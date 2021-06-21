@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pushGit": "git checkout master && git merge dev && git push origin master && git checkout dev"
   },
   "eslintConfig": {
     "extends": [
