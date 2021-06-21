@@ -1,7 +1,14 @@
-import React from 'react';
+import * as React from 'react';
+
+//Components
+import Navbar from './nav_bar';
 
 const App = () => {
-    return <div>Hold for landing page</div>;
+    return (
+        <>
+            <Navbar />
+        </>
+    )
 };
 
 export default App;
