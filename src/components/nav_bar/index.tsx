@@ -1,11 +1,13 @@
 import * as React from 'react';
+import styled from 'styled-components';
+
+//Styles:
+const MainContainer = styled.div`
+    border: 1px solid black;
+`;
 
 const index = () => {
-    return (
-        <div>
-            This should be the navigation bar!
-        </div>
-    )
-}
+    return <MainContainer>RamenRankings</MainContainer>;
+};
 
-export default index
+export default index;
