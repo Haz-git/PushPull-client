@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 //Components
-import Navbar from './nav_bar';
 import GlobalStyle from '../globalstyle';
+import Navbar from './nav_bar';
+import Backdrop from './backdrop';
 
 //Styles:
 const MainWrapper = styled.section``;
@@ -14,6 +15,7 @@ const App = () => {
             <GlobalStyle />
             <MainWrapper>
                 <Navbar />
+                <Backdrop />
             </MainWrapper>
         </>
     );
