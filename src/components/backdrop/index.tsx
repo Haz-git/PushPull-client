@@ -15,7 +15,7 @@ const MainContainer = styled.section`
 const index = () => {
     return (
         <MainContainer>
-            Find and review your favorite instant ramen.
+            Craving a bowl of instant ramen?
             <SearchBar />
         </MainContainer>
     );
