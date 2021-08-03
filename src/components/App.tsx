@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
 //Components
 import GlobalStyle from '../globalstyle';
@@ -12,13 +11,12 @@ import GlobalSearchSectionFour from './body_section/GlobalSearchSectionFour';
 import Footer from './footer';
 
 //Styles:
-const MainWrapper = styled.section``;
 
 const App = () => {
     return (
         <>
             <GlobalStyle />
-            <MainWrapper>
+            <div>
                 <Navbar />
                 <Backdrop />
                 <FeatureSectionOne />
@@ -26,7 +24,7 @@ const App = () => {
                 <ReviewSectionThree />
                 <GlobalSearchSectionFour />
                 <Footer />
-            </MainWrapper>
+            </div>
         </>
     );
 };
