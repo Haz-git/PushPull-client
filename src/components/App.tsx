@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 //Components
-import GlobalStyle from '../globalstyle';
 import Navbar from './nav_bar';
 import Backdrop from './backdrop';
 import FeatureSectionOne from './body_section/FeatureSectionOne';
@@ -15,7 +14,6 @@ import Footer from './footer';
 const App = () => {
     return (
         <>
-            <GlobalStyle />
             <div>
                 <Navbar />
                 <Backdrop />

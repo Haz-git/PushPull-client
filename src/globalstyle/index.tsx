@@ -1,8 +1,3 @@
-import { createGlobalStyle } from 'styled-components';
-import { normalize } from 'styled-normalize';
+const placeHolderGlobalStyles = () => {};
 
-const GlobalStyle = createGlobalStyle`
-    ${normalize}
-`;
-
-export default GlobalStyle;
+export default placeHolderGlobalStyles;
