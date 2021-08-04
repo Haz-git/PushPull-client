@@ -6,7 +6,12 @@ import styled from 'styled-components';
 const StyledNavbar = styled.nav`
     background: ${(props) => props.theme.background};
     width: 100%;
-    border: 1px solid black;
+    padding: 1rem 1rem;
+`;
+
+const StyledNavLogo = styled.h1`
+    font-size: 1rem;
+    font-weight: 700;
 `;
 
 //Interfaces:
@@ -14,7 +19,7 @@ const StyledNavbar = styled.nav`
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <h1>RankMyWorkout</h1>
+            <StyledNavLogo>RankmyWorkout</StyledNavLogo>
         </StyledNavbar>
     );
 };
