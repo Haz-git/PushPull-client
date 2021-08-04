@@ -1,5 +1,10 @@
 import * as React from 'react';
 
+//Styles:
+import GlobalStyle from '../styles/globalStyles';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme } from '../styles/themes';
+
 //Components
 import Navbar from './nav_bar/Navbar';
 import Backdrop from './backdrop';
@@ -13,7 +18,8 @@ import GeneralButton from './general_components/GeneralButton';
 const App = () => {
     return (
         <>
-            <div>
+            <ThemeProvider theme={lightTheme}>
+                <GlobalStyle />
                 <Navbar />
                 <Backdrop />
                 <FeatureSectionOne />
@@ -22,7 +28,7 @@ const App = () => {
                 <GlobalSearchSectionFour />
                 <Footer />
                 <GeneralButton />
-            </div>
+            </ThemeProvider>
         </>
     );
 };
