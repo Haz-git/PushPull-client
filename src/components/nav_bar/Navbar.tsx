@@ -11,9 +11,9 @@ const useStyles = createUseStyles(
             padding: '1rem 1rem',
         },
         navbar__logo: {
-            fontFamily: 'Lato',
+            fontFamily: 'Lato, sans-serif',
             fontWeight: '700',
-
+            fontSize: theme.fontSizes.sm,
             padding: '0',
             margin: '0',
         },
