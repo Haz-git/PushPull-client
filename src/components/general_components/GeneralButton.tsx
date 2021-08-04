@@ -5,7 +5,7 @@ import { Button, theming } from '@mantine/core';
 const useStyles = createUseStyles(
     (theme) => ({
         buttonClass: {
-            boxShadow: theme.shadows.md,
+            boxShadow: theme.shadows.sm,
 
             '&:hover': {
                 backgroundColor: 'red',
