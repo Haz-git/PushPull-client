@@ -7,7 +7,7 @@ import { lightTheme } from '../styles/themes';
 
 //Components
 import Navbar from './nav_bar/Navbar';
-import Backdrop from './backdrop';
+import Backdrop from './backdrop/BackdropMain';
 import FeatureSectionOne from './body_section/FeatureSectionOne';
 import FeatureSectionTwo from './body_section/FeatureSectionTwo';
 import ReviewSectionThree from './body_section/ReviewSectionThree';
