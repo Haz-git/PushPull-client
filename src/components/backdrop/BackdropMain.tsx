@@ -9,7 +9,7 @@ const BackdropMainContainer = styled.section`
 `;
 
 const BackdropMain = () => {
-    return <BackdropMainContainer>backdrop</BackdropMainContainer>;
+    return <BackdropMainContainer></BackdropMainContainer>;
 };
 
 export default BackdropMain;
