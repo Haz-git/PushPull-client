@@ -8,14 +8,16 @@ const MainTextLineOne = styled.h1`
     color: ${(props) => props.theme.mainText};
     text-shadow: ${(props) => props.theme.textShadows.sm};
     font-size: 6rem;
-    padding-right: 2rem;
+    text-align: center;
+    padding-right: 4rem;
 `;
 
 const MainTextLineTwo = styled.h1`
     color: ${(props) => props.theme.mainText};
     text-shadow: ${(props) => props.theme.textShadows.sm};
     font-size: 6rem;
-    padding-left: 8rem;
+    text-align: center;
+    padding-left: 4rem;
 `;
 
 const BackdropText = () => {
