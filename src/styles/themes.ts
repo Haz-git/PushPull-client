@@ -1,5 +1,5 @@
 export const lightTheme = {
-    background: 'rgba(255, 255, 255, 1)',
+    background: 'rgba(229, 229, 229, 1)',
     mainText: 'rgba(0, 0, 34, 1)',
     subText: 'rgba(0, 0, 34, .7)',
     fontSizes: {
