@@ -7,10 +7,11 @@ const StyledNavbar = styled.nav`
     background: ${(props) => props.theme.background};
     width: 100%;
     padding: 1rem 1rem;
+    box-shadow: ${(props) => props.theme.shadows.sm};
 `;
 
 const StyledNavLogo = styled.h1`
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.fontSizes.xl};
     font-weight: 700;
 `;
 
@@ -19,7 +20,7 @@ const StyledNavLogo = styled.h1`
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <StyledNavLogo>RankmyWorkout</StyledNavLogo>
+            <StyledNavLogo>RankMyWorkout</StyledNavLogo>
         </StyledNavbar>
     );
 };
