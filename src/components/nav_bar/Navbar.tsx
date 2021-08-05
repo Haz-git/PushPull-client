@@ -7,11 +7,12 @@ const StyledNavbar = styled.nav`
     background: ${(props) => props.theme.background};
     width: 100%;
     padding: 1rem 1rem;
-    box-shadow: ${(props) => props.theme.shadows.sm};
+    /* box-shadow: ${(props) => props.theme.shadows.sm}; */
 `;
 
 const StyledNavLogo = styled.h1`
-    font-size: ${(props) => props.theme.fontSizes.xl};
+    color: ${(props) => props.theme.mainText};
+    font-size: ${(props) => props.theme.fontSizes.md};
     font-weight: 700;
 `;
 
