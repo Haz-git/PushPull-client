@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 const BackdropMainContainer = styled.section`
     display: grid;
-    grid-template-columns: 50% auto;
+    grid-template-columns: 40% auto;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -17,8 +17,9 @@ const BackdropMainContainer = styled.section`
 `;
 
 const SVGContainer = styled.div`
-    height: 31rem;
-    width: 31rem;
+    margin-top: -5rem;
+    height: 30rem;
+    width: 30rem;
 `;
 
 const BackdropMain = () => {
