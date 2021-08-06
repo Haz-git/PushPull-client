@@ -2,6 +2,8 @@ import * as React from 'react';
 
 //Components:
 import BodySection from './body_section_components/BodySection';
+import GeneralButton from '../general_components/GeneralButton';
+import { ReactComponent as SquatSVG } from '../../assets/body_section_squat.svg';
 
 //Styles:
 import styled from 'styled-components';
@@ -14,7 +16,14 @@ const BodySectionMain = () => {
         <MainBodySectionContainer>
             <BodySection
                 textHeader="Find Your Next Workout"
-                textDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu, aliquam diam purus."
+                textDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur metus sit amet dui finibus sodales."
+                primaryButton={
+                    <GeneralButton
+                        buttonLabel="Top Ranked"
+                        onClick={() => console.log('test')}
+                    />
+                }
+                SVGImage={<SquatSVG />}
             />
         </MainBodySectionContainer>
     );
