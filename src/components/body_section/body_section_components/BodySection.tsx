@@ -146,16 +146,33 @@ const BodySection = ({
     return (
         <>
             <BrowserView>
-                <MainContainer>
-                    <ItemWrapper isReversed={isReversed}>
-                        <SVGContainer>{SVGImage}</SVGContainer>
-                        <TextContainer>
-                            <BodyHeader>{textHeader}</BodyHeader>
-                            <BodyDesc>{textDesc}</BodyDesc>
-                            <ButtonContainer>{primaryButton}</ButtonContainer>
-                        </TextContainer>
-                    </ItemWrapper>
-                </MainContainer>
+                {isReversed === false ? (
+                    <MainContainer>
+                        <ItemWrapper isReversed={isReversed}>
+                            <SVGContainer>{SVGImage}</SVGContainer>
+                            <TextContainer>
+                                <BodyHeader>{textHeader}</BodyHeader>
+                                <BodyDesc>{textDesc}</BodyDesc>
+                                <ButtonContainer>
+                                    {primaryButton}
+                                </ButtonContainer>
+                            </TextContainer>
+                        </ItemWrapper>
+                    </MainContainer>
+                ) : (
+                    <MainContainer>
+                        <ItemWrapper isReversed={isReversed}>
+                            <TextContainer>
+                                <BodyHeader>{textHeader}</BodyHeader>
+                                <BodyDesc>{textDesc}</BodyDesc>
+                                <ButtonContainer>
+                                    {primaryButton}
+                                </ButtonContainer>
+                            </TextContainer>
+                            <SVGContainer>{SVGImage}</SVGContainer>
+                        </ItemWrapper>
+                    </MainContainer>
+                )}
             </BrowserView>
             <MobileView>
                 <MainContainer>
