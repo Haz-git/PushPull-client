@@ -21,6 +21,8 @@ const BodySectionMain = () => {
                     <GeneralButton
                         buttonLabel="Top Ranked"
                         onClick={() => console.log('test')}
+                        fontSize="1.25rem"
+                        padding="1rem 1rem"
                     />
                 }
                 SVGImage={<SquatSVG />}
