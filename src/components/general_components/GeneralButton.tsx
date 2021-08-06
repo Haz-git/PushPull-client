@@ -8,7 +8,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     justify-content: center;
     border: none;
     background: ${(props) => props.buttonBackground};
-    padding: 0.8rem 1rem;
+    padding: ${(props) => props.padding};
     border-radius: 0.3rem;
     font-family: 'Lato', sans-serif;
     font-size: ${(props) => props.fontSize};
@@ -56,6 +56,7 @@ interface IGeneralButtonProps {
     hoverTransform?: string;
     hoverShadow?: string;
     width?: string;
+    padding?: string;
 }
 
 const GeneralButton = ({
@@ -74,6 +75,7 @@ const GeneralButton = ({
     hoverTransform = 'scale(1.05)',
     hoverShadow = 'rgba(0, 0, 0, 0.4) 0px 2px 4px,rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,rgba(0, 0, 0, 0.2) 0px -3px 0px inset;',
     width = '100%',
+    padding = '.8rem 1rem',
 }: IGeneralButtonProps): JSX.Element => {
     return (
         <>
@@ -90,6 +92,7 @@ const GeneralButton = ({
                 hoverTransform={hoverTransform}
                 hoverShadow={hoverShadow}
                 width={width}
+                padding={padding}
             >
                 <IconContainer iconMargin={iconMargin}>
                     {buttonIcon && buttonIcon}
