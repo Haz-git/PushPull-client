@@ -8,6 +8,7 @@ export const lightTheme = {
         md: '1.1rem',
         lg: '1.5rem',
         xl: '2rem',
+        xxl: '2.5rem',
     },
     textShadows: {
         sm: '1px 1px 1px rgba(0,0,0,.25)',
