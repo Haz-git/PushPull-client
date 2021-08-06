@@ -14,6 +14,20 @@ const ItemWrapper = styled.div<IStyledProps>`
     align-items: center;
     justify-content: center;
     grid-template-columns: auto 40%;
+
+    @media ${deviceMin.mobileS} {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media ${deviceMin.laptopHalf} {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        grid-template-columns: auto 40%;
+    }
 `;
 
 const MobileItemWrapper = styled.div`
@@ -31,9 +45,9 @@ const SVGContainer = styled.div`
     }
 
     @media ${deviceMin.browserSm} {
-        margin: 0 auto;
-        height: 22rem;
-        width: 22rem;
+        margin: 4rem auto -1.5rem auto;
+        height: 28rem;
+        width: 28rem;
     }
 
     @media ${deviceMin.laptopHalf} {
@@ -65,6 +79,17 @@ const BodyHeader = styled.h2`
         margin-bottom: 1rem;
         font-size: ${(props) => props.theme.fontSizes.lg};
     }
+
+    @media ${deviceMin.browserSm} {
+        margin: 1rem auto 0 auto;
+    }
+
+    @media ${deviceMin.laptopS} {
+        font-size: ${(props) => props.theme.fontSizes.xxl};
+        color: ${(props) => props.theme.mainText};
+        font-weight: 700;
+        margin: 2rem 0;
+    }
 `;
 
 const BodyDesc = styled.p`
@@ -76,6 +101,13 @@ const BodyDesc = styled.p`
     @media ${deviceMin.mobileS} {
         margin: 0.5rem 0;
         font-size: ${(props) => props.theme.fontSizes.md};
+    }
+
+    @media ${deviceMin.laptopS} {
+        font-size: ${(props) => props.theme.fontSizes.lg};
+        color: ${(props) => props.theme.subText};
+        font-weight: 600;
+        margin: 2rem 0;
     }
 `;
 
