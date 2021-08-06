@@ -8,10 +8,7 @@ import { lightTheme } from '../styles/themes';
 //Components
 import Navbar from './nav_bar/Navbar';
 import Backdrop from './backdrop/BackdropMain';
-import FeatureSectionOne from './body_section/FeatureSectionOne';
-import FeatureSectionTwo from './body_section/FeatureSectionTwo';
-import ReviewSectionThree from './body_section/ReviewSectionThree';
-import GlobalSearchSectionFour from './body_section/GlobalSearchSectionFour';
+import BodySectionMain from './body_section/BodySectionMain';
 import Footer from './footer';
 import GeneralButton from './general_components/GeneralButton';
 
@@ -22,10 +19,7 @@ const App = () => {
                 <GlobalStyle />
                 <Navbar />
                 <Backdrop />
-                <FeatureSectionOne />
-                <FeatureSectionTwo />
-                <ReviewSectionThree />
-                <GlobalSearchSectionFour />
+                <BodySectionMain />
                 <Footer />
                 <GeneralButton />
             </ThemeProvider>
