@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const BackdropMainContainer = styled.section`
     width: 100%;
-    background: rgba(255, 183, 0, 1);
+    background: rgba(241, 135, 1, 1);
     padding: 2rem 0;
 `;
 
