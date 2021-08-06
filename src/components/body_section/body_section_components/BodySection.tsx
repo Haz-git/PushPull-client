@@ -26,8 +26,8 @@ const SVGContainer = styled.div`
 
     @media ${deviceMin.mobileS} {
         margin: -1rem auto;
-        height: 20rem;
-        width: 20rem;
+        height: 22rem;
+        width: 22rem;
     }
 
     @media ${deviceMin.browserSm} {
@@ -63,7 +63,7 @@ const BodyHeader = styled.h2`
     @media ${deviceMin.mobileS} {
         margin-top: 4rem;
         margin-bottom: 1rem;
-        font-size: ${(props) => props.theme.fontSizes.lg};
+        font-size: 1.8rem;
     }
 `;
 
@@ -75,7 +75,7 @@ const BodyDesc = styled.p`
 
     @media ${deviceMin.mobileS} {
         margin: 0.5rem 0;
-        font-size: ${(props) => props.theme.fontSizes.md};
+        font-size: 1.2rem;
     }
 `;
 
