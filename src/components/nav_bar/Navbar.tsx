@@ -21,7 +21,7 @@ const StyledNavLogo = styled.h1`
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <StyledNavLogo>Pushpull</StyledNavLogo>
+            <StyledNavLogo>PushPull</StyledNavLogo>
         </StyledNavbar>
     );
 };
