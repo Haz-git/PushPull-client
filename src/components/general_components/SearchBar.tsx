@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import { Search } from '@styled-icons/ionicons-solid/Search';
 import OutsideClickHandler from 'react-outside-click-handler';
 
