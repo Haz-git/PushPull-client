@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 //Components:
+import { deviceMin } from '../../devices/breakpoints';
 import BackdropText from './backdrop_components/BackdropText';
 import { ReactComponent as BackdropSVG } from '../../assets/backdrop_workout_pic.svg';
 import SearchBar from '../general_components/SearchBar';
@@ -19,17 +20,61 @@ const GridWrapper = styled.div`
     grid-template-columns: 40% auto;
     align-items: center;
     justify-content: center;
+
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.laptopHalf} {
+        display: grid;
+        grid-template-columns: 40% auto;
+        align-items: center;
+        justify-content: center;
+    }
 `;
 
 const SVGContainer = styled.div`
     margin-top: -6rem;
     height: 30rem;
     width: 30rem;
+
+    @media ${deviceMin.mobileS} {
+        height: 17rem;
+        width: 17rem;
+        margin: -1rem auto;
+    }
+
+    @media ${deviceMin.browserSm} {
+        height: 22rem;
+        width: 22rem;
+        margin: -1rem auto;
+    }
+
+    @media ${deviceMin.laptopHalf} {
+        margin-top: -6rem;
+        height: 24rem;
+        width: 24rem;
+    }
+
+    @media ${deviceMin.laptopS} {
+        margin-top: -6rem;
+        height: 30rem;
+        width: 30rem;
+    }
 `;
 
 const SearchBarContainer = styled.div`
     padding: 0 5rem;
     width: 100%;
+
+    @media ${deviceMin.mobileS} {
+        padding: 1rem 1rem;
+    }
+
+    @media ${deviceMin.laptopS} {
+        padding: 0 5rem;
+        width: 100%;
+    }
 `;
 
 const BackdropMain = () => {
