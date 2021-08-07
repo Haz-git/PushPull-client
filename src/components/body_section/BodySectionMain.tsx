@@ -24,10 +24,11 @@ const StyledRankingSVG = styled(RankingSVG)`
     }
 
     @media ${deviceMin.laptopHalf} {
-        margin-top: 6rem;
+        margin-top: 3rem;
     }
 
     @media ${deviceMin.laptopS} {
+        margin-top: 6rem;
     }
 `;
 
@@ -65,6 +66,19 @@ const BodySectionMain = () => {
                 backgroundColor="#0F0628"
                 mainTextColor="rgba(255, 255, 255, 1)"
                 subTextColor="rgba(255, 255, 255, .7)"
+            />
+            <BodySection
+                textHeader="Can't Find Your Exercise?"
+                textDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur metus sit amet dui finibus sodales."
+                primaryButton={
+                    <GeneralButton
+                        buttonLabel="Add Exercise"
+                        onClick={() => console.log('test')}
+                        fontSize="1.25rem"
+                        padding="1rem 1rem"
+                    />
+                }
+                SVGImage={<ReviewSVG />}
             />
         </MainBodySectionContainer>
     );
