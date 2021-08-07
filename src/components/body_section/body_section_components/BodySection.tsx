@@ -7,9 +7,11 @@ import { BrowserView, MobileView, TabletView } from 'react-device-detect';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section``;
+const MainContainer = styled.section<BodySectionProps>`
+    background: ${(props) => props.backgroundColor};
+`;
 
-const ItemWrapper = styled.div<IStyledProps>`
+const ItemWrapper = styled.div<BodySectionProps>`
     display: grid;
     align-items: center;
     justify-content: center;
@@ -20,17 +22,21 @@ const ItemWrapper = styled.div<IStyledProps>`
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding: 3rem 0;
     }
 
     @media ${deviceMin.laptopHalf} {
+        padding: 0 0;
         display: grid;
         align-items: center;
         justify-content: center;
-        grid-template-columns: auto 40%;
+        grid-template-columns: ${(props) =>
+            props.isReversed === true ? '40% auto' : 'auto 40%'};
     }
 `;
 
 const MobileItemWrapper = styled.div`
+    padding: 2rem 0;
     display: block;
 `;
 
@@ -58,8 +64,8 @@ const SVGContainer = styled.div`
 
     @media ${deviceMin.laptopS} {
         margin: 0 auto;
-        height: 40rem;
-        width: 40rem;
+        height: 38rem;
+        width: 38rem;
     }
 `;
 
@@ -68,9 +74,9 @@ const TextContainer = styled.div`
     margin-left: 2rem;
 `;
 
-const BodyHeader = styled.h2`
+const BodyHeader = styled.h2<BodySectionProps>`
     font-size: ${(props) => props.theme.fontSizes.xxl};
-    color: ${(props) => props.theme.mainText};
+    color: ${(props) => props.mainTextColor};
     font-weight: 700;
     margin: 2rem 0;
 
@@ -86,15 +92,15 @@ const BodyHeader = styled.h2`
 
     @media ${deviceMin.laptopS} {
         font-size: ${(props) => props.theme.fontSizes.xxl};
-        color: ${(props) => props.theme.mainText};
+        color: ${(props) => props.mainTextColor};
         font-weight: 700;
         margin: 2rem 0;
     }
 `;
 
-const BodyDesc = styled.p`
+const BodyDesc = styled.p<BodySectionProps>`
     font-size: ${(props) => props.theme.fontSizes.lg};
-    color: ${(props) => props.theme.subText};
+    color: ${(props) => props.subTextColor};
     font-weight: 600;
     margin: 2rem 0;
 
@@ -105,7 +111,7 @@ const BodyDesc = styled.p`
 
     @media ${deviceMin.laptopS} {
         font-size: ${(props) => props.theme.fontSizes.lg};
-        color: ${(props) => props.theme.subText};
+        color: ${(props) => props.subTextColor};
         font-weight: 600;
         margin: 2rem 0;
     }
@@ -126,6 +132,9 @@ const ButtonContainer = styled.div`
 
 interface IStyledProps {
     isReversed?: boolean;
+    backgroundColor?: string;
+    mainTextColor?: string;
+    subTextColor?: string;
 }
 
 interface IComponentProps {
@@ -133,8 +142,9 @@ interface IComponentProps {
     textHeader?: string;
     textDesc?: string;
     primaryButton?: JSX.Element;
-    isReversed?: boolean;
 }
+
+type BodySectionProps = IStyledProps & IComponentProps;
 
 const BodySection = ({
     SVGImage,
@@ -142,17 +152,24 @@ const BodySection = ({
     textDesc,
     primaryButton,
     isReversed = false,
-}: IComponentProps): JSX.Element => {
+    backgroundColor = 'inherit',
+    mainTextColor = 'rgba(0, 0, 34, 1)',
+    subTextColor = 'rgba(0, 0, 34, .7)',
+}: BodySectionProps): JSX.Element => {
     return (
         <>
             <BrowserView>
                 {isReversed === false ? (
-                    <MainContainer>
+                    <MainContainer backgroundColor={backgroundColor}>
                         <ItemWrapper isReversed={isReversed}>
                             <SVGContainer>{SVGImage}</SVGContainer>
                             <TextContainer>
-                                <BodyHeader>{textHeader}</BodyHeader>
-                                <BodyDesc>{textDesc}</BodyDesc>
+                                <BodyHeader mainTextColor={mainTextColor}>
+                                    {textHeader}
+                                </BodyHeader>
+                                <BodyDesc subTextColor={subTextColor}>
+                                    {textDesc}
+                                </BodyDesc>
                                 <ButtonContainer>
                                     {primaryButton}
                                 </ButtonContainer>
@@ -160,11 +177,15 @@ const BodySection = ({
                         </ItemWrapper>
                     </MainContainer>
                 ) : (
-                    <MainContainer>
+                    <MainContainer backgroundColor={backgroundColor}>
                         <ItemWrapper isReversed={isReversed}>
                             <TextContainer>
-                                <BodyHeader>{textHeader}</BodyHeader>
-                                <BodyDesc>{textDesc}</BodyDesc>
+                                <BodyHeader mainTextColor={mainTextColor}>
+                                    {textHeader}
+                                </BodyHeader>
+                                <BodyDesc subTextColor={subTextColor}>
+                                    {textDesc}
+                                </BodyDesc>
                                 <ButtonContainer>
                                     {primaryButton}
                                 </ButtonContainer>
@@ -175,11 +196,15 @@ const BodySection = ({
                 )}
             </BrowserView>
             <MobileView>
-                <MainContainer>
+                <MainContainer backgroundColor={backgroundColor}>
                     <MobileItemWrapper>
                         <TextContainer>
-                            <BodyHeader>{textHeader}</BodyHeader>
-                            <BodyDesc>{textDesc}</BodyDesc>
+                            <BodyHeader mainTextColor={mainTextColor}>
+                                {textHeader}
+                            </BodyHeader>
+                            <BodyDesc subTextColor={subTextColor}>
+                                {textDesc}
+                            </BodyDesc>
                         </TextContainer>
                         <SVGContainer>{SVGImage}</SVGContainer>
                         <MobileButtonContainer>
