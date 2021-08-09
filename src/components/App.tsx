@@ -9,7 +9,7 @@ import { lightTheme } from '../styles/themes';
 import Navbar from './nav_bar/Navbar';
 import Backdrop from './backdrop/BackdropMain';
 import BodySectionMain from './body_section/BodySectionMain';
-import Footer from './footer';
+import MainFooter from './footer/MainFooter';
 
 const App = () => {
     return (
@@ -19,7 +19,7 @@ const App = () => {
                 <Navbar />
                 <Backdrop />
                 <BodySectionMain />
-                <Footer />
+                <MainFooter />
             </ThemeProvider>
         </>
     );
