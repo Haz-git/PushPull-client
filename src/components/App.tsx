@@ -9,6 +9,7 @@ import { lightTheme } from '../styles/themes';
 //Components:
 import history from '../utils/historyObject';
 import Navbar from './nav_bar/Navbar';
+import MainFooter from './footer/MainFooter';
 import MainLandingPageView from './main_landing_page/MainLandingPageView';
 import MainSearchPage from './search_page/MainSearchPage';
 
@@ -27,6 +28,7 @@ const App = () => {
                             component={MainSearchPage}
                         />
                     </Switch>
+                    <MainFooter />
                 </Router>
             </ThemeProvider>
         </>
