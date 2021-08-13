@@ -87,7 +87,7 @@ const BackdropMain = () => {
                 </SVGContainer>
             </GridWrapper>
             <SearchBarContainer>
-                <SearchBar />
+                <SearchBar placeholderText="Find your workout..." />
             </SearchBarContainer>
         </BackdropMainContainer>
     );
