@@ -37,9 +37,9 @@ const FilterColumn = () => {
             <ButtonsContainer>
                 <FilterButton filterLabel="Category" />
                 <ButtonDivider />
-                <FilterButton filterLabel="Location" />
-                <ButtonDivider />
                 <FilterButton filterLabel="Equipment" />
+                <ButtonDivider />
+                <FilterButton filterLabel="Difficulty" />
             </ButtonsContainer>
         </MainContainer>
     );
