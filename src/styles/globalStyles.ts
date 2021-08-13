@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         height: 100%;
-        background: #ffffff;
+        background: rgba(244, 244, 244, 1);
         font-family: 'Lato', sans-serif, helvetica;
     }
 
