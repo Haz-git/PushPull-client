@@ -24,7 +24,7 @@ const FilterColumn = () => {
     return (
         <MainContainer>
             <FilterText>Filter By</FilterText>
-            <DividerLine border="1px solid rgba(244,244,244, 1)" />
+            <DividerLine border="1px solid #e5e5e5" />
         </MainContainer>
     );
 };
