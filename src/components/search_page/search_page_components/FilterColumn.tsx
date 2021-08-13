@@ -10,6 +10,7 @@ import styled from 'styled-components';
 const MainContainer = styled.div`
     background: rgba(239, 239, 239, 1);
     text-align: left;
+    width: 15rem;
 `;
 
 const FilterText = styled.h2`

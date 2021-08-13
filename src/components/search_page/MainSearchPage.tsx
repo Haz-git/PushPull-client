@@ -10,7 +10,7 @@ import styled from 'styled-components';
 const MainSearchPageContainer = styled.section`
     height: 100vh;
     display: grid;
-    grid-template-columns: 1.5fr 6fr;
+    grid-template-columns: 1fr 8fr;
 `;
 
 //Interfaces:
