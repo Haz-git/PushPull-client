@@ -53,9 +53,13 @@ interface IStyledProps {
 }
 interface IComponentProps {
     inputHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    placeholderText?: string;
 }
 
-const Searchbar = ({ inputHandler }: IComponentProps): JSX.Element => {
+const Searchbar = ({
+    inputHandler,
+    placeholderText = 'Search...',
+}: IComponentProps): JSX.Element => {
     const [isActive, setIsActive] = useState(false);
 
     const toggleIsActive = () => setIsActive(true);
@@ -66,7 +70,7 @@ const Searchbar = ({ inputHandler }: IComponentProps): JSX.Element => {
                 <SearchIcon />
                 <StyledSearchInput
                     onChange={inputHandler}
-                    placeholder="Search Workouts..."
+                    placeholder={placeholderText}
                     isActive={isActive}
                 />
             </MainContainer>
