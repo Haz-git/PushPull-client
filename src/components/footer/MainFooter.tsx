@@ -9,7 +9,7 @@ const MainContainer = styled.section`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: ${(props) => props.theme.background};
+    background: ${(props) => props.theme.lightBackground};
     padding: 2rem 1rem;
 `;
 

@@ -4,10 +4,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`
-    background: ${(props) => props.theme.background};
+    background: ${(props) => props.theme.lightBackground};
     width: 100%;
     padding: 1rem 1rem;
-    /* box-shadow: ${(props) => props.theme.shadows.sm}; */
+    /* box-shadow: ${(props) => props.theme.shadows.sm};
+    z-index: 99999; */
 `;
 
 const StyledNavLogo = styled.h1`
