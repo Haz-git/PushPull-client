@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import SearchBar from '../../general_components/SearchBar';
+import SortByWheel from './SortByWheel';
 
 //Styles:
 import styled from 'styled-components';
@@ -11,13 +12,17 @@ const MainContainer = styled.section`
 `;
 
 const SearchResultsTextContainer = styled.div`
-    margin: 2rem 0;
+    margin: 2rem 0.2rem;
 `;
 
 const SearchResultsText = styled.h3`
     color: ${(props) => props.theme.mainText};
     font-size: ${(props) => props.theme.fontSizes.lg};
     font-weight: 700;
+`;
+
+const SortByWheelContainer = styled.div`
+    margin: 1.5rem 0;
 `;
 
 //Interfaces:
@@ -28,8 +33,11 @@ const SearchResultsSection = () => {
             <SearchBar placeholderText="Search again..." />
             <SearchResultsTextContainer>
                 <SearchResultsText>
-                    (10) Search results found for 'barbell'
+                    (10) Search Results for 'barbell'
                 </SearchResultsText>
+                <SortByWheelContainer>
+                    <SortByWheel />
+                </SortByWheelContainer>
             </SearchResultsTextContainer>
         </MainContainer>
     );
