@@ -2,7 +2,7 @@ import * as React from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 import {
     BrowserView,
-    MobileView,
+    MobileOnlyView,
     CustomView,
     isBrowser,
     isTablet,
@@ -201,7 +201,7 @@ const BodySection = ({
                     </MainContainer>
                 )}
             </CustomView>
-            <MobileView>
+            <MobileOnlyView>
                 <MainContainer backgroundColor={backgroundColor}>
                     <MobileItemWrapper>
                         <TextContainer>
@@ -218,7 +218,7 @@ const BodySection = ({
                         </MobileButtonContainer>
                     </MobileItemWrapper>
                 </MainContainer>
-            </MobileView>
+            </MobileOnlyView>
         </>
     );
 };
