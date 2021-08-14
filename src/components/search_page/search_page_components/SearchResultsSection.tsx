@@ -30,8 +30,9 @@ const SortByWheelContainer = styled.div`
 
 const WorkoutProgramContainer = styled.div<StyledProps>`
     overflow-y: scroll;
-    margin: 1.5rem -1rem;
+    margin: 1.5rem -2rem;
     height: ${(props) => `${props.containerHeight - 290}px`};
+    padding: 1rem 2rem;
 `;
 
 //Interfaces:
