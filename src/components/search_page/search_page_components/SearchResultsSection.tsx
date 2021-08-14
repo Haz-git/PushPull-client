@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import SearchBar from '../../general_components/SearchBar';
 import SortByWheel from './SortByWheel';
 import WorkoutProgramComponent from './WorkoutProgramComponent';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -26,13 +28,21 @@ const SortByWheelContainer = styled.div`
     margin: 1.5rem 0;
 `;
 
-const WorkoutProgramContainer = styled.div`
-    margin: 1.5rem 0;
+const WorkoutProgramContainer = styled.div<StyledProps>`
+    overflow-y: scroll;
+    margin: 1.5rem -1rem;
+    height: ${(props) => `${props.containerHeight - 290}px`};
 `;
 
 //Interfaces:
 
+interface StyledProps {
+    containerHeight: number;
+}
+
 const SearchResultsSection = () => {
+    const { height } = useWindowDimensions();
+
     return (
         <MainContainer>
             <SearchBar placeholderText="Search again..." />
@@ -43,7 +53,10 @@ const SearchResultsSection = () => {
                 <SortByWheelContainer>
                     <SortByWheel />
                 </SortByWheelContainer>
-                <WorkoutProgramContainer>
+                <WorkoutProgramContainer containerHeight={height}>
+                    <WorkoutProgramComponent />
+                    <WorkoutProgramComponent />
+                    <WorkoutProgramComponent />
                     <WorkoutProgramComponent />
                 </WorkoutProgramContainer>
             </SearchResultsTextContainer>
