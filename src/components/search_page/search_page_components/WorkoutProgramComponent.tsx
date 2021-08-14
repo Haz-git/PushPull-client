@@ -10,9 +10,18 @@ import styled from 'styled-components';
 //Icons:
 
 const MainContainer = styled.div`
+    margin-bottom: 1rem;
+    padding: 1rem 1rem;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    border-radius: 0.3rem;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+        background: #ffffff;
+    }
 `;
 
 const SVGContainer = styled.div`
