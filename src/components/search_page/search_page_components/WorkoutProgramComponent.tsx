@@ -8,24 +8,6 @@ import { ReactComponent as TrainerSVG } from '../../../assets/workout_program_tr
 import styled from 'styled-components';
 
 //Icons:
-import { Star as StarEmpty } from '@styled-icons/fluentui-system-regular/Star';
-import { StarHalf } from '@styled-icons/fluentui-system-filled/StarHalf';
-import { Star as StarFull } from '@styled-icons/fluentui-system-filled/Star';
-
-const StarEmptyIcon = styled(StarEmpty)`
-    height: 2rem;
-    width: 2rem;
-`;
-
-const StarHalfIcon = styled(StarHalf)`
-    height: 2rem;
-    width: 2rem;
-`;
-
-const StarFullIcon = styled(StarFull)`
-    height: 2rem;
-    width: 2rem;
-`;
 
 const MainContainer = styled.div`
     display: flex;
@@ -120,10 +102,7 @@ const WorkoutProgramComponent = ({
                             value={programAverageRating}
                             color="rgba(0, 0, 34, 0.7)"
                             activeColor="rgba(224, 113, 51, 1)"
-                            size="50px"
-                            emptyIcon={<StarEmptyIcon />}
-                            halfIcon={<StarHalfIcon />}
-                            fullIcon={<StarFullIcon />}
+                            size={20}
                         />
                     </StarsContainer>
                     <RatingText>
