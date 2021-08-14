@@ -41,6 +41,10 @@ const FilterColumn = () => {
                 <FilterButton filterLabel="Equipment" />
                 <ButtonDivider />
                 <FilterButton filterLabel="Difficulty" />
+                <ButtonDivider />
+                <FilterButton filterLabel="Workout Days" />
+                <ButtonDivider />
+                <FilterButton filterLabel="Workout Length" />
             </ButtonsContainer>
         </MainContainer>
     );
