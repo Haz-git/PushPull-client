@@ -21,7 +21,9 @@ const MainContainer = styled.div<IStyledProps>`
     width: 100%;
     border-radius: 0.4em;
     border: ${({ isActive }) =>
-        isActive === false ? '1px solid #ececec' : '1px solid #4263eb'};
+        isActive === false
+            ? '1px solid #ececec'
+            : '1px solid rgba(224, 113, 51, 1)'};
 
     box-shadow: ${({ isActive }) =>
         isActive === false ? 'none' : 'rgba(0, 0, 0, 0.2) 0px 2px 4px'};
