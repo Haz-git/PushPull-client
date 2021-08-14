@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
-import { BrowserView, MobileView, TabletView } from 'react-device-detect';
+import {
+    BrowserView,
+    MobileView,
+    CustomView,
+    isBrowser,
+    isTablet,
+} from 'react-device-detect';
 
 //Components:
 
@@ -158,7 +164,7 @@ const BodySection = ({
 }: BodySectionProps): JSX.Element => {
     return (
         <>
-            <BrowserView>
+            <CustomView condition={isBrowser === true || isTablet === true}>
                 {isReversed === false ? (
                     <MainContainer backgroundColor={backgroundColor}>
                         <ItemWrapper isReversed={isReversed}>
@@ -194,7 +200,7 @@ const BodySection = ({
                         </ItemWrapper>
                     </MainContainer>
                 )}
-            </BrowserView>
+            </CustomView>
             <MobileView>
                 <MainContainer backgroundColor={backgroundColor}>
                     <MobileItemWrapper>
