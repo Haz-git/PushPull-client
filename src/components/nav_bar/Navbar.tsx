@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+//Components:
+import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
+
 //Styles:
 import styled from 'styled-components';
 
@@ -7,14 +10,14 @@ const StyledNavbar = styled.nav`
     background: ${(props) => props.theme.lightBackground};
     width: 100%;
     padding: 1rem 1rem;
+    text-align: left;
     /* box-shadow: ${(props) => props.theme.shadows.sm};
     z-index: 99999; */
 `;
 
-const StyledNavLogo = styled.h1`
-    color: ${(props) => props.theme.mainText};
-    font-size: ${(props) => props.theme.fontSizes.md};
-    font-weight: 700;
+const StyledNavLogo = styled.div`
+    height: 2rem;
+    width: 10rem;
 `;
 
 //Interfaces:
@@ -22,7 +25,9 @@ const StyledNavLogo = styled.h1`
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <StyledNavLogo>PushPull</StyledNavLogo>
+            <StyledNavLogo>
+                <LogoSVG />
+            </StyledNavLogo>
         </StyledNavbar>
     );
 };
