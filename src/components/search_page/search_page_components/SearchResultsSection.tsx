@@ -3,6 +3,7 @@ import * as React from 'react';
 //Components:
 import SearchBar from '../../general_components/SearchBar';
 import SortByWheel from './SortByWheel';
+import WorkoutProgramComponent from './WorkoutProgramComponent';
 
 //Styles:
 import styled from 'styled-components';
@@ -25,6 +26,10 @@ const SortByWheelContainer = styled.div`
     margin: 1.5rem 0;
 `;
 
+const WorkoutProgramContainer = styled.div`
+    margin: 1.5rem 0;
+`;
+
 //Interfaces:
 
 const SearchResultsSection = () => {
@@ -38,6 +43,9 @@ const SearchResultsSection = () => {
                 <SortByWheelContainer>
                     <SortByWheel />
                 </SortByWheelContainer>
+                <WorkoutProgramContainer>
+                    <WorkoutProgramComponent />
+                </WorkoutProgramContainer>
             </SearchResultsTextContainer>
         </MainContainer>
     );
