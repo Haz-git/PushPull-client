@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { deviceMin } from '../../../devices/breakpoints';
 
 //Components:
 import SearchBar from '../../general_components/SearchBar';
@@ -11,7 +12,19 @@ import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-    padding: 2rem 2rem;
+    @media ${deviceMin.mobileS} {
+        padding: 1rem 1rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        padding: 2rem 2rem;
+    }
+
+    @media ${deviceMin.laptopHalf} {
+    }
+
+    @media ${deviceMin.laptopS} {
+    }
 `;
 
 const SearchResultsTextContainer = styled.div`
@@ -22,6 +35,20 @@ const SearchResultsText = styled.h3`
     color: ${(props) => props.theme.mainText};
     font-size: ${(props) => props.theme.fontSizes.lg};
     font-weight: 700;
+
+    @media ${deviceMin.mobileS} {
+        font-size: ${(props) => props.theme.fontSizes.md};
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: ${(props) => props.theme.fontSizes.lg};
+    }
+
+    @media ${deviceMin.laptopHalf} {
+    }
+
+    @media ${deviceMin.laptopS} {
+    }
 `;
 
 const SortByWheelContainer = styled.div`
