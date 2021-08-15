@@ -11,6 +11,7 @@ const MainContainer = styled.div`
     background: rgba(239, 239, 239, 1);
     text-align: left;
     width: 15rem;
+    height: 100%;
 `;
 
 const FilterText = styled.h2`

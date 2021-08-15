@@ -18,16 +18,10 @@ const MainSearchPageContainer = styled.section`
         height: 100%;
     }
 
-    @media ${deviceMin.browserSm} {
+    @media ${deviceMin.tabletp} {
         height: 100vh;
         display: grid;
         grid-template-columns: 1fr 8fr;
-    }
-
-    @media ${deviceMin.laptopHalf} {
-    }
-
-    @media ${deviceMin.laptopS} {
     }
 `;
 
@@ -36,14 +30,8 @@ const FilterColumnView = styled.div`
         display: none;
     }
 
-    @media ${deviceMin.browserSm} {
+    @media ${deviceMin.tabletp} {
         display: block;
-    }
-
-    @media ${deviceMin.laptopHalf} {
-    }
-
-    @media ${deviceMin.laptopS} {
     }
 `;
 

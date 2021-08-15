@@ -35,9 +35,10 @@ const SVGContainer = styled.div`
         display: none;
     }
 
-    @media ${deviceMin.browserSm} {
-        height: 11rem;
-        width: 11rem;
+    @media ${deviceMin.browsersmp} {
+        display: block;
+        min-height: 11rem;
+        min-width: 11rem;
         border: 1px solid #ececec;
     }
 `;
@@ -50,7 +51,7 @@ const InfoContainer = styled.div`
         margin-left: 0;
     }
 
-    @media ${deviceMin.browserSm} {
+    @media ${deviceMin.browsersmp} {
         margin-left: 2rem;
     }
 `;

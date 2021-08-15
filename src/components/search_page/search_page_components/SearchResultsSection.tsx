@@ -19,12 +19,6 @@ const MainContainer = styled.section`
     @media ${deviceMin.browserSm} {
         padding: 2rem 2rem;
     }
-
-    @media ${deviceMin.laptopHalf} {
-    }
-
-    @media ${deviceMin.laptopS} {
-    }
 `;
 
 const SearchResultsTextContainer = styled.div`
@@ -42,12 +36,6 @@ const SearchResultsText = styled.h3`
 
     @media ${deviceMin.browserSm} {
         font-size: ${(props) => props.theme.fontSizes.lg};
-    }
-
-    @media ${deviceMin.laptopHalf} {
-    }
-
-    @media ${deviceMin.laptopS} {
     }
 `;
 
