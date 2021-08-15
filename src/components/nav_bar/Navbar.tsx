@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 //Components:
+import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 
 //Styles:
@@ -15,7 +16,17 @@ const StyledNavbar = styled.nav`
     z-index: 99999; */
 `;
 
-const StyledNavLogo = styled.div`
+const StyledNavLogo = styled(Link)`
+    outline: none;
+    border: none;
+    background: transparent;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const LogoContainer = styled.div`
     height: 2rem;
     width: 10rem;
 `;
@@ -25,8 +36,10 @@ const StyledNavLogo = styled.div`
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <StyledNavLogo>
-                <LogoSVG />
+            <StyledNavLogo to="/">
+                <LogoContainer>
+                    <LogoSVG />
+                </LogoContainer>
             </StyledNavLogo>
         </StyledNavbar>
     );
