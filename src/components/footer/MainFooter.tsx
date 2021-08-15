@@ -60,7 +60,7 @@ const FooterText = styled.p`
     }
 
     @media ${deviceMin.tablet} {
-        font-size: ${(props) => props.theme.fontSizes.md};
+        font-size: ${(props) => props.theme.fontSizes.smp};
     }
 `;
 
@@ -75,7 +75,7 @@ const FooterTextLinks = styled.a`
 
     @media ${deviceMin.tablet} {
         margin: 0 1rem;
-        font-size: ${(props) => props.theme.fontSizes.md};
+        font-size: ${(props) => props.theme.fontSizes.smp};
     }
 `;
 

@@ -6,6 +6,7 @@ export const lightTheme = {
     fontSizes: {
         xs: '.5rem',
         sm: '.8rem',
+        smp: '1rem',
         md: '1.1rem',
         lg: '1.5rem',
         xl: '2rem',
