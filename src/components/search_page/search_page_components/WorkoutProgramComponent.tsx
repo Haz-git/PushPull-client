@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { deviceMin } from '../../../devices/breakpoints';
 
 //Components:
 import ReactStars from 'react-rating-stars-component';
@@ -29,17 +30,43 @@ const SVGContainer = styled.div`
     height: 11rem;
     width: 11rem;
     border: 1px solid #ececec;
+
+    @media ${deviceMin.mobileS} {
+        display: none;
+    }
+
+    @media ${deviceMin.browserSm} {
+        height: 11rem;
+        width: 11rem;
+        border: 1px solid #ececec;
+    }
 `;
 
 const InfoContainer = styled.div`
     position: relative;
     margin-left: 2rem;
+
+    @media ${deviceMin.mobileS} {
+        margin-left: 0;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-left: 2rem;
+    }
 `;
 
 const ProgramTitle = styled.h2`
     font-size: 1.5rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 800;
+
+    @media ${deviceMin.mobileS} {
+        font-size: 1.1rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: 1.5rem;
+    }
 `;
 
 const ProgramRatingContainer = styled.div`
@@ -47,6 +74,16 @@ const ProgramRatingContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin: 0.75rem 0;
+
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
 `;
 
 const StarsContainer = styled.div`
@@ -54,17 +91,43 @@ const StarsContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin-right: 1rem;
+
+    @media ${deviceMin.mobileS} {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-bottom: 0;
+        margin-right: 1rem;
+    }
 `;
 const RatingText = styled.p`
     font-size: 1rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 700;
+
+    @media ${deviceMin.mobileS} {
+        font-size: 0.85rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: 1rem;
+    }
 `;
 
 const ProgramDesc = styled.p`
     font-size: 1.1rem;
     color: ${(props) => props.theme.subText};
     font-weight: 500;
+
+    @media ${deviceMin.mobileS} {
+        font-size: 0.9rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: 1.1rem;
+    }
 `;
 
 const ProgramTagsContainer = styled.div`
