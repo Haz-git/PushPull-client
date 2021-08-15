@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
 import FilterColumn from './search_page_components/FilterColumn';
@@ -11,15 +12,35 @@ const MainSearchPageContainer = styled.section`
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 8fr;
+
+    @media ${deviceMin.mobileS} {
+    }
+
+    @media ${deviceMin.browserSm} {
+    }
+
+    @media ${deviceMin.laptopHalf} {
+    }
+
+    @media ${deviceMin.laptopS} {
+    }
 `;
+
+const FilterColumnView = styled.div``;
+
+const SearchResultsSectionView = styled.div``;
 
 //Interfaces:
 
 const MainSearchPage = () => {
     return (
         <MainSearchPageContainer>
-            <FilterColumn />
-            <SearchResultsSection />
+            <FilterColumnView>
+                <FilterColumn />
+            </FilterColumnView>
+            <SearchResultsSectionView>
+                <SearchResultsSection />
+            </SearchResultsSectionView>
         </MainSearchPageContainer>
     );
 };
