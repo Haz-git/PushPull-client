@@ -7,6 +7,7 @@ const size = {
     browserSm: '500px',
     laptopHalf: '700px',
     tablet: '768px',
+    tabletp: '800px',
     laptopS: '850px',
     laptop: '1024px',
     laptopL: '1440px',
