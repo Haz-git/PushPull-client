@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import DividerLine from '../../general_components/DividerLine';
@@ -32,6 +33,19 @@ const ButtonDivider = styled.div`
 //interfaces:
 
 const FilterColumn = () => {
+    enum RenderView {
+        RENDER_MAIN_FILTER = 'RENDER_MAIN_FILTER',
+        RENDER_SELECTION_CATEGORY = 'RENDER_SELECTION_CATEGORY',
+        RENDER_SELECTION_EQUIPMENT = 'RENDER_SELECTION_EQUIPMENT',
+        RENDER_SELECTION_DIFFICULTY = 'RENDER_SELECTION_DIFFICULTY',
+        RENDER_SELECTION_WORKOUTDAYS = 'RENDER_SELECTION_WORKOUTDAYS',
+        RENDER_SELECTION_WORKOUTLENGTH = 'RENDER_SELECTION_WORKOUTLENGTH',
+    }
+
+    const [renderState, setRenderState] = useState(
+        RenderView.RENDER_MAIN_FILTER
+    );
+
     return (
         <MainContainer>
             <FilterText>Filter By</FilterText>
