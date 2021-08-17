@@ -33,18 +33,22 @@ const MainContainer = styled.button`
 `;
 
 const FilterLabelText = styled.h3`
-    font-size: ${(props) => props.theme.fontSizes.md};
+    font-size: 1rem;
     color: ${(props) => props.theme.subText};
 `;
 
 //Interfaces:
 interface IComponentProps {
     filterLabel: string;
+    onClick?: React.MouseEventHandler;
 }
 
-const FilterButton = ({ filterLabel }: IComponentProps): JSX.Element => {
+const FilterButton = ({
+    filterLabel,
+    onClick,
+}: IComponentProps): JSX.Element => {
     return (
-        <MainContainer>
+        <MainContainer onClick={onClick}>
             <FilterLabelText>{filterLabel}</FilterLabelText>
             <RightArrowIcon />
         </MainContainer>
