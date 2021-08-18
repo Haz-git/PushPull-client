@@ -63,6 +63,7 @@ const ReturnButton = styled.button`
     background: inherit;
     border-radius: 0.3rem;
     transition: 0.3s all ease-in-out;
+    margin-left: -0.5rem;
 
     &:hover {
         text-decoration: none;
