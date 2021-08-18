@@ -17,6 +17,10 @@ const StyledNavbar = styled.nav`
 `;
 
 const StyledNavLogo = styled(Link)`
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
     outline: none;
     border: none;
     background: transparent;
@@ -27,6 +31,7 @@ const StyledNavLogo = styled(Link)`
 `;
 
 const LogoContainer = styled.div`
+    position: relative;
     height: 2rem;
     width: 10rem;
 `;
@@ -36,11 +41,10 @@ const LogoContainer = styled.div`
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <StyledNavLogo to="/">
-                <LogoContainer>
-                    <LogoSVG />
-                </LogoContainer>
-            </StyledNavLogo>
+            <LogoContainer>
+                <LogoSVG />
+                <StyledNavLogo to="/" />
+            </LogoContainer>
         </StyledNavbar>
     );
 };
