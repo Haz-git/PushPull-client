@@ -28,13 +28,14 @@ const MainContainer = styled.button`
     &:hover {
         text-decoration: none;
         outline: none;
-        background: #dbdbdb;
+        background: #e8e8e8;
     }
 `;
 
 const FilterLabelText = styled.h3`
     font-size: 1rem;
     color: ${(props) => props.theme.subText};
+    font-weight: 600;
 `;
 
 //Interfaces:
