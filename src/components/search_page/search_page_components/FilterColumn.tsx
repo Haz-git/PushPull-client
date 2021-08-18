@@ -4,6 +4,7 @@ import { useState } from 'react';
 //Components:
 import DividerLine from '../../general_components/DividerLine';
 import FilterButton from './FilterButton';
+import FilterChoice from './FilterChoice';
 
 //Styles:
 import styled from 'styled-components';
@@ -15,7 +16,7 @@ const LeftArrowIcon = styled(ChevronLeft)`
     height: 0.9rem;
     width: 0.9rem;
     margin-right: 0.15rem;
-    margin-bottom: 0.035rem;
+    margin-bottom: 0.0385rem;
     color: ${(props) => props.theme.subText};
 `;
 
@@ -136,15 +137,35 @@ const FilterColumn = () => {
                             </TitleContainer>
                             <DividerLine border="1px solid #e5e5e5" />
                             <ButtonsContainer>
-                                <FilterButton filterLabel="Weightlifting" />
+                                <FilterChoice
+                                    choiceLabel="Any Category"
+                                    isActive={true}
+                                />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Powerlifting" />
+                                <FilterChoice
+                                    choiceLabel="Weightlifting"
+                                    isActive={false}
+                                />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Bodybuilding" />
+                                <FilterChoice
+                                    choiceLabel="Powerlifting"
+                                    isActive={false}
+                                />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Crossfit" />
+                                <FilterChoice
+                                    choiceLabel="Bodybuilding"
+                                    isActive={false}
+                                />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Aerobics" />
+                                <FilterChoice
+                                    choiceLabel="Crossfit"
+                                    isActive={false}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    choiceLabel="Aerobics"
+                                    isActive={false}
+                                />
                             </ButtonsContainer>
                         </MainContainer>
                     );
