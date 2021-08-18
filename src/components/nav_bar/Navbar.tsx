@@ -12,6 +12,8 @@ const StyledNavbar = styled.nav`
     width: 100%;
     padding: 1rem 1rem;
     text-align: left;
+    top: 0;
+    position: sticky;
     /* box-shadow: ${(props) => props.theme.shadows.sm};
     z-index: 99999; */
 `;
