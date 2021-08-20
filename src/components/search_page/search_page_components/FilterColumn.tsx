@@ -85,10 +85,41 @@ const FilterColumn = () => {
         RENDER_SELECTION_WORKOUTLENGTH = 'RENDER_SELECTION_WORKOUTLENGTH',
     }
 
+    //State management for filter column view -- default it RenderView.RENDER_MAIN_FILTER
     const [renderState, setRenderState] = useState(
         RenderView.RENDER_MAIN_FILTER
     );
 
+    //State manager for the active filter choices per filter button..
+    const [activeFilters, setActiveFilters] = useState({
+        category: 'any',
+        equipment: 'any',
+        difficulty: 'any',
+        workoutDays: 'any',
+        workoutLength: 'any',
+    });
+
+    //Filter choice selection handler:
+    const handleUserFilterChoiceSelection = (
+        e: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        const { name } = e.currentTarget;
+
+        //Extract out the filter name and filter choice
+        const targetNum = name.indexOf(':');
+        const mainFilterName = name.substr(0, targetNum);
+        const filterId = name.substr(targetNum + 1);
+
+        console.log(mainFilterName, filterId);
+
+        //Change the state if it's a different value? Type conflict during the check...
+
+        setActiveFilters({
+            ...activeFilters,
+            [mainFilterName]: filterId,
+        });
+    };
+    console.log(activeFilters);
     const renderFilterView = (view: RenderView) => {
         if (view) {
             switch (view) {
@@ -138,33 +169,45 @@ const FilterColumn = () => {
                             <DividerLine border="1px solid #e5e5e5" />
                             <ButtonsContainer>
                                 <FilterChoice
+                                    name="category:any"
                                     choiceLabel="Any Category"
                                     isActive={true}
+                                    onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
+                                    name="category:weightlifting"
                                     choiceLabel="Weightlifting"
                                     isActive={false}
+                                    onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
+                                    name="category:powerlifting"
                                     choiceLabel="Powerlifting"
                                     isActive={false}
+                                    onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
+                                    name="category:bodybuilding"
                                     choiceLabel="Bodybuilding"
                                     isActive={false}
+                                    onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
+                                    name="category:crossfit"
                                     choiceLabel="Crossfit"
                                     isActive={false}
+                                    onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
+                                    name="category:aerobics"
                                     choiceLabel="Aerobics"
                                     isActive={false}
+                                    onClick={handleUserFilterChoiceSelection}
                                 />
                             </ButtonsContainer>
                         </MainContainer>
