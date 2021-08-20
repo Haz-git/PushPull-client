@@ -12,7 +12,7 @@ import { ChevronLeft } from '@styled-icons/boxicons-solid/ChevronLeft';
 
 //Icons:
 
-const LeftArrowIcon = styled(ChevronLeft)`
+export const LeftArrowIcon = styled(ChevronLeft)`
     height: 0.9rem;
     width: 0.9rem;
     margin-right: 0.15rem;
@@ -20,14 +20,14 @@ const LeftArrowIcon = styled(ChevronLeft)`
     color: ${(props) => props.theme.subText};
 `;
 
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
     background: rgba(239, 239, 239, 1);
     text-align: left;
     width: 18rem;
     height: 100%;
 `;
 
-const TitleContainer = styled.div`
+export const TitleContainer = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -36,21 +36,21 @@ const TitleContainer = styled.div`
     padding: 2rem 2rem;
 `;
 
-const FilterText = styled.h2`
+export const FilterText = styled.h2`
     font-size: ${(props) => props.theme.fontSizes.xl};
     color: ${(props) => props.theme.accentColors.orange};
     font-weight: 800;
 `;
 
-const ButtonsContainer = styled.div`
+export const ButtonsContainer = styled.div`
     padding: 2rem 1rem;
 `;
 
-const ButtonDivider = styled.div`
+export const ButtonDivider = styled.div`
     height: 0.5rem;
 `;
 
-const ReturnButton = styled.button`
+export const ReturnButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,7 +81,7 @@ const FilterColumn = () => {
         RENDER_SELECTION_CATEGORY = 'RENDER_SELECTION_CATEGORY',
         RENDER_SELECTION_EQUIPMENT = 'RENDER_SELECTION_EQUIPMENT',
         RENDER_SELECTION_DIFFICULTY = 'RENDER_SELECTION_DIFFICULTY',
-        RENDER_SELECTION_WORKOUTDAYS = 'RENDER_SELECTION_WORKOUTDAYS',
+        RENDER_SELECTION_WORKOUTSCHEDULE = 'RENDER_SELECTION_WORKOUTSCHEDULE',
         RENDER_SELECTION_WORKOUTLENGTH = 'RENDER_SELECTION_WORKOUTLENGTH',
     }
 
@@ -95,7 +95,7 @@ const FilterColumn = () => {
         category: 'any',
         equipment: 'any',
         difficulty: 'any',
-        workoutDays: 'any',
+        workoutSchedule: 'any',
         workoutLength: 'any',
     });
 
@@ -176,21 +176,65 @@ const FilterColumn = () => {
                                 <FilterButton
                                     name="equipment"
                                     filterLabel="Equipment"
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_SELECTION_EQUIPMENT
+                                        )
+                                    }
+                                    currentSelection={setCurrentSelectionForFilterButton(
+                                        'equipment'
+                                    )}
+                                    onFilterRemoval={
+                                        removeUserFilterChoiceSelection
+                                    }
                                 />
                                 <ButtonDivider />
                                 <FilterButton
                                     name="difficulty"
                                     filterLabel="Difficulty"
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_SELECTION_DIFFICULTY
+                                        )
+                                    }
+                                    currentSelection={setCurrentSelectionForFilterButton(
+                                        'difficulty'
+                                    )}
+                                    onFilterRemoval={
+                                        removeUserFilterChoiceSelection
+                                    }
                                 />
                                 <ButtonDivider />
                                 <FilterButton
-                                    name="workoutDays"
-                                    filterLabel="Workout Days"
+                                    name="workoutSchedule"
+                                    filterLabel="Workout Schedule"
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_SELECTION_WORKOUTSCHEDULE
+                                        )
+                                    }
+                                    currentSelection={setCurrentSelectionForFilterButton(
+                                        'workoutSchedule'
+                                    )}
+                                    onFilterRemoval={
+                                        removeUserFilterChoiceSelection
+                                    }
                                 />
                                 <ButtonDivider />
                                 <FilterButton
                                     name="workoutLength"
                                     filterLabel="Workout Length"
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_SELECTION_WORKOUTLENGTH
+                                        )
+                                    }
+                                    currentSelection={setCurrentSelectionForFilterButton(
+                                        'workoutLength'
+                                    )}
+                                    onFilterRemoval={
+                                        removeUserFilterChoiceSelection
+                                    }
                                 />
                             </ButtonsContainer>
                         </MainContainer>
@@ -269,6 +313,256 @@ const FilterColumn = () => {
                                     isActive={setActiveStateForFilterChoice(
                                         'category',
                                         'aerobics'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                            </ButtonsContainer>
+                        </MainContainer>
+                    );
+                case RenderView.RENDER_SELECTION_EQUIPMENT:
+                    return (
+                        <MainContainer>
+                            <TitleContainer>
+                                <ReturnButton
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_MAIN_FILTER
+                                        )
+                                    }
+                                >
+                                    <LeftArrowIcon />
+                                    Filters
+                                </ReturnButton>
+                                <FilterText>Equipment</FilterText>
+                            </TitleContainer>
+                            <DividerLine border="1px solid #e5e5e5" />
+                            <ButtonsContainer>
+                                <FilterChoice
+                                    name="equipment:any"
+                                    choiceLabel="Any Equipment"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'equipment',
+                                        'any'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="equipment:no Equipment"
+                                    choiceLabel="No Equipment"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'equipment',
+                                        'no Equipment'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="equipment:gym Required"
+                                    choiceLabel="Gym Required"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'equipment',
+                                        'gym Required'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="equipment:outdoors"
+                                    choiceLabel="Outdoors"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'equipment',
+                                        'outdoors'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                            </ButtonsContainer>
+                        </MainContainer>
+                    );
+                case RenderView.RENDER_SELECTION_DIFFICULTY:
+                    return (
+                        <MainContainer>
+                            <TitleContainer>
+                                <ReturnButton
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_MAIN_FILTER
+                                        )
+                                    }
+                                >
+                                    <LeftArrowIcon />
+                                    Filters
+                                </ReturnButton>
+                                <FilterText>Difficulty</FilterText>
+                            </TitleContainer>
+                            <DividerLine border="1px solid #e5e5e5" />
+                            <ButtonsContainer>
+                                <FilterChoice
+                                    name="difficulty:any"
+                                    choiceLabel="Any Difficulty"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'difficulty',
+                                        'any'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="difficulty:beginner"
+                                    choiceLabel="Beginner"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'difficulty',
+                                        'beginner'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="difficulty:intermediate"
+                                    choiceLabel="Intermediate"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'difficulty',
+                                        'intermediate'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="difficulty:advanced"
+                                    choiceLabel="Advanced"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'difficulty',
+                                        'advanced'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                            </ButtonsContainer>
+                        </MainContainer>
+                    );
+                case RenderView.RENDER_SELECTION_WORKOUTSCHEDULE:
+                    return (
+                        <MainContainer>
+                            <TitleContainer>
+                                <ReturnButton
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_MAIN_FILTER
+                                        )
+                                    }
+                                >
+                                    <LeftArrowIcon />
+                                    Filters
+                                </ReturnButton>
+                                <FilterText>Schedule</FilterText>
+                            </TitleContainer>
+                            <DividerLine border="1px solid #e5e5e5" />
+                            <ButtonsContainer>
+                                <FilterChoice
+                                    name="workoutSchedule:any"
+                                    choiceLabel="Any # of Days"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutSchedule',
+                                        'any'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="workoutSchedule:1-2 Days/Week"
+                                    choiceLabel="1-2 Days/Week"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutSchedule',
+                                        '1-2 Days/Week'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="workoutSchedule:3-4 Days/Week"
+                                    choiceLabel="3-4 Days/Week"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutSchedule',
+                                        '3-4 Days/Week'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="workoutSchedule:5-7 Days/Week"
+                                    choiceLabel="5-7 Days/Week"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutSchedule',
+                                        '5-7 Days/Week'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                            </ButtonsContainer>
+                        </MainContainer>
+                    );
+                case RenderView.RENDER_SELECTION_WORKOUTLENGTH:
+                    return (
+                        <MainContainer>
+                            <TitleContainer>
+                                <ReturnButton
+                                    onClick={() =>
+                                        setRenderState(
+                                            RenderView.RENDER_MAIN_FILTER
+                                        )
+                                    }
+                                >
+                                    <LeftArrowIcon />
+                                    Filters
+                                </ReturnButton>
+                                <FilterText>Time Length</FilterText>
+                            </TitleContainer>
+                            <DividerLine border="1px solid #e5e5e5" />
+                            <ButtonsContainer>
+                                <FilterChoice
+                                    name="workoutLength:any"
+                                    choiceLabel="Any Amount of Time"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutLength',
+                                        'any'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="workoutLength:< 45 Minutes"
+                                    choiceLabel="< 45 Minutes"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutLength',
+                                        '< 45 Minutes'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="workoutLength:1-2 Hours"
+                                    choiceLabel="1-2 Hours"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutLength',
+                                        '1-2 Hours'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="workoutLength:2-3 Hours"
+                                    choiceLabel="2-3 Hours"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutLength',
+                                        '2-3 Hours'
+                                    )}
+                                    onClick={handleUserFilterChoiceSelection}
+                                />
+                                <ButtonDivider />
+                                <FilterChoice
+                                    name="workoutLength:3+ Hours"
+                                    choiceLabel="3+ Hours"
+                                    isActive={setActiveStateForFilterChoice(
+                                        'workoutLength',
+                                        '3+ Hours'
                                     )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
