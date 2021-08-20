@@ -23,7 +23,7 @@ const LeftArrowIcon = styled(ChevronLeft)`
 const MainContainer = styled.div`
     background: rgba(239, 239, 239, 1);
     text-align: left;
-    width: 15rem;
+    width: 18rem;
     height: 100%;
 `;
 
@@ -120,6 +120,19 @@ const FilterColumn = () => {
         }
     };
 
+    const removeUserFilterChoiceSelection = (
+        e: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        const { name } = e.currentTarget;
+
+        if (activeFilters[name] !== 'any') {
+            setActiveFilters({
+                ...activeFilters,
+                [name]: 'any',
+            });
+        }
+    };
+
     const setActiveStateForFilterChoice = (
         filterOption: string,
         filterChoice: string
@@ -127,6 +140,10 @@ const FilterColumn = () => {
         //Checks the main state, and returns a boolean if the current filter choice is selected to render active state.
         if (activeFilters[filterOption] === filterChoice) return true;
         else return false;
+    };
+
+    const setCurrentSelectionForFilterButton = (filterOption: string) => {
+        return activeFilters[filterOption];
     };
 
     const renderFilterView = (view: RenderView) => {
@@ -141,21 +158,40 @@ const FilterColumn = () => {
                             <DividerLine border="1px solid #e5e5e5" />
                             <ButtonsContainer>
                                 <FilterButton
+                                    name="category"
                                     filterLabel="Category"
                                     onClick={() =>
                                         setRenderState(
                                             RenderView.RENDER_SELECTION_CATEGORY
                                         )
                                     }
+                                    currentSelection={setCurrentSelectionForFilterButton(
+                                        'category'
+                                    )}
+                                    onFilterRemoval={
+                                        removeUserFilterChoiceSelection
+                                    }
                                 />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Equipment" />
+                                <FilterButton
+                                    name="equipment"
+                                    filterLabel="Equipment"
+                                />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Difficulty" />
+                                <FilterButton
+                                    name="difficulty"
+                                    filterLabel="Difficulty"
+                                />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Workout Days" />
+                                <FilterButton
+                                    name="workoutDays"
+                                    filterLabel="Workout Days"
+                                />
                                 <ButtonDivider />
-                                <FilterButton filterLabel="Workout Length" />
+                                <FilterButton
+                                    name="workoutLength"
+                                    filterLabel="Workout Length"
+                                />
                             </ButtonsContainer>
                         </MainContainer>
                     );
