@@ -47,15 +47,17 @@ interface IComponentProps {
     choiceLabel: string;
     onClick?: React.MouseEventHandler;
     isActive: boolean;
+    name?: string;
 }
 
 const FilterChoice = ({
     choiceLabel,
     onClick,
     isActive,
+    name,
 }: IComponentProps): JSX.Element => {
     return (
-        <MainContainer onClick={onClick} isActive={isActive}>
+        <MainContainer name={name} onClick={onClick} isActive={isActive}>
             <ChoiceLabelText isActive={isActive}>{choiceLabel}</ChoiceLabelText>
         </MainContainer>
     );
