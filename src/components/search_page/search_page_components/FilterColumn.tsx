@@ -120,9 +120,14 @@ const FilterColumn = () => {
         }
     };
 
-    console.log(activeFilters);
-
-    const setActiveStateForFilterChoice = (filterOption: string) => {};
+    const setActiveStateForFilterChoice = (
+        filterOption: string,
+        filterChoice: string
+    ) => {
+        //Checks the main state, and returns a boolean if the current filter choice is selected to render active state.
+        if (activeFilters[filterOption] === filterChoice) return true;
+        else return false;
+    };
 
     const renderFilterView = (view: RenderView) => {
         if (view) {
@@ -175,42 +180,60 @@ const FilterColumn = () => {
                                 <FilterChoice
                                     name="category:any"
                                     choiceLabel="Any Category"
-                                    isActive={true}
+                                    isActive={setActiveStateForFilterChoice(
+                                        'category',
+                                        'any'
+                                    )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
                                     name="category:weightlifting"
                                     choiceLabel="Weightlifting"
-                                    isActive={false}
+                                    isActive={setActiveStateForFilterChoice(
+                                        'category',
+                                        'weightlifting'
+                                    )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
                                     name="category:powerlifting"
                                     choiceLabel="Powerlifting"
-                                    isActive={false}
+                                    isActive={setActiveStateForFilterChoice(
+                                        'category',
+                                        'powerlifting'
+                                    )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
                                     name="category:bodybuilding"
                                     choiceLabel="Bodybuilding"
-                                    isActive={false}
+                                    isActive={setActiveStateForFilterChoice(
+                                        'category',
+                                        'bodybuilding'
+                                    )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
                                     name="category:crossfit"
                                     choiceLabel="Crossfit"
-                                    isActive={false}
+                                    isActive={setActiveStateForFilterChoice(
+                                        'category',
+                                        'crossfit'
+                                    )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
                                 <ButtonDivider />
                                 <FilterChoice
                                     name="category:aerobics"
                                     choiceLabel="Aerobics"
-                                    isActive={false}
+                                    isActive={setActiveStateForFilterChoice(
+                                        'category',
+                                        'aerobics'
+                                    )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
                             </ButtonsContainer>
