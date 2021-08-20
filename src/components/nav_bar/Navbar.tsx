@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
 import { Link } from 'react-router-dom';
@@ -36,6 +37,16 @@ const LogoContainer = styled.div`
     position: relative;
     height: 2rem;
     width: 10rem;
+
+    @media ${deviceMin.mobileS} {
+        height: 1.7rem;
+        width: 6rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        height: 2rem;
+        width: 10rem;
+    }
 `;
 
 //Interfaces:
