@@ -91,7 +91,7 @@ const FilterColumn = () => {
     );
 
     //State manager for the active filter choices per filter button..
-    const [activeFilters, setActiveFilters] = useState({
+    const [activeFilters, setActiveFilters] = useState<any>({
         category: 'any',
         equipment: 'any',
         difficulty: 'any',
@@ -110,16 +110,20 @@ const FilterColumn = () => {
         const mainFilterName = name.substr(0, targetNum);
         const filterId = name.substr(targetNum + 1);
 
-        console.log(mainFilterName, filterId);
-
         //Change the state if it's a different value? Type conflict during the check...
 
-        setActiveFilters({
-            ...activeFilters,
-            [mainFilterName]: filterId,
-        });
+        if (activeFilters[mainFilterName] !== filterId) {
+            setActiveFilters({
+                ...activeFilters,
+                [mainFilterName]: filterId,
+            });
+        }
     };
+
     console.log(activeFilters);
+
+    const setActiveStateForFilterChoice = (filterOption: string) => {};
+
     const renderFilterView = (view: RenderView) => {
         if (view) {
             switch (view) {
