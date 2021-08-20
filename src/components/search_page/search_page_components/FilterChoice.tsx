@@ -19,7 +19,7 @@ const MainContainer = styled.button<StyledComponentProps>`
             ? `7px solid ${props.theme.accentColors.orange}`
             : `none`};
     background: ${(props) => (props.isActive === true ? `#ffffff` : `inherit`)};
-    transition: 0.3s all ease-in-out;
+    transition: 0.2s all linear;
     box-shadow: ${({ isActive }) =>
         isActive === false ? 'none' : 'rgba(0, 0, 0, 0.2) 0px 2px 4px'};
 
@@ -27,7 +27,7 @@ const MainContainer = styled.button<StyledComponentProps>`
         text-decoration: none;
         outline: none;
         background: ${(props) =>
-            props.isActive === true ? `#ffffff` : `e8e8e8`};
+            props.isActive === true ? `#ffffff` : `#e8e8e8`};
     }
 `;
 
