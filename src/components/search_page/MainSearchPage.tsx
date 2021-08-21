@@ -32,6 +32,7 @@ const FilterColumnView = styled.div`
 
     @media ${deviceMin.tabletp} {
         display: block;
+        width: 18rem;
     }
 `;
 
