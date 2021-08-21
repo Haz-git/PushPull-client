@@ -2,6 +2,16 @@ import * as React from 'react';
 import { useState } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
+//Redux:
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    updateCategory,
+    updateEquipment,
+    updateDifficulty,
+    updateWorkoutSchedule,
+    updateWorkoutLength,
+} from '../../../redux/filterOptions/filterActions';
+
 //Components:
 import DividerLine from '../../general_components/DividerLine';
 import FilterButton from './FilterButton';
@@ -97,6 +107,9 @@ const FilterColumn = () => {
         RENDER_SELECTION_WORKOUTLENGTH = 'RENDER_SELECTION_WORKOUTLENGTH',
     }
 
+    //Redux dispatch hook:
+    const dispatch = useDispatch();
+
     //State management for filter column view -- default it RenderView.RENDER_MAIN_FILTER
     const [renderState, setRenderState] = useState(
         RenderView.RENDER_MAIN_FILTER
@@ -129,6 +142,25 @@ const FilterColumn = () => {
                 ...activeFilters,
                 [mainFilterName]: filterId,
             });
+
+            //dispatch necessary changes to store:
+            switch (mainFilterName) {
+                case 'category':
+                    dispatch(updateCategory(filterId));
+                    break;
+                case 'equipment':
+                    dispatch(updateEquipment(filterId));
+                    break;
+                case 'difficulty':
+                    dispatch(updateDifficulty(filterId));
+                    break;
+                case 'workoutSchedule':
+                    dispatch(updateWorkoutSchedule(filterId));
+                    break;
+                case 'workoutLength':
+                    dispatch(updateWorkoutLength(filterId));
+                    break;
+            }
         }
     };
 
