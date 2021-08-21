@@ -110,23 +110,12 @@ const FilterColumn = () => {
     //Redux dispatch hook:
     const dispatch = useDispatch();
 
-    //Redux Selector hook:
-    const { category, equipment, difficulty, workoutSchedule, workoutLength } =
-        useSelector((state: RootStateOrAny) => state.filters);
+    const filters = useSelector((state: RootStateOrAny) => state.filters);
 
     //State management for filter column view -- default it RenderView.RENDER_MAIN_FILTER
     const [renderState, setRenderState] = useState(
         RenderView.RENDER_MAIN_FILTER
     );
-
-    //State manager for the active filter choices per filter button..
-    const [activeFilters, setActiveFilters] = useState<any>({
-        category: category,
-        equipment: equipment,
-        difficulty: difficulty,
-        workoutSchedule: workoutSchedule,
-        workoutLength: workoutLength,
-    });
 
     //Filter choice selection handler:
     const handleUserFilterChoiceSelection = (
@@ -141,12 +130,7 @@ const FilterColumn = () => {
 
         //Change the state if it's a different value? Type conflict during the check...
 
-        if (activeFilters[mainFilterName] !== filterId) {
-            setActiveFilters({
-                ...activeFilters,
-                [mainFilterName]: filterId,
-            });
-
+        if (filters[mainFilterName] !== filterId) {
             //dispatch necessary changes to store:
             switch (mainFilterName) {
                 case 'category':
@@ -173,12 +157,7 @@ const FilterColumn = () => {
     ) => {
         const { name } = e.currentTarget;
 
-        if (activeFilters[name] !== 'any') {
-            setActiveFilters({
-                ...activeFilters,
-                [name]: 'any',
-            });
-
+        if (filters[name] !== 'any') {
             //dispatch changes to reset a filter in store:
             switch (name) {
                 case 'category':
@@ -205,12 +184,12 @@ const FilterColumn = () => {
         filterChoice: string
     ) => {
         //Checks the main state, and returns a boolean if the current filter choice is selected to render active state.
-        if (activeFilters[filterOption] === filterChoice) return true;
+        if (filters[filterOption] === filterChoice) return true;
         else return false;
     };
 
     const setCurrentSelectionForFilterButton = (filterOption: string) => {
-        return activeFilters[filterOption];
+        return filters[filterOption];
     };
 
     const renderFilterView = (view: RenderView) => {
