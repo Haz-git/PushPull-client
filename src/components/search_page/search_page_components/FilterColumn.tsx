@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { deviceMin } from '../../../devices/breakpoints';
 
 //Components:
 import DividerLine from '../../general_components/DividerLine';
@@ -23,8 +24,11 @@ export const LeftArrowIcon = styled(ChevronLeft)`
 export const MainContainer = styled.div`
     background: rgba(239, 239, 239, 1);
     text-align: left;
-    width: 18rem;
-    height: 100%;
+    width: 100%;
+
+    @media ${deviceMin.tabletp} {
+        height: 100%;
+    }
 `;
 
 export const TitleContainer = styled.div`
@@ -34,6 +38,14 @@ export const TitleContainer = styled.div`
     flex-direction: column;
     text-align: left;
     padding: 2rem 2rem;
+
+    @media ${deviceMin.mobileS} {
+        padding: 1rem 1rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        padding: 2rem 2rem;
+    }
 `;
 
 export const FilterText = styled.h2`
