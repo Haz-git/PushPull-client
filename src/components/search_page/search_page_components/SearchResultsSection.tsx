@@ -7,6 +7,7 @@ import SearchBar from '../../general_components/SearchBar';
 import SortByWheel from './SortByWheel';
 import WorkoutProgramComponent from './WorkoutProgramComponent';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+import MobileFilterDrawerButton from './MobileFilterDrawerButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -50,6 +51,16 @@ const WorkoutProgramContainer = styled.div<StyledProps>`
     padding: 1rem 2rem;
 `;
 
+const MobileFilterButtonContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.tabletp} {
+        display: none;
+    }
+`;
+
 //Interfaces:
 
 interface StyledProps {
@@ -69,6 +80,9 @@ const SearchResultsSection = () => {
                 <SortByWheelContainer>
                     <SortByWheel />
                 </SortByWheelContainer>
+                <MobileFilterButtonContainer>
+                    <MobileFilterDrawerButton btnLabel="Filters" />
+                </MobileFilterButtonContainer>
                 <WorkoutProgramContainer containerHeight={height}>
                     <WorkoutProgramComponent />
                     <WorkoutProgramComponent />
