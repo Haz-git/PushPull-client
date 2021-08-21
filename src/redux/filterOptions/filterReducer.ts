@@ -1,20 +1,26 @@
 import { FilterActionType } from './action-types';
 import { FilterAction } from './filterInterfaces';
 
-const initialState = {};
+const initialState = {
+    category: 'any',
+    equipment: 'any',
+    difficulty: 'any',
+    workoutSchedule: 'any',
+    workoutLength: 'any',
+};
 
 const filterReducer = (state: Object = initialState, action: FilterAction) => {
     switch (action.type) {
         case FilterActionType.USER_UPDATE_CATEGORY:
-            return { ...state, filters: action.payload };
+            return { ...state, category: action.payload };
         case FilterActionType.USER_UPDATE_EQUIPMENT:
-            return { ...state, filters: action.payload };
+            return { ...state, equipment: action.payload };
         case FilterActionType.USER_UPDATE_DIFFICULTY:
-            return { ...state, filters: action.payload };
+            return { ...state, difficulty: action.payload };
         case FilterActionType.USER_UPDATE_WORKOUTSCHEDULE:
-            return { ...state, filters: action.payload };
+            return { ...state, workoutSchedule: action.payload };
         case FilterActionType.USER_UPDATE_WORKOUTLENGTH:
-            return { ...state, filters: action.payload };
+            return { ...state, workoutLength: action.payload };
         default:
             return state;
     }
