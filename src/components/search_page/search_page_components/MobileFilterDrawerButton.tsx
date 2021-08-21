@@ -8,8 +8,8 @@ import { Adjustments } from '@styled-icons/heroicons-outline/Adjustments';
 
 //Icons:
 const AdjustmentIcon = styled(Adjustments)`
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.4rem;
+    width: 1.4rem;
     color: #ffffff;
     margin-left: 0.5rem;
 `;
@@ -20,10 +20,12 @@ const MainContainer = styled.button`
     justify-content: flex-start;
     background: ${(props) => props.theme.accentColors.orange};
     /* background: #2d2c2a; */
-    border-radius: 0.3rem;
+    border-radius: 1.5rem;
     color: #ffffff;
-    border: none;
-    padding: 0.5rem 0.5rem;
+    border: 2px solid rgba(255, 178, 134, 1);
+    padding: 0.6rem 0.8rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
 `;
 
 const ButtonText = styled.h3`
