@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Redux:
-import { useDispatch, useSelector } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import {
     updateCategory,
     updateEquipment,
@@ -110,6 +110,10 @@ const FilterColumn = () => {
     //Redux dispatch hook:
     const dispatch = useDispatch();
 
+    //Redux Selector hook:
+    const { category, equipment, difficulty, workoutSchedule, workoutLength } =
+        useSelector((state: RootStateOrAny) => state.filters);
+
     //State management for filter column view -- default it RenderView.RENDER_MAIN_FILTER
     const [renderState, setRenderState] = useState(
         RenderView.RENDER_MAIN_FILTER
@@ -117,11 +121,11 @@ const FilterColumn = () => {
 
     //State manager for the active filter choices per filter button..
     const [activeFilters, setActiveFilters] = useState<any>({
-        category: 'any',
-        equipment: 'any',
-        difficulty: 'any',
-        workoutSchedule: 'any',
-        workoutLength: 'any',
+        category: category,
+        equipment: equipment,
+        difficulty: difficulty,
+        workoutSchedule: workoutSchedule,
+        workoutLength: workoutLength,
     });
 
     //Filter choice selection handler:
