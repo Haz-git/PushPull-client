@@ -91,7 +91,7 @@ const CurrentSelectionText = styled.h2`
 const CloseButtonDiv = styled.button`
     position: absolute;
     top: 50%;
-    left: 85%;
+    right: 0;
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     padding: 0.5rem 0.5rem;
