@@ -8,6 +8,7 @@ import SortByWheel from './SortByWheel';
 import WorkoutProgramComponent from './WorkoutProgramComponent';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import MobileFilterDrawerButton from './MobileFilterDrawerButton';
+import MobileFilterDrawer from './MobileFilterDrawer';
 
 //Styles:
 import styled from 'styled-components';
@@ -69,28 +70,43 @@ interface StyledProps {
 
 const SearchResultsSection = () => {
     const { height } = useWindowDimensions();
+    const [renderMobileDrawer, setRenderMobileDrawer] = useState(false);
+
+    //toggles mobile drawer:
+    const toggleMobileDrawer = (status: boolean) => {
+        setRenderMobileDrawer(status);
+    };
 
     return (
-        <MainContainer>
-            <SearchBar placeholderText="Search again..." />
-            <SearchResultsTextContainer>
-                <SearchResultsText>
-                    (10) Search Results for 'barbell'
-                </SearchResultsText>
-                <SortByWheelContainer>
-                    <SortByWheel />
-                </SortByWheelContainer>
-                <MobileFilterButtonContainer>
-                    <MobileFilterDrawerButton btnLabel="Filters" />
-                </MobileFilterButtonContainer>
-                <WorkoutProgramContainer containerHeight={height}>
-                    <WorkoutProgramComponent />
-                    <WorkoutProgramComponent />
-                    <WorkoutProgramComponent />
-                    <WorkoutProgramComponent />
-                </WorkoutProgramContainer>
-            </SearchResultsTextContainer>
-        </MainContainer>
+        <>
+            <MobileFilterDrawer
+                isOpen={renderMobileDrawer}
+                closeFunc={toggleMobileDrawer}
+            />
+            <MainContainer>
+                <SearchBar placeholderText="Search again..." />
+                <SearchResultsTextContainer>
+                    <SearchResultsText>
+                        (10) Search Results for 'barbell'
+                    </SearchResultsText>
+                    <SortByWheelContainer>
+                        <SortByWheel />
+                    </SortByWheelContainer>
+                    <MobileFilterButtonContainer>
+                        <MobileFilterDrawerButton
+                            btnLabel="Filters"
+                            onClick={toggleMobileDrawer}
+                        />
+                    </MobileFilterButtonContainer>
+                    <WorkoutProgramContainer containerHeight={height}>
+                        <WorkoutProgramComponent />
+                        <WorkoutProgramComponent />
+                        <WorkoutProgramComponent />
+                        <WorkoutProgramComponent />
+                    </WorkoutProgramContainer>
+                </SearchResultsTextContainer>
+            </MainContainer>
+        </>
     );
 };
 
