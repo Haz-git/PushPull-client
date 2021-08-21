@@ -16,6 +16,7 @@ const MainSearchPageContainer = styled.section`
     @media ${deviceMin.mobileS} {
         display: block;
         height: 100%;
+        overflow: hidden;
     }
 
     @media ${deviceMin.tabletp} {
