@@ -10,7 +10,7 @@ import { Adjustments } from '@styled-icons/heroicons-outline/Adjustments';
 const AdjustmentIcon = styled(Adjustments)`
     height: 1.5rem;
     width: 1.5rem;
-    color: ${(props) => props.theme.accentColors.orange};
+    color: #ffffff;
     margin-left: 0.5rem;
 `;
 
@@ -18,15 +18,16 @@ const MainContainer = styled.button`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background: #2d2c2a;
+    background: ${(props) => props.theme.accentColors.orange};
+    /* background: #2d2c2a; */
     border-radius: 0.3rem;
     color: #ffffff;
-    border: 2px solid ${(props) => props.theme.accentColors.orange};
+    border: none;
     padding: 0.5rem 0.5rem;
 `;
 
 const ButtonText = styled.h3`
-    color: ${(props) => props.theme.accentColors.orange};
+    color: #ffffff;
     font-size: ${(props) => props.theme.fontSizes.md};
     font-weight: 500;
 `;
