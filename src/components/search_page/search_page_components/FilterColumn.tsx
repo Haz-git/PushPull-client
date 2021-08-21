@@ -178,6 +178,25 @@ const FilterColumn = () => {
                 ...activeFilters,
                 [name]: 'any',
             });
+
+            //dispatch changes to reset a filter in store:
+            switch (name) {
+                case 'category':
+                    dispatch(updateCategory('any'));
+                    break;
+                case 'equipment':
+                    dispatch(updateEquipment('any'));
+                    break;
+                case 'difficulty':
+                    dispatch(updateDifficulty('any'));
+                    break;
+                case 'workoutSchedule':
+                    dispatch(updateWorkoutSchedule('any'));
+                    break;
+                case 'workoutLength':
+                    dispatch(updateWorkoutLength('any'));
+                    break;
+            }
         }
     };
 
