@@ -2,6 +2,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
+//Redux:
+import { RootStateOrAny, useSelector } from 'react-redux';
+
 //Components:
 import SearchBar from '../../general_components/SearchBar';
 import SortByWheel from './SortByWheel';
@@ -9,6 +12,7 @@ import WorkoutProgramComponent from './WorkoutProgramComponent';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import MobileFilterDrawerButton from './MobileFilterDrawerButton';
 import MobileFilterDrawer from './MobileFilterDrawer';
+import MobileFilterPill from './MobileFilterPill';
 
 //Styles:
 import styled from 'styled-components';
@@ -54,7 +58,27 @@ const WorkoutProgramContainer = styled.div<StyledProps>`
 
 const MobileFilterButtonContainer = styled.div`
     @media ${deviceMin.mobileS} {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    @media ${deviceMin.tabletp} {
+        display: none;
+    }
+`;
+
+const MobilePillContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-x: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     @media ${deviceMin.tabletp} {
@@ -77,6 +101,34 @@ const SearchResultsSection = () => {
         setRenderMobileDrawer(status);
     };
 
+    //Redux Selector hook:
+    const { category, equipment, difficulty, workoutSchedule, workoutLength } =
+        useSelector((state: RootStateOrAny) => state.filters);
+
+    //Pill render function:
+    const renderFilterPills = () => {
+        let pillArray = [] as any[];
+        pillArray.push(
+            { type: 'category', val: category },
+            { type: 'equipment', val: equipment },
+            { type: 'difficulty', val: difficulty },
+            { type: 'workoutSchedule', val: workoutSchedule },
+            { type: 'workoutLength', val: workoutLength }
+        );
+
+        return pillArray
+            .filter((object) => object.val !== 'any')
+            .map((object) => (
+                <MobileFilterPill
+                    pillLabel={
+                        object.val.charAt(0).toUpperCase() + object.val.slice(1)
+                    }
+                    filterType={object.type}
+                    key={object.type}
+                />
+            ));
+    };
+
     return (
         <>
             <MobileFilterDrawer
@@ -97,6 +149,9 @@ const SearchResultsSection = () => {
                             btnLabel="Filters"
                             onClick={toggleMobileDrawer}
                         />
+                        <MobilePillContainer>
+                            {renderFilterPills()}
+                        </MobilePillContainer>
                     </MobileFilterButtonContainer>
                     <WorkoutProgramContainer containerHeight={height}>
                         <WorkoutProgramComponent />
