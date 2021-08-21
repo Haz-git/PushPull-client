@@ -33,10 +33,11 @@ const MobileFilterDrawer = ({
                     drawer: {
                         background: 'rgb(239, 239, 239)',
                         overflowY: 'scroll',
-                        padding: '1rem .5rem',
+                        padding: '1rem 0rem',
                     },
                     header: {
                         marginBottom: '-.75rem',
+                        marginRight: '1rem',
                     },
                 }}
             >
