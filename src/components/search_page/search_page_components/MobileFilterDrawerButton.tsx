@@ -35,13 +35,15 @@ const ButtonText = styled.h3`
 
 interface IComponentProps {
     btnLabel: string;
+    onClick: (status: boolean) => void;
 }
 
 const MobileFilterDrawerButton = ({
     btnLabel,
+    onClick,
 }: IComponentProps): JSX.Element => {
     return (
-        <MainContainer>
+        <MainContainer onClick={() => onClick(true)}>
             <ButtonText>{btnLabel}</ButtonText>
             <AdjustmentIcon />
         </MainContainer>
