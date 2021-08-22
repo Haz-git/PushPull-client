@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Redux:
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
 import SearchBar from '../../general_components/SearchBar';
@@ -94,16 +95,24 @@ interface StyledProps {
 
 const SearchResultsSection = () => {
     const { height } = useWindowDimensions();
+
+    //Redux Dispatch hook:
+    const dispatch = useDispatch();
+
+    //Redux Selector hook:
+    const { category, equipment, difficulty, workoutSchedule, workoutLength } =
+        useSelector((state: RootStateOrAny) => state.filters);
+
+    useEffect(() => {
+        dispatch(getWorkoutPrograms());
+    }, []);
+
     const [renderMobileDrawer, setRenderMobileDrawer] = useState(false);
 
     //toggles mobile drawer:
     const toggleMobileDrawer = (status: boolean) => {
         setRenderMobileDrawer(status);
     };
-
-    //Redux Selector hook:
-    const { category, equipment, difficulty, workoutSchedule, workoutLength } =
-        useSelector((state: RootStateOrAny) => state.filters);
 
     //Pill render function:
     const renderFilterPills = () => {
@@ -127,6 +136,24 @@ const SearchResultsSection = () => {
                     key={object.type}
                 />
             ));
+    };
+
+    const workoutPrograms = useSelector(
+        (state: RootStateOrAny) => state.workoutPrograms.workoutPrograms
+    );
+
+    //Render workout programs
+    const renderWorkoutPrograms = () => {
+        if (workoutPrograms !== undefined && workoutPrograms !== null) {
+            return workoutPrograms.map((program: any) => (
+                <WorkoutProgramComponent
+                    key={program.id}
+                    programTitle={program.workoutProgramTitle}
+                    programDesc={program.workoutProgramDesc}
+                    programAverageRating={program.rating}
+                />
+            ));
+        }
     };
 
     return (
@@ -154,10 +181,7 @@ const SearchResultsSection = () => {
                         </MobilePillContainer>
                     </MobileFilterButtonContainer>
                     <WorkoutProgramContainer containerHeight={height}>
-                        <WorkoutProgramComponent />
-                        <WorkoutProgramComponent />
-                        <WorkoutProgramComponent />
-                        <WorkoutProgramComponent />
+                        {renderWorkoutPrograms()}
                     </WorkoutProgramContainer>
                 </SearchResultsTextContainer>
             </MainContainer>
