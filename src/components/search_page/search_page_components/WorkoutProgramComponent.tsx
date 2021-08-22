@@ -47,6 +47,7 @@ const SVGContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
+    width: 100%;
     margin-left: 2rem;
 
     @media ${deviceMin.mobileS} {
@@ -59,6 +60,10 @@ const InfoContainer = styled.div`
 `;
 
 const ProgramTitle = styled.h2`
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
     font-size: 1.5rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 800;
