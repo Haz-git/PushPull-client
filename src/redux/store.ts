@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage';
 
 //Reducers:
 import filterReducer from './filterOptions/filterReducer';
+import workoutProgramReducer from './workoutPrograms/workoutProgramReducer';
 
 //Persistence:
 const persistConfig = {
@@ -21,6 +22,7 @@ const composeEnhancers =
 //RootReducer:
 const appReducer = combineReducers({
     filters: filterReducer,
+    workoutPrograms: workoutProgramReducer,
 });
 
 //Persisting formReducer:
