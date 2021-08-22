@@ -116,26 +116,35 @@ const SearchResultsSection = () => {
 
     //Pill render function:
     const renderFilterPills = () => {
-        let pillArray = [] as any[];
-        pillArray.push(
-            { type: 'category', val: category },
-            { type: 'equipment', val: equipment },
-            { type: 'difficulty', val: difficulty },
-            { type: 'workoutSchedule', val: workoutSchedule },
-            { type: 'workoutLength', val: workoutLength }
-        );
+        if (
+            category &&
+            equipment &&
+            difficulty &&
+            workoutSchedule &&
+            workoutLength
+        ) {
+            let pillArray = [] as any[];
+            pillArray.push(
+                { type: 'category', val: category },
+                { type: 'equipment', val: equipment },
+                { type: 'difficulty', val: difficulty },
+                { type: 'workoutSchedule', val: workoutSchedule },
+                { type: 'workoutLength', val: workoutLength }
+            );
 
-        return pillArray
-            .filter((object) => object.val !== 'any')
-            .map((object) => (
-                <MobileFilterPill
-                    pillLabel={
-                        object.val.charAt(0).toUpperCase() + object.val.slice(1)
-                    }
-                    filterType={object.type}
-                    key={object.type}
-                />
-            ));
+            return pillArray
+                .filter((object) => object.val !== 'any')
+                .map((object) => (
+                    <MobileFilterPill
+                        pillLabel={
+                            object.val.charAt(0).toUpperCase() +
+                            object.val.slice(1)
+                        }
+                        filterType={object.type}
+                        key={object.type}
+                    />
+                ));
+        }
     };
 
     const workoutPrograms = useSelector(
