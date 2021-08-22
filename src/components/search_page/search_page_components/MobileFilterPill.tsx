@@ -64,7 +64,6 @@ const MobileFilterPill = ({
     const dispatch = useDispatch();
 
     const removeFilter = (type: string) => {
-        console.log('worked');
         switch (type) {
             case 'category':
                 dispatch(updateCategory('any'));
