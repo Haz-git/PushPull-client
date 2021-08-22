@@ -14,6 +14,7 @@ import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import MobileFilterDrawerButton from './MobileFilterDrawerButton';
 import MobileFilterDrawer from './MobileFilterDrawer';
 import MobileFilterPill from './MobileFilterPill';
+import WorkoutProgramSkeletonLoader from '../../general_components/WorkoutProgramSkeletonLoader';
 
 //Styles:
 import styled from 'styled-components';
@@ -96,6 +97,12 @@ interface StyledProps {
 const SearchResultsSection = () => {
     const { height } = useWindowDimensions();
 
+    //Loader state
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    //LoaderStateHandler:
+    const setLoadedStatus = (status: boolean) => setIsLoaded(status);
+
     //Redux Dispatch hook:
     const dispatch = useDispatch();
 
@@ -104,7 +111,7 @@ const SearchResultsSection = () => {
         useSelector((state: RootStateOrAny) => state.filters);
 
     useEffect(() => {
-        dispatch(getWorkoutPrograms());
+        dispatch(getWorkoutPrograms(setLoadedStatus));
     }, []);
 
     const [renderMobileDrawer, setRenderMobileDrawer] = useState(false);
@@ -190,7 +197,16 @@ const SearchResultsSection = () => {
                         </MobilePillContainer>
                     </MobileFilterButtonContainer>
                     <WorkoutProgramContainer containerHeight={height}>
-                        {renderWorkoutPrograms()}
+                        {isLoaded === true ? (
+                            renderWorkoutPrograms()
+                        ) : (
+                            <>
+                                <WorkoutProgramSkeletonLoader />
+                                <WorkoutProgramSkeletonLoader />
+                                <WorkoutProgramSkeletonLoader />
+                                <WorkoutProgramSkeletonLoader />
+                            </>
+                        )}
                     </WorkoutProgramContainer>
                 </SearchResultsTextContainer>
             </MainContainer>
