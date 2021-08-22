@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
+//utils:
+import truncateString from '../../../utils/truncateString';
+
 //Components:
 import ReactStars from 'react-rating-stars-component';
 import { ReactComponent as TrainerSVG } from '../../../assets/workout_program_trainer.svg';
@@ -44,7 +47,6 @@ const SVGContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
-    position: relative;
     margin-left: 2rem;
 
     @media ${deviceMin.mobileS} {
@@ -131,10 +133,6 @@ const ProgramDesc = styled.p`
     }
 `;
 
-const ProgramTagsContainer = styled.div`
-    margin-top: 1rem;
-`;
-
 //Interfaces:
 
 interface IComponentProps {
@@ -184,8 +182,9 @@ const WorkoutProgramComponent = ({
                         {programReviewCount} reviews
                     </RatingText>
                 </ProgramRatingContainer>
-                <ProgramDesc>{programDesc}</ProgramDesc>
-                <ProgramTagsContainer>Tags</ProgramTagsContainer>
+                <ProgramDesc>
+                    {truncateString('WORKOUT_PROGRAM_DESC', programDesc)}
+                </ProgramDesc>
             </InfoContainer>
         </MainContainer>
     );
