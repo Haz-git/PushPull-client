@@ -94,14 +94,16 @@ interface StyledProps {
     containerHeight: number;
 }
 
-const SearchResultsSection = () => {
+interface ISearchResultsSection {
+    isResultsLoaded: boolean;
+    handleIsResultsLoaded: (status: boolean) => void;
+}
+
+const SearchResultsSection = ({
+    isResultsLoaded,
+    handleIsResultsLoaded,
+}: ISearchResultsSection): JSX.Element => {
     const { height } = useWindowDimensions();
-
-    //Loader state
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    //LoaderStateHandler:
-    const setLoadedStatus = (status: boolean) => setIsLoaded(status);
 
     //Redux Dispatch hook:
     const dispatch = useDispatch();
@@ -111,7 +113,7 @@ const SearchResultsSection = () => {
         useSelector((state: RootStateOrAny) => state.filters);
 
     useEffect(() => {
-        dispatch(getWorkoutPrograms(setLoadedStatus));
+        dispatch(getWorkoutPrograms(handleIsResultsLoaded));
     }, []);
 
     const [renderMobileDrawer, setRenderMobileDrawer] = useState(false);
@@ -149,13 +151,15 @@ const SearchResultsSection = () => {
                         }
                         filterType={object.type}
                         key={object.type}
+                        handleIsResultsLoaded={handleIsResultsLoaded}
+                        isResultsLoaded={isResultsLoaded}
                     />
                 ));
         }
     };
 
     const workoutPrograms = useSelector(
-        (state: RootStateOrAny) => state.workoutPrograms.workoutPrograms
+        (state: RootStateOrAny) => state.workoutPrograms.filteredWorkoutPrograms
     );
 
     //Render workout programs
@@ -177,6 +181,8 @@ const SearchResultsSection = () => {
             <MobileFilterDrawer
                 isOpen={renderMobileDrawer}
                 closeFunc={toggleMobileDrawer}
+                handleIsResultsLoaded={handleIsResultsLoaded}
+                isResultsLoaded={isResultsLoaded}
             />
             <MainContainer>
                 <SearchBar placeholderText="Search again..." />
@@ -197,7 +203,7 @@ const SearchResultsSection = () => {
                         </MobilePillContainer>
                     </MobileFilterButtonContainer>
                     <WorkoutProgramContainer containerHeight={height}>
-                        {isLoaded === true ? (
+                        {isResultsLoaded === true ? (
                             renderWorkoutPrograms()
                         ) : (
                             <>
