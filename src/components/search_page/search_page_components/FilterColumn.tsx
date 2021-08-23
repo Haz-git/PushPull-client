@@ -11,6 +11,7 @@ import {
     updateWorkoutSchedule,
     updateWorkoutLength,
 } from '../../../redux/filterOptions/filterActions';
+import { filterAndUpdateWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
 import DividerLine from '../../general_components/DividerLine';
@@ -97,7 +98,15 @@ export const ReturnButton = styled.button`
 
 //interfaces:
 
-const FilterColumn = () => {
+interface IFilterColumn {
+    isResultsLoaded: boolean;
+    handleIsResultsLoaded: (status: boolean) => void;
+}
+
+const FilterColumn = ({
+    isResultsLoaded,
+    handleIsResultsLoaded,
+}: IFilterColumn): JSX.Element => {
     enum RenderView {
         RENDER_MAIN_FILTER = 'RENDER_MAIN_FILTER',
         RENDER_SELECTION_CATEGORY = 'RENDER_SELECTION_CATEGORY',
@@ -131,22 +140,38 @@ const FilterColumn = () => {
         //Change the state if it's a different value? Type conflict during the check...
 
         if (filters[mainFilterName] !== filterId) {
+            handleIsResultsLoaded(false);
             //dispatch necessary changes to store:
             switch (mainFilterName) {
                 case 'category':
                     dispatch(updateCategory(filterId));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'equipment':
                     dispatch(updateEquipment(filterId));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'difficulty':
                     dispatch(updateDifficulty(filterId));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'workoutSchedule':
                     dispatch(updateWorkoutSchedule(filterId));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'workoutLength':
                     dispatch(updateWorkoutLength(filterId));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
             }
         }
@@ -158,22 +183,38 @@ const FilterColumn = () => {
         const { name } = e.currentTarget;
 
         if (filters[name] !== 'any') {
+            handleIsResultsLoaded(false);
             //dispatch changes to reset a filter in store:
             switch (name) {
                 case 'category':
                     dispatch(updateCategory('any'));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'equipment':
                     dispatch(updateEquipment('any'));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'difficulty':
                     dispatch(updateDifficulty('any'));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'workoutSchedule':
                     dispatch(updateWorkoutSchedule('any'));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
                 case 'workoutLength':
                     dispatch(updateWorkoutLength('any'));
+                    dispatch(
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                    );
                     break;
             }
         }
