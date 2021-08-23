@@ -12,11 +12,15 @@ import styled from 'styled-components';
 interface IComponentProps {
     isOpen: boolean;
     closeFunc: (status: boolean) => void;
+    isResultsLoaded: boolean;
+    handleIsResultsLoaded: (status: boolean) => void;
 }
 
 const MobileFilterDrawer = ({
     isOpen,
     closeFunc,
+    isResultsLoaded,
+    handleIsResultsLoaded,
 }: IComponentProps): JSX.Element => {
     return (
         <>
@@ -41,7 +45,10 @@ const MobileFilterDrawer = ({
                     },
                 }}
             >
-                <FilterColumn />
+                <FilterColumn
+                    handleIsResultsLoaded={handleIsResultsLoaded}
+                    isResultsLoaded={isResultsLoaded}
+                />
             </Drawer>
         </>
     );

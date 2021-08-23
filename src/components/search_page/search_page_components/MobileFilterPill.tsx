@@ -9,6 +9,7 @@ import {
     updateWorkoutSchedule,
     updateWorkoutLength,
 } from '../../../redux/filterOptions/filterActions';
+import { filterAndUpdateWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
 
@@ -54,31 +55,41 @@ const CloseButton = styled.button`
 interface IComponentProps {
     filterType: string;
     pillLabel?: string;
+    isResultsLoaded: boolean;
+    handleIsResultsLoaded: (status: boolean) => void;
 }
 
 const MobileFilterPill = ({
     filterType,
     pillLabel,
+    isResultsLoaded,
+    handleIsResultsLoaded,
 }: IComponentProps): JSX.Element => {
     //Redux dispatch hook:
     const dispatch = useDispatch();
 
     const removeFilter = (type: string) => {
+        handleIsResultsLoaded(false);
         switch (type) {
             case 'category':
                 dispatch(updateCategory('any'));
+                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
                 break;
             case 'equipment':
                 dispatch(updateEquipment('any'));
+                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
                 break;
             case 'difficulty':
                 dispatch(updateDifficulty('any'));
+                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
                 break;
             case 'workoutSchedule':
                 dispatch(updateWorkoutSchedule('any'));
+                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
                 break;
             case 'workoutLength':
                 dispatch(updateWorkoutLength('any'));
+                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
                 break;
         }
     };
