@@ -1,7 +1,10 @@
 import { WorkoutProgramActionType } from './action-types';
 import { WorkoutProgramAction } from './workoutProgramInterfaces';
 
-const initialState = {};
+const initialState = {
+    workoutPrograms: [],
+    filteredWorkoutPrograms: [],
+};
 
 const workoutProgramReducer = (
     state: Object = initialState,
@@ -13,7 +16,7 @@ const workoutProgramReducer = (
         case WorkoutProgramActionType.USER_CREATE_WORKOUTPROGRAM:
             return { ...state, workoutPrograms: action.payload };
         case WorkoutProgramActionType.USER_UPDATE_WORKOUTPROGRAM:
-            return { ...state, workoutPrograms: action.payload };
+            return { ...state, filteredWorkoutPrograms: action.payload };
         case WorkoutProgramActionType.USER_DELETE_WORKOUTPROGRAM:
             return { ...state, workoutPrograms: action.payload };
         default:

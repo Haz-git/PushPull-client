@@ -43,12 +43,17 @@ export const getWorkoutPrograms = (
             filters
         );
 
-        if (response && filteredPrograms) {
+        if (response && filteredPrograms !== null) {
             statusCallback(true);
         }
 
         dispatch({
             type: WorkoutProgramActionType.USER_GET_WORKOUTPROGRAMS,
+            payload: response.data.workoutPrograms,
+        });
+
+        dispatch({
+            type: WorkoutProgramActionType.USER_UPDATE_WORKOUTPROGRAM,
             payload: filteredPrograms,
         });
     };
@@ -62,9 +67,22 @@ export const filterAndUpdateWorkoutPrograms = (
         getState: () => CombinedState
     ) => {
         const { filters } = getState();
-
         const {
             workoutPrograms: { workoutPrograms },
         } = getState();
+
+        const filteredPrograms = filterWorkoutPrograms(
+            workoutPrograms,
+            filters
+        );
+
+        if (filteredPrograms !== null) {
+            statusCallback(true);
+        }
+
+        dispatch({
+            type: WorkoutProgramActionType.USER_UPDATE_WORKOUTPROGRAM,
+            payload: filteredPrograms,
+        });
     };
 };
