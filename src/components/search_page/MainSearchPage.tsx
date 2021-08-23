@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
@@ -42,13 +43,25 @@ const SearchResultsSectionView = styled.div``;
 //Interfaces:
 
 const MainSearchPage = () => {
+    //This loader state controls skeleton loaders from SearchResultsSection:
+    const [isResultsLoaded, setIsResultsLoaded] = useState(false);
+
+    const handleIsResultsLoaded = (status: boolean) =>
+        setIsResultsLoaded(status);
+
     return (
         <MainSearchPageContainer>
             <FilterColumnView>
-                <FilterColumn />
+                <FilterColumn
+                    handleIsResultsLoaded={handleIsResultsLoaded}
+                    isResultsLoaded={isResultsLoaded}
+                />
             </FilterColumnView>
             <SearchResultsSectionView>
-                <SearchResultsSection />
+                <SearchResultsSection
+                    handleIsResultsLoaded={handleIsResultsLoaded}
+                    isResultsLoaded={isResultsLoaded}
+                />
             </SearchResultsSectionView>
         </MainSearchPageContainer>
     );
