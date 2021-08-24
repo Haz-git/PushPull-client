@@ -113,7 +113,7 @@ const SearchResultsSection = ({
         useSelector((state: RootStateOrAny) => state.filters);
 
     useEffect(() => {
-        dispatch(getWorkoutPrograms(handleIsResultsLoaded));
+        dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
     }, []);
 
     const [renderMobileDrawer, setRenderMobileDrawer] = useState(false);
