@@ -41,6 +41,7 @@ const ButtonText = styled.h3`
     font-size: ${(props) => props.theme.fontSizes.md};
     font-weight: 500;
     white-space: nowrap;
+    text-shadow: 0px 1px 1px #000000;
 `;
 
 const CloseButton = styled.button`

@@ -32,6 +32,7 @@ const ButtonText = styled.h3`
     color: #ffffff;
     font-size: ${(props) => props.theme.fontSizes.md};
     font-weight: 500;
+    text-shadow: 0px 1px 1px #000000;
 `;
 //Interfaces:
 
