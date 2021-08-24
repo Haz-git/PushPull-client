@@ -7,7 +7,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
-import SearchBar from '../../general_components/SearchBar';
+import SearchbarDropdown from './SearchbarDropdown';
 import SortByWheel from './SortByWheel';
 import WorkoutProgramComponent from './WorkoutProgramComponent';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
@@ -162,6 +162,10 @@ const SearchResultsSection = ({
         (state: RootStateOrAny) => state.workoutPrograms.filteredWorkoutPrograms
     );
 
+    const totalWorkoutPrograms = useSelector(
+        (state: RootStateOrAny) => state.workoutPrograms.workoutPrograms
+    );
+
     //Render workout programs
     const renderWorkoutPrograms = () => {
         if (workoutPrograms !== undefined && workoutPrograms !== null) {
@@ -185,7 +189,9 @@ const SearchResultsSection = ({
                 isResultsLoaded={isResultsLoaded}
             />
             <MainContainer>
-                <SearchBar placeholderText="Search again..." />
+                <SearchbarDropdown
+                    totalWorkoutPrograms={totalWorkoutPrograms}
+                />
                 <SearchResultsTextContainer>
                     <SearchResultsText>
                         (10) Search Results for 'barbell'
