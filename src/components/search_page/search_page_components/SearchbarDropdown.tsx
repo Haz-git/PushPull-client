@@ -49,7 +49,7 @@ const EntityNameText = styled.p`
     font-family: 'Lato', sans-serif;
     font-size: ${(props) => props.theme.fontSizes.md};
     font-weight: 600;
-    color: ${(props) => props.theme.subText};
+    color: ${(props) => props.theme.mainText};
     padding-bottom: 0.05rem;
 `;
 
