@@ -26,7 +26,8 @@ interface WorkoutProgramState {
 type CombinedState = FilterState & WorkoutProgramState;
 
 export const getWorkoutPrograms = (
-    statusCallback: (status: boolean) => void
+    statusCallback: (status: boolean) => void,
+    page: number
 ) => {
     return async (
         dispatch: Dispatch<WorkoutProgramAction>,
@@ -34,9 +35,15 @@ export const getWorkoutPrograms = (
     ) => {
         const { filters } = getState();
 
-        const response = await api.get('/workoutProgram/all');
+        const response = await api.get(`/workoutProgram/all/?page=${page - 1}`);
+        console.log(response);
 
-        const currWorkoutPrograms = response.data.workoutPrograms;
+        const { count: totalItems } = response.data.workoutPrograms;
+        const currentPage = page ? +page : 0;
+        //5 is from the backend. It's the pagination limit.
+        const totalPages = Math.ceil(totalItems / 8);
+
+        const currWorkoutPrograms = response.data.workoutPrograms.rows;
 
         const filteredPrograms = filterWorkoutPrograms(
             currWorkoutPrograms,
@@ -49,7 +56,12 @@ export const getWorkoutPrograms = (
 
         dispatch({
             type: WorkoutProgramActionType.USER_GET_WORKOUTPROGRAMS,
-            payload: response.data.workoutPrograms,
+            payload: {
+                workoutPrograms: currWorkoutPrograms,
+                totalItems,
+                currentPage,
+                totalPages,
+            },
         });
 
         dispatch({
