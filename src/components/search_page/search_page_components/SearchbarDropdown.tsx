@@ -21,6 +21,8 @@ const DropdownContainer = styled.div`
     flex-direction: column;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    overflow-y: scroll;
+    max-height: 15rem;
 `;
 
 const EntityItem = styled(Link)`
@@ -52,6 +54,7 @@ const EntityNameText = styled.p`
 `;
 
 //Interfaces:
+
 interface IComponentProps {
     totalWorkoutPrograms?: any[];
 }
@@ -110,10 +113,14 @@ const SearchbarDropdown = ({
         }
     };
 
+    //outsideClickHandler:
+
+    const onClickOutside = () => {
+        if (sortedWorkoutPrograms.length > 0) setSortedWorkoutPrograms([]);
+    };
+
     return (
-        <OutsideClickHandler
-            onOutsideClick={() => setSortedWorkoutPrograms([])}
-        >
+        <OutsideClickHandler onOutsideClick={onClickOutside}>
             <MainContainer>
                 <SearchBar
                     inputHandler={onSearchbarChange}
