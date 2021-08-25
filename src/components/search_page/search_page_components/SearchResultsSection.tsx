@@ -159,7 +159,7 @@ const SearchResultsSection = ({
     const { category, equipment, difficulty, workoutSchedule, workoutLength } =
         useSelector((state: RootStateOrAny) => state.filters);
 
-    const { totalItems, currentPage, totalPages } = useSelector(
+    const { totalItems, currentPage, totalPages, searchTerm } = useSelector(
         (state: RootStateOrAny) => state.workoutPrograms.workoutPrograms
     );
 
@@ -306,6 +306,29 @@ const SearchResultsSection = ({
         }
     };
 
+    //Handle search results text:
+    const renderSearchText = () => {
+        if (totalItems && searchTerm) {
+            return (
+                <SearchResultsText>
+                    {`${totalItems} Search Results for '${searchTerm}'`}
+                </SearchResultsText>
+            );
+        } else if (totalItems) {
+            return (
+                <SearchResultsText>
+                    {`${totalItems} Search Results`}
+                </SearchResultsText>
+            );
+        } else if (totalItems === 0 && totalPages === 0) {
+            return (
+                <SearchResultsText>
+                    {`${totalItems} Search Results for '${searchTerm}'`}
+                </SearchResultsText>
+            );
+        }
+    };
+
     return (
         <>
             <MobileFilterDrawer
@@ -320,9 +343,7 @@ const SearchResultsSection = ({
                     loadingHandler={handleIsResultsLoaded}
                 />
                 <SearchResultsTextContainer>
-                    <SearchResultsText>
-                        {`${totalItems} Search Results`}
-                    </SearchResultsText>
+                    <SearchResultsText>{renderSearchText()}</SearchResultsText>
                     <SortByWheelContainer>
                         <SortByWheel />
                     </SortByWheelContainer>
