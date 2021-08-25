@@ -54,6 +54,7 @@ interface IStyledProps {
     isActive: boolean;
 }
 interface IComponentProps {
+    keypressHandler?: (e: React.KeyboardEvent) => void;
     inputHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholderText?: string;
 }
@@ -61,6 +62,7 @@ interface IComponentProps {
 const Searchbar = ({
     inputHandler,
     placeholderText = 'Search...',
+    keypressHandler,
 }: IComponentProps): JSX.Element => {
     const [isActive, setIsActive] = useState(false);
 
@@ -71,6 +73,7 @@ const Searchbar = ({
             <MainContainer onClick={toggleIsActive} isActive={isActive}>
                 <SearchIcon />
                 <StyledSearchInput
+                    onKeyPress={keypressHandler}
                     onChange={inputHandler}
                     placeholder={placeholderText}
                     isActive={isActive}
