@@ -19,6 +19,22 @@ import WorkoutProgramSkeletonLoader from '../../general_components/WorkoutProgra
 //Styles:
 import styled from 'styled-components';
 
+//Icons:
+import { ChevronRight } from '@styled-icons/boxicons-solid/ChevronRight';
+import { ChevronLeft } from '@styled-icons/boxicons-solid/ChevronLeft';
+
+const RightArrowIcon = styled(ChevronRight)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: ${(props) => props.theme.mainText};
+`;
+
+const LeftArrowIcon = styled(ChevronLeft)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: ${(props) => props.theme.mainText};
+`;
+
 const MainContainer = styled.section`
     @media ${deviceMin.mobileS} {
         padding: 1rem 1rem;
@@ -88,10 +104,41 @@ const MobilePillContainer = styled.div`
     }
 `;
 
+const PaginationButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    text-align: center;
+`;
+
+const PaginationText = styled.h3`
+    color: ${(props) => props.theme.mainText};
+    font-size: ${(props) => props.theme.fontSizes.md};
+    font-weight: 600;
+    margin: 0 2rem;
+`;
+
+const PaginationButton = styled.button<StyledPaginationProps>`
+    border: none;
+    background: transparent;
+    padding: 0.5rem 0.5rem;
+    border-radius: 50%;
+    transition: 0.2s all ease-in-out;
+    visibility: ${(props) => (props.isActive ? 'visible' : 'hidden')};
+
+    &:hover {
+        background: #e8e8e8;
+    }
+`;
 //Interfaces:
 
 interface StyledProps {
     containerHeight: number;
+}
+
+interface StyledPaginationProps {
+    isActive: boolean;
 }
 
 interface ISearchResultsSection {
@@ -111,6 +158,10 @@ const SearchResultsSection = ({
     //Redux Selector hook:
     const { category, equipment, difficulty, workoutSchedule, workoutLength } =
         useSelector((state: RootStateOrAny) => state.filters);
+
+    const { totalItems, currentPage, totalPages } = useSelector(
+        (state: RootStateOrAny) => state.workoutPrograms.workoutPrograms
+    );
 
     useEffect(() => {
         dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
@@ -180,6 +231,81 @@ const SearchResultsSection = ({
         }
     };
 
+    //Show pagination buttons:
+    const showPaginationButton = (direction: string) => {
+        if (totalItems && currentPage && totalPages) {
+            if (direction === 'FORWARD') {
+                if (currentPage !== totalPages) return true;
+            } else {
+                if (currentPage > 1) return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    };
+
+    //Render pagination buttons:
+    const renderPaginationButtons = () => {
+        if (totalItems && currentPage && totalPages) {
+            return (
+                <PaginationButtonContainer>
+                    <PaginationButton
+                        onClick={() =>
+                            handlePaginationRequest(
+                                currentPage,
+                                totalPages,
+                                'BACKWARD'
+                            )
+                        }
+                        isActive={showPaginationButton('BACKWARD')}
+                    >
+                        <LeftArrowIcon />
+                    </PaginationButton>
+                    <PaginationText>
+                        {`${currentPage} of ${totalPages}`}
+                    </PaginationText>
+                    <PaginationButton
+                        onClick={() =>
+                            handlePaginationRequest(
+                                currentPage,
+                                totalPages,
+                                'FORWARD'
+                            )
+                        }
+                        isActive={showPaginationButton('FORWARD')}
+                    >
+                        <RightArrowIcon />
+                    </PaginationButton>
+                </PaginationButtonContainer>
+            );
+        }
+    };
+
+    //Handle pagination request:
+    const handlePaginationRequest = (
+        current: number,
+        total: number,
+        direction: string
+    ) => {
+        console.log(current, total, direction);
+        if (direction === 'FORWARD') {
+            if (current !== total) {
+                current = current + 1;
+                handleIsResultsLoaded(false);
+                dispatch(getWorkoutPrograms(handleIsResultsLoaded, current));
+            }
+        } else {
+            //Direction is BACKWARD
+            if (current > 1) {
+                current = current - 1;
+                handleIsResultsLoaded(false);
+                dispatch(getWorkoutPrograms(handleIsResultsLoaded, current));
+            }
+        }
+    };
+
     return (
         <>
             <MobileFilterDrawer
@@ -219,6 +345,7 @@ const SearchResultsSection = ({
                                 <WorkoutProgramSkeletonLoader />
                             </>
                         )}
+                        {renderPaginationButtons()}
                     </WorkoutProgramContainer>
                 </SearchResultsTextContainer>
             </MainContainer>
