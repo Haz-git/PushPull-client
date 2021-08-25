@@ -1,6 +1,10 @@
 import * as React from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+
 //Components:
+import historyObject from '../../utils/historyObject';
 import { deviceMin } from '../../devices/breakpoints';
 import BackdropText from './backdrop_components/BackdropText';
 import { ReactComponent as BackdropSVG } from '../../assets/backdrop_workout_pic.svg';
@@ -63,20 +67,6 @@ const SVGContainer = styled.div`
     }
 `;
 
-const SearchBarContainer = styled.div`
-    padding: 0 5rem;
-    width: 100%;
-
-    @media ${deviceMin.mobileS} {
-        padding: 1rem 1rem;
-    }
-
-    @media ${deviceMin.laptopS} {
-        padding: 0 5rem;
-        width: 100%;
-    }
-`;
-
 const BackdropMain = () => {
     return (
         <BackdropMainContainer>
@@ -86,9 +76,6 @@ const BackdropMain = () => {
                     <BackdropSVG />
                 </SVGContainer>
             </GridWrapper>
-            <SearchBarContainer>
-                <SearchBar placeholderText="Find your workout..." />
-            </SearchBarContainer>
         </BackdropMainContainer>
     );
 };
