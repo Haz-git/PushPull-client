@@ -343,7 +343,7 @@ const SearchResultsSection = ({
                     loadingHandler={handleIsResultsLoaded}
                 />
                 <SearchResultsTextContainer>
-                    <SearchResultsText>{renderSearchText()}</SearchResultsText>
+                    {renderSearchText()}
                     <SortByWheelContainer>
                         <SortByWheel />
                     </SortByWheelContainer>
