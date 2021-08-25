@@ -7,6 +7,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
+import scrollToTop from '../../../utils/scrollToTop';
 import { ReactComponent as NoDataSVG } from '../../../assets/search_no_data.svg';
 import SearchbarDropdown from './SearchbarDropdown';
 import SortByWheel from './SortByWheel';
@@ -186,6 +187,7 @@ const SearchResultsSection = ({
     );
 
     useEffect(() => {
+        scrollToTop();
         dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
     }, []);
 
