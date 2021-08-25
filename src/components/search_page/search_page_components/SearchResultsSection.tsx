@@ -214,7 +214,8 @@ const SearchResultsSection = ({
     );
 
     const totalWorkoutPrograms = useSelector(
-        (state: RootStateOrAny) => state.workoutPrograms.workoutPrograms
+        (state: RootStateOrAny) =>
+            state.workoutPrograms.workoutPrograms.workoutPrograms
     );
 
     //Render workout programs
@@ -289,7 +290,6 @@ const SearchResultsSection = ({
         total: number,
         direction: string
     ) => {
-        console.log(current, total, direction);
         if (direction === 'FORWARD') {
             if (current !== total) {
                 current = current + 1;
@@ -317,10 +317,11 @@ const SearchResultsSection = ({
             <MainContainer>
                 <SearchbarDropdown
                     totalWorkoutPrograms={totalWorkoutPrograms}
+                    loadingHandler={handleIsResultsLoaded}
                 />
                 <SearchResultsTextContainer>
                     <SearchResultsText>
-                        (10) Search Results for 'barbell'
+                        {`${totalItems} Search Results`}
                     </SearchResultsText>
                     <SortByWheelContainer>
                         <SortByWheel />
