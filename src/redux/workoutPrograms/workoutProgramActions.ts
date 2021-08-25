@@ -71,6 +71,7 @@ export const getWorkoutPrograms = (
                 totalItems,
                 currentPage,
                 totalPages,
+                searchTerm,
             },
         });
 
