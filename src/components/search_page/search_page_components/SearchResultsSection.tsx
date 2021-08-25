@@ -7,6 +7,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
+import { ReactComponent as NoDataSVG } from '../../../assets/search_no_data.svg';
 import SearchbarDropdown from './SearchbarDropdown';
 import SortByWheel from './SortByWheel';
 import WorkoutProgramComponent from './WorkoutProgramComponent';
@@ -72,6 +73,27 @@ const WorkoutProgramContainer = styled.div<StyledProps>`
     margin: 1.5rem -2rem;
     height: ${(props) => `${props.containerHeight - 290}px`};
     padding: 1rem 2rem;
+`;
+
+const SVGContainer = styled.div`
+    margin: 0 auto;
+
+    text-align: center;
+
+    @media ${deviceMin.mobileS} {
+        width: 25rem;
+        height: 25rem;
+    }
+
+    @media ${deviceMin.laptop} {
+        width: 27rem;
+        height: 27rem;
+    }
+
+    @media ${deviceMin.desktopS} {
+        width: 33rem;
+        height: 33rem;
+    }
 `;
 
 const MobileFilterButtonContainer = styled.div`
@@ -221,14 +243,22 @@ const SearchResultsSection = ({
     //Render workout programs
     const renderWorkoutPrograms = () => {
         if (workoutPrograms !== undefined && workoutPrograms !== null) {
-            return workoutPrograms.map((program: any) => (
-                <WorkoutProgramComponent
-                    key={program.id}
-                    programTitle={program.workoutProgramTitle}
-                    programDesc={program.workoutProgramDesc}
-                    programAverageRating={program.rating}
-                />
-            ));
+            if (workoutPrograms.length === 0 && totalItems === 0) {
+                return (
+                    <SVGContainer>
+                        <NoDataSVG />
+                    </SVGContainer>
+                );
+            } else {
+                return workoutPrograms.map((program: any) => (
+                    <WorkoutProgramComponent
+                        key={program.id}
+                        programTitle={program.workoutProgramTitle}
+                        programDesc={program.workoutProgramDesc}
+                        programAverageRating={program.rating}
+                    />
+                ));
+            }
         }
     };
 
