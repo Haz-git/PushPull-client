@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
+
 //Components:
 import SearchBar from '../../general_components/SearchBar';
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -57,11 +61,15 @@ const EntityNameText = styled.p`
 
 interface IComponentProps {
     totalWorkoutPrograms?: any[];
+    loadingHandler: (status: boolean) => void;
 }
 
 const SearchbarDropdown = ({
     totalWorkoutPrograms,
+    loadingHandler,
 }: IComponentProps): JSX.Element => {
+    //Dispatch function:
+    const dispatch = useDispatch();
     //Sorted workout program state:
     const [sortedWorkoutPrograms, setSortedWorkoutPrograms] = useState<any[]>(
         []
@@ -119,12 +127,22 @@ const SearchbarDropdown = ({
         if (sortedWorkoutPrograms.length > 0) setSortedWorkoutPrograms([]);
     };
 
+    //Searchbar submit handler:
+    const handleSearchbarEnterPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && searchbarInput === '') {
+            dispatch(getWorkoutPrograms(loadingHandler, 1));
+        } else if (e.key === 'Enter' && searchbarInput !== '') {
+            dispatch(getWorkoutPrograms(loadingHandler, 1, searchbarInput));
+        }
+    };
+
     return (
         <OutsideClickHandler onOutsideClick={onClickOutside}>
             <MainContainer>
                 <SearchBar
                     inputHandler={onSearchbarChange}
                     placeholderText="Search again..."
+                    keypressHandler={handleSearchbarEnterPress}
                 />
                 <DropdownContainer>
                     {mapFilteredWorkoutPrograms()}
