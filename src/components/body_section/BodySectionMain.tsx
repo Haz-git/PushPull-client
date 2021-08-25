@@ -2,6 +2,7 @@ import * as React from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
+import historyObject from '../../utils/historyObject';
 import BodySection from './body_section_components/BodySection';
 import GeneralButton from '../general_components/GeneralButton';
 import { ReactComponent as SquatSVG } from '../../assets/body_section_squat.svg';
@@ -42,8 +43,8 @@ const BodySectionMain = () => {
                 textDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur metus sit amet dui finibus sodales."
                 primaryButton={
                     <GeneralButton
-                        buttonLabel="Top Ranked"
-                        onClick={() => console.log('test')}
+                        buttonLabel="Search Workouts"
+                        onClick={() => historyObject.push('/search')}
                         fontSize="1.25rem"
                         padding="1rem 1rem"
                     />
