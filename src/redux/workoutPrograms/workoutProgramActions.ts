@@ -95,7 +95,7 @@ export const filterAndUpdateWorkoutPrograms = (
         } = getState();
 
         const filteredPrograms = filterWorkoutPrograms(
-            workoutPrograms,
+            workoutPrograms.workoutPrograms,
             filters
         );
 
