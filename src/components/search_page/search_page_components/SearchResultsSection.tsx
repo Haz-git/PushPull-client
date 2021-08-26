@@ -281,7 +281,13 @@ const SearchResultsSection = ({
 
     //Render pagination buttons:
     const renderPaginationButtons = () => {
-        if (totalItems && currentPage && totalPages) {
+        if (
+            totalItems &&
+            currentPage &&
+            totalPages &&
+            workoutPrograms !== undefined &&
+            workoutPrograms.length !== 0
+        ) {
             return (
                 <PaginationButtonContainer>
                     <PaginationButton
