@@ -245,7 +245,7 @@ const SearchResultsSection = ({
     //Render workout programs
     const renderWorkoutPrograms = () => {
         if (workoutPrograms !== undefined && workoutPrograms !== null) {
-            if (workoutPrograms.length === 0 && totalItems === 0) {
+            if (workoutPrograms.length === 0 || totalItems === 0) {
                 return (
                     <SVGContainer>
                         <NoDataSVG />
