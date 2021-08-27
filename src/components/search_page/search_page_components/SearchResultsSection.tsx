@@ -234,13 +234,14 @@ const SearchResultsSection = ({
     };
 
     const workoutPrograms = useSelector(
-        (state: RootStateOrAny) => state.workoutPrograms.filteredWorkoutPrograms
-    );
-
-    const totalWorkoutPrograms = useSelector(
         (state: RootStateOrAny) =>
             state.workoutPrograms.workoutPrograms.workoutPrograms
     );
+
+    // const totalWorkoutPrograms = useSelector(
+    //     (state: RootStateOrAny) =>
+    //         state.workoutPrograms.workoutPrograms.workoutPrograms
+    // );
 
     //Render workout programs
     const renderWorkoutPrograms = () => {
@@ -355,7 +356,7 @@ const SearchResultsSection = ({
         } else if (totalItems) {
             return (
                 <SearchResultsText>
-                    {`${totalItems} Search Results`}
+                    {`${totalItems} Total Results`}
                 </SearchResultsText>
             );
         } else if (totalItems === 0 && totalPages === 0) {
@@ -377,7 +378,7 @@ const SearchResultsSection = ({
             />
             <MainContainer>
                 <SearchbarDropdown
-                    totalWorkoutPrograms={totalWorkoutPrograms}
+                    totalWorkoutPrograms={workoutPrograms}
                     loadingHandler={handleIsResultsLoaded}
                 />
                 <SearchResultsTextContainer>
