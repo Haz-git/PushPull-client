@@ -74,23 +74,33 @@ const MobileFilterPill = ({
         switch (type) {
             case 'category':
                 dispatch(updateCategory('any'));
-                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
+                dispatch(
+                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
+                );
                 break;
             case 'equipment':
                 dispatch(updateEquipment('any'));
-                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
+                dispatch(
+                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
+                );
                 break;
             case 'difficulty':
                 dispatch(updateDifficulty('any'));
-                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
+                dispatch(
+                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
+                );
                 break;
             case 'workoutSchedule':
                 dispatch(updateWorkoutSchedule('any'));
-                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
+                dispatch(
+                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
+                );
                 break;
             case 'workoutLength':
                 dispatch(updateWorkoutLength('any'));
-                dispatch(filterAndUpdateWorkoutPrograms(handleIsResultsLoaded));
+                dispatch(
+                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
+                );
                 break;
         }
     };
