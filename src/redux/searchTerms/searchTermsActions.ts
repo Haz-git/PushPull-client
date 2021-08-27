@@ -13,28 +13,32 @@ export const updateSearchTerm = (searchTerm: string) => {
     ) => {
         const { searchTerms } = getState();
 
-        console.log(searchTerms);
-
         let modifiedSearchTerms;
 
-        if (
-            searchTerms.searchTerms !== undefined &&
-            searchTerms.searchTerms !== null
-        ) {
-            modifiedSearchTerms = [...searchTerms.searchTerms];
+        if (searchTerm !== '') {
+            if (
+                searchTerms.searchTerms.recentSearchTerms !== undefined &&
+                searchTerms.searchTerms.recentSearchTerms !== null
+            ) {
+                modifiedSearchTerms = [
+                    ...searchTerms.searchTerms.recentSearchTerms,
+                ];
 
-            if (modifiedSearchTerms.length >= 5) modifiedSearchTerms.shift();
+                if (modifiedSearchTerms.length >= 5)
+                    modifiedSearchTerms.shift();
 
-            modifiedSearchTerms.push(searchTerm);
-        } else {
-            modifiedSearchTerms = [searchTerm];
+                modifiedSearchTerms.push(searchTerm);
+            } else {
+                modifiedSearchTerms = [searchTerm];
+            }
         }
-
-        console.log(modifiedSearchTerms);
 
         dispatch({
             type: SearchTermActionType.USER_UPDATE_SEARCHTERM,
-            payload: modifiedSearchTerms,
+            payload: {
+                currSearchTerm: searchTerm,
+                recentSearchTerms: modifiedSearchTerms,
+            },
         });
     };
 };
