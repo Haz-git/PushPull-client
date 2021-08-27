@@ -35,30 +35,25 @@ export const getWorkoutPrograms = (
         getState: () => FilterState
     ) => {
         const { filters } = getState();
-
         let response;
 
         if (searchTerm && searchTerm !== undefined && searchTerm !== null) {
-            response = await api.get(
-                `/workoutProgram/search/${searchTerm}/?page=${page - 1}`
+            response = await api.post(
+                `/workoutProgram/search/${searchTerm}/?page=${page - 1}`,
+                { filters }
             );
         } else {
-            response = await api.get(`/workoutProgram/all/?page=${page - 1}`);
+            response = await api.post(`/workoutProgram/all/?page=${page - 1}`, {
+                filters,
+            });
         }
 
         const { count: totalItems } = response.data.workoutPrograms;
         const currentPage = page ? +page : 0;
-        //5 is from the backend. It's the pagination limit.
+
         const totalPages = Math.ceil(totalItems / 8);
 
-        const currWorkoutPrograms = response.data.workoutPrograms.rows;
-
-        const filteredPrograms = filterWorkoutPrograms(
-            currWorkoutPrograms,
-            filters
-        );
-
-        if (response && filteredPrograms !== null) {
+        if (response) {
             statusCallback(true);
         }
 
@@ -67,17 +62,12 @@ export const getWorkoutPrograms = (
         dispatch({
             type: WorkoutProgramActionType.USER_GET_WORKOUTPROGRAMS,
             payload: {
-                workoutPrograms: currWorkoutPrograms,
+                workoutPrograms: response.data.workoutPrograms.rows,
                 totalItems,
                 currentPage,
                 totalPages,
                 searchTerm,
             },
-        });
-
-        dispatch({
-            type: WorkoutProgramActionType.USER_UPDATE_WORKOUTPROGRAM,
-            payload: filteredPrograms,
         });
     };
 };
