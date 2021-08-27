@@ -182,8 +182,12 @@ const SearchResultsSection = ({
     const { category, equipment, difficulty, workoutSchedule, workoutLength } =
         useSelector((state: RootStateOrAny) => state.filters);
 
-    const { totalItems, currentPage, totalPages, searchTerm } = useSelector(
+    const { totalItems, currentPage, totalPages } = useSelector(
         (state: RootStateOrAny) => state.workoutPrograms.workoutPrograms
+    );
+
+    const { currSearchTerm, recentSearchTerms } = useSelector(
+        (state: RootStateOrAny) => state.searchTerms.searchTerms
     );
 
     useEffect(() => {
@@ -237,11 +241,6 @@ const SearchResultsSection = ({
         (state: RootStateOrAny) =>
             state.workoutPrograms.workoutPrograms.workoutPrograms
     );
-
-    // const totalWorkoutPrograms = useSelector(
-    //     (state: RootStateOrAny) =>
-    //         state.workoutPrograms.workoutPrograms.workoutPrograms
-    // );
 
     //Render workout programs
     const renderWorkoutPrograms = () => {
@@ -347,13 +346,13 @@ const SearchResultsSection = ({
 
     //Handle search results text:
     const renderSearchText = () => {
-        if (totalItems && searchTerm) {
+        if (totalItems && currSearchTerm) {
             return (
                 <SearchResultsText>
-                    {`${totalItems} Search Results for '${searchTerm}'`}
+                    {`${totalItems} Search Results for '${currSearchTerm}'`}
                 </SearchResultsText>
             );
-        } else if (totalItems) {
+        } else if (totalItems && currSearchTerm === '') {
             return (
                 <SearchResultsText>
                     {`${totalItems} Total Results`}
@@ -362,7 +361,7 @@ const SearchResultsSection = ({
         } else if (totalItems === 0 && totalPages === 0) {
             return (
                 <SearchResultsText>
-                    {`${totalItems} Search Results for '${searchTerm}'`}
+                    {`${totalItems} Search Results for '${currSearchTerm}'`}
                 </SearchResultsText>
             );
         }
