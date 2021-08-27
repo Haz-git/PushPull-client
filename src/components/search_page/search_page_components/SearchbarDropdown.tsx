@@ -4,6 +4,7 @@ import { useState } from 'react';
 //Redux:
 import { useDispatch } from 'react-redux';
 import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
+import { updateSearchTerm } from '../../../redux/searchTerms/searchTermsActions';
 
 //Components:
 import SearchBar from '../../general_components/SearchBar';
@@ -132,6 +133,7 @@ const SearchbarDropdown = ({
         if (e.key === 'Enter' && searchbarInput === '') {
             dispatch(getWorkoutPrograms(loadingHandler, 1));
         } else if (e.key === 'Enter' && searchbarInput !== '') {
+            dispatch(updateSearchTerm(searchbarInput));
             dispatch(getWorkoutPrograms(loadingHandler, 1, searchbarInput));
         }
     };
