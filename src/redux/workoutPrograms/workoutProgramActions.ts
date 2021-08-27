@@ -28,8 +28,7 @@ type CombinedState = FilterState & WorkoutProgramState;
 
 export const getWorkoutPrograms = (
     statusCallback: (status: boolean) => void,
-    page: number,
-    searchTerm?: string
+    page: number
 ) => {
     return async (
         dispatch: Dispatch<WorkoutProgramAction>,
@@ -43,13 +42,7 @@ export const getWorkoutPrograms = (
         } = getState();
 
         let response;
-
-        if (searchTerm && searchTerm !== undefined && searchTerm !== null) {
-            response = await api.post(
-                `/workoutProgram/search/${searchTerm}/?page=${page - 1}`,
-                { filters }
-            );
-        } else if (!searchTerm && currSearchTerm !== '') {
+        if (currSearchTerm !== '') {
             response = await api.post(
                 `/workoutProgram/search/${currSearchTerm}/?page=${page - 1}`,
                 { filters }
@@ -78,7 +71,6 @@ export const getWorkoutPrograms = (
                 totalItems,
                 currentPage,
                 totalPages,
-                searchTerm,
             },
         });
     };
