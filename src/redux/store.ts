@@ -7,12 +7,13 @@ import storage from 'redux-persist/lib/storage';
 //Reducers:
 import filterReducer from './filterOptions/filterReducer';
 import workoutProgramReducer from './workoutPrograms/workoutProgramReducer';
+import searchTermReducer from './searchTerms/searchTermsReducer';
 
 //Persistence:
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['filters'],
+    whitelist: ['filters', 'searchTerms'],
 };
 
 //Create Enhancers and Middlewares:
@@ -23,6 +24,7 @@ const composeEnhancers =
 const appReducer = combineReducers({
     filters: filterReducer,
     workoutPrograms: workoutProgramReducer,
+    searchTerms: searchTermReducer,
 });
 
 //Persisting formReducer:
