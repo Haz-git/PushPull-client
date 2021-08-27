@@ -15,6 +15,7 @@ interface FilterState {
         workoutSchedule: string;
         workoutLength: string;
     };
+    searchTerms: any;
 }
 
 interface WorkoutProgramState {
@@ -35,11 +36,22 @@ export const getWorkoutPrograms = (
         getState: () => FilterState
     ) => {
         const { filters } = getState();
+        const {
+            searchTerms: {
+                searchTerms: { currSearchTerm },
+            },
+        } = getState();
+
         let response;
 
         if (searchTerm && searchTerm !== undefined && searchTerm !== null) {
             response = await api.post(
                 `/workoutProgram/search/${searchTerm}/?page=${page - 1}`,
+                { filters }
+            );
+        } else if (!searchTerm && currSearchTerm !== '') {
+            response = await api.post(
+                `/workoutProgram/search/${currSearchTerm}/?page=${page - 1}`,
                 { filters }
             );
         } else {
@@ -73,7 +85,8 @@ export const getWorkoutPrograms = (
 };
 
 export const filterAndUpdateWorkoutPrograms = (
-    statusCallback: (status: boolean) => void
+    statusCallback: (status: boolean) => void,
+    page: number
 ) => {
     return async (
         dispatch: Dispatch<WorkoutProgramAction>,
@@ -81,21 +94,42 @@ export const filterAndUpdateWorkoutPrograms = (
     ) => {
         const { filters } = getState();
         const {
-            workoutPrograms: { workoutPrograms },
+            searchTerms: {
+                searchTerms: { currSearchTerm, recentSearchTerms },
+            },
         } = getState();
 
-        const filteredPrograms = filterWorkoutPrograms(
-            workoutPrograms.workoutPrograms,
-            filters
-        );
+        let response;
 
-        if (filteredPrograms !== null) {
+        if (currSearchTerm && currSearchTerm !== '') {
+            response = await api.post(
+                `/workoutProgram/search/${currSearchTerm}/?page=${page - 1}`,
+                { filters }
+            );
+        } else {
+            response = await api.post(`/workoutProgram/all/?page=${page - 1}`, {
+                filters,
+            });
+        }
+
+        const { count: totalItems } = response.data.workoutPrograms;
+        const currentPage = page ? +page : 0;
+
+        const totalPages = Math.ceil(totalItems / 8);
+
+        if (response) {
             statusCallback(true);
         }
 
         dispatch({
             type: WorkoutProgramActionType.USER_UPDATE_WORKOUTPROGRAM,
-            payload: filteredPrograms,
+            payload: {
+                workoutPrograms: response.data.workoutPrograms.rows,
+                totalItems,
+                currentPage,
+                totalPages,
+                searchTerm: currSearchTerm,
+            },
         });
     };
 };
