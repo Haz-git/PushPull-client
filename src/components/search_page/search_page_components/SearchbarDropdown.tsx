@@ -135,7 +135,7 @@ const SearchbarDropdown = ({
             dispatch(getWorkoutPrograms(loadingHandler, 1));
         } else if (e.key === 'Enter' && searchbarInput !== '') {
             dispatch(updateSearchTerm(searchbarInput));
-            dispatch(getWorkoutPrograms(loadingHandler, 1, searchbarInput));
+            dispatch(getWorkoutPrograms(loadingHandler, 1));
         }
     };
 
