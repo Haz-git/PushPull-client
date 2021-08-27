@@ -9,7 +9,7 @@ import {
     updateWorkoutSchedule,
     updateWorkoutLength,
 } from '../../../redux/filterOptions/filterActions';
-import { filterAndUpdateWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
+import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
 
@@ -74,33 +74,23 @@ const MobileFilterPill = ({
         switch (type) {
             case 'category':
                 dispatch(updateCategory('any'));
-                dispatch(
-                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
-                );
+                dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
                 break;
             case 'equipment':
                 dispatch(updateEquipment('any'));
-                dispatch(
-                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
-                );
+                dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
                 break;
             case 'difficulty':
                 dispatch(updateDifficulty('any'));
-                dispatch(
-                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
-                );
+                dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
                 break;
             case 'workoutSchedule':
                 dispatch(updateWorkoutSchedule('any'));
-                dispatch(
-                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
-                );
+                dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
                 break;
             case 'workoutLength':
                 dispatch(updateWorkoutLength('any'));
-                dispatch(
-                    filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
-                );
+                dispatch(getWorkoutPrograms(handleIsResultsLoaded, 1));
                 break;
         }
     };
