@@ -146,31 +146,31 @@ const FilterColumn = ({
                 case 'category':
                     dispatch(updateCategory(filterId));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'equipment':
                     dispatch(updateEquipment(filterId));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'difficulty':
                     dispatch(updateDifficulty(filterId));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'workoutSchedule':
                     dispatch(updateWorkoutSchedule(filterId));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'workoutLength':
                     dispatch(updateWorkoutLength(filterId));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
             }
@@ -189,31 +189,31 @@ const FilterColumn = ({
                 case 'category':
                     dispatch(updateCategory('any'));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'equipment':
                     dispatch(updateEquipment('any'));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'difficulty':
                     dispatch(updateDifficulty('any'));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'workoutSchedule':
                     dispatch(updateWorkoutSchedule('any'));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
                 case 'workoutLength':
                     dispatch(updateWorkoutLength('any'));
                     dispatch(
-                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded)
+                        filterAndUpdateWorkoutPrograms(handleIsResultsLoaded, 1)
                     );
                     break;
             }
