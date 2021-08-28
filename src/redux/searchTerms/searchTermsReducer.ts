@@ -1,7 +1,12 @@
 import { SearchTermActionType } from './action-types';
 import { SearchTermAction } from './searchTermsInterfaces';
 
-const initialState = {};
+const initialState = {
+    searchTerms: {
+        currSearchTerm: '',
+        recentSearchTerms: [],
+    },
+};
 
 const workoutProgramReducer = (
     state: object = initialState,
