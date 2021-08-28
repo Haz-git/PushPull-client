@@ -10,6 +10,7 @@ import { updateSearchTerm } from '../../../redux/searchTerms/searchTermsActions'
 //Components:
 import SearchBar from '../../general_components/SearchBar';
 import OutsideClickHandler from 'react-outside-click-handler';
+import useFocus from '../../../utils/hooks/useFocus';
 import { Link } from 'react-router-dom';
 
 //Styles:
@@ -138,6 +139,9 @@ const SearchbarDropdown = ({
     loadingHandler,
     recentSearchTerms,
 }: IComponentProps): JSX.Element => {
+    //useFocus hook:
+    const [inputRef, setInputFocus] = useFocus();
+
     //Dispatch function:
     const dispatch = useDispatch();
 
@@ -179,7 +183,11 @@ const SearchbarDropdown = ({
     const mapRecentTerms = () => {
         if (recentSearchTerms) {
             return recentSearchTerms.map((term) => (
-                <RecentTermEntity isActive={renderDropdown} key={uuid()}>
+                <RecentTermEntity
+                    isActive={renderDropdown}
+                    key={uuid()}
+                    onClick={() => handleRecentTermButton(term)}
+                >
                     <TimeIcon />
                     <EntityNameText>{term}</EntityNameText>
                 </RecentTermEntity>
@@ -201,6 +209,12 @@ const SearchbarDropdown = ({
         }
     };
 
+    //Click handler for recent buttons:
+    const handleRecentTermButton = (term: string) => {
+        setSearchbarInput(term);
+        setInputFocus();
+    };
+
     return (
         <OutsideClickHandler onOutsideClick={onClickOutside}>
             <MainContainer onClick={() => setRenderDropdown(true)}>
@@ -208,6 +222,8 @@ const SearchbarDropdown = ({
                     inputHandler={onSearchbarChange}
                     placeholderText="Search again..."
                     keypressHandler={handleSearchbarEnterPress}
+                    currValue={searchbarInput}
+                    focusRef={inputRef}
                 />
                 <DropdownContainer isActive={renderDropdown}>
                     <DropdownHeaderContainer isActive={renderDropdown}>
