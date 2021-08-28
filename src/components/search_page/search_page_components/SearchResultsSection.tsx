@@ -377,6 +377,7 @@ const SearchResultsSection = ({
             />
             <MainContainer>
                 <SearchbarDropdown
+                    recentSearchTerms={recentSearchTerms}
                     totalWorkoutPrograms={workoutPrograms}
                     loadingHandler={handleIsResultsLoaded}
                 />
@@ -399,7 +400,6 @@ const SearchResultsSection = ({
                             renderWorkoutPrograms()
                         ) : (
                             <>
-                                <WorkoutProgramSkeletonLoader />
                                 <WorkoutProgramSkeletonLoader />
                                 <WorkoutProgramSkeletonLoader />
                                 <WorkoutProgramSkeletonLoader />
