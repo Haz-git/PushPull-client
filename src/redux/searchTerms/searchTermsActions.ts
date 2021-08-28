@@ -31,6 +31,12 @@ export const updateSearchTerm = (searchTerm: string) => {
             } else {
                 modifiedSearchTerms = [searchTerm];
             }
+        } else {
+            if (searchTerms.searchTerms.recentSearchTerms) {
+                modifiedSearchTerms = searchTerms.searchTerms.recentSearchTerms;
+            } else {
+                modifiedSearchTerms = [];
+            }
         }
 
         dispatch({
