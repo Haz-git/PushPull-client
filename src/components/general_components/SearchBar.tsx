@@ -57,12 +57,16 @@ interface IComponentProps {
     keypressHandler?: (e: React.KeyboardEvent) => void;
     inputHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholderText?: string;
+    currValue?: string;
+    focusRef: React.RefObject<HTMLInputElement>;
 }
 
 const Searchbar = ({
     inputHandler,
     placeholderText = 'Search...',
     keypressHandler,
+    currValue,
+    focusRef,
 }: IComponentProps): JSX.Element => {
     const [isActive, setIsActive] = useState(false);
 
@@ -73,10 +77,12 @@ const Searchbar = ({
             <MainContainer onClick={toggleIsActive} isActive={isActive}>
                 <SearchIcon />
                 <StyledSearchInput
+                    value={currValue}
                     onKeyPress={keypressHandler}
                     onChange={inputHandler}
                     placeholder={placeholderText}
                     isActive={isActive}
+                    ref={focusRef}
                 />
             </MainContainer>
         </OutsideClickHandler>
