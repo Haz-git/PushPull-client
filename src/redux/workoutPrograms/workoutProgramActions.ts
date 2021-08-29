@@ -18,13 +18,13 @@ interface FilterState {
     searchTerms: any;
 }
 
-interface WorkoutProgramState {
-    workoutPrograms: {
-        workoutPrograms: any;
+interface SortState {
+    sortOptions: {
+        workoutProgramSort: string;
+        reviewSort: string;
     };
 }
-
-type CombinedState = FilterState & WorkoutProgramState;
+type CombinedState = FilterState & SortState;
 
 export const getWorkoutPrograms = (
     statusCallback: (status: boolean) => void,
@@ -32,7 +32,7 @@ export const getWorkoutPrograms = (
 ) => {
     return async (
         dispatch: Dispatch<WorkoutProgramAction>,
-        getState: () => FilterState
+        getState: () => CombinedState
     ) => {
         const { filters } = getState();
         const {
@@ -40,16 +40,20 @@ export const getWorkoutPrograms = (
                 searchTerms: { currSearchTerm },
             },
         } = getState();
+        const {
+            sortOptions: { workoutProgramSort },
+        } = getState();
 
         let response;
         if (currSearchTerm !== '') {
             response = await api.post(
                 `/workoutProgram/search/${currSearchTerm}/?page=${page - 1}`,
-                { filters }
+                { filters, workoutProgramSort }
             );
         } else {
             response = await api.post(`/workoutProgram/all/?page=${page - 1}`, {
                 filters,
+                workoutProgramSort,
             });
         }
 
