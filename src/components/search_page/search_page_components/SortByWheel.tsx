@@ -82,7 +82,13 @@ interface StyledProps {
     isActive: boolean;
 }
 
-const SortByWheel = () => {
+interface IComponentProps {
+    handleIsResultsLoaded: (status: boolean) => void;
+}
+
+const SortByWheel = ({
+    handleIsResultsLoaded,
+}: IComponentProps): JSX.Element => {
     //Redux Dispatch Hook:
     const dispatch = useDispatch();
 
@@ -100,7 +106,12 @@ const SortByWheel = () => {
     //Dispatches a change to the current sort:
     const dispatchSort = (sortOption: string) => {
         if (workoutProgramSort !== sortOption) {
-            dispatch(updateWorkoutProgramSortOption(sortOption));
+            dispatch(
+                updateWorkoutProgramSortOption(
+                    handleIsResultsLoaded,
+                    sortOption
+                )
+            );
         }
     };
 
