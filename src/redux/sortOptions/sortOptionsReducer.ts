@@ -2,8 +2,8 @@ import { SortOptionActionType } from './action-types';
 import { SortOptionAction } from './sortOptionsInterface';
 
 const initialState = {
-    workoutProgramSort: '',
-    reviewSort: '',
+    workoutProgramSort: 'alphabetical',
+    reviewSort: 'newest',
 };
 
 const sortOptionReducer = (
