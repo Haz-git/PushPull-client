@@ -106,6 +106,7 @@ const SortByWheel = ({
     //Dispatches a change to the current sort:
     const dispatchSort = (sortOption: string) => {
         if (workoutProgramSort !== sortOption) {
+            handleIsResultsLoaded(false);
             dispatch(
                 updateWorkoutProgramSortOption(
                     handleIsResultsLoaded,
