@@ -384,7 +384,9 @@ const SearchResultsSection = ({
                 <SearchResultsTextContainer>
                     {renderSearchText()}
                     <SortByWheelContainer>
-                        <SortByWheel />
+                        <SortByWheel
+                            handleIsResultsLoaded={handleIsResultsLoaded}
+                        />
                     </SortByWheelContainer>
                     <MobileFilterButtonContainer>
                         <MobileFilterDrawerButton
