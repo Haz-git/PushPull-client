@@ -258,6 +258,7 @@ const SearchResultsSection = ({
                         programTitle={program.workoutProgramTitle}
                         programDesc={program.workoutProgramDesc}
                         programAverageRating={program.rating}
+                        programReviewCount={program.reviews}
                     />
                 ));
             }
