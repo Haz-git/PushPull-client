@@ -20,15 +20,20 @@ export const updateSearchTerm = (searchTerm: string) => {
                 searchTerms.searchTerms.recentSearchTerms !== undefined &&
                 searchTerms.searchTerms.recentSearchTerms !== null
             ) {
+                //If the user has existing searchTerms.
                 modifiedSearchTerms = [
                     ...searchTerms.searchTerms.recentSearchTerms,
                 ];
 
-                if (modifiedSearchTerms.length >= 5)
-                    modifiedSearchTerms.shift();
+                if (modifiedSearchTerms.indexOf(searchTerm) === -1) {
+                    //We only add the searchTerm if it doesn't exist already.
+                    if (modifiedSearchTerms.length >= 3)
+                        modifiedSearchTerms.shift();
 
-                modifiedSearchTerms.push(searchTerm);
+                    modifiedSearchTerms.push(searchTerm);
+                }
             } else {
+                //If the user doesn't have existing searchTerms.
                 modifiedSearchTerms = [searchTerm];
             }
         } else {
