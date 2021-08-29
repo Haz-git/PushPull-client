@@ -153,7 +153,7 @@ const WorkoutProgramComponent = ({
     programImage,
     programTitle = 'Workout Program',
     programDesc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    programReviewCount = 20,
+    programReviewCount = 0,
     programAverageRating = 4.0,
     programTags = ['Beginner', 'Gym', 'Powerlifting'],
 }: IComponentProps): JSX.Element => {
