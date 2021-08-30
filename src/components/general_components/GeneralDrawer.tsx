@@ -37,6 +37,7 @@ const GeneralDrawer = ({
                     },
                     drawer: {
                         borderRadius: '.4rem',
+                        background: 'rgba(244, 244, 244, 1)',
                     },
                     header: {
                         marginBottom: '.5rem',
