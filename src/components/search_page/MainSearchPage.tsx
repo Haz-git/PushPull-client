@@ -5,6 +5,8 @@ import { deviceMin } from '../../devices/breakpoints';
 //Components:
 import FilterColumn from './search_page_components/FilterColumn';
 import SearchResultsSection from './search_page_components/SearchResultsSection';
+import GeneralModal from '../general_components/GeneralModal';
+import AddNewProgramForm from './search_page_components/AddNewProgramForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -49,19 +51,34 @@ const MainSearchPage = () => {
     const handleIsResultsLoaded = (status: boolean) =>
         setIsResultsLoaded(status);
 
+    //Loader state for modal:
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => setShowModal(false);
+    const handleModalState = (status: boolean) => setShowModal(status);
+
     return (
         <>
+            <GeneralModal
+                openBoolean={showModal}
+                closeFunc={closeModal}
+                size="xl"
+                title="Suggest a new Workout Program"
+            >
+                <AddNewProgramForm />
+            </GeneralModal>
             <MainSearchPageContainer>
                 <FilterColumnView>
                     <FilterColumn
                         handleIsResultsLoaded={handleIsResultsLoaded}
                         isResultsLoaded={isResultsLoaded}
+                        handleModalState={handleModalState}
                     />
                 </FilterColumnView>
                 <SearchResultsSectionView>
                     <SearchResultsSection
                         handleIsResultsLoaded={handleIsResultsLoaded}
                         isResultsLoaded={isResultsLoaded}
+                        handleModalState={handleModalState}
                     />
                 </SearchResultsSectionView>
             </MainSearchPageContainer>
