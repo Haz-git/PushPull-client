@@ -98,6 +98,51 @@ const AddNewProgramForm = () => {
                         ]}
                     />
                 </SelectWrapper>
+                <SelectWrapper>
+                    <Select
+                        clearable
+                        styles={{
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                        }}
+                        label="Workout Schedule"
+                        placeholder="Choose Workout Schedule"
+                        data={[
+                            { value: 'any', label: 'Any # of Days' },
+                            { value: '1-2 Days/Week', label: '1-2 Days/Week' },
+                            { value: '3-4 Days/Week', label: '3-4 Days/Week' },
+                            { value: '5-7 Days/Week', label: '5-7 Days/Week' },
+                        ]}
+                    />
+                </SelectWrapper>
+                <SelectWrapper>
+                    <Select
+                        clearable
+                        styles={{
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                        }}
+                        label="Workout Length"
+                        placeholder="Choose Workout Length"
+                        data={[
+                            { value: 'any', label: 'Any Amount of Time' },
+                            { value: '< 45 Minutes', label: '< 45 Minutes' },
+                            { value: '1-2 Hours', label: '1-2 Hours' },
+                            { value: '2-3 Hours', label: '2-3 Hours' },
+                            { value: '3+ Hours', label: '3+ Hours' },
+                        ]}
+                    />
+                </SelectWrapper>
             </FormInputContainer>
         </MainFormContainer>
     );
