@@ -61,7 +61,7 @@ const MainSearchPage = () => {
             <GeneralDrawer
                 openBoolean={showDrawer}
                 closeFunc={closeDrawer}
-                size="xl"
+                size="50%"
                 title="Suggest a new Workout Program"
             >
                 <AddNewProgramForm />
