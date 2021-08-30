@@ -43,6 +43,8 @@ const GeneralDrawer = ({
                 onClose={closeFunc}
                 size={size}
                 padding={padding}
+                noCloseOnClickOutside
+                noCloseOnEscape
             >
                 {children}
             </Drawer>
