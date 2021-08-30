@@ -10,10 +10,12 @@ import {
     updateDifficulty,
     updateWorkoutSchedule,
     updateWorkoutLength,
+    resetAllFilters,
 } from '../../../redux/filterOptions/filterActions';
 import { getWorkoutPrograms } from '../../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
+import GeneralButton from '../../general_components/GeneralButton';
 import DividerLine from '../../general_components/DividerLine';
 import FilterButton from './FilterButton';
 import FilterChoice from './FilterChoice';
@@ -33,6 +35,7 @@ export const LeftArrowIcon = styled(ChevronLeft)`
 `;
 
 export const MainContainer = styled.div`
+    position: relative;
     background: rgba(239, 239, 239, 1);
     text-align: left;
     width: 100%;
@@ -94,6 +97,14 @@ export const ReturnButton = styled.button`
         outline: none;
         background: #dbdbdb;
     }
+`;
+
+const OtherButtonContainer = styled.div`
+    position: absolute;
+    padding: 0rem 1rem;
+    top: 100vh;
+    transform: translateY(-180%);
+    width: 100%;
 `;
 
 //interfaces:
@@ -304,6 +315,21 @@ const FilterColumn = ({
                                     }
                                 />
                             </ButtonsContainer>
+                            <OtherButtonContainer>
+                                <GeneralButton
+                                    buttonLabel="Reset All Filters"
+                                    margin=".75rem 0"
+                                    onClick={() => {
+                                        handleIsResultsLoaded(false);
+                                        dispatch(
+                                            resetAllFilters(
+                                                handleIsResultsLoaded
+                                            )
+                                        );
+                                    }}
+                                />
+                                <GeneralButton buttonLabel="Suggest New Program" />
+                            </OtherButtonContainer>
                         </MainContainer>
                     );
                 case RenderView.RENDER_SELECTION_CATEGORY:
