@@ -40,7 +40,7 @@ const MobileFilterDrawer = ({
                         padding: '1rem 0rem',
                     },
                     header: {
-                        marginBottom: '-.75rem',
+                        marginBottom: '-.5rem',
                         marginRight: '1rem',
                     },
                 }}
