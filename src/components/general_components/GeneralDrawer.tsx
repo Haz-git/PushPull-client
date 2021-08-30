@@ -13,6 +13,7 @@ interface IGeneralDrawer {
     children: React.ReactNode;
     size?: string;
     title?: string;
+    padding?: number;
 }
 
 const GeneralDrawer = ({
@@ -21,6 +22,7 @@ const GeneralDrawer = ({
     children,
     size = 'md',
     title = 'Modal',
+    padding = 25,
 }: IGeneralDrawer): JSX.Element => {
     return (
         <>
@@ -40,6 +42,7 @@ const GeneralDrawer = ({
                 opened={openBoolean}
                 onClose={closeFunc}
                 size={size}
+                padding={padding}
             >
                 {children}
             </Drawer>
