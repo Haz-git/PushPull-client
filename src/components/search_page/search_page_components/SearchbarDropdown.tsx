@@ -204,6 +204,7 @@ const SearchbarDropdown = ({
     //Searchbar submit handler:
     const handleSearchbarEnterPress = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
+            loadingHandler(false);
             dispatch(updateSearchTerm(searchbarInput));
             dispatch(getWorkoutPrograms(loadingHandler, 1));
         }
