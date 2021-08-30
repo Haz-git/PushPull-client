@@ -112,11 +112,13 @@ const OtherButtonContainer = styled.div`
 interface IFilterColumn {
     isResultsLoaded: boolean;
     handleIsResultsLoaded: (status: boolean) => void;
+    handleModalState: (status: boolean) => void;
 }
 
 const FilterColumn = ({
     isResultsLoaded,
     handleIsResultsLoaded,
+    handleModalState,
 }: IFilterColumn): JSX.Element => {
     enum RenderView {
         RENDER_MAIN_FILTER = 'RENDER_MAIN_FILTER',
@@ -328,7 +330,10 @@ const FilterColumn = ({
                                         );
                                     }}
                                 />
-                                <GeneralButton buttonLabel="Suggest New Program" />
+                                <GeneralButton
+                                    buttonLabel="Suggest New Program"
+                                    onClick={() => handleModalState(true)}
+                                />
                             </OtherButtonContainer>
                         </MainContainer>
                     );

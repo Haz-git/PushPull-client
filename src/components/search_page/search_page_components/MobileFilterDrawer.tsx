@@ -14,6 +14,7 @@ interface IComponentProps {
     closeFunc: (status: boolean) => void;
     isResultsLoaded: boolean;
     handleIsResultsLoaded: (status: boolean) => void;
+    handleModalState: (status: boolean) => void;
 }
 
 const MobileFilterDrawer = ({
@@ -21,6 +22,7 @@ const MobileFilterDrawer = ({
     closeFunc,
     isResultsLoaded,
     handleIsResultsLoaded,
+    handleModalState,
 }: IComponentProps): JSX.Element => {
     return (
         <>
@@ -48,6 +50,7 @@ const MobileFilterDrawer = ({
                 <FilterColumn
                     handleIsResultsLoaded={handleIsResultsLoaded}
                     isResultsLoaded={isResultsLoaded}
+                    handleModalState={handleModalState}
                 />
             </Drawer>
         </>
