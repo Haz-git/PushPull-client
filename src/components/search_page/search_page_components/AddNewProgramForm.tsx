@@ -4,6 +4,7 @@ import * as React from 'react';
 import { TextInput } from '@mantine/core';
 import { Select } from '@mantine/core';
 import { Textarea } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -36,6 +37,12 @@ const InputWrapper = styled.div``;
 
 const SelectWrapper = styled.div`
     margin-bottom: 1rem;
+`;
+
+const ButtonContainer = styled.div`
+    margin: 2rem 1rem;
+    width: 11rem;
+    float: right;
 `;
 
 const AddNewProgramForm = () => {
@@ -277,6 +284,9 @@ const AddNewProgramForm = () => {
                 placeholder="Writing a more detailed description will increase the acceptance rate of your program."
                 required
             />
+            <ButtonContainer>
+                <GeneralButton buttonLabel="Submit for Review" />
+            </ButtonContainer>
         </MainFormContainer>
     );
 };
