@@ -7,6 +7,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     align-items: center;
     justify-content: center;
     border: none;
+    margin: ${(props) => props.margin};
     background: ${(props) => props.buttonBackground};
     padding: ${(props) => props.padding};
     border-radius: 0.3rem;
@@ -20,7 +21,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
             : 'rgba(0, 0, 0, 0.5) 0px 2px 4px'};
     overflow: hidden;
     width: ${(props) => props.width};
-
+    text-shadow: ${(props) => props.textShadow};
     transition: all 0.1s ease-in;
 
     &:focus {
@@ -57,6 +58,8 @@ interface IGeneralButtonProps {
     hoverShadow?: string;
     width?: string;
     padding?: string;
+    margin?: string;
+    textShadow?: string;
 }
 
 const GeneralButton = ({
@@ -72,10 +75,12 @@ const GeneralButton = ({
     fontSize = '1em',
     hoverColor = 'none',
     fontWeight = '600',
-    hoverTransform = 'scale(1.05)',
+    hoverTransform = 'scale(1.01)',
     hoverShadow = 'rgba(0, 0, 0, 0.4) 0px 2px 4px,rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,rgba(0, 0, 0, 0.2) 0px -3px 0px inset;',
     width = '100%',
     padding = '.8rem 1rem',
+    margin = '0rem 0rem',
+    textShadow = 'rgba(0, 0, 34, .5) 1px 1px 0',
 }: IGeneralButtonProps): JSX.Element => {
     return (
         <>
@@ -93,6 +98,8 @@ const GeneralButton = ({
                 hoverShadow={hoverShadow}
                 width={width}
                 padding={padding}
+                margin={margin}
+                textShadow={textShadow}
             >
                 <IconContainer iconMargin={iconMargin}>
                     {buttonIcon && buttonIcon}
