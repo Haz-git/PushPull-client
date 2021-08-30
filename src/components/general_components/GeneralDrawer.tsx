@@ -35,6 +35,9 @@ const GeneralDrawer = ({
                         fontSize: '1.5rem',
                         fontWeight: 700,
                     },
+                    drawer: {
+                        borderRadius: '.4rem',
+                    },
                     header: {
                         marginBottom: '.5rem',
                     },
