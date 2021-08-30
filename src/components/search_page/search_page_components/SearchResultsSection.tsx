@@ -167,13 +167,13 @@ interface StyledPaginationProps {
 interface ISearchResultsSection {
     isResultsLoaded: boolean;
     handleIsResultsLoaded: (status: boolean) => void;
-    handleModalState: (status: boolean) => void;
+    handleDrawerState: (status: boolean) => void;
 }
 
 const SearchResultsSection = ({
     isResultsLoaded,
     handleIsResultsLoaded,
-    handleModalState,
+    handleDrawerState,
 }: ISearchResultsSection): JSX.Element => {
     const { height } = useWindowDimensions();
 
@@ -377,7 +377,7 @@ const SearchResultsSection = ({
                 closeFunc={toggleMobileDrawer}
                 handleIsResultsLoaded={handleIsResultsLoaded}
                 isResultsLoaded={isResultsLoaded}
-                handleModalState={handleModalState}
+                handleDrawerState={handleDrawerState}
             />
             <MainContainer>
                 <SearchbarDropdown

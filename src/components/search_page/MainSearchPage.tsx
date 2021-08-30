@@ -5,7 +5,7 @@ import { deviceMin } from '../../devices/breakpoints';
 //Components:
 import FilterColumn from './search_page_components/FilterColumn';
 import SearchResultsSection from './search_page_components/SearchResultsSection';
-import GeneralModal from '../general_components/GeneralModal';
+import GeneralDrawer from '../general_components/GeneralDrawer';
 import AddNewProgramForm from './search_page_components/AddNewProgramForm';
 
 //Styles:
@@ -52,33 +52,33 @@ const MainSearchPage = () => {
         setIsResultsLoaded(status);
 
     //Loader state for modal:
-    const [showModal, setShowModal] = useState(false);
-    const closeModal = () => setShowModal(false);
-    const handleModalState = (status: boolean) => setShowModal(status);
+    const [showDrawer, setShowDrawer] = useState(false);
+    const closeDrawer = () => setShowDrawer(false);
+    const handleDrawerState = (status: boolean) => setShowDrawer(status);
 
     return (
         <>
-            <GeneralModal
-                openBoolean={showModal}
-                closeFunc={closeModal}
+            <GeneralDrawer
+                openBoolean={showDrawer}
+                closeFunc={closeDrawer}
                 size="xl"
                 title="Suggest a new Workout Program"
             >
                 <AddNewProgramForm />
-            </GeneralModal>
+            </GeneralDrawer>
             <MainSearchPageContainer>
                 <FilterColumnView>
                     <FilterColumn
                         handleIsResultsLoaded={handleIsResultsLoaded}
                         isResultsLoaded={isResultsLoaded}
-                        handleModalState={handleModalState}
+                        handleDrawerState={handleDrawerState}
                     />
                 </FilterColumnView>
                 <SearchResultsSectionView>
                     <SearchResultsSection
                         handleIsResultsLoaded={handleIsResultsLoaded}
                         isResultsLoaded={isResultsLoaded}
-                        handleModalState={handleModalState}
+                        handleDrawerState={handleDrawerState}
                     />
                 </SearchResultsSectionView>
             </MainSearchPageContainer>
