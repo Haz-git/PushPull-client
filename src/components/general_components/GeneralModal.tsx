@@ -30,7 +30,7 @@ const GeneralModal = ({
                     title: {
                         color: 'rgba(0, 0, 34, 1)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '1.6rem',
+                        fontSize: '1.5rem',
                         fontWeight: 700,
                     },
                     header: {
@@ -40,6 +40,7 @@ const GeneralModal = ({
                 opened={openBoolean}
                 onClose={closeFunc}
                 size={size}
+                overflow="outside"
             >
                 {children}
             </Modal>
