@@ -50,20 +50,22 @@ const MainSearchPage = () => {
         setIsResultsLoaded(status);
 
     return (
-        <MainSearchPageContainer>
-            <FilterColumnView>
-                <FilterColumn
-                    handleIsResultsLoaded={handleIsResultsLoaded}
-                    isResultsLoaded={isResultsLoaded}
-                />
-            </FilterColumnView>
-            <SearchResultsSectionView>
-                <SearchResultsSection
-                    handleIsResultsLoaded={handleIsResultsLoaded}
-                    isResultsLoaded={isResultsLoaded}
-                />
-            </SearchResultsSectionView>
-        </MainSearchPageContainer>
+        <>
+            <MainSearchPageContainer>
+                <FilterColumnView>
+                    <FilterColumn
+                        handleIsResultsLoaded={handleIsResultsLoaded}
+                        isResultsLoaded={isResultsLoaded}
+                    />
+                </FilterColumnView>
+                <SearchResultsSectionView>
+                    <SearchResultsSection
+                        handleIsResultsLoaded={handleIsResultsLoaded}
+                        isResultsLoaded={isResultsLoaded}
+                    />
+                </SearchResultsSectionView>
+            </MainSearchPageContainer>
+        </>
     );
 };
 
