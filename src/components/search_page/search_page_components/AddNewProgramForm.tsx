@@ -18,6 +18,12 @@ export const FormDesc = styled.h1`
     text-align: left;
 `;
 
+const StyledTextInput = styled(TextInput)`
+    &:focus {
+        border: 1px solid red;
+    }
+`;
+
 const FormInputContainer = styled.div`
     margin-left: -2rem;
     padding: 1rem 2rem;
@@ -42,7 +48,7 @@ const AddNewProgramForm = () => {
             <FormInputContainer>
                 <InputWrapper>
                     <SelectWrapper>
-                        <TextInput
+                        <StyledTextInput
                             styles={{
                                 label: {
                                     color: 'rgba(0, 0, 34, .7)',
@@ -58,6 +64,7 @@ const AddNewProgramForm = () => {
                                     fontWeight: 500,
                                 },
                             }}
+                            required
                             label="Program Title"
                             placeholder="Name your Program"
                         />
@@ -98,6 +105,7 @@ const AddNewProgramForm = () => {
                                 },
                                 { value: 'crossfit', label: 'Crossfit' },
                             ]}
+                            required
                         />
                     </SelectWrapper>
                     <SelectWrapper>
@@ -132,6 +140,7 @@ const AddNewProgramForm = () => {
                                 },
                                 { value: 'outdoors', label: 'Outdoors' },
                             ]}
+                            required
                         />
                     </SelectWrapper>
                 </InputWrapper>
@@ -168,6 +177,7 @@ const AddNewProgramForm = () => {
                                 },
                                 { value: 'advanced', label: 'Advanced' },
                             ]}
+                            required
                         />
                     </SelectWrapper>
                     <SelectWrapper>
@@ -205,6 +215,7 @@ const AddNewProgramForm = () => {
                                     label: '5-7 Days/Week',
                                 },
                             ]}
+                            required
                         />
                     </SelectWrapper>
                     <SelectWrapper>
@@ -237,6 +248,7 @@ const AddNewProgramForm = () => {
                                 { value: '2-3 Hours', label: '2-3 Hours' },
                                 { value: '3+ Hours', label: '3+ Hours' },
                             ]}
+                            required
                         />
                     </SelectWrapper>
                 </InputWrapper>
@@ -263,6 +275,7 @@ const AddNewProgramForm = () => {
                 }}
                 label="Program Description"
                 placeholder="Writing a more detailed description will increase the acceptance rate of your program."
+                required
             />
         </MainFormContainer>
     );
