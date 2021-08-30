@@ -8,6 +8,9 @@ import SearchResultsSection from './search_page_components/SearchResultsSection'
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import AddNewProgramForm from './search_page_components/AddNewProgramForm';
 
+//Utils:
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
+
 //Styles:
 import styled from 'styled-components';
 
@@ -45,6 +48,8 @@ const SearchResultsSectionView = styled.div``;
 //Interfaces:
 
 const MainSearchPage = () => {
+    const { width } = useWindowDimensions();
+
     //This loader state controls skeleton loaders from SearchResultsSection:
     const [isResultsLoaded, setIsResultsLoaded] = useState(false);
 
@@ -56,12 +61,26 @@ const MainSearchPage = () => {
     const closeDrawer = () => setShowDrawer(false);
     const handleDrawerState = (status: boolean) => setShowDrawer(status);
 
+    //Controls drawer size:
+    const renderDrawerSize = () => {
+        if (width !== undefined && width !== null) {
+            if (width === 1440 || width >= 1440) return '40%';
+            if (width === 1050 || width >= 1050) return '50%';
+            if (width === 800 || width >= 800) return '60%';
+            if (width === 700 || width >= 700) return '70%';
+            if (width === 600 || width >= 600) return '90%';
+            if (width === 500 || width >= 500) return '100%';
+
+            return '40%';
+        }
+    };
+
     return (
         <>
             <GeneralDrawer
                 openBoolean={showDrawer}
                 closeFunc={closeDrawer}
-                size="50%"
+                size={renderDrawerSize()}
                 title="Suggest a new Workout Program"
             >
                 <AddNewProgramForm />
