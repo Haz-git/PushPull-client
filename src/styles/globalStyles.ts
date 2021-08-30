@@ -33,6 +33,24 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
+
+    .mantine-select-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
+    .mantine-text-input-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
+    .mantine-textarea-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
 `;
 
 export default GlobalStyle;
