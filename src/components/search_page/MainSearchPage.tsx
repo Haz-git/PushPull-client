@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
+import { BrowserView, MobileOnlyView } from 'react-device-detect';
 
 //Components:
 import FilterColumn from './search_page_components/FilterColumn';
@@ -77,14 +78,28 @@ const MainSearchPage = () => {
 
     return (
         <>
-            <GeneralDrawer
-                openBoolean={showDrawer}
-                closeFunc={closeDrawer}
-                size={renderDrawerSize()}
-                title="Suggest a new Workout Program"
-            >
-                <AddNewProgramForm />
-            </GeneralDrawer>
+            <MobileOnlyView>
+                <GeneralDrawer
+                    openBoolean={showDrawer}
+                    closeFunc={closeDrawer}
+                    size="100%"
+                    title="Suggest a new Workout Program"
+                    position="bottom"
+                >
+                    <AddNewProgramForm />
+                </GeneralDrawer>
+            </MobileOnlyView>
+            <BrowserView>
+                <GeneralDrawer
+                    openBoolean={showDrawer}
+                    closeFunc={closeDrawer}
+                    size={renderDrawerSize()}
+                    title="Suggest a new Workout Program"
+                    position="left"
+                >
+                    <AddNewProgramForm />
+                </GeneralDrawer>
+            </BrowserView>
             <MainSearchPageContainer>
                 <FilterColumnView>
                     <FilterColumn
