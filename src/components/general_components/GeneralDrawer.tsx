@@ -14,6 +14,7 @@ interface IGeneralDrawer {
     size?: string;
     title?: string;
     padding?: number;
+    position?: 'right' | 'left' | 'top' | 'bottom' | undefined;
 }
 
 const GeneralDrawer = ({
@@ -23,10 +24,12 @@ const GeneralDrawer = ({
     size = 'md',
     title = 'Modal',
     padding = 25,
+    position = 'right',
 }: IGeneralDrawer): JSX.Element => {
     return (
         <>
             <Drawer
+                position={position}
                 title={title}
                 styles={{
                     title: {
@@ -36,6 +39,7 @@ const GeneralDrawer = ({
                         fontWeight: 700,
                     },
                     drawer: {
+                        overflowY: 'scroll',
                         borderRadius: '.4rem',
                         background: 'rgba(244, 244, 244, 1)',
                     },
