@@ -51,6 +51,7 @@ const MobileFilterDrawer = ({
                     handleIsResultsLoaded={handleIsResultsLoaded}
                     isResultsLoaded={isResultsLoaded}
                     handleDrawerState={handleDrawerState}
+                    mobileFilterColumnCloseFunc={closeFunc}
                 />
             </Drawer>
         </>
