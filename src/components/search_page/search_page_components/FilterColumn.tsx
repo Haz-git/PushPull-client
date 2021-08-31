@@ -113,12 +113,14 @@ interface IFilterColumn {
     isResultsLoaded: boolean;
     handleIsResultsLoaded: (status: boolean) => void;
     handleDrawerState: (status: boolean) => void;
+    mobileFilterColumnCloseFunc?: (status: boolean) => void;
 }
 
 const FilterColumn = ({
     isResultsLoaded,
     handleIsResultsLoaded,
     handleDrawerState,
+    mobileFilterColumnCloseFunc,
 }: IFilterColumn): JSX.Element => {
     enum RenderView {
         RENDER_MAIN_FILTER = 'RENDER_MAIN_FILTER',
@@ -332,7 +334,11 @@ const FilterColumn = ({
                                 />
                                 <GeneralButton
                                     buttonLabel="Suggest New Program"
-                                    onClick={() => handleDrawerState(true)}
+                                    onClick={() => {
+                                        if (mobileFilterColumnCloseFunc)
+                                            mobileFilterColumnCloseFunc(false);
+                                        handleDrawerState(true);
+                                    }}
                                 />
                             </OtherButtonContainer>
                         </MainContainer>
