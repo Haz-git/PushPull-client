@@ -5,6 +5,7 @@ import { deviceMin } from '../../../devices/breakpoints';
 import truncateString from '../../../utils/truncateString';
 
 //Components:
+import { Link } from 'react-router-dom';
 import ReactStars from 'react-rating-stars-component';
 import { ReactComponent as TrainerSVG } from '../../../assets/workout_program_trainer.svg';
 
@@ -13,7 +14,7 @@ import styled from 'styled-components';
 
 //Icons:
 
-const MainContainer = styled.div`
+const MainContainer = styled(Link)`
     margin-bottom: 1rem;
     padding: 1rem 1rem;
     display: flex;
@@ -147,6 +148,7 @@ interface IComponentProps {
     programReviewCount?: number;
     programAverageRating?: number;
     programTags?: string[];
+    programLink: string;
 }
 
 const WorkoutProgramComponent = ({
@@ -156,6 +158,7 @@ const WorkoutProgramComponent = ({
     programReviewCount = 0,
     programAverageRating = 4.0,
     programTags = ['Beginner', 'Gym', 'Powerlifting'],
+    programLink,
 }: IComponentProps): JSX.Element => {
     const renderImage = () => {
         if (!programImage) {
@@ -166,7 +169,7 @@ const WorkoutProgramComponent = ({
     };
 
     return (
-        <MainContainer>
+        <MainContainer to={programLink}>
             <SVGContainer>{renderImage()}</SVGContainer>
             <InfoContainer>
                 <ProgramTitle>{programTitle}</ProgramTitle>
