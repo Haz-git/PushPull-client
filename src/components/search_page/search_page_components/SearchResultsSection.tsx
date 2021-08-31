@@ -271,6 +271,7 @@ const SearchResultsSection = ({
                         programDesc={program.workoutProgramDesc}
                         programAverageRating={program.rating}
                         programReviewCount={program.reviews}
+                        programLink={`program/${program.id}`}
                     />
                 ));
             }
