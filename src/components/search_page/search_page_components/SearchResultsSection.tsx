@@ -82,8 +82,18 @@ const SVGContainer = styled.div`
     text-align: center;
 
     @media ${deviceMin.mobileS} {
-        width: 25rem;
-        height: 25rem;
+        width: 19rem;
+        height: 19rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        width: 23rem;
+        height: 23rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        width: 25.5rem;
+        height: 25.5rem;
     }
 
     @media ${deviceMin.laptop} {
