@@ -41,6 +41,7 @@ export const MainContainer = styled.div`
     width: 100%;
 
     @media ${deviceMin.tabletp} {
+        border-right: 2px solid #e5e5e5;
         height: 100%;
     }
 `;
