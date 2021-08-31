@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 //Components:
+import { deviceMin } from '../../../devices/breakpoints';
 import { TextInput } from '@mantine/core';
 import { Select } from '@mantine/core';
 import { Textarea } from '@mantine/core';
@@ -26,11 +27,18 @@ const StyledTextInput = styled(TextInput)`
 `;
 
 const FormInputContainer = styled.div`
-    margin-left: -2rem;
-    padding: 1rem 2rem;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    column-gap: 1rem;
+    @media ${deviceMin.mobileS} {
+        margin-top: 1rem;
+        display: block;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-left: -2rem;
+        padding: 1rem 2rem;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 1rem;
+    }
 `;
 
 const InputWrapper = styled.div``;
@@ -39,10 +47,27 @@ const SelectWrapper = styled.div`
     margin-bottom: 1rem;
 `;
 
+const TextAreaContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        padding: 0;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-right: 1rem;
+    }
+`;
+
 const ButtonContainer = styled.div`
-    margin: 2rem 1rem;
-    width: 11rem;
-    float: right;
+    @media ${deviceMin.mobileS} {
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin: 2rem 1rem;
+        width: 11rem;
+        float: right;
+    }
 `;
 
 const AddNewProgramForm = () => {
@@ -260,30 +285,29 @@ const AddNewProgramForm = () => {
                     </SelectWrapper>
                 </InputWrapper>
             </FormInputContainer>
-            <Textarea
-                styles={{
-                    root: {
-                        paddingRight: '.5rem',
-                    },
-                    label: {
-                        color: 'rgba(0, 0, 34, .7)',
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: '1rem',
-                        fontWeight: 700,
-                        marginBottom: '.25rem',
-                    },
-                    input: {
-                        color: 'rgba(0, 0, 34, 1)',
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: '.9rem',
-                        fontWeight: 500,
-                        height: '15rem',
-                    },
-                }}
-                label="Program Description"
-                placeholder="Writing a more detailed description will increase the acceptance rate of your program."
-                required
-            />
+            <TextAreaContainer>
+                <Textarea
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                            height: '15rem',
+                        },
+                    }}
+                    label="Program Description"
+                    placeholder="Writing a more detailed description will increase the acceptance rate of your program."
+                    required
+                />
+            </TextAreaContainer>
             <ButtonContainer>
                 <GeneralButton buttonLabel="Submit for Review" />
             </ButtonContainer>
