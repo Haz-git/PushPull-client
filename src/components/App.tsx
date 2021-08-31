@@ -12,6 +12,7 @@ import Navbar from './nav_bar/Navbar';
 import MainFooter from './footer/MainFooter';
 import MainLandingPageView from './main_landing_page/MainLandingPageView';
 import MainSearchPage from './search_page/MainSearchPage';
+import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPage';
 
 const App = () => {
     return (
@@ -26,6 +27,11 @@ const App = () => {
                             exact
                             path="/search"
                             component={MainSearchPage}
+                        />
+                        <Route
+                            exact
+                            path="/program/:id"
+                            component={MainWorkoutProgramPage}
                         />
                     </Switch>
                     <MainFooter />
