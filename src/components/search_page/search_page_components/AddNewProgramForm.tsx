@@ -309,7 +309,14 @@ const AddNewProgramForm = () => {
                 />
             </TextAreaContainer>
             <ButtonContainer>
-                <GeneralButton buttonLabel="Submit for Review" />
+                <GeneralButton
+                    buttonLabel="Submit for Review"
+                    onClick={() =>
+                        alert(
+                            `We're Sorry! This feature is currently in the works. Please try again later.`
+                        )
+                    }
+                />
             </ButtonContainer>
         </MainFormContainer>
     );
