@@ -6,13 +6,27 @@ import truncateString from '../../../utils/truncateString';
 
 //Components:
 import { Link } from 'react-router-dom';
-import ReactStars from 'react-rating-stars-component';
+import Rating from 'react-rating';
 import { ReactComponent as TrainerSVG } from '../../../assets/workout_program_trainer.svg';
 
 //Styles:
 import styled from 'styled-components';
 
 //Icons:
+import { StarOutline } from '@styled-icons/evaicons-outline/StarOutline';
+import { Star } from '@styled-icons/evaicons-solid/Star';
+
+const EmptyStar = styled(StarOutline)`
+    height: 1.6rem;
+    width: 1.6rem;
+    color: rgba(224, 113, 51, 1);
+`;
+
+const FullStar = styled(Star)`
+    height: 1.6rem;
+    width: 1.6rem;
+    color: rgba(224, 113, 51, 1);
+`;
 
 const MainContainer = styled(Link)`
     margin-bottom: 1rem;
@@ -175,14 +189,14 @@ const WorkoutProgramComponent = ({
                 <ProgramTitle>{programTitle}</ProgramTitle>
                 <ProgramRatingContainer>
                     <StarsContainer>
-                        <ReactStars
-                            count={5}
-                            isHalf={true}
-                            edit={false}
-                            value={programAverageRating}
-                            color="rgba(0, 0, 34, 0.7)"
-                            activeColor="rgba(224, 113, 51, 1)"
-                            size={20}
+                        <Rating
+                            start={0}
+                            stop={5}
+                            fractions={0.1}
+                            readonly={true}
+                            initialRating={programAverageRating}
+                            emptySymbol={<EmptyStar />}
+                            fullSymbol={<FullStar />}
                         />
                     </StarsContainer>
                     <RatingText>
