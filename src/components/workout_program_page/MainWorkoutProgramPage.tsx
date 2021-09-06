@@ -1,4 +1,9 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+
+//Redux:
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { findWorkoutProgram } from '../../redux/workoutPrograms/workoutProgramActions';
 
 //Components:
 import { deviceMin } from '../../devices/breakpoints';
@@ -27,13 +32,41 @@ const MainContainer = styled.section`
 `;
 
 //Interfaces:
+interface IComponentProps {
+    match: {
+        params: {
+            id: any;
+        };
+    };
+}
 
-const MainWorkoutProgramPage = () => {
+const MainWorkoutProgramPage = ({
+    match: {
+        params: { id },
+    },
+}: IComponentProps): JSX.Element => {
     //This component should contain all of the views of the workout program page.
+
+    //Dispatch Hook:
+    const dispatch = useDispatch();
+
+    const [isLoaded, setIsLoaded] = useState(false);
+    const handleLoadedStatus = (status: boolean) => setIsLoaded(status);
+
+    useEffect(() => {
+        dispatch(findWorkoutProgram(id, handleLoadedStatus));
+    }, []);
+
     return (
         <MainContainer>
-            <RatingColumn />
-            <ReviewResults />
+            {isLoaded === true ? (
+                <>
+                    <RatingColumn />
+                    <ReviewResults />
+                </>
+            ) : (
+                <div>LOADING</div>
+            )}
         </MainContainer>
     );
 };
