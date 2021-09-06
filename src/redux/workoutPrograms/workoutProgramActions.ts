@@ -79,3 +79,21 @@ export const getWorkoutPrograms = (
         });
     };
 };
+
+export const findWorkoutProgram = (
+    id: string,
+    statusCallback: (status: boolean) => void
+) => {
+    return async (dispatch: Dispatch<WorkoutProgramAction>) => {
+        let response = await api.get(`/workoutProgram/${id}`);
+
+        if (response) {
+            statusCallback(true);
+        }
+
+        dispatch({
+            type: WorkoutProgramActionType.USER_UPDATE_WORKOUTPROGRAM,
+            payload: response.data.workoutPrograms,
+        });
+    };
+};
