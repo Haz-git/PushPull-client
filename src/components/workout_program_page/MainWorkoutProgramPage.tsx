@@ -26,11 +26,11 @@ const MainContainer = styled.section`
     @media ${deviceMin.tabletp} {
         display: grid;
         grid-template-columns: 1fr 8fr;
-        overflow: scroll;
     }
 `;
 
 //Interfaces:
+
 interface IComponentProps {
     match: {
         params: {
