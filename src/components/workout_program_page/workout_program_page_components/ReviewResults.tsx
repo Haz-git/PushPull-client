@@ -7,7 +7,6 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
     padding: 1rem 1rem;
-    border: 1px solid black;
 `;
 
 //Interfaces:
