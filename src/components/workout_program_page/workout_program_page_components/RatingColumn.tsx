@@ -10,15 +10,15 @@ import Rating from 'react-rating';
 import styled from 'styled-components';
 import { Star } from '@styled-icons/evaicons-solid/Star';
 
-const EmptyStar = styled(Star)`
-    height: 2.5rem;
-    width: 2.5rem;
+const EmptyStar = styled(Star)<StyledProps>`
+    height: ${(props) => props.starHeight};
+    width: ${(props) => props.starWidth};
     color: #c2c2c2;
 `;
 
-const FullStar = styled(Star)`
-    height: 2.5rem;
-    width: 2.5rem;
+const FullStar = styled(Star)<StyledProps>`
+    height: ${(props) => props.starHeight};
+    width: ${(props) => props.starWidth};
     color: rgba(224, 113, 51, 1);
 `;
 
@@ -63,13 +63,39 @@ const RatingBreakdownContainer = styled.div`
     padding: 2rem 1.5rem;
 `;
 
-const SubcategoryText = styled.p`
+const SubcategoryHeader = styled.h2`
     font-size: 1.5rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 700;
+    margin-bottom: 1rem;
+`;
+
+const SubcategoryText = styled.p`
+    font-size: 1.1rem;
+    color: ${(props) => props.theme.subText};
+    font-weight: 700;
+`;
+
+const SubcategoryRating = styled.span`
+    font-size: 1.1rem;
+    color: ${(props) => props.theme.mainText};
+    font-weight: 900;
+    margin-right: 0.75rem;
+`;
+
+const RatingCategoryContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0.75rem;
 `;
 
 //Interfaces:
+
+interface StyledProps {
+    starWidth: string;
+    starHeight: string;
+}
 
 const RatingColumn = () => {
     useEffect(() => {
@@ -89,13 +115,73 @@ const RatingColumn = () => {
                     fractions={0.1}
                     readonly={true}
                     initialRating={1.4}
-                    emptySymbol={<EmptyStar />}
-                    fullSymbol={<FullStar />}
+                    emptySymbol={
+                        <EmptyStar starHeight="2.5rem" starWidth="2.5rem" />
+                    }
+                    fullSymbol={
+                        <FullStar starHeight="2.5rem" starWidth="2.5rem" />
+                    }
                 />
                 <GeneralScoreText>1.4</GeneralScoreText>
             </RatingStarsContainer>
             <RatingBreakdownContainer>
-                <SubcategoryText>Ratings</SubcategoryText>
+                <SubcategoryHeader>Ratings by Category</SubcategoryHeader>
+                <RatingCategoryContainer>
+                    <SubcategoryText>
+                        Repeatable - <SubcategoryRating>2.4</SubcategoryRating>
+                    </SubcategoryText>
+                    <Rating
+                        start={0}
+                        stop={5}
+                        fractions={0.1}
+                        readonly={true}
+                        initialRating={2.4}
+                        emptySymbol={
+                            <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                        fullSymbol={
+                            <FullStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                    />
+                </RatingCategoryContainer>
+                <RatingCategoryContainer>
+                    <SubcategoryText>
+                        Accurate Difficulty -{' '}
+                        <SubcategoryRating>1.1</SubcategoryRating>
+                    </SubcategoryText>
+                    <Rating
+                        start={0}
+                        stop={5}
+                        fractions={0.1}
+                        readonly={true}
+                        initialRating={1.1}
+                        emptySymbol={
+                            <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                        fullSymbol={
+                            <FullStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                    />
+                </RatingCategoryContainer>
+                <RatingCategoryContainer>
+                    <SubcategoryText>
+                        Clear Exercises -{' '}
+                        <SubcategoryRating>4.1</SubcategoryRating>
+                    </SubcategoryText>
+                    <Rating
+                        start={0}
+                        stop={5}
+                        fractions={0.1}
+                        readonly={true}
+                        initialRating={4.1}
+                        emptySymbol={
+                            <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                        fullSymbol={
+                            <FullStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                    />
+                </RatingCategoryContainer>
             </RatingBreakdownContainer>
         </MainContainer>
     );
