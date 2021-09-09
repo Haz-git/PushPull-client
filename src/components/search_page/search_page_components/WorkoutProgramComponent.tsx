@@ -13,13 +13,12 @@ import { ReactComponent as TrainerSVG } from '../../../assets/workout_program_tr
 import styled from 'styled-components';
 
 //Icons:
-import { StarOutline } from '@styled-icons/evaicons-outline/StarOutline';
 import { Star } from '@styled-icons/evaicons-solid/Star';
 
-const EmptyStar = styled(StarOutline)`
+const EmptyStar = styled(Star)`
     height: 1.6rem;
     width: 1.6rem;
-    color: rgba(224, 113, 51, 1);
+    color: #c2c2c2;
 `;
 
 const FullStar = styled(Star)`
