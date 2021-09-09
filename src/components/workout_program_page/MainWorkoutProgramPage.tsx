@@ -14,7 +14,6 @@ import ReviewResults from './workout_program_page_components/ReviewResults';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-    height: 100vh;
     display: grid;
     grid-template-columns: 2fr 6fr;
 
@@ -25,9 +24,9 @@ const MainContainer = styled.section`
     }
 
     @media ${deviceMin.tabletp} {
-        height: 100vh;
         display: grid;
         grid-template-columns: 1fr 8fr;
+        overflow: scroll;
     }
 `;
 
