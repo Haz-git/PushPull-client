@@ -46,10 +46,10 @@ const ReturnButtonContainer = styled.div`
 const ReturnButton = styled(Link)``;
 
 const GeneralRatingText = styled.h1`
-    font-size: 1.8rem;
+    font-size: 2.1rem;
     color: ${(props) => props.theme.mainText};
-    font-weight: 600;
-    margin: 2rem 1.5rem 0rem 1.5rem;
+    font-weight: 800;
+    margin: 1.5rem 1.5rem 0rem 1.5rem;
 `;
 
 const GeneralScoreText = styled.h1`
@@ -223,7 +223,6 @@ const RatingColumn = () => {
             <ReviewerLevelContainer>
                 <SubcategoryHeader>Reviewer Levels</SubcategoryHeader>
                 <ReviewerLevelChartContainer>
-                    {/* <ResponsiveContainer width="100%" height="100%"> */}
                     <BarChart
                         width={350}
                         height={300}
@@ -234,20 +233,19 @@ const RatingColumn = () => {
                             left: -20,
                             bottom: 10,
                         }}
-                        barSize={10}
+                        barSize={30}
                     >
                         <XAxis
                             dataKey="name"
                             scale="point"
                             padding={{ left: 38, right: 38 }}
                         />
-                        <YAxis />
+                        <YAxis tickCount={8} />
                         <Tooltip />
                         <Legend />
                         <CartesianGrid />
                         <Bar dataKey="Reviewers" fill="rgba(224, 113, 51, 1)" />
                     </BarChart>
-                    {/* </ResponsiveContainer> */}
                 </ReviewerLevelChartContainer>
             </ReviewerLevelContainer>
         </MainContainer>
