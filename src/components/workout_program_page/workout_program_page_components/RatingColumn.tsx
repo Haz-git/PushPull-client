@@ -2,6 +2,16 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 //Components:
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts';
 import { Link } from 'react-router-dom';
 import scrollToTop from '../../../utils/scrollToTop';
 import Rating from 'react-rating';
@@ -61,6 +71,7 @@ const RatingStarsContainer = styled.div`
 
 const RatingBreakdownContainer = styled.div`
     padding: 2rem 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
 `;
 
 const SubcategoryHeader = styled.h2`
@@ -90,6 +101,17 @@ const RatingCategoryContainer = styled.div`
     margin-bottom: 0.75rem;
 `;
 
+const ReviewerLevelContainer = styled.div`
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+`;
+
+const ReviewerLevelChartContainer = styled.div`
+    margin-top: 1rem;
+    height: 100%;
+    width: 100%;
+`;
+
 //Interfaces:
 
 interface StyledProps {
@@ -101,6 +123,21 @@ const RatingColumn = () => {
     useEffect(() => {
         scrollToTop();
     }, []);
+
+    const dummyData = [
+        {
+            name: 'Beginner',
+            Reviewers: 10,
+        },
+        {
+            name: 'Intermediate',
+            Reviewers: 5,
+        },
+        {
+            name: 'Advanced',
+            Reviewers: 1,
+        },
+    ];
 
     return (
         <MainContainer>
@@ -183,6 +220,36 @@ const RatingColumn = () => {
                     />
                 </RatingCategoryContainer>
             </RatingBreakdownContainer>
+            <ReviewerLevelContainer>
+                <SubcategoryHeader>Reviewer Levels</SubcategoryHeader>
+                <ReviewerLevelChartContainer>
+                    {/* <ResponsiveContainer width="100%" height="100%"> */}
+                    <BarChart
+                        width={350}
+                        height={300}
+                        data={dummyData}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: -20,
+                            bottom: 10,
+                        }}
+                        barSize={10}
+                    >
+                        <XAxis
+                            dataKey="name"
+                            scale="point"
+                            padding={{ left: 38, right: 38 }}
+                        />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <CartesianGrid />
+                        <Bar dataKey="Reviewers" fill="rgba(224, 113, 51, 1)" />
+                    </BarChart>
+                    {/* </ResponsiveContainer> */}
+                </ReviewerLevelChartContainer>
+            </ReviewerLevelContainer>
         </MainContainer>
     );
 };
