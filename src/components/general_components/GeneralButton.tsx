@@ -18,7 +18,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     box-shadow: ${(props) =>
         props.disableShadow === true
             ? 'none'
-            : 'rgba(0, 0, 0, 0.5) 0px 2px 4px'};
+            : 'rgba(0, 0, 0, 0.5) 0px 1px 2px'};
     overflow: hidden;
     width: ${(props) => props.width};
     text-shadow: ${(props) => props.textShadow};
@@ -76,7 +76,7 @@ const GeneralButton = ({
     hoverColor = 'none',
     fontWeight = '600',
     hoverTransform = 'scale(1.01)',
-    hoverShadow = 'rgba(0, 0, 0, 0.4) 0px 2px 4px,rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,rgba(0, 0, 0, 0.2) 0px -3px 0px inset;',
+    hoverShadow = 'rgba(0, 0, 0, 0.4) 0px 2px 4px,rgba(0, 0, 0, 0.3) 0px 7px 13px -1px,rgba(0, 0, 0, 0.2) 0px -3px 0px inset;',
     width = '100%',
     padding = '.8rem 1rem',
     margin = '0rem 0rem',
