@@ -16,7 +16,7 @@ import styled from 'styled-components';
 const MainContainer = styled.section`
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 8fr;
+    grid-template-columns: 2fr 6fr;
 
     @media ${deviceMin.mobileS} {
         display: block;
