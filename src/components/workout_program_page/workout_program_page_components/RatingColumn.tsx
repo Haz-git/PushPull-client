@@ -15,10 +15,26 @@ import {
 import { Link } from 'react-router-dom';
 import scrollToTop from '../../../utils/scrollToTop';
 import Rating from 'react-rating';
+import GeneralButton from '../../general_components/GeneralButton';
+import historyObject from '../../../utils/historyObject';
 
 //Styles:
 import styled from 'styled-components';
 import { Star } from '@styled-icons/evaicons-solid/Star';
+import { CaretLeft } from '@styled-icons/boxicons-regular/CaretLeft';
+import { Pencil } from '@styled-icons/boxicons-solid/Pencil';
+
+const PencilIcon = styled(Pencil)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #ffffff;
+`;
+
+const CaretLeftIcon = styled(CaretLeft)`
+    height: 1.2rem;
+    width: 1.2rem;
+    color: ${(props) => props.theme.mainText};
+`;
 
 const EmptyStar = styled(Star)<StyledProps>`
     height: ${(props) => props.starHeight};
@@ -39,26 +55,23 @@ const MainContainer = styled.section`
 `;
 
 const ReturnButtonContainer = styled.div`
-    border: 1px solid red;
-    margin: 1rem 1.5rem;
+    margin: 1rem 1rem 0rem 1.5rem;
 `;
-
-const ReturnButton = styled(Link)``;
 
 const GeneralRatingText = styled.h1`
     font-size: 2.1rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 800;
-    margin: 1.5rem 1.5rem 0rem 1.5rem;
+    margin: 2rem 1.5rem 0rem 1.5rem;
 `;
 
 const GeneralScoreText = styled.h1`
     padding: 0rem 0rem 0.5rem 0rem;
-    font-size: 2.5rem;
+    font-size: 2.1rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 900;
     margin-bottom: -0.5rem;
-    margin-left: 1rem;
+    margin-right: 1rem;
 `;
 
 const RatingStarsContainer = styled.div`
@@ -66,6 +79,10 @@ const RatingStarsContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     padding: 0.5rem 1.5rem;
+`;
+
+const SubmitReviewButtonContainer = styled.div`
+    padding: 0.5rem 0rem 2rem 1.5rem;
     border-bottom: 1px solid #e5e5e5;
 `;
 
@@ -142,10 +159,23 @@ const RatingColumn = () => {
     return (
         <MainContainer>
             <ReturnButtonContainer>
-                <ReturnButton to="/search">Return</ReturnButton>
+                <GeneralButton
+                    onClick={() => historyObject.push('/search')}
+                    buttonIcon={<CaretLeftIcon />}
+                    disableShadow={true}
+                    hoverShadow="none"
+                    hoverTransform="none"
+                    width="13rem"
+                    buttonLabel="All Workout Programs"
+                    buttonBackground="#e5e5e5"
+                    padding=".5rem .4rem"
+                    buttonTextColor="rgba(0, 0, 34, 1)"
+                    textShadow="none"
+                />
             </ReturnButtonContainer>
             <GeneralRatingText>Overall Rating</GeneralRatingText>
             <RatingStarsContainer>
+                <GeneralScoreText>1.4</GeneralScoreText>
                 <Rating
                     start={0}
                     stop={5}
@@ -159,8 +189,16 @@ const RatingColumn = () => {
                         <FullStar starHeight="2.5rem" starWidth="2.5rem" />
                     }
                 />
-                <GeneralScoreText>1.4</GeneralScoreText>
             </RatingStarsContainer>
+            <SubmitReviewButtonContainer>
+                <GeneralButton
+                    buttonLabel="Submit a Review"
+                    padding=".6rem .5rem"
+                    width="16rem"
+                    buttonIcon={<PencilIcon />}
+                    hoverTransform="none"
+                />
+            </SubmitReviewButtonContainer>
             <RatingBreakdownContainer>
                 <SubcategoryHeader>Ratings by Category</SubcategoryHeader>
                 <RatingCategoryContainer>
