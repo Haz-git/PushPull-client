@@ -52,6 +52,7 @@ const MainContainer = styled.section`
     width: 25rem;
     border-right: 1px solid #e5e5e5;
     text-align: left;
+    height: 100%;
 `;
 
 const ReturnButtonContainer = styled.div`
