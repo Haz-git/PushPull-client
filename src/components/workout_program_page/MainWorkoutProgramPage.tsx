@@ -9,6 +9,7 @@ import { findWorkoutProgram } from '../../redux/workoutPrograms/workoutProgramAc
 import { deviceMin } from '../../devices/breakpoints';
 import RatingColumn from './workout_program_page_components/RatingColumn';
 import ReviewResults from './workout_program_page_components/ReviewResults';
+import ReviewSkeletonLoader from './workout_program_page_components/ReviewSkeletonLoader';
 
 //Styles:
 import styled from 'styled-components';
@@ -61,8 +62,6 @@ const MainWorkoutProgramPage = ({
         (state: RootStateOrAny) => state.workoutPrograms
     );
 
-    console.log(workoutPrograms);
-
     return (
         <MainContainer>
             {isLoaded === true ? (
@@ -75,7 +74,9 @@ const MainWorkoutProgramPage = ({
                     />
                 </>
             ) : (
-                <div>LOADING</div>
+                <>
+                    <ReviewSkeletonLoader />
+                </>
             )}
         </MainContainer>
     );
