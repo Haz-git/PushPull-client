@@ -22,9 +22,17 @@ const FullStar = styled(Star)<IStyledProps>`
 
 const MainContainer = styled.div`
     padding: 1.5rem 1.5rem;
-    background: #ffffff;
     border-radius: 0.3rem;
-    border: 1px solid #ececec;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease-in-out;
+    background: #f2f2f2;
+
+    &:hover {
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+            rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+        background: #ffffff;
+    }
 `;
 
 const ReviewHeader = styled.h2`
