@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import Rating from 'react-rating';
+import { Accordion, AccordionItem } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -27,9 +28,9 @@ const MainContainer = styled.div`
 `;
 
 const ReviewHeader = styled.h2`
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: ${(props) => props.theme.mainText};
-    font-weight: 800;
+    font-weight: 700;
 `;
 
 const ReviewText = styled.p<IStyledProps>`
@@ -49,7 +50,11 @@ const AuthorContainer = styled.div`
 `;
 
 const DetailsContainer = styled.div`
-    padding: 0.5rem 0;
+    padding: 0rem 0;
+`;
+
+const ImprovementsContainer = styled.div`
+    margin-top: 1rem;
 `;
 
 //Interfaces:
@@ -96,7 +101,85 @@ const ReviewComponent = () => {
                     </ReviewText>
                 </AuthorContainer>
             </StarBox>
-            <DetailsContainer></DetailsContainer>
+            <DetailsContainer>
+                <ReviewText
+                    color="rgba(0, 0, 34, .7)"
+                    fontWeight="600"
+                    fontSize="1rem"
+                >
+                    Reviewer level: Beginner
+                </ReviewText>
+                <ReviewText
+                    color="rgba(0, 0, 34, .7)"
+                    fontWeight="600"
+                    fontSize="1rem"
+                >
+                    Followed program for: 5 weeks
+                </ReviewText>
+                <ReviewText
+                    color="rgba(0, 0, 34, .7)"
+                    fontWeight="600"
+                    fontSize="1rem"
+                >
+                    Recommends program for: Beginners
+                </ReviewText>
+            </DetailsContainer>
+            <ImprovementsContainer>
+                <Accordion
+                    initialItem={-1}
+                    transitionDuration={400}
+                    styles={{
+                        label: {
+                            fontFamily: 'Lato, sans-serif',
+                            fontWeight: 700,
+                            fontSize: '1rem',
+                            color: 'rgba(0, 0, 34, .7)',
+                        },
+                        item: {
+                            fontFamily: 'Lato, sans-serif',
+                            fontWeight: 500,
+                            fontSize: '1rem',
+                            color: 'rgba(0, 0, 34, .7)',
+                        },
+                    }}
+                >
+                    <AccordionItem label={`Improved Stats`}>
+                        <ReviewText
+                            color="rgba(0, 0, 34, .7)"
+                            fontWeight="400"
+                            fontSize="1rem"
+                        >
+                            Bench: 100kg to 200kg
+                        </ReviewText>
+                    </AccordionItem>
+                    <AccordionItem label={`Author Review`}>
+                        <ReviewText
+                            color="rgba(0, 0, 34, .7)"
+                            fontWeight="400"
+                            fontSize="1rem"
+                        >
+                            Sed pulvinar proin gravida hendrerit. Fringilla ut
+                            morbi tincidunt augue interdum velit euismod in. Sed
+                            cras ornare arcu dui vivamus arcu felis. Faucibus
+                            interdum posuere lorem ipsum dolor sit amet
+                            consectetur. Suscipit tellus mauris a diam maecenas.
+                            Adipiscing bibendum est ultricies integer quis
+                            auctor elit sed vulputate. Tristique nulla aliquet
+                            enim tortor at auctor urna. Eu sem integer vitae
+                            justo eget magna fermentum. Pellentesque elit eget
+                            gravida cum sociis natoque penatibus et. Vel
+                            pharetra vel turpis nunc eget lorem dolor sed
+                            viverra. Ut placerat orci nulla pellentesque
+                            dignissim enim sit amet venenatis. Lobortis
+                            elementum nibh tellus molestie nunc. Ultricies
+                            tristique nulla aliquet enim. Turpis massa sed
+                            elementum tempus egestas sed sed risus pretium.
+                            Egestas congue quisque egestas diam. Non quam lacus
+                            suspendisse faucibus interdum posuere lorem ipsum.
+                        </ReviewText>
+                    </AccordionItem>
+                </Accordion>
+            </ImprovementsContainer>
         </MainContainer>
     );
 };
