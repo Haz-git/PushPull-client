@@ -12,7 +12,7 @@ const shine = keyframes`
   }
 `;
 
-const load = keyframes`
+export const load = keyframes`
     from {
         left: -150px;
     }
@@ -59,7 +59,7 @@ const SkeletonTextContainer = styled.div`
     }
 `;
 
-const SkeletonLoaderLine = styled.div<IStyledProps>`
+export const SkeletonLoaderLine = styled.div<IStyledProps>`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     margin: ${(props) => props.margin};
@@ -105,7 +105,7 @@ const SkeletonRatingContainer = styled.div`
 
 //Interfaces:
 
-interface IStyledProps {
+export interface IStyledProps {
     width?: string;
     height?: string;
     margin?: string;
