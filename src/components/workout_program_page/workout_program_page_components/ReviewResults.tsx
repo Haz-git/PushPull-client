@@ -89,7 +89,6 @@ const ReviewResults = ({
                     <ReviewComponent />
                     <ReviewComponent />
                     <ReviewComponent />
-                    <ReviewComponent />
                 </ReviewContainer>
             </ProgramReviewsContainer>
         </MainContainer>
