@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 //Components:
 import { Accordion, AccordionItem } from '@mantine/core';
+import ReviewComponent from './ReviewComponent';
 
 //Styles:
 import styled from 'styled-components';
@@ -32,6 +33,11 @@ const ReviewCountLabel = styled.h2`
     color: ${(props) => props.theme.mainText};
     font-weight: 700;
 `;
+
+const ReviewContainer = styled.div`
+    margin-top: 2rem;
+`;
+
 //Interfaces:
 
 interface IComponentProps {
@@ -79,6 +85,9 @@ const ReviewResults = ({
             </ProgramHeaderContainer>
             <ProgramReviewsContainer>
                 <ReviewCountLabel>{`${programReviewCount} Total Reviews`}</ReviewCountLabel>
+                <ReviewContainer>
+                    <ReviewComponent />
+                </ReviewContainer>
             </ProgramReviewsContainer>
         </MainContainer>
     );
