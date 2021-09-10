@@ -56,12 +56,23 @@ const MainWorkoutProgramPage = ({
         dispatch(findWorkoutProgram(id, handleLoadedStatus));
     }, []);
 
+    //Selector Hook:
+    const { workoutPrograms } = useSelector(
+        (state: RootStateOrAny) => state.workoutPrograms
+    );
+
+    console.log(workoutPrograms);
+
     return (
         <MainContainer>
             {isLoaded === true ? (
                 <>
-                    <RatingColumn />
-                    <ReviewResults />
+                    <RatingColumn programRating={workoutPrograms.rating} />
+                    <ReviewResults
+                        programTitle={workoutPrograms.workoutProgramTitle}
+                        programDesc={workoutPrograms.workoutProgramDesc}
+                        programReviewCount={workoutPrograms.Reviews}
+                    />
                 </>
             ) : (
                 <div>LOADING</div>
