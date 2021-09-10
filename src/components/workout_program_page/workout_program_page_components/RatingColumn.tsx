@@ -137,7 +137,11 @@ interface StyledProps {
     starHeight: string;
 }
 
-const RatingColumn = () => {
+interface IComponentProps {
+    programRating: number;
+}
+
+const RatingColumn = ({ programRating }: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();
     }, []);
@@ -176,13 +180,13 @@ const RatingColumn = () => {
             </ReturnButtonContainer>
             <GeneralRatingText>Overall Rating</GeneralRatingText>
             <RatingStarsContainer>
-                <GeneralScoreText>1.4</GeneralScoreText>
+                <GeneralScoreText>{programRating}</GeneralScoreText>
                 <Rating
                     start={0}
                     stop={5}
                     fractions={0.1}
                     readonly={true}
-                    initialRating={1.4}
+                    initialRating={programRating}
                     emptySymbol={
                         <EmptyStar starHeight="2.5rem" starWidth="2.5rem" />
                     }
