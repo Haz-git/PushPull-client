@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { Accordion, AccordionItem } from '@mantine/core';
@@ -27,7 +28,7 @@ const ProgramReviewsContainer = styled.div`
 `;
 
 const ReviewCountLabel = styled.h2`
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 700;
 `;
@@ -50,6 +51,7 @@ const ReviewResults = ({
                 <ProgramTitle>{programTitle}</ProgramTitle>
                 <ProgramDescAccContainer>
                     <Accordion
+                        initialItem={-1}
                         transitionDuration={400}
                         styles={{
                             label: {
