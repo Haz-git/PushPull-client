@@ -22,6 +22,15 @@ const ProgramDescAccContainer = styled.div`
     margin: 1rem 0;
 `;
 
+const ProgramReviewsContainer = styled.div`
+    margin-top: 2rem;
+`;
+
+const ReviewCountLabel = styled.h2`
+    font-size: 1.8rem;
+    color: ${(props) => props.theme.mainText};
+    font-weight: 700;
+`;
 //Interfaces:
 
 interface IComponentProps {
@@ -66,6 +75,9 @@ const ReviewResults = ({
                     </Accordion>
                 </ProgramDescAccContainer>
             </ProgramHeaderContainer>
+            <ProgramReviewsContainer>
+                <ReviewCountLabel>{`${programReviewCount} Total Reviews`}</ReviewCountLabel>
+            </ProgramReviewsContainer>
         </MainContainer>
     );
 };
