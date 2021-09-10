@@ -71,7 +71,7 @@ const MainWorkoutProgramPage = ({
                     <ReviewResults
                         programTitle={workoutPrograms.workoutProgramTitle}
                         programDesc={workoutPrograms.workoutProgramDesc}
-                        programReviewCount={workoutPrograms.Reviews}
+                        programReviewCount={workoutPrograms.reviews}
                     />
                 </>
             ) : (
