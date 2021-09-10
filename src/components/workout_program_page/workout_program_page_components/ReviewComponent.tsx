@@ -139,7 +139,7 @@ const ReviewComponent = () => {
                     styles={{
                         label: {
                             fontFamily: 'Lato, sans-serif',
-                            fontWeight: 700,
+                            fontWeight: 800,
                             fontSize: '1rem',
                             color: 'rgba(0, 0, 34, .7)',
                         },
