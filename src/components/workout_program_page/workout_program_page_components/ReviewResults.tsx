@@ -87,6 +87,9 @@ const ReviewResults = ({
                 <ReviewCountLabel>{`${programReviewCount} Total Reviews`}</ReviewCountLabel>
                 <ReviewContainer>
                     <ReviewComponent />
+                    <ReviewComponent />
+                    <ReviewComponent />
+                    <ReviewComponent />
                 </ReviewContainer>
             </ProgramReviewsContainer>
         </MainContainer>
