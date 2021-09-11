@@ -134,6 +134,7 @@ const ReviewComponent = () => {
             </DetailsContainer>
             <ImprovementsContainer>
                 <Accordion
+                    multiple={true}
                     initialItem={-1}
                     transitionDuration={400}
                     styles={{
