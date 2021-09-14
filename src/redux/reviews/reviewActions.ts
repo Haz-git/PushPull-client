@@ -9,10 +9,24 @@ export const getReviews = (
     page: number
 ) => {
     return async (dispatch: Dispatch<ReviewAction>) => {
-        console.log('Testing getReviews dispatch');
-
         let response = await api.get(`/reviews/all/${workoutProgramId}`);
 
-        console.log(response);
+        const { count: totalItems } = response.data.reviews;
+        const currentPage = page ? +page : 0;
+        const totalPages = Math.ceil(totalItems / 8);
+
+        if (response) {
+            statusCallback(true);
+        }
+
+        dispatch({
+            type: ReviewActionType.USER_GET_REVIEWS,
+            payload: {
+                reviews: response.data.reviews.rows,
+                totalItems,
+                currentPage,
+                totalPages,
+            },
+        });
     };
 };
