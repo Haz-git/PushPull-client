@@ -68,7 +68,25 @@ const ReviewResults = ({
     }, []);
 
     //Selector Hook:
-    const { reviews } = useSelector((state: RootStateOrAny) => state.reviews);
+
+    // const { currentPage, totalPages } = useSelector(
+    //     (state: RootStateOrAny) => state.reviews.reviews
+    // );
+
+    // const { reviews } = useSelector(
+    //     (state: RootStateOrAny) => state.reviews.reviews.reviews
+    // );
+
+    //Mapping Review Components:
+    // const renderReviews = () => {
+    //     if (reviews !== undefined && reviews !== null) {
+    //         if (reviews.length === 0) {
+    //             return <>NONE</>;
+    //         } else {
+    //             return reviews.map((review: any) => <ReviewComponent />);
+    //         }
+    //     }
+    // };
 
     return (
         <MainContainer>
