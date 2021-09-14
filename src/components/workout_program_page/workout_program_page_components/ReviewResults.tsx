@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+//Redux:
+import { getReviews } from '../../../redux/reviews/reviewActions';
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 
 //Components:
 import { Accordion, AccordionItem } from '@mantine/core';
@@ -44,13 +48,28 @@ interface IComponentProps {
     programTitle: string;
     programDesc: string;
     programReviewCount: number;
+    programId: string;
 }
 
 const ReviewResults = ({
     programTitle,
     programDesc,
     programReviewCount,
+    programId,
 }: IComponentProps): JSX.Element => {
+    //Dispatch Hook:
+    const dispatch = useDispatch();
+
+    const [isLoaded, setIsLoaded] = useState(false);
+    const handleLoadedStatus = (status: boolean) => setIsLoaded(status);
+
+    useEffect(() => {
+        dispatch(getReviews(handleLoadedStatus, programId, 1));
+    }, []);
+
+    //Selector Hook:
+    const { reviews } = useSelector((state: RootStateOrAny) => state.reviews);
+
     return (
         <MainContainer>
             <ProgramHeaderContainer>
