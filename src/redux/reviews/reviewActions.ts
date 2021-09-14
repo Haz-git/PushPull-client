@@ -15,10 +15,6 @@ export const getReviews = (
         const currentPage = page ? +page : 0;
         const totalPages = Math.ceil(totalItems / 8);
 
-        if (response) {
-            statusCallback(true);
-        }
-
         dispatch({
             type: ReviewActionType.USER_GET_REVIEWS,
             payload: {
@@ -28,5 +24,9 @@ export const getReviews = (
                 totalPages,
             },
         });
+
+        if (response) {
+            statusCallback(true);
+        }
     };
 };
