@@ -58,35 +58,44 @@ const ReviewResults = ({
     programId,
 }: IComponentProps): JSX.Element => {
     //Dispatch Hook:
-    const dispatch = useDispatch();
-
-    const [isLoaded, setIsLoaded] = useState(false);
-    const handleLoadedStatus = (status: boolean) => setIsLoaded(status);
-
-    useEffect(() => {
-        dispatch(getReviews(handleLoadedStatus, programId, 1));
-    }, []);
 
     //Selector Hook:
 
-    // const { currentPage, totalPages } = useSelector(
-    //     (state: RootStateOrAny) => state.reviews.reviews
-    // );
+    const { currentPage, totalPages, totalItems } = useSelector(
+        (state: RootStateOrAny) => state.reviews.reviews
+    );
 
-    // const { reviews } = useSelector(
-    //     (state: RootStateOrAny) => state.reviews.reviews.reviews
-    // );
+    const { reviews } = useSelector(
+        (state: RootStateOrAny) => state.reviews.reviews
+    );
 
-    //Mapping Review Components:
-    // const renderReviews = () => {
-    //     if (reviews !== undefined && reviews !== null) {
-    //         if (reviews.length === 0) {
-    //             return <>NONE</>;
-    //         } else {
-    //             return reviews.map((review: any) => <ReviewComponent />);
-    //         }
-    //     }
-    // };
+    console.log(reviews);
+
+    // Mapping Review Components:
+    const renderReviews = () => {
+        if (reviews !== undefined && reviews !== null) {
+            if (reviews.length === 0) {
+                return <>NONE</>;
+            } else {
+                return reviews.map((review: any) => (
+                    <ReviewComponent
+                        key={review.id}
+                        reviewId={review.id}
+                        reviewerLevel={review.currentLevel}
+                        reviewTitle={review.reviewTitle}
+                        reviewDesc={review.reviewDesc}
+                        recommendedLevel={review.recommendedLevel}
+                        effectivenessRating={review.effectivenessRating}
+                        repeatableRating={review.repeatableRating}
+                        accurateDifficulty={review.accurateDifficulty}
+                        followLength={review.followLength}
+                        improvedStats={review.improvedStats}
+                        createdAt={review.createdAt}
+                    />
+                ));
+            }
+        }
+    };
 
     return (
         <MainContainer>
@@ -122,11 +131,7 @@ const ReviewResults = ({
             </ProgramHeaderContainer>
             <ProgramReviewsContainer>
                 <ReviewCountLabel>{`${programReviewCount} Total Reviews`}</ReviewCountLabel>
-                <ReviewContainer>
-                    <ReviewComponent />
-                    <ReviewComponent />
-                    <ReviewComponent />
-                </ReviewContainer>
+                <ReviewContainer>{renderReviews()}</ReviewContainer>
             </ProgramReviewsContainer>
         </MainContainer>
     );
