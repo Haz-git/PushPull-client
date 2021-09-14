@@ -74,24 +74,62 @@ interface IStyledProps {
     starHeight?: string;
 }
 
-const ReviewComponent = () => {
+interface IComponentProps {
+    reviewId: string;
+    reviewerLevel: string;
+    reviewTitle: string;
+    reviewDesc: string;
+    recommendedLevel: string;
+    effectivenessRating: number;
+    repeatableRating: number;
+    accurateDifficulty: number;
+    followLength: number;
+    improvedStats: any;
+    createdAt: string;
+}
+
+const ReviewComponent = ({
+    reviewId,
+    reviewerLevel,
+    reviewTitle,
+    reviewDesc,
+    recommendedLevel,
+    effectivenessRating,
+    repeatableRating,
+    accurateDifficulty,
+    followLength,
+    improvedStats,
+    createdAt,
+}: IComponentProps): JSX.Element => {
+    const computeTotalRating = () => {
+        return (
+            Math.round(
+                [
+                    effectivenessRating,
+                    repeatableRating,
+                    accurateDifficulty,
+                ].reduce((a, v, i) => (a * v * i) / (i + 1)) * 10
+            ) / 10
+        );
+    };
+
     return (
         <MainContainer>
-            <ReviewHeader>This workout is bonkers!</ReviewHeader>
+            <ReviewHeader>{reviewTitle}</ReviewHeader>
             <StarBox>
                 <ReviewText
                     color="rgba(0, 0, 34, 1)"
                     fontWeight="600"
                     fontSize="1.25rem"
                 >
-                    3.5 -
+                    {`${computeTotalRating()} - `}
                 </ReviewText>
                 <Rating
                     start={0}
                     stop={5}
                     fractions={0.1}
                     readonly={true}
-                    initialRating={3.5}
+                    initialRating={computeTotalRating()}
                     emptySymbol={
                         <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
                     }
@@ -115,7 +153,10 @@ const ReviewComponent = () => {
                     fontWeight="600"
                     fontSize="1rem"
                 >
-                    Reviewer level: Beginner
+                    {`Reviewer Level: ${
+                        reviewerLevel.charAt(0).toUpperCase() +
+                        reviewerLevel.slice(1)
+                    }`}
                 </ReviewText>
                 <ReviewText
                     color="rgba(0, 0, 34, .7)"
@@ -129,7 +170,10 @@ const ReviewComponent = () => {
                     fontWeight="600"
                     fontSize="1rem"
                 >
-                    Recommends program for: Beginners
+                    {`Recommends program for: ${
+                        recommendedLevel.charAt(0).toUpperCase() +
+                        recommendedLevel.slice(1)
+                    }`}
                 </ReviewText>
             </DetailsContainer>
             <ImprovementsContainer>
@@ -167,24 +211,7 @@ const ReviewComponent = () => {
                             fontWeight="400"
                             fontSize="1rem"
                         >
-                            Sed pulvinar proin gravida hendrerit. Fringilla ut
-                            morbi tincidunt augue interdum velit euismod in. Sed
-                            cras ornare arcu dui vivamus arcu felis. Faucibus
-                            interdum posuere lorem ipsum dolor sit amet
-                            consectetur. Suscipit tellus mauris a diam maecenas.
-                            Adipiscing bibendum est ultricies integer quis
-                            auctor elit sed vulputate. Tristique nulla aliquet
-                            enim tortor at auctor urna. Eu sem integer vitae
-                            justo eget magna fermentum. Pellentesque elit eget
-                            gravida cum sociis natoque penatibus et. Vel
-                            pharetra vel turpis nunc eget lorem dolor sed
-                            viverra. Ut placerat orci nulla pellentesque
-                            dignissim enim sit amet venenatis. Lobortis
-                            elementum nibh tellus molestie nunc. Ultricies
-                            tristique nulla aliquet enim. Turpis massa sed
-                            elementum tempus egestas sed sed risus pretium.
-                            Egestas congue quisque egestas diam. Non quam lacus
-                            suspendisse faucibus interdum posuere lorem ipsum.
+                            {reviewDesc}
                         </ReviewText>
                     </AccordionItem>
                 </Accordion>
