@@ -50,11 +50,12 @@ const MainWorkoutProgramPage = ({
     //Dispatch Hook:
     const dispatch = useDispatch();
 
-    const [isLoaded, setIsLoaded] = useState(false);
-    const handleLoadedStatus = (status: boolean) => setIsLoaded(status);
+    const [isWorkoutProgramLoaded, setIsWorkoutProgramLoaded] = useState(false);
+    const handleWorkoutProgramLoadedStatus = (status: boolean) =>
+        setIsWorkoutProgramLoaded(status);
 
     useEffect(() => {
-        dispatch(findWorkoutProgram(id, handleLoadedStatus));
+        dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
     }, []);
 
     //Selector Hook:
@@ -64,7 +65,7 @@ const MainWorkoutProgramPage = ({
 
     return (
         <MainContainer>
-            {isLoaded === true ? (
+            {isWorkoutProgramLoaded === true ? (
                 <>
                     <RatingColumn programRating={workoutPrograms.rating} />
                     <ReviewResults
