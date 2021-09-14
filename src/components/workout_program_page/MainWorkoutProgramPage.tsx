@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { findWorkoutProgram } from '../../redux/workoutPrograms/workoutProgramActions';
+import { getReviews } from '../../redux/reviews/reviewActions';
 
 //Components:
 import { deviceMin } from '../../devices/breakpoints';
@@ -51,11 +52,17 @@ const MainWorkoutProgramPage = ({
     const dispatch = useDispatch();
 
     const [isWorkoutProgramLoaded, setIsWorkoutProgramLoaded] = useState(false);
+    const [areReviewsLoaded, setAreReviewsLoaded] = useState(false);
+
+    const handleReviewsLoadedStatus = (status: boolean) =>
+        setAreReviewsLoaded(status);
+
     const handleWorkoutProgramLoadedStatus = (status: boolean) =>
         setIsWorkoutProgramLoaded(status);
 
     useEffect(() => {
         dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
+        dispatch(getReviews(handleReviewsLoadedStatus, id, 1));
     }, []);
 
     //Selector Hook:
@@ -65,7 +72,7 @@ const MainWorkoutProgramPage = ({
 
     return (
         <MainContainer>
-            {isWorkoutProgramLoaded === true ? (
+            {isWorkoutProgramLoaded && areReviewsLoaded === true ? (
                 <>
                     <RatingColumn programRating={workoutPrograms.rating} />
                     <ReviewResults
