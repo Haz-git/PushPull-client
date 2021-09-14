@@ -9,6 +9,7 @@ import filterReducer from './filterOptions/filterReducer';
 import workoutProgramReducer from './workoutPrograms/workoutProgramReducer';
 import searchTermReducer from './searchTerms/searchTermsReducer';
 import sortOptionReducer from './sortOptions/sortOptionsReducer';
+import reviewReducer from './reviews/reviewReducer';
 
 //Persistence:
 const persistConfig = {
@@ -27,6 +28,7 @@ const appReducer = combineReducers({
     workoutPrograms: workoutProgramReducer,
     searchTerms: searchTermReducer,
     sortOptions: sortOptionReducer,
+    reviews: reviewReducer,
 });
 
 //Persisting formReducer:
