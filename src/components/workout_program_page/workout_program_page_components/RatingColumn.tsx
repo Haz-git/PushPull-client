@@ -145,7 +145,7 @@ const ReviewerLevelChartContainer = styled.div`
     @media ${deviceMin.mobileS} {
         margin-top: 1rem;
         height: 15rem;
-        width: 20rem;
+        width: 19rem;
     }
 
     @media ${deviceMin.mobileM} {
