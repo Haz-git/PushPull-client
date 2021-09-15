@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
+//Utils/Hooks:
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+
 //Redux:
 import { getReviews } from '../../../redux/reviews/reviewActions';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -8,6 +11,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 //Components:
 import { Accordion, AccordionItem } from '@mantine/core';
 import ReviewComponent from './ReviewComponent';
+import { ReactComponent as SurveySVG } from '../../../assets/survey_review.svg';
 
 //Styles:
 import styled from 'styled-components';
@@ -38,26 +42,44 @@ const ReviewCountLabel = styled.h2`
     font-weight: 700;
 `;
 
-const ReviewContainer = styled.div`
+const ReviewContainer = styled.div<ReviewContainerProps>`
     margin-top: 2rem;
+    height: ${(props) => `${props.containerHeight - 290}px`};
+`;
+
+//Styles: survey_review SVG
+
+const SvgContainer = styled.div`
+    height: 50rem;
+    width: 50rem;
+    margin: 4rem auto;
+    text-align: center;
+`;
+
+const SvgText = styled.h3`
+    font-size: 1.5rem;
+    color: ${(props) => props.theme.subText};
+    font-weight: 900;
 `;
 
 //Interfaces:
+interface ReviewContainerProps {
+    containerHeight: number;
+}
 
 interface IComponentProps {
     programTitle: string;
     programDesc: string;
-    programReviewCount: number;
     programId: string;
 }
 
 const ReviewResults = ({
     programTitle,
     programDesc,
-    programReviewCount,
     programId,
 }: IComponentProps): JSX.Element => {
-    //Dispatch Hook:
+    //useWindowDimensions Hook:
+    const { height } = useWindowDimensions();
 
     //Selector Hook:
 
@@ -69,13 +91,18 @@ const ReviewResults = ({
         (state: RootStateOrAny) => state.reviews.reviews
     );
 
-    console.log(reviews);
-
     // Mapping Review Components:
     const renderReviews = () => {
         if (reviews !== undefined && reviews !== null) {
             if (reviews.length === 0) {
-                return <>NONE</>;
+                return (
+                    <SvgContainer>
+                        <SvgText>
+                            Sorry, no reviews here yet. You can be the first!
+                        </SvgText>
+                        <SurveySVG />
+                    </SvgContainer>
+                );
             } else {
                 return reviews.map((review: any) => (
                     <ReviewComponent
@@ -130,8 +157,10 @@ const ReviewResults = ({
                 </ProgramDescAccContainer>
             </ProgramHeaderContainer>
             <ProgramReviewsContainer>
-                <ReviewCountLabel>{`${programReviewCount} Total Reviews`}</ReviewCountLabel>
-                <ReviewContainer>{renderReviews()}</ReviewContainer>
+                <ReviewCountLabel>{`${totalItems} Total Review(s)`}</ReviewCountLabel>
+                <ReviewContainer containerHeight={height}>
+                    {renderReviews()}
+                </ReviewContainer>
             </ProgramReviewsContainer>
         </MainContainer>
     );
