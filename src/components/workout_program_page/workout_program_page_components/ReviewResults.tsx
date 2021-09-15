@@ -59,10 +59,32 @@ const ReviewContainer = styled.div<ReviewContainerProps>`
 //Styles: survey_review SVG
 
 const SvgContainer = styled.div`
-    height: 50rem;
-    width: 50rem;
-    margin: 4rem auto;
-    text-align: center;
+    @media ${deviceMin.mobileS} {
+        margin: 4rem auto;
+        height: 17rem;
+        width: 17rem;
+        text-align: center;
+    }
+
+    @media ${deviceMin.mobileM} {
+        height: 20rem;
+        width: 20rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        height: 23rem;
+        width: 23rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        height: 28rem;
+        width: 28rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        height: 50rem;
+        width: 50rem;
+    }
 `;
 
 const SvgText = styled.h3`
