@@ -74,7 +74,10 @@ const MainWorkoutProgramPage = ({
         <MainContainer>
             {isWorkoutProgramLoaded && areReviewsLoaded === true ? (
                 <>
-                    <RatingColumn programRating={workoutPrograms.rating} />
+                    <RatingColumn
+                        programRating={workoutPrograms.rating}
+                        programTitle={workoutPrograms.workoutProgramTitle}
+                    />
                     <ReviewResults
                         programTitle={workoutPrograms.workoutProgramTitle}
                         programDesc={workoutPrograms.workoutProgramDesc}
