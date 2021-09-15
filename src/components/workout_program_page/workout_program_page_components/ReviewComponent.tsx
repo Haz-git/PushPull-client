@@ -4,6 +4,9 @@ import * as React from 'react';
 import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
 
+//Utils:
+import capitalize from '../../../utils/capitalize';
+
 //Styles:
 import styled from 'styled-components';
 import { Star } from '@styled-icons/evaicons-solid/Star';
@@ -101,16 +104,45 @@ const ReviewComponent = ({
     improvedStats,
     createdAt,
 }: IComponentProps): JSX.Element => {
+    console.log(improvedStats);
+    //Destructures improved stats and renders out text for each stat:
+    const renderImprovedStats = () => {
+        if (Object.keys(improvedStats).length > 0) {
+            let tempArr: any[] = [];
+
+            for (const [key, value] of Object.entries(improvedStats)) {
+                tempArr.push({ key, value });
+            }
+
+            return tempArr.map((statObject) => (
+                <ReviewText
+                    color="rgba(0, 0, 34, .7)"
+                    fontWeight="400"
+                    fontSize="1rem"
+                >
+                    {`${capitalize(statObject.key)} : ${
+                        statObject.value.old
+                    } to ${statObject.value.new}`}
+                </ReviewText>
+            ));
+        } else {
+            return <>Nothing was improved</>;
+        }
+    };
+
+    //Computes the total rating from averages from three ratings.
     const computeTotalRating = () => {
-        return (
-            Math.round(
-                [
-                    effectivenessRating,
-                    repeatableRating,
-                    accurateDifficulty,
-                ].reduce((a, v, i) => (a * v * i) / (i + 1)) * 10
-            ) / 10
-        );
+        if (effectivenessRating && repeatableRating && accurateDifficulty) {
+            return (
+                Math.round(
+                    [
+                        effectivenessRating,
+                        repeatableRating,
+                        accurateDifficulty,
+                    ].reduce((a, v, i) => (a * v * i) / (i + 1)) * 10
+                ) / 10
+            );
+        }
     };
 
     return (
@@ -153,27 +185,21 @@ const ReviewComponent = ({
                     fontWeight="600"
                     fontSize="1rem"
                 >
-                    {`Reviewer Level: ${
-                        reviewerLevel.charAt(0).toUpperCase() +
-                        reviewerLevel.slice(1)
-                    }`}
+                    {`Reviewer Level: ${capitalize(reviewerLevel)}`}
                 </ReviewText>
                 <ReviewText
                     color="rgba(0, 0, 34, .7)"
                     fontWeight="600"
                     fontSize="1rem"
                 >
-                    Followed program for: 5 weeks
+                    {`Followed program for: ${followLength} days`}
                 </ReviewText>
                 <ReviewText
                     color="rgba(0, 0, 34, .7)"
                     fontWeight="600"
                     fontSize="1rem"
                 >
-                    {`Recommends program for: ${
-                        recommendedLevel.charAt(0).toUpperCase() +
-                        recommendedLevel.slice(1)
-                    }`}
+                    {`Recommends program for: ${capitalize(recommendedLevel)}`}
                 </ReviewText>
             </DetailsContainer>
             <ImprovementsContainer>
@@ -197,13 +223,7 @@ const ReviewComponent = ({
                     }}
                 >
                     <AccordionItem label={`Improved Stats`}>
-                        <ReviewText
-                            color="rgba(0, 0, 34, .7)"
-                            fontWeight="400"
-                            fontSize="1rem"
-                        >
-                            Bench: 100kg to 200kg
-                        </ReviewText>
+                        {renderImprovedStats()}
                     </AccordionItem>
                     <AccordionItem label={`Author Review`}>
                         <ReviewText
