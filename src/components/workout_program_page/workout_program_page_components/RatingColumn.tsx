@@ -54,6 +54,14 @@ const MainContainer = styled.section`
     border-right: 1px solid #e5e5e5;
     text-align: left;
     height: 100%;
+
+    @media ${deviceMin.mobileS} {
+        width: 100%;
+    }
+
+    @media ${deviceMin.tabletp} {
+        width: 25rem;
+    }
 `;
 
 const ReturnButtonContainer = styled.div`
@@ -114,10 +122,18 @@ const SubcategoryRating = styled.span`
 `;
 
 const RatingCategoryContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 0.75rem;
+    @media ${deviceMin.mobileS} {
+        display: block;
+        padding: 0.5rem 0;
+    }
+
+    @media ${deviceMin.mobileM} {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 0.75rem;
+        padding: 0;
+    }
 `;
 
 const ReviewerLevelContainer = styled.div`
