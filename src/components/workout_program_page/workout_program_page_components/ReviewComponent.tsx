@@ -3,6 +3,7 @@ import * as React from 'react';
 //Components:
 import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
+import { v4 } from 'uuid';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
@@ -104,7 +105,6 @@ const ReviewComponent = ({
     improvedStats,
     createdAt,
 }: IComponentProps): JSX.Element => {
-    console.log(improvedStats);
     //Destructures improved stats and renders out text for each stat:
     const renderImprovedStats = () => {
         if (Object.keys(improvedStats).length > 0) {
@@ -119,6 +119,7 @@ const ReviewComponent = ({
                     color="rgba(0, 0, 34, .7)"
                     fontWeight="400"
                     fontSize="1rem"
+                    key={v4()}
                 >
                     {`${capitalize(statObject.key)} : ${
                         statObject.value.old
@@ -126,7 +127,7 @@ const ReviewComponent = ({
                 </ReviewText>
             ));
         } else {
-            return <>Nothing was improved</>;
+            return <ReviewText>Apparently, nothing was improved.</ReviewText>;
         }
     };
 
