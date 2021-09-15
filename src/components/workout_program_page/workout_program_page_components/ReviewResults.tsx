@@ -9,6 +9,7 @@ import { getReviews } from '../../../redux/reviews/reviewActions';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 
 //Components:
+import { deviceMin } from '../../../devices/breakpoints';
 import { Accordion, AccordionItem } from '@mantine/core';
 import ReviewComponent from './ReviewComponent';
 import { ReactComponent as SurveySVG } from '../../../assets/survey_review.svg';
@@ -26,6 +27,14 @@ const ProgramTitle = styled.h1`
     font-size: 2.5rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 800;
+
+    @media ${deviceMin.mobileS} {
+        display: none;
+    }
+
+    @media ${deviceMin.tabletp} {
+        display: block;
+    }
 `;
 
 const ProgramDescAccContainer = styled.div`

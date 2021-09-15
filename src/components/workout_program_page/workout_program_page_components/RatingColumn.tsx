@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 //Components:
+import { deviceMin } from '../../../devices/breakpoints';
 import {
     BarChart,
     Bar,
@@ -130,6 +131,23 @@ const ReviewerLevelChartContainer = styled.div`
     width: 100%;
 `;
 
+//Mobile Styles:
+
+const ProgramTitle = styled.h1`
+    font-size: 2.5rem;
+    color: ${(props) => props.theme.mainText};
+    font-weight: 800;
+
+    @media ${deviceMin.mobileS} {
+        display: block;
+        padding: 1rem 1.5rem 0rem 1.5rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        display: none;
+    }
+`;
+
 //Interfaces:
 
 interface StyledProps {
@@ -139,9 +157,13 @@ interface StyledProps {
 
 interface IComponentProps {
     programRating: number;
+    programTitle: string;
 }
 
-const RatingColumn = ({ programRating }: IComponentProps): JSX.Element => {
+const RatingColumn = ({
+    programRating,
+    programTitle,
+}: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();
     }, []);
@@ -178,6 +200,7 @@ const RatingColumn = ({ programRating }: IComponentProps): JSX.Element => {
                     textShadow="none"
                 />
             </ReturnButtonContainer>
+            <ProgramTitle>{programTitle}</ProgramTitle>
             <GeneralRatingText>Overall Rating</GeneralRatingText>
             <RatingStarsContainer>
                 <GeneralScoreText>{programRating}</GeneralScoreText>
