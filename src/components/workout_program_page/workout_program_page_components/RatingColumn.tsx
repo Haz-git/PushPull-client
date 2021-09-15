@@ -142,9 +142,22 @@ const ReviewerLevelContainer = styled.div`
 `;
 
 const ReviewerLevelChartContainer = styled.div`
-    margin-top: 1rem;
-    height: 100%;
-    width: 100%;
+    @media ${deviceMin.mobileS} {
+        margin-top: 1rem;
+        height: 15rem;
+        width: 20rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        margin-top: 1rem;
+        height: 18rem;
+        width: 22rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        height: 20rem;
+        width: 23rem;
+    }
 `;
 
 //Mobile Styles:
@@ -305,29 +318,34 @@ const RatingColumn = ({
             <ReviewerLevelContainer>
                 <SubcategoryHeader>Reviewer Levels</SubcategoryHeader>
                 <ReviewerLevelChartContainer>
-                    <BarChart
-                        width={350}
-                        height={300}
-                        data={dummyData}
-                        margin={{
-                            top: 10,
-                            right: 30,
-                            left: -20,
-                            bottom: 10,
-                        }}
-                        barSize={30}
-                    >
-                        <XAxis
-                            dataKey="name"
-                            scale="point"
-                            padding={{ left: 38, right: 38 }}
-                        />
-                        <YAxis tickCount={8} />
-                        <Tooltip />
-                        <Legend />
-                        <CartesianGrid />
-                        <Bar dataKey="Reviewers" fill="rgba(224, 113, 51, 1)" />
-                    </BarChart>
+                    <ResponsiveContainer>
+                        <BarChart
+                            width={350}
+                            height={300}
+                            data={dummyData}
+                            margin={{
+                                top: 10,
+                                right: 30,
+                                left: -35,
+                                bottom: 10,
+                            }}
+                            barSize={30}
+                        >
+                            <XAxis
+                                dataKey="name"
+                                scale="point"
+                                padding={{ left: 38, right: 38 }}
+                            />
+                            <YAxis tickCount={8} />
+                            <Tooltip />
+                            <Legend />
+                            <CartesianGrid />
+                            <Bar
+                                dataKey="Reviewers"
+                                fill="rgba(224, 113, 51, 1)"
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
                 </ReviewerLevelChartContainer>
             </ReviewerLevelContainer>
         </MainContainer>
