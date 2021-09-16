@@ -14,6 +14,10 @@ import ReviewSkeletonLoader from './workout_program_page_components/ReviewSkelet
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import ReportWorkoutProgramForm from './workout_program_page_components/ReportWorkoutProgramForm';
 
+//Utils:
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
+import renderDrawerSize from '../../utils/renderDrawerSize';
+
 //Styles:
 import styled from 'styled-components';
 
@@ -50,6 +54,7 @@ const MainWorkoutProgramPage = ({
 }: IComponentProps): JSX.Element => {
     //This component should contain all of the views of the workout program page.
 
+    const { width } = useWindowDimensions();
     //Dispatch Hook:
     const dispatch = useDispatch();
 
@@ -87,6 +92,7 @@ const MainWorkoutProgramPage = ({
                     <GeneralDrawer
                         openBoolean={stateReportDrawer}
                         closeFunc={closeReportDrawer}
+                        size={renderDrawerSize(width)}
                     >
                         <ReportWorkoutProgramForm />
                     </GeneralDrawer>
