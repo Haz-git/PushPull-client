@@ -51,6 +51,7 @@ const MainWorkoutProgramPage = ({
     //Dispatch Hook:
     const dispatch = useDispatch();
 
+    //Handles loaders
     const [isWorkoutProgramLoaded, setIsWorkoutProgramLoaded] = useState(false);
     const [areReviewsLoaded, setAreReviewsLoaded] = useState(false);
 
@@ -59,6 +60,12 @@ const MainWorkoutProgramPage = ({
 
     const handleWorkoutProgramLoadedStatus = (status: boolean) =>
         setIsWorkoutProgramLoaded(status);
+
+    //Handles report modal for RatingColumn:
+    const [stateReportModal, setStateReportModal] = useState(false);
+
+    const handleReportModalStatus = (status: boolean) =>
+        setStateReportModal(status);
 
     useEffect(() => {
         dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
@@ -77,6 +84,7 @@ const MainWorkoutProgramPage = ({
                     <RatingColumn
                         programRating={workoutPrograms.rating}
                         programTitle={workoutPrograms.workoutProgramTitle}
+                        handleReportModal={handleReportModalStatus}
                     />
                     <ReviewResults
                         programTitle={workoutPrograms.workoutProgramTitle}
