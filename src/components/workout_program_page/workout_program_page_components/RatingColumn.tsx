@@ -198,13 +198,13 @@ interface StyledProps {
 interface IComponentProps {
     programRating: number;
     programTitle: string;
-    handleReportModal: (status: boolean) => void;
+    openReportDrawer: () => void;
 }
 
 const RatingColumn = ({
     programRating,
     programTitle,
-    handleReportModal,
+    openReportDrawer,
 }: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();
@@ -242,7 +242,7 @@ const RatingColumn = ({
                     textShadow="none"
                 />
                 <GeneralButton
-                    onClick={() => handleReportModal(true)}
+                    onClick={() => openReportDrawer()}
                     buttonLabel="Flag"
                     fontWeight="700"
                     width="6rem"

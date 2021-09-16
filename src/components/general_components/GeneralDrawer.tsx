@@ -24,7 +24,7 @@ const GeneralDrawer = ({
     size = 'md',
     title = 'Modal',
     padding = 25,
-    position = 'right',
+    position = 'left',
 }: IGeneralDrawer): JSX.Element => {
     return (
         <>

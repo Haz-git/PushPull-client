@@ -11,6 +11,8 @@ import { deviceMin } from '../../devices/breakpoints';
 import RatingColumn from './workout_program_page_components/RatingColumn';
 import ReviewResults from './workout_program_page_components/ReviewResults';
 import ReviewSkeletonLoader from './workout_program_page_components/ReviewSkeletonLoader';
+import GeneralDrawer from '../general_components/GeneralDrawer';
+import ReportWorkoutProgramForm from './workout_program_page_components/ReportWorkoutProgramForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -61,11 +63,12 @@ const MainWorkoutProgramPage = ({
     const handleWorkoutProgramLoadedStatus = (status: boolean) =>
         setIsWorkoutProgramLoaded(status);
 
-    //Handles report modal for RatingColumn:
-    const [stateReportModal, setStateReportModal] = useState(false);
+    //Handles report drawer for RatingColumn:
+    const [stateReportDrawer, setStateReportDrawer] = useState(false);
 
-    const handleReportModalStatus = (status: boolean) =>
-        setStateReportModal(status);
+    const openReportDrawer = () => setStateReportDrawer(true);
+
+    const closeReportDrawer = () => setStateReportDrawer(false);
 
     useEffect(() => {
         dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
@@ -81,10 +84,16 @@ const MainWorkoutProgramPage = ({
         <MainContainer>
             {isWorkoutProgramLoaded && areReviewsLoaded === true ? (
                 <>
+                    <GeneralDrawer
+                        openBoolean={stateReportDrawer}
+                        closeFunc={closeReportDrawer}
+                    >
+                        <ReportWorkoutProgramForm />
+                    </GeneralDrawer>
                     <RatingColumn
                         programRating={workoutPrograms.rating}
                         programTitle={workoutPrograms.workoutProgramTitle}
-                        handleReportModal={handleReportModalStatus}
+                        openReportDrawer={openReportDrawer}
                     />
                     <ReviewResults
                         programTitle={workoutPrograms.workoutProgramTitle}
