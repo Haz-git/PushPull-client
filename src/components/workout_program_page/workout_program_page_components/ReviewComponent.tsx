@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 //Components:
+import { deviceMin } from '../../../devices/breakpoints';
 import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
 import { v4 } from 'uuid';
@@ -52,13 +53,42 @@ const ReviewText = styled.p<IStyledProps>`
 `;
 
 const StarBox = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.browsersmp} {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+`;
+
+const RatingsContainer = styled.div`
     display: flex;
     align-items: center;
-    padding: 0.5rem 0;
+    justify-content: left;
+
+    @media ${deviceMin.mobileS} {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    @media ${deviceMin.browsersmp} {
+        margin: 0;
+    }
 `;
 
 const AuthorContainer = styled.div`
-    margin-left: 0.5rem;
+    @media ${deviceMin.mobileS} {
+        margin: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    @media ${deviceMin.browsersmp} {
+        margin-left: 0.5rem;
+        margin-bottom: 0;
+    }
 `;
 
 const DetailsContainer = styled.div`
@@ -150,26 +180,28 @@ const ReviewComponent = ({
         <MainContainer>
             <ReviewHeader>{reviewTitle}</ReviewHeader>
             <StarBox>
-                <ReviewText
-                    color="rgba(0, 0, 34, 1)"
-                    fontWeight="600"
-                    fontSize="1.25rem"
-                >
-                    {`${computeTotalRating()} - `}
-                </ReviewText>
-                <Rating
-                    start={0}
-                    stop={5}
-                    fractions={0.1}
-                    readonly={true}
-                    initialRating={computeTotalRating()}
-                    emptySymbol={
-                        <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
-                    }
-                    fullSymbol={
-                        <FullStar starHeight="1.5rem" starWidth="1.5rem" />
-                    }
-                />
+                <RatingsContainer>
+                    <ReviewText
+                        color="rgba(0, 0, 34, 1)"
+                        fontWeight="600"
+                        fontSize="1.25rem"
+                    >
+                        {`${computeTotalRating()} - `}
+                    </ReviewText>
+                    <Rating
+                        start={0}
+                        stop={5}
+                        fractions={0.1}
+                        readonly={true}
+                        initialRating={computeTotalRating()}
+                        emptySymbol={
+                            <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                        fullSymbol={
+                            <FullStar starHeight="1.5rem" starWidth="1.5rem" />
+                        }
+                    />
+                </RatingsContainer>
                 <AuthorContainer>
                     <ReviewText
                         color="rgba(0, 0, 34, .7)"
