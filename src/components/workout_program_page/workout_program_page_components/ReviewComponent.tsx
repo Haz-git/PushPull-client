@@ -5,13 +5,30 @@ import { deviceMin } from '../../../devices/breakpoints';
 import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
 import { v4 } from 'uuid';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
 
 //Styles:
 import styled from 'styled-components';
+
+//Icons:
 import { Star } from '@styled-icons/evaicons-solid/Star';
+import { ThumbLike } from '@styled-icons/fluentui-system-regular/ThumbLike';
+import { ThumbDislike } from '@styled-icons/fluentui-system-regular/ThumbDislike';
+
+const LikeIconEmpty = styled(ThumbLike)`
+    height: 1.3rem;
+    width: 1.3rem;
+    color: #7678ed;
+`;
+
+const DislikeIconEmpty = styled(ThumbDislike)`
+    height: 1.3rem;
+    width: 1.3rem;
+    color: #7678ed;
+`;
 
 const EmptyStar = styled(Star)<IStyledProps>`
     height: ${(props) => props.starHeight};
@@ -97,6 +114,22 @@ const DetailsContainer = styled.div`
 
 const ImprovementsContainer = styled.div`
     margin-top: 1rem;
+`;
+
+const ButtonsContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+
+    @media ${deviceMin.browserSm} {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
 `;
 
 //Interfaces:
@@ -269,6 +302,34 @@ const ReviewComponent = ({
                     </AccordionItem>
                 </Accordion>
             </ImprovementsContainer>
+            <ButtonsContainer>
+                <GeneralButton
+                    buttonLabel="Useful (0)"
+                    fontWeight="700"
+                    width="10rem"
+                    buttonBackground="transparent"
+                    buttonTextColor="#7678ED"
+                    textShadow="none"
+                    border="2px solid #7678ED"
+                    hoverTransform="none"
+                    hoverShadow="none"
+                    buttonIcon={<LikeIconEmpty />}
+                    padding=".5rem .7rem"
+                />
+                <GeneralButton
+                    buttonLabel="Not Useful (0)"
+                    fontWeight="700"
+                    width="10rem"
+                    buttonBackground="transparent"
+                    buttonTextColor="#7678ED"
+                    textShadow="none"
+                    border="2px solid #7678ED"
+                    hoverTransform="none"
+                    hoverShadow="none"
+                    buttonIcon={<DislikeIconEmpty />}
+                    padding=".5rem .7rem"
+                />
+            </ButtonsContainer>
         </MainContainer>
     );
 };
