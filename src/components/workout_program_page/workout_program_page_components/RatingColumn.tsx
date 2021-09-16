@@ -24,6 +24,13 @@ import styled from 'styled-components';
 import { Star } from '@styled-icons/evaicons-solid/Star';
 import { CaretLeft } from '@styled-icons/boxicons-regular/CaretLeft';
 import { Pencil } from '@styled-icons/boxicons-solid/Pencil';
+import { FlagPride } from '@styled-icons/fluentui-system-filled/FlagPride';
+
+const FlagIcon = styled(FlagPride)`
+    height: 1.2rem;
+    width: 1.2rem;
+    color: red;
+`;
 
 const PencilIcon = styled(Pencil)`
     height: 1.25rem;
@@ -65,6 +72,10 @@ const MainContainer = styled.section`
 `;
 
 const ReturnButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
     margin: 1rem 1rem 0rem 1.5rem;
 `;
 
@@ -187,11 +198,13 @@ interface StyledProps {
 interface IComponentProps {
     programRating: number;
     programTitle: string;
+    handleReportModal: (status: boolean) => void;
 }
 
 const RatingColumn = ({
     programRating,
     programTitle,
+    handleReportModal,
 }: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();
@@ -222,11 +235,26 @@ const RatingColumn = ({
                     hoverShadow="none"
                     hoverTransform="none"
                     width="13rem"
-                    buttonLabel="All Workout Programs"
+                    buttonLabel="Workout Programs"
                     buttonBackground="#e5e5e5"
                     padding=".5rem .4rem"
                     buttonTextColor="rgba(0, 0, 34, 1)"
                     textShadow="none"
+                />
+                <GeneralButton
+                    onClick={() => handleReportModal(true)}
+                    buttonLabel="Report"
+                    fontWeight="700"
+                    width="6rem"
+                    buttonBackground="transparent"
+                    buttonTextColor="red"
+                    textShadow="none"
+                    border="1px solid red"
+                    hoverTransform="none"
+                    hoverShadow="none"
+                    disableShadow={true}
+                    buttonIcon={<FlagIcon />}
+                    padding=".45rem .4rem"
                 />
             </ReturnButtonContainer>
             <ProgramTitle>{programTitle}</ProgramTitle>
