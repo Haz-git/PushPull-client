@@ -54,6 +54,7 @@ const ReviewCountLabel = styled.h2`
 const ReviewContainer = styled.div<ReviewContainerProps>`
     margin-top: 2rem;
     height: ${(props) => `${props.containerHeight - 290}px`};
+    overflow-y: scroll;
 `;
 
 //Styles: survey_review SVG
