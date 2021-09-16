@@ -243,7 +243,7 @@ const RatingColumn = ({
                 />
                 <GeneralButton
                     onClick={() => handleReportModal(true)}
-                    buttonLabel="Report"
+                    buttonLabel="Flag"
                     fontWeight="700"
                     width="6rem"
                     buttonBackground="transparent"
