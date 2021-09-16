@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import { Star } from '@styled-icons/evaicons-solid/Star';
 import { ThumbLike } from '@styled-icons/fluentui-system-regular/ThumbLike';
 import { ThumbDislike } from '@styled-icons/fluentui-system-regular/ThumbDislike';
+import { FlagPride } from '@styled-icons/fluentui-system-filled/FlagPride';
 
 const LikeIconEmpty = styled(ThumbLike)`
     height: 1.3rem;
@@ -28,6 +29,12 @@ const DislikeIconEmpty = styled(ThumbDislike)`
     height: 1.3rem;
     width: 1.3rem;
     color: #7678ed;
+`;
+
+const FlagIcon = styled(FlagPride)`
+    height: 1.3rem;
+    width: 1.3rem;
+    color: red;
 `;
 
 const EmptyStar = styled(Star)<IStyledProps>`
@@ -54,6 +61,29 @@ const MainContainer = styled.div`
         box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
             rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         background: #ffffff;
+    }
+`;
+
+const HeaderContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: block;
+        position: relative;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+`;
+
+const HeaderFlagContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: none;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: block;
     }
 `;
 
@@ -114,6 +144,16 @@ const DetailsContainer = styled.div`
 
 const ImprovementsContainer = styled.div`
     margin-top: 1rem;
+`;
+
+const MobileFlagContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: none;
+    }
 `;
 
 const ButtonsContainer = styled.div`
@@ -211,7 +251,25 @@ const ReviewComponent = ({
 
     return (
         <MainContainer>
-            <ReviewHeader>{reviewTitle}</ReviewHeader>
+            <HeaderContainer>
+                <ReviewHeader>{reviewTitle}</ReviewHeader>
+                <HeaderFlagContainer>
+                    <GeneralButton
+                        buttonLabel="Flag"
+                        fontWeight="700"
+                        width="5rem"
+                        buttonBackground="transparent"
+                        buttonTextColor="red"
+                        textShadow="none"
+                        border="1px solid red"
+                        hoverTransform="none"
+                        hoverShadow="none"
+                        disableShadow={true}
+                        buttonIcon={<FlagIcon />}
+                        padding=".5rem .7rem"
+                    />
+                </HeaderFlagContainer>
+            </HeaderContainer>
             <StarBox>
                 <RatingsContainer>
                     <ReviewText
@@ -310,9 +368,10 @@ const ReviewComponent = ({
                     buttonBackground="transparent"
                     buttonTextColor="#7678ED"
                     textShadow="none"
-                    border="2px solid #7678ED"
+                    border="1px solid #7678ED"
                     hoverTransform="none"
                     hoverShadow="none"
+                    disableShadow={true}
                     buttonIcon={<LikeIconEmpty />}
                     padding=".5rem .7rem"
                 />
@@ -323,12 +382,29 @@ const ReviewComponent = ({
                     buttonBackground="transparent"
                     buttonTextColor="#7678ED"
                     textShadow="none"
-                    border="2px solid #7678ED"
+                    border="1px solid #7678ED"
                     hoverTransform="none"
                     hoverShadow="none"
+                    disableShadow={true}
                     buttonIcon={<DislikeIconEmpty />}
                     padding=".5rem .7rem"
                 />
+                <MobileFlagContainer>
+                    <GeneralButton
+                        buttonLabel="Flag"
+                        fontWeight="700"
+                        width="5rem"
+                        buttonBackground="transparent"
+                        buttonTextColor="red"
+                        textShadow="none"
+                        border="1px solid red"
+                        hoverTransform="none"
+                        hoverShadow="none"
+                        disableShadow={true}
+                        buttonIcon={<FlagIcon />}
+                        padding=".5rem .7rem"
+                    />
+                </MobileFlagContainer>
             </ButtonsContainer>
         </MainContainer>
     );
