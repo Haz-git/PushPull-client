@@ -90,6 +90,7 @@ const MainWorkoutProgramPage = ({
             {isWorkoutProgramLoaded && areReviewsLoaded === true ? (
                 <>
                     <GeneralDrawer
+                        title={`Flag '${workoutPrograms.workoutProgramTitle}' for Review`}
                         openBoolean={stateReportDrawer}
                         closeFunc={closeReportDrawer}
                         size={renderDrawerSize(width)}
