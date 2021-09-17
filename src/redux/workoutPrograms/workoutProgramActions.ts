@@ -66,8 +66,6 @@ export const getWorkoutPrograms = (
             statusCallback(true);
         }
 
-        console.log(response);
-
         dispatch({
             type: WorkoutProgramActionType.USER_GET_WORKOUTPROGRAMS,
             payload: {
