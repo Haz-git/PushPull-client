@@ -103,6 +103,15 @@ const MainWorkoutProgramPage = ({
                 >
                     <ReportWorkoutProgramForm />
                 </GeneralDrawer>
+                <GeneralDrawer
+                    title={`Flag this Review`}
+                    openBoolean={stateReviewReportDrawer}
+                    closeFunc={closeReviewReportDrawer}
+                    size={renderDrawerSize(width)}
+                    position="left"
+                >
+                    <ReportReviewForm />
+                </GeneralDrawer>
             </BrowserView>
             <MobileOnlyView>
                 <GeneralDrawer
@@ -113,6 +122,15 @@ const MainWorkoutProgramPage = ({
                     position="bottom"
                 >
                     <ReportWorkoutProgramForm />
+                </GeneralDrawer>
+                <GeneralDrawer
+                    title={`Flag this Review`}
+                    openBoolean={stateReviewReportDrawer}
+                    closeFunc={closeReviewReportDrawer}
+                    size="100%"
+                    position="bottom"
+                >
+                    <ReportReviewForm />
                 </GeneralDrawer>
             </MobileOnlyView>
             <MainContainer>
@@ -127,6 +145,7 @@ const MainWorkoutProgramPage = ({
                             programTitle={workoutPrograms.workoutProgramTitle}
                             programDesc={workoutPrograms.workoutProgramDesc}
                             programId={id}
+                            openReviewReportDrawer={openReviewReportDrawer}
                         />
                     </>
                 ) : (
