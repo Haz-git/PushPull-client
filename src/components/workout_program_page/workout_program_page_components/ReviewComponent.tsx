@@ -193,6 +193,7 @@ interface IComponentProps {
     followLength: number;
     improvedStats: any;
     createdAt: string;
+    openReviewReportDrawer: () => void;
 }
 
 const ReviewComponent = ({
@@ -207,6 +208,7 @@ const ReviewComponent = ({
     followLength,
     improvedStats,
     createdAt,
+    openReviewReportDrawer,
 }: IComponentProps): JSX.Element => {
     //Destructures improved stats and renders out text for each stat:
     const renderImprovedStats = () => {
@@ -267,6 +269,7 @@ const ReviewComponent = ({
                         disableShadow={true}
                         buttonIcon={<FlagIcon />}
                         padding=".5rem .7rem"
+                        onClick={() => openReviewReportDrawer()}
                     />
                 </HeaderFlagContainer>
             </HeaderContainer>
@@ -403,6 +406,7 @@ const ReviewComponent = ({
                         disableShadow={true}
                         buttonIcon={<FlagIcon />}
                         padding=".5rem .7rem"
+                        onClick={() => openReviewReportDrawer()}
                     />
                 </MobileFlagContainer>
             </ButtonsContainer>
