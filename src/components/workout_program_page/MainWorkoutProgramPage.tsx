@@ -140,6 +140,7 @@ const MainWorkoutProgramPage = ({
                             programRating={workoutPrograms.rating}
                             programTitle={workoutPrograms.workoutProgramTitle}
                             openReportDrawer={openReportDrawer}
+                            programId={id}
                         />
                         <ReviewResults
                             programTitle={workoutPrograms.workoutProgramTitle}
