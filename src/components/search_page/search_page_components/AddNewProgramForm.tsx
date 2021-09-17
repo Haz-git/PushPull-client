@@ -57,7 +57,7 @@ const TextAreaContainer = styled.div`
     }
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
     @media ${deviceMin.mobileS} {
         margin: 1rem 0;
         width: 100%;
