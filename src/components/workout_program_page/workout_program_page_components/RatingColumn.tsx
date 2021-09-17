@@ -199,12 +199,14 @@ interface IComponentProps {
     programRating: number;
     programTitle: string;
     openReportDrawer: () => void;
+    programId: string;
 }
 
 const RatingColumn = ({
     programRating,
     programTitle,
     openReportDrawer,
+    programId,
 }: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();
@@ -282,6 +284,9 @@ const RatingColumn = ({
                     width="16rem"
                     buttonIcon={<PencilIcon />}
                     hoverTransform="none"
+                    onClick={() =>
+                        historyObject.push(`/add-review/${programId}`)
+                    }
                 />
             </SubmitReviewButtonContainer>
             <RatingBreakdownContainer>
