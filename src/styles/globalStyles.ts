@@ -34,6 +34,14 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
+
+    .mantine-multi-select-input .mantine-multi-select-root {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+
+    }
+
     .mantine-select-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
@@ -51,6 +59,8 @@ const GlobalStyle = createGlobalStyle`
             border: 1px solid rgba(224, 113, 51, 1);
         }
     }
+
+
 `;
 
 export default GlobalStyle;
