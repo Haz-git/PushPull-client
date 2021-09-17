@@ -103,12 +103,14 @@ interface IComponentProps {
     programTitle: string;
     programDesc: string;
     programId: string;
+    openReviewReportDrawer: () => void;
 }
 
 const ReviewResults = ({
     programTitle,
     programDesc,
     programId,
+    openReviewReportDrawer,
 }: IComponentProps): JSX.Element => {
     //useWindowDimensions Hook:
     const { height } = useWindowDimensions();
@@ -150,6 +152,7 @@ const ReviewResults = ({
                         followLength={review.followLength}
                         improvedStats={review.improvedStats}
                         createdAt={review.createdAt}
+                        openReviewReportDrawer={openReviewReportDrawer}
                     />
                 ));
             }
