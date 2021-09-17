@@ -13,6 +13,7 @@ import MainFooter from './footer/MainFooter';
 import MainLandingPageView from './main_landing_page/MainLandingPageView';
 import MainSearchPage from './search_page/MainSearchPage';
 import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPage';
+import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 
 const App = () => {
     return (
@@ -32,6 +33,11 @@ const App = () => {
                             exact
                             path="/program/:id"
                             component={MainWorkoutProgramPage}
+                        />
+                        <Route
+                            exact
+                            path="/add-review/:id"
+                            component={MainAddReviewPageView}
                         />
                     </Switch>
                     <MainFooter />
