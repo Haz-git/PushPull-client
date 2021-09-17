@@ -14,6 +14,7 @@ import ReviewResults from './workout_program_page_components/ReviewResults';
 import ReviewSkeletonLoader from './workout_program_page_components/ReviewSkeletonLoader';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import ReportWorkoutProgramForm from './workout_program_page_components/ReportWorkoutProgramForm';
+import ReportReviewForm from './workout_program_page_components/ReportReviewForm';
 
 //Utils:
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
@@ -59,22 +60,26 @@ const MainWorkoutProgramPage = ({
     //Dispatch Hook:
     const dispatch = useDispatch();
 
-    //Handles loaders
+    //Handles loaders for loading in reviews and workoutprogram stats:
     const [isWorkoutProgramLoaded, setIsWorkoutProgramLoaded] = useState(false);
     const [areReviewsLoaded, setAreReviewsLoaded] = useState(false);
 
     const handleReviewsLoadedStatus = (status: boolean) =>
         setAreReviewsLoaded(status);
-
     const handleWorkoutProgramLoadedStatus = (status: boolean) =>
         setIsWorkoutProgramLoaded(status);
 
-    //Handles report drawer for RatingColumn:
+    //Handles report drawer for workoutprogram:
     const [stateReportDrawer, setStateReportDrawer] = useState(false);
-
     const openReportDrawer = () => setStateReportDrawer(true);
-
     const closeReportDrawer = () => setStateReportDrawer(false);
+
+    //Handles report drawer for reviews:
+    const [stateReviewReportDrawer, setStateReviewReportDrawer] =
+        useState(false);
+    const [currentReviewId, setCurrentReviewId] = useState('');
+    const openReviewReportDrawer = () => setStateReviewReportDrawer(true);
+    const closeReviewReportDrawer = () => setStateReviewReportDrawer(false);
 
     useEffect(() => {
         dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
