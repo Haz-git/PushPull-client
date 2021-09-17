@@ -7,6 +7,7 @@ import { findWorkoutProgram } from '../../redux/workoutPrograms/workoutProgramAc
 import { getReviews } from '../../redux/reviews/reviewActions';
 
 //Components:
+import { BrowserView, MobileOnlyView } from 'react-device-detect';
 import { deviceMin } from '../../devices/breakpoints';
 import RatingColumn from './workout_program_page_components/RatingColumn';
 import ReviewResults from './workout_program_page_components/ReviewResults';
@@ -86,34 +87,50 @@ const MainWorkoutProgramPage = ({
     );
 
     return (
-        <MainContainer>
-            {isWorkoutProgramLoaded && areReviewsLoaded === true ? (
-                <>
-                    <GeneralDrawer
-                        title={`Flag '${workoutPrograms.workoutProgramTitle}' for Review`}
-                        openBoolean={stateReportDrawer}
-                        closeFunc={closeReportDrawer}
-                        size={renderDrawerSize(width)}
-                    >
-                        <ReportWorkoutProgramForm />
-                    </GeneralDrawer>
-                    <RatingColumn
-                        programRating={workoutPrograms.rating}
-                        programTitle={workoutPrograms.workoutProgramTitle}
-                        openReportDrawer={openReportDrawer}
-                    />
-                    <ReviewResults
-                        programTitle={workoutPrograms.workoutProgramTitle}
-                        programDesc={workoutPrograms.workoutProgramDesc}
-                        programId={id}
-                    />
-                </>
-            ) : (
-                <>
-                    <ReviewSkeletonLoader />
-                </>
-            )}
-        </MainContainer>
+        <>
+            <BrowserView>
+                <GeneralDrawer
+                    title={`Flag '${workoutPrograms.workoutProgramTitle}' for Review`}
+                    openBoolean={stateReportDrawer}
+                    closeFunc={closeReportDrawer}
+                    size={renderDrawerSize(width)}
+                    position="left"
+                >
+                    <ReportWorkoutProgramForm />
+                </GeneralDrawer>
+            </BrowserView>
+            <MobileOnlyView>
+                <GeneralDrawer
+                    title={`Flag '${workoutPrograms.workoutProgramTitle}' for Review`}
+                    openBoolean={stateReportDrawer}
+                    closeFunc={closeReportDrawer}
+                    size="100%"
+                    position="bottom"
+                >
+                    <ReportWorkoutProgramForm />
+                </GeneralDrawer>
+            </MobileOnlyView>
+            <MainContainer>
+                {isWorkoutProgramLoaded && areReviewsLoaded === true ? (
+                    <>
+                        <RatingColumn
+                            programRating={workoutPrograms.rating}
+                            programTitle={workoutPrograms.workoutProgramTitle}
+                            openReportDrawer={openReportDrawer}
+                        />
+                        <ReviewResults
+                            programTitle={workoutPrograms.workoutProgramTitle}
+                            programDesc={workoutPrograms.workoutProgramDesc}
+                            programId={id}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <ReviewSkeletonLoader />
+                    </>
+                )}
+            </MainContainer>
+        </>
     );
 };
 
