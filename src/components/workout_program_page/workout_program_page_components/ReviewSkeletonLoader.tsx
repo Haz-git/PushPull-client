@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import { deviceMin } from '../../../devices/breakpoints';
+import { BrowserView, MobileOnlyView } from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -40,6 +41,17 @@ const LeftChartContainer = styled.div`
 const SubcategoryContainer = styled.div`
     display: flex;
     align-items: center;
+`;
+
+const MobileSubcategoryContainer = styled.div`
+    display: block;
+    margin: 0.5rem 0;
+`;
+
+const MobileRatingGrouper = styled.div`
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
 `;
 
 const RightColumnContainer = styled.div`
@@ -124,102 +136,208 @@ const ReviewSkeletonLoader = () => {
                         height="2.5rem"
                         margin="0rem 1rem 0rem 1.5rem"
                     />
-                    <SubcategoryContainer>
-                        <SkeletonLoaderLine
-                            width="7rem"
-                            height="2rem"
-                            margin="1rem 1rem 0rem 1.5rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                    </SubcategoryContainer>
-                    <SubcategoryContainer>
-                        <SkeletonLoaderLine
-                            width="9rem"
-                            height="2rem"
-                            margin="1rem 1rem 0rem 1.5rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                    </SubcategoryContainer>
-                    <SubcategoryContainer>
-                        <SkeletonLoaderLine
-                            width="8rem"
-                            height="2rem"
-                            margin="1rem 1rem 0rem 1.5rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                        <SkeletonLoaderLine
-                            width="2rem"
-                            height="2rem"
-                            margin="1rem .4rem 0rem 0rem"
-                        />
-                    </SubcategoryContainer>
+                    <BrowserView>
+                        <SubcategoryContainer>
+                            <SkeletonLoaderLine
+                                width="7rem"
+                                height="2rem"
+                                margin="1rem 1rem 0rem 1.5rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                        </SubcategoryContainer>
+                        <SubcategoryContainer>
+                            <SkeletonLoaderLine
+                                width="9rem"
+                                height="2rem"
+                                margin="1rem 1rem 0rem 1.5rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                        </SubcategoryContainer>
+                        <SubcategoryContainer>
+                            <SkeletonLoaderLine
+                                width="8rem"
+                                height="2rem"
+                                margin="1rem 1rem 0rem 1.5rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                            <SkeletonLoaderLine
+                                width="2rem"
+                                height="2rem"
+                                margin="1rem .4rem 0rem 0rem"
+                            />
+                        </SubcategoryContainer>
+                    </BrowserView>
+                    <MobileOnlyView>
+                        <MobileSubcategoryContainer>
+                            <SkeletonLoaderLine
+                                width="8rem"
+                                height="2rem"
+                                margin="1rem 1rem 0rem 1.5rem"
+                            />
+                            <MobileRatingGrouper>
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                            </MobileRatingGrouper>
+                        </MobileSubcategoryContainer>
+                        <MobileSubcategoryContainer>
+                            <SkeletonLoaderLine
+                                width="8rem"
+                                height="2rem"
+                                margin="1rem 1rem 0rem 1.5rem"
+                            />
+                            <MobileRatingGrouper>
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                            </MobileRatingGrouper>
+                        </MobileSubcategoryContainer>
+                        <MobileSubcategoryContainer>
+                            <SkeletonLoaderLine
+                                width="8rem"
+                                height="2rem"
+                                margin="1rem 1rem 0rem 1.5rem"
+                            />
+                            <MobileRatingGrouper>
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                                <SkeletonLoaderLine
+                                    width="2rem"
+                                    height="2rem"
+                                    margin="1rem .4rem 0rem 0rem"
+                                />
+                            </MobileRatingGrouper>
+                        </MobileSubcategoryContainer>
+                    </MobileOnlyView>
                 </LeftCategoryContainer>
                 <LeftChartContainer>
                     <SkeletonLoaderLine
@@ -227,33 +345,65 @@ const ReviewSkeletonLoader = () => {
                         height="2.5rem"
                         margin="0rem 1rem 0rem 1.5rem"
                     />
-                    <SkeletonLoaderLine
-                        width="20rem"
-                        height="15rem"
-                        margin="1rem 1rem 0rem 1.5rem"
-                    />
+                    <BrowserView>
+                        <SkeletonLoaderLine
+                            width="20rem"
+                            height="15rem"
+                            margin="1rem 1rem 0rem 1.5rem"
+                        />
+                    </BrowserView>
+                    <MobileOnlyView>
+                        <SkeletonLoaderLine
+                            width="17rem"
+                            height="15rem"
+                            margin="1rem 1rem 0rem 1.5rem"
+                        />
+                    </MobileOnlyView>
                 </LeftChartContainer>
             </LeftColumnContainer>
             <RightColumnContainer>
-                <RightHeaderContainer>
-                    <SkeletonLoaderLine
-                        width="40rem"
-                        height="3.5rem"
-                        margin="1rem 1rem 0rem 1.5rem"
-                    />
-                    <RightDrawerContainer>
+                <BrowserView>
+                    <RightHeaderContainer>
                         <SkeletonLoaderLine
-                            width="20rem"
-                            height="2rem"
-                            margin="0rem 1rem 0rem 1.5rem"
+                            width="40rem"
+                            height="3.5rem"
+                            margin="1rem 1rem 0rem 1.5rem"
                         />
-                    </RightDrawerContainer>
-                    <SkeletonLoaderLine
-                        width="15rem"
-                        height="2.5rem"
-                        margin="1rem 1rem 0rem 1.5rem"
-                    />
-                </RightHeaderContainer>
+                        <RightDrawerContainer>
+                            <SkeletonLoaderLine
+                                width="20rem"
+                                height="2rem"
+                                margin="0rem 1rem 0rem 1.5rem"
+                            />
+                        </RightDrawerContainer>
+                        <SkeletonLoaderLine
+                            width="15rem"
+                            height="2.5rem"
+                            margin="1rem 1rem 0rem 1.5rem"
+                        />
+                    </RightHeaderContainer>
+                </BrowserView>
+                <MobileOnlyView>
+                    <RightHeaderContainer>
+                        <SkeletonLoaderLine
+                            width="17rem"
+                            height="3rem"
+                            margin="1rem 1rem 0rem -.5rem"
+                        />
+                        <RightDrawerContainer>
+                            <SkeletonLoaderLine
+                                width="17rem"
+                                height="2rem"
+                                margin="0rem 1rem 0rem -.5rem"
+                            />
+                        </RightDrawerContainer>
+                        <SkeletonLoaderLine
+                            width="15rem"
+                            height="2.5rem"
+                            margin="1rem 1rem 0rem -.5rem"
+                        />
+                    </RightHeaderContainer>
+                </MobileOnlyView>
                 <RightResultsContainer>
                     <SkeletonLoaderLine
                         width="100%"
