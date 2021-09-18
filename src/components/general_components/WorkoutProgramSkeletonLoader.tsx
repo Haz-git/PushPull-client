@@ -91,16 +91,6 @@ const SkeletonRatingContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin: 0.75rem 0;
-
-    @media ${deviceMin.mobileS} {
-        display: block;
-    }
-
-    @media ${deviceMin.browserSm} {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
 `;
 
 //Interfaces:
