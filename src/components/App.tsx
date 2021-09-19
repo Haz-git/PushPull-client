@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 
-//Styles:
+//Style Imports:
+import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '../styles/themes';
@@ -14,12 +16,28 @@ import MainLandingPageView from './main_landing_page/MainLandingPageView';
 import MainSearchPage from './search_page/MainSearchPage';
 import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPage';
 import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
+import GeneralModal from './general_components/GeneralModal';
+
+//Styles:
+const BugReportModalContainer = styled.div``;
 
 const App = () => {
+    const [stateBugReportModal, setStateBugReportModal] = useState(false);
+    const openBugReportModal = () => setStateBugReportModal(true);
+    const closeBugReportModal = () => setStateBugReportModal(false);
+
     return (
         <>
             <ThemeProvider theme={lightTheme}>
                 <GlobalStyle />
+                <BugReportModalContainer>
+                    <GeneralModal
+                        openBoolean={stateBugReportModal}
+                        closeFunc={closeBugReportModal}
+                    >
+                        <div>TEST</div>
+                    </GeneralModal>
+                </BugReportModalContainer>
                 <Router history={history}>
                     <Navbar />
                     <Switch>
@@ -40,7 +58,7 @@ const App = () => {
                             component={MainAddReviewPageView}
                         />
                     </Switch>
-                    <MainFooter />
+                    <MainFooter bugReportHandler={openBugReportModal} />
                 </Router>
             </ThemeProvider>
         </>
