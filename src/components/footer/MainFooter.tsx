@@ -2,6 +2,7 @@ import * as React from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
+import GeneralButton from '../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -81,13 +82,18 @@ const FooterTextLinks = styled.a`
 
 //Interfaces:
 
-const MainFooter = () => {
+interface IComponentProps {
+    bugReportHandler: () => void;
+}
+
+const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
             <FooterTextBlock>
                 <FooterText>© 2021 PushPull. All rights reserved.</FooterText>
             </FooterTextBlock>
             <FooterBlock>
+                <GeneralButton onClick={bugReportHandler} />
                 <FooterTextLinks href="https://storyset.com" target="_blank">
                     Illustrations by StorySet
                 </FooterTextLinks>
