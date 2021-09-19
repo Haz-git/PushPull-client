@@ -181,12 +181,10 @@ const WorkoutProgramComponent = ({
         return programImage;
     };
 
-    return (
-        <MainContainer to={programLink}>
-            <SVGContainer>{renderImage()}</SVGContainer>
-            <InfoContainer>
-                <ProgramTitle>{programTitle}</ProgramTitle>
-                <ProgramRatingContainer>
+    const renderRatingAndReviewCount = () => {
+        if (programReviewCount > 0) {
+            return (
+                <>
                     <StarsContainer>
                         <Rating
                             start={0}
@@ -202,6 +200,24 @@ const WorkoutProgramComponent = ({
                         {programAverageRating}/5 rating from{' '}
                         {programReviewCount} reviews
                     </RatingText>
+                </>
+            );
+        } else {
+            return (
+                <RatingText style={{ fontStyle: 'italic' }}>
+                    No Reviews Yet
+                </RatingText>
+            );
+        }
+    };
+
+    return (
+        <MainContainer to={programLink}>
+            <SVGContainer>{renderImage()}</SVGContainer>
+            <InfoContainer>
+                <ProgramTitle>{programTitle}</ProgramTitle>
+                <ProgramRatingContainer>
+                    {renderRatingAndReviewCount()}
                 </ProgramRatingContainer>
                 <ProgramDesc>
                     {truncateString('WORKOUT_PROGRAM_DESC', programDesc)}
