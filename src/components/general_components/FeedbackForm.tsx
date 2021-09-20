@@ -69,7 +69,7 @@ const FeedbackForm = () => {
                         },
                     }}
                     label="Describe your feedback below."
-                    placeholder={`For a code-related bug; please describe how you encountered the bug, and steps to repeat the bug.`}
+                    placeholder={`For a code-related bug--please describe how you encountered the bug, and steps to repeat the bug.`}
                     required
                 />
             </TextAreaContainer>
