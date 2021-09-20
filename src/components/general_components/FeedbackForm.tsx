@@ -18,6 +18,8 @@ const SelectContainer = styled.div`
     margin: 1rem 0;
 `;
 
+const TextAreaContainer = styled.div``;
+
 const FeedbackForm = () => {
     const selectData = [
         { value: 'generalFeedback', label: 'General Feedback' },
@@ -48,6 +50,39 @@ const FeedbackForm = () => {
                     }}
                 />
             </SelectContainer>
+            <TextAreaContainer>
+                <Textarea
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                            height: '15rem',
+                        },
+                    }}
+                    label="Describe your feedback below."
+                    placeholder={`For a code-related bug; please describe how you encountered the bug, and steps to repeat the bug.`}
+                    required
+                />
+            </TextAreaContainer>
+            <ButtonContainer>
+                <GeneralButton
+                    buttonLabel="Send my feedback"
+                    onClick={() =>
+                        alert(
+                            'Our apologies, this feature is currently in-the-works!'
+                        )
+                    }
+                />
+            </ButtonContainer>
         </MainFormContainer>
     );
 };
