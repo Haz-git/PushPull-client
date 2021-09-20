@@ -23,7 +23,7 @@ const MainContainer = styled.div`
 const MainAddReviewPageView = () => {
     return (
         <MainContainer>
-            <WizardForm startIndex={0} maxIndex={1}>
+            <WizardForm>
                 <div>TEST</div>
                 <div>MULTIPLE</div>
                 <div>CHILDREN</div>
