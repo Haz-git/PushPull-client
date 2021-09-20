@@ -6,8 +6,19 @@ import * as React from 'react';
 
 //Interfaces:
 
-const WizardForm = () => {
-    return <div>General Wizard Form component</div>;
+interface IComponentProps {
+    startIndex: number;
+    maxIndex: number;
+    children: React.ReactNode;
+}
+
+const WizardForm = ({
+    startIndex,
+    maxIndex,
+    children,
+}: IComponentProps): JSX.Element => {
+    console.log(children);
+    return <div>{children}</div>;
 };
 
 export default WizardForm;
