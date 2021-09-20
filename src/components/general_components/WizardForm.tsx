@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 //Components:
 import GeneralButton from '../general_components/GeneralButton';
+import { Progress } from '@mantine/core';
 
 //Styles:
 
@@ -35,11 +36,33 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
         }
     };
 
+    //Renders the length of the progress bar
+    const renderLengthProgressBar = () => {
+        if (children) {
+            if (viewIndex > 0) {
+                return (viewIndex / ((children as any).length - 1)) * 100;
+            } else {
+                return 0;
+            }
+        }
+    };
+
     return (
         <div>
             {renderWizardFormViews()}
             <GeneralButton buttonLabel="Back" onClick={handlePrev} />
             <GeneralButton buttonLabel="Next" onClick={handleNext} />
+            <Progress
+                value={renderLengthProgressBar()}
+                styles={{
+                    root: {
+                        background: '#e5e5e5',
+                    },
+                    bar: {
+                        background: '#e07133',
+                    },
+                }}
+            />
         </div>
     );
 };
