@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import { deviceMin } from '../../devices/breakpoints';
+import WizardForm from '../general_components/WizardForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -20,7 +21,16 @@ const MainContainer = styled.div`
 //Interfaces:
 
 const MainAddReviewPageView = () => {
-    return <MainContainer>Add Review Page</MainContainer>;
+    return (
+        <MainContainer>
+            <WizardForm startIndex={0} maxIndex={1}>
+                <div>TEST</div>
+                <div>MULTIPLE</div>
+                <div>CHILDREN</div>
+                <div>HERE</div>
+            </WizardForm>
+        </MainContainer>
+    );
 };
 
 export default MainAddReviewPageView;
