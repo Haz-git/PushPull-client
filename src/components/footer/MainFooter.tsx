@@ -17,47 +17,43 @@ const MailIcon = styled(MailSend)`
 `;
 
 const MainContainer = styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: ${(props) => props.theme.lightBackground};
-    padding: 1rem 1rem;
-
     @media ${deviceMin.mobileS} {
         display: block;
         text-align: center;
-        padding: 1rem 1rem;
+        padding: 0.5rem 1rem;
+        background: ${(props) => props.theme.lightBackground};
     }
 
-    @media ${deviceMin.browserSm} {
+    @media ${deviceMin.tablet} {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem 1rem;
     }
 `;
 
 const FooterTextBlock = styled.div`
     @media ${deviceMin.mobileS} {
-        margin-bottom: 1rem;
+        margin: 1rem 0;
     }
 
-    @media ${deviceMin.browserSm} {
-        margin-bottom: 0;
+    @media ${deviceMin.laptopHalf} {
+        margin: 0;
     }
 `;
 
 const FooterBlock = styled.div`
     @media ${deviceMin.mobileS} {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        display: block;
     }
 
-    @media ${deviceMin.browserSm} {
+    @media ${deviceMin.mobileM} {
+        display: block;
+    }
+
+    @media ${deviceMin.tabletp} {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem 1rem;
     }
 `;
 
@@ -108,6 +104,7 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                     onClick={bugReportHandler}
                     padding=".4rem .4rem"
                     buttonIcon={<MailIcon />}
+                    margin=".5rem auto"
                 />
                 <FooterTextLinks href="https://storyset.com" target="_blank">
                     Illustrations by StorySet
