@@ -17,6 +17,7 @@ import MainSearchPage from './search_page/MainSearchPage';
 import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPage';
 import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 import GeneralModal from './general_components/GeneralModal';
+import FeedbackForm from './general_components/FeedbackForm';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
@@ -34,8 +35,9 @@ const App = () => {
                     <GeneralModal
                         openBoolean={stateBugReportModal}
                         closeFunc={closeBugReportModal}
+                        title="Send Feedback"
                     >
-                        <div>TEST</div>
+                        <FeedbackForm />
                     </GeneralModal>
                 </BugReportModalContainer>
                 <Router history={history}>
