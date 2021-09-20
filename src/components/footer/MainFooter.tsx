@@ -7,6 +7,15 @@ import GeneralButton from '../general_components/GeneralButton';
 //Styles:
 import styled from 'styled-components';
 
+//Icons:
+import { MailSend } from '@styled-icons/boxicons-regular/MailSend';
+
+const MailIcon = styled(MailSend)`
+    height: 1.3rem;
+    width: 1.3rem;
+    color: white;
+`;
+
 const MainContainer = styled.section`
     display: flex;
     align-items: center;
@@ -93,7 +102,13 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                 <FooterText>© 2021 PushPull. All rights reserved.</FooterText>
             </FooterTextBlock>
             <FooterBlock>
-                <GeneralButton onClick={bugReportHandler} />
+                <GeneralButton
+                    buttonLabel="Feedback"
+                    width="7.5rem"
+                    onClick={bugReportHandler}
+                    padding=".4rem .4rem"
+                    buttonIcon={<MailIcon />}
+                />
                 <FooterTextLinks href="https://storyset.com" target="_blank">
                     Illustrations by StorySet
                 </FooterTextLinks>
