@@ -6,8 +6,8 @@ import * as React from 'react';
 
 //Interfaces:
 
-const StepNavigationCrumbs = () => {
+const WizardStepNavigationColumn = () => {
     return <div>Step navigation Crumbs</div>;
 };
 
-export default StepNavigationCrumbs;
+export default WizardStepNavigationColumn;

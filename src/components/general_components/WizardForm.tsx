@@ -2,10 +2,18 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 //Components:
+import WizardStepNavigationColumn from '../general_components/WizardStepNavigationColumn';
 import GeneralButton from '../general_components/GeneralButton';
 import { Progress } from '@mantine/core';
 
 //Styles:
+import styled from 'styled-components';
+
+const MainContainer = styled.section``;
+
+const FormContainer = styled.div``;
+
+const ChildrenContainer = styled.div``;
 
 //Interfaces:
 
@@ -49,12 +57,10 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
     };
 
     return (
-        <div>
-            {renderWizardFormViews()}
-            <GeneralButton buttonLabel="Back" onClick={handlePrev} />
-            <GeneralButton buttonLabel="Next" onClick={handleNext} />
+        <MainContainer>
             <Progress
                 value={renderLengthProgressBar()}
+                radius="xs"
                 styles={{
                     root: {
                         background: '#e5e5e5',
@@ -64,7 +70,12 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
                     },
                 }}
             />
-        </div>
+            <FormContainer>
+                <ChildrenContainer>{renderWizardFormViews()}</ChildrenContainer>
+            </FormContainer>
+            <GeneralButton buttonLabel="Back" onClick={handlePrev} />
+            <GeneralButton buttonLabel="Next" onClick={handleNext} />
+        </MainContainer>
     );
 };
 
