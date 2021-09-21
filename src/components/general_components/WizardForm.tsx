@@ -9,13 +9,12 @@ import { Progress } from '@mantine/core';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section`
-    height: 100vh;
-`;
+const MainContainer = styled.section``;
 
 const FormContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 8fr;
+    height: 100vh;
 `;
 
 const ChildrenContainer = styled.div``;
@@ -47,6 +46,12 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
         if (viewIndex > 0) {
             setViewIndex(viewIndex - 1);
         }
+    };
+
+    //Handle requests to a specific view:
+    const handleSpecificViewRequest = (viewNum: number) => {
+        if (viewNum >= 0 && viewNum < (children as any).length)
+            setViewIndex(viewNum);
     };
 
     //Render different wizard form views:
@@ -101,6 +106,7 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
                             stepTitle: 'HERE',
                         },
                     ]}
+                    requestView={handleSpecificViewRequest}
                 />
                 <ChildrenContainer>
                     {renderWizardFormViews()}
