@@ -15,17 +15,22 @@ const MainContainer = styled.div`
 `;
 
 const NodeContainer = styled.div`
-    margin: 2rem 0;
+    margin: 4rem 0rem 0rem 0rem;
 `;
 
-const NodeItem = styled.div`
+const NodeItem = styled.button`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin: 1rem 0;
+    margin: 2rem 0;
+    border: none;
+    background: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
 `;
 
-const NodeCircle = styled.div<NodeStyledProps>`
+const NodeCircle = styled.div<NodeCircleProps>`
+    position: relative;
     font-size: 1.2rem;
     color: ${(props) =>
         props.isActive === true ? '#ffffff' : props.theme.subText};
@@ -33,14 +38,30 @@ const NodeCircle = styled.div<NodeStyledProps>`
     text-shadow: ${(props) =>
         props.isActive === true ? props.theme.textShadows.sm : 'none'};
     vertical-align: middle;
-    line-height: 2rem;
+    line-height: 3rem;
     text-align: center;
     background: ${(props) =>
         props.isActive === true ? props.theme.accentColors.orange : '#e5e5e5'};
-    border-radius: 2rem;
-    height: 2rem;
-    width: 2rem;
+    border-radius: 1.5rem;
+    height: 3rem;
+    width: 3rem;
     margin-right: 1rem;
+
+    &::before {
+        visibility: ${(props) =>
+            props.isLastNode === true ? 'hidden' : 'visible'};
+        content: '';
+        width: 3px;
+        height: 100%;
+        background: ${(props) =>
+            props.isActive === true
+                ? props.theme.accentColors.orange
+                : '#e5e5e5'};
+        display: block;
+        position: absolute;
+        left: 1.45rem;
+        top: 100%;
+    }
 `;
 
 const NodeLabel = styled.p<NodeStyledProps>`
@@ -51,6 +72,10 @@ const NodeLabel = styled.p<NodeStyledProps>`
 
 //Interfaces:
 
+interface NodeCircleProps {
+    isActive: boolean;
+    isLastNode: boolean;
+}
 interface NodeStyledProps {
     isActive: boolean;
 }
@@ -59,25 +84,38 @@ interface IComponentProps {
     numSteps: number;
     currentStep: number;
     steps: any[];
+    requestView: (viewNum: number) => void;
 }
 
 const WizardStepNavigationColumn = ({
     numSteps,
     currentStep,
     steps,
+    requestView,
 }: IComponentProps): JSX.Element => {
-    console.log(currentStep);
+    //Determines any node that's active:
     const determineActiveNodeStep = (stepOfNode: number) => {
         if (currentStep !== undefined && stepOfNode === currentStep)
             return true;
         return false;
     };
 
+    //Identifies the last node to remove pseudo-element:
+    const identifyLastNode = (currNodeStep: number) => {
+        if (currNodeStep === steps.length - 1) return true;
+        return false;
+    };
+
+    //Renders all node items:
     const renderNodeItem = () => {
         if (steps) {
             return steps.map((stepItem) => (
-                <NodeItem key={uuid()}>
+                <NodeItem
+                    key={uuid()}
+                    onClick={() => requestView(stepItem.stepNum)}
+                >
                     <NodeCircle
+                        isLastNode={identifyLastNode(stepItem.stepNum)}
                         isActive={determineActiveNodeStep(stepItem.stepNum)}
                     >
                         {stepItem.stepNum + 1}
