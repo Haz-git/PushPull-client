@@ -8,14 +8,14 @@ import WizardForm from '../general_components/WizardForm';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-    @media ${deviceMin.mobileS} {
-        height: 100%;
-        overflow: hidden;
-    }
+    // @media ${deviceMin.mobileS} {
+    //     height: 100%;
+    //     overflow: hidden;
+    // }
 
-    @media ${deviceMin.browserSm} {
-        height: 100vh;
-    }
+    // @media ${deviceMin.browserSm} {
+    //     height: 100vh;
+    // }
 `;
 
 //Interfaces:
