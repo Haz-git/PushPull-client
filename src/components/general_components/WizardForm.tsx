@@ -34,7 +34,7 @@ interface IComponentProps {
 }
 
 const WizardForm = ({ children }: IComponentProps): JSX.Element => {
-    const [viewIndex, setViewIndex] = useState(0);
+    const [viewIndex, setViewIndex] = useState(1);
 
     //Handle Prev or Next Requests:
     const handleNext = () => {
@@ -44,7 +44,7 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
     };
 
     const handlePrev = () => {
-        if (viewIndex > 0) {
+        if (viewIndex >= 1) {
             setViewIndex(viewIndex - 1);
         }
     };
