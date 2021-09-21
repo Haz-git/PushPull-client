@@ -83,7 +83,28 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
                 }}
             />
             <FormContainer>
-                <WizardStepNavigationColumn />
+                <WizardStepNavigationColumn
+                    numSteps={(children as any).length}
+                    currentStep={viewIndex}
+                    steps={[
+                        {
+                            stepNum: 1,
+                            stepTitle: 'TEST',
+                        },
+                        {
+                            stepNum: 2,
+                            stepTitle: 'MULTIPLE',
+                        },
+                        {
+                            stepNum: 3,
+                            stepTitle: 'CHILDREN',
+                        },
+                        {
+                            stepNum: 4,
+                            stepTitle: 'HERE',
+                        },
+                    ]}
+                />
                 <ChildrenContainer>
                     {renderWizardFormViews()}
                     <ButtonContainer>
