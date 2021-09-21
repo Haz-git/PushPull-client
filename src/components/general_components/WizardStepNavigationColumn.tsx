@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { v4 as uuid } from 'uuid';
@@ -11,11 +12,18 @@ const MainContainer = styled.div`
     border-right: 1px solid #e5e5e5;
     text-align: left;
     height: 100%;
-    padding: 2rem 2rem;
+    padding: 4rem 2rem;
+`;
+
+const TitleHeader = styled.h2`
+    font-size: 1.8rem;
+    color: ${(props) => props.theme.mainText};
+    font-weight: 800;
+    margin-bottom: 3rem;
 `;
 
 const NodeContainer = styled.div`
-    margin: 4rem 0rem 0rem 0rem;
+    margin: 2rem 0rem 0rem 0rem;
 `;
 
 const NodeItem = styled.button`
@@ -66,7 +74,8 @@ const NodeCircle = styled.div<NodeCircleProps>`
 
 const NodeLabel = styled.p<NodeStyledProps>`
     font-size: 1.2rem;
-    color: ${(props) => props.theme.mainText};
+    color: ${(props) =>
+        props.isActive === true ? props.theme.mainText : props.theme.subText};
     font-weight: 800;
 `;
 
@@ -132,7 +141,7 @@ const WizardStepNavigationColumn = ({
 
     return (
         <MainContainer>
-            Step navigation Crumbs {numSteps} STEPS
+            <TitleHeader>Timeline</TitleHeader>
             <NodeContainer>{renderNodeItem()}</NodeContainer>
         </MainContainer>
     );
