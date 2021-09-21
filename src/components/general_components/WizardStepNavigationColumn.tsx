@@ -67,6 +67,7 @@ const WizardStepNavigationColumn = ({
 }: IComponentProps): JSX.Element => {
     console.log(currentStep);
     const determineActiveNodeStep = (stepOfNode: number) => {
+        console.log(stepOfNode, currentStep);
         if (currentStep && stepOfNode === currentStep) return true;
         return false;
     };
