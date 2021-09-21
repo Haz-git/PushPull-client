@@ -30,7 +30,8 @@ const NodeCircle = styled.div<NodeStyledProps>`
     color: ${(props) =>
         props.isActive === true ? '#ffffff' : props.theme.subText};
     font-weight: 800;
-    text-shadow: ${(props) => props.theme.textShadows.sm};
+    text-shadow: ${(props) =>
+        props.isActive === true ? props.theme.textShadows.sm : 'none'};
     vertical-align: middle;
     line-height: 2rem;
     text-align: center;
@@ -67,8 +68,8 @@ const WizardStepNavigationColumn = ({
 }: IComponentProps): JSX.Element => {
     console.log(currentStep);
     const determineActiveNodeStep = (stepOfNode: number) => {
-        console.log(stepOfNode, currentStep);
-        if (currentStep && stepOfNode === currentStep) return true;
+        if (currentStep !== undefined && stepOfNode === currentStep)
+            return true;
         return false;
     };
 
