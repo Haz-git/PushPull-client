@@ -38,6 +38,7 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
 
     //Renders the length of the progress bar
     const renderLengthProgressBar = () => {
+        //Instead of rendering the progress bar via the number of children, we should render the length of the progress bar via number of fields entered..later
         if (children) {
             if (viewIndex > 0) {
                 return (viewIndex / ((children as any).length - 1)) * 100;
