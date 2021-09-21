@@ -25,28 +25,34 @@ const NodeItem = styled.div`
     margin: 1rem 0;
 `;
 
-const NodeCircle = styled.div`
+const NodeCircle = styled.div<NodeStyledProps>`
     font-size: 1.2rem;
-    color: white;
+    color: ${(props) =>
+        props.isActive === true ? '#ffffff' : props.theme.subText};
     font-weight: 800;
     text-shadow: ${(props) => props.theme.textShadows.sm};
     vertical-align: middle;
     line-height: 2rem;
     text-align: center;
-    background: ${(props) => props.theme.accentColors.orange};
+    background: ${(props) =>
+        props.isActive === true ? props.theme.accentColors.orange : '#e5e5e5'};
     border-radius: 2rem;
     height: 2rem;
     width: 2rem;
     margin-right: 1rem;
 `;
 
-const NodeLabel = styled.p`
+const NodeLabel = styled.p<NodeStyledProps>`
     font-size: 1.2rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 800;
 `;
 
 //Interfaces:
+
+interface NodeStyledProps {
+    isActive: boolean;
+}
 
 interface IComponentProps {
     numSteps: number;
@@ -59,12 +65,26 @@ const WizardStepNavigationColumn = ({
     currentStep,
     steps,
 }: IComponentProps): JSX.Element => {
+    console.log(currentStep);
+    const determineActiveNodeStep = (stepOfNode: number) => {
+        if (currentStep && stepOfNode === currentStep) return true;
+        return false;
+    };
+
     const renderNodeItem = () => {
-        if (steps && currentStep) {
+        if (steps) {
             return steps.map((stepItem) => (
                 <NodeItem key={uuid()}>
-                    <NodeCircle>{stepItem.stepNum}</NodeCircle>
-                    <NodeLabel>{stepItem.stepTitle}</NodeLabel>
+                    <NodeCircle
+                        isActive={determineActiveNodeStep(stepItem.stepNum)}
+                    >
+                        {stepItem.stepNum + 1}
+                    </NodeCircle>
+                    <NodeLabel
+                        isActive={determineActiveNodeStep(stepItem.stepNum)}
+                    >
+                        {stepItem.stepTitle}
+                    </NodeLabel>
                 </NodeItem>
             ));
         }
