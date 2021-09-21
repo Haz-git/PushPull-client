@@ -10,12 +10,32 @@ const MainContainer = styled.div`
     border-right: 1px solid #e5e5e5;
     text-align: left;
     height: 100%;
+    padding: 2rem 2rem;
 `;
+
+const NodeContainer = styled.div``;
+
+const Nodes = styled.div``;
 
 //Interfaces:
 
-const WizardStepNavigationColumn = () => {
-    return <MainContainer>Step navigation Crumbs</MainContainer>;
+interface IComponentProps {
+    numSteps: number;
+    currentStep: number;
+    steps: any[];
+}
+
+const WizardStepNavigationColumn = ({
+    numSteps,
+    currentStep,
+    steps,
+}: IComponentProps): JSX.Element => {
+    return (
+        <MainContainer>
+            Step navigation Crumbs {numSteps} STEPS
+            <NodeContainer></NodeContainer>
+        </MainContainer>
+    );
 };
 
 export default WizardStepNavigationColumn;
