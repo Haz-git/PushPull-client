@@ -9,11 +9,23 @@ import { Progress } from '@mantine/core';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section``;
+const MainContainer = styled.section`
+    height: 100vh;
+`;
 
-const FormContainer = styled.div``;
+const FormContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+`;
 
 const ChildrenContainer = styled.div``;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+`;
 
 //Interfaces:
 
@@ -71,10 +83,23 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
                 }}
             />
             <FormContainer>
-                <ChildrenContainer>{renderWizardFormViews()}</ChildrenContainer>
+                <WizardStepNavigationColumn />
+                <ChildrenContainer>
+                    {renderWizardFormViews()}
+                    <ButtonContainer>
+                        <GeneralButton
+                            buttonLabel="Back"
+                            onClick={handlePrev}
+                            width="6rem"
+                        />
+                        <GeneralButton
+                            buttonLabel="Next"
+                            onClick={handleNext}
+                            width="6rem"
+                        />
+                    </ButtonContainer>
+                </ChildrenContainer>
             </FormContainer>
-            <GeneralButton buttonLabel="Back" onClick={handlePrev} />
-            <GeneralButton buttonLabel="Next" onClick={handleNext} />
         </MainContainer>
     );
 };
