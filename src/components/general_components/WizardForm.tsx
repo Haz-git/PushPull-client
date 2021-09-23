@@ -70,6 +70,24 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
         }
     };
 
+    //Parses the id's of the children, and turns them into the WizardStepNavigationColumn's Step Titles:
+    const parseChildrenIdToStepTitle = () => {
+        if (children) {
+            let stepTitles: any[] = [];
+
+            for (let i = 0; i < (children as any).length; i++) {
+                let tempObj: { [key: string]: any } = {};
+
+                tempObj['stepNum'] = i;
+                tempObj['stepTitle'] = (children as any)[i].props.id;
+
+                stepTitles.push(tempObj);
+            }
+
+            return stepTitles;
+        }
+    };
+
     return (
         <MainContainer>
             <Progress
@@ -88,24 +106,7 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
                 <WizardStepNavigationColumn
                     numSteps={(children as any).length}
                     currentStep={viewIndex}
-                    steps={[
-                        {
-                            stepNum: 0,
-                            stepTitle: 'TEST',
-                        },
-                        {
-                            stepNum: 1,
-                            stepTitle: 'MULTIPLE',
-                        },
-                        {
-                            stepNum: 2,
-                            stepTitle: 'CHILDREN',
-                        },
-                        {
-                            stepNum: 3,
-                            stepTitle: 'HERE',
-                        },
-                    ]}
+                    steps={parseChildrenIdToStepTitle()}
                     requestView={handleSpecificViewRequest}
                 />
                 <ChildrenContainer>
