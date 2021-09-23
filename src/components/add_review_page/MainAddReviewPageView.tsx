@@ -24,10 +24,10 @@ const MainAddReviewPageView = () => {
     return (
         <MainContainer>
             <WizardForm>
-                <div>TEST</div>
-                <div>MULTIPLE</div>
-                <div>CHILDREN</div>
-                <div>HERE</div>
+                <div id="Star Ratings">TEST</div>
+                <div id="Level Recommendations">MULTIPLE</div>
+                <div id="Improvements">CHILDREN</div>
+                <div id="More Details">HERE</div>
             </WizardForm>
         </MainContainer>
     );
