@@ -92,7 +92,7 @@ interface NodeStyledProps {
 interface IComponentProps {
     numSteps: number;
     currentStep: number;
-    steps: any[];
+    steps: any;
     requestView: (viewNum: number) => void;
 }
 
@@ -117,7 +117,7 @@ const WizardStepNavigationColumn = ({
     //Renders all node items:
     const renderNodeItem = () => {
         if (steps) {
-            return steps.map((stepItem) => (
+            return steps.map((stepItem: any) => (
                 <NodeItem
                     key={uuid()}
                     onClick={() => requestView(stepItem.stepNum)}
