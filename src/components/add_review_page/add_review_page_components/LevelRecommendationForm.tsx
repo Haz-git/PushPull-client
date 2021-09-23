@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components
 
@@ -17,12 +18,48 @@ import {
 import { Select } from '@mantine/core';
 
 const SelectContainer = styled.div`
-    margin: 1rem 0;
+    margin: 2.5rem 0 1rem 0;
+`;
+
+const InfoContainer = styled.div``;
+
+const InfoText = styled.p`
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${(props) => props.theme.mainText};
 `;
 
 //Interfaces
 
 const LevelRecommendationForm = () => {
+    const [userLevel, setUserLevel] = useState('');
+
+    const handleUserLevelSelection = (val: string) => {
+        setUserLevel(val);
+    };
+
+    const selectionDesc = {
+        beginner:
+            'Example: I have been training for a few months. Linear Progression works well for me.',
+        intermediate:
+            'Example: I have been training for a few years. Short-term Periodization works well for me.',
+        advanced:
+            'Example: I have been training for many years. Long-term Periodization works well for me.',
+    };
+
+    const parseInfoText = () => {
+        if (userLevel !== '') {
+            switch (userLevel) {
+                case 'beginner':
+                    return <InfoText>{selectionDesc.beginner}</InfoText>;
+                case 'intermediate':
+                    return <InfoText>{selectionDesc.intermediate}</InfoText>;
+                case 'advanced':
+                    return <InfoText>{selectionDesc.advanced}</InfoText>;
+            }
+        }
+    };
+
     return (
         <MainContainer>
             <FormTitleContainer>
@@ -38,13 +75,7 @@ const LevelRecommendationForm = () => {
                             There's no formal classification on this subject,
                             however a good judgement combines both the length of
                             time you've been training and response to training
-                            stimulus. For example, someone who has been training
-                            for only a few months and responds well to linear
-                            progression would be (probably) classified as a
-                            beginner. A more experienced and advanced PushPuller
-                            will have probably trained more than a few years and
-                            needs to implement some sort of long-term
-                            periodization.
+                            stimulus.
                         </FormDesc>
                     </FormDescContainer>
                     <SelectContainer>
@@ -85,8 +116,10 @@ const LevelRecommendationForm = () => {
                                 },
                             ]}
                             required
+                            onChange={handleUserLevelSelection}
                         />
                     </SelectContainer>
+                    <InfoContainer>{parseInfoText()}</InfoContainer>
                 </FormInputContainer>
                 <FormInputContainer>
                     <FormSubtitle>
