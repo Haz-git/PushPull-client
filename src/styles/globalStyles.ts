@@ -35,11 +35,17 @@ const GlobalStyle = createGlobalStyle`
     }
 
 
-    .mantine-multi-select-input .mantine-multi-select-root {
+    .mantine-multi-select-input-input .mantine-multi-select-root {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
 
+    }
+
+    .mantine-number-input-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
     }
 
     .mantine-select-input {

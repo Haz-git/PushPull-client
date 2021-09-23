@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-//Components
+//Components:
+import { Select } from '@mantine/core';
+import { NumberInput } from '@mantine/core';
 
-//Styles
+//Styles:
 import styled from 'styled-components';
 import {
     MainContainer,
@@ -15,10 +17,9 @@ import {
     FormDescContainer,
     FormDesc,
 } from './StarRatingsForm';
-import { Select } from '@mantine/core';
 
 const SelectContainer = styled.div`
-    margin: 2.5rem 0 1rem 0;
+    margin: 2rem 0 1rem 0;
 `;
 
 const InfoContainer = styled.div``;
@@ -27,6 +28,10 @@ const InfoText = styled.p`
     font-size: 1rem;
     font-weight: 600;
     color: ${(props) => props.theme.mainText};
+`;
+
+const NumberInputContainer = styled.div`
+    margin: 2rem 0 1rem 0;
 `;
 
 //Interfaces
@@ -165,6 +170,37 @@ const LevelRecommendationForm = () => {
                             required
                         />
                     </SelectContainer>
+                </FormInputContainer>
+                <FormInputContainer>
+                    <FormSubtitle>
+                        Approximately how many days did you run this program?
+                    </FormSubtitle>
+                    <NumberInputContainer>
+                        <NumberInput
+                            label="Estimated Days"
+                            min={1}
+                            max={180}
+                            required
+                            styles={{
+                                root: {
+                                    maxWidth: '40rem',
+                                },
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1.05rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.25rem',
+                                },
+                                input: {
+                                    color: 'rgba(0, 0, 34, 1)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1.05rem',
+                                    fontWeight: 700,
+                                },
+                            }}
+                        />
+                    </NumberInputContainer>
                 </FormInputContainer>
             </FormContainer>
         </MainContainer>
