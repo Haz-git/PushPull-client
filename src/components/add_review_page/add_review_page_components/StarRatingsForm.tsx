@@ -74,9 +74,7 @@ const StarRatingsForm = () => {
             </FormTitleContainer>
             <FormContainer>
                 <FormInputContainer>
-                    <FormSubtitle>
-                        How would you rate this program's reliability?
-                    </FormSubtitle>
+                    <FormSubtitle>Is this program reliable?</FormSubtitle>
                     <FormDescContainer>
                         <FormDesc>
                             In other words, how repeatable is this program? Are
@@ -120,9 +118,7 @@ const StarRatingsForm = () => {
                     </StarContainer>
                 </FormInputContainer>
                 <FormInputContainer>
-                    <FormSubtitle>
-                        How would you rate this program's effectiveness?
-                    </FormSubtitle>
+                    <FormSubtitle>Is this program effective?</FormSubtitle>
                     <FormDescContainer>
                         <FormDesc>
                             Did this program offer improvement in the proclaimed
