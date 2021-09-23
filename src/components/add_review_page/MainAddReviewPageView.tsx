@@ -4,6 +4,7 @@ import * as React from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 import WizardForm from '../general_components/WizardForm';
 import StarRatingsForm from './add_review_page_components/StarRatingsForm';
+import LevelRecommendationForm from './add_review_page_components/LevelRecommendationForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -30,7 +31,9 @@ const MainAddReviewPageView = () => {
                 <WizardSection id="Star Ratings">
                     <StarRatingsForm />
                 </WizardSection>
-                <div id="Level Recommendations">MULTIPLE</div>
+                <WizardSection id="Level Recommendations">
+                    <LevelRecommendationForm></LevelRecommendationForm>
+                </WizardSection>
                 <div id="Improvements">CHILDREN</div>
                 <div id="More Details">HERE</div>
             </WizardForm>
