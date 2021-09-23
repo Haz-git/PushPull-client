@@ -76,7 +76,7 @@ const NodeLabel = styled.p<NodeStyledProps>`
     font-size: 1.2rem;
     color: ${(props) =>
         props.isActive === true ? props.theme.mainText : props.theme.subText};
-    font-weight: 800;
+    font-weight: 700;
 `;
 
 //Interfaces:
@@ -104,8 +104,7 @@ const WizardStepNavigationColumn = ({
 }: IComponentProps): JSX.Element => {
     //Determines any node that's active:
     const determineActiveNodeStep = (stepOfNode: number) => {
-        if (currentStep !== undefined && stepOfNode === currentStep)
-            return true;
+        if (currentStep !== undefined && stepOfNode <= currentStep) return true;
         return false;
     };
 
