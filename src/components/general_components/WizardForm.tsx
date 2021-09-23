@@ -24,6 +24,7 @@ const ButtonContainer = styled.div`
     align-items: center;
     justify-content: flex-end;
     gap: 0.5rem;
+    margin-right: 2rem;
 `;
 
 //Interfaces:
