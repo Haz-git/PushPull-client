@@ -7,6 +7,7 @@ import { NumberInput } from '@mantine/core';
 import { Select } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
 import ExerciseCard from './ExerciseCard';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
@@ -112,6 +113,22 @@ const ImprovementsForm = () => {
     };
 
     //Renders all ExerciseCards:
+
+    const renderAllExerciseCards = () => {
+        if (userExercises.length >= 1) {
+            console.log(userExercises);
+            console.log('should be rendered');
+            return userExercises.map((exercise: any) => (
+                <ExerciseCard
+                    key={uuid()}
+                    exerciseTitle={exercise.exerciseTitle}
+                    initialWeight={exercise.initialWeight}
+                    finalWeight={exercise.finalWeight}
+                    weightUnit={exercise.exerciseUnit}
+                />
+            ));
+        }
+    };
 
     return (
         <MainContainer>
@@ -273,7 +290,7 @@ const ImprovementsForm = () => {
                             </ButtonContainer>
                         </UserExerciseInputsContainer>
                         <UserExerciseCardContainer>
-                            test
+                            {renderAllExerciseCards()}
                         </UserExerciseCardContainer>
                     </AddExerciseContainerGrid>
                 </FormInputContainer>
