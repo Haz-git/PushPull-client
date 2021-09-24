@@ -114,8 +114,6 @@ const ImprovementsForm = () => {
 
     const renderAllExerciseCards = () => {
         if (userExercises.length >= 1) {
-            console.log(userExercises);
-            console.log('should be rendered');
             return userExercises.map((exercise: any) => (
                 <ExerciseCard
                     key={uuid()}
@@ -140,8 +138,8 @@ const ImprovementsForm = () => {
                     </FormSubtitle>
                     <FormDescContainer>
                         <FormDesc>
-                            Let people know how much you've improved! Our
-                            favorites are Bench Press, Barbell Squat, and
+                            Let people know how much you've improved...or not!
+                            Our favorites are Bench Press, Barbell Squat, and
                             Deadlift.
                         </FormDesc>
                     </FormDescContainer>
