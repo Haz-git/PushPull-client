@@ -32,13 +32,13 @@ const PostIcon = styled(PostAdd)`
 const AddExerciseContainerGrid = styled.div`
     display: grid;
     grid-template-columns: 40% auto;
-    align-items: center;
+    align-items: flex-start;
     margin: 2rem 0;
+    column-gap: 2rem;
+    max-width: 60rem;
 `;
 
-const UserExerciseInputsContainer = styled.div`
-    border-right: 1px solid #e5e5e5;
-`;
+const UserExerciseInputsContainer = styled.div``;
 
 const UserInputContainer = styled.div`
     margin-bottom: 1.5rem;
@@ -105,9 +105,7 @@ const ImprovementsForm = () => {
             };
 
             userExercises.push(tempObj);
-
             setUserExercises(userExercises);
-
             resetAllInputs();
         }
     };
