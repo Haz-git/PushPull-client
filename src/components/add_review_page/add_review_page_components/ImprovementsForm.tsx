@@ -34,7 +34,7 @@ const AddExerciseContainerGrid = styled.div`
     grid-template-columns: 40% auto;
     align-items: flex-start;
     margin: 2rem 0;
-    column-gap: 2rem;
+    column-gap: 10rem;
     max-width: 60rem;
 `;
 
