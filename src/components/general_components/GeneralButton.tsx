@@ -23,6 +23,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     width: ${(props) => props.width};
     text-shadow: ${(props) => props.textShadow};
     transition: all 0.1s ease-in;
+    height: ${(props) => props.height};
 
     &:focus {
         outline: none;
@@ -61,6 +62,7 @@ interface IGeneralButtonProps {
     margin?: string;
     textShadow?: string;
     border?: string;
+    height?: string;
 }
 
 const GeneralButton = ({
@@ -83,6 +85,7 @@ const GeneralButton = ({
     margin = '0rem 0rem',
     textShadow = 'rgba(0, 0, 34, .5) 1px 1px 0',
     border = 'none',
+    height = 'auto',
 }: IGeneralButtonProps): JSX.Element => {
     return (
         <>
@@ -103,6 +106,7 @@ const GeneralButton = ({
                 margin={margin}
                 textShadow={textShadow}
                 border={border}
+                height={height}
             >
                 <IconContainer iconMargin={iconMargin}>
                     {buttonIcon && buttonIcon}
