@@ -14,6 +14,7 @@ export const lightTheme = {
     },
     accentColors: {
         orange: 'rgba(224, 113, 51, 1)',
+        red: '#e04733',
     },
     textShadows: {
         sm: '1px 1px 1px rgba(0,0,0,.25)',
