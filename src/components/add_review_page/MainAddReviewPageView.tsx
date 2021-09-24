@@ -16,9 +16,9 @@ const MainContainer = styled.section`
     //     overflow: hidden;
     // }
 
-    // @media ${deviceMin.browserSm} {
-    //     height: 100vh;
-    // }
+    @media ${deviceMin.browserSm} {
+        height: 100vh;
+    }
 `;
 
 const WizardSection = styled.div``;
