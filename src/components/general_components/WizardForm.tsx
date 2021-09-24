@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 //Components:
+import scrollToTop from '../../utils/scrollToTop';
 import WizardStepNavigationColumn from '../general_components/WizardStepNavigationColumn';
 import GeneralButton from '../general_components/GeneralButton';
 import { Progress } from '@mantine/core';
@@ -14,10 +15,12 @@ const MainContainer = styled.section``;
 const FormContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 8fr;
-    height: 100vh;
+    height: 100%;
 `;
 
-const ChildrenContainer = styled.div``;
+const ChildrenContainer = styled.div`
+    margin-bottom: 2rem;
+`;
 
 const ButtonContainer = styled.div`
     display: flex;
@@ -34,18 +37,25 @@ interface IComponentProps {
 }
 
 const WizardForm = ({ children }: IComponentProps): JSX.Element => {
+    //Scroll to top on component render:
+    useEffect(() => {
+        scrollToTop();
+    }, []);
+
     const [viewIndex, setViewIndex] = useState(0);
 
     //Handle Prev or Next Requests:
     const handleNext = () => {
         if ((children as any)[viewIndex + 1] !== undefined) {
             setViewIndex(viewIndex + 1);
+            scrollToTop();
         }
     };
 
     const handlePrev = () => {
         if (viewIndex > 0) {
             setViewIndex(viewIndex - 1);
+            scrollToTop();
         }
     };
 
