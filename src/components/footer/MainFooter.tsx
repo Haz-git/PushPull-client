@@ -18,6 +18,7 @@ const MailIcon = styled(MailSend)`
 
 const MainContainer = styled.section`
     @media ${deviceMin.mobileS} {
+        /* height: 10rem; */
         display: block;
         text-align: center;
         padding: 0.5rem 1rem;
@@ -25,6 +26,7 @@ const MainContainer = styled.section`
     }
 
     @media ${deviceMin.tablet} {
+        /* height: 4rem; */
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -93,7 +95,7 @@ interface IComponentProps {
 
 const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
     return (
-        <MainContainer>
+        <MainContainer className="main-footer">
             <FooterTextBlock>
                 <FooterText>© 2021 PushPull. All rights reserved.</FooterText>
             </FooterTextBlock>

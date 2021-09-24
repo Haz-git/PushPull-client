@@ -10,12 +10,14 @@ import { Progress } from '@mantine/core';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section``;
+const MainContainer = styled.section`
+    height: 100vh;
+    overflow: scroll;
+`;
 
 const FormContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 8fr;
-    height: 100%;
 `;
 
 const ChildrenContainer = styled.div`

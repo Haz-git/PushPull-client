@@ -9,10 +9,18 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
+        position: relative;
         height: 100%;
         background: rgba(244, 244, 244, 1);
         font-family: 'Lato', sans-serif, helvetica;
+        /* padding-bottom: 4rem; */
     }
+
+    /* .main-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    } */
 
     a {
         text-decoration: none;
