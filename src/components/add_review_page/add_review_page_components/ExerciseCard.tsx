@@ -7,8 +7,17 @@ import styled from 'styled-components';
 import { CaretUp } from '@styled-icons/fluentui-system-filled/CaretUp';
 import { CaretDown } from '@styled-icons/fluentui-system-filled/CaretDown';
 import { ArrowRightAlt } from '@styled-icons/material-rounded/ArrowRightAlt';
+import { Delete } from '@styled-icons/fluentui-system-filled/Delete';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Icons:
+
+const DeleteIcon = styled(Delete)`
+    height: 1.7rem;
+    width: 1.7rem;
+    color: white;
+`;
+
 const CaretUpIcon = styled(CaretUp)`
     height: 1.7rem;
     width: 1.7rem;
@@ -28,6 +37,9 @@ const ArrowRightIcon = styled(ArrowRightAlt)`
 `;
 
 const MainContainer = styled.div`
+    display: grid;
+    width: 20rem;
+    grid-template-columns: 80% auto;
     border-radius: 0.3rem;
     border: none;
     background: #ffffff;
@@ -49,20 +61,22 @@ const ExerciseText = styled.p`
 `;
 
 const TitleContainer = styled.div`
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
     border-bottom: 1px solid #ececec;
 `;
 
 const InfoContainer = styled.div``;
 
 const WeightContainer = styled.div`
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 `;
 
 const IconContainer = styled.div``;
+
+const ButtonContainer = styled.div``;
 
 //Interfaces:
 
@@ -97,6 +111,18 @@ const ExerciseCard = ({
                     <IconContainer>{renderCaretIcon()}</IconContainer>
                 </WeightContainer>
             </InfoContainer>
+            <ButtonContainer>
+                <GeneralButton
+                    height="100%"
+                    buttonBackground="#e04733"
+                    disableShadow={true}
+                    width="100%"
+                    buttonIcon={<DeleteIcon />}
+                    buttonLabel=""
+                    iconMargin="0"
+                    hoverShadow="none"
+                />
+            </ButtonContainer>
         </MainContainer>
     );
 };
