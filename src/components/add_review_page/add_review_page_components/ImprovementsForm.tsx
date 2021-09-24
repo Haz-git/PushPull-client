@@ -52,12 +52,14 @@ const ButtonContainer = styled.div`
 //Interfaces:
 
 const ImprovementsForm = () => {
+    //State handler for all exercises:
     const [userExercises, setUserExercises] = useState<any>([]);
 
+    //State handlers for all user inputs:
     const [exerciseTitle, setExerciseTitle] = useState<any>('');
     const [initialWeight, setInitialWeight] = useState(1);
     const [finalWeight, setFinalWeight] = useState(1);
-    const [exerciseUnit, setExerciseUnit] = useState('');
+    const [exerciseUnit, setExerciseUnit] = useState('lbs');
 
     const handleUserExerciseInput = (
         e: React.ChangeEvent<HTMLInputElement>
@@ -76,6 +78,40 @@ const ImprovementsForm = () => {
     const handleUserExerciseUnitInput = (value: string) => {
         setExerciseUnit(value);
     };
+
+    //Reset Inputs:
+    const resetAllInputs = () => {
+        setExerciseTitle('');
+        setInitialWeight(1);
+        setFinalWeight(1);
+        setExerciseUnit('lbs');
+    };
+
+    //Submission Handler:
+
+    const handleUserSubmission = () => {
+        if (
+            exerciseTitle !== '' &&
+            initialWeight >= 1 &&
+            finalWeight >= 1 &&
+            exerciseUnit
+        ) {
+            let tempObj = {
+                exerciseTitle,
+                initialWeight,
+                finalWeight,
+                exerciseUnit,
+            };
+
+            userExercises.push(tempObj);
+
+            setUserExercises(userExercises);
+
+            resetAllInputs();
+        }
+    };
+
+    //Renders all ExerciseCards:
 
     return (
         <MainContainer>
@@ -232,6 +268,7 @@ const ImprovementsForm = () => {
                                     buttonTextColor="#ffffff"
                                     padding=".6rem .5rem"
                                     fontSize="1.05rem"
+                                    onClick={handleUserSubmission}
                                 />
                             </ButtonContainer>
                         </UserExerciseInputsContainer>
