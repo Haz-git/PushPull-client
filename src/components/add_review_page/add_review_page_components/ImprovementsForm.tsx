@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { TextInput } from '@mantine/core';
@@ -51,6 +52,31 @@ const ButtonContainer = styled.div`
 //Interfaces:
 
 const ImprovementsForm = () => {
+    const [userExercises, setUserExercises] = useState<any>([]);
+
+    const [exerciseTitle, setExerciseTitle] = useState<any>('');
+    const [initialWeight, setInitialWeight] = useState(1);
+    const [finalWeight, setFinalWeight] = useState(1);
+    const [exerciseUnit, setExerciseUnit] = useState('');
+
+    const handleUserExerciseInput = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        setExerciseTitle(e.target.value);
+    };
+
+    const handleUserIWeight = (value: number) => {
+        setInitialWeight(value);
+    };
+
+    const handleUserFWeight = (value: number) => {
+        setFinalWeight(value);
+    };
+
+    const handleUserExerciseUnitInput = (value: string) => {
+        console.log(value);
+    };
+
     return (
         <MainContainer>
             <FormTitleContainer>
@@ -72,6 +98,7 @@ const ImprovementsForm = () => {
                         <UserExerciseInputsContainer>
                             <UserInputContainer>
                                 <TextInput
+                                    name="exerciseTitle"
                                     styles={{
                                         root: {
                                             maxWidth: '30rem',
@@ -93,10 +120,12 @@ const ImprovementsForm = () => {
                                     required
                                     label="Exercise Name"
                                     placeholder="Write your exercise name"
+                                    onChange={handleUserExerciseInput}
                                 />
                             </UserInputContainer>
                             <UserInputContainer>
                                 <NumberInput
+                                    name="initialWeight"
                                     label="Initial Weight"
                                     min={1}
                                     max={9999}
@@ -119,10 +148,12 @@ const ImprovementsForm = () => {
                                             fontWeight: 700,
                                         },
                                     }}
+                                    onChange={handleUserIWeight}
                                 />
                             </UserInputContainer>
                             <UserInputContainer>
                                 <NumberInput
+                                    name="finalWeight"
                                     label="Final Weight"
                                     min={1}
                                     max={9999}
@@ -145,10 +176,12 @@ const ImprovementsForm = () => {
                                             fontWeight: 700,
                                         },
                                     }}
+                                    onChange={handleUserFWeight}
                                 />
                             </UserInputContainer>
                             <UserInputContainer>
                                 <Select
+                                    name="weightUnit"
                                     clearable
                                     styles={{
                                         root: {
@@ -181,6 +214,7 @@ const ImprovementsForm = () => {
                                         },
                                     ]}
                                     required
+                                    onChange={handleUserExerciseUnitInput}
                                 />
                             </UserInputContainer>
                             <ButtonContainer>
