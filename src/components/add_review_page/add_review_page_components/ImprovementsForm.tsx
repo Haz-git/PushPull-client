@@ -74,7 +74,7 @@ const ImprovementsForm = () => {
     };
 
     const handleUserExerciseUnitInput = (value: string) => {
-        console.log(value);
+        setExerciseUnit(value);
     };
 
     return (
@@ -121,6 +121,7 @@ const ImprovementsForm = () => {
                                     label="Exercise Name"
                                     placeholder="Write your exercise name"
                                     onChange={handleUserExerciseInput}
+                                    value={exerciseTitle}
                                 />
                             </UserInputContainer>
                             <UserInputContainer>
@@ -149,6 +150,7 @@ const ImprovementsForm = () => {
                                         },
                                     }}
                                     onChange={handleUserIWeight}
+                                    value={initialWeight}
                                 />
                             </UserInputContainer>
                             <UserInputContainer>
@@ -177,6 +179,7 @@ const ImprovementsForm = () => {
                                         },
                                     }}
                                     onChange={handleUserFWeight}
+                                    value={finalWeight}
                                 />
                             </UserInputContainer>
                             <UserInputContainer>
@@ -215,6 +218,7 @@ const ImprovementsForm = () => {
                                     ]}
                                     required
                                     onChange={handleUserExerciseUnitInput}
+                                    value={exerciseUnit}
                                 />
                             </UserInputContainer>
                             <ButtonContainer>
