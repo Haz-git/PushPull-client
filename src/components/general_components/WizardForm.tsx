@@ -65,6 +65,7 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
     const handleSpecificViewRequest = (viewNum: number) => {
         if (viewNum >= 0 && viewNum < (children as any).length)
             setViewIndex(viewNum);
+        scrollToTop();
     };
 
     //Render different wizard form views:
