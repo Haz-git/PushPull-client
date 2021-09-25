@@ -21,29 +21,32 @@ import {
     FormDesc,
 } from './StarRatingsForm';
 
-const SvgContainer = styled.div`
+const SvgContainer = styled.button<SvgContainerProps>`
     text-align: center;
     height: 12rem;
     width: 15rem;
     padding: 1rem 1rem;
-    background: transparent;
-    border: 1px solid #e5e5e5;
+    background: ${(props) => (props.isSelected ? '#ffffff' : 'transparent')};
+    border: ${(props) =>
+        props.isSelected
+            ? '1px solid rgba(224, 113, 51, 1)'
+            : '1px solid #e5e5e5'};
     border-radius: 0.3rem;
     margin-right: 2rem;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s linear;
 
     &:hover {
         background: #ffffff;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px,
-            rgba(0, 0, 0, 0.23) 0px 2px 4px;
-        transform: scale(1.02);
+            rgba(0, 0, 0, 0.23) 0px 1px 6px;
+        transform: scale(1.01);
     }
 `;
 
 const SvgText = styled.p`
     font-size: 1.1rem;
-    font-weight: 800;
+    font-weight: 700;
     color: ${(props) => props.theme.subText};
 `;
 
@@ -68,11 +71,20 @@ const NumberInputContainer = styled.div`
 
 //Interfaces
 
+interface SvgContainerProps {
+    isSelected: boolean;
+}
+
 const LevelRecommendationForm = () => {
     const [userLevel, setUserLevel] = useState('');
+    const [userRecommendation, setUserRecommendation] = useState('');
 
     const handleUserLevelSelection = (val: string) => {
         setUserLevel(val);
+    };
+
+    const handleUserRecommendationSelection = (val: string) => {
+        setUserRecommendation(val);
     };
 
     const selectionDesc = {
@@ -97,6 +109,19 @@ const LevelRecommendationForm = () => {
         }
     };
 
+    const identifySelected = (curr: string, selectionType: string) => {
+        switch (selectionType) {
+            case 'userLevel':
+                if (curr === userLevel) return true;
+                else return false;
+            case 'recommendLevel':
+                if (curr === userRecommendation) return true;
+                else return false;
+            default:
+                return false;
+        }
+    };
+
     return (
         <MainContainer>
             <FormTitleContainer>
@@ -116,15 +141,35 @@ const LevelRecommendationForm = () => {
                         </FormDesc>
                     </FormDescContainer>
                     <SelectContainer>
-                        <SvgContainer>
+                        <SvgContainer
+                            isSelected={identifySelected(
+                                'beginner',
+                                'userLevel'
+                            )}
+                            onClick={() => handleUserLevelSelection('beginner')}
+                        >
                             <SvgText>Beginner</SvgText>
                             <BeginnerLevelSVG />
                         </SvgContainer>
-                        <SvgContainer>
+                        <SvgContainer
+                            isSelected={identifySelected(
+                                'intermediate',
+                                'userLevel'
+                            )}
+                            onClick={() =>
+                                handleUserLevelSelection('intermediate')
+                            }
+                        >
                             <SvgText>Intermediate</SvgText>
                             <IntermediateLevelSVG />
                         </SvgContainer>
-                        <SvgContainer>
+                        <SvgContainer
+                            isSelected={identifySelected(
+                                'advanced',
+                                'userLevel'
+                            )}
+                            onClick={() => handleUserLevelSelection('advanced')}
+                        >
                             <SvgText>Advanced</SvgText>
                             <AdvancedLevelSVG />
                         </SvgContainer>
@@ -136,15 +181,41 @@ const LevelRecommendationForm = () => {
                         Who would you recommend this program to?
                     </FormSubtitle>
                     <SelectContainer>
-                        <SvgContainer>
+                        <SvgContainer
+                            isSelected={identifySelected(
+                                'beginner',
+                                'recommendLevel'
+                            )}
+                            onClick={() =>
+                                handleUserRecommendationSelection('beginner')
+                            }
+                        >
                             <SvgText>Beginner</SvgText>
                             <BeginnerLevelSVG />
                         </SvgContainer>
-                        <SvgContainer>
+                        <SvgContainer
+                            isSelected={identifySelected(
+                                'intermediate',
+                                'recommendLevel'
+                            )}
+                            onClick={() =>
+                                handleUserRecommendationSelection(
+                                    'intermediate'
+                                )
+                            }
+                        >
                             <SvgText>Intermediate</SvgText>
                             <IntermediateLevelSVG />
                         </SvgContainer>
-                        <SvgContainer>
+                        <SvgContainer
+                            isSelected={identifySelected(
+                                'advanced',
+                                'recommendLevel'
+                            )}
+                            onClick={() =>
+                                handleUserRecommendationSelection('advanced')
+                            }
+                        >
                             <SvgText>Advanced</SvgText>
                             <AdvancedLevelSVG />
                         </SvgContainer>
