@@ -4,6 +4,9 @@ import { useState } from 'react';
 //Components:
 import { Select } from '@mantine/core';
 import { NumberInput } from '@mantine/core';
+import { ReactComponent as BeginnerLevelSVG } from '../../../assets/beginner.svg';
+import { ReactComponent as IntermediateLevelSVG } from '../../../assets/intermediate.svg';
+import { ReactComponent as AdvancedLevelSVG } from '../../../assets/advanced.svg';
 
 //Styles:
 import styled from 'styled-components';
@@ -18,7 +21,36 @@ import {
     FormDesc,
 } from './StarRatingsForm';
 
+const SvgContainer = styled.div`
+    text-align: center;
+    height: 12rem;
+    width: 15rem;
+    padding: 1rem 1rem;
+    background: transparent;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.3rem;
+    margin-right: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background: #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px,
+            rgba(0, 0, 0, 0.23) 0px 2px 4px;
+        transform: scale(1.02);
+    }
+`;
+
+const SvgText = styled.p`
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: ${(props) => props.theme.subText};
+`;
+
 const SelectContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     margin: 2rem 0 1rem 0;
 `;
 
@@ -84,45 +116,18 @@ const LevelRecommendationForm = () => {
                         </FormDesc>
                     </FormDescContainer>
                     <SelectContainer>
-                        <Select
-                            clearable
-                            styles={{
-                                root: {
-                                    maxWidth: '40rem',
-                                },
-                                label: {
-                                    color: 'rgba(0, 0, 34, .7)',
-                                    fontFamily: 'Lato, sans-serif',
-                                    fontSize: '1.05rem',
-                                    fontWeight: 700,
-                                    marginBottom: '.25rem',
-                                },
-                                input: {
-                                    color: 'rgba(0, 0, 34, 1)',
-                                    fontFamily: 'Lato, sans-serif',
-                                    fontSize: '1.05rem',
-                                    fontWeight: 700,
-                                },
-                            }}
-                            label="Estimated User Level"
-                            placeholder="Choose a Level"
-                            data={[
-                                {
-                                    value: 'beginner',
-                                    label: 'Beginner',
-                                },
-                                {
-                                    value: 'intermediate',
-                                    label: 'Intermediate',
-                                },
-                                {
-                                    value: 'advanced',
-                                    label: 'Advanced',
-                                },
-                            ]}
-                            required
-                            onChange={handleUserLevelSelection}
-                        />
+                        <SvgContainer>
+                            <SvgText>Beginner</SvgText>
+                            <BeginnerLevelSVG />
+                        </SvgContainer>
+                        <SvgContainer>
+                            <SvgText>Intermediate</SvgText>
+                            <IntermediateLevelSVG />
+                        </SvgContainer>
+                        <SvgContainer>
+                            <SvgText>Advanced</SvgText>
+                            <AdvancedLevelSVG />
+                        </SvgContainer>
                     </SelectContainer>
                     <InfoContainer>{parseInfoText()}</InfoContainer>
                 </FormInputContainer>
@@ -131,44 +136,18 @@ const LevelRecommendationForm = () => {
                         Who would you recommend this program to?
                     </FormSubtitle>
                     <SelectContainer>
-                        <Select
-                            clearable
-                            styles={{
-                                root: {
-                                    maxWidth: '40rem',
-                                },
-                                label: {
-                                    color: 'rgba(0, 0, 34, .7)',
-                                    fontFamily: 'Lato, sans-serif',
-                                    fontSize: '1.05rem',
-                                    fontWeight: 700,
-                                    marginBottom: '.25rem',
-                                },
-                                input: {
-                                    color: 'rgba(0, 0, 34, 1)',
-                                    fontFamily: 'Lato, sans-serif',
-                                    fontSize: '1.05rem',
-                                    fontWeight: 700,
-                                },
-                            }}
-                            label="Estimated User Level"
-                            placeholder="Choose a Level"
-                            data={[
-                                {
-                                    value: 'beginner',
-                                    label: 'Beginner PushPullers',
-                                },
-                                {
-                                    value: 'intermediate',
-                                    label: 'Intermediate PushPullers',
-                                },
-                                {
-                                    value: 'advanced',
-                                    label: 'Advanced PushPullers',
-                                },
-                            ]}
-                            required
-                        />
+                        <SvgContainer>
+                            <SvgText>Beginner</SvgText>
+                            <BeginnerLevelSVG />
+                        </SvgContainer>
+                        <SvgContainer>
+                            <SvgText>Intermediate</SvgText>
+                            <IntermediateLevelSVG />
+                        </SvgContainer>
+                        <SvgContainer>
+                            <SvgText>Advanced</SvgText>
+                            <AdvancedLevelSVG />
+                        </SvgContainer>
                     </SelectContainer>
                 </FormInputContainer>
                 <FormInputContainer>
