@@ -33,7 +33,8 @@ const AddExerciseContainerGrid = styled.div`
     display: grid;
     grid-template-columns: 40% auto;
     align-items: flex-start;
-    margin: 2rem 0;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
     column-gap: 10rem;
     max-width: 60rem;
 `;
@@ -97,11 +98,13 @@ const ImprovementsForm = () => {
             finalWeight >= 1 &&
             exerciseUnit
         ) {
+            let exerciseId = uuid();
             let tempObj = {
                 exerciseTitle,
                 initialWeight,
                 finalWeight,
                 exerciseUnit,
+                exerciseId,
             };
 
             userExercises.push(tempObj);
@@ -116,7 +119,8 @@ const ImprovementsForm = () => {
         if (userExercises.length >= 1) {
             return userExercises.map((exercise: any) => (
                 <ExerciseCard
-                    key={uuid()}
+                    exerciseId={exercise.exerciseId}
+                    key={exercise.exerciseId}
                     exerciseTitle={exercise.exerciseTitle}
                     initialWeight={exercise.initialWeight}
                     finalWeight={exercise.finalWeight}
