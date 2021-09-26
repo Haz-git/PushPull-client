@@ -39,7 +39,7 @@ const ArrowRightIcon = styled(ArrowRightAlt)`
 const MainContainer = styled.div`
     display: grid;
     width: 20rem;
-    grid-template-columns: 80% auto;
+    grid-template-columns: 85% auto;
     border-radius: 0.3rem;
     border: none;
     background: #ffffff;
@@ -49,7 +49,7 @@ const MainContainer = styled.div`
 `;
 
 const ExerciseCardTitle = styled.h2`
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 700;
 `;
@@ -76,7 +76,9 @@ const WeightContainer = styled.div`
 
 const IconContainer = styled.div``;
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+    max-width: 3rem;
+`;
 
 //Interfaces:
 
@@ -85,6 +87,7 @@ interface IComponentProps {
     initialWeight: number;
     finalWeight: number;
     weightUnit: string;
+    exerciseId: number;
 }
 
 const ExerciseCard = ({
@@ -92,6 +95,7 @@ const ExerciseCard = ({
     initialWeight,
     finalWeight,
     weightUnit,
+    exerciseId,
 }: IComponentProps): JSX.Element => {
     const renderCaretIcon = () => {
         if (finalWeight > initialWeight) return <CaretUpIcon />;
