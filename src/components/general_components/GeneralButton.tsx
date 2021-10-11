@@ -10,7 +10,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     margin: ${(props) => props.margin};
     background: ${(props) => props.buttonBackground};
     padding: ${(props) => props.padding};
-    border-radius: 0.2rem;
+    border-radius: ${(props) => props.borderRadius};
     font-family: 'Lato', sans-serif;
     font-size: ${(props) => props.fontSize};
     font-weight: ${(props) => props.fontWeight};
@@ -63,6 +63,7 @@ interface IGeneralButtonProps {
     textShadow?: string;
     border?: string;
     height?: string;
+    borderRadius?: string;
 }
 
 const GeneralButton = ({
@@ -86,6 +87,7 @@ const GeneralButton = ({
     textShadow = 'rgba(0, 0, 34, .5) 1px 1px 0',
     border = 'none',
     height = 'auto',
+    borderRadius = '0.2rem',
 }: IGeneralButtonProps): JSX.Element => {
     return (
         <>
@@ -107,6 +109,7 @@ const GeneralButton = ({
                 textShadow={textShadow}
                 border={border}
                 height={height}
+                borderRadius={borderRadius}
             >
                 <IconContainer iconMargin={iconMargin}>
                     {buttonIcon && buttonIcon}
