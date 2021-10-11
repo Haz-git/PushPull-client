@@ -125,6 +125,7 @@ const ExerciseCard = ({
                     buttonLabel=""
                     iconMargin="0"
                     hoverShadow="none"
+                    borderRadius="0rem .2rem .2rem 0rem"
                 />
             </ButtonContainer>
         </MainContainer>
