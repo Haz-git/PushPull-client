@@ -21,13 +21,13 @@ const DeleteIcon = styled(Delete)`
 const CaretUpIcon = styled(CaretUp)`
     height: 1.7rem;
     width: 1.7rem;
-    color: green;
+    color: ${(props) => props.theme.accentColors.green};
 `;
 
 const CaretDownIcon = styled(CaretDown)`
     height: 1.7rem;
     width: 1.7rem;
-    color: red;
+    color: ${(props) => props.theme.accentColors.red};
 `;
 
 const ArrowRightIcon = styled(ArrowRightAlt)`
@@ -118,7 +118,7 @@ const ExerciseCard = ({
             <ButtonContainer>
                 <GeneralButton
                     height="100%"
-                    buttonBackground="#e04733"
+                    buttonBackground="#AF1432"
                     disableShadow={true}
                     width="100%"
                     buttonIcon={<DeleteIcon />}
