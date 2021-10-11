@@ -113,7 +113,7 @@ const ImprovementsForm = () => {
             finalWeight >= 1 &&
             exerciseUnit
         ) {
-            let exerciseId = uuid();
+            let exerciseId = uuid().toString();
             let tempObj = {
                 exerciseTitle,
                 initialWeight,
@@ -140,8 +140,23 @@ const ImprovementsForm = () => {
                     initialWeight={exercise.initialWeight}
                     finalWeight={exercise.finalWeight}
                     weightUnit={exercise.exerciseUnit}
+                    removeExerciseCard={removeExerciseCard}
                 />
             ));
+        }
+    };
+
+    const removeExerciseCard = (exerciseId: string) => {
+        if (exerciseId) {
+            let targetIdx = userExercises.findIndex(
+                (obj: any) => obj.exerciseId === exerciseId
+            );
+
+            if (targetIdx > -1) {
+                let newArr = userExercises.slice();
+                newArr.splice(targetIdx, 1);
+                setUserExercises(newArr);
+            }
         }
     };
 
