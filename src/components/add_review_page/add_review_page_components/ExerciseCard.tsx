@@ -87,7 +87,8 @@ interface IComponentProps {
     initialWeight: number;
     finalWeight: number;
     weightUnit: string;
-    exerciseId: number;
+    exerciseId: string;
+    removeExerciseCard: (exerciseId: string) => void;
 }
 
 const ExerciseCard = ({
@@ -96,6 +97,7 @@ const ExerciseCard = ({
     finalWeight,
     weightUnit,
     exerciseId,
+    removeExerciseCard,
 }: IComponentProps): JSX.Element => {
     const renderCaretIcon = () => {
         if (finalWeight > initialWeight) return <CaretUpIcon />;
@@ -126,6 +128,7 @@ const ExerciseCard = ({
                     iconMargin="0"
                     hoverShadow="none"
                     borderRadius="0rem .2rem .2rem 0rem"
+                    onClick={() => removeExerciseCard(exerciseId)}
                 />
             </ButtonContainer>
         </MainContainer>
