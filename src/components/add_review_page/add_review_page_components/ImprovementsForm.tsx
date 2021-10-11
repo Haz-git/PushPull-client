@@ -29,11 +29,21 @@ const PostIcon = styled(PostAdd)`
     color: #ffffff;
 `;
 
+const ExerciseCountContainer = styled.div`
+    margin-top: 3rem;
+`;
+
+const ExerciseCountText = styled.h2<ExerciseCountProps>`
+    font-size: 1.5rem;
+    color: ${(props) => props.textColor};
+    font-weight: 800;
+`;
+
 const AddExerciseContainerGrid = styled.div`
     display: grid;
     grid-template-columns: 40% auto;
     align-items: flex-start;
-    margin-top: 4rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
     column-gap: 10rem;
     max-width: 60rem;
@@ -52,6 +62,10 @@ const ButtonContainer = styled.div`
 `;
 
 //Interfaces:
+
+interface ExerciseCountProps {
+    textColor: string;
+}
 
 const ImprovementsForm = () => {
     //State handler for all exercises:
@@ -93,6 +107,7 @@ const ImprovementsForm = () => {
 
     const handleUserSubmission = () => {
         if (
+            userExercises.length < 5 &&
             exerciseTitle !== '' &&
             initialWeight >= 1 &&
             finalWeight >= 1 &&
@@ -130,6 +145,24 @@ const ImprovementsForm = () => {
         }
     };
 
+    const returnExerciseCardCount = () => {
+        return userExercises.length;
+    };
+
+    const returnExerciseCardTextWithColors = () => {
+        let cardTextColor = '#AF1432';
+
+        if (userExercises.length >= 3) {
+            cardTextColor = '#41A312';
+        }
+
+        return (
+            <ExerciseCountText textColor={cardTextColor}>
+                {`${returnExerciseCardCount()}/5 Exercises`}
+            </ExerciseCountText>
+        );
+    };
+
     return (
         <MainContainer>
             <FormTitleContainer>
@@ -147,6 +180,9 @@ const ImprovementsForm = () => {
                             Deadlift.
                         </FormDesc>
                     </FormDescContainer>
+                    <ExerciseCountContainer>
+                        {returnExerciseCardTextWithColors()}
+                    </ExerciseCountContainer>
                     <AddExerciseContainerGrid>
                         <UserExerciseInputsContainer>
                             <UserInputContainer>
