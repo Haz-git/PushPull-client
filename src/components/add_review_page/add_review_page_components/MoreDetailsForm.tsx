@@ -30,15 +30,33 @@ const UserDescInputContainer = styled.div`
     margin: 2rem 0rem;
 `;
 
+const RTELabel = styled.label`
+    color: rgba(0, 0, 34, 0.7);
+    font-family: Lato, san-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+`;
+
+const RTEContainer = styled.div`
+    margin-top: 0.3rem;
+`;
+
 //Interfaces:
 
 //Default 'Placeholder' for RTE:
 
 const initialRTEValue = `
         <div>
-            <h1>Test</h1>
+            <h1>My Engaging Review</h1>
             <div>
-                <li>Something</li>
+                <b>Some items to perhaps consider when writing...</b>
+            </div>
+            <div>
+                <ol>
+                    <li>Were you consuming a calorie deficit or surplus on this program?</li>
+                    <li>Did you have ample time for recovery (did you sleep well)?</li>
+                    <li>Any challenges? Sticking points?</li>
+                </ol>
             </div>
         </div> 
     `;
@@ -90,29 +108,13 @@ const MoreDetailsForm = () => {
                             />
                         </UserHeaderInputContainer>
                         <UserDescInputContainer>
-                            {/* <RichTextEditor value={value} onChange={onChange} /> */}
-                            <Textarea
-                                styles={{
-                                    label: {
-                                        color: 'rgba(0, 0, 34, .7)',
-                                        fontFamily: 'Lato, sans-serif',
-                                        fontSize: '1.05rem',
-                                        fontWeight: 700,
-                                        marginBottom: '.25rem',
-                                    },
-                                    input: {
-                                        color: 'rgba(0, 0, 34, 1)',
-                                        fontFamily: 'Lato, sans-serif',
-                                        fontSize: '1.05rem',
-                                        fontWeight: 700,
-                                        maxWidth: '60rem',
-                                        height: '27rem',
-                                    },
-                                }}
-                                label="Review Description"
-                                placeholder="Let everyone know your thoughts!"
-                                required
-                            />
+                            <RTELabel>Review Description</RTELabel>
+                            <RTEContainer>
+                                <RichTextEditor
+                                    value={value}
+                                    onChange={onChange}
+                                />
+                            </RTEContainer>
                         </UserDescInputContainer>
                     </UserInputContainer>
                 </FormInputContainer>
