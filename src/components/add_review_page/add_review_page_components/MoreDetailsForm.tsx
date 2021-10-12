@@ -89,7 +89,7 @@ const MoreDetailsForm = () => {
                             />
                         </UserHeaderInputContainer>
                         <UserDescInputContainer>
-                            <RichTextEditor value={value} onChange={onChange} />
+                            {/* <RichTextEditor value={value} onChange={onChange} /> */}
                         </UserDescInputContainer>
                     </UserInputContainer>
                 </FormInputContainer>
