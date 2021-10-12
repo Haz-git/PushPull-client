@@ -46,6 +46,12 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
 
     const [viewIndex, setViewIndex] = useState(0);
 
+    const returnChildrenLength = () => {
+        if (children) {
+            return (children as any).length;
+        }
+    };
+
     //Handle Prev or Next Requests:
     const handleNext = () => {
         if ((children as any)[viewIndex + 1] !== undefined) {
@@ -102,6 +108,41 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
         }
     };
 
+    const renderPaginationButtons = () => {
+        if (returnChildrenLength() === viewIndex + 1) {
+            //if length of children === viewIndex, it means we are at the last page.
+            return (
+                <>
+                    <GeneralButton
+                        buttonLabel="Back"
+                        onClick={handlePrev}
+                        width="6rem"
+                    />
+                    <GeneralButton
+                        buttonLabel="Submit my Review"
+                        onClick={handleNext}
+                        width="12rem"
+                    />
+                </>
+            );
+        }
+
+        return (
+            <>
+                <GeneralButton
+                    buttonLabel="Back"
+                    onClick={handlePrev}
+                    width="6rem"
+                />
+                <GeneralButton
+                    buttonLabel="Next"
+                    onClick={handleNext}
+                    width="6rem"
+                />
+            </>
+        );
+    };
+
     return (
         <MainContainer>
             <Progress
@@ -126,16 +167,7 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
                 <ChildrenContainer>
                     {renderWizardFormViews()}
                     <ButtonContainer>
-                        <GeneralButton
-                            buttonLabel="Back"
-                            onClick={handlePrev}
-                            width="6rem"
-                        />
-                        <GeneralButton
-                            buttonLabel="Next"
-                            onClick={handleNext}
-                            width="6rem"
-                        />
+                        {renderPaginationButtons()}
                     </ButtonContainer>
                 </ChildrenContainer>
             </FormContainer>
