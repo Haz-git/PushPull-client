@@ -5,6 +5,7 @@ import { useState } from 'react';
 import GeneralButton from '../../general_components/GeneralButton';
 import { TextInput } from '@mantine/core';
 import { RichTextEditor } from '@mantine/rte';
+import { Textarea } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -90,6 +91,28 @@ const MoreDetailsForm = () => {
                         </UserHeaderInputContainer>
                         <UserDescInputContainer>
                             {/* <RichTextEditor value={value} onChange={onChange} /> */}
+                            <Textarea
+                                styles={{
+                                    label: {
+                                        color: 'rgba(0, 0, 34, .7)',
+                                        fontFamily: 'Lato, sans-serif',
+                                        fontSize: '1.05rem',
+                                        fontWeight: 700,
+                                        marginBottom: '.25rem',
+                                    },
+                                    input: {
+                                        color: 'rgba(0, 0, 34, 1)',
+                                        fontFamily: 'Lato, sans-serif',
+                                        fontSize: '1.05rem',
+                                        fontWeight: 700,
+                                        maxWidth: '60rem',
+                                        height: '27rem',
+                                    },
+                                }}
+                                label="Review Description"
+                                placeholder="Let everyone know your thoughts!"
+                                required
+                            />
                         </UserDescInputContainer>
                     </UserInputContainer>
                 </FormInputContainer>
