@@ -6,6 +6,7 @@ import WizardForm from '../general_components/WizardForm';
 import StarRatingsForm from './add_review_page_components/StarRatingsForm';
 import LevelRecommendationForm from './add_review_page_components/LevelRecommendationForm';
 import ImprovementsForm from './add_review_page_components/ImprovementsForm';
+import MoreDetailsForm from './add_review_page_components/MoreDetailsForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -38,7 +39,9 @@ const MainAddReviewPageView = () => {
                 <WizardSection id="Improvements">
                     <ImprovementsForm />
                 </WizardSection>
-                <div id="More Details">HERE</div>
+                <WizardSection id="More Details">
+                    <MoreDetailsForm />
+                </WizardSection>
             </WizardForm>
         </MainContainer>
     );
