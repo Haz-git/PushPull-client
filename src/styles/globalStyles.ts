@@ -50,6 +50,13 @@ const GlobalStyle = createGlobalStyle`
 
     }
 
+    .mantine-rich-text-editor-root {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+
+    }
+
     .mantine-number-input-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
