@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
 import { TextInput } from '@mantine/core';
-import { Textarea } from '@mantine/core';
+import { RichTextEditor } from '@mantine/rte';
 
 //Styles:
 import styled from 'styled-components';
@@ -24,11 +25,26 @@ const UserInputContainer = styled.div`
 
 const UserHeaderInputContainer = styled.div``;
 
-const UserDescInputContainer = styled.div``;
+const UserDescInputContainer = styled.div`
+    margin: 2rem 0rem;
+`;
 
 //Interfaces:
 
+//Default 'Placeholder' for RTE:
+
+const initialRTEValue = `
+        <div>
+            <h1>Test</h1>
+            <div>
+                <li>Something</li>
+            </div>
+        </div> 
+    `;
+
 const MoreDetailsForm = () => {
+    const [value, onChange] = useState(initialRTEValue);
+
     return (
         <MainContainer>
             <FormTitleContainer>
@@ -72,6 +88,9 @@ const MoreDetailsForm = () => {
                                 placeholder="Insert Engaging Header Here..."
                             />
                         </UserHeaderInputContainer>
+                        <UserDescInputContainer>
+                            <RichTextEditor value={value} onChange={onChange} />
+                        </UserDescInputContainer>
                     </UserInputContainer>
                 </FormInputContainer>
             </FormContainer>
