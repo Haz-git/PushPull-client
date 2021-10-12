@@ -113,6 +113,15 @@ const MoreDetailsForm = () => {
                                 <RichTextEditor
                                     value={value}
                                     onChange={onChange}
+                                    sticky={true}
+                                    styles={{
+                                        root: {
+                                            height: '30rem',
+                                            maxHeight: '30rem',
+                                            overflow: 'scroll',
+                                            maxWidth: '55rem',
+                                        },
+                                    }}
                                 />
                             </RTEContainer>
                         </UserDescInputContainer>
