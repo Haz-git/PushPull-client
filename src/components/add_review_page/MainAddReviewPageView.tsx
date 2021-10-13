@@ -88,8 +88,14 @@ const MainAddReviewPageView = () => {
             ...userReviewInputDetails,
             [e.target.name]: val,
         });
+    };
 
-        console.log(userReviewInputDetails);
+    //User button handler:
+    const handleUserButtonSelection = (name: string, val: string) => {
+        setUserReviewInputDetails({
+            ...userReviewInputDetails,
+            [name]: val,
+        });
     };
 
     //User star ratings handlers:
@@ -109,6 +115,8 @@ const MainAddReviewPageView = () => {
         }
     };
 
+    console.log(userReviewInputDetails);
+
     return (
         <MainContainer>
             <WizardForm>
@@ -122,7 +130,7 @@ const MainAddReviewPageView = () => {
                 </WizardSection>
                 <WizardSection id="Level Recommendations">
                     <LevelRecommendationForm
-                        onChangeHandler={handleUserInput}
+                        onChangeHandler={handleUserButtonSelection}
                     />
                 </WizardSection>
                 <WizardSection id="Improvements">
