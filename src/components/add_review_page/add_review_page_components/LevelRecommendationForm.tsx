@@ -75,7 +75,13 @@ interface SvgContainerProps {
     isSelected: boolean;
 }
 
-const LevelRecommendationForm = () => {
+interface IComponentProps {
+    onChangeHandler: (e: any) => void;
+}
+
+const LevelRecommendationForm = ({
+    onChangeHandler,
+}: IComponentProps): JSX.Element => {
     const [userLevel, setUserLevel] = useState('');
     const [userRecommendation, setUserRecommendation] = useState('');
 
@@ -142,6 +148,7 @@ const LevelRecommendationForm = () => {
                     </FormDescContainer>
                     <SelectContainer>
                         <SvgContainer
+                            name="currentLevel"
                             isSelected={identifySelected(
                                 'beginner',
                                 'userLevel'
@@ -152,6 +159,7 @@ const LevelRecommendationForm = () => {
                             <BeginnerLevelSVG />
                         </SvgContainer>
                         <SvgContainer
+                            name="currentLevel"
                             isSelected={identifySelected(
                                 'intermediate',
                                 'userLevel'
@@ -164,6 +172,7 @@ const LevelRecommendationForm = () => {
                             <IntermediateLevelSVG />
                         </SvgContainer>
                         <SvgContainer
+                            name="currentLevel"
                             isSelected={identifySelected(
                                 'advanced',
                                 'userLevel'
@@ -182,6 +191,7 @@ const LevelRecommendationForm = () => {
                     </FormSubtitle>
                     <SelectContainer>
                         <SvgContainer
+                            name="recommendedLevel"
                             isSelected={identifySelected(
                                 'beginner',
                                 'recommendLevel'
@@ -194,6 +204,7 @@ const LevelRecommendationForm = () => {
                             <BeginnerLevelSVG />
                         </SvgContainer>
                         <SvgContainer
+                            name="recommendedLevel"
                             isSelected={identifySelected(
                                 'intermediate',
                                 'recommendLevel'
@@ -208,6 +219,7 @@ const LevelRecommendationForm = () => {
                             <IntermediateLevelSVG />
                         </SvgContainer>
                         <SvgContainer
+                            name="recommendedLevel"
                             isSelected={identifySelected(
                                 'advanced',
                                 'recommendLevel'
