@@ -115,11 +115,33 @@ const MainAddReviewPageView = () => {
         }
     };
 
-    console.log(userReviewInputDetails);
+    // console.log(userReviewInputDetails);
+
+    const identifyUserProgress = () => {
+        let totalUserInputs = 11;
+
+        //Check items inside userReviewInputDetails:
+        for (const property in userReviewInputDetails) {
+            if (
+                userReviewInputDetails[
+                    property as keyof typeof userReviewInputDetails
+                ] !== '' ||
+                userReviewInputDetails[
+                    property as keyof typeof userReviewInputDetails
+                ] !== 0
+            ) {
+                totalUserInputs = totalUserInputs - 1;
+            }
+        }
+
+        return totalUserInputs;
+    };
+    //Not returning number correctly...
+    identifyUserProgress();
 
     return (
         <MainContainer>
-            <WizardForm>
+            <WizardForm progressIndicator={1}>
                 <WizardSection id="Star Ratings">
                     <StarRatingsForm
                         onChangeHandler={handleStarRatings}
