@@ -76,15 +76,17 @@ interface SvgContainerProps {
 }
 
 interface IComponentProps {
-    onSVGSelectHandler: (name: string, val: string) => void;
+    onSVGSelectHandler: (name: string, val: string | number) => void;
     currentRecommendSelection: string;
     currentSelfSelection: string;
+    currentFollowLength: number;
 }
 
 const LevelRecommendationForm = ({
     onSVGSelectHandler,
     currentRecommendSelection,
     currentSelfSelection,
+    currentFollowLength,
 }: IComponentProps): JSX.Element => {
     const selectionDesc = {
         beginner:
@@ -240,6 +242,7 @@ const LevelRecommendationForm = ({
                     </FormSubtitle>
                     <NumberInputContainer>
                         <NumberInput
+                            value={currentFollowLength}
                             label="Estimated Days"
                             min={1}
                             max={180}
@@ -262,6 +265,9 @@ const LevelRecommendationForm = ({
                                     fontWeight: 700,
                                 },
                             }}
+                            onChange={(val) =>
+                                onSVGSelectHandler('followLength', val)
+                            }
                         />
                     </NumberInputContainer>
                 </FormInputContainer>
