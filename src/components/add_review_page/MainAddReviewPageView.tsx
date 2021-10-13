@@ -130,7 +130,13 @@ const MainAddReviewPageView = () => {
                 </WizardSection>
                 <WizardSection id="Level Recommendations">
                     <LevelRecommendationForm
-                        onChangeHandler={handleUserButtonSelection}
+                        onSVGSelectHandler={handleUserButtonSelection}
+                        currentRecommendSelection={
+                            userReviewInputDetails.recommendedLevel
+                        }
+                        currentSelfSelection={
+                            userReviewInputDetails.currentLevel
+                        }
                     />
                 </WizardSection>
                 <WizardSection id="Improvements">
