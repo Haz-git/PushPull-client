@@ -76,23 +76,16 @@ interface SvgContainerProps {
 }
 
 interface IComponentProps {
-    onChangeHandler: (name: string, val: string) => void;
+    onSVGSelectHandler: (name: string, val: string) => void;
+    currentRecommendSelection: string;
+    currentSelfSelection: string;
 }
 
 const LevelRecommendationForm = ({
-    onChangeHandler,
+    onSVGSelectHandler,
+    currentRecommendSelection,
+    currentSelfSelection,
 }: IComponentProps): JSX.Element => {
-    const [userLevel, setUserLevel] = useState('');
-    const [userRecommendation, setUserRecommendation] = useState('');
-
-    const handleUserLevelSelection = (val: string) => {
-        setUserLevel(val);
-    };
-
-    const handleUserRecommendationSelection = (val: string) => {
-        setUserRecommendation(val);
-    };
-
     const selectionDesc = {
         beginner:
             'Example: I have been training for a few months. Linear Progression works well for me.',
@@ -103,8 +96,8 @@ const LevelRecommendationForm = ({
     };
 
     const parseInfoText = () => {
-        if (userLevel !== '') {
-            switch (userLevel) {
+        if (currentSelfSelection !== '') {
+            switch (currentSelfSelection) {
                 case 'beginner':
                     return <InfoText>{selectionDesc.beginner}</InfoText>;
                 case 'intermediate':
@@ -118,10 +111,10 @@ const LevelRecommendationForm = ({
     const identifySelected = (curr: string, selectionType: string) => {
         switch (selectionType) {
             case 'userLevel':
-                if (curr === userLevel) return true;
+                if (curr === currentSelfSelection) return true;
                 else return false;
             case 'recommendLevel':
-                if (curr === userRecommendation) return true;
+                if (curr === currentRecommendSelection) return true;
                 else return false;
             default:
                 return false;
@@ -153,7 +146,7 @@ const LevelRecommendationForm = ({
                                 'userLevel'
                             )}
                             onClick={() =>
-                                onChangeHandler('currentLevel', 'beginner')
+                                onSVGSelectHandler('currentLevel', 'beginner')
                             }
                         >
                             <SvgText>Beginner</SvgText>
@@ -165,7 +158,10 @@ const LevelRecommendationForm = ({
                                 'userLevel'
                             )}
                             onClick={() =>
-                                onChangeHandler('currentLevel', 'intermediate')
+                                onSVGSelectHandler(
+                                    'currentLevel',
+                                    'intermediate'
+                                )
                             }
                         >
                             <SvgText>Intermediate</SvgText>
@@ -177,7 +173,7 @@ const LevelRecommendationForm = ({
                                 'userLevel'
                             )}
                             onClick={() =>
-                                onChangeHandler('currentLevel', 'advanced')
+                                onSVGSelectHandler('currentLevel', 'advanced')
                             }
                         >
                             <SvgText>Advanced</SvgText>
@@ -192,26 +188,27 @@ const LevelRecommendationForm = ({
                     </FormSubtitle>
                     <SelectContainer>
                         <SvgContainer
-                            name="recommendedLevel"
                             isSelected={identifySelected(
                                 'beginner',
                                 'recommendLevel'
                             )}
                             onClick={() =>
-                                onChangeHandler('recommendedLevel', 'beginner')
+                                onSVGSelectHandler(
+                                    'recommendedLevel',
+                                    'beginner'
+                                )
                             }
                         >
                             <SvgText>Beginner</SvgText>
                             <BeginnerLevelSVG />
                         </SvgContainer>
                         <SvgContainer
-                            name="recommendedLevel"
                             isSelected={identifySelected(
                                 'intermediate',
                                 'recommendLevel'
                             )}
                             onClick={() =>
-                                onChangeHandler(
+                                onSVGSelectHandler(
                                     'recommendedLevel',
                                     'intermediate'
                                 )
@@ -221,13 +218,15 @@ const LevelRecommendationForm = ({
                             <IntermediateLevelSVG />
                         </SvgContainer>
                         <SvgContainer
-                            name="recommendedLevel"
                             isSelected={identifySelected(
                                 'advanced',
                                 'recommendLevel'
                             )}
                             onClick={() =>
-                                onChangeHandler('recommendedLevel', 'advanced')
+                                onSVGSelectHandler(
+                                    'recommendedLevel',
+                                    'advanced'
+                                )
                             }
                         >
                             <SvgText>Advanced</SvgText>
