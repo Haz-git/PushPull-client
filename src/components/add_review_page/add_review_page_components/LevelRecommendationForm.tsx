@@ -198,7 +198,7 @@ const LevelRecommendationForm = ({
                                 'recommendLevel'
                             )}
                             onClick={() =>
-                                handleUserRecommendationSelection('beginner')
+                                onChangeHandler('recommendedLevel', 'beginner')
                             }
                         >
                             <SvgText>Beginner</SvgText>
@@ -211,7 +211,8 @@ const LevelRecommendationForm = ({
                                 'recommendLevel'
                             )}
                             onClick={() =>
-                                handleUserRecommendationSelection(
+                                onChangeHandler(
+                                    'recommendedLevel',
                                     'intermediate'
                                 )
                             }
@@ -226,7 +227,7 @@ const LevelRecommendationForm = ({
                                 'recommendLevel'
                             )}
                             onClick={() =>
-                                handleUserRecommendationSelection('advanced')
+                                onChangeHandler('recommendedLevel', 'advanced')
                             }
                         >
                             <SvgText>Advanced</SvgText>
