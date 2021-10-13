@@ -91,7 +91,7 @@ const MainAddReviewPageView = () => {
     };
 
     //User button handler:
-    const handleUserButtonSelection = (name: string, val: string) => {
+    const handleUserButtonSelection = (name: string, val: string | number) => {
         setUserReviewInputDetails({
             ...userReviewInputDetails,
             [name]: val,
@@ -136,6 +136,9 @@ const MainAddReviewPageView = () => {
                         }
                         currentSelfSelection={
                             userReviewInputDetails.currentLevel
+                        }
+                        currentFollowLength={
+                            userReviewInputDetails.followLength
                         }
                     />
                 </WizardSection>
