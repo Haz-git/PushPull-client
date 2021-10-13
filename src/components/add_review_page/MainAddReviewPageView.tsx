@@ -34,13 +34,14 @@ const MainAddReviewPageView = () => {
     const [userReviewInputDetails, setUserReviewInputDetails] = useState({
         reviewTitle: '',
         reviewDesc: '',
-        effectivenessRating: 0,
-        repeatableRating: 0,
-        accurateDifficulty: 0,
         currentLevel: '',
         recommendedLevel: '',
         followLength: 0,
     });
+
+    const [repeatableRating, setRepeatableRating] = useState(0);
+    const [effectivenessRating, setEffectivenessRating] = useState(0);
+    const [accurateDifficulty, setAccurateDifficulty] = useState(0);
 
     const [userImprovedStats, setUserImprovedStats] = useState({});
 
@@ -87,13 +88,37 @@ const MainAddReviewPageView = () => {
             ...userReviewInputDetails,
             [e.target.name]: val,
         });
+
+        console.log(userReviewInputDetails);
+    };
+
+    //User star ratings handlers:
+    const handleStarRatings = (val: number, type: string) => {
+        switch (type) {
+            case 'REPEAT':
+                setRepeatableRating(val);
+                break;
+            case 'EFFECTIVE':
+                setEffectivenessRating(val);
+                break;
+            case 'DIFFICULT':
+                setAccurateDifficulty(val);
+                break;
+            default:
+                throw new Error('No valid type');
+        }
     };
 
     return (
         <MainContainer>
             <WizardForm>
                 <WizardSection id="Star Ratings">
-                    <StarRatingsForm />
+                    <StarRatingsForm
+                        onChangeHandler={handleStarRatings}
+                        initialRepeat={repeatableRating}
+                        initialDifficult={accurateDifficulty}
+                        initialEffective={effectivenessRating}
+                    />
                 </WizardSection>
                 <WizardSection id="Level Recommendations">
                     <LevelRecommendationForm></LevelRecommendationForm>
