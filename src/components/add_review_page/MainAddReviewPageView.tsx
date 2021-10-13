@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 
 //Components:
+import historyObject from '../../utils/historyObject';
 import { deviceMin } from '../../devices/breakpoints';
 import WizardForm from '../general_components/WizardForm';
 import StarRatingsForm from './add_review_page_components/StarRatingsForm';
@@ -27,6 +29,37 @@ const WizardSection = styled.div``;
 //Interfaces:
 
 const MainAddReviewPageView = () => {
+    useEffect(() => {
+        window.addEventListener('beforeunload', alertUser);
+
+        window.history.pushState(null, '', window.location.pathname);
+        window.addEventListener('popstate', onBackButtonEvent);
+
+        return () => {
+            window.removeEventListener('beforeunload', alertUser);
+            window.removeEventListener('popstate', onBackButtonEvent);
+        };
+    }, []);
+
+    const alertUser = (e: any) => {
+        e.preventDefault();
+        e.returnValue = '';
+    };
+
+    const onBackButtonEvent = (e: any) => {
+        e.preventDefault();
+
+        if (
+            window.confirm(
+                'Are you sure you want to leave? Your changes will not be saved.'
+            )
+        ) {
+            historyObject.goBack();
+        } else {
+            window.history.pushState(null, '', window.location.pathname);
+        }
+    };
+
     return (
         <MainContainer>
             <WizardForm>
