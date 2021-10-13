@@ -29,9 +29,9 @@ const WizardSection = styled.div``;
 //Interfaces:
 
 const MainAddReviewPageView = () => {
-    const reviewProgressIndicator = useState(0);
+    const [reviewProgressIndicator, setReviewProgressIndicator] = useState(0);
 
-    const userReviewInputDetails = useState({
+    const [userReviewInputDetails, setUserReviewInputDetails] = useState({
         reviewTitle: '',
         reviewDesc: '',
         effectivenessRating: 0,
@@ -42,7 +42,7 @@ const MainAddReviewPageView = () => {
         followLength: 0,
     });
 
-    const userImprovedStats = useState({});
+    const [userImprovedStats, setUserImprovedStats] = useState({});
 
     useEffect(() => {
         //Alert based event listeners
@@ -56,6 +56,8 @@ const MainAddReviewPageView = () => {
             window.removeEventListener('popstate', onBackButtonEvent);
         };
     }, []);
+
+    //Navigation indication handlers:
 
     const alertUser = (e: any) => {
         e.preventDefault();
@@ -74,6 +76,17 @@ const MainAddReviewPageView = () => {
         } else {
             window.history.pushState(null, '', window.location.pathname);
         }
+    };
+
+    //User input master handler:
+
+    const handleUserInput = (e: any) => {
+        const val = e.target.value;
+
+        setUserReviewInputDetails({
+            ...userReviewInputDetails,
+            [e.target.name]: val,
+        });
     };
 
     return (
