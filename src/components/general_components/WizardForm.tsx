@@ -36,6 +36,7 @@ const ButtonContainer = styled.div`
 
 interface IComponentProps {
     children: React.ReactNode;
+    progressIndicator: number;
 }
 
 const WizardForm = ({ children }: IComponentProps): JSX.Element => {
