@@ -121,7 +121,9 @@ const MainAddReviewPageView = () => {
                     />
                 </WizardSection>
                 <WizardSection id="Level Recommendations">
-                    <LevelRecommendationForm></LevelRecommendationForm>
+                    <LevelRecommendationForm
+                        onChangeHandler={handleUserInput}
+                    />
                 </WizardSection>
                 <WizardSection id="Improvements">
                     <ImprovementsForm />
