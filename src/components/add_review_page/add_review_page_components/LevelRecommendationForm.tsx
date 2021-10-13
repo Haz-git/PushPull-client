@@ -76,7 +76,7 @@ interface SvgContainerProps {
 }
 
 interface IComponentProps {
-    onChangeHandler: (e: any) => void;
+    onChangeHandler: (name: string, val: string) => void;
 }
 
 const LevelRecommendationForm = ({
@@ -148,36 +148,37 @@ const LevelRecommendationForm = ({
                     </FormDescContainer>
                     <SelectContainer>
                         <SvgContainer
-                            name="currentLevel"
                             isSelected={identifySelected(
                                 'beginner',
                                 'userLevel'
                             )}
-                            onClick={() => handleUserLevelSelection('beginner')}
+                            onClick={() =>
+                                onChangeHandler('currentLevel', 'beginner')
+                            }
                         >
                             <SvgText>Beginner</SvgText>
                             <BeginnerLevelSVG />
                         </SvgContainer>
                         <SvgContainer
-                            name="currentLevel"
                             isSelected={identifySelected(
                                 'intermediate',
                                 'userLevel'
                             )}
                             onClick={() =>
-                                handleUserLevelSelection('intermediate')
+                                onChangeHandler('currentLevel', 'intermediate')
                             }
                         >
                             <SvgText>Intermediate</SvgText>
                             <IntermediateLevelSVG />
                         </SvgContainer>
                         <SvgContainer
-                            name="currentLevel"
                             isSelected={identifySelected(
                                 'advanced',
                                 'userLevel'
                             )}
-                            onClick={() => handleUserLevelSelection('advanced')}
+                            onClick={() =>
+                                onChangeHandler('currentLevel', 'advanced')
+                            }
                         >
                             <SvgText>Advanced</SvgText>
                             <AdvancedLevelSVG />
