@@ -66,7 +66,21 @@ export const StarContainer = styled.div`
 
 */
 
-const StarRatingsForm = () => {
+//Interfaces:
+
+interface IComponentProps {
+    onChangeHandler: (val: number, type: string) => void;
+    initialRepeat: number;
+    initialEffective: number;
+    initialDifficult: number;
+}
+
+const StarRatingsForm = ({
+    onChangeHandler,
+    initialRepeat,
+    initialDifficult,
+    initialEffective,
+}: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
             <FormTitleContainer>
@@ -88,9 +102,10 @@ const StarRatingsForm = () => {
                             stop={5}
                             fractions={2}
                             readonly={false}
-                            initialRating={0}
+                            initialRating={initialRepeat}
                             emptySymbol={<EmptyStar />}
                             fullSymbol={<FullStar />}
+                            onChange={(val) => onChangeHandler(val, 'REPEAT')}
                         />
                     </StarContainer>
                 </FormInputContainer>
@@ -111,9 +126,12 @@ const StarRatingsForm = () => {
                             stop={5}
                             fractions={2}
                             readonly={false}
-                            initialRating={0}
+                            initialRating={initialDifficult}
                             emptySymbol={<EmptyStar />}
                             fullSymbol={<FullStar />}
+                            onChange={(val) =>
+                                onChangeHandler(val, 'DIFFICULT')
+                            }
                         />
                     </StarContainer>
                 </FormInputContainer>
@@ -132,9 +150,12 @@ const StarRatingsForm = () => {
                             stop={5}
                             fractions={2}
                             readonly={false}
-                            initialRating={0}
+                            initialRating={initialEffective}
                             emptySymbol={<EmptyStar />}
                             fullSymbol={<FullStar />}
+                            onChange={(val) =>
+                                onChangeHandler(val, 'EFFECTIVE')
+                            }
                         />
                     </StarContainer>
                 </FormInputContainer>
