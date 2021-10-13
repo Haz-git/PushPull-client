@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 //Components:
 import historyObject from '../../utils/historyObject';
@@ -29,7 +29,23 @@ const WizardSection = styled.div``;
 //Interfaces:
 
 const MainAddReviewPageView = () => {
+    const reviewProgressIndicator = useState(0);
+
+    const userReviewInputDetails = useState({
+        reviewTitle: '',
+        reviewDesc: '',
+        effectivenessRating: 0,
+        repeatableRating: 0,
+        accurateDifficulty: 0,
+        currentLevel: '',
+        recommendedLevel: '',
+        followLength: 0,
+    });
+
+    const userImprovedStats = useState({});
+
     useEffect(() => {
+        //Alert based event listeners
         window.addEventListener('beforeunload', alertUser);
 
         window.history.pushState(null, '', window.location.pathname);
