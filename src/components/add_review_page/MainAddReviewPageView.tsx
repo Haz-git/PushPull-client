@@ -26,6 +26,24 @@ const MainContainer = styled.section`
 
 const WizardSection = styled.div``;
 
+//Default 'Placeholder' for RTE:
+
+const initialRTEValue = `
+        <div>
+            <h1>My Engaging Review</h1>
+            <div>
+                <b>Some items to perhaps consider when writing...</b>
+            </div>
+            <div>
+                <ol>
+                    <li>Were you consuming a calorie deficit or surplus on this program?</li>
+                    <li>Did you have ample time for recovery (did you sleep well)?</li>
+                    <li>Any challenges? Sticking points?</li>
+                </ol>
+            </div>
+        </div> 
+    `;
+
 //Interfaces:
 
 const MainAddReviewPageView = () => {
@@ -33,7 +51,7 @@ const MainAddReviewPageView = () => {
 
     const [userReviewInputDetails, setUserReviewInputDetails] = useState({
         reviewTitle: '',
-        reviewDesc: '',
+        reviewDesc: initialRTEValue,
         currentLevel: '',
         recommendedLevel: '',
         followLength: 0,
@@ -81,12 +99,10 @@ const MainAddReviewPageView = () => {
 
     //User input master handler:
 
-    const handleUserInput = (e: any) => {
-        const val = e.target.value;
-
+    const handleUserMoreDetailsInput = (name: string, val: string) => {
         setUserReviewInputDetails({
             ...userReviewInputDetails,
-            [e.target.name]: val,
+            [name]: val,
         });
     };
 
@@ -165,24 +181,34 @@ const MainAddReviewPageView = () => {
         return totalSelectedOptions;
     };
 
+    //Helper function for checking valid improvements length:
+    const checkImprovementExerciseLength = () => {
+        if (userImprovedStats.length >= 3) return 3;
+        return userImprovedStats.length;
+    };
+
     const identifyUserProgress = () => {
-        let totalUserInputs = 11;
+        let totalUserInputsRequired = 12;
 
         //Check items inside userReviewInputDetails
         for (const [key, value] of Object.entries(userReviewInputDetails)) {
-            if (value !== '' && value !== 0) {
-                totalUserInputs -= 1;
+            if (value !== '' && value !== 0 && value !== initialRTEValue) {
+                totalUserInputsRequired -= 1;
             }
         }
 
         //Check star ratings:
-        totalUserInputs -= checkStarRatingsSelected();
+        totalUserInputsRequired -= checkStarRatingsSelected();
+
+        //Check improvements for atleast 3 entries:
+        totalUserInputsRequired -= checkImprovementExerciseLength(); //I think there's something weird going on here..
 
         console.log(userReviewInputDetails);
-        console.log(totalUserInputs);
+        console.log(totalUserInputsRequired);
 
-        return totalUserInputs;
+        return totalUserInputsRequired;
     };
+
     //Not returning number correctly...
     identifyUserProgress();
 
@@ -219,7 +245,11 @@ const MainAddReviewPageView = () => {
                     />
                 </WizardSection>
                 <WizardSection id="More Details">
-                    <MoreDetailsForm />
+                    <MoreDetailsForm
+                        handleUserInput={handleUserMoreDetailsInput}
+                        currentEditorVal={userReviewInputDetails.reviewDesc}
+                        currentHeaderVal={userReviewInputDetails.reviewTitle}
+                    />
                 </WizardSection>
             </WizardForm>
         </MainContainer>
