@@ -43,27 +43,17 @@ const RTEContainer = styled.div`
 
 //Interfaces:
 
-//Default 'Placeholder' for RTE:
+interface IComponentProps {
+    handleUserInput: (name: string, val: string) => void;
+    currentHeaderVal: string;
+    currentEditorVal: string;
+}
 
-const initialRTEValue = `
-        <div>
-            <h1>My Engaging Review</h1>
-            <div>
-                <b>Some items to perhaps consider when writing...</b>
-            </div>
-            <div>
-                <ol>
-                    <li>Were you consuming a calorie deficit or surplus on this program?</li>
-                    <li>Did you have ample time for recovery (did you sleep well)?</li>
-                    <li>Any challenges? Sticking points?</li>
-                </ol>
-            </div>
-        </div> 
-    `;
-
-const MoreDetailsForm = () => {
-    const [value, onChange] = useState(initialRTEValue);
-
+const MoreDetailsForm = ({
+    handleUserInput,
+    currentHeaderVal,
+    currentEditorVal,
+}: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
             <FormTitleContainer>
@@ -83,7 +73,6 @@ const MoreDetailsForm = () => {
                     <UserInputContainer>
                         <UserHeaderInputContainer>
                             <TextInput
-                                name="reviewHeader"
                                 styles={{
                                     root: {
                                         maxWidth: '30rem',
@@ -105,14 +94,23 @@ const MoreDetailsForm = () => {
                                 required
                                 label="Review Header"
                                 placeholder="Insert Engaging Header Here..."
+                                onChange={(e) =>
+                                    handleUserInput(
+                                        'reviewTitle',
+                                        e.target.value
+                                    )
+                                }
+                                value={currentHeaderVal}
                             />
                         </UserHeaderInputContainer>
                         <UserDescInputContainer>
                             <RTELabel>Review Description</RTELabel>
                             <RTEContainer>
                                 <RichTextEditor
-                                    value={value}
-                                    onChange={onChange}
+                                    value={currentEditorVal}
+                                    onChange={(val) =>
+                                        handleUserInput('reviewDesc', val)
+                                    }
                                     sticky={true}
                                     styles={{
                                         root: {
