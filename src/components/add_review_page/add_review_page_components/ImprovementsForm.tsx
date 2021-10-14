@@ -67,10 +67,17 @@ interface ExerciseCountProps {
     textColor: string;
 }
 
-const ImprovementsForm = () => {
-    //State handler for all exercises:
-    const [userExercises, setUserExercises] = useState<any>([]);
+interface IComponentProps {
+    userExerciseHandler: (object: any) => void;
+    currentUserExercises: any[];
+    removeExerciseCard: (exerciseId: string) => void;
+}
 
+const ImprovementsForm = ({
+    userExerciseHandler,
+    currentUserExercises,
+    removeExerciseCard,
+}: IComponentProps): JSX.Element => {
     //State handlers for all user inputs:
     const [exerciseTitle, setExerciseTitle] = useState<any>('');
     const [initialWeight, setInitialWeight] = useState(1);
@@ -106,33 +113,24 @@ const ImprovementsForm = () => {
     //Submission Handler:
 
     const handleUserSubmission = () => {
-        if (
-            userExercises.length < 5 &&
-            exerciseTitle !== '' &&
-            initialWeight >= 1 &&
-            finalWeight >= 1 &&
-            exerciseUnit
-        ) {
-            let exerciseId = uuid().toString();
-            let tempObj = {
-                exerciseTitle,
-                initialWeight,
-                finalWeight,
-                exerciseUnit,
-                exerciseId,
-            };
+        let exerciseId = uuid().toString();
+        let tempObj = {
+            exerciseTitle,
+            initialWeight,
+            finalWeight,
+            exerciseUnit,
+            exerciseId,
+        };
 
-            userExercises.push(tempObj);
-            setUserExercises(userExercises);
-            resetAllInputs();
-        }
+        userExerciseHandler(tempObj);
+        resetAllInputs();
     };
 
     //Renders all ExerciseCards:
 
     const renderAllExerciseCards = () => {
-        if (userExercises.length >= 1) {
-            return userExercises.map((exercise: any) => (
+        if (currentUserExercises.length >= 1) {
+            return currentUserExercises.map((exercise: any) => (
                 <ExerciseCard
                     exerciseId={exercise.exerciseId}
                     key={exercise.exerciseId}
@@ -146,28 +144,14 @@ const ImprovementsForm = () => {
         }
     };
 
-    const removeExerciseCard = (exerciseId: string) => {
-        if (exerciseId) {
-            let targetIdx = userExercises.findIndex(
-                (obj: any) => obj.exerciseId === exerciseId
-            );
-
-            if (targetIdx > -1) {
-                let newArr = userExercises.slice();
-                newArr.splice(targetIdx, 1);
-                setUserExercises(newArr);
-            }
-        }
-    };
-
     const returnExerciseCardCount = () => {
-        return userExercises.length;
+        return currentUserExercises.length;
     };
 
     const returnExerciseCardTextWithColors = () => {
         let cardTextColor = '#AF1432';
 
-        if (userExercises.length >= 3) {
+        if (currentUserExercises.length >= 3) {
             cardTextColor = '#41A312';
         }
 
