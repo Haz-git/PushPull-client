@@ -39,7 +39,10 @@ interface IComponentProps {
     progressIndicator: number;
 }
 
-const WizardForm = ({ children }: IComponentProps): JSX.Element => {
+const WizardForm = ({
+    children,
+    progressIndicator,
+}: IComponentProps): JSX.Element => {
     //Scroll to top on component render:
     useEffect(() => {
         scrollToTop();
@@ -85,10 +88,13 @@ const WizardForm = ({ children }: IComponentProps): JSX.Element => {
     //Renders the length of the progress bar
     const renderLengthProgressBar = () => {
         //Instead of rendering the progress bar via the number of children, we should render the length of the progress bar via number of fields entered..later
-        if (children) {
-            if (viewIndex >= 0)
-                return (viewIndex / ((children as any).length - 1)) * 100;
+
+        let currentProgress = 0;
+        if (progressIndicator) {
+            currentProgress = progressIndicator * 9.091;
         }
+
+        return currentProgress;
     };
 
     //Parses the id's of the children, and turns them into the WizardStepNavigationColumn's Step Titles:
