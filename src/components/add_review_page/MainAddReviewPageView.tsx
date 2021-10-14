@@ -99,15 +99,7 @@ const MainAddReviewPageView = () => {
 
     //User input master handler:
 
-    const handleUserMoreDetailsInput = (name: string, val: string) => {
-        setUserReviewInputDetails({
-            ...userReviewInputDetails,
-            [name]: val,
-        });
-    };
-
-    //User button handler:
-    const handleUserButtonSelection = (name: string, val: string | number) => {
+    const handleUserInput = (name: string, val: string | number) => {
         setUserReviewInputDetails({
             ...userReviewInputDetails,
             [name]: val,
@@ -188,33 +180,30 @@ const MainAddReviewPageView = () => {
     };
 
     const identifyUserProgress = () => {
-        let totalUserInputsRequired = 12;
+        //12 is required
+        let totalUserInputsRequired = 0;
 
         //Check items inside userReviewInputDetails
         for (const [key, value] of Object.entries(userReviewInputDetails)) {
             if (value !== '' && value !== 0 && value !== initialRTEValue) {
-                totalUserInputsRequired -= 1;
+                totalUserInputsRequired += 1;
             }
         }
 
         //Check star ratings:
-        totalUserInputsRequired -= checkStarRatingsSelected();
+        totalUserInputsRequired += checkStarRatingsSelected();
 
         //Check improvements for atleast 3 entries:
-        totalUserInputsRequired -= checkImprovementExerciseLength(); //I think there's something weird going on here..
+        totalUserInputsRequired += checkImprovementExerciseLength(); //I think there's something weird going on here..
 
-        console.log(userReviewInputDetails);
         console.log(totalUserInputsRequired);
 
         return totalUserInputsRequired;
     };
 
-    //Not returning number correctly...
-    identifyUserProgress();
-
     return (
         <MainContainer>
-            <WizardForm progressIndicator={1}>
+            <WizardForm progressIndicator={identifyUserProgress()}>
                 <WizardSection id="Star Ratings">
                     <StarRatingsForm
                         onChangeHandler={handleStarRatings}
@@ -225,7 +214,7 @@ const MainAddReviewPageView = () => {
                 </WizardSection>
                 <WizardSection id="Level Recommendations">
                     <LevelRecommendationForm
-                        onSVGSelectHandler={handleUserButtonSelection}
+                        onSVGSelectHandler={handleUserInput}
                         currentRecommendSelection={
                             userReviewInputDetails.recommendedLevel
                         }
@@ -246,7 +235,7 @@ const MainAddReviewPageView = () => {
                 </WizardSection>
                 <WizardSection id="More Details">
                     <MoreDetailsForm
-                        handleUserInput={handleUserMoreDetailsInput}
+                        handleUserInput={handleUserInput}
                         currentEditorVal={userReviewInputDetails.reviewDesc}
                         currentHeaderVal={userReviewInputDetails.reviewTitle}
                     />
