@@ -43,7 +43,7 @@ const MainAddReviewPageView = () => {
     const [effectivenessRating, setEffectivenessRating] = useState(0);
     const [accurateDifficulty, setAccurateDifficulty] = useState(0);
 
-    const [userImprovedStats, setUserImprovedStats] = useState({});
+    const [userImprovedStats, setUserImprovedStats] = useState<any>([]);
 
     useEffect(() => {
         //Alert based event listeners
@@ -98,6 +98,45 @@ const MainAddReviewPageView = () => {
         });
     };
 
+    //User improvements exercise handler:
+    const handleUserImprovementsInput = (object: any) => {
+        const {
+            exerciseTitle,
+            initialWeight,
+            finalWeight,
+            exerciseUnit,
+            exerciseId,
+        } = object;
+
+        if (
+            userImprovedStats.length < 5 &&
+            exerciseTitle !== '' &&
+            initialWeight >= 1 &&
+            finalWeight >= 1 &&
+            exerciseUnit &&
+            exerciseId
+        ) {
+            userImprovedStats.push(object);
+            setUserImprovedStats(userImprovedStats);
+        }
+    };
+
+    //User improvements exercise deletion handler:
+
+    const removeExerciseCard = (exerciseId: string) => {
+        if (exerciseId) {
+            let targetIdx = userImprovedStats.findIndex(
+                (obj: any) => obj.exerciseId === exerciseId
+            );
+
+            if (targetIdx > -1) {
+                let newArr = userImprovedStats.slice();
+                newArr.splice(targetIdx, 1);
+                setUserImprovedStats(newArr);
+            }
+        }
+    };
+
     //User star ratings handlers:
     const handleStarRatings = (val: number, type: string) => {
         switch (type) {
@@ -115,9 +154,7 @@ const MainAddReviewPageView = () => {
         }
     };
 
-    // console.log(userReviewInputDetails);
-
-    //Helper function for checking star ratings:
+    //Helper function for checking if star ratings have been selected--to indicate via progress bar:
     const checkStarRatingsSelected = () => {
         let totalSelectedOptions = 0;
 
@@ -175,7 +212,11 @@ const MainAddReviewPageView = () => {
                     />
                 </WizardSection>
                 <WizardSection id="Improvements">
-                    <ImprovementsForm />
+                    <ImprovementsForm
+                        userExerciseHandler={handleUserImprovementsInput}
+                        currentUserExercises={userImprovedStats}
+                        removeExerciseCard={removeExerciseCard}
+                    />
                 </WizardSection>
                 <WizardSection id="More Details">
                     <MoreDetailsForm />
