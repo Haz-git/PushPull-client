@@ -124,8 +124,9 @@ const MainAddReviewPageView = () => {
             exerciseUnit &&
             exerciseId
         ) {
-            userImprovedStats.push(object);
-            setUserImprovedStats(userImprovedStats);
+            let newArr = userImprovedStats.slice();
+            newArr.push(object);
+            setUserImprovedStats(newArr);
         }
     };
 
@@ -175,12 +176,13 @@ const MainAddReviewPageView = () => {
 
     //Helper function for checking valid improvements length:
     const checkImprovementExerciseLength = () => {
+        console.log(userImprovedStats.length);
         if (userImprovedStats.length >= 3) return 3;
         return userImprovedStats.length;
     };
 
     const identifyUserProgress = () => {
-        //12 is required
+        //11 is required
         let totalUserInputsRequired = 0;
 
         //Check items inside userReviewInputDetails
@@ -195,8 +197,6 @@ const MainAddReviewPageView = () => {
 
         //Check improvements for atleast 3 entries:
         totalUserInputsRequired += checkImprovementExerciseLength(); //I think there's something weird going on here..
-
-        console.log(totalUserInputsRequired);
 
         return totalUserInputsRequired;
     };
