@@ -117,22 +117,32 @@ const MainAddReviewPageView = () => {
 
     // console.log(userReviewInputDetails);
 
+    //Helper function for checking star ratings:
+    const checkStarRatingsSelected = () => {
+        let totalSelectedOptions = 0;
+
+        if (repeatableRating !== 0) totalSelectedOptions += 1;
+        if (effectivenessRating !== 0) totalSelectedOptions += 1;
+        if (accurateDifficulty !== 0) totalSelectedOptions += 1;
+
+        return totalSelectedOptions;
+    };
+
     const identifyUserProgress = () => {
         let totalUserInputs = 11;
 
-        //Check items inside userReviewInputDetails:
-        for (const property in userReviewInputDetails) {
-            if (
-                userReviewInputDetails[
-                    property as keyof typeof userReviewInputDetails
-                ] !== '' ||
-                userReviewInputDetails[
-                    property as keyof typeof userReviewInputDetails
-                ] !== 0
-            ) {
-                totalUserInputs = totalUserInputs - 1;
+        //Check items inside userReviewInputDetails
+        for (const [key, value] of Object.entries(userReviewInputDetails)) {
+            if (value !== '' && value !== 0) {
+                totalUserInputs -= 1;
             }
         }
+
+        //Check star ratings:
+        totalUserInputs -= checkStarRatingsSelected();
+
+        console.log(userReviewInputDetails);
+        console.log(totalUserInputs);
 
         return totalUserInputs;
     };
