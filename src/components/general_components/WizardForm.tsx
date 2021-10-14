@@ -15,6 +15,13 @@ const MainContainer = styled.section`
     overflow: scroll;
 `;
 
+const ProgressBarContainer = styled.div`
+    top: 0;
+    position: sticky;
+    position: -webkit-sticky;
+    z-index: 50;
+`;
+
 const FormContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 8fr;
@@ -152,18 +159,20 @@ const WizardForm = ({
 
     return (
         <MainContainer>
-            <Progress
-                value={renderLengthProgressBar()}
-                radius="xs"
-                styles={{
-                    root: {
-                        background: '#e5e5e5',
-                    },
-                    bar: {
-                        background: '#e07133',
-                    },
-                }}
-            />
+            <ProgressBarContainer>
+                <Progress
+                    value={renderLengthProgressBar()}
+                    radius="xs"
+                    styles={{
+                        root: {
+                            background: '#e5e5e5',
+                        },
+                        bar: {
+                            background: '#e07133',
+                        },
+                    }}
+                />
+            </ProgressBarContainer>
             <FormContainer>
                 <WizardStepNavigationColumn
                     numSteps={(children as any).length}
