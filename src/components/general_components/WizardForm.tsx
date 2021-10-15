@@ -31,7 +31,7 @@ const FormContainer = styled.div`
         display: block;
     }
 
-    @media ${deviceMin.laptopHalf} {
+    @media ${deviceMin.laptop} {
         display: grid;
         grid-template-columns: 1fr 8fr;
     }
