@@ -136,7 +136,7 @@ const LevelRecommendationForm = ({
     return (
         <MainContainer>
             <FormTitleContainer>
-                <FormTitle>Level Recommendations</FormTitle>
+                <FormTitle>Level Suggestions</FormTitle>
             </FormTitleContainer>
             <FormContainer>
                 <FormInputContainer>
