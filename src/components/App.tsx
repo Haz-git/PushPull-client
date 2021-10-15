@@ -31,37 +31,43 @@ const App = () => {
         <>
             <ThemeProvider theme={lightTheme}>
                 <GlobalStyle />
-                <BugReportModalContainer>
-                    <GeneralModal
-                        openBoolean={stateBugReportModal}
-                        closeFunc={closeBugReportModal}
-                        title="Send Feedback"
-                    >
-                        <FeedbackForm />
-                    </GeneralModal>
-                </BugReportModalContainer>
-                <Router history={history}>
-                    <Navbar />
-                    <Switch>
-                        <Route exact path="/" component={MainLandingPageView} />
-                        <Route
-                            exact
-                            path="/search"
-                            component={MainSearchPage}
-                        />
-                        <Route
-                            exact
-                            path="/program/:id"
-                            component={MainWorkoutProgramPage}
-                        />
-                        <Route
-                            exact
-                            path="/add-review/:id"
-                            component={MainAddReviewPageView}
-                        />
-                    </Switch>
+                <>
+                    <BugReportModalContainer>
+                        <GeneralModal
+                            openBoolean={stateBugReportModal}
+                            closeFunc={closeBugReportModal}
+                            title="Send Feedback"
+                        >
+                            <FeedbackForm />
+                        </GeneralModal>
+                    </BugReportModalContainer>
+                    <Router history={history}>
+                        <Navbar />
+                        <Switch>
+                            <Route
+                                exact
+                                path="/"
+                                component={MainLandingPageView}
+                            />
+                            <Route
+                                exact
+                                path="/search"
+                                component={MainSearchPage}
+                            />
+                            <Route
+                                exact
+                                path="/program/:id"
+                                component={MainWorkoutProgramPage}
+                            />
+                            <Route
+                                exact
+                                path="/add-review/:id"
+                                component={MainAddReviewPageView}
+                            />
+                        </Switch>
+                    </Router>
                     <MainFooter bugReportHandler={openBugReportModal} />
-                </Router>
+                </>
             </ThemeProvider>
         </>
     );
