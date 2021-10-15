@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 //Components:
+import { deviceMin } from '../../devices/breakpoints';
 import scrollToTop from '../../utils/scrollToTop';
 import WizardStepNavigationColumn from '../general_components/WizardStepNavigationColumn';
 import GeneralButton from '../general_components/GeneralButton';
@@ -25,6 +26,15 @@ const ProgressBarContainer = styled.div`
 const FormContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 8fr;
+
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: grid;
+        grid-template-columns: 1fr 8fr;
+    }
 `;
 
 const ChildrenContainer = styled.div`
