@@ -11,7 +11,7 @@ const size = {
     tabletp: '800px',
     laptopS: '850px',
     laptop: '1024px',
-    laptopM: '1225px',
+    laptopM: '1250px',
     laptopL: '1440px',
     desktopS: '1920px',
     desktopL: '2560px',
