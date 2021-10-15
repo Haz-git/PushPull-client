@@ -41,11 +41,17 @@ const TitleHeader = styled.h2`
 const NodeContainer = styled.div`
     @media ${deviceMin.mobileS} {
         display: flex;
-        margin: 2rem auto 0rem 0rem;
+        margin: 2rem 0rem 0rem 0rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: flex;
+        margin: 2rem 0rem 0rem 1rem;
     }
 
     @media ${deviceMin.laptopHalf} {
         display: block;
+        margin: 2rem 0rem 0rem 0rem;
     }
 `;
 
@@ -92,6 +98,43 @@ const NodeCircle = styled.div<NodeCircleProps>`
         border-radius: 2rem;
         height: 2.5rem;
         width: 2.5rem;
+        margin-right: 1rem;
+
+        &::before {
+            visibility: ${(props) =>
+                props.isLastNode === true ? 'hidden' : 'visible'};
+            content: '';
+            width: 2.5rem;
+            height: 3px;
+            background: ${(props) =>
+                props.isActive === true
+                    ? props.theme.accentColors.orange
+                    : '#e5e5e5'};
+            display: block;
+            position: absolute;
+            right: -2.5rem;
+            top: 45%;
+        }
+    }
+
+    @media ${deviceMin.browserSm} {
+        position: relative;
+        font-size: 1.2rem;
+        color: ${(props) =>
+            props.isActive === true ? '#ffffff' : props.theme.subText};
+        font-weight: 800;
+        text-shadow: ${(props) =>
+            props.isActive === true ? props.theme.textShadows.sm : 'none'};
+        vertical-align: middle;
+        line-height: 3rem;
+        text-align: center;
+        background: ${(props) =>
+            props.isActive === true
+                ? props.theme.accentColors.orange
+                : '#e5e5e5'};
+        border-radius: 2rem;
+        height: 3rem;
+        width: 3rem;
         margin-right: 1rem;
 
         &::before {
