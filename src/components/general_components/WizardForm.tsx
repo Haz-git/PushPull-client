@@ -143,9 +143,9 @@ const WizardForm = ({
                         width="6rem"
                     />
                     <GeneralButton
-                        buttonLabel="Submit my Review"
+                        buttonLabel="Submit"
                         onClick={handleNext}
-                        width="12rem"
+                        width="6rem"
                     />
                 </>
             );
