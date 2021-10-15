@@ -39,10 +39,9 @@ const TitleHeader = styled.h2`
 `;
 
 const NodeContainer = styled.div`
-    margin: 2rem 0rem 0rem 0rem;
-
     @media ${deviceMin.mobileS} {
         display: flex;
+        margin: 2rem auto 0rem 0rem;
     }
 
     @media ${deviceMin.browserSm} {
