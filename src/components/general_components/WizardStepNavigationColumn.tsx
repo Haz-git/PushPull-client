@@ -15,7 +15,7 @@ const MainContainer = styled.div`
         padding: 0rem 1rem;
     }
 
-    @media ${deviceMin.laptopHalf} {
+    @media ${deviceMin.laptop} {
         width: 17rem;
         border-right: 1px solid #e5e5e5;
         text-align: left;
@@ -33,7 +33,7 @@ const TitleHeader = styled.h2`
         display: none;
     }
 
-    @media ${deviceMin.laptopHalf} {
+    @media ${deviceMin.laptop} {
         display: block;
         font-size: 1.8rem;
         color: ${(props) => props.theme.mainText};
@@ -53,7 +53,7 @@ const NodeContainer = styled.div`
         margin: 2rem 0rem 0rem 1rem;
     }
 
-    @media ${deviceMin.laptopHalf} {
+    @media ${deviceMin.laptop} {
         display: block;
         margin: 2rem 0rem 0rem 0rem;
     }
@@ -71,7 +71,7 @@ const NodeItem = styled.button`
         cursor: pointer;
     }
 
-    @media ${deviceMin.laptopHalf} {
+    @media ${deviceMin.laptop} {
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -158,7 +158,7 @@ const NodeCircle = styled.div<NodeCircleProps>`
         }
     }
 
-    @media ${deviceMin.laptopHalf} {
+    @media ${deviceMin.laptop} {
         position: relative;
         font-size: 1.2rem;
         color: ${(props) =>
@@ -201,7 +201,7 @@ const NodeLabel = styled.p<NodeStyledProps>`
         display: none;
     }
 
-    @media ${deviceMin.laptopHalf} {
+    @media ${deviceMin.laptop} {
         font-size: 1rem;
         color: ${(props) =>
             props.isActive === true
@@ -211,9 +211,8 @@ const NodeLabel = styled.p<NodeStyledProps>`
         display: block;
     }
 
-    @media ${deviceMin.tabletp} {
-        font-size: 1rem;
-        display: block;
+    @media ${deviceMin.laptopM} {
+        font-size: 1.2rem;
     }
 `;
 
