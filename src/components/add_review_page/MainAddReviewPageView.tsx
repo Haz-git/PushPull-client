@@ -176,7 +176,6 @@ const MainAddReviewPageView = () => {
 
     //Helper function for checking valid improvements length:
     const checkImprovementExerciseLength = () => {
-        console.log(userImprovedStats.length);
         if (userImprovedStats.length >= 3) return 3;
         return userImprovedStats.length;
     };
