@@ -46,7 +46,7 @@ const AddExerciseContainerGrid = styled.div`
         margin-top: 1rem;
     }
 
-    @media ${deviceMin.browserSm} {
+    @media ${deviceMin.laptopHalf} {
         display: grid;
         grid-template-columns: 40% auto;
         align-items: flex-start;
@@ -70,7 +70,7 @@ const UserExerciseCardContainer = styled.div`
         margin-top: 1.5rem;
     }
 
-    @media ${deviceMin.browserSm} {
+    @media ${deviceMin.laptopHalf} {
         margin-top: -2.5rem;
         padding-top: 0;
         border-top: none;
