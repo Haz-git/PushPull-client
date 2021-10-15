@@ -38,7 +38,8 @@ const ArrowRightIcon = styled(ArrowRightAlt)`
 
 const MainContainer = styled.div`
     display: grid;
-    width: 20rem;
+    width: 100%;
+    max-width: 20rem;
     grid-template-columns: 85% auto;
     border-radius: 0.3rem;
     border: none;
