@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 //Components:
+import { deviceMin } from '../../../devices/breakpoints';
 import Rating from 'react-rating';
 
 //Styles:
@@ -10,31 +11,67 @@ import styled from 'styled-components';
 import { Star } from '@styled-icons/evaicons-solid/Star';
 
 const EmptyStar = styled(Star)`
-    height: 3.5rem;
-    width: 3.5rem;
-    color: #c2c2c2;
+    @media ${deviceMin.mobileS} {
+        height: 2.5rem;
+        width: 2.5rem;
+        color: #c2c2c2;
+    }
+
+    @media ${deviceMin.browserSm} {
+        height: 3.5rem;
+        width: 3.5rem;
+    }
 `;
 
 const FullStar = styled(Star)`
-    height: 3.5rem;
-    width: 3.5rem;
-    color: rgba(224, 113, 51, 1);
+    @media ${deviceMin.mobileS} {
+        height: 2.5rem;
+        width: 2.5rem;
+        color: rgba(224, 113, 51, 1);
+    }
+
+    @media ${deviceMin.browserSm} {
+        height: 3.5rem;
+        width: 3.5rem;
+    }
 `;
 
 export const MainContainer = styled.section`
     padding: 3.5rem 2rem;
+
+    @media ${deviceMin.mobileS} {
+        padding: 3.5rem 1rem 1rem 1rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        padding: 3.5rem 2rem;
+    }
 `;
 
 export const FormTitleContainer = styled.div``;
 
 export const FormTitle = styled.h1`
-    font-size: 2.5rem;
-    color: ${(props) => props.theme.mainText};
-    font-weight: 800;
+    @media ${deviceMin.mobileS} {
+        font-size: 2.1rem;
+        color: ${(props) => props.theme.mainText};
+        font-weight: 800;
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: 2.5rem;
+        color: ${(props) => props.theme.mainText};
+        font-weight: 800;
+    }
 `;
 
 export const FormContainer = styled.div`
-    margin-top: 2rem;
+    @media ${deviceMin.mobileS} {
+        margin-top: 1rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-top: 2rem;
+    }
 `;
 
 export const FormInputContainer = styled.div`
@@ -42,9 +79,17 @@ export const FormInputContainer = styled.div`
 `;
 
 export const FormSubtitle = styled.h2`
-    font-size: 1.6rem;
-    color: ${(props) => props.theme.mainText};
-    font-weight: 700;
+    @media ${deviceMin.mobileS} {
+        font-size: 1.4rem;
+        color: ${(props) => props.theme.mainText};
+        font-weight: 700;
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: 1.6rem;
+        color: ${(props) => props.theme.mainText};
+        font-weight: 700;
+    }
 `;
 
 export const FormDescContainer = styled.div`
@@ -52,9 +97,17 @@ export const FormDescContainer = styled.div`
 `;
 
 export const FormDesc = styled.h3`
-    font-size: 1.2rem;
-    color: ${(props) => props.theme.subText};
-    font-weight: 700;
+    @media ${deviceMin.mobileS} {
+        font-size: 1rem;
+        color: ${(props) => props.theme.subText};
+        font-weight: 700;
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: 1.2rem;
+        color: ${(props) => props.theme.subText};
+        font-weight: 700;
+    }
 `;
 
 export const StarContainer = styled.div`
