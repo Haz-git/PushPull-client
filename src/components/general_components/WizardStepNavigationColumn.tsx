@@ -16,11 +16,15 @@ const MainContainer = styled.div`
     }
 
     @media ${deviceMin.laptopHalf} {
-        width: 25rem;
+        width: 17rem;
         border-right: 1px solid #e5e5e5;
         text-align: left;
         height: 100%;
         padding: 4rem 2rem;
+    }
+
+    @media ${deviceMin.laptopM} {
+        width: 25rem;
     }
 `;
 
@@ -208,7 +212,7 @@ const NodeLabel = styled.p<NodeStyledProps>`
     }
 
     @media ${deviceMin.tabletp} {
-        font-size: 1.2rem;
+        font-size: 1rem;
         display: block;
     }
 `;
