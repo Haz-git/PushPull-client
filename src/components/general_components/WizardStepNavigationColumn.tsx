@@ -12,7 +12,7 @@ const MainContainer = styled.div`
     @media ${deviceMin.mobileS} {
         width: 100%;
         text-align: left;
-        padding: 0rem 2rem;
+        padding: 0rem 1rem;
     }
 
     @media ${deviceMin.browserSm} {
@@ -84,15 +84,15 @@ const NodeCircle = styled.div<NodeCircleProps>`
         text-shadow: ${(props) =>
             props.isActive === true ? props.theme.textShadows.sm : 'none'};
         vertical-align: middle;
-        line-height: 2rem;
+        line-height: 2.5rem;
         text-align: center;
         background: ${(props) =>
             props.isActive === true
                 ? props.theme.accentColors.orange
                 : '#e5e5e5'};
         border-radius: 2rem;
-        height: 2rem;
-        width: 2rem;
+        height: 2.5rem;
+        width: 2.5rem;
         margin-right: 1rem;
 
         &::before {
@@ -100,7 +100,7 @@ const NodeCircle = styled.div<NodeCircleProps>`
                 props.isLastNode === true ? 'hidden' : 'visible'};
             content: '';
             width: 2.5rem;
-            height: 2px;
+            height: 3px;
             background: ${(props) =>
                 props.isActive === true
                     ? props.theme.accentColors.orange
