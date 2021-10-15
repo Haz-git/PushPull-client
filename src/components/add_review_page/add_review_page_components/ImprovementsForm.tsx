@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 
 //Components:
+import { deviceMin } from '../../../devices/breakpoints';
 import { TextInput } from '@mantine/core';
 import { NumberInput } from '@mantine/core';
 import { Select } from '@mantine/core';
@@ -40,13 +41,20 @@ const ExerciseCountText = styled.h2<ExerciseCountProps>`
 `;
 
 const AddExerciseContainerGrid = styled.div`
-    display: grid;
-    grid-template-columns: 40% auto;
-    align-items: flex-start;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    column-gap: 10rem;
-    max-width: 60rem;
+    @media ${deviceMin.mobileS} {
+        display: block;
+        margin-top: 1rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: grid;
+        grid-template-columns: 40% auto;
+        align-items: flex-start;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        column-gap: 10rem;
+        max-width: 60rem;
+    }
 `;
 
 const UserExerciseInputsContainer = styled.div``;
@@ -55,7 +63,19 @@ const UserInputContainer = styled.div`
     margin-bottom: 1.5rem;
 `;
 
-const UserExerciseCardContainer = styled.div``;
+const UserExerciseCardContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        border-top: 2px solid #ececec;
+        padding-top: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-top: -2.5rem;
+        padding-top: 0;
+        border-top: none;
+    }
+`;
 
 const ButtonContainer = styled.div`
     max-width: 30rem;
