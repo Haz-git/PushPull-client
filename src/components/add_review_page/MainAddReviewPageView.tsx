@@ -211,7 +211,7 @@ const MainAddReviewPageView = () => {
                         initialEffective={effectivenessRating}
                     />
                 </WizardSection>
-                <WizardSection id="Level Recommendations">
+                <WizardSection id="Level Suggestions">
                     <LevelRecommendationForm
                         onSVGSelectHandler={handleUserInput}
                         currentRecommendSelection={
