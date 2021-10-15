@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 
 //Components:
+import { deviceMin } from '../../../devices/breakpoints';
 import { Select } from '@mantine/core';
 import { NumberInput } from '@mantine/core';
 import { ReactComponent as BeginnerLevelSVG } from '../../../assets/beginner.svg';
@@ -22,25 +23,32 @@ import {
 } from './StarRatingsForm';
 
 const SvgContainer = styled.button<SvgContainerProps>`
-    text-align: center;
-    height: 12rem;
-    width: 15rem;
-    padding: 1rem 1rem;
-    background: ${(props) => (props.isSelected ? '#ffffff' : 'transparent')};
-    border: ${(props) =>
-        props.isSelected
-            ? '1px solid rgba(224, 113, 51, 1)'
-            : '1px solid #e5e5e5'};
-    border-radius: 0.3rem;
-    margin-right: 2rem;
-    cursor: pointer;
-    transition: all 0.2s linear;
+    @media ${deviceMin.mobileS} {
+        text-align: center;
+        height: 12rem;
+        width: 15rem;
+        padding: 1rem 1rem;
+        background: ${(props) =>
+            props.isSelected ? '#ffffff' : 'transparent'};
+        border: ${(props) =>
+            props.isSelected
+                ? '1px solid rgba(224, 113, 51, 1)'
+                : '1px solid #e5e5e5'};
+        border-radius: 0.3rem;
+        margin-right: 1rem;
+        cursor: pointer;
+        transition: all 0.2s linear;
 
-    &:hover {
-        background: #ffffff;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px,
-            rgba(0, 0, 0, 0.23) 0px 1px 6px;
-        transform: scale(1.01);
+        &:hover {
+            background: #ffffff;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px,
+                rgba(0, 0, 0, 0.23) 0px 1px 6px;
+            transform: scale(1.01);
+        }
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-right: 2rem;
     }
 `;
 
@@ -55,6 +63,8 @@ const SelectContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin: 2rem 0 1rem 0;
+    padding: 0.5rem 0.5rem;
+    overflow-x: scroll;
 `;
 
 const InfoContainer = styled.div``;
