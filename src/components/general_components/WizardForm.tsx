@@ -12,9 +12,11 @@ import { Progress } from '@mantine/core';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-    padding-bottom: 4rem;
-
     @media ${deviceMin.mobileS} {
+        padding-bottom: 4rem;
+    }
+
+    @media ${deviceMin.browserSm} {
         padding-bottom: 8rem;
     }
 

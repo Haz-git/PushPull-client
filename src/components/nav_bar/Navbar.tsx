@@ -40,8 +40,8 @@ const LogoContainer = styled.div`
     width: 10rem;
 
     @media ${deviceMin.mobileS} {
-        height: 1.7rem;
-        width: 6rem;
+        height: 2rem;
+        width: 10rem;
     }
 
     @media ${deviceMin.browserSm} {
