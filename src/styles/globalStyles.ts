@@ -5,22 +5,17 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        scroll-behavior: smooth;
+        scroll-behavior: smooth;    
     }
 
     body {
-        position: relative;
         height: 100%;
+        min-height: 100%;
+        position: relative;
         background: rgba(244, 244, 244, 1);
         font-family: 'Lato', sans-serif, helvetica;
-        /* padding-bottom: 4rem; */
+        padding-bottom: 4rem;
     }
-
-    /* .main-footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    } */
 
     a {
         text-decoration: none;

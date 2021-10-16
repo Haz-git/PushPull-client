@@ -12,12 +12,11 @@ import { Progress } from '@mantine/core';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-    height: 100vh;
-    overflow: scroll;
+    padding-bottom: 4rem;
 `;
 
 const ProgressBarContainer = styled.div`
-    top: 0;
+    top: 4rem;
     position: sticky;
     position: -webkit-sticky;
     z-index: 50;
