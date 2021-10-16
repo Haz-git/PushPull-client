@@ -14,7 +14,19 @@ const GlobalStyle = createGlobalStyle`
         position: relative;
         background: rgba(244, 244, 244, 1);
         font-family: 'Lato', sans-serif, helvetica;
-        padding-bottom: 4rem;
+
+    }
+
+    @media screen and (min-width: 320px) {
+        body {
+            padding-bottom: 8rem;
+        }
+    }
+
+    @media screen and (min-width: 800px) {
+        body {
+            padding-bottom: 4rem;
+        }
     }
 
     a {

@@ -13,6 +13,14 @@ import styled from 'styled-components';
 
 const MainContainer = styled.section`
     padding-bottom: 4rem;
+
+    @media ${deviceMin.mobileS} {
+        padding-bottom: 8rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        padding-bottom: 4rem;
+    }
 `;
 
 const ProgressBarContainer = styled.div`

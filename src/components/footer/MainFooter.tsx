@@ -19,6 +19,7 @@ const MailIcon = styled(MailSend)`
 const MainContainer = styled.section`
     @media ${deviceMin.mobileS} {
         /* height: 10rem; */
+        height: 8rem;
         position: fixed;
         left: 0;
         bottom: 0;
@@ -30,7 +31,7 @@ const MainContainer = styled.section`
     }
 
     @media ${deviceMin.tablet} {
-        /* height: 4rem; */
+        height: 4rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
