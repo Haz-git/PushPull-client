@@ -1,19 +1,41 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
+import {
+    CustomView,
+    isDesktop,
+    isTablet,
+    MobileOnlyView,
+} from 'react-device-detect';
 
 //Components:
 import GeneralButton from '../general_components/GeneralButton';
+import { Collapse } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
 
 //Icons:
 import { MailSend } from '@styled-icons/boxicons-regular/MailSend';
+import { CaretUp } from '@styled-icons/fluentui-system-filled/CaretUp';
+import { CaretDown } from '@styled-icons/fluentui-system-filled/CaretDown';
 
 const MailIcon = styled(MailSend)`
     height: 1.3rem;
     width: 1.3rem;
-    color: white;
+    color: #ffffff;
+`;
+
+const CaretUpIcon = styled(CaretUp)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #ffffff;
+`;
+
+const CaretDownIcon = styled(CaretDown)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #ffffff;
 `;
 
 const MainContainer = styled.section`
@@ -36,6 +58,42 @@ const MainContainer = styled.section`
         align-items: center;
         justify-content: space-between;
     }
+`;
+
+const MobileMainContainer = styled.section`
+    // max-height: 4rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    text-align: center;
+    background: ${(props) => props.theme.lightBackground};
+`;
+
+const MobilePaddingSpacers = styled.div`
+    padding: 0.1rem 0.5rem;
+`;
+
+const MobileFlexContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const MobileLinkContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`;
+
+const MobileFooterTextLinks = styled.a`
+    color: ${(props) => props.theme.mainText};
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.5rem 0;
+    background: #ececec;
+    width: 100%;
 `;
 
 const FooterTextBlock = styled.div`
@@ -99,28 +157,100 @@ interface IComponentProps {
 }
 
 const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const identifyBrowserOrTablet = () => {
+        if (isDesktop || isTablet) return true;
+        else return false;
+    };
+
+    const returnStateCollapseButtonIcon = () => {
+        if (isOpen === true) return <CaretDownIcon />;
+        return <CaretUpIcon />;
+    };
+
     return (
-        <MainContainer className="main-footer">
-            <FooterTextBlock>
-                <FooterText>© 2021 PushPull. All rights reserved.</FooterText>
-            </FooterTextBlock>
-            <FooterBlock>
-                <GeneralButton
-                    buttonLabel="Feedback"
-                    width="7.5rem"
-                    onClick={bugReportHandler}
-                    padding=".4rem .4rem"
-                    buttonIcon={<MailIcon />}
-                    margin=".5rem auto"
-                />
-                <FooterTextLinks href="https://storyset.com" target="_blank">
-                    Illustrations by StorySet
-                </FooterTextLinks>
-                <FooterTextLinks>Add a Review</FooterTextLinks>
-                <FooterTextLinks>About Us</FooterTextLinks>
-                <FooterTextLinks>Contact Us</FooterTextLinks>
-            </FooterBlock>
-        </MainContainer>
+        <>
+            <CustomView condition={identifyBrowserOrTablet()}>
+                <MainContainer>
+                    <FooterTextBlock>
+                        <FooterText>
+                            © 2021 PushPull. All rights reserved.
+                        </FooterText>
+                    </FooterTextBlock>
+                    <FooterBlock>
+                        <GeneralButton
+                            buttonLabel="Feedback"
+                            width="7.5rem"
+                            onClick={bugReportHandler}
+                            padding=".4rem .4rem"
+                            buttonIcon={<MailIcon />}
+                            margin=".5rem auto"
+                        />
+                        <FooterTextLinks
+                            href="https://storyset.com"
+                            target="_blank"
+                        >
+                            Illustrations by StorySet
+                        </FooterTextLinks>
+                        <FooterTextLinks>Add a Review</FooterTextLinks>
+                        <FooterTextLinks>About Us</FooterTextLinks>
+                        <FooterTextLinks>Contact Us</FooterTextLinks>
+                    </FooterBlock>
+                </MainContainer>
+            </CustomView>
+            <MobileOnlyView>
+                <MobileMainContainer>
+                    <MobileFlexContainer>
+                        <FooterTextBlock>
+                            <MobilePaddingSpacers>
+                                <FooterText>© 2021 PushPull</FooterText>
+                            </MobilePaddingSpacers>
+                        </FooterTextBlock>
+                        <FooterBlock>
+                            <MobilePaddingSpacers>
+                                <GeneralButton
+                                    buttonLabel="Feedback"
+                                    width="6rem"
+                                    onClick={bugReportHandler}
+                                    padding=".2rem .1rem"
+                                    buttonIcon={<MailIcon />}
+                                    margin=".5rem auto"
+                                    fontSize=".8rem"
+                                />
+                            </MobilePaddingSpacers>
+                        </FooterBlock>
+                    </MobileFlexContainer>
+                    <Collapse in={isOpen}>
+                        <MobileLinkContainer>
+                            <MobileFooterTextLinks
+                                href="https://storyset.com"
+                                target="_blank"
+                            >
+                                Illustrations by StorySet
+                            </MobileFooterTextLinks>
+                            <MobileFooterTextLinks>
+                                Add a Review
+                            </MobileFooterTextLinks>
+                            <MobileFooterTextLinks>
+                                About Us
+                            </MobileFooterTextLinks>
+                            <MobileFooterTextLinks>
+                                Contact Us
+                            </MobileFooterTextLinks>
+                        </MobileLinkContainer>
+                    </Collapse>
+                    <GeneralButton
+                        height="1.5rem"
+                        buttonLabel=""
+                        padding=".2rem .5rem"
+                        borderRadius="none"
+                        buttonIcon={returnStateCollapseButtonIcon()}
+                        onClick={() => setIsOpen(!isOpen)}
+                    />
+                </MobileMainContainer>
+            </MobileOnlyView>
+        </>
     );
 };
 
