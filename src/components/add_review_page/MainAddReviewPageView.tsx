@@ -200,6 +200,15 @@ const MainAddReviewPageView = () => {
         return totalUserInputsRequired;
     };
 
+    //Primary submission handler for review:
+    const handleReviewSubmission = () => {
+        if (identifyUserProgress() === 11) {
+            //If user has fully completed progress, we let them submit.
+
+            console.log('Submit the review');
+        }
+    };
+
     return (
         <MainContainer>
             <WizardForm progressIndicator={identifyUserProgress()}>
