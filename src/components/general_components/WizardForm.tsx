@@ -63,11 +63,13 @@ const ButtonContainer = styled.div`
 interface IComponentProps {
     children: React.ReactNode;
     progressIndicator: number;
+    submissionHandler: (...args: any[]) => any;
 }
 
 const WizardForm = ({
     children,
     progressIndicator,
+    submissionHandler,
 }: IComponentProps): JSX.Element => {
     //Scroll to top on component render:
     useEffect(() => {
@@ -153,7 +155,7 @@ const WizardForm = ({
                     />
                     <GeneralButton
                         buttonLabel="Submit"
-                        onClick={handleNext}
+                        onClick={submissionHandler}
                         width="6rem"
                     />
                 </>
