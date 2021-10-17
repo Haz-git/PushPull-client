@@ -211,7 +211,10 @@ const MainAddReviewPageView = () => {
 
     return (
         <MainContainer>
-            <WizardForm progressIndicator={identifyUserProgress()}>
+            <WizardForm
+                progressIndicator={identifyUserProgress()}
+                submissionHandler={handleReviewSubmission}
+            >
                 <WizardSection id="Star Ratings">
                     <StarRatingsForm
                         onChangeHandler={handleStarRatings}
