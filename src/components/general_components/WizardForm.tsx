@@ -158,22 +158,30 @@ const WizardForm = ({
                     />
                 </>
             );
-        }
-
-        return (
-            <>
-                <GeneralButton
-                    buttonLabel="Back"
-                    onClick={handlePrev}
-                    width="6rem"
-                />
+        } else if (viewIndex === 0) {
+            return (
                 <GeneralButton
                     buttonLabel="Next"
                     onClick={handleNext}
                     width="6rem"
                 />
-            </>
-        );
+            );
+        } else {
+            return (
+                <>
+                    <GeneralButton
+                        buttonLabel="Back"
+                        onClick={handlePrev}
+                        width="6rem"
+                    />
+                    <GeneralButton
+                        buttonLabel="Next"
+                        onClick={handleNext}
+                        width="6rem"
+                    />
+                </>
+            );
+        }
     };
 
     return (
