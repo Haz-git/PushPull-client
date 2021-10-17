@@ -9,6 +9,7 @@ import StarRatingsForm from './add_review_page_components/StarRatingsForm';
 import LevelRecommendationForm from './add_review_page_components/LevelRecommendationForm';
 import ImprovementsForm from './add_review_page_components/ImprovementsForm';
 import MoreDetailsForm from './add_review_page_components/MoreDetailsForm';
+import GeneralModal from '../general_components/GeneralModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -48,6 +49,8 @@ const initialRTEValue = `
 
 const MainAddReviewPageView = () => {
     const [reviewProgressIndicator, setReviewProgressIndicator] = useState(0);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [userReviewInputDetails, setUserReviewInputDetails] = useState({
         reviewTitle: '',
@@ -95,6 +98,10 @@ const MainAddReviewPageView = () => {
         } else {
             window.history.pushState(null, '', window.location.pathname);
         }
+    };
+
+    const closeConfirmationModal = () => {
+        setIsModalOpen(false);
     };
 
     //User input master handler:
@@ -186,7 +193,7 @@ const MainAddReviewPageView = () => {
 
         //Check items inside userReviewInputDetails
         for (const [key, value] of Object.entries(userReviewInputDetails)) {
-            if (value !== '' && value !== 0 && value !== initialRTEValue) {
+            if (value !== '' && value !== 0 && value !== `${initialRTEValue}`) {
                 totalUserInputsRequired += 1;
             }
         }
@@ -205,12 +212,18 @@ const MainAddReviewPageView = () => {
         if (identifyUserProgress() === 11) {
             //If user has fully completed progress, we let them submit.
 
-            console.log('Submit the review');
+            setIsModalOpen(true);
         }
     };
 
     return (
         <MainContainer>
+            <GeneralModal
+                openBoolean={isModalOpen}
+                closeFunc={closeConfirmationModal}
+            >
+                <div>test confirmation modal</div>
+            </GeneralModal>
             <WizardForm
                 progressIndicator={identifyUserProgress()}
                 submissionHandler={handleReviewSubmission}
