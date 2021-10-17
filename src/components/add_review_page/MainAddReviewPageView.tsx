@@ -9,7 +9,9 @@ import StarRatingsForm from './add_review_page_components/StarRatingsForm';
 import LevelRecommendationForm from './add_review_page_components/LevelRecommendationForm';
 import ImprovementsForm from './add_review_page_components/ImprovementsForm';
 import MoreDetailsForm from './add_review_page_components/MoreDetailsForm';
+//Modal Styles:
 import GeneralModal from '../general_components/GeneralModal';
+import ReviewConfirmationModal from './add_review_page_components/ReviewConfirmationModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -221,8 +223,19 @@ const MainAddReviewPageView = () => {
             <GeneralModal
                 openBoolean={isModalOpen}
                 closeFunc={closeConfirmationModal}
+                title="Confirm Review"
             >
-                <div>test confirmation modal</div>
+                <ReviewConfirmationModal
+                    reviewTitle={userReviewInputDetails.reviewTitle}
+                    reviewDesc={userReviewInputDetails.reviewDesc}
+                    currentLevel={userReviewInputDetails.currentLevel}
+                    recommendedLevel={userReviewInputDetails.recommendedLevel}
+                    followLength={userReviewInputDetails.followLength}
+                    repeatableRating={repeatableRating}
+                    effectivenessRating={effectivenessRating}
+                    accurateDifficulty={accurateDifficulty}
+                    userImprovedStats={userImprovedStats}
+                />
             </GeneralModal>
             <WizardForm
                 progressIndicator={identifyUserProgress()}
