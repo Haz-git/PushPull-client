@@ -11,8 +11,8 @@ import RichTextEditor from '@mantine/rte';
 import {
     MainFormContainer,
     FormDesc,
-    ButtonContainer,
 } from '../../search_page/search_page_components/AddNewProgramForm';
+import GeneralButton from '../../general_components/GeneralButton';
 import ExerciseCard from './ExerciseCard';
 import { Star } from '@styled-icons/evaicons-solid/Star';
 
@@ -70,6 +70,17 @@ const ReviewDetailInput = styled.h2`
     font-weight: 800;
 `;
 
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin: 1rem 0;
+`;
+
+const ButtonSpacer = styled.div`
+    width: 1rem;
+`;
+
 //Interfaces:
 
 interface IComponentProps {
@@ -82,6 +93,7 @@ interface IComponentProps {
     effectivenessRating: number;
     accurateDifficulty: number;
     userImprovedStats: any[];
+    closeFunc: () => void;
 }
 
 const ReviewConfirmationModal = ({
@@ -94,9 +106,8 @@ const ReviewConfirmationModal = ({
     effectivenessRating,
     accurateDifficulty,
     userImprovedStats,
+    closeFunc,
 }: IComponentProps): JSX.Element => {
-    console.log(userImprovedStats);
-
     const renderUserStoredImprovedStats = () => {
         if (userImprovedStats.length >= 1) {
             return userImprovedStats.map((exercise: any) => (
@@ -177,6 +188,24 @@ const ReviewConfirmationModal = ({
                     {renderUserStoredImprovedStats()}
                 </ReviewDetailCard>
             </CardContainer>
+            <ButtonContainer>
+                <GeneralButton
+                    buttonLabel="Cancel"
+                    buttonBackground="#ececec"
+                    buttonTextColor="rgba(0, 0, 34, 1)"
+                    textShadow="none"
+                    width="7rem"
+                    disableShadow={true}
+                    hoverShadow="none"
+                    onClick={() => closeFunc()}
+                />
+                <ButtonSpacer />
+                <GeneralButton
+                    buttonLabel="Confirm"
+                    width="9rem"
+                    onClick={() => alert('Work in progress...')}
+                />
+            </ButtonContainer>
         </MainFormContainer>
     );
 };
