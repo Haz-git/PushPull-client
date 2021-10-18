@@ -235,6 +235,7 @@ const MainAddReviewPageView = () => {
                     effectivenessRating={effectivenessRating}
                     accurateDifficulty={accurateDifficulty}
                     userImprovedStats={userImprovedStats}
+                    closeFunc={closeConfirmationModal}
                 />
             </GeneralModal>
             <WizardForm
