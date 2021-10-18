@@ -13,31 +13,34 @@ import {
     FormDesc,
     ButtonContainer,
 } from '../../search_page/search_page_components/AddNewProgramForm';
+import ExerciseCard from './ExerciseCard';
 import { Star } from '@styled-icons/evaicons-solid/Star';
 
 const EmptyStar = styled(Star)`
+    margin-bottom: 0.5rem;
     @media ${deviceMin.mobileS} {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2rem;
+        width: 2rem;
         color: #c2c2c2;
     }
 
     @media ${deviceMin.browserSm} {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2rem;
+        width: 2rem;
     }
 `;
 
 const FullStar = styled(Star)`
+    margin-bottom: 0.5rem;
     @media ${deviceMin.mobileS} {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2rem;
+        width: 2rem;
         color: rgba(224, 113, 51, 1);
     }
 
     @media ${deviceMin.browserSm} {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2rem;
+        width: 2rem;
     }
 `;
 
@@ -92,6 +95,27 @@ const ReviewConfirmationModal = ({
     accurateDifficulty,
     userImprovedStats,
 }: IComponentProps): JSX.Element => {
+    console.log(userImprovedStats);
+
+    const renderUserStoredImprovedStats = () => {
+        if (userImprovedStats.length >= 1) {
+            return userImprovedStats.map((exercise: any) => (
+                <ExerciseCard
+                    exerciseId={exercise.exerciseId}
+                    key={exercise.exerciseId}
+                    exerciseTitle={exercise.exerciseTitle}
+                    initialWeight={exercise.initialWeight}
+                    finalWeight={exercise.finalWeight}
+                    weightUnit={exercise.exerciseUnit}
+                    removeExerciseCard={() =>
+                        console.log('This option should not be available')
+                    }
+                    hasDelete={false}
+                />
+            ));
+        }
+    };
+
     return (
         <MainFormContainer>
             <FormDesc>Please confirm your entries before submission.</FormDesc>
@@ -147,6 +171,10 @@ const ReviewConfirmationModal = ({
                         emptySymbol={<EmptyStar />}
                         fullSymbol={<FullStar />}
                     />
+                </ReviewDetailCard>
+                <ReviewDetailCard>
+                    <ReviewDetailTitle>Improvements</ReviewDetailTitle>
+                    {renderUserStoredImprovedStats()}
                 </ReviewDetailCard>
             </CardContainer>
         </MainFormContainer>
