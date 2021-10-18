@@ -97,6 +97,7 @@ interface IComponentProps {
     accurateDifficulty: number;
     userImprovedStats: any[];
     closeFunc: () => void;
+    submitFunc: () => void;
 }
 
 const ReviewConfirmationModal = ({
