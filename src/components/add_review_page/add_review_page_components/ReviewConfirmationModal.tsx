@@ -111,6 +111,7 @@ const ReviewConfirmationModal = ({
     accurateDifficulty,
     userImprovedStats,
     closeFunc,
+    submitFunc,
 }: IComponentProps): JSX.Element => {
     const renderUserStoredImprovedStats = () => {
         if (userImprovedStats.length >= 1) {
@@ -213,7 +214,7 @@ const ReviewConfirmationModal = ({
                 <GeneralButton
                     buttonLabel="Confirm"
                     width="9rem"
-                    onClick={() => alert('Work in progress...')}
+                    onClick={() => submitFunc()}
                 />
             </ButtonContainer>
         </MainFormContainer>
