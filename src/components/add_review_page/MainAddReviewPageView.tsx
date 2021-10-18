@@ -55,7 +55,19 @@ const initialRTEValue = `
 
 //Interfaces:
 
-const MainAddReviewPageView = () => {
+interface IComponentProps {
+    match: {
+        params: {
+            id: any;
+        };
+    };
+}
+
+const MainAddReviewPageView = ({
+    match: {
+        params: { id },
+    },
+}: IComponentProps): JSX.Element => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [userReviewInputDetails, setUserReviewInputDetails] = useState({
@@ -249,7 +261,13 @@ const MainAddReviewPageView = () => {
             currentLevel: userReviewInputDetails.currentLevel,
             recommendedlevel: userReviewInputDetails.recommendedLevel,
             followLength: userReviewInputDetails.followLength,
+            effectivenessRating: effectivenessRating,
+            repeatableRating: repeatableRating,
+            accurateDifficulty: accurateDifficulty,
+            workoutProgramId: id,
+            improvedStats: parseImprovedStatsToObject(),
         };
+
         dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
     };
 
