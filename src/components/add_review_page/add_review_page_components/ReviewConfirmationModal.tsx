@@ -65,6 +65,7 @@ const ReviewDetailTitle = styled.h3`
 const ReviewRTEContainer = styled.div`
     border: 1px solid #c6c6c6;
     border-radius: 0.3rem;
+    background: #ffffff;
 `;
 
 const ReviewDetailInput = styled.h2`
