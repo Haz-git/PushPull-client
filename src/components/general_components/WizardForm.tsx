@@ -152,6 +152,11 @@ const WizardForm = ({
                         buttonLabel="Back"
                         onClick={handlePrev}
                         width="6rem"
+                        buttonBackground="#c6c6c6"
+                        buttonTextColor="rgba(0, 0, 34, 1)"
+                        textShadow="none"
+                        disableShadow={true}
+                        hoverShadow="none"
                     />
                     <GeneralButton
                         buttonLabel="Submit"
@@ -175,6 +180,11 @@ const WizardForm = ({
                         buttonLabel="Back"
                         onClick={handlePrev}
                         width="6rem"
+                        buttonBackground="#c6c6c6"
+                        buttonTextColor="rgba(0, 0, 34, 1)"
+                        textShadow="none"
+                        disableShadow={true}
+                        hoverShadow="none"
                     />
                     <GeneralButton
                         buttonLabel="Next"
