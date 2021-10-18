@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 //Components:
-import parse from 'html-react-parser';
 import { deviceMin } from '../../../devices/breakpoints';
 import Rating from 'react-rating';
 
 //Styles:
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
 import {
     MainFormContainer,
     FormDesc,
@@ -62,7 +62,10 @@ const ReviewDetailTitle = styled.h3`
     margin-bottom: 0.5rem;
 `;
 
-const ReviewRTEContainer = styled.div``;
+const ReviewRTEContainer = styled.div`
+    border: 1px solid #c6c6c6;
+    border-radius: 0.3rem;
+`;
 
 const ReviewDetailInput = styled.h2`
     font-size: 1.3rem;
@@ -127,8 +130,6 @@ const ReviewConfirmationModal = ({
         }
     };
 
-    console.log(reviewDesc);
-
     return (
         <MainFormContainer>
             <FormDesc>Please confirm your entries before submission.</FormDesc>
@@ -139,7 +140,13 @@ const ReviewConfirmationModal = ({
                 </ReviewDetailCard>
                 <ReviewDetailCard>
                     <ReviewDetailTitle>Review Description</ReviewDetailTitle>
-                    <ReviewRTEContainer>{parse(reviewDesc)}</ReviewRTEContainer>
+                    <ReviewRTEContainer>
+                        <ReactQuill
+                            theme="bubble"
+                            value={reviewDesc}
+                            readOnly={true}
+                        />
+                    </ReviewRTEContainer>
                 </ReviewDetailCard>
                 <ReviewDetailCard>
                     <ReviewDetailTitle>Current Level</ReviewDetailTitle>
