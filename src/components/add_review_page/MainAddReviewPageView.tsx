@@ -10,6 +10,7 @@ import LevelRecommendationForm from './add_review_page_components/LevelRecommend
 import ImprovementsForm from './add_review_page_components/ImprovementsForm';
 import MoreDetailsForm from './add_review_page_components/MoreDetailsForm';
 import { v4 as uuid } from 'uuid';
+import { Overlay } from '@mantine/core';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -74,6 +75,10 @@ const MainAddReviewPageView = ({
 
     //This modal is for letting the user know when the request is finished and programmatically pushes the user back to the workout program page (when done).
     const [isCallbackModalOpen, setIsCallbackModalOpen] = useState(false);
+
+    //Status of review-add dispatch request:
+    const [isReviewAddRequestLoading, setIsReviewAddRequestLoading] =
+        useState(false);
 
     const [userReviewInputDetails, setUserReviewInputDetails] = useState({
         reviewTitle: '',
@@ -276,6 +281,7 @@ const MainAddReviewPageView = ({
         dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
         closeConfirmationModal();
         setIsCallbackModalOpen(true);
+        setIsReviewAddRequestLoading(true);
     };
 
     return (
@@ -283,8 +289,15 @@ const MainAddReviewPageView = ({
             <GeneralModal
                 openBoolean={isCallbackModalOpen}
                 closeFunc={() => setIsCallbackModalOpen(false)}
+                title=""
             >
-                <LoadingReviewSubmission />
+                {isReviewAddRequestLoading && (
+                    <Overlay opacity={0.1} color="#000" zIndex={100}>
+                        <LoadingReviewSubmission
+                            requestStatus={isReviewAddRequestLoading}
+                        />
+                    </Overlay>
+                )}
             </GeneralModal>
             <GeneralModal
                 openBoolean={isModalOpen}
