@@ -10,7 +10,7 @@ import LevelRecommendationForm from './add_review_page_components/LevelRecommend
 import ImprovementsForm from './add_review_page_components/ImprovementsForm';
 import MoreDetailsForm from './add_review_page_components/MoreDetailsForm';
 import { v4 as uuid } from 'uuid';
-import { Overlay } from '@mantine/core';
+import { Notification } from '@mantine/core';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -280,25 +280,19 @@ const MainAddReviewPageView = ({
 
         dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
         closeConfirmationModal();
-        setIsCallbackModalOpen(true);
         setIsReviewAddRequestLoading(true);
     };
 
     return (
         <MainContainer>
-            <GeneralModal
-                openBoolean={isCallbackModalOpen}
-                closeFunc={() => setIsCallbackModalOpen(false)}
-                title=""
+            {/* <Notification
+                onClose={() => console.log('hello')}
+                loading={true}
+                title="Your review is being uploaded.."
+                disallowClose
             >
-                {isReviewAddRequestLoading && (
-                    <Overlay opacity={0.1} color="#000" zIndex={100}>
-                        <LoadingReviewSubmission
-                            requestStatus={isReviewAddRequestLoading}
-                        />
-                    </Overlay>
-                )}
-            </GeneralModal>
+                Thank you for your contribution!
+            </Notification> */}
             <GeneralModal
                 openBoolean={isModalOpen}
                 closeFunc={closeConfirmationModal}

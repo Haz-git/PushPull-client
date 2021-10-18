@@ -3,7 +3,6 @@ import * as React from 'react';
 //Components:
 import { deviceMin } from '../../../devices/breakpoints';
 import Rating from 'react-rating';
-import { LoadingOverlay } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
