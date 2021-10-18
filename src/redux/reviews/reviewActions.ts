@@ -30,3 +30,12 @@ export const getReviews = (
         }
     };
 };
+
+export const addReview = (
+    statusCallback: (status: boolean) => void,
+    reviewObject: any
+) => {
+    return async (dispatch: Dispatch<ReviewAction>) => {
+        console.log(reviewObject);
+    };
+};
