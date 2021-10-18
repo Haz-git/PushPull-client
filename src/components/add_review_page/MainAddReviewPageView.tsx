@@ -9,6 +9,12 @@ import StarRatingsForm from './add_review_page_components/StarRatingsForm';
 import LevelRecommendationForm from './add_review_page_components/LevelRecommendationForm';
 import ImprovementsForm from './add_review_page_components/ImprovementsForm';
 import MoreDetailsForm from './add_review_page_components/MoreDetailsForm';
+import { v4 as uuid } from 'uuid';
+
+//Redux:
+import { useDispatch } from 'react-redux';
+import { addReview } from '../../redux/reviews/reviewActions';
+
 //Modal Styles:
 import GeneralModal from '../general_components/GeneralModal';
 import ReviewConfirmationModal from './add_review_page_components/ReviewConfirmationModal';
@@ -78,6 +84,9 @@ const MainAddReviewPageView = () => {
             window.removeEventListener('popstate', onBackButtonEvent);
         };
     }, []);
+
+    //Redux Dispatch
+    const dispatch = useDispatch();
 
     //Navigation indication handlers:
 
@@ -207,13 +216,41 @@ const MainAddReviewPageView = () => {
         return totalUserInputsRequired;
     };
 
-    //Primary submission handler for review:
-    const handleReviewSubmission = () => {
+    const OpenReviewConfirmationModalOnFormCompletion = () => {
         if (identifyUserProgress() === 11) {
             //If user has fully completed progress, we let them submit.
 
             setIsModalOpen(true);
         }
+    };
+
+    //Review submission callback handler:
+    const reviewSubmittedCallbackNotifier = () => {
+        console.log('Review has been submitted');
+    };
+
+    const parseImprovedStatsToObject = () => {
+        let statObj: any = {};
+
+        if (userImprovedStats.length > 0) {
+            for (let i = 0; i < userImprovedStats.length; i++) {
+                statObj[i] = userImprovedStats[i];
+            }
+        }
+
+        return statObj;
+    };
+
+    const onReviewConfirmationModalSubmission = () => {
+        let reviewObject = {
+            reviewId: uuid(),
+            reviewTitle: userReviewInputDetails.reviewTitle,
+            reviewDesc: userReviewInputDetails.reviewDesc,
+            currentLevel: userReviewInputDetails.currentLevel,
+            recommendedlevel: userReviewInputDetails.recommendedLevel,
+            followLength: userReviewInputDetails.followLength,
+        };
+        dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
     };
 
     return (
@@ -234,11 +271,12 @@ const MainAddReviewPageView = () => {
                     accurateDifficulty={accurateDifficulty}
                     userImprovedStats={userImprovedStats}
                     closeFunc={closeConfirmationModal}
+                    submitFunc={onReviewConfirmationModalSubmission}
                 />
             </GeneralModal>
             <WizardForm
                 progressIndicator={identifyUserProgress()}
-                submissionHandler={handleReviewSubmission}
+                submissionHandler={OpenReviewConfirmationModalOnFormCompletion}
             >
                 <WizardSection id="Star Ratings">
                     <StarRatingsForm
