@@ -18,6 +18,7 @@ import { addReview } from '../../redux/reviews/reviewActions';
 //Modal Styles:
 import GeneralModal from '../general_components/GeneralModal';
 import ReviewConfirmationModal from './add_review_page_components/ReviewConfirmationModal';
+import LoadingReviewSubmission from './add_review_page_components/LoadingReviewSubmission';
 
 //Styles:
 import styled from 'styled-components';
@@ -283,7 +284,7 @@ const MainAddReviewPageView = ({
                 openBoolean={isCallbackModalOpen}
                 closeFunc={() => setIsCallbackModalOpen(false)}
             >
-                <div>testing...Request is being processed.</div>
+                <LoadingReviewSubmission />
             </GeneralModal>
             <GeneralModal
                 openBoolean={isModalOpen}
