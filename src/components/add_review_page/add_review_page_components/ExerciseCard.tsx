@@ -36,11 +36,12 @@ const ArrowRightIcon = styled(ArrowRightAlt)`
     color: ${(props) => props.theme.subText};
 `;
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<MainContainerProps>`
     display: grid;
     width: 100%;
     max-width: 20rem;
-    grid-template-columns: 85% auto;
+    grid-template-columns: ${(props) =>
+        props.hasDelete === true ? '85% auto' : '100%'};
     border-radius: 0.3rem;
     border: none;
     background: #ffffff;
@@ -83,6 +84,10 @@ const ButtonContainer = styled.div`
 
 //Interfaces:
 
+interface MainContainerProps {
+    hasDelete: boolean;
+}
+
 interface IComponentProps {
     exerciseTitle: string;
     initialWeight: number;
@@ -90,6 +95,7 @@ interface IComponentProps {
     weightUnit: string;
     exerciseId: string;
     removeExerciseCard: (exerciseId: string) => void;
+    hasDelete?: boolean;
 }
 
 const ExerciseCard = ({
@@ -99,6 +105,7 @@ const ExerciseCard = ({
     weightUnit,
     exerciseId,
     removeExerciseCard,
+    hasDelete = true,
 }: IComponentProps): JSX.Element => {
     const renderCaretIcon = () => {
         if (finalWeight > initialWeight) return <CaretUpIcon />;
@@ -106,7 +113,7 @@ const ExerciseCard = ({
     };
 
     return (
-        <MainContainer>
+        <MainContainer hasDelete={hasDelete}>
             <InfoContainer>
                 <TitleContainer>
                     <ExerciseCardTitle>{exerciseTitle}</ExerciseCardTitle>
@@ -118,20 +125,22 @@ const ExerciseCard = ({
                     <IconContainer>{renderCaretIcon()}</IconContainer>
                 </WeightContainer>
             </InfoContainer>
-            <ButtonContainer>
-                <GeneralButton
-                    height="100%"
-                    buttonBackground="#AF1432"
-                    disableShadow={true}
-                    width="100%"
-                    buttonIcon={<DeleteIcon />}
-                    buttonLabel=""
-                    iconMargin="0"
-                    hoverShadow="none"
-                    borderRadius="0rem .2rem .2rem 0rem"
-                    onClick={() => removeExerciseCard(exerciseId)}
-                />
-            </ButtonContainer>
+            {hasDelete && (
+                <ButtonContainer>
+                    <GeneralButton
+                        height="100%"
+                        buttonBackground="#AF1432"
+                        disableShadow={true}
+                        width="100%"
+                        buttonIcon={<DeleteIcon />}
+                        buttonLabel=""
+                        iconMargin="0"
+                        hoverShadow="none"
+                        borderRadius="0rem .2rem .2rem 0rem"
+                        onClick={() => removeExerciseCard(exerciseId)}
+                    />
+                </ButtonContainer>
+            )}
         </MainContainer>
     );
 };
