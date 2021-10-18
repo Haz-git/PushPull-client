@@ -68,7 +68,11 @@ const MainAddReviewPageView = ({
         params: { id },
     },
 }: IComponentProps): JSX.Element => {
+    //This modal is the confirmation modal -> User reviews all responses in this modal and confirms submission.
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    //This modal is for letting the user know when the request is finished and programmatically pushes the user back to the workout program page (when done).
+    const [isCallbackModalOpen, setIsCallbackModalOpen] = useState(false);
 
     const [userReviewInputDetails, setUserReviewInputDetails] = useState({
         reviewTitle: '',
@@ -269,10 +273,18 @@ const MainAddReviewPageView = ({
         };
 
         dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
+        closeConfirmationModal();
+        setIsCallbackModalOpen(true);
     };
 
     return (
         <MainContainer>
+            <GeneralModal
+                openBoolean={isCallbackModalOpen}
+                closeFunc={() => setIsCallbackModalOpen(false)}
+            >
+                <div>testing...Request is being processed.</div>
+            </GeneralModal>
             <GeneralModal
                 openBoolean={isModalOpen}
                 closeFunc={closeConfirmationModal}
