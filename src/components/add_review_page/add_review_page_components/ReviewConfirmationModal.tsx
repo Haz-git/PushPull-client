@@ -7,7 +7,7 @@ import Rating from 'react-rating';
 
 //Styles:
 import styled from 'styled-components';
-import RichTextEditor from '@mantine/rte';
+import ReactQuill from 'react-quill';
 import {
     MainFormContainer,
     FormDesc,
@@ -126,6 +126,8 @@ const ReviewConfirmationModal = ({
             ));
         }
     };
+
+    console.log(reviewDesc);
 
     return (
         <MainFormContainer>
