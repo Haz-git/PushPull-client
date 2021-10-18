@@ -50,8 +50,6 @@ const initialRTEValue = `
 //Interfaces:
 
 const MainAddReviewPageView = () => {
-    const [reviewProgressIndicator, setReviewProgressIndicator] = useState(0);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [userReviewInputDetails, setUserReviewInputDetails] = useState({
