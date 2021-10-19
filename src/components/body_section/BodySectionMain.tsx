@@ -58,7 +58,7 @@ const BodySectionMain = () => {
                 primaryButton={
                     <GeneralButton
                         buttonLabel="Add Ranking"
-                        onClick={() => console.log('test')}
+                        onClick={() => console.log('In development')}
                         fontSize="1.25rem"
                         padding="1rem 1rem"
                     />
