@@ -7,6 +7,10 @@ import { Accordion, AccordionItem } from '@mantine/core';
 import { v4 } from 'uuid';
 import GeneralButton from '../../general_components/GeneralButton';
 
+import { decode } from 'html-entities';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
+
 //Utils:
 import capitalize from '../../../utils/capitalize';
 
@@ -142,6 +146,10 @@ const DetailsContainer = styled.div`
     padding: 0rem 0;
 `;
 
+const ReviewRTEContainer = styled.div`
+    color: ${(props) => props.theme.mainText};
+`;
+
 const ImprovementsContainer = styled.div`
     margin-top: 1rem;
 `;
@@ -215,8 +223,8 @@ const ReviewComponent = ({
         if (Object.keys(improvedStats).length > 0) {
             let tempArr: any[] = [];
 
-            for (const [key, value] of Object.entries(improvedStats)) {
-                tempArr.push({ key, value });
+            for (const statObject of Object.values(improvedStats)) {
+                tempArr.push(statObject);
             }
 
             return tempArr.map((statObject) => (
@@ -224,11 +232,11 @@ const ReviewComponent = ({
                     color="rgba(0, 0, 34, .7)"
                     fontWeight="400"
                     fontSize="1rem"
-                    key={v4()}
+                    key={statObject.exerciseId}
                 >
-                    {`${capitalize(statObject.key)} : ${
-                        statObject.value.old
-                    } to ${statObject.value.new}`}
+                    {`${capitalize(statObject.exerciseTitle)} : ${
+                        statObject.initialWeight
+                    } to ${statObject.finalWeight}`}
                 </ReviewText>
             ));
         } else {
@@ -353,13 +361,13 @@ const ReviewComponent = ({
                         {renderImprovedStats()}
                     </AccordionItem>
                     <AccordionItem label={`Author Review`}>
-                        <ReviewText
-                            color="rgba(0, 0, 34, .7)"
-                            fontWeight="400"
-                            fontSize="1rem"
-                        >
-                            {reviewDesc}
-                        </ReviewText>
+                        <ReviewRTEContainer>
+                            <ReactQuill
+                                theme="bubble"
+                                value={decode(reviewDesc)}
+                                readOnly={true}
+                            />
+                        </ReviewRTEContainer>
                     </AccordionItem>
                 </Accordion>
             </ImprovementsContainer>
