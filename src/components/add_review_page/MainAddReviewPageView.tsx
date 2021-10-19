@@ -255,7 +255,7 @@ const MainAddReviewPageView = ({
         notifications.showNotification({
             title: 'Congratulations! Your Review Has Been Added!',
             message: 'Thank you for your contribution.',
-            autoClose: 4000,
+            autoClose: 10000,
         });
 
         historyObject.push(`/program/${id}`);
