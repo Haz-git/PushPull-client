@@ -247,8 +247,10 @@ const MainAddReviewPageView = ({
     };
 
     //Review submission callback handler:
-    const reviewSubmittedCallbackNotifier = () => {
-        console.log('Review has been submitted');
+    const reviewSubmittedCallbackNotifier = (status: boolean) => {
+        setIsReviewAddRequestLoading(status);
+
+        if (status === false) notifications.clean();
     };
 
     const parseImprovedStatsToObject = () => {
@@ -278,18 +280,20 @@ const MainAddReviewPageView = ({
             improvedStats: parseImprovedStatsToObject(),
         };
 
-        dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
-        closeConfirmationModal();
-        setIsReviewAddRequestLoading(true);
-
         //Open notification:
         notifications.showNotification({
-            title: 'Your Review is Being Processed..',
-            message: 'Thank you for your contribution!',
+            title: 'Your Review is Being Processed...',
+            message: 'Please wait as we update our databases.',
             color: 'rgba(224, 113, 51, 1)',
             loading: true,
             autoClose: false,
+            disallowClose: false,
         });
+
+        setIsReviewAddRequestLoading(true);
+        closeConfirmationModal();
+
+        dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
     };
 
     return (
