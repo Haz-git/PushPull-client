@@ -16,7 +16,11 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <NotificationsProvider>
+                <NotificationsProvider
+                    position="bottom-left"
+                    zIndex={99999}
+                    limit={5}
+                >
                     <NormalizeCSS />
                     <App />
                 </NotificationsProvider>
