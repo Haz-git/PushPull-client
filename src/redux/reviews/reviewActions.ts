@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 import { ReviewAction } from './reviewInterfaces';
 import { ReviewActionType } from './action-types';
 
+import { useNotifications } from '@mantine/notifications';
+
 export const getReviews = (
     statusCallback: (status: boolean) => void,
     workoutProgramId: string,
@@ -37,5 +39,7 @@ export const addReview = (
 ) => {
     return async (dispatch: Dispatch<ReviewAction>) => {
         console.log(reviewObject);
+
+        statusCallback(false);
     };
 };
