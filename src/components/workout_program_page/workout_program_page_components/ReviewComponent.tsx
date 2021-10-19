@@ -247,15 +247,11 @@ const ReviewComponent = ({
     //Computes the total rating from averages from three ratings.
     const computeTotalRating = () => {
         if (effectivenessRating && repeatableRating && accurateDifficulty) {
-            return (
-                Math.round(
-                    [
-                        effectivenessRating,
-                        repeatableRating,
-                        accurateDifficulty,
-                    ].reduce((a, v, i) => (a * v * i) / (i + 1)) * 10
-                ) / 10
-            );
+            let totalSum =
+                effectivenessRating + repeatableRating + accurateDifficulty;
+            let totalAvg = totalSum / 3;
+
+            return Math.round(totalAvg);
         }
     };
 
