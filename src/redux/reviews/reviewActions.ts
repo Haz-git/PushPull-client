@@ -38,8 +38,15 @@ export const addReview = (
     reviewObject: any
 ) => {
     return async (dispatch: Dispatch<ReviewAction>) => {
-        console.log(reviewObject);
+        let response = await api.post(
+            `/reviews/submit/${reviewObject.workoutProgramId}`,
+            { workoutProgramReview: reviewObject }
+        );
 
-        statusCallback(false);
+        console.log(response);
+
+        if (response) {
+            statusCallback(false);
+        }
     };
 };
