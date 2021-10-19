@@ -249,8 +249,16 @@ const MainAddReviewPageView = ({
     //Review submission callback handler:
     const reviewSubmittedCallbackNotifier = (status: boolean) => {
         setIsReviewAddRequestLoading(status);
+        if (status === false) notifications.clean(); //Clean loading notif.
 
-        if (status === false) notifications.clean();
+        //Push new notif:
+        notifications.showNotification({
+            title: 'Congratulations! Your Review Has Been Added!',
+            message: 'Thank you for your contribution.',
+            autoClose: 4000,
+        });
+
+        historyObject.push(`/program/${id}`);
     };
 
     const parseImprovedStatsToObject = () => {
@@ -271,7 +279,7 @@ const MainAddReviewPageView = ({
             reviewTitle: userReviewInputDetails.reviewTitle,
             reviewDesc: userReviewInputDetails.reviewDesc,
             currentLevel: userReviewInputDetails.currentLevel,
-            recommendedlevel: userReviewInputDetails.recommendedLevel,
+            recommendedLevel: userReviewInputDetails.recommendedLevel,
             followLength: userReviewInputDetails.followLength,
             effectivenessRating: effectivenessRating,
             repeatableRating: repeatableRating,
