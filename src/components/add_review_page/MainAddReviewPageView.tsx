@@ -10,7 +10,7 @@ import LevelRecommendationForm from './add_review_page_components/LevelRecommend
 import ImprovementsForm from './add_review_page_components/ImprovementsForm';
 import MoreDetailsForm from './add_review_page_components/MoreDetailsForm';
 import { v4 as uuid } from 'uuid';
-import { Notification } from '@mantine/core';
+import { useNotifications } from '@mantine/notifications';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -73,8 +73,8 @@ const MainAddReviewPageView = ({
     //This modal is the confirmation modal -> User reviews all responses in this modal and confirms submission.
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    //This modal is for letting the user know when the request is finished and programmatically pushes the user back to the workout program page (when done).
-    const [isCallbackModalOpen, setIsCallbackModalOpen] = useState(false);
+    //Mantine notifications hook
+    const notifications = useNotifications();
 
     //Status of review-add dispatch request:
     const [isReviewAddRequestLoading, setIsReviewAddRequestLoading] =
@@ -281,18 +281,19 @@ const MainAddReviewPageView = ({
         dispatch(addReview(reviewSubmittedCallbackNotifier, reviewObject));
         closeConfirmationModal();
         setIsReviewAddRequestLoading(true);
+
+        //Open notification:
+        notifications.showNotification({
+            title: 'Your Review is Being Processed..',
+            message: 'Thank you for your contribution!',
+            color: 'rgba(224, 113, 51, 1)',
+            loading: true,
+            autoClose: false,
+        });
     };
 
     return (
         <MainContainer>
-            {/* <Notification
-                onClose={() => console.log('hello')}
-                loading={true}
-                title="Your review is being uploaded.."
-                disallowClose
-            >
-                Thank you for your contribution!
-            </Notification> */}
             <GeneralModal
                 openBoolean={isModalOpen}
                 closeFunc={closeConfirmationModal}
