@@ -171,7 +171,11 @@ const ReviewerLevelChartContainer = styled.div`
     }
 
     @media ${deviceMin.browserSm} {
+<<<<<<< HEAD
         height: 22rem;
+=======
+        height: 21rem;
+>>>>>>> dev
         width: 23rem;
     }
 `;
