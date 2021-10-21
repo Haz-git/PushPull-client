@@ -101,6 +101,7 @@ const MoreDetailsForm = ({
                                     )
                                 }
                                 value={currentHeaderVal}
+                                maxLength={250}
                             />
                         </UserHeaderInputContainer>
                         <UserDescInputContainer>
