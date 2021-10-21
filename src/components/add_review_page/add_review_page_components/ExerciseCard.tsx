@@ -48,6 +48,7 @@ const MainContainer = styled.div<MainContainerProps>`
     box-shadow: rgba(14, 30, 37, 0.12) 0px 1px 5px 0px,
         rgba(14, 30, 37, 0.32) 0px 1px 3px 0px;
     margin-bottom: 1rem;
+    word-break: break-word;
 `;
 
 const ExerciseCardTitle = styled.h2`

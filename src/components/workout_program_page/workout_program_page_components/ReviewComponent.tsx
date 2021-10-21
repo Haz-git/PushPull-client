@@ -79,6 +79,7 @@ const HeaderContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
+        column-gap: 1.5rem;
     }
 `;
 
@@ -96,6 +97,7 @@ const ReviewHeader = styled.h2`
     font-size: 1.3rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 700;
+    word-break: break-word;
 `;
 
 const ReviewText = styled.p<IStyledProps>`
