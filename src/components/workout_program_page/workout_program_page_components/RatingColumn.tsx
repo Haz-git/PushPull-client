@@ -185,6 +185,18 @@ const RecommendedLevelContainer = styled.div`
     border-bottom: 1px solid #e5e5e5;
 `;
 
+const AverageFollowLengthContainer = styled.div`
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+`;
+
+const RuntimeText = styled.h2`
+    font-size: 1.5rem;
+    color: rgba(224, 113, 51, 1);
+    font-weight: 900;
+    margin-bottom: 1rem;
+`;
+
 //Mobile Styles:
 
 const ProgramTitle = styled.h1`
@@ -472,6 +484,10 @@ const RatingColumn = ({
                     </ResponsiveContainer>
                 </ReviewerLevelChartContainer>
             </RecommendedLevelContainer>
+            <AverageFollowLengthContainer>
+                <SubcategoryHeader>Average Program Runtime</SubcategoryHeader>
+                <RuntimeText>{`${avgFollowLength} Days`}</RuntimeText>
+            </AverageFollowLengthContainer>
         </MainContainer>
     );
 };

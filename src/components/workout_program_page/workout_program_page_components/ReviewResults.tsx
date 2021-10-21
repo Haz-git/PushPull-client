@@ -54,7 +54,8 @@ const ReviewCountLabel = styled.h2`
 const ReviewContainer = styled.div<ReviewContainerProps>`
     margin: 1rem -1rem 0rem -1rem;
     padding: 1rem 1rem;
-    height: ${(props) => `${props.containerHeight - 290}px`};
+    // height: ${(props) => `${props.containerHeight - 290}px`};
+    height: 100%;
     overflow-y: scroll;
 `;
 
