@@ -12,7 +12,6 @@ export const getReviews = (
 ) => {
     return async (dispatch: Dispatch<ReviewAction>) => {
         let response = await api.get(`/reviews/all/${workoutProgramId}`);
-        console.log(response);
 
         const { count: totalItems } = response.data.reviews;
         const currentPage = page ? +page : 0;

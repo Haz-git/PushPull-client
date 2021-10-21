@@ -180,6 +180,11 @@ const ReviewerLevelChartContainer = styled.div`
     }
 `;
 
+const RecommendedLevelContainer = styled.div`
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+`;
+
 //Mobile Styles:
 
 const ProgramTitle = styled.h1`
@@ -209,6 +214,16 @@ interface IComponentProps {
     programTitle: string;
     openReportDrawer: () => void;
     programId: string;
+    accurateScore: number;
+    effectiveScore: number;
+    reliableScore: number;
+    reviewerAdvCount: number;
+    reviewerBegCount: number;
+    reviewerIntCount: number;
+    recAdvCount: number;
+    recBegCount: number;
+    recIntCount: number;
+    avgFollowLength: number;
 }
 
 const RatingColumn = ({
@@ -216,23 +231,48 @@ const RatingColumn = ({
     programTitle,
     openReportDrawer,
     programId,
+    accurateScore,
+    effectiveScore,
+    reliableScore,
+    reviewerAdvCount,
+    reviewerBegCount,
+    reviewerIntCount,
+    recAdvCount,
+    recBegCount,
+    recIntCount,
+    avgFollowLength,
 }: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();
     }, []);
 
-    const dummyData = [
+    const reviewerLevels = [
         {
             name: 'Beginner',
-            Reviewers: 10,
+            Reviewers: reviewerBegCount,
         },
         {
             name: 'Intermediate',
-            Reviewers: 5,
+            Reviewers: reviewerIntCount,
         },
         {
             name: 'Advanced',
-            Reviewers: 1,
+            Reviewers: reviewerAdvCount,
+        },
+    ];
+
+    const recommendedLevels = [
+        {
+            name: 'Beginner',
+            Reviewers: recBegCount,
+        },
+        {
+            name: 'Intermediate',
+            Reviewers: recIntCount,
+        },
+        {
+            name: 'Advanced',
+            Reviewers: recAdvCount,
         },
     ];
 
@@ -271,7 +311,7 @@ const RatingColumn = ({
             <ProgramTitle>{programTitle}</ProgramTitle>
             <GeneralRatingText>Overall Rating</GeneralRatingText>
             <RatingStarsContainer>
-                <GeneralScoreText>{programRating}</GeneralScoreText>
+                <GeneralScoreText>{`${programRating}`}</GeneralScoreText>
                 <Rating
                     start={0}
                     stop={5}
@@ -302,14 +342,15 @@ const RatingColumn = ({
                 <SubcategoryHeader>Ratings by Category</SubcategoryHeader>
                 <RatingCategoryContainer>
                     <SubcategoryText>
-                        Repeatable - <SubcategoryRating>2.4</SubcategoryRating>
+                        Reliability -{' '}
+                        <SubcategoryRating>{`${reliableScore}`}</SubcategoryRating>
                     </SubcategoryText>
                     <Rating
                         start={0}
                         stop={5}
                         fractions={0.1}
                         readonly={true}
-                        initialRating={2.4}
+                        initialRating={reliableScore}
                         emptySymbol={
                             <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
                         }
@@ -321,14 +362,14 @@ const RatingColumn = ({
                 <RatingCategoryContainer>
                     <SubcategoryText>
                         Accurate Difficulty -{' '}
-                        <SubcategoryRating>1.1</SubcategoryRating>
+                        <SubcategoryRating>{`${accurateScore}`}</SubcategoryRating>
                     </SubcategoryText>
                     <Rating
                         start={0}
                         stop={5}
                         fractions={0.1}
                         readonly={true}
-                        initialRating={1.1}
+                        initialRating={accurateScore}
                         emptySymbol={
                             <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
                         }
@@ -339,15 +380,15 @@ const RatingColumn = ({
                 </RatingCategoryContainer>
                 <RatingCategoryContainer>
                     <SubcategoryText>
-                        Clear Exercises -{' '}
-                        <SubcategoryRating>4.1</SubcategoryRating>
+                        Effectiveness -{' '}
+                        <SubcategoryRating>{`${effectiveScore}`}</SubcategoryRating>
                     </SubcategoryText>
                     <Rating
                         start={0}
                         stop={5}
                         fractions={0.1}
                         readonly={true}
-                        initialRating={4.1}
+                        initialRating={effectiveScore}
                         emptySymbol={
                             <EmptyStar starHeight="1.5rem" starWidth="1.5rem" />
                         }
@@ -364,11 +405,11 @@ const RatingColumn = ({
                         <BarChart
                             width={350}
                             height={300}
-                            data={dummyData}
+                            data={reviewerLevels}
                             margin={{
                                 top: 10,
                                 right: 30,
-                                left: -35,
+                                left: -30,
                                 bottom: 10,
                             }}
                             barSize={30}
@@ -380,7 +421,11 @@ const RatingColumn = ({
                             />
                             <YAxis tickCount={8} />
                             <Tooltip />
-                            <Legend />
+                            <Legend
+                                align="center"
+                                verticalAlign="bottom"
+                                wrapperStyle={{ position: 'relative' }}
+                            />
                             <CartesianGrid />
                             <Bar
                                 dataKey="Reviewers"
@@ -390,6 +435,43 @@ const RatingColumn = ({
                     </ResponsiveContainer>
                 </ReviewerLevelChartContainer>
             </ReviewerLevelContainer>
+            <RecommendedLevelContainer>
+                <SubcategoryHeader>Suggested Experience</SubcategoryHeader>
+                <ReviewerLevelChartContainer>
+                    <ResponsiveContainer>
+                        <BarChart
+                            width={350}
+                            height={300}
+                            data={recommendedLevels}
+                            margin={{
+                                top: 10,
+                                right: 30,
+                                left: -30,
+                                bottom: 10,
+                            }}
+                            barSize={30}
+                        >
+                            <XAxis
+                                dataKey="name"
+                                scale="point"
+                                padding={{ left: 38, right: 38 }}
+                            />
+                            <YAxis tickCount={8} />
+                            <Tooltip />
+                            <Legend
+                                align="center"
+                                verticalAlign="bottom"
+                                wrapperStyle={{ position: 'relative' }}
+                            />
+                            <CartesianGrid />
+                            <Bar
+                                dataKey="Experience Level"
+                                fill="rgba(224, 113, 51, 1)"
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </ReviewerLevelChartContainer>
+            </RecommendedLevelContainer>
         </MainContainer>
     );
 };

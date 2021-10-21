@@ -91,6 +91,8 @@ const MainWorkoutProgramPage = ({
         (state: RootStateOrAny) => state.workoutPrograms
     );
 
+    console.log(workoutPrograms);
+
     return (
         <>
             <BrowserView>
@@ -141,6 +143,20 @@ const MainWorkoutProgramPage = ({
                             programTitle={workoutPrograms.workoutProgramTitle}
                             openReportDrawer={openReportDrawer}
                             programId={id}
+                            accurateScore={
+                                workoutPrograms.avgAccurateDifficultyRating
+                            }
+                            effectiveScore={
+                                workoutPrograms.avgEffectivenessRating
+                            }
+                            reliableScore={workoutPrograms.avgRepeatableRating}
+                            reviewerAdvCount={workoutPrograms.reviewerAdvCount}
+                            reviewerBegCount={workoutPrograms.reviewerBegCount}
+                            reviewerIntCount={workoutPrograms.reviewerIntCount}
+                            recAdvCount={workoutPrograms.recAdvCount}
+                            recBegCount={workoutPrograms.recBegCount}
+                            recIntCount={workoutPrograms.recIntCount}
+                            avgFollowLength={workoutPrograms.avgFollowLength}
                         />
                         <ReviewResults
                             programTitle={workoutPrograms.workoutProgramTitle}
