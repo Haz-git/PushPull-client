@@ -264,15 +264,15 @@ const RatingColumn = ({
     const recommendedLevels = [
         {
             name: 'Beginner',
-            Reviewers: recBegCount,
+            'Reviewers Suggested': recBegCount,
         },
         {
             name: 'Intermediate',
-            Reviewers: recIntCount,
+            'Reviewers Suggested': recIntCount,
         },
         {
             name: 'Advanced',
-            Reviewers: recAdvCount,
+            'Reviewers Suggested': recAdvCount,
         },
     ];
 
@@ -465,7 +465,7 @@ const RatingColumn = ({
                             />
                             <CartesianGrid />
                             <Bar
-                                dataKey="Experience Level"
+                                dataKey="Reviewers Suggested"
                                 fill="rgba(224, 113, 51, 1)"
                             />
                         </BarChart>

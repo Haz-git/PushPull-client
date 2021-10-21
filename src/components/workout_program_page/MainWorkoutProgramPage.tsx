@@ -91,8 +91,6 @@ const MainWorkoutProgramPage = ({
         (state: RootStateOrAny) => state.workoutPrograms
     );
 
-    console.log(workoutPrograms);
-
     return (
         <>
             <BrowserView>
