@@ -6,10 +6,11 @@ import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
 import { v4 } from 'uuid';
 import GeneralButton from '../../general_components/GeneralButton';
-
+import dayjs from 'dayjs';
 import { decode } from 'html-entities';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
+import ExerciseCard from '../../add_review_page/add_review_page_components/ExerciseCard';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
@@ -154,6 +155,12 @@ const ImprovementsContainer = styled.div`
     margin-top: 1rem;
 `;
 
+const StatCardContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    column-gap: 1rem;
+`;
+
 const MobileFlagContainer = styled.div`
     @media ${deviceMin.mobileS} {
         display: block;
@@ -218,6 +225,8 @@ const ReviewComponent = ({
     createdAt,
     openReviewReportDrawer,
 }: IComponentProps): JSX.Element => {
+    // console.log(improvedStats);
+
     //Destructures improved stats and renders out text for each stat:
     const renderImprovedStats = () => {
         if (Object.keys(improvedStats).length > 0) {
@@ -228,16 +237,19 @@ const ReviewComponent = ({
             }
 
             return tempArr.map((statObject) => (
-                <ReviewText
-                    color="rgba(0, 0, 34, .7)"
-                    fontWeight="400"
-                    fontSize="1rem"
+                <ExerciseCard
+                    exerciseId={statObject.exerciseId}
                     key={statObject.exerciseId}
-                >
-                    {`${capitalize(statObject.exerciseTitle)} : ${
-                        statObject.initialWeight
-                    } to ${statObject.finalWeight}`}
-                </ReviewText>
+                    exerciseTitle={statObject.exerciseTitle}
+                    initialWeight={statObject.initialWeight}
+                    finalWeight={statObject.finalWeight}
+                    weightUnit={statObject.exerciseUnit}
+                    removeExerciseCard={() =>
+                        console.log('This option should not be available')
+                    }
+                    hasDelete={false}
+                    maxWidth={'100%'}
+                />
             ));
         } else {
             return <ReviewText>Apparently, nothing was improved.</ReviewText>;
@@ -306,7 +318,8 @@ const ReviewComponent = ({
                         fontWeight="400"
                         fontSize=".9rem"
                     >
-                        Anonymous Python on 9/10/2021
+                        Anonymous Python on{' '}
+                        {`${dayjs(createdAt).format('MM/DD/YYYY')}`}
                     </ReviewText>
                 </AuthorContainer>
             </StarBox>
@@ -354,7 +367,9 @@ const ReviewComponent = ({
                     }}
                 >
                     <AccordionItem label={`Improved Stats`}>
-                        {renderImprovedStats()}
+                        <StatCardContainer>
+                            {renderImprovedStats()}
+                        </StatCardContainer>
                     </AccordionItem>
                     <AccordionItem label={`Author Review`}>
                         <ReviewRTEContainer>
