@@ -43,8 +43,6 @@ export const addReview = (
             { workoutProgramReview: reviewObject }
         );
 
-        console.log(response);
-
         if (response) {
             statusCallback(false);
         }
