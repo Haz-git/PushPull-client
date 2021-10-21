@@ -39,12 +39,12 @@ const ArrowRightIcon = styled(ArrowRightAlt)`
 const MainContainer = styled.div<MainContainerProps>`
     display: grid;
     width: 100%;
-    max-width: 20rem;
+    max-width: ${(props) => props.maxWidth};
     grid-template-columns: ${(props) =>
         props.hasDelete === true ? '85% auto' : '100%'};
     border-radius: 0.3rem;
     border: none;
-    background: #ffffff;
+    background: ${(props) => props.backgroundColor};
     box-shadow: rgba(14, 30, 37, 0.12) 0px 1px 5px 0px,
         rgba(14, 30, 37, 0.32) 0px 1px 3px 0px;
     margin-bottom: 1rem;
@@ -86,6 +86,8 @@ const ButtonContainer = styled.div`
 
 interface MainContainerProps {
     hasDelete: boolean;
+    backgroundColor: string;
+    maxWidth: string;
 }
 
 interface IComponentProps {
@@ -96,6 +98,8 @@ interface IComponentProps {
     exerciseId: string;
     removeExerciseCard: (exerciseId: string) => void;
     hasDelete?: boolean;
+    backgroundColor?: string;
+    maxWidth?: string;
 }
 
 const ExerciseCard = ({
@@ -106,6 +110,8 @@ const ExerciseCard = ({
     exerciseId,
     removeExerciseCard,
     hasDelete = true,
+    backgroundColor = '#ffffff',
+    maxWidth = '20rem',
 }: IComponentProps): JSX.Element => {
     const renderCaretIcon = () => {
         if (finalWeight > initialWeight) return <CaretUpIcon />;
@@ -113,7 +119,11 @@ const ExerciseCard = ({
     };
 
     return (
-        <MainContainer hasDelete={hasDelete}>
+        <MainContainer
+            hasDelete={hasDelete}
+            backgroundColor={backgroundColor}
+            maxWidth={maxWidth}
+        >
             <InfoContainer>
                 <TitleContainer>
                     <ExerciseCardTitle>{exerciseTitle}</ExerciseCardTitle>
