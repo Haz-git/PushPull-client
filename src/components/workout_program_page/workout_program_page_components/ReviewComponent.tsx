@@ -6,7 +6,7 @@ import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
 import { v4 } from 'uuid';
 import GeneralButton from '../../general_components/GeneralButton';
-
+import dayjs from 'dayjs';
 import { decode } from 'html-entities';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
@@ -306,7 +306,8 @@ const ReviewComponent = ({
                         fontWeight="400"
                         fontSize=".9rem"
                     >
-                        Anonymous Python on 9/10/2021
+                        Anonymous Python on{' '}
+                        {`${dayjs(createdAt).format('MM/DD/YYYY')}`}
                     </ReviewText>
                 </AuthorContainer>
             </StarBox>
