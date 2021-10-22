@@ -13,9 +13,10 @@ export const lightTheme = {
         xxl: '2.5rem',
     },
     accentColors: {
-        orange: 'rgba(224, 113, 51, 1)',
+        orange: 'rgba(224, 113, 51, 1)', //Hex #e07133
         red: '#AF1432',
         green: '#41A312',
+        blue: 'rgba(43, 90, 147,1)',
     },
     textShadows: {
         sm: '1px 1px 1px rgba(0,0,0,.25)',

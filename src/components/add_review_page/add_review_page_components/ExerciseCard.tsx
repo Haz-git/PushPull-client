@@ -8,9 +8,16 @@ import { CaretUp } from '@styled-icons/fluentui-system-filled/CaretUp';
 import { CaretDown } from '@styled-icons/fluentui-system-filled/CaretDown';
 import { ArrowRightAlt } from '@styled-icons/material-rounded/ArrowRightAlt';
 import { Delete } from '@styled-icons/fluentui-system-filled/Delete';
+import { Equals } from '@styled-icons/typicons/Equals';
 import GeneralButton from '../../general_components/GeneralButton';
 
 //Icons:
+
+const EqualsIcon = styled(Equals)`
+    height: 1.7rem;
+    width: 1.7rem;
+    color: ${(props) => props.theme.accentColors.blue};
+`;
 
 const DeleteIcon = styled(Delete)`
     height: 1.7rem;
@@ -115,8 +122,13 @@ const ExerciseCard = ({
     maxWidth = '20rem',
 }: IComponentProps): JSX.Element => {
     const renderCaretIcon = () => {
-        if (finalWeight > initialWeight) return <CaretUpIcon />;
-        return <CaretDownIcon />;
+        if (finalWeight > initialWeight) {
+            return <CaretUpIcon />;
+        } else if (finalWeight === initialWeight) {
+            return <EqualsIcon />;
+        } else {
+            return <CaretDownIcon />;
+        }
     };
 
     return (
