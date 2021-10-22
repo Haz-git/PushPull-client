@@ -19,6 +19,7 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
     padding: 2rem 2rem;
+    background: #ffffff;
 `;
 
 const ProgramHeaderContainer = styled.div``;

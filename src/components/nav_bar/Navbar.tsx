@@ -15,9 +15,8 @@ const StyledNavbar = styled.nav`
     text-align: left;
     top: 0;
     position: sticky;
-    z-index: 20 !important;
-    /* box-shadow: ${(props) => props.theme.shadows.sm};
-    z-index: 999; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 999;
 `;
 
 const StyledNavLogo = styled(Link)`
