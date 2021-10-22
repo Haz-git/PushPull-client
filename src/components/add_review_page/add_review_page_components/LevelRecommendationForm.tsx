@@ -255,7 +255,7 @@ const LevelRecommendationForm = ({
                             value={currentFollowLength}
                             label="Estimated Days"
                             min={1}
-                            max={180}
+                            max={7300}
                             required
                             styles={{
                                 root: {
