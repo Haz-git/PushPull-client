@@ -57,6 +57,9 @@ const MainContainer = styled.section`
         display: flex;
         align-items: center;
         justify-content: space-between;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px -3px 8px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px -3px 8px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px -3px 8px;
     }
 `;
 
