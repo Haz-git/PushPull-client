@@ -287,6 +287,10 @@ const MainAddReviewPageView = ({
             accurateDifficulty: accurateDifficulty,
             workoutProgramId: id,
             improvedStats: parseImprovedStatsToObject(),
+            usefulScore: 0,
+            notUsefulScore: 0,
+            flaggedCount: 0,
+            reviewAuthorId: 'Anonymous',
         };
 
         //Open notification:

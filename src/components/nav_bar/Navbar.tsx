@@ -15,7 +15,9 @@ const StyledNavbar = styled.nav`
     text-align: left;
     top: 0;
     position: sticky;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
     z-index: 999;
 `;
 
