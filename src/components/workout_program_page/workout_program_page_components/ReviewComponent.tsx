@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { deviceMin } from '../../../devices/breakpoints';
@@ -211,6 +212,8 @@ interface IComponentProps {
     improvedStats: any;
     createdAt: string;
     openReviewReportDrawer: () => void;
+    usefulScore: number;
+    notUsefulScore: number;
 }
 
 const ReviewComponent = ({
@@ -226,8 +229,12 @@ const ReviewComponent = ({
     improvedStats,
     createdAt,
     openReviewReportDrawer,
+    usefulScore,
+    notUsefulScore,
 }: IComponentProps): JSX.Element => {
-    // console.log(improvedStats);
+    const [isUsefulButtonSelected, setIsUsefulButtonSelected] = useState(false);
+    const [isNotUsefulButtonSelected, setIsNotUsefulButtonSelected] =
+        useState(false);
 
     //Destructures improved stats and renders out text for each stat:
     const renderImprovedStats = () => {
@@ -266,6 +273,48 @@ const ReviewComponent = ({
             let totalAvg = totalSum / 3;
 
             return Math.round(totalAvg);
+        }
+    };
+
+    const areNoButtonsSelected = () => {
+        if (!isUsefulButtonSelected && !isNotUsefulButtonSelected) return true;
+        else return false;
+    };
+
+    const renderSelectedButtons = () => {
+        if (areNoButtonsSelected()) {
+            return (
+                <>
+                    <GeneralButton
+                        buttonLabel={`Useful (${usefulScore})`}
+                        fontWeight="700"
+                        width="10rem"
+                        buttonBackground="transparent"
+                        buttonTextColor="#7678ED"
+                        textShadow="none"
+                        border="1px solid #7678ED"
+                        hoverTransform="none"
+                        hoverShadow="none"
+                        disableShadow={true}
+                        buttonIcon={<LikeIconEmpty />}
+                        padding=".5rem .7rem"
+                    />
+                    <GeneralButton
+                        buttonLabel={`Not Useful (${notUsefulScore})`}
+                        fontWeight="700"
+                        width="10rem"
+                        buttonBackground="transparent"
+                        buttonTextColor="#7678ED"
+                        textShadow="none"
+                        border="1px solid #7678ED"
+                        hoverTransform="none"
+                        hoverShadow="none"
+                        disableShadow={true}
+                        buttonIcon={<DislikeIconEmpty />}
+                        padding=".5rem .7rem"
+                    />
+                </>
+            );
         }
     };
 

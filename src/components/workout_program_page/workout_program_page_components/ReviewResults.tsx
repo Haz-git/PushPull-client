@@ -141,6 +141,7 @@ const ReviewResults = ({
                     </SvgContainer>
                 );
             } else {
+                console.log(reviews);
                 return reviews.map((review: any) => (
                     <ReviewComponent
                         key={review.id}
@@ -156,6 +157,8 @@ const ReviewResults = ({
                         improvedStats={review.improvedStats}
                         createdAt={review.createdAt}
                         openReviewReportDrawer={openReviewReportDrawer}
+                        usefulScore={review.usefulScore}
+                        notUsefulScore={review.notUsefulScore}
                     />
                 ));
             }
