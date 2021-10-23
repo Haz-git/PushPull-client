@@ -5,8 +5,21 @@ import { useState } from 'react';
 
 //Styles:
 import styled from 'styled-components';
+import { TextInput } from '@mantine/core';
 
 const MainContainer = styled.section``;
+
+const FormContainer = styled.div`
+    width: 30rem;
+    background: #ffffff;
+    padding: 2rem 2rem;
+    border-radius: 0.3rem;
+    margin: 2rem auto;
+`;
+
+const InputContainer = styled.div`
+    margin: 1rem 0;
+`;
 
 //Interfaces:
 
@@ -20,7 +33,7 @@ Userfront.init('5nxxrqn7');
 const UserSignup = () => {
     const [userSignupDetails, setUserSignupDetails] = useState({
         email: '',
-        userName: '',
+        username: '',
         password: '',
         passwordVerify: '',
     });
@@ -40,24 +53,119 @@ const UserSignup = () => {
             email: userSignupDetails.email,
             password: userSignupDetails.password,
             data: {
-                userName: userSignupDetails.userName,
+                username: userSignupDetails.username,
             },
         });
     };
 
     return (
         <MainContainer>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Email Address
-                    <input
-                        name="email"
-                        type="email"
-                        value={userSignupDetails.email}
-                        onChange={handleUserInput}
-                    />
-                </label>
-            </form>
+            <FormContainer>
+                <form onSubmit={handleSubmit}>
+                    <InputContainer>
+                        <TextInput
+                            name="email"
+                            type="email"
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.25rem',
+                                },
+                                input: {
+                                    color: 'rgba(0, 0, 34, 1)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '.9rem',
+                                    fontWeight: 500,
+                                },
+                            }}
+                            required
+                            label="Email Address"
+                            placeholder="youremail@something.com"
+                            value={userSignupDetails.email}
+                            onChange={handleUserInput}
+                        />
+                    </InputContainer>
+                    <InputContainer>
+                        <TextInput
+                            name="username"
+                            type="text"
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.25rem',
+                                },
+                                input: {
+                                    color: 'rgba(0, 0, 34, 1)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '.9rem',
+                                    fontWeight: 500,
+                                },
+                            }}
+                            required
+                            label="Username"
+                            placeholder="FitEntity420"
+                            value={userSignupDetails.username}
+                            onChange={handleUserInput}
+                        />
+                    </InputContainer>
+                    <InputContainer>
+                        <TextInput
+                            name="password"
+                            type="password"
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.25rem',
+                                },
+                                input: {
+                                    color: 'rgba(0, 0, 34, 1)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '.9rem',
+                                    fontWeight: 500,
+                                },
+                            }}
+                            required
+                            label="Password"
+                            value={userSignupDetails.password}
+                            onChange={handleUserInput}
+                        />
+                    </InputContainer>
+                    <InputContainer>
+                        <TextInput
+                            name="passwordVerify"
+                            type="password"
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.25rem',
+                                },
+                                input: {
+                                    color: 'rgba(0, 0, 34, 1)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '.9rem',
+                                    fontWeight: 500,
+                                },
+                            }}
+                            required
+                            label="Confirm Password"
+                            value={userSignupDetails.passwordVerify}
+                            onChange={handleUserInput}
+                        />
+                    </InputContainer>
+                </form>
+            </FormContainer>
         </MainContainer>
     );
 };
