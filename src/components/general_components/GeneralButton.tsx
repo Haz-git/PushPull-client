@@ -64,6 +64,7 @@ interface IGeneralButtonProps {
     border?: string;
     height?: string;
     borderRadius?: string;
+    type?: 'button' | 'submit' | 'reset';
 }
 
 const GeneralButton = ({
@@ -88,6 +89,7 @@ const GeneralButton = ({
     border = 'none',
     height = 'auto',
     borderRadius = '0.2rem',
+    type = 'submit',
 }: IGeneralButtonProps): JSX.Element => {
     return (
         <>
@@ -110,6 +112,7 @@ const GeneralButton = ({
                 border={border}
                 height={height}
                 borderRadius={borderRadius}
+                type={type}
             >
                 <IconContainer iconMargin={iconMargin}>
                     {buttonIcon && buttonIcon}
