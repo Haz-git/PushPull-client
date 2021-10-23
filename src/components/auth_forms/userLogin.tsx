@@ -6,8 +6,8 @@ import * as React from 'react';
 
 //Interfaces:
 
-const userLogin = () => {
+const UserLogin = () => {
     return <div>Login Page</div>;
 };
 
-export default userLogin;
+export default UserLogin;
