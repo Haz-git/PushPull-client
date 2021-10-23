@@ -32,7 +32,34 @@ const UserSignup = () => {
         });
     };
 
-    return <MainContainer>test</MainContainer>;
+    const handleSubmit = (e: React.FormEvent): void => {
+        e.preventDefault();
+
+        Userfront.signup({
+            method: 'password',
+            email: userSignupDetails.email,
+            password: userSignupDetails.password,
+            data: {
+                userName: userSignupDetails.userName,
+            },
+        });
+    };
+
+    return (
+        <MainContainer>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Email Address
+                    <input
+                        name="email"
+                        type="email"
+                        value={userSignupDetails.email}
+                        onChange={handleUserInput}
+                    />
+                </label>
+            </form>
+        </MainContainer>
+    );
 };
 
 export default UserSignup;
