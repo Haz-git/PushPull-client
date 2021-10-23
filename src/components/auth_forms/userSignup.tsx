@@ -9,6 +9,20 @@ import GeneralButton from '../general_components/GeneralButton';
 //Styles:
 import styled from 'styled-components';
 import { TextInput } from '@mantine/core';
+import { LogoFacebook } from '@styled-icons/ionicons-solid';
+import { LogoGoogle } from '@styled-icons/ionicons-solid';
+
+const FbLogo = styled(LogoFacebook)`
+    color: #ffffff;
+    height: 1.25rem;
+    width: 1.25rem;
+`;
+
+const GLogo = styled(LogoGoogle)`
+    color: #ffffff;
+    height: 1.25rem;
+    width: 1.25rem;
+`;
 
 const MainContainer = styled.section`
     height: 100%;
@@ -59,11 +73,27 @@ const HeaderDivider = styled.div`
 `;
 
 const InputContainer = styled.div`
-    margin: 1rem 0;
+    margin: 0.5rem 0;
 `;
 
 const ButtonContainer = styled.div`
-    margin-top: 2rem;
+    margin-top: 1rem;
+`;
+
+const OrRule = styled.h3`
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #d3d3d3;
+    line-height: 0.1em;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+    color: #c6c6c6;
+    font-weight: 900;
+`;
+
+const OrText = styled.span`
+    background: #fff;
+    padding: 0 1rem;
 `;
 
 const ProviderContainer = styled.div`
@@ -249,15 +279,20 @@ const UserSignup = () => {
                         <GeneralButton buttonLabel="Sign up" />
                     </ButtonContainer>
                 </form>
+                <OrRule>
+                    <OrText>OR</OrText>
+                </OrRule>
                 <ProviderContainer>
                     <GeneralButton
                         buttonLabel="Sign up with Google"
                         buttonBackground="#0F9D58"
+                        buttonIcon={<GLogo />}
                     />
                     <ProviderDivider />
                     <GeneralButton
                         buttonLabel="Sign up with Facebook"
                         buttonBackground="#1877f2"
+                        buttonIcon={<FbLogo />}
                     />
                 </ProviderContainer>
             </FormContainer>
