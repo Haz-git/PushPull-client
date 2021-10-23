@@ -3,11 +3,26 @@ import { useState } from 'react';
 
 //Components:
 import { ReactComponent as SignupSVG } from '../../assets/signup_animation.svg';
+import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import GeneralButton from '../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
 import { TextInput } from '@mantine/core';
+import { LogoFacebook } from '@styled-icons/ionicons-solid';
+import { LogoGoogle } from '@styled-icons/ionicons-solid';
+
+const FbLogo = styled(LogoFacebook)`
+    color: #ffffff;
+    height: 1.25rem;
+    width: 1.25rem;
+`;
+
+const GLogo = styled(LogoGoogle)`
+    color: #ffffff;
+    height: 1.25rem;
+    width: 1.25rem;
+`;
 
 const MainContainer = styled.section`
     height: 100%;
@@ -26,14 +41,67 @@ const FormContainer = styled.div`
     padding: 2rem 2rem;
     border-radius: 0.3rem;
     margin: 2rem auto;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `;
 
-const InputContainer = styled.div`
+const LogoContainer = styled.div`
+    text-align: center;
+    margin: 0 auto;
+    width: 10rem;
+`;
+
+const HeadingContainer = styled.div`
+    text-align: center;
     margin: 1rem 0;
 `;
 
+const PrimaryHeading = styled.h1`
+    font-size: 1.2rem;
+    color: ${(props) => props.theme.mainText};
+    font-weight: 700;
+`;
+
+const SecondaryHeading = styled.h2`
+    font-size: 1rem;
+    color: ${(props) => props.theme.subText};
+    font-weight: 700;
+`;
+
+const HeaderDivider = styled.div`
+    height: 0.5rem;
+`;
+
+const InputContainer = styled.div`
+    margin: 0.5rem 0;
+`;
+
 const ButtonContainer = styled.div`
-    margin-top: 2rem;
+    margin-top: 1rem;
+`;
+
+const OrRule = styled.h3`
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #d3d3d3;
+    line-height: 0.1em;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+    color: #c6c6c6;
+    font-weight: 900;
+`;
+
+const OrText = styled.span`
+    background: #fff;
+    padding: 0 1rem;
+`;
+
+const ProviderContainer = styled.div`
+    margin: 1rem 0;
+`;
+
+const ProviderDivider = styled.div`
+    height: 1rem;
 `;
 
 //Interfaces:
@@ -53,6 +121,8 @@ const UserSignup = () => {
         passwordVerify: '',
     });
 
+    const [alertMessage, setAlertMessage] = useState('');
+
     const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setUserSignupDetails({
             ...userSignupDetails,
@@ -60,8 +130,17 @@ const UserSignup = () => {
         });
     };
 
+    const isPasswordVerified = () => {
+        if (userSignupDetails.password !== userSignupDetails.passwordVerify)
+            return false;
+        return true;
+    };
+
     const handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
+        if (alertMessage !== '') setAlertMessage('');
+
+        if (!isPasswordVerified()) setAlertMessage('Passwords must match');
 
         Userfront.signup({
             method: 'password',
@@ -70,6 +149,8 @@ const UserSignup = () => {
             data: {
                 username: userSignupDetails.username,
             },
+        }).catch((err: any) => {
+            setAlertMessage(err.message);
         });
     };
 
@@ -79,6 +160,18 @@ const UserSignup = () => {
                 <SignupSVG />
             </SVGContainer>
             <FormContainer>
+                <LogoContainer>
+                    <LogoSVG />
+                </LogoContainer>
+                <HeadingContainer>
+                    <PrimaryHeading>
+                        Create your PushPull Account
+                    </PrimaryHeading>
+                    <HeaderDivider />
+                    <SecondaryHeading>
+                        It's free and only takes a minute.
+                    </SecondaryHeading>
+                </HeadingContainer>
                 <form onSubmit={handleSubmit}>
                     <InputContainer>
                         <TextInput
@@ -186,6 +279,22 @@ const UserSignup = () => {
                         <GeneralButton buttonLabel="Sign up" />
                     </ButtonContainer>
                 </form>
+                <OrRule>
+                    <OrText>OR</OrText>
+                </OrRule>
+                <ProviderContainer>
+                    <GeneralButton
+                        buttonLabel="Sign up with Google"
+                        buttonBackground="#0F9D58"
+                        buttonIcon={<GLogo />}
+                    />
+                    <ProviderDivider />
+                    <GeneralButton
+                        buttonLabel="Sign up with Facebook"
+                        buttonBackground="#1877f2"
+                        buttonIcon={<FbLogo />}
+                    />
+                </ProviderContainer>
             </FormContainer>
         </MainContainer>
     );
