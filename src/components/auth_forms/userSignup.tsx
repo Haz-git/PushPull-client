@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 //Components:
 import { ReactComponent as SignupSVG } from '../../assets/signup_animation.svg';
+import GeneralButton from '../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -29,6 +30,10 @@ const FormContainer = styled.div`
 
 const InputContainer = styled.div`
     margin: 1rem 0;
+`;
+
+const ButtonContainer = styled.div`
+    margin-top: 2rem;
 `;
 
 //Interfaces:
@@ -177,6 +182,9 @@ const UserSignup = () => {
                             onChange={handleUserInput}
                         />
                     </InputContainer>
+                    <ButtonContainer>
+                        <GeneralButton buttonLabel="Sign up" />
+                    </ButtonContainer>
                 </form>
             </FormContainer>
         </MainContainer>
