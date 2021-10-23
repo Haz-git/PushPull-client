@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 //Components:
 import { ReactComponent as SignupSVG } from '../../assets/signup_animation.svg';
+import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import GeneralButton from '../general_components/GeneralButton';
 
 //Styles:
@@ -26,6 +27,35 @@ const FormContainer = styled.div`
     padding: 2rem 2rem;
     border-radius: 0.3rem;
     margin: 2rem auto;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+`;
+
+const LogoContainer = styled.div`
+    text-align: center;
+    margin: 0 auto;
+    width: 10rem;
+`;
+
+const HeadingContainer = styled.div`
+    text-align: center;
+    margin: 1rem 0;
+`;
+
+const PrimaryHeading = styled.h1`
+    font-size: 1.2rem;
+    color: ${(props) => props.theme.mainText};
+    font-weight: 800;
+`;
+
+const SecondaryHeading = styled.h2`
+    font-size: 1rem;
+    color: ${(props) => props.theme.subText};
+    font-weight: 800;
+`;
+
+const HeaderDivider = styled.div`
+    height: 0.5rem;
 `;
 
 const InputContainer = styled.div`
@@ -53,6 +83,8 @@ const UserSignup = () => {
         passwordVerify: '',
     });
 
+    const [alertMessage, setAlertMessage] = useState('');
+
     const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setUserSignupDetails({
             ...userSignupDetails,
@@ -60,8 +92,17 @@ const UserSignup = () => {
         });
     };
 
+    const isPasswordVerified = () => {
+        if (userSignupDetails.password !== userSignupDetails.passwordVerify)
+            return false;
+        return true;
+    };
+
     const handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
+        if (alertMessage !== '') setAlertMessage('');
+
+        if (!isPasswordVerified()) setAlertMessage('Passwords must match');
 
         Userfront.signup({
             method: 'password',
@@ -70,6 +111,8 @@ const UserSignup = () => {
             data: {
                 username: userSignupDetails.username,
             },
+        }).catch((err: any) => {
+            setAlertMessage(err.message);
         });
     };
 
@@ -79,6 +122,18 @@ const UserSignup = () => {
                 <SignupSVG />
             </SVGContainer>
             <FormContainer>
+                <LogoContainer>
+                    <LogoSVG />
+                </LogoContainer>
+                <HeadingContainer>
+                    <PrimaryHeading>
+                        Create your PushPull Account
+                    </PrimaryHeading>
+                    <HeaderDivider />
+                    <SecondaryHeading>
+                        It's free and only takes a minute.
+                    </SecondaryHeading>
+                </HeadingContainer>
                 <form onSubmit={handleSubmit}>
                     <InputContainer>
                         <TextInput
