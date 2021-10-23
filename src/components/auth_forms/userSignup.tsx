@@ -45,13 +45,13 @@ const HeadingContainer = styled.div`
 const PrimaryHeading = styled.h1`
     font-size: 1.2rem;
     color: ${(props) => props.theme.mainText};
-    font-weight: 800;
+    font-weight: 700;
 `;
 
 const SecondaryHeading = styled.h2`
     font-size: 1rem;
     color: ${(props) => props.theme.subText};
-    font-weight: 800;
+    font-weight: 700;
 `;
 
 const HeaderDivider = styled.div`
@@ -64,6 +64,14 @@ const InputContainer = styled.div`
 
 const ButtonContainer = styled.div`
     margin-top: 2rem;
+`;
+
+const ProviderContainer = styled.div`
+    margin: 1rem 0;
+`;
+
+const ProviderDivider = styled.div`
+    height: 1rem;
 `;
 
 //Interfaces:
@@ -241,6 +249,17 @@ const UserSignup = () => {
                         <GeneralButton buttonLabel="Sign up" />
                     </ButtonContainer>
                 </form>
+                <ProviderContainer>
+                    <GeneralButton
+                        buttonLabel="Sign up with Google"
+                        buttonBackground="#0F9D58"
+                    />
+                    <ProviderDivider />
+                    <GeneralButton
+                        buttonLabel="Sign up with Facebook"
+                        buttonBackground="#1877f2"
+                    />
+                </ProviderContainer>
             </FormContainer>
         </MainContainer>
     );
