@@ -2,12 +2,22 @@ import * as React from 'react';
 import { useState } from 'react';
 
 //Components:
+import { ReactComponent as SignupSVG } from '../../assets/signup_animation.svg';
 
 //Styles:
 import styled from 'styled-components';
 import { TextInput } from '@mantine/core';
 
-const MainContainer = styled.section``;
+const MainContainer = styled.section`
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    justify-content: center;
+`;
+
+const SVGContainer = styled.div``;
 
 const FormContainer = styled.div`
     width: 30rem;
@@ -60,6 +70,9 @@ const UserSignup = () => {
 
     return (
         <MainContainer>
+            <SVGContainer>
+                <SignupSVG />
+            </SVGContainer>
             <FormContainer>
                 <form onSubmit={handleSubmit}>
                     <InputContainer>
