@@ -4,6 +4,9 @@ import { useState } from 'react';
 //Components:
 
 //Styles:
+import styled from 'styled-components';
+
+const MainContainer = styled.section``;
 
 //Interfaces:
 
@@ -14,8 +17,22 @@ const Userfront = windowObject.Userfront;
 //Tenant ID could possibly be stored in an ENV var.
 Userfront.init('5nxxrqn7');
 
-const userSignup = () => {
-    return <div>Sign up page</div>;
+const UserSignup = () => {
+    const [userSignupDetails, setUserSignupDetails] = useState({
+        email: '',
+        userName: '',
+        password: '',
+        passwordVerify: '',
+    });
+
+    const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setUserSignupDetails({
+            ...userSignupDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    return <MainContainer>test</MainContainer>;
 };
 
-export default userSignup;
+export default UserSignup;
