@@ -332,12 +332,6 @@ const UserSignup = () => {
                         buttonBackground="#0F9D58"
                         buttonIcon={<GLogo />}
                     />
-                    <ProviderDivider />
-                    <GeneralButton
-                        buttonLabel="Sign up with Facebook"
-                        buttonBackground="#1877f2"
-                        buttonIcon={<FbLogo />}
-                    />
                 </ProviderContainer>
             </FormContainer>
         </MainContainer>
