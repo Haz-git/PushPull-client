@@ -56,7 +56,9 @@ const HeadingContainer = styled.div`
     margin: 0.75rem 0;
 `;
 
-const ErrorContainer = styled.div``;
+const ErrorContainer = styled.div`
+    text-align: center;
+`;
 
 const ErrorText = styled.h2<IErrorText>`
     font-size: 0.9rem;
@@ -168,12 +170,14 @@ const UserSignup = () => {
         if (alertMessage !== '') setAlertMessage('');
 
         if (!isPasswordVerified()) {
-            return setAlertMessage('Passwords must match.');
+            return setAlertMessage(
+                '"password" and "confirm password" must match'
+            );
         }
 
         if (!isUsernameValid()) {
             return setAlertMessage(
-                'Username must be greater than 3 characters.'
+                '"username" must be greater than 3 characters'
             );
         }
 
@@ -183,6 +187,7 @@ const UserSignup = () => {
             password: userSignupDetails.password,
             username: userSignupDetails.username,
         }).catch((err: any) => {
+            console.log(err);
             console.log(err.message);
             setAlertMessage(err.message);
         });
