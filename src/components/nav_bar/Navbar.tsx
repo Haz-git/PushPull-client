@@ -4,11 +4,16 @@ import { deviceMin } from '../../devices/breakpoints';
 //Components:
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
+import GeneralButton from '../../components/general_components/GeneralButton';
+import historyObject from '../../utils/historyObject';
 
 //Styles:
 import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: ${(props) => props.theme.lightBackground};
     width: 100%;
     padding: 1rem 1rem;
@@ -51,6 +56,16 @@ const LogoContainer = styled.div`
     }
 `;
 
+const ButtonsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const ButtonDivider = styled.div`
+    width: 2rem;
+`;
+
 //Interfaces:
 
 const Navbar = () => {
@@ -60,6 +75,23 @@ const Navbar = () => {
                 <LogoSVG />
                 <StyledNavLogo to="/" />
             </LogoContainer>
+            <ButtonsContainer>
+                <GeneralButton
+                    buttonLabel="Log in"
+                    padding=".45rem .7rem"
+                    buttonBackground="#ffffff"
+                    buttonTextColor="#7678ED"
+                    textShadow="none"
+                    border="2px solid #7678ED"
+                    onClick={() => historyObject.push('/login')}
+                />
+                <ButtonDivider />
+                <GeneralButton
+                    buttonLabel="Sign up"
+                    padding=".6rem .7rem"
+                    onClick={() => historyObject.push('/signup')}
+                />
+            </ButtonsContainer>
         </StyledNavbar>
     );
 };
