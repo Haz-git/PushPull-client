@@ -115,6 +115,22 @@ const ProviderDivider = styled.div`
     height: 1rem;
 `;
 
+const RedirectContainer = styled.div`
+    text-align: center;
+    margin-top: 1rem;
+`;
+
+const RedirectText = styled.h2`
+    font-size: 1rem;
+    color: ${(props) => props.theme.subText};
+    font-weight: 700;
+`;
+
+const RedirectLink = styled.a`
+    font-weight: 900;
+    color: ${(props) => props.theme.accentColors.orange};
+`;
+
 //Interfaces:
 
 interface IErrorText {
@@ -323,7 +339,13 @@ const UserSignup = () => {
                         <GeneralButton buttonLabel="Sign up" />
                     </ButtonContainer>
                 </form>
-                <OrRule>
+                <RedirectContainer>
+                    <RedirectText>
+                        Already have an account?{' '}
+                        <RedirectLink href="/login">Log in</RedirectLink>
+                    </RedirectText>
+                </RedirectContainer>
+                {/* <OrRule>
                     <OrText>OR</OrText>
                 </OrRule>
                 <ProviderContainer>
@@ -332,7 +354,7 @@ const UserSignup = () => {
                         buttonBackground="#0F9D58"
                         buttonIcon={<GLogo />}
                     />
-                </ProviderContainer>
+                </ProviderContainer> */}
             </FormContainer>
         </MainContainer>
     );
