@@ -183,6 +183,7 @@ const UserSignup = () => {
             password: userSignupDetails.password,
             username: userSignupDetails.username,
         }).catch((err: any) => {
+            console.log(err.message);
             setAlertMessage(err.message);
         });
     };
