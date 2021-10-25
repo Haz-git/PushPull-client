@@ -53,7 +53,16 @@ const LogoContainer = styled.div`
 
 const HeadingContainer = styled.div`
     text-align: center;
-    margin: 1rem 0;
+    margin: 0.75rem 0;
+`;
+
+const ErrorContainer = styled.div``;
+
+const ErrorText = styled.h2<IErrorText>`
+    font-size: 0.9rem;
+    color: ${(props) => props.theme.accentColors.red};
+    font-weight: 700;
+    visibility: ${(props) => (props.display === 'true' ? 'visible' : 'hidden')};
 `;
 
 const PrimaryHeading = styled.h1`
@@ -106,6 +115,10 @@ const ProviderDivider = styled.div`
 
 //Interfaces:
 
+interface IErrorText {
+    display: string;
+}
+
 //UserFront IDP API initialization;
 const windowObject = window as any;
 const Userfront = windowObject.Userfront;
@@ -121,7 +134,7 @@ const UserSignup = () => {
         passwordVerify: '',
     });
 
-    const [alertMessage, setAlertMessage] = useState('');
+    const [alertMessage, setAlertMessage] = useState('alertMessageDefault');
 
     const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setUserSignupDetails({
@@ -130,25 +143,45 @@ const UserSignup = () => {
         });
     };
 
+    const isUsernameValid = () => {
+        if (
+            userSignupDetails.username !== '' &&
+            userSignupDetails.username.length >= 3
+        )
+            return true;
+        return false;
+    };
+
     const isPasswordVerified = () => {
         if (userSignupDetails.password !== userSignupDetails.passwordVerify)
             return false;
         return true;
     };
 
+    const checkAlertMessage = () => {
+        if (alertMessage !== 'alertMessageDefault') return 'true';
+        else return 'false';
+    };
+
     const handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
         if (alertMessage !== '') setAlertMessage('');
 
-        if (!isPasswordVerified()) setAlertMessage('Passwords must match');
+        if (!isPasswordVerified()) {
+            return setAlertMessage('Passwords must match.');
+        }
+
+        if (!isUsernameValid()) {
+            return setAlertMessage(
+                'Username must be greater than 3 characters.'
+            );
+        }
 
         Userfront.signup({
             method: 'password',
             email: userSignupDetails.email,
             password: userSignupDetails.password,
-            data: {
-                username: userSignupDetails.username,
-            },
+            username: userSignupDetails.username,
         }).catch((err: any) => {
             setAlertMessage(err.message);
         });
@@ -172,6 +205,11 @@ const UserSignup = () => {
                         It's free and only takes a minute.
                     </SecondaryHeading>
                 </HeadingContainer>
+                <ErrorContainer>
+                    <ErrorText display={checkAlertMessage()}>
+                        {alertMessage}
+                    </ErrorText>
+                </ErrorContainer>
                 <form onSubmit={handleSubmit}>
                     <InputContainer>
                         <TextInput
