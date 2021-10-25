@@ -6,6 +6,7 @@ import { deviceMin } from '../../devices/breakpoints';
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import { Burger } from '@mantine/core';
+import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
 import historyObject from '../../utils/historyObject';
 
@@ -80,6 +81,15 @@ const BurgerContainer = styled.div`
     }
 `;
 
+const MobileButtonsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0rem 1rem;
+    row-gap: 1rem;
+`;
+
 //Interfaces:
 
 const Navbar = () => {
@@ -116,6 +126,38 @@ const Navbar = () => {
                     size={25}
                 />
             </BurgerContainer>
+            <GeneralDrawer
+                openBoolean={isBurgerOpened}
+                closeFunc={() => setIsBurgerOpened(false)}
+                position="right"
+                size="50%"
+                padding={0}
+                title=""
+            >
+                <MobileButtonsContainer>
+                    <GeneralButton
+                        buttonLabel="Log in"
+                        padding=".45rem .7rem"
+                        buttonBackground="#ffffff"
+                        buttonTextColor="#7678ED"
+                        textShadow="none"
+                        border="2px solid #7678ED"
+                        onClick={() => {
+                            setIsBurgerOpened(false);
+                            historyObject.push('/login');
+                        }}
+                    />
+
+                    <GeneralButton
+                        buttonLabel="Sign up"
+                        padding=".6rem .7rem"
+                        onClick={() => {
+                            setIsBurgerOpened(false);
+                            historyObject.push('/signup');
+                        }}
+                    />
+                </MobileButtonsContainer>
+            </GeneralDrawer>
         </StyledNavbar>
     );
 };
