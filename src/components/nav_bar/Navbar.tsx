@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
+import { Burger } from '@mantine/core';
 import GeneralButton from '../../components/general_components/GeneralButton';
 import historyObject from '../../utils/historyObject';
 
@@ -57,18 +59,32 @@ const LogoContainer = styled.div`
 `;
 
 const ButtonsContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @media ${deviceMin.mobileS} {
+        display: none;
+    }
+
+    @media ${deviceMin.browserSm} {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 `;
 
 const ButtonDivider = styled.div`
     width: 2rem;
 `;
 
+const BurgerContainer = styled.div`
+    @media ${deviceMin.browserSm} {
+        display: none;
+    }
+`;
+
 //Interfaces:
 
 const Navbar = () => {
+    const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+
     return (
         <StyledNavbar>
             <LogoContainer>
@@ -92,6 +108,14 @@ const Navbar = () => {
                     onClick={() => historyObject.push('/signup')}
                 />
             </ButtonsContainer>
+            <BurgerContainer>
+                <Burger
+                    opened={isBurgerOpened}
+                    onClick={() => setIsBurgerOpened((o) => !o)}
+                    color="rgba(224, 113, 51, 1)"
+                    size={25}
+                />
+            </BurgerContainer>
         </StyledNavbar>
     );
 };
