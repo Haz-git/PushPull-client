@@ -228,8 +228,6 @@ const UserAuthForm = ({
                     color: 'orange',
                     autoClose: 20000,
                 });
-
-                historyObject.push('/login');
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
