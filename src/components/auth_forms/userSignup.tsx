@@ -245,7 +245,7 @@ const UserSignup = () => {
                     autoClose: 20000,
                 });
 
-                historyObject.push('/');
+                historyObject.push('/login');
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
