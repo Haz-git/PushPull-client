@@ -56,7 +56,7 @@ const App = () => {
                             title=""
                             padding={0}
                             size={isMobileOnly ? '100%' : '35rem'}
-                            position={isMobileOnly ? 'bottom' : 'left'}
+                            position={isMobileOnly ? 'bottom' : 'right'}
                         >
                             <UserAuthForm
                                 formBackgroundColor="transparent"
@@ -75,7 +75,9 @@ const App = () => {
                         </GeneralModal>
                     </BugReportModalContainer>
                     <Router history={history}>
-                        <Navbar />
+                        <Navbar
+                            toggleAuthDrawerWithView={toggleAuthDrawerWithView}
+                        />
                         <Switch>
                             <Route
                                 exact
