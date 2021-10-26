@@ -3,7 +3,7 @@ import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
 import { ReactComponent as SignupSVG } from '../../assets/signup_animation.svg';
-import UserSignupForm from './userSignupForm';
+import UserAuthForm from './UserAuthForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -59,7 +59,7 @@ const UserSignup = () => {
             <SVGContainer>
                 <SignupSVG />
             </SVGContainer>
-            <UserSignupForm />
+            <UserAuthForm authStateRenderView="SIGNUP" />
         </MainContainer>
     );
 };
