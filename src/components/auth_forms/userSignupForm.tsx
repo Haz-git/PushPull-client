@@ -12,15 +12,14 @@ import { TextInput } from '@mantine/core';
 //Styles:
 import styled from 'styled-components';
 
-const FormContainer = styled.div`
+const FormContainer = styled.div<IComponentProps>`
     width: 100%;
     max-width: 35rem;
-    background: #ffffff;
+    background: ${(props) => props.formBackgroundColor};
     padding: 2rem 2rem;
     border-radius: 0.3rem;
     margin: 2rem auto;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: ${(props) => props.formShadow};
 `;
 
 const LogoContainer = styled.div`
@@ -115,6 +114,11 @@ interface IErrorText {
     display: string;
 }
 
+interface IComponentProps {
+    formBackgroundColor?: string;
+    formShadow?: string;
+}
+
 //UserFront IDP API initialization;
 const windowObject = window as any;
 const Userfront = windowObject.Userfront;
@@ -122,7 +126,10 @@ const Userfront = windowObject.Userfront;
 //Tenant ID could possibly be stored in an ENV var.
 Userfront.init('5nxxrqn7');
 
-const UserSignupForm = () => {
+const UserSignupForm = ({
+    formBackgroundColor = '#ffffff',
+    formShadow = 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+}: IComponentProps): JSX.Element => {
     const notifications = useNotifications();
 
     const [userSignupDetails, setUserSignupDetails] = useState({
@@ -199,7 +206,10 @@ const UserSignupForm = () => {
             });
     };
     return (
-        <FormContainer>
+        <FormContainer
+            formBackgroundColor={formBackgroundColor}
+            formShadow={formShadow}
+        >
             <LogoContainer>
                 <LogoSVG />
             </LogoContainer>
