@@ -216,6 +216,150 @@ const UserAuthForm = ({
                 setAlertMessage(err.message);
             });
     };
+
+    const renderAuthFormView = () => {
+        if (authStateRenderView !== undefined && authStateRenderView !== null) {
+            switch (AuthFormRenderView) {
+                case 'SIGNUP':
+                    return (
+                        <>
+                            <HeadingContainer>
+                                <PrimaryHeading>
+                                    Create your PushPull Account
+                                </PrimaryHeading>
+                                <HeaderDivider />
+                                <SecondaryHeading>
+                                    It's free and only takes a minute.
+                                </SecondaryHeading>
+                            </HeadingContainer>
+                            <ErrorContainer>
+                                <ErrorText display={checkAlertMessage()}>
+                                    {alertMessage}
+                                </ErrorText>
+                            </ErrorContainer>
+                            <form onSubmit={handleSignupSubmission}>
+                                <InputContainer>
+                                    <TextInput
+                                        name="email"
+                                        type="email"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Email Address"
+                                        placeholder="youremail@something.com"
+                                        value={userSignupDetails.email}
+                                        onChange={handleUserInput}
+                                    />
+                                </InputContainer>
+                                <InputContainer>
+                                    <TextInput
+                                        name="username"
+                                        type="text"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Username"
+                                        placeholder="FitEntity420"
+                                        value={userSignupDetails.username}
+                                        onChange={handleUserInput}
+                                    />
+                                </InputContainer>
+                                <InputContainer>
+                                    <TextInput
+                                        name="password"
+                                        type="password"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Password"
+                                        value={userSignupDetails.password}
+                                        onChange={handleUserInput}
+                                    />
+                                </InputContainer>
+                                <InputContainer>
+                                    <TextInput
+                                        name="passwordVerify"
+                                        type="password"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Confirm Password"
+                                        value={userSignupDetails.passwordVerify}
+                                        onChange={handleUserInput}
+                                    />
+                                </InputContainer>
+                                <ButtonContainer>
+                                    <GeneralButton buttonLabel="Sign up" />
+                                </ButtonContainer>
+                            </form>
+                            <RedirectContainer>
+                                <RedirectText>
+                                    Already have an account?{' '}
+                                    <RedirectLink href="/login">
+                                        Log in
+                                    </RedirectLink>
+                                </RedirectText>
+                            </RedirectContainer>
+                        </>
+                    );
+                case 'LOGIN':
+                    return <>LOGIN</>;
+            }
+        }
+    };
+
     return (
         <FormContainer
             formBackgroundColor={formBackgroundColor}
@@ -224,131 +368,8 @@ const UserAuthForm = ({
             <LogoContainer>
                 <LogoSVG />
             </LogoContainer>
-            <HeadingContainer>
-                <PrimaryHeading>Create your PushPull Account</PrimaryHeading>
-                <HeaderDivider />
-                <SecondaryHeading>
-                    It's free and only takes a minute.
-                </SecondaryHeading>
-            </HeadingContainer>
-            <ErrorContainer>
-                <ErrorText display={checkAlertMessage()}>
-                    {alertMessage}
-                </ErrorText>
-            </ErrorContainer>
-            <form onSubmit={handleSignupSubmission}>
-                <InputContainer>
-                    <TextInput
-                        name="email"
-                        type="email"
-                        styles={{
-                            label: {
-                                color: 'rgba(0, 0, 34, .7)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '1rem',
-                                fontWeight: 700,
-                                marginBottom: '.25rem',
-                            },
-                            input: {
-                                color: 'rgba(0, 0, 34, 1)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '.9rem',
-                                fontWeight: 500,
-                            },
-                        }}
-                        required
-                        label="Email Address"
-                        placeholder="youremail@something.com"
-                        value={userSignupDetails.email}
-                        onChange={handleUserInput}
-                    />
-                </InputContainer>
-                <InputContainer>
-                    <TextInput
-                        name="username"
-                        type="text"
-                        styles={{
-                            label: {
-                                color: 'rgba(0, 0, 34, .7)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '1rem',
-                                fontWeight: 700,
-                                marginBottom: '.25rem',
-                            },
-                            input: {
-                                color: 'rgba(0, 0, 34, 1)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '.9rem',
-                                fontWeight: 500,
-                            },
-                        }}
-                        required
-                        label="Username"
-                        placeholder="FitEntity420"
-                        value={userSignupDetails.username}
-                        onChange={handleUserInput}
-                    />
-                </InputContainer>
-                <InputContainer>
-                    <TextInput
-                        name="password"
-                        type="password"
-                        styles={{
-                            label: {
-                                color: 'rgba(0, 0, 34, .7)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '1rem',
-                                fontWeight: 700,
-                                marginBottom: '.25rem',
-                            },
-                            input: {
-                                color: 'rgba(0, 0, 34, 1)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '.9rem',
-                                fontWeight: 500,
-                            },
-                        }}
-                        required
-                        label="Password"
-                        value={userSignupDetails.password}
-                        onChange={handleUserInput}
-                    />
-                </InputContainer>
-                <InputContainer>
-                    <TextInput
-                        name="passwordVerify"
-                        type="password"
-                        styles={{
-                            label: {
-                                color: 'rgba(0, 0, 34, .7)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '1rem',
-                                fontWeight: 700,
-                                marginBottom: '.25rem',
-                            },
-                            input: {
-                                color: 'rgba(0, 0, 34, 1)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '.9rem',
-                                fontWeight: 500,
-                            },
-                        }}
-                        required
-                        label="Confirm Password"
-                        value={userSignupDetails.passwordVerify}
-                        onChange={handleUserInput}
-                    />
-                </InputContainer>
-                <ButtonContainer>
-                    <GeneralButton buttonLabel="Sign up" />
-                </ButtonContainer>
-            </form>
-            <RedirectContainer>
-                <RedirectText>
-                    Already have an account?{' '}
-                    <RedirectLink href="/login">Log in</RedirectLink>
-                </RedirectText>
-            </RedirectContainer>
+            {renderAuthFormView()}
+
             {/* <OrRule>
                     <OrText>OR</OrText>
                 </OrRule>

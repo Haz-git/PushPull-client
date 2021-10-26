@@ -92,7 +92,11 @@ const MobileButtonsContainer = styled.div`
 
 //Interfaces:
 
-const Navbar = () => {
+interface IComponentProps {
+    toggleAuthDrawerWithView: (state: boolean, view: string) => void;
+}
+
+const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
     return (
@@ -109,13 +113,13 @@ const Navbar = () => {
                     buttonTextColor="#7678ED"
                     textShadow="none"
                     border="2px solid #7678ED"
-                    onClick={() => historyObject.push('/login')}
+                    onClick={() => toggleAuthDrawerWithView(true, 'LOGIN')}
                 />
                 <ButtonDivider />
                 <GeneralButton
                     buttonLabel="Sign up"
                     padding=".6rem .7rem"
-                    onClick={() => historyObject.push('/signup')}
+                    onClick={() => toggleAuthDrawerWithView(true, 'SIGNUP')}
                 />
             </ButtonsContainer>
             <BurgerContainer>
@@ -144,7 +148,7 @@ const Navbar = () => {
                         border="2px solid #7678ED"
                         onClick={() => {
                             setIsBurgerOpened(false);
-                            historyObject.push('/login');
+                            toggleAuthDrawerWithView(true, 'LOGIN');
                         }}
                     />
 
@@ -153,7 +157,7 @@ const Navbar = () => {
                         padding=".6rem .7rem"
                         onClick={() => {
                             setIsBurgerOpened(false);
-                            historyObject.push('/signup');
+                            toggleAuthDrawerWithView(true, 'SIGNUP');
                         }}
                     />
                 </MobileButtonsContainer>
