@@ -6,12 +6,14 @@ import { deviceMin } from '../../devices/breakpoints';
 import { ReactComponent as SignupSVG } from '../../assets/signup_animation.svg';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import GeneralButton from '../general_components/GeneralButton';
+import { useNotifications } from '@mantine/notifications';
 
 //Styles:
 import styled from 'styled-components';
 import { TextInput } from '@mantine/core';
 import { LogoFacebook } from '@styled-icons/ionicons-solid';
 import { LogoGoogle } from '@styled-icons/ionicons-solid';
+import historyObject from '../../utils/historyObject';
 
 const FbLogo = styled(LogoFacebook)`
     color: #ffffff;
@@ -165,6 +167,8 @@ const Userfront = windowObject.Userfront;
 Userfront.init('5nxxrqn7');
 
 const UserSignup = () => {
+    const notifications = useNotifications();
+
     const [userSignupDetails, setUserSignupDetails] = useState({
         email: '',
         username: '',
@@ -217,14 +221,35 @@ const UserSignup = () => {
             );
         }
 
+        // Userfront.signup({
+        //     method: 'password',
+        //     email: userSignupDetails.email,
+        //     password: userSignupDetails.password,
+        //     username: userSignupDetails.username,
+        // }).catch((err: any) => {
+        //     setAlertMessage(err.message);
+        // });
+
         Userfront.signup({
             method: 'password',
             email: userSignupDetails.email,
             password: userSignupDetails.password,
             username: userSignupDetails.username,
-        }).catch((err: any) => {
-            setAlertMessage(err.message);
-        });
+            redirect: false,
+        })
+            .then((value: any) => {
+                notifications.showNotification({
+                    title: 'Wooo! Your Account Has Been Created!',
+                    message: `Welcome to Pushpull, ${value.username}.`,
+                    color: 'orange',
+                    autoClose: 20000,
+                });
+
+                historyObject.push('/');
+            })
+            .catch((err: any) => {
+                setAlertMessage(err.message);
+            });
     };
 
     return (
