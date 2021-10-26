@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
 import { ReactComponent as SignupSVG } from '../../assets/signup_animation.svg';
@@ -27,16 +28,34 @@ const GLogo = styled(LogoGoogle)`
 const MainContainer = styled.section`
     height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center;
-    justify-content: center;
+
+    @media ${deviceMin.mobileS} {
+        display: block;
+        padding: 0 0.5rem;
+        position: relative;
+    }
+
+    @media ${deviceMin.laptopL} {
+        display: grid;
+        grid-template-columns: 63% 37%;
+        align-items: center;
+        justify-content: center;
+    }
 `;
 
-const SVGContainer = styled.div``;
+const SVGContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: none;
+    }
+
+    @media ${deviceMin.laptopL} {
+        display: block;
+    }
+`;
 
 const FormContainer = styled.div`
-    width: 30rem;
+    width: 100%;
+    max-width: 35rem;
     background: #ffffff;
     padding: 2rem 2rem;
     border-radius: 0.3rem;
@@ -203,8 +222,6 @@ const UserSignup = () => {
             password: userSignupDetails.password,
             username: userSignupDetails.username,
         }).catch((err: any) => {
-            console.log(err);
-            console.log(err.message);
             setAlertMessage(err.message);
         });
     };
