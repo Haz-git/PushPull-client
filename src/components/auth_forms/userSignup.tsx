@@ -40,6 +40,7 @@ const MainContainer = styled.section`
         grid-template-columns: 63% 37%;
         align-items: center;
         justify-content: center;
+        padding: 0 1rem;
     }
 `;
 
