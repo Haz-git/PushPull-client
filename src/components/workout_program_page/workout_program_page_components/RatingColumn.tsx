@@ -232,6 +232,7 @@ interface IComponentProps {
     recBegCount: number;
     recIntCount: number;
     avgFollowLength: number;
+    toggleSignupDrawer: (state: boolean) => void;
 }
 
 const RatingColumn = ({
@@ -249,6 +250,7 @@ const RatingColumn = ({
     recBegCount,
     recIntCount,
     avgFollowLength,
+    toggleSignupDrawer,
 }: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();
@@ -341,9 +343,12 @@ const RatingColumn = ({
                     width="16rem"
                     buttonIcon={<PencilIcon />}
                     hoverTransform="none"
-                    onClick={() =>
-                        historyObject.push(`/add-review/${programId}`)
-                    }
+                    onClick={() => {
+                        //Once finalized, if user not logged in, render login form or signup form.
+                        // toggleSignupDrawer(true);
+
+                        historyObject.push(`/add-review/${programId}`);
+                    }}
                 />
             </SubmitReviewButtonContainer>
             <RatingBreakdownContainer>
