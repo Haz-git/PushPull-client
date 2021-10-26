@@ -44,7 +44,8 @@ const GeneralDrawer = ({
                         background: 'rgba(244, 244, 244, 1)',
                     },
                     header: {
-                        marginBottom: '.5rem',
+                        marginBottom: '0rem',
+                        padding: '.5rem .5rem',
                     },
                 }}
                 opened={openBoolean}

@@ -17,6 +17,7 @@ export const lightTheme = {
         red: '#AF1432',
         green: '#41A312',
         blue: 'rgba(43, 90, 147,1)',
+        purple: '#7678ED',
     },
     textShadows: {
         sm: '1px 1px 1px rgba(0,0,0,.25)',

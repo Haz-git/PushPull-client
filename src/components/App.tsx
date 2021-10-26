@@ -20,12 +20,23 @@ import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPag
 import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 import GeneralModal from './general_components/GeneralModal';
 import FeedbackForm from './general_components/FeedbackForm';
+import { isMobileOnly } from 'react-device-detect';
+
+//Signup Drawer
+import GeneralDrawer from './general_components/GeneralDrawer';
+import UserSignupForm from './auth_forms/userSignupForm';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
 
+const SignupDrawerContainer = styled.div``;
+
 const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
+    const [stateSignupDrawer, setStateSignupDrawer] = useState(false);
+
+    const toggleSignupDrawer = (state: boolean) => setStateSignupDrawer(state);
+
     const openBugReportModal = () => setStateBugReportModal(true);
     const closeBugReportModal = () => setStateBugReportModal(false);
 
@@ -34,6 +45,21 @@ const App = () => {
             <ThemeProvider theme={lightTheme}>
                 <GlobalStyle />
                 <>
+                    <SignupDrawerContainer>
+                        <GeneralDrawer
+                            openBoolean={stateSignupDrawer}
+                            closeFunc={() => setStateSignupDrawer(false)}
+                            title=""
+                            padding={0}
+                            size={isMobileOnly ? '100%' : '35rem'}
+                            position={isMobileOnly ? 'bottom' : 'left'}
+                        >
+                            <UserSignupForm
+                                formBackgroundColor="transparent"
+                                formShadow="none"
+                            />
+                        </GeneralDrawer>
+                    </SignupDrawerContainer>
                     <BugReportModalContainer>
                         <GeneralModal
                             openBoolean={stateBugReportModal}
@@ -65,7 +91,12 @@ const App = () => {
                             <Route
                                 exact
                                 path="/program/:id"
-                                component={MainWorkoutProgramPage}
+                                render={(props) => (
+                                    <MainWorkoutProgramPage
+                                        {...props}
+                                        toggleSignupDrawer={toggleSignupDrawer}
+                                    />
+                                )}
                             />
                             <Route
                                 exact
