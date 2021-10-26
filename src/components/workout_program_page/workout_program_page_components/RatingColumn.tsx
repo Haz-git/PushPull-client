@@ -236,7 +236,7 @@ interface IComponentProps {
     recBegCount: number;
     recIntCount: number;
     avgFollowLength: number;
-    toggleSignupDrawer: (state: boolean) => void;
+    toggleAuthDrawerWithView: (state: boolean, view: string) => void;
 }
 
 const RatingColumn = ({
@@ -254,7 +254,7 @@ const RatingColumn = ({
     recBegCount,
     recIntCount,
     avgFollowLength,
-    toggleSignupDrawer,
+    toggleAuthDrawerWithView,
 }: IComponentProps): JSX.Element => {
     useEffect(() => {
         scrollToTop();

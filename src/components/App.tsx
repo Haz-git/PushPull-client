@@ -24,7 +24,7 @@ import { isMobileOnly } from 'react-device-detect';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
-import UserSignupForm from './auth_forms/userSignupForm';
+import UserAuthForm from './auth_forms/UserAuthForm';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
@@ -33,9 +33,13 @@ const SignupDrawerContainer = styled.div``;
 
 const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
-    const [stateSignupDrawer, setStateSignupDrawer] = useState(false);
+    const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
+    const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
 
-    const toggleSignupDrawer = (state: boolean) => setStateSignupDrawer(state);
+    const toggleAuthDrawerWithView = (state: boolean, view: string) => {
+        setStateAuthFormView(view);
+        setStateAuthDrawer(state);
+    };
 
     const openBugReportModal = () => setStateBugReportModal(true);
     const closeBugReportModal = () => setStateBugReportModal(false);
@@ -47,16 +51,17 @@ const App = () => {
                 <>
                     <SignupDrawerContainer>
                         <GeneralDrawer
-                            openBoolean={stateSignupDrawer}
-                            closeFunc={() => setStateSignupDrawer(false)}
+                            openBoolean={stateAuthDrawer}
+                            closeFunc={() => setStateAuthDrawer(false)}
                             title=""
                             padding={0}
                             size={isMobileOnly ? '100%' : '35rem'}
                             position={isMobileOnly ? 'bottom' : 'left'}
                         >
-                            <UserSignupForm
+                            <UserAuthForm
                                 formBackgroundColor="transparent"
                                 formShadow="none"
+                                authStateRenderView={stateAuthFormView}
                             />
                         </GeneralDrawer>
                     </SignupDrawerContainer>
@@ -94,7 +99,9 @@ const App = () => {
                                 render={(props) => (
                                     <MainWorkoutProgramPage
                                         {...props}
-                                        toggleSignupDrawer={toggleSignupDrawer}
+                                        toggleAuthDrawerWithView={
+                                            toggleAuthDrawerWithView
+                                        }
                                     />
                                 )}
                             />

@@ -12,7 +12,7 @@ import { TextInput } from '@mantine/core';
 //Styles:
 import styled from 'styled-components';
 
-const FormContainer = styled.div<IComponentProps>`
+const FormContainer = styled.div<IFormContainerProps>`
     width: 100%;
     max-width: 35rem;
     background: ${(props) => props.formBackgroundColor};
@@ -114,10 +114,17 @@ interface IErrorText {
     display: string;
 }
 
-interface IComponentProps {
+interface IFormContainerProps {
     formBackgroundColor?: string;
     formShadow?: string;
 }
+
+interface IUserAuthFormProps {
+    //Options will be 'SIGNUP' or 'LOGIN'
+    authStateRenderView: string;
+}
+
+type IComponentProps = IFormContainerProps & IUserAuthFormProps;
 
 //UserFront IDP API initialization;
 const windowObject = window as any;
@@ -126,11 +133,15 @@ const Userfront = windowObject.Userfront;
 //Tenant ID could possibly be stored in an ENV var.
 Userfront.init('5nxxrqn7');
 
-const UserSignupForm = ({
+const UserAuthForm = ({
     formBackgroundColor = '#ffffff',
     formShadow = 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+    authStateRenderView,
 }: IComponentProps): JSX.Element => {
     const notifications = useNotifications();
+
+    const [AuthFormRenderView, setAuthFormRenderView] =
+        useState(authStateRenderView);
 
     const [userSignupDetails, setUserSignupDetails] = useState({
         email: '',
@@ -168,7 +179,7 @@ const UserSignupForm = ({
         else return 'false';
     };
 
-    const handleSubmit = (e: React.FormEvent): void => {
+    const handleSignupSubmission = (e: React.FormEvent): void => {
         e.preventDefault();
         if (alertMessage !== '') setAlertMessage('');
 
@@ -225,7 +236,7 @@ const UserSignupForm = ({
                     {alertMessage}
                 </ErrorText>
             </ErrorContainer>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSignupSubmission}>
                 <InputContainer>
                     <TextInput
                         name="email"
@@ -352,4 +363,4 @@ const UserSignupForm = ({
     );
 };
 
-export default UserSignupForm;
+export default UserAuthForm;

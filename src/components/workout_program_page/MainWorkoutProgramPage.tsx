@@ -47,7 +47,7 @@ interface IComponentProps {
             id: any;
         };
     };
-    toggleSignupDrawer: (state: boolean) => void;
+    toggleAuthDrawerWithView: (state: boolean, view: string) => void;
 }
 
 const MainWorkoutProgramPage = ({
@@ -55,7 +55,7 @@ const MainWorkoutProgramPage = ({
         params: { id },
     },
 
-    toggleSignupDrawer,
+    toggleAuthDrawerWithView,
 }: IComponentProps): JSX.Element => {
     //This component should contain all of the views of the workout program page.
     const { width } = useWindowDimensions();
@@ -157,7 +157,7 @@ const MainWorkoutProgramPage = ({
                             recBegCount={workoutPrograms.recBegCount}
                             recIntCount={workoutPrograms.recIntCount}
                             avgFollowLength={workoutPrograms.avgFollowLength}
-                            toggleSignupDrawer={toggleSignupDrawer}
+                            toggleAuthDrawerWithView={toggleAuthDrawerWithView}
                         />
                         <ReviewResults
                             programTitle={workoutPrograms.workoutProgramTitle}
