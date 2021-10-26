@@ -103,9 +103,12 @@ const RedirectText = styled.h2`
     font-weight: 700;
 `;
 
-const RedirectLink = styled.a`
+const RedirectLink = styled.button`
+    border: none;
+    background: transparent;
     font-weight: 900;
     color: ${(props) => props.theme.accentColors.orange};
+    cursor: pointer;
 `;
 
 //Interfaces:
@@ -150,11 +153,27 @@ const UserAuthForm = ({
         passwordVerify: '',
     });
 
+    const [userLoginDetails, setUserLoginDetails] = useState({
+        email: '',
+        password: '',
+    });
+
     const [alertMessage, setAlertMessage] = useState('alertMessageDefault');
 
-    const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleUserSignupInput = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ): void => {
         setUserSignupDetails({
             ...userSignupDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleUserLoginInput = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ): void => {
+        setUserLoginDetails({
+            ...userLoginDetails,
             [e.target.name]: e.target.value,
         });
     };
@@ -217,6 +236,12 @@ const UserAuthForm = ({
             });
     };
 
+    const handleLoginSubmission = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        console.log('login');
+    };
+
     const renderAuthFormView = () => {
         if (authStateRenderView !== undefined && authStateRenderView !== null) {
             switch (AuthFormRenderView) {
@@ -261,7 +286,7 @@ const UserAuthForm = ({
                                         label="Email Address"
                                         placeholder="youremail@something.com"
                                         value={userSignupDetails.email}
-                                        onChange={handleUserInput}
+                                        onChange={handleUserSignupInput}
                                     />
                                 </InputContainer>
                                 <InputContainer>
@@ -287,7 +312,7 @@ const UserAuthForm = ({
                                         label="Username"
                                         placeholder="FitEntity420"
                                         value={userSignupDetails.username}
-                                        onChange={handleUserInput}
+                                        onChange={handleUserSignupInput}
                                     />
                                 </InputContainer>
                                 <InputContainer>
@@ -312,7 +337,7 @@ const UserAuthForm = ({
                                         required
                                         label="Password"
                                         value={userSignupDetails.password}
-                                        onChange={handleUserInput}
+                                        onChange={handleUserSignupInput}
                                     />
                                 </InputContainer>
                                 <InputContainer>
@@ -337,7 +362,7 @@ const UserAuthForm = ({
                                         required
                                         label="Confirm Password"
                                         value={userSignupDetails.passwordVerify}
-                                        onChange={handleUserInput}
+                                        onChange={handleUserSignupInput}
                                     />
                                 </InputContainer>
                                 <ButtonContainer>
@@ -347,7 +372,11 @@ const UserAuthForm = ({
                             <RedirectContainer>
                                 <RedirectText>
                                     Already have an account?{' '}
-                                    <RedirectLink href="/login">
+                                    <RedirectLink
+                                        onClick={() =>
+                                            setAuthFormRenderView('LOGIN')
+                                        }
+                                    >
                                         Log in
                                     </RedirectLink>
                                 </RedirectText>
@@ -355,7 +384,92 @@ const UserAuthForm = ({
                         </>
                     );
                 case 'LOGIN':
-                    return <>LOGIN</>;
+                    return (
+                        <>
+                            <HeadingContainer>
+                                <PrimaryHeading>
+                                    Login to PushPull
+                                </PrimaryHeading>
+                                <HeaderDivider />
+                                <SecondaryHeading>
+                                    Welcome, glad to see you back.
+                                </SecondaryHeading>
+                            </HeadingContainer>
+                            <ErrorContainer>
+                                <ErrorText display={checkAlertMessage()}>
+                                    {alertMessage}
+                                </ErrorText>
+                            </ErrorContainer>
+                            <form onSubmit={handleLoginSubmission}>
+                                <InputContainer>
+                                    <TextInput
+                                        name="email"
+                                        type="email"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Email Address"
+                                        placeholder="youremail@something.com"
+                                        value={userLoginDetails.email}
+                                        onChange={handleUserLoginInput}
+                                    />
+                                </InputContainer>
+                                <InputContainer>
+                                    <TextInput
+                                        name="password"
+                                        type="password"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Password"
+                                        value={userLoginDetails.password}
+                                        onChange={handleUserLoginInput}
+                                    />
+                                </InputContainer>
+                                <ButtonContainer>
+                                    <GeneralButton buttonLabel="Login" />
+                                </ButtonContainer>
+                            </form>
+                            <RedirectContainer>
+                                <RedirectText>
+                                    Don't have an account?{' '}
+                                    <RedirectLink
+                                        onClick={() =>
+                                            setAuthFormRenderView('SIGNUP')
+                                        }
+                                    >
+                                        Create one
+                                    </RedirectLink>
+                                </RedirectText>
+                            </RedirectContainer>
+                        </>
+                    );
             }
         }
     };
