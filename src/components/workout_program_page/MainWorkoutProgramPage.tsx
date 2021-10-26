@@ -47,15 +47,17 @@ interface IComponentProps {
             id: any;
         };
     };
+    toggleSignupDrawer: (state: boolean) => void;
 }
 
 const MainWorkoutProgramPage = ({
     match: {
         params: { id },
     },
+
+    toggleSignupDrawer,
 }: IComponentProps): JSX.Element => {
     //This component should contain all of the views of the workout program page.
-
     const { width } = useWindowDimensions();
     //Dispatch Hook:
     const dispatch = useDispatch();
@@ -95,7 +97,7 @@ const MainWorkoutProgramPage = ({
         <>
             <BrowserView>
                 <GeneralDrawer
-                    title={`Flag '${workoutPrograms.workoutProgramTitle}' for Review`}
+                    title={`Flag This Program`}
                     openBoolean={stateReportDrawer}
                     closeFunc={closeReportDrawer}
                     size={renderDrawerSize(width)}
@@ -115,7 +117,7 @@ const MainWorkoutProgramPage = ({
             </BrowserView>
             <MobileOnlyView>
                 <GeneralDrawer
-                    title={`Flag '${workoutPrograms.workoutProgramTitle}' for Review`}
+                    title={`Flag This Program`}
                     openBoolean={stateReportDrawer}
                     closeFunc={closeReportDrawer}
                     size="100%"
@@ -155,6 +157,7 @@ const MainWorkoutProgramPage = ({
                             recBegCount={workoutPrograms.recBegCount}
                             recIntCount={workoutPrograms.recIntCount}
                             avgFollowLength={workoutPrograms.avgFollowLength}
+                            toggleSignupDrawer={toggleSignupDrawer}
                         />
                         <ReviewResults
                             programTitle={workoutPrograms.workoutProgramTitle}
