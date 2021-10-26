@@ -255,8 +255,8 @@ const MainAddReviewPageView = ({
         notifications.showNotification({
             title: 'Congratulations! Your Review Has Been Added!',
             message: 'Thank you for your contribution.',
-            color: 'rgba(224, 113, 51, 1)',
-            autoClose: 10000,
+            color: 'orange',
+            autoClose: 15000,
         });
 
         historyObject.push(`/program/${id}`);
