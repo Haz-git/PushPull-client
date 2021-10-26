@@ -10,7 +10,9 @@ import GeneralButton from '../../general_components/GeneralButton';
 //Styles:
 import styled from 'styled-components';
 
-export const MainFormContainer = styled.div``;
+export const MainFormContainer = styled.div`
+    padding: 0.5rem 0.5rem;
+`;
 
 export const FormDesc = styled.h1`
     font-family: 'Lato', sans-serif;
