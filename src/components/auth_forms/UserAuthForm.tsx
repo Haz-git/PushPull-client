@@ -260,6 +260,8 @@ const UserAuthForm = ({
                     passwordVerify: '',
                     username: '',
                 });
+
+                setAuthFormRenderView('LOGIN');
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
