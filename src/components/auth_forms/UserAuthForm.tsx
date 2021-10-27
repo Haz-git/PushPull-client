@@ -174,6 +174,11 @@ const UserAuthForm = ({
         email: '',
     });
 
+    const [userNewPasswordDetails, setUserNewPasswordDetails] = useState({
+        password: '',
+        passwordVerify: '',
+    });
+
     const [alertMessage, setAlertMessage] = useState('alertMessageDefault');
 
     const handleUserSignupInput = (
@@ -203,6 +208,15 @@ const UserAuthForm = ({
         });
     };
 
+    const handleUserNewPasswordInput = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ): void => {
+        setUserNewPasswordDetails({
+            ...userNewPasswordDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
     const isUsernameValid = () => {
         if (
             userSignupDetails.username !== '' &&
@@ -214,6 +228,15 @@ const UserAuthForm = ({
 
     const isPasswordVerified = () => {
         if (userSignupDetails.password !== userSignupDetails.passwordVerify)
+            return false;
+        return true;
+    };
+
+    const isNewPasswordVerified = () => {
+        if (
+            userNewPasswordDetails.password !==
+            userNewPasswordDetails.passwordVerify
+        )
             return false;
         return true;
     };
@@ -293,7 +316,7 @@ const UserAuthForm = ({
             });
     };
 
-    const handlePasswordResetSubmission = (e: React.FormEvent) => {
+    const handlePasswordResetLinkSubmission = (e: React.FormEvent) => {
         e.preventDefault();
 
         Userfront.sendResetLink(userPasswordResetDetails.email)
@@ -308,6 +331,31 @@ const UserAuthForm = ({
                 setUserPasswordResetDetails({ email: '' });
 
                 closeAuthDrawerContainer();
+            })
+            .catch((err: any) => {
+                setAlertMessage(err.message);
+            });
+    };
+
+    const handlePasswordResetSubmission = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!isNewPasswordVerified()) {
+            return setAlertMessage(
+                '"new password" and "confirm new password" must match'
+            );
+        }
+
+        Userfront.resetPassword({ password: userNewPasswordDetails.password })
+            .then((promise: any) => {
+                notifications.showNotification({
+                    title: 'Your Password Has Been Reset!',
+                    message: `Make sure you keep it safe.`,
+                    color: 'orange',
+                    autoClose: 20000,
+                });
+
+                setUserNewPasswordDetails({ password: '', passwordVerify: '' });
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
@@ -533,7 +581,9 @@ const UserAuthForm = ({
                                     Forgot your{' '}
                                     <RedirectLink
                                         onClick={() =>
-                                            setAuthFormRenderView('RESET')
+                                            setAuthFormRenderView(
+                                                'RESETSENDLINK'
+                                            )
                                         }
                                     >
                                         Password?
@@ -554,11 +604,13 @@ const UserAuthForm = ({
                             </RedirectContainer>
                         </>
                     );
-                case 'RESET':
+                case 'RESETSENDLINK':
                     return (
                         <>
                             <HeadingContainer>
-                                <PrimaryHeading>Password Reset</PrimaryHeading>
+                                <PrimaryHeading>
+                                    Forgot Password?
+                                </PrimaryHeading>
                                 <HeaderDivider />
                                 <SecondaryHeading>
                                     We'll email you a link to reset your
@@ -570,7 +622,7 @@ const UserAuthForm = ({
                                     {alertMessage}
                                 </ErrorText>
                             </ErrorContainer>
-                            <form onSubmit={handlePasswordResetSubmission}>
+                            <form onSubmit={handlePasswordResetLinkSubmission}>
                                 <InputContainer>
                                     <TextInput
                                         name="email"
@@ -598,7 +650,7 @@ const UserAuthForm = ({
                                     />
                                 </InputContainer>
                                 <ButtonContainer>
-                                    <GeneralButton buttonLabel="Reset Password" />
+                                    <GeneralButton buttonLabel="Send Reset Link" />
                                 </ButtonContainer>
                             </form>
                             <RedirectContainer>
@@ -618,6 +670,78 @@ const UserAuthForm = ({
                                     Sign up
                                 </RedirectLink>
                             </RedirectContainer>
+                        </>
+                    );
+                case 'RESETPASSWORD':
+                    return (
+                        <>
+                            <HeadingContainer>
+                                <PrimaryHeading>Reset Password</PrimaryHeading>
+                                <HeaderDivider />
+                                <SecondaryHeading>
+                                    Enter and confirm your new password below.
+                                </SecondaryHeading>
+                            </HeadingContainer>
+                            <ErrorContainer>
+                                <ErrorText display={checkAlertMessage()}>
+                                    {alertMessage}
+                                </ErrorText>
+                            </ErrorContainer>
+                            <form onSubmit={handlePasswordResetSubmission}>
+                                <InputContainer>
+                                    <TextInput
+                                        name="password"
+                                        type="password"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="New Password"
+                                        value={userNewPasswordDetails.password}
+                                        onChange={handleUserNewPasswordInput}
+                                    />
+                                </InputContainer>
+                                <InputContainer>
+                                    <TextInput
+                                        name="passwordVerify"
+                                        type="password"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Confirm New Password"
+                                        value={userNewPasswordDetails.password}
+                                        onChange={handleUserNewPasswordInput}
+                                    />
+                                </InputContainer>
+                                <ButtonContainer>
+                                    <GeneralButton buttonLabel="Reset My Password" />
+                                </ButtonContainer>
+                            </form>
                         </>
                     );
 
