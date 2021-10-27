@@ -265,7 +265,21 @@ const UserAuthForm = ({
 
     const handlePasswordResetSubmission = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('passwordReset');
+
+        Userfront.sendResetLink(userPasswordResetDetails.email)
+            .then((promise: any) => {
+                notifications.showNotification({
+                    title: 'An Email Has Been Sent!',
+                    message: `Please check your inbox and follow the link.`,
+                    color: 'orange',
+                    autoClose: 20000,
+                });
+
+                setUserPasswordResetDetails({ email: '' });
+            })
+            .catch((err: any) => {
+                setAlertMessage(err.message);
+            });
     };
 
     const renderAuthFormView = () => {
