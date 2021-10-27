@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
+import { isMobileOnly } from 'react-device-detect';
 
 //Style Imports:
 import styled from 'styled-components';
@@ -20,7 +21,7 @@ import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPag
 import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 import GeneralModal from './general_components/GeneralModal';
 import FeedbackForm from './general_components/FeedbackForm';
-import { isMobileOnly } from 'react-device-detect';
+import PasswordResetForm from './auth_forms/PasswordResetForm';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
@@ -111,6 +112,11 @@ const App = () => {
                                 exact
                                 path="/add-review/:id"
                                 component={MainAddReviewPageView}
+                            />
+                            <Route
+                                exact
+                                path="/password/reset"
+                                component={PasswordResetForm}
                             />
                         </Switch>
                     </Router>
