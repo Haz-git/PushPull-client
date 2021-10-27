@@ -121,7 +121,14 @@ const App = () => {
                             <Route
                                 exact
                                 path="/password/reset"
-                                component={PasswordResetForm}
+                                render={(props) => (
+                                    <PasswordResetForm
+                                        {...props}
+                                        closeAuthDrawerContainer={
+                                            closeAuthDrawerContainer
+                                        }
+                                    />
+                                )}
                             />
                         </Switch>
                     </Router>
