@@ -11,6 +11,13 @@ import { TextInput } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
+import { Dot } from '@styled-icons/bootstrap/Dot';
+
+const DotIcon = styled(Dot)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: ${(props) => props.theme.mainText};
+`;
 
 const FormContainer = styled.div<IFormContainerProps>`
     width: 100%;
@@ -93,6 +100,9 @@ const ProviderDivider = styled.div`
 `;
 
 const RedirectContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     margin-top: 1rem;
 `;
@@ -541,7 +551,27 @@ const UserAuthForm = ({
                                         onChange={handleUserPasswordResetInput}
                                     />
                                 </InputContainer>
+                                <ButtonContainer>
+                                    <GeneralButton buttonLabel="Reset Password" />
+                                </ButtonContainer>
                             </form>
+                            <RedirectContainer>
+                                <RedirectLink
+                                    onClick={() =>
+                                        setAuthFormRenderView('LOGIN')
+                                    }
+                                >
+                                    Log in
+                                </RedirectLink>
+                                <DotIcon />
+                                <RedirectLink
+                                    onClick={() =>
+                                        setAuthFormRenderView('SIGNUP')
+                                    }
+                                >
+                                    Sign up
+                                </RedirectLink>
+                            </RedirectContainer>
                         </>
                     );
 
