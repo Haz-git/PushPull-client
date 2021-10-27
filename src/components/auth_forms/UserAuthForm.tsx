@@ -135,6 +135,7 @@ interface IFormContainerProps {
 interface IUserAuthFormProps {
     //Options will be 'SIGNUP' or 'LOGIN' or 'RESET'
     authStateRenderView: string;
+    closeAuthDrawerContainer: () => void;
 }
 
 type IComponentProps = IFormContainerProps & IUserAuthFormProps;
@@ -150,6 +151,7 @@ const UserAuthForm = ({
     formBackgroundColor = '#ffffff',
     formShadow = 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
     authStateRenderView,
+    closeAuthDrawerContainer,
 }: IComponentProps): JSX.Element => {
     const notifications = useNotifications();
 
@@ -247,9 +249,16 @@ const UserAuthForm = ({
             .then((value: any) => {
                 notifications.showNotification({
                     title: 'Wooo! Your Account Has Been Created!',
-                    message: `Welcome to Pushpull, ${value.username}.`,
+                    message: `Welcome to Pushpull, ${value.username}. Please verify your account by email.`,
                     color: 'orange',
                     autoClose: 20000,
+                });
+
+                setUserSignupDetails({
+                    email: '',
+                    password: '',
+                    passwordVerify: '',
+                    username: '',
                 });
             })
             .catch((err: any) => {
@@ -260,7 +269,26 @@ const UserAuthForm = ({
     const handleLoginSubmission = (e: React.FormEvent) => {
         e.preventDefault();
 
-        console.log('login');
+        Userfront.login({
+            method: 'password',
+            emailOrUsername: userLoginDetails.email,
+            password: userLoginDetails.password,
+        })
+            .then((promise: any) => {
+                notifications.showNotification({
+                    title: `Welcome Back, ${userLoginDetails.email}`,
+                    message: `You've been successfully logged in.`,
+                    color: 'orange',
+                    autoClose: 20000,
+                });
+
+                setUserLoginDetails({ email: '', password: '' });
+
+                closeAuthDrawerContainer();
+            })
+            .catch((err: any) => {
+                setAlertMessage(err.message);
+            });
     };
 
     const handlePasswordResetSubmission = (e: React.FormEvent) => {
@@ -276,6 +304,8 @@ const UserAuthForm = ({
                 });
 
                 setUserPasswordResetDetails({ email: '' });
+
+                closeAuthDrawerContainer();
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
@@ -444,7 +474,7 @@ const UserAuthForm = ({
                                 <InputContainer>
                                     <TextInput
                                         name="email"
-                                        type="email"
+                                        type="text"
                                         styles={{
                                             label: {
                                                 color: 'rgba(0, 0, 34, .7)',
@@ -461,8 +491,8 @@ const UserAuthForm = ({
                                             },
                                         }}
                                         required
-                                        label="Email Address"
-                                        placeholder="youremail@something.com"
+                                        label="Email Address or Username"
+                                        placeholder=""
                                         value={userLoginDetails.email}
                                         onChange={handleUserLoginInput}
                                     />
