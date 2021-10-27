@@ -54,14 +54,7 @@ const SVGContainer = styled.div`
 //Interfaces:
 
 const UserSignup = () => {
-    return (
-        <MainContainer>
-            <SVGContainer>
-                <SignupSVG />
-            </SVGContainer>
-            <UserAuthForm authStateRenderView="SIGNUP" />
-        </MainContainer>
-    );
+    return <MainContainer>Route Under Construction.</MainContainer>;
 };
 
 export default UserSignup;
