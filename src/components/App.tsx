@@ -42,6 +42,8 @@ const App = () => {
         setStateAuthDrawer(state);
     };
 
+    const closeAuthDrawerContainer = () => setStateAuthDrawer(false);
+
     const openBugReportModal = () => setStateBugReportModal(true);
     const closeBugReportModal = () => setStateBugReportModal(false);
 
@@ -63,6 +65,9 @@ const App = () => {
                                 formBackgroundColor="transparent"
                                 formShadow="none"
                                 authStateRenderView={stateAuthFormView}
+                                closeAuthDrawerContainer={
+                                    closeAuthDrawerContainer
+                                }
                             />
                         </GeneralDrawer>
                     </SignupDrawerContainer>
