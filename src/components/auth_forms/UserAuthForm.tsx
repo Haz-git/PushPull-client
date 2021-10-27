@@ -249,12 +249,17 @@ const UserAuthForm = ({
             .then((value: any) => {
                 notifications.showNotification({
                     title: 'Wooo! Your Account Has Been Created!',
-                    message: `Welcome to Pushpull, ${value.username}.`,
+                    message: `Welcome to Pushpull, ${value.username}. Please verify your account by email.`,
                     color: 'orange',
                     autoClose: 20000,
                 });
 
-                closeAuthDrawerContainer();
+                setUserSignupDetails({
+                    email: '',
+                    password: '',
+                    passwordVerify: '',
+                    username: '',
+                });
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
@@ -265,13 +270,14 @@ const UserAuthForm = ({
         e.preventDefault();
 
         Userfront.login({
-            email: userLoginDetails.email,
+            method: 'password',
+            emailOrUsername: userLoginDetails.email,
             password: userLoginDetails.password,
         })
             .then((promise: any) => {
                 notifications.showNotification({
-                    title: 'An Email Has Been Sent!',
-                    message: `Please check your inbox and follow the link.`,
+                    title: `Welcome Back, ${userLoginDetails.email}`,
+                    message: `You've been successfully logged in.`,
                     color: 'orange',
                     autoClose: 20000,
                 });
@@ -468,7 +474,7 @@ const UserAuthForm = ({
                                 <InputContainer>
                                     <TextInput
                                         name="email"
-                                        type="email"
+                                        type="text"
                                         styles={{
                                             label: {
                                                 color: 'rgba(0, 0, 34, .7)',
@@ -485,8 +491,8 @@ const UserAuthForm = ({
                                             },
                                         }}
                                         required
-                                        label="Email Address"
-                                        placeholder="youremail@something.com"
+                                        label="Email Address or Username"
+                                        placeholder=""
                                         value={userLoginDetails.email}
                                         onChange={handleUserLoginInput}
                                     />
