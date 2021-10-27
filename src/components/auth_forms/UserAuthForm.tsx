@@ -11,6 +11,13 @@ import { TextInput } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
+import { Dot } from '@styled-icons/bootstrap/Dot';
+
+const DotIcon = styled(Dot)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: ${(props) => props.theme.mainText};
+`;
 
 const FormContainer = styled.div<IFormContainerProps>`
     width: 100%;
@@ -93,6 +100,9 @@ const ProviderDivider = styled.div`
 `;
 
 const RedirectContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     margin-top: 1rem;
 `;
@@ -123,7 +133,7 @@ interface IFormContainerProps {
 }
 
 interface IUserAuthFormProps {
-    //Options will be 'SIGNUP' or 'LOGIN'
+    //Options will be 'SIGNUP' or 'LOGIN' or 'RESET'
     authStateRenderView: string;
 }
 
@@ -158,6 +168,10 @@ const UserAuthForm = ({
         password: '',
     });
 
+    const [userPasswordResetDetails, setUserPasswordResetDetails] = useState({
+        email: '',
+    });
+
     const [alertMessage, setAlertMessage] = useState('alertMessageDefault');
 
     const handleUserSignupInput = (
@@ -174,6 +188,15 @@ const UserAuthForm = ({
     ): void => {
         setUserLoginDetails({
             ...userLoginDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleUserPasswordResetInput = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ): void => {
+        setUserPasswordResetDetails({
+            ...userPasswordResetDetails,
             [e.target.name]: e.target.value,
         });
     };
@@ -238,6 +261,11 @@ const UserAuthForm = ({
         e.preventDefault();
 
         console.log('login');
+    };
+
+    const handlePasswordResetSubmission = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log('passwordReset');
     };
 
     const renderAuthFormView = () => {
@@ -456,6 +484,18 @@ const UserAuthForm = ({
                             </form>
                             <RedirectContainer>
                                 <RedirectText>
+                                    Forgot your{' '}
+                                    <RedirectLink
+                                        onClick={() =>
+                                            setAuthFormRenderView('RESET')
+                                        }
+                                    >
+                                        Password?
+                                    </RedirectLink>
+                                </RedirectText>
+                            </RedirectContainer>
+                            <RedirectContainer>
+                                <RedirectText>
                                     Don't have an account?{' '}
                                     <RedirectLink
                                         onClick={() =>
@@ -468,6 +508,75 @@ const UserAuthForm = ({
                             </RedirectContainer>
                         </>
                     );
+                case 'RESET':
+                    return (
+                        <>
+                            <HeadingContainer>
+                                <PrimaryHeading>Password Reset</PrimaryHeading>
+                                <HeaderDivider />
+                                <SecondaryHeading>
+                                    We'll email you a link to reset your
+                                    password.
+                                </SecondaryHeading>
+                            </HeadingContainer>
+                            <ErrorContainer>
+                                <ErrorText display={checkAlertMessage()}>
+                                    {alertMessage}
+                                </ErrorText>
+                            </ErrorContainer>
+                            <form onSubmit={handlePasswordResetSubmission}>
+                                <InputContainer>
+                                    <TextInput
+                                        name="email"
+                                        type="email"
+                                        styles={{
+                                            label: {
+                                                color: 'rgba(0, 0, 34, .7)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '1rem',
+                                                fontWeight: 700,
+                                                marginBottom: '.25rem',
+                                            },
+                                            input: {
+                                                color: 'rgba(0, 0, 34, 1)',
+                                                fontFamily: 'Lato, sans-serif',
+                                                fontSize: '.9rem',
+                                                fontWeight: 500,
+                                            },
+                                        }}
+                                        required
+                                        label="Email Address"
+                                        placeholder="youremail@something.com"
+                                        value={userPasswordResetDetails.email}
+                                        onChange={handleUserPasswordResetInput}
+                                    />
+                                </InputContainer>
+                                <ButtonContainer>
+                                    <GeneralButton buttonLabel="Reset Password" />
+                                </ButtonContainer>
+                            </form>
+                            <RedirectContainer>
+                                <RedirectLink
+                                    onClick={() =>
+                                        setAuthFormRenderView('LOGIN')
+                                    }
+                                >
+                                    Log in
+                                </RedirectLink>
+                                <DotIcon />
+                                <RedirectLink
+                                    onClick={() =>
+                                        setAuthFormRenderView('SIGNUP')
+                                    }
+                                >
+                                    Sign up
+                                </RedirectLink>
+                            </RedirectContainer>
+                        </>
+                    );
+
+                default:
+                    throw new Error('No Render Control String Was Set');
             }
         }
     };
