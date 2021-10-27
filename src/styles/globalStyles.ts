@@ -89,6 +89,18 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    .mantine-notification-root {
+    
+
+        @media(min-width: 320px) {
+            bottom: 4rem;
+        }
+
+        @media(min-width: 768px) {
+            bottom: 4rem;
+        }
+    }
+
 
 `;
 
