@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../redux/auth/authActions';
+
 //Components:
+import Userfront from '@userfront/react';
 import historyObject from '../../utils/historyObject';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
@@ -133,16 +138,12 @@ interface IFormContainerProps {
 }
 
 interface IUserAuthFormProps {
-    //Options will be 'SIGNUP' or 'LOGIN' or 'RESET'
+    //Options will be 'SIGNUP' or 'LOGIN' or 'RESETSENDLINK' or 'RESETPASSWORD'
     authStateRenderView: string;
     closeAuthDrawerContainer: () => void;
 }
 
 type IComponentProps = IFormContainerProps & IUserAuthFormProps;
-
-//UserFront IDP API initialization;
-const windowObject = window as any;
-const Userfront = windowObject.Userfront;
 
 //Tenant ID could possibly be stored in an ENV var.
 Userfront.init('5nxxrqn7');
@@ -154,6 +155,7 @@ const UserAuthForm = ({
     closeAuthDrawerContainer,
 }: IComponentProps): JSX.Element => {
     const notifications = useNotifications();
+    const dispatch = useDispatch();
 
     const [AuthFormRenderView, setAuthFormRenderView] =
         useState(authStateRenderView);
@@ -308,6 +310,8 @@ const UserAuthForm = ({
                 });
 
                 setUserLoginDetails({ email: '', password: '' });
+                console.log(promise);
+                dispatch(userLogin(Userfront.user));
 
                 closeAuthDrawerContainer();
             })
