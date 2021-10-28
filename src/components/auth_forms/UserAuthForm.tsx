@@ -133,7 +133,7 @@ interface IFormContainerProps {
 }
 
 interface IUserAuthFormProps {
-    //Options will be 'SIGNUP' or 'LOGIN' or 'RESET'
+    //Options will be 'SIGNUP' or 'LOGIN' or 'RESETSENDLINK' or 'RESETPASSWORD'
     authStateRenderView: string;
     closeAuthDrawerContainer: () => void;
 }

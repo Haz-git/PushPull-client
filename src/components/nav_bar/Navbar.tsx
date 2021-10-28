@@ -8,6 +8,7 @@ import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import { Burger } from '@mantine/core';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
+import UserDropdown from './navbar_components/UserDropdown';
 import historyObject from '../../utils/historyObject';
 
 //Styles:
@@ -96,8 +97,52 @@ interface IComponentProps {
     toggleAuthDrawerWithView: (state: boolean, view: string) => void;
 }
 
+//Userfront Initialization:
+
+const windowObject = window as any;
+const Userfront = windowObject.Userfront;
+
+Userfront.init('5nxxrqn7');
+
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+
+    console.log(Userfront.user);
+
+    const renderAuthOptionsIfUserNotLoggedIn = () => {
+        if (Userfront.user.email) {
+            return (
+                <ButtonsContainer>
+                    <UserDropdown />
+                </ButtonsContainer>
+            );
+        } else {
+            return (
+                <ButtonsContainer>
+                    <GeneralButton
+                        buttonLabel="Log in"
+                        padding=".45rem .7rem"
+                        buttonBackground="#ffffff"
+                        buttonTextColor="#7678ED"
+                        textShadow="none"
+                        border="2px solid #7678ED"
+                        onClick={() => toggleAuthDrawerWithView(true, 'LOGIN')}
+                    />
+                    <ButtonDivider />
+                    <GeneralButton
+                        buttonLabel="Sign up"
+                        padding=".6rem .7rem"
+                        onClick={() => toggleAuthDrawerWithView(true, 'SIGNUP')}
+                    />
+                    <GeneralButton
+                        buttonLabel="Logout"
+                        padding=".6rem .7rem"
+                        onClick={() => Userfront.logout()}
+                    />
+                </ButtonsContainer>
+            );
+        }
+    };
 
     return (
         <StyledNavbar>
@@ -105,23 +150,7 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
                 <LogoSVG />
                 <StyledNavLogo to="/" />
             </LogoContainer>
-            <ButtonsContainer>
-                <GeneralButton
-                    buttonLabel="Log in"
-                    padding=".45rem .7rem"
-                    buttonBackground="#ffffff"
-                    buttonTextColor="#7678ED"
-                    textShadow="none"
-                    border="2px solid #7678ED"
-                    onClick={() => toggleAuthDrawerWithView(true, 'LOGIN')}
-                />
-                <ButtonDivider />
-                <GeneralButton
-                    buttonLabel="Sign up"
-                    padding=".6rem .7rem"
-                    onClick={() => toggleAuthDrawerWithView(true, 'SIGNUP')}
-                />
-            </ButtonsContainer>
+            {renderAuthOptionsIfUserNotLoggedIn()}
             <BurgerContainer>
                 <Burger
                     opened={isBurgerOpened}
