@@ -8,7 +8,7 @@ const authReducer = (state: Object = initialState, action: AuthAction) => {
         case AuthActionType.USER_LOG_IN:
             return { ...state, userDetails: action.payload };
         case AuthActionType.USER_SIGN_OUT:
-            return { ...state, userDetails: action.payload };
+            return { ...state, userDetails: initialState };
         default:
             return state;
     }
