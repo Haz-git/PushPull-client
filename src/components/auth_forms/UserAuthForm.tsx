@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { userLogin } from '../../redux/auth/authActions';
 
 //Components:
+import Userfront from '@userfront/react';
 import historyObject from '../../utils/historyObject';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
@@ -143,10 +144,6 @@ interface IUserAuthFormProps {
 }
 
 type IComponentProps = IFormContainerProps & IUserAuthFormProps;
-
-//UserFront IDP API initialization;
-const windowObject = window as any;
-const Userfront = windowObject.Userfront;
 
 //Tenant ID could possibly be stored in an ENV var.
 Userfront.init('5nxxrqn7');

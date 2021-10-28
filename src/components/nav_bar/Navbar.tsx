@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
+import Userfront from '@userfront/react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import { Burger } from '@mantine/core';
@@ -98,9 +99,6 @@ interface IComponentProps {
 }
 
 //Userfront Initialization:
-
-const windowObject = window as any;
-const Userfront = windowObject.Userfront;
 
 Userfront.init('5nxxrqn7');
 
