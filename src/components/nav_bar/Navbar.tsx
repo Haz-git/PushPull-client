@@ -2,6 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
+//Redux:
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { userSignout } from '../../redux/auth/authActions';
+
 //Components:
 import Userfront from '@userfront/react';
 import { Link } from 'react-router-dom';
@@ -103,17 +107,26 @@ interface IComponentProps {
 Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
+    const User = useSelector((state: RootStateOrAny) => state.user.user);
+    const dispatch = useDispatch();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
     const renderAuthOptionsIfUserNotLoggedIn = () => {
-        if (Userfront.user.email) {
+        if (
+            User &&
+            Object.keys(User).length !== 0 &&
+            Object.getPrototypeOf(User) === Object.prototype
+        ) {
             return (
                 <ButtonsContainer>
                     <UserDropdown />
                     <GeneralButton
                         buttonLabel="Logout"
                         padding=".6rem .7rem"
-                        onClick={() => Userfront.logout()}
+                        onClick={() => {
+                            dispatch(userSignout());
+                            Userfront.logout();
+                        }}
                     />
                 </ButtonsContainer>
             );
@@ -134,11 +147,6 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
                         buttonLabel="Sign up"
                         padding=".6rem .7rem"
                         onClick={() => toggleAuthDrawerWithView(true, 'SIGNUP')}
-                    />
-                    <GeneralButton
-                        buttonLabel="Logout"
-                        padding=".6rem .7rem"
-                        onClick={() => Userfront.logout()}
                     />
                 </ButtonsContainer>
             );
