@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../redux/auth/authActions';
+
 //Components:
 import historyObject from '../../utils/historyObject';
 import GeneralDrawer from '../general_components/GeneralDrawer';
@@ -154,6 +158,7 @@ const UserAuthForm = ({
     closeAuthDrawerContainer,
 }: IComponentProps): JSX.Element => {
     const notifications = useNotifications();
+    const dispatch = useDispatch();
 
     const [AuthFormRenderView, setAuthFormRenderView] =
         useState(authStateRenderView);
@@ -308,6 +313,7 @@ const UserAuthForm = ({
                 });
 
                 setUserLoginDetails({ email: '', password: '' });
+                dispatch(userLogin(Userfront.user));
 
                 closeAuthDrawerContainer();
             })
