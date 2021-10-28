@@ -23,7 +23,7 @@ const StyledNavbar = styled.nav`
     justify-content: space-between;
     background: ${(props) => props.theme.lightBackground};
     width: 100%;
-    padding: 1rem 1rem;
+    padding: 0.5rem 1rem;
     text-align: left;
     top: 0;
     position: sticky;

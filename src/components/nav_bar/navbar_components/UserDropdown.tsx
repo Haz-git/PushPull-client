@@ -19,8 +19,9 @@ const MainContainer = styled.div`
 `;
 
 const DropdownContainer = styled.div`
-    border: 1px solid black;
-    padding: 0;
+    border: 1px solid #d3d3d3;
+    border-radius: 0.3rem;
+    padding: 1rem 1rem;
 `;
 
 //Interfaces:
