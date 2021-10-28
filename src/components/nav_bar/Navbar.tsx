@@ -2,12 +2,18 @@ import * as React from 'react';
 import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
+//Redux:
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { userSignout } from '../../redux/auth/authActions';
+
 //Components:
+import Userfront from '@userfront/react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import { Burger } from '@mantine/core';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
+import UserDropdown from './navbar_components/UserDropdown';
 import historyObject from '../../utils/historyObject';
 
 //Styles:
@@ -96,8 +102,56 @@ interface IComponentProps {
     toggleAuthDrawerWithView: (state: boolean, view: string) => void;
 }
 
+//Userfront Initialization:
+
+Userfront.init('5nxxrqn7');
+
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
+    const User = useSelector((state: RootStateOrAny) => state.user.user);
+    const dispatch = useDispatch();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+
+    const renderAuthOptionsIfUserNotLoggedIn = () => {
+        if (
+            User &&
+            Object.keys(User).length !== 0 &&
+            Object.getPrototypeOf(User) === Object.prototype
+        ) {
+            return (
+                <ButtonsContainer>
+                    <UserDropdown />
+                    <GeneralButton
+                        buttonLabel="Logout"
+                        padding=".6rem .7rem"
+                        onClick={() => {
+                            dispatch(userSignout());
+                            Userfront.logout();
+                        }}
+                    />
+                </ButtonsContainer>
+            );
+        } else {
+            return (
+                <ButtonsContainer>
+                    <GeneralButton
+                        buttonLabel="Log in"
+                        padding=".45rem .7rem"
+                        buttonBackground="#ffffff"
+                        buttonTextColor="#7678ED"
+                        textShadow="none"
+                        border="2px solid #7678ED"
+                        onClick={() => toggleAuthDrawerWithView(true, 'LOGIN')}
+                    />
+                    <ButtonDivider />
+                    <GeneralButton
+                        buttonLabel="Sign up"
+                        padding=".6rem .7rem"
+                        onClick={() => toggleAuthDrawerWithView(true, 'SIGNUP')}
+                    />
+                </ButtonsContainer>
+            );
+        }
+    };
 
     return (
         <StyledNavbar>
@@ -105,23 +159,7 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
                 <LogoSVG />
                 <StyledNavLogo to="/" />
             </LogoContainer>
-            <ButtonsContainer>
-                <GeneralButton
-                    buttonLabel="Log in"
-                    padding=".45rem .7rem"
-                    buttonBackground="#ffffff"
-                    buttonTextColor="#7678ED"
-                    textShadow="none"
-                    border="2px solid #7678ED"
-                    onClick={() => toggleAuthDrawerWithView(true, 'LOGIN')}
-                />
-                <ButtonDivider />
-                <GeneralButton
-                    buttonLabel="Sign up"
-                    padding=".6rem .7rem"
-                    onClick={() => toggleAuthDrawerWithView(true, 'SIGNUP')}
-                />
-            </ButtonsContainer>
+            {renderAuthOptionsIfUserNotLoggedIn()}
             <BurgerContainer>
                 <Burger
                     opened={isBurgerOpened}

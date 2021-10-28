@@ -10,12 +10,13 @@ import workoutProgramReducer from './workoutPrograms/workoutProgramReducer';
 import searchTermReducer from './searchTerms/searchTermsReducer';
 import sortOptionReducer from './sortOptions/sortOptionsReducer';
 import reviewReducer from './reviews/reviewReducer';
+import authReducer from './auth/authReducer';
 
 //Persistence:
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['filters', 'searchTerms', 'sortOptions'],
+    whitelist: ['user', 'filters', 'searchTerms', 'sortOptions'],
 };
 
 //Create Enhancers and Middlewares:
@@ -24,6 +25,7 @@ const composeEnhancers =
 
 //RootReducer:
 const appReducer = combineReducers({
+    user: authReducer,
     filters: filterReducer,
     workoutPrograms: workoutProgramReducer,
     searchTerms: searchTermReducer,
