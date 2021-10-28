@@ -313,6 +313,7 @@ const UserAuthForm = ({
                 });
 
                 setUserLoginDetails({ email: '', password: '' });
+                console.log(promise);
                 dispatch(userLogin(Userfront.user));
 
                 closeAuthDrawerContainer();

@@ -107,13 +107,16 @@ Userfront.init('5nxxrqn7');
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
-    console.log(Userfront.user);
-
     const renderAuthOptionsIfUserNotLoggedIn = () => {
         if (Userfront.user.email) {
             return (
                 <ButtonsContainer>
                     <UserDropdown />
+                    <GeneralButton
+                        buttonLabel="Logout"
+                        padding=".6rem .7rem"
+                        onClick={() => Userfront.logout()}
+                    />
                 </ButtonsContainer>
             );
         } else {
