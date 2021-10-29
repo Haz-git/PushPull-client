@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import Userfront from '@userfront/react';
 import { deviceMin } from '../../../devices/breakpoints';
+import { isMobileOnly } from 'react-device-detect';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -78,7 +79,7 @@ const UserDetailText = styled.h3`
     }
 
     @media ${deviceMin.browserSm} {
-        max-width: 10rem;
+        max-width: 9.5rem;
     }
 `;
 
@@ -101,10 +102,15 @@ const UserDropdown = ({
     const notifications = useNotifications();
     const [stateCollapse, setStateCollapse] = useState(false);
 
+    const checkIfMobile = () => {
+        if (isMobileOnly) return 'sm';
+        return 'lg';
+    };
+
     return (
         <MainContainer>
             <Menu
-                placement="center"
+                placement="start"
                 control={
                     <DropdownContainer>
                         <AvatarContainer>
@@ -122,7 +128,7 @@ const UserDropdown = ({
                     </DropdownContainer>
                 }
                 zIndex={999}
-                size="sm"
+                size={checkIfMobile()}
             >
                 <MenuItem
                     icon={<ExitIcon />}
