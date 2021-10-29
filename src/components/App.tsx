@@ -14,8 +14,6 @@ import history from '../utils/historyObject';
 import Navbar from './nav_bar/Navbar';
 import MainFooter from './footer/MainFooter';
 import MainLandingPageView from './main_landing_page/MainLandingPageView';
-import userLogin from './auth_forms/userLogin';
-import userSignup from './auth_forms/userSignup';
 import MainSearchPage from './search_page/MainSearchPage';
 import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPage';
 import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
@@ -90,12 +88,7 @@ const App = () => {
                                 path="/"
                                 component={MainLandingPageView}
                             />
-                            <Route exact path="/login" component={userLogin} />
-                            <Route
-                                exact
-                                path="/signup"
-                                component={userSignup}
-                            />
+
                             <Route
                                 exact
                                 path="/search"
