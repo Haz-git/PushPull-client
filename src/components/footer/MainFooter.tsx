@@ -53,7 +53,7 @@ const MainContainer = styled.section`
     }
 
     @media ${deviceMin.tablet} {
-        height: 4rem;
+        height: 3.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
