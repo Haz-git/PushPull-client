@@ -302,15 +302,15 @@ const UserAuthForm = ({
             password: userLoginDetails.password,
         })
             .then((promise: any) => {
+                setUserLoginDetails({ email: '', password: '' });
+                dispatch(userLogin(Userfront.user));
+
                 notifications.showNotification({
-                    title: `Welcome Back, ${userLoginDetails.email}`,
+                    title: `Welcome Back, ${Userfront.user.username}`,
                     message: `You've been successfully logged in.`,
                     color: 'orange',
                     autoClose: 20000,
                 });
-
-                setUserLoginDetails({ email: '', password: '' });
-                dispatch(userLogin(Userfront.user));
 
                 closeAuthDrawerContainer();
             })
