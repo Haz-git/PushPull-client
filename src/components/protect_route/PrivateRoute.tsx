@@ -1,31 +1,22 @@
 import * as React from 'react';
 
 //Components:
-import { Route, Redirect } from 'react-router-dom';
-import useLoginStatus from '../../utils/hooks/useLoginStatus';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 //Styles:
 
 //Interfaces:
 
-interface IComponentProps {
-    children: React.ReactNode;
-}
-
-const PrivateRoute = ({ children, ...rest }: IComponentProps): JSX.Element => {
-    const isLoggedIn = useLoginStatus();
-    return (
-        <Route
-            {...rest}
-            render={() => {
-                return isLoggedIn === true ? (
-                    children
-                ) : (
-                    <Redirect to="/login" />
-                );
-            }}
-        />
-    );
+const PrivateRoute = ({
+    component,
+    isAuthenticated,
+    toggleAuthDrawerWithView,
+    ...rest
+}: any) => {
+    if (isAuthenticated) {
+        return <Route {...rest} component={component} />;
+    }
+    return <>{toggleAuthDrawerWithView(true, 'LOGIN')}</>;
 };
 
 export default PrivateRoute;
