@@ -121,23 +121,37 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
             );
         } else {
             return (
-                <ButtonsContainer>
-                    <GeneralButton
-                        buttonLabel="Log in"
-                        padding=".45rem .7rem"
-                        buttonBackground="#ffffff"
-                        buttonTextColor="#7678ED"
-                        textShadow="none"
-                        border="2px solid #7678ED"
-                        onClick={() => toggleAuthDrawerWithView(true, 'LOGIN')}
-                    />
-                    <ButtonDivider />
-                    <GeneralButton
-                        buttonLabel="Sign up"
-                        padding=".6rem .7rem"
-                        onClick={() => toggleAuthDrawerWithView(true, 'SIGNUP')}
-                    />
-                </ButtonsContainer>
+                <>
+                    <ButtonsContainer>
+                        <GeneralButton
+                            buttonLabel="Log in"
+                            padding=".45rem .7rem"
+                            buttonBackground="#ffffff"
+                            buttonTextColor="#7678ED"
+                            textShadow="none"
+                            border="2px solid #7678ED"
+                            onClick={() =>
+                                toggleAuthDrawerWithView(true, 'LOGIN')
+                            }
+                        />
+                        <ButtonDivider />
+                        <GeneralButton
+                            buttonLabel="Sign up"
+                            padding=".6rem .7rem"
+                            onClick={() =>
+                                toggleAuthDrawerWithView(true, 'SIGNUP')
+                            }
+                        />
+                    </ButtonsContainer>
+                    <BurgerContainer>
+                        <Burger
+                            opened={isBurgerOpened}
+                            onClick={() => setIsBurgerOpened((o) => !o)}
+                            color="rgba(224, 113, 51, 1)"
+                            size={25}
+                        />
+                    </BurgerContainer>
+                </>
             );
         }
     };
@@ -149,14 +163,6 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
                 <StyledNavLogo to="/" />
             </LogoContainer>
             {renderAuthOptionsIfUserNotLoggedIn()}
-            <BurgerContainer>
-                <Burger
-                    opened={isBurgerOpened}
-                    onClick={() => setIsBurgerOpened((o) => !o)}
-                    color="rgba(224, 113, 51, 1)"
-                    size={25}
-                />
-            </BurgerContainer>
             <GeneralDrawer
                 openBoolean={isBurgerOpened}
                 closeFunc={() => setIsBurgerOpened(false)}
