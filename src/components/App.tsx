@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 import { isMobileOnly } from 'react-device-detect';
 
+//Hooks:
+import useLoginStatus from '../utils/hooks/useLoginStatus';
+
 //Style Imports:
 import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyles';
@@ -25,6 +28,7 @@ import PasswordResetForm from './auth_forms/PasswordResetForm';
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
 import UserAuthForm from './auth_forms/UserAuthForm';
+import AuthPage from './auth_forms/AuthPage';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
@@ -35,6 +39,8 @@ const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
+
+    const isUserLoggedIn = useLoginStatus();
 
     const toggleAuthDrawerWithView = (state: boolean, view: string) => {
         setStateAuthFormView(view);
@@ -89,11 +95,15 @@ const App = () => {
                                 path="/"
                                 component={MainLandingPageView}
                             />
-
                             <Route
                                 exact
                                 path="/search"
                                 component={MainSearchPage}
+                            />
+                            <Route
+                                exact
+                                path="/authenticate"
+                                component={AuthPage}
                             />
                             <Route
                                 exact
@@ -107,16 +117,21 @@ const App = () => {
                                     />
                                 )}
                             />
-                            {/* <PrivateRoute
+                            <PrivateRoute
                                 exact
                                 path="/add-review/:id"
-                                children={<MainAddReviewPageView />}
-                            /> */}
-                            <Route
+                                authPath="/authenticate"
+                                isAuthenticated={isUserLoggedIn}
+                                component={MainAddReviewPageView}
+                                toggleAuthDrawerWithView={
+                                    toggleAuthDrawerWithView
+                                }
+                            />
+                            {/* <Route
                                 exact
                                 path="/add-review/:id"
                                 component={MainAddReviewPageView}
-                            />
+                            /> */}
                             <Route
                                 exact
                                 path="/password/reset"

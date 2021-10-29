@@ -26,7 +26,7 @@ const MainContainer = styled.section`
 `;
 
 const ProgressBarContainer = styled.div`
-    top: 4rem;
+    top: 3.75rem;
     position: sticky;
     position: -webkit-sticky;
     z-index: 50;

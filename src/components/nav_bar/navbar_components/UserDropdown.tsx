@@ -133,7 +133,7 @@ const UserDropdown = ({
                 <MenuItem
                     icon={<ExitIcon />}
                     onClick={() => {
-                        Userfront.logout();
+                        Userfront.logout({ redirect: false });
                         dispatch(userSignout());
                         notifications.showNotification({
                             title: `You've Been Signed Out`,
