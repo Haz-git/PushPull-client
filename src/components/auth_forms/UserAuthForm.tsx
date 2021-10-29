@@ -300,6 +300,7 @@ const UserAuthForm = ({
             method: 'password',
             emailOrUsername: userLoginDetails.email,
             password: userLoginDetails.password,
+            redirect: false,
         })
             .then((promise: any) => {
                 setUserLoginDetails({ email: '', password: '' });
