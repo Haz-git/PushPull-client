@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Redux:
-import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
-import { userSignout } from '../../redux/auth/authActions';
+import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
 import Userfront from '@userfront/react';
@@ -14,7 +13,6 @@ import { Burger } from '@mantine/core';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
 import UserDropdown from './navbar_components/UserDropdown';
-import historyObject from '../../utils/historyObject';
 
 //Styles:
 import styled from 'styled-components';
@@ -25,14 +23,14 @@ const StyledNavbar = styled.nav`
     justify-content: space-between;
     background: ${(props) => props.theme.lightBackground};
     width: 100%;
-    padding: 1rem 1rem;
+    padding: 0.5rem 1rem;
     text-align: left;
     top: 0;
     position: sticky;
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
-    z-index: 999;
+    z-index: 995;
 `;
 
 const StyledNavLogo = styled(Link)`
@@ -108,7 +106,6 @@ Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
-    const dispatch = useDispatch();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
     const renderAuthOptionsIfUserNotLoggedIn = () => {
@@ -117,18 +114,11 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
             Object.keys(User).length !== 0 &&
             Object.getPrototypeOf(User) === Object.prototype
         ) {
+            console.log(User);
+            const { email, image, username } = User;
+
             return (
-                <ButtonsContainer>
-                    <UserDropdown />
-                    <GeneralButton
-                        buttonLabel="Logout"
-                        padding=".6rem .7rem"
-                        onClick={() => {
-                            dispatch(userSignout());
-                            Userfront.logout();
-                        }}
-                    />
-                </ButtonsContainer>
+                <UserDropdown email={email} image={image} username={username} />
             );
         } else {
             return (
