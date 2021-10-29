@@ -15,6 +15,7 @@ import { useNotifications } from '@mantine/notifications';
 //Styles:
 import styled from 'styled-components';
 import { Exit } from '@styled-icons/boxicons-regular/Exit';
+import { CaretDown } from '@styled-icons/ionicons-outline/CaretDown';
 
 const ExitIcon = styled(Exit)`
     height: 1.25rem;
@@ -22,9 +23,19 @@ const ExitIcon = styled(Exit)`
     color: ${(props) => props.theme.mainText};
 `;
 
+const CaretDownIcon = styled(CaretDown)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #c6c6c6;
+`;
+
 const MainContainer = styled.div`
     cursor: pointer;
-    z-index: 9999;
+    transition: all 0.1s ease-in;
+
+    &:hover {
+        background: #ececec;
+    }
 `;
 
 const DropdownContainer = styled.div`
@@ -34,7 +45,7 @@ const DropdownContainer = styled.div`
     border: 1px solid #d3d3d3;
     border-radius: 0.3rem;
     padding: 0.5rem 0.5rem;
-    column-gap: 1rem;
+    column-gap: 0.75rem;
 `;
 
 const AvatarContainer = styled.div``;
@@ -82,6 +93,7 @@ const UserDropdown = ({
                         <HeaderContainer>
                             <UserDetailText>{username}</UserDetailText>
                         </HeaderContainer>
+                        <CaretDownIcon />
                     </DropdownContainer>
                 }
                 zIndex={999}
