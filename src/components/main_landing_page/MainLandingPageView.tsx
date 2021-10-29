@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import Userfront from '@userfront/react';
+import queryString from 'query-string';
 import { useNotifications } from '@mantine/notifications';
 
 //Redux:
+import { useParams, useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../redux/auth/authActions';
 
@@ -17,16 +19,18 @@ import BodySectionMain from '../body_section/BodySectionMain';
 
 Userfront.init('5nxxrqn7');
 
-const MainLandingPageView = () => {
+const MainLandingPageView = (): JSX.Element => {
+    const params = useParams();
     const dispatch = useDispatch();
+    const location = useLocation();
     const notifications = useNotifications();
 
     useEffect(() => {
         //URLSearchParams seems to return empty object...Fix!
-        const urlParams = new URLSearchParams(window.location.search);
-        console.log(urlParams);
-        const token = urlParams.get('token');
-        const uuid = urlParams.get('uuid');
+        const { search } = location;
+        const urlParams = queryString.parse(search);
+        const { token } = urlParams;
+        const { uuid } = urlParams;
         if (token && uuid) {
             Userfront.login({
                 method: 'link',
