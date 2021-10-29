@@ -22,6 +22,7 @@ const MainLandingPageView = () => {
     const notifications = useNotifications();
 
     useEffect(() => {
+        //URLSearchParams seems to return empty object...Fix!
         const urlParams = new URLSearchParams(window.location.search);
         console.log(urlParams);
         const token = urlParams.get('token');
