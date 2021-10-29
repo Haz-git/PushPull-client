@@ -10,6 +10,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '../styles/themes';
 
 //Components:
+import PrivateRoute from './protect_route/PrivateRoute';
 import history from '../utils/historyObject';
 import Navbar from './nav_bar/Navbar';
 import MainFooter from './footer/MainFooter';
@@ -106,6 +107,11 @@ const App = () => {
                                     />
                                 )}
                             />
+                            {/* <PrivateRoute
+                                exact
+                                path="/add-review/:id"
+                                children={<MainAddReviewPageView />}
+                            /> */}
                             <Route
                                 exact
                                 path="/add-review/:id"

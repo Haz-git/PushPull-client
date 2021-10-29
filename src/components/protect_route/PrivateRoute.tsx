@@ -9,8 +9,7 @@ import useLoginStatus from '../../utils/hooks/useLoginStatus';
 //Interfaces:
 
 interface IComponentProps {
-    children: any;
-    rest: any;
+    children: React.ReactNode;
 }
 
 const PrivateRoute = ({ children, ...rest }: IComponentProps): JSX.Element => {
