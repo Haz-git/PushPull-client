@@ -104,6 +104,7 @@ const UserDropdown = ({
     return (
         <MainContainer>
             <Menu
+                placement="center"
                 control={
                     <DropdownContainer>
                         <AvatarContainer>
