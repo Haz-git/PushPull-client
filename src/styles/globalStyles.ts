@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
 
     @media screen and (min-width: 800px) {
         body {
-            padding-bottom: 4rem;
+            padding-bottom: 3.5rem;
         }
     }
 
