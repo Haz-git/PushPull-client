@@ -141,6 +141,8 @@ interface IUserAuthFormProps {
     //Options will be 'SIGNUP' or 'LOGIN' or 'RESETSENDLINK' or 'RESETPASSWORD'
     authStateRenderView: string;
     closeAuthDrawerContainer: () => void;
+    hasRedirection?: boolean;
+    redirectPath?: string;
 }
 
 type IComponentProps = IFormContainerProps & IUserAuthFormProps;
@@ -153,6 +155,8 @@ const UserAuthForm = ({
     formShadow = 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
     authStateRenderView,
     closeAuthDrawerContainer,
+    hasRedirection = false,
+    redirectPath = '',
 }: IComponentProps): JSX.Element => {
     const notifications = useNotifications();
     const dispatch = useDispatch();
@@ -313,7 +317,9 @@ const UserAuthForm = ({
                     autoClose: 20000,
                 });
 
-                closeAuthDrawerContainer();
+                if (hasRedirection && redirectPath)
+                    return historyObject.push(redirectPath);
+                else closeAuthDrawerContainer();
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
