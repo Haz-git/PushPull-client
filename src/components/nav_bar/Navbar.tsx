@@ -13,6 +13,7 @@ import { Burger } from '@mantine/core';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
 import UserDropdown from './navbar_components/UserDropdown';
+import useLoginStatus from '../../utils/hooks/useLoginStatus';
 
 //Styles:
 import styled from 'styled-components';
@@ -106,14 +107,11 @@ Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
+    const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
     const renderAuthOptionsIfUserNotLoggedIn = () => {
-        if (
-            User &&
-            Object.keys(User).length !== 0 &&
-            Object.getPrototypeOf(User) === Object.prototype
-        ) {
+        if (isUserLoggedIn) {
             const { email, image, username } = User;
 
             return (
