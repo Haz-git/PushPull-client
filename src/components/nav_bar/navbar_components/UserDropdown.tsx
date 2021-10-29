@@ -97,6 +97,7 @@ const UserDropdown = ({
                     </DropdownContainer>
                 }
                 zIndex={999}
+                size="sm"
             >
                 <MenuItem
                     icon={<ExitIcon />}
