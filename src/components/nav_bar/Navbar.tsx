@@ -7,7 +7,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
 import Userfront from '@userfront/react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import { Burger } from '@mantine/core';
 import GeneralDrawer from '../general_components/GeneralDrawer';
@@ -108,6 +108,7 @@ Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
+    const Location = useLocation();
     const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
@@ -118,7 +119,7 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
             return (
                 <UserDropdown email={email} image={image} username={username} />
             );
-        } else {
+        } else if (!isUserLoggedIn && Location.pathname !== '/authenticate') {
             return (
                 <>
                     <ButtonsContainer>
@@ -152,6 +153,8 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
                     </BurgerContainer>
                 </>
             );
+        } else {
+            return null;
         }
     };
 
