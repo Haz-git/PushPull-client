@@ -28,6 +28,7 @@ import PasswordResetForm from './auth_forms/PasswordResetForm';
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
 import UserAuthForm from './auth_forms/UserAuthForm';
+import AuthPage from './auth_forms/AuthPage';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
@@ -101,6 +102,11 @@ const App = () => {
                             />
                             <Route
                                 exact
+                                path="/authenticate"
+                                component={AuthPage}
+                            />
+                            <Route
+                                exact
                                 path="/program/:id"
                                 render={(props) => (
                                     <MainWorkoutProgramPage
@@ -114,6 +120,7 @@ const App = () => {
                             <PrivateRoute
                                 exact
                                 path="/add-review/:id"
+                                authPath="/authenticate"
                                 isAuthenticated={isUserLoggedIn}
                                 component={MainAddReviewPageView}
                                 toggleAuthDrawerWithView={
