@@ -11,12 +11,14 @@ const PrivateRoute = ({
     component,
     isAuthenticated,
     toggleAuthDrawerWithView,
+    authPath,
     ...rest
 }: any) => {
     if (isAuthenticated) {
         return <Route {...rest} component={component} />;
+    } else {
+        return <Redirect to={{ pathname: authPath }} />;
     }
-    return <>{toggleAuthDrawerWithView(true, 'LOGIN')}</>;
 };
 
 export default PrivateRoute;
