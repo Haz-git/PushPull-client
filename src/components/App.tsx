@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 import { isMobileOnly } from 'react-device-detect';
 
+//Hooks:
+import useLoginStatus from '../utils/hooks/useLoginStatus';
+
 //Style Imports:
 import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyles';
@@ -35,6 +38,8 @@ const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
+
+    const isUserLoggedIn = useLoginStatus();
 
     const toggleAuthDrawerWithView = (state: boolean, view: string) => {
         setStateAuthFormView(view);
@@ -107,16 +112,20 @@ const App = () => {
                                     />
                                 )}
                             />
-                            {/* <PrivateRoute
+                            <PrivateRoute
                                 exact
                                 path="/add-review/:id"
-                                children={<MainAddReviewPageView />}
-                            /> */}
-                            <Route
+                                isAuthenticated={isUserLoggedIn}
+                                component={MainAddReviewPageView}
+                                toggleAuthDrawerWithView={
+                                    toggleAuthDrawerWithView
+                                }
+                            />
+                            {/* <Route
                                 exact
                                 path="/add-review/:id"
                                 component={MainAddReviewPageView}
-                            />
+                            /> */}
                             <Route
                                 exact
                                 path="/password/reset"
