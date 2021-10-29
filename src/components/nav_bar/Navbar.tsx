@@ -114,7 +114,6 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
             Object.keys(User).length !== 0 &&
             Object.getPrototypeOf(User) === Object.prototype
         ) {
-            console.log(User);
             const { email, image, username } = User;
 
             return (
