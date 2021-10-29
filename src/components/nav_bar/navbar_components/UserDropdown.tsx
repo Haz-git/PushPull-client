@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Userfront from '@userfront/react';
+import { deviceMin } from '../../../devices/breakpoints';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -36,6 +37,14 @@ const MainContainer = styled.div`
     &:hover {
         background: #ececec;
     }
+
+    @media ${deviceMin.mobileS} {
+        max-width: 8rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        max-width: 15rem;
+    }
 `;
 
 const DropdownContainer = styled.div`
@@ -56,6 +65,21 @@ const UserDetailText = styled.h3`
     font-size: 1rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 800;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media ${deviceMin.mobileS} {
+        max-width: 2rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        max-width: 3rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        max-width: 10rem;
+    }
 `;
 
 //Interfaces:
@@ -108,7 +132,7 @@ const UserDropdown = ({
                             title: `You've Been Signed Out`,
                             message: `We'll see you next time.`,
                             color: 'orange',
-                            autoClose: 20000,
+                            autoClose: 15000,
                         });
                     }}
                 >
