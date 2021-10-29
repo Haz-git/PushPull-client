@@ -94,7 +94,6 @@ const App = () => {
                                 path="/"
                                 component={MainLandingPageView}
                             />
-
                             <Route
                                 exact
                                 path="/search"
