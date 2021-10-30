@@ -24,6 +24,7 @@ import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 import GeneralModal from './general_components/GeneralModal';
 import FeedbackForm from './general_components/FeedbackForm';
 import PasswordResetForm from './auth_forms/PasswordResetForm';
+import NotFound from './not_found_page/NotFound';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
@@ -127,11 +128,6 @@ const App = () => {
                                     toggleAuthDrawerWithView
                                 }
                             />
-                            {/* <Route
-                                exact
-                                path="/add-review/:id"
-                                component={MainAddReviewPageView}
-                            /> */}
                             <Route
                                 exact
                                 path="/password/reset"
@@ -144,6 +140,7 @@ const App = () => {
                                     />
                                 )}
                             />
+                            <Route component={NotFound} />
                         </Switch>
                     </Router>
                     <MainFooter bugReportHandler={openBugReportModal} />
