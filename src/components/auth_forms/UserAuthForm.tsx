@@ -143,6 +143,7 @@ interface IUserAuthFormProps {
     closeAuthDrawerContainer: () => void;
     hasRedirection?: boolean;
     redirectPath?: string;
+    isAuthPath?: boolean;
 }
 
 type IComponentProps = IFormContainerProps & IUserAuthFormProps;
@@ -157,6 +158,7 @@ const UserAuthForm = ({
     closeAuthDrawerContainer,
     hasRedirection = false,
     redirectPath = '',
+    isAuthPath = false,
 }: IComponentProps): JSX.Element => {
     const notifications = useNotifications();
     const dispatch = useDispatch();
@@ -317,9 +319,17 @@ const UserAuthForm = ({
                     autoClose: 20000,
                 });
 
-                if (hasRedirection && redirectPath)
+                if (hasRedirection && redirectPath && isAuthPath) {
                     return historyObject.push(redirectPath);
-                else closeAuthDrawerContainer();
+                } else if (
+                    !hasRedirection &&
+                    redirectPath === '' &&
+                    isAuthPath
+                ) {
+                    return historyObject.push('/');
+                } else {
+                    closeAuthDrawerContainer();
+                }
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
@@ -340,7 +350,7 @@ const UserAuthForm = ({
 
                 setUserPasswordResetDetails({ email: '' });
 
-                closeAuthDrawerContainer();
+                if (!hasRedirection) closeAuthDrawerContainer();
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);

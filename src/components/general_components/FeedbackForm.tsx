@@ -25,6 +25,7 @@ const FeedbackForm = () => {
         { value: 'generalFeedback', label: 'General Feedback' },
         { value: 'issue', label: 'Non-code Issue' },
         { value: 'bug', label: 'Code-related Bug' },
+        { value: 'featureRequest', label: 'Feature Request' },
     ];
 
     return (
