@@ -744,7 +744,9 @@ const UserAuthForm = ({
                                         }}
                                         required
                                         label="Confirm New Password"
-                                        value={userNewPasswordDetails.password}
+                                        value={
+                                            userNewPasswordDetails.passwordVerify
+                                        }
                                         onChange={handleUserNewPasswordInput}
                                     />
                                 </InputContainer>
