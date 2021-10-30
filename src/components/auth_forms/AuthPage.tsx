@@ -31,6 +31,7 @@ const AuthPage = () => {
                 }
                 hasRedirection={hasRedirection()}
                 redirectPath={returnRedirectPath()}
+                isAuthPath={true}
             />
         </div>
     );
