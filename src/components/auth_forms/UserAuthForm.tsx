@@ -340,7 +340,7 @@ const UserAuthForm = ({
 
                 setUserPasswordResetDetails({ email: '' });
 
-                closeAuthDrawerContainer();
+                if (!hasRedirection) closeAuthDrawerContainer();
             })
             .catch((err: any) => {
                 setAlertMessage(err.message);
