@@ -13,7 +13,7 @@ const AuthPage = () => {
     const { state }: any = useLocation();
 
     const hasRedirection = () => {
-        if (state.from.pathname) return true;
+        if (state?.from?.pathname) return true;
         return false;
     };
     const returnRedirectPath = () => {
