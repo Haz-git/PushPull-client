@@ -26,7 +26,9 @@ const AuthPage = () => {
         <div>
             <UserAuthForm
                 authStateRenderView="LOGIN"
-                closeAuthDrawerContainer={() => console.log('No use')}
+                closeAuthDrawerContainer={() =>
+                    console.log('Not provided...as intended.')
+                }
                 hasRedirection={hasRedirection()}
                 redirectPath={returnRedirectPath()}
             />
