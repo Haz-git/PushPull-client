@@ -13,7 +13,7 @@ import { v4 as uuid } from 'uuid';
 import { useNotifications } from '@mantine/notifications';
 
 //Redux:
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { addReview } from '../../redux/reviews/reviewActions';
 
 //Modal Styles:
@@ -109,6 +109,7 @@ const MainAddReviewPageView = ({
 
     //Redux Dispatch
     const dispatch = useDispatch();
+    const User = useSelector((state: RootStateOrAny) => state?.user?.user);
 
     //Navigation indication handlers:
 
@@ -290,7 +291,9 @@ const MainAddReviewPageView = ({
             usefulScore: 0,
             notUsefulScore: 0,
             flaggedCount: 0,
-            reviewAuthorId: 'Anonymous',
+            reviewAuthorId: `${User?.uuid || 'UnknownUuidError'}`,
+            reviewAuthorName: `${User?.username || 'Anonymous'}`,
+            reviewAuthorImg: `${User?.image || 'UnknownImgLinkError'}`,
         };
 
         //Open notification:
