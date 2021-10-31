@@ -70,10 +70,11 @@ const SortByWheelContainer = styled.div`
 `;
 
 const WorkoutProgramContainer = styled.div<StyledProps>`
-    overflow-y: scroll;
+    // overflow-y: scroll;
     margin: 1.5rem -2rem;
-    height: ${(props) => `${props.containerHeight - 290}px`};
-    padding: 1rem 2rem;
+    // height: ${(props) => `${props.containerHeight - 290}px`};
+    height: 100%;
+    padding: 1rem 2rem 0rem 2rem;
 `;
 
 const SVGContainer = styled.div`

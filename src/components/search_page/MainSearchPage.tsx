@@ -31,6 +31,7 @@ const MainSearchPageContainer = styled.section`
         height: 100vh;
         display: grid;
         grid-template-columns: 1fr 8fr;
+        overflow: visible;
     }
 `;
 
@@ -40,6 +41,9 @@ const FilterColumnView = styled.div`
     }
 
     @media ${deviceMin.tabletp} {
+        top: 0;
+        position: -webkit-sticky;
+        position: sticky;
         display: block;
         width: 18rem;
     }

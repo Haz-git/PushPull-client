@@ -19,6 +19,8 @@ import useLoginStatus from '../../utils/hooks/useLoginStatus';
 import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`
+    top: 0;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,8 +29,6 @@ const StyledNavbar = styled.nav`
     height: 3.75rem;
     padding: 0.5rem 1rem;
     text-align: left;
-    top: 0;
-    position: sticky;
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
