@@ -39,6 +39,7 @@ const CaretDownIcon = styled(CaretDown)`
 `;
 
 const MainContainer = styled.section`
+    z-index: 90;
     @media ${deviceMin.mobileS} {
         /* height: 10rem; */
         height: 8rem;
@@ -64,6 +65,7 @@ const MainContainer = styled.section`
 `;
 
 const MobileMainContainer = styled.section`
+    z-index: 90;
     // max-height: 4rem;
     position: fixed;
     left: 0;
