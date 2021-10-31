@@ -158,6 +158,9 @@ const ReviewResults = ({
                         openReviewReportDrawer={openReviewReportDrawer}
                         usefulScore={review.usefulScore}
                         notUsefulScore={review.notUsefulScore}
+                        reviewAuthorId={review.reviewAuthorId}
+                        reviewAuthorName={review.reviewAuthorName}
+                        reviewAuthorImg={review.reviewAuthorImg}
                     />
                 ));
             }

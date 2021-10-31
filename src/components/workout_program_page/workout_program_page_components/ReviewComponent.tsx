@@ -12,6 +12,7 @@ import { decode } from 'html-entities';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import ExerciseCard from '../../add_review_page/add_review_page_components/ExerciseCard';
+import { Avatar } from '@mantine/core';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
@@ -135,14 +136,50 @@ const RatingsContainer = styled.div`
 `;
 
 const AuthorContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     @media ${deviceMin.mobileS} {
         margin: 0;
         margin-bottom: 0.5rem;
+        width: 20rem;
     }
 
     @media ${deviceMin.browsersmp} {
         margin-left: 0.5rem;
         margin-bottom: 0;
+    }
+`;
+
+const AvatarContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        margin-right: 0.5rem;
+    }
+
+    @media ${deviceMin.browsersmp} {
+        margin: 0 0.5rem;
+    }
+`;
+
+const AuthorNameText = styled.h3`
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: ${(props) => props.theme.mainText};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 5rem;
+
+    @media ${deviceMin.mobileS} {
+        width: 10rem;
+    }
+
+    @media ${deviceMin.browsersmp} {
+        width: 15rem;
     }
 `;
 
@@ -214,6 +251,9 @@ interface IComponentProps {
     openReviewReportDrawer: () => void;
     usefulScore: number;
     notUsefulScore: number;
+    reviewAuthorName: string;
+    reviewAuthorImg: string;
+    reviewAuthorId: string;
 }
 
 const ReviewComponent = ({
@@ -231,6 +271,9 @@ const ReviewComponent = ({
     openReviewReportDrawer,
     usefulScore,
     notUsefulScore,
+    reviewAuthorId,
+    reviewAuthorName,
+    reviewAuthorImg,
 }: IComponentProps): JSX.Element => {
     const [isUsefulButtonSelected, setIsUsefulButtonSelected] = useState(false);
     const [isNotUsefulButtonSelected, setIsNotUsefulButtonSelected] =
@@ -364,13 +407,21 @@ const ReviewComponent = ({
                     />
                 </RatingsContainer>
                 <AuthorContainer>
+                    <AvatarContainer>
+                        <Avatar
+                            src={reviewAuthorImg}
+                            size="sm"
+                            alt="User image"
+                            radius="sm"
+                        />
+                    </AvatarContainer>
+                    <AuthorNameText>{reviewAuthorName}</AuthorNameText>
                     <ReviewText
                         color="rgba(0, 0, 34, .7)"
                         fontWeight="400"
                         fontSize=".9rem"
                     >
-                        Anonymous Python on{' '}
-                        {`${dayjs(createdAt).format('MM/DD/YYYY')}`}
+                        on {`${dayjs(createdAt).format('MM/DD/YYYY')}`}
                     </ReviewText>
                 </AuthorContainer>
             </StarBox>
