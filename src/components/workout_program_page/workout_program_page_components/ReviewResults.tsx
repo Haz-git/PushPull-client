@@ -141,8 +141,6 @@ const ReviewResults = ({
                     </SvgContainer>
                 );
             } else {
-                console.log(reviews);
-
                 return reviews.map((review: any) => (
                     <ReviewComponent
                         key={review.id}
