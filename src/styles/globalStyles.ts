@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
+        padding-top: 3.75rem;
         width: 100%;
         height: 100%;
         min-height: 100%;
@@ -20,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 
     @media screen and (min-width: 320px) {
         body {
-            padding-bottom: 8rem;
+            padding-bottom: 3.5rem;
         }
     }
 
