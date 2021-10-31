@@ -214,6 +214,9 @@ interface IComponentProps {
     openReviewReportDrawer: () => void;
     usefulScore: number;
     notUsefulScore: number;
+    reviewAuthorName: string;
+    reviewAuthorImg: string;
+    reviewAuthorId: string;
 }
 
 const ReviewComponent = ({
@@ -231,6 +234,9 @@ const ReviewComponent = ({
     openReviewReportDrawer,
     usefulScore,
     notUsefulScore,
+    reviewAuthorId,
+    reviewAuthorName,
+    reviewAuthorImg,
 }: IComponentProps): JSX.Element => {
     const [isUsefulButtonSelected, setIsUsefulButtonSelected] = useState(false);
     const [isNotUsefulButtonSelected, setIsNotUsefulButtonSelected] =
