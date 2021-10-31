@@ -19,6 +19,7 @@ import GeneralButton from '../../general_components/GeneralButton';
 import DividerLine from '../../general_components/DividerLine';
 import FilterButton from './FilterButton';
 import FilterChoice from './FilterChoice';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -34,15 +35,23 @@ export const LeftArrowIcon = styled(ChevronLeft)`
     color: ${(props) => props.theme.subText};
 `;
 
-export const MainContainer = styled.div`
-    position: relative;
+export const MainContainer = styled.section<IMainContainer>`
+    top: 3.75rem;
+    position: -webkit-sticky;
+    position: sticky;
     background: rgba(239, 239, 239, 1);
     text-align: left;
     width: 100%;
 
+    @media ${deviceMin.mobileS} {
+        z-index: -1;
+        margin-top: -4rem;
+        height: 100%;
+    }
+
     @media ${deviceMin.tabletp} {
         border-right: 2px solid #e5e5e5;
-        height: 100%;
+        height: ${(props) => `${props.height - 115}px`};
     }
 `;
 
@@ -103,12 +112,17 @@ export const ReturnButton = styled.button`
 const OtherButtonContainer = styled.div`
     position: absolute;
     padding: 0rem 1rem;
-    top: 100vh;
-    transform: translateY(-180%);
+    // top: 90vh;
+    // transform: translateY(-180%);
+    bottom: 1rem;
     width: 100%;
 `;
 
 //interfaces:
+
+interface IMainContainer {
+    height: number;
+}
 
 interface IFilterColumn {
     isResultsLoaded: boolean;
@@ -131,6 +145,9 @@ const FilterColumn = ({
         RENDER_SELECTION_WORKOUTSCHEDULE = 'RENDER_SELECTION_WORKOUTSCHEDULE',
         RENDER_SELECTION_WORKOUTLENGTH = 'RENDER_SELECTION_WORKOUTLENGTH',
     }
+
+    //Height window dimension:
+    const { height } = useWindowDimensions();
 
     //Redux dispatch hook:
     const dispatch = useDispatch();
@@ -234,7 +251,7 @@ const FilterColumn = ({
             switch (view) {
                 case RenderView.RENDER_MAIN_FILTER:
                     return (
-                        <MainContainer>
+                        <MainContainer height={height}>
                             <TitleContainer>
                                 <FilterText>Filter By</FilterText>
                             </TitleContainer>
@@ -346,7 +363,7 @@ const FilterColumn = ({
                     );
                 case RenderView.RENDER_SELECTION_CATEGORY:
                     return (
-                        <MainContainer>
+                        <MainContainer height={height}>
                             <TitleContainer>
                                 <ReturnButton
                                     onClick={() =>
@@ -426,7 +443,7 @@ const FilterColumn = ({
                     );
                 case RenderView.RENDER_SELECTION_EQUIPMENT:
                     return (
-                        <MainContainer>
+                        <MainContainer height={height}>
                             <TitleContainer>
                                 <ReturnButton
                                     onClick={() =>
@@ -486,7 +503,7 @@ const FilterColumn = ({
                     );
                 case RenderView.RENDER_SELECTION_DIFFICULTY:
                     return (
-                        <MainContainer>
+                        <MainContainer height={height}>
                             <TitleContainer>
                                 <ReturnButton
                                     onClick={() =>
@@ -546,7 +563,7 @@ const FilterColumn = ({
                     );
                 case RenderView.RENDER_SELECTION_WORKOUTSCHEDULE:
                     return (
-                        <MainContainer>
+                        <MainContainer height={height}>
                             <TitleContainer>
                                 <ReturnButton
                                     onClick={() =>
@@ -606,7 +623,7 @@ const FilterColumn = ({
                     );
                 case RenderView.RENDER_SELECTION_WORKOUTLENGTH:
                     return (
-                        <MainContainer>
+                        <MainContainer height={height}>
                             <TitleContainer>
                                 <ReturnButton
                                     onClick={() =>
