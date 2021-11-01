@@ -13,6 +13,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import ExerciseCard from '../../add_review_page/add_review_page_components/ExerciseCard';
 import { Avatar } from '@mantine/core';
+import { isMobileOnly } from 'react-device-detect';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
@@ -190,6 +191,24 @@ const DetailsContainer = styled.div`
 
 const ReviewRTEContainer = styled.div`
     color: ${(props) => props.theme.mainText};
+
+    @media ${deviceMin.mobileS} {
+        margin-left: -3rem;
+        width: 16rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        width: 19rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        width: 22rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-left: 0;
+        width: 100%;
+    }
 `;
 
 const ImprovementsContainer = styled.div`
@@ -200,6 +219,23 @@ const StatCardContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     column-gap: 1rem;
+`;
+
+const MobileStatContainer = styled.div`
+    display: block;
+
+    @media ${deviceMin.mobileS} {
+        margin-left: -2rem;
+        width: 14rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        width: 16rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        width: 16rem;
+    }
 `;
 
 const MobileFlagContainer = styled.div`
@@ -362,6 +398,20 @@ const ReviewComponent = ({
         }
     };
 
+    const renderStatCardsOnDevices = () => {
+        if (isMobileOnly) {
+            return (
+                <MobileStatContainer>
+                    {renderImprovedStats()}
+                </MobileStatContainer>
+            );
+        } else {
+            return (
+                <StatCardContainer>{renderImprovedStats()}</StatCardContainer>
+            );
+        }
+    };
+
     return (
         <MainContainer>
             <HeaderContainer>
@@ -470,9 +520,7 @@ const ReviewComponent = ({
                     }}
                 >
                     <AccordionItem label={`Improved Stats`}>
-                        <StatCardContainer>
-                            {renderImprovedStats()}
-                        </StatCardContainer>
+                        {renderStatCardsOnDevices()}
                     </AccordionItem>
                     <AccordionItem label={`Author Review`}>
                         <ReviewRTEContainer>
