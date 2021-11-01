@@ -39,9 +39,9 @@ const BugReportModalContainer = styled.div``;
 
 const SignupDrawerContainer = styled.div``;
 
-const App = () => {
-    const AuthContext = createContext<any>(null); //Default value set to null
+export const AuthContext = createContext<any>(null); //Default value set to null
 
+const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
