@@ -16,10 +16,15 @@ import 'react-quill/dist/quill.bubble.css';
 import ExerciseCard from '../../add_review_page/add_review_page_components/ExerciseCard';
 import { Avatar } from '@mantine/core';
 import { isMobileOnly } from 'react-device-detect';
-import useLoginStatus from '../../../utils/hooks/useLoginStatus';
+
+//Redux:
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { voteReview } from '../../../redux/auth/authActions';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
+import useLoginStatus from '../../../utils/hooks/useLoginStatus';
+import updateReviewVotes from '../../../utils/updateReviewVotes';
 
 //Styles:
 import styled from 'styled-components';
@@ -324,6 +329,8 @@ const ReviewComponent = ({
 }: IComponentProps): JSX.Element => {
     const { toggleAuthDrawerWithView } = useContext(AuthContext);
     const isUserLoggedIn = useLoginStatus();
+    const User = useSelector((state: RootStateOrAny) => state?.user.user);
+    const dispatch = useDispatch();
 
     const [isUsefulButtonSelected, setIsUsefulButtonSelected] = useState(false);
     const [isNotUsefulButtonSelected, setIsNotUsefulButtonSelected] =
@@ -385,27 +392,46 @@ const ReviewComponent = ({
     };
 
     const handleReviewVoteRequest = (requestType: string) => {
+        let currData = User?.data['reviewsVoted'];
         switch (requestType) {
             case 'USEFUL':
                 //Check if no buttons are selected:
                 if (areNoButtonsSelected()) {
                     setIsUsefulButtonSelected(true);
-                    return Userfront.user.update({
-                        data: {
-                            reviewsVoted: {
-                                [reviewId]: 'USEFUL',
-                            },
-                        },
-                    });
+                    let newObj = updateReviewVotes(
+                        'ADD',
+                        'USEFUL',
+                        reviewId,
+                        currData
+                    );
+                    dispatch(voteReview(newObj));
+
+                    break;
                 }
 
                 //if this button has already been selected, deselect it.
-                if (isUsefulButtonSelected)
-                    return setIsUsefulButtonSelected(false);
+                if (isUsefulButtonSelected) {
+                    setIsUsefulButtonSelected(false);
+                    let newObj = updateReviewVotes(
+                        'DELETE',
+                        'USEFUL',
+                        reviewId,
+                        currData
+                    );
+                    dispatch(voteReview(newObj));
+                    break;
+                }
 
                 //if passed above, then one of the two buttons are selected.
-                return switchIfAlreadyVoted(requestType);
-
+                switchIfAlreadyVoted(requestType);
+                let newObj = updateReviewVotes(
+                    'UPDATE',
+                    'NOTUSEFUL',
+                    reviewId,
+                    currData
+                );
+                dispatch(voteReview(newObj));
+                break;
             case 'NOTUSEFUL':
                 if (areNoButtonsSelected())
                     return setIsNotUsefulButtonSelected(true);
