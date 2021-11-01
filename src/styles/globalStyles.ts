@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
         position: relative;
         background: rgba(244, 244, 244, 1);
         font-family: 'Lato', sans-serif, helvetica;
+        -webkit-overflow-scrolling: touch;
 
     }
 
