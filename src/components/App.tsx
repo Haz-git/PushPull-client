@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 import { isMobileOnly } from 'react-device-detect';
 
+//Context:
+import { createContext } from 'react';
+
 //Hooks:
 import useLoginStatus from '../utils/hooks/useLoginStatus';
 
@@ -37,6 +40,8 @@ const BugReportModalContainer = styled.div``;
 const SignupDrawerContainer = styled.div``;
 
 const App = () => {
+    const AuthContext = createContext<any>(null); //Default value set to null
+
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
@@ -110,12 +115,16 @@ const App = () => {
                                 exact
                                 path="/program/:id"
                                 render={(props) => (
-                                    <MainWorkoutProgramPage
-                                        {...props}
-                                        toggleAuthDrawerWithView={
-                                            toggleAuthDrawerWithView
-                                        }
-                                    />
+                                    <AuthContext.Provider
+                                        value={{ toggleAuthDrawerWithView }}
+                                    >
+                                        <MainWorkoutProgramPage
+                                            {...props}
+                                            toggleAuthDrawerWithView={
+                                                toggleAuthDrawerWithView
+                                            }
+                                        />
+                                    </AuthContext.Provider>
                                 )}
                             />
                             <PrivateRoute
