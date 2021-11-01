@@ -172,14 +172,15 @@ const AuthorNameText = styled.h3`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 5rem;
+    max-width: 5rem;
+    margin-right: 0.25rem;
 
     @media ${deviceMin.mobileS} {
-        width: 10rem;
+        max-width: 10rem;
     }
 
     @media ${deviceMin.browsersmp} {
-        width: 15rem;
+        max-width: 15rem;
     }
 `;
 
