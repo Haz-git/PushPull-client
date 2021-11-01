@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { useContext } from 'react';
 
 //Components:
+import { AuthContext } from '../../App';
 import { deviceMin } from '../../../devices/breakpoints';
 import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
@@ -14,6 +16,7 @@ import 'react-quill/dist/quill.bubble.css';
 import ExerciseCard from '../../add_review_page/add_review_page_components/ExerciseCard';
 import { Avatar } from '@mantine/core';
 import { isMobileOnly } from 'react-device-detect';
+import useLoginStatus from '../../../utils/hooks/useLoginStatus';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
@@ -312,6 +315,9 @@ const ReviewComponent = ({
     reviewAuthorName,
     reviewAuthorImg,
 }: IComponentProps): JSX.Element => {
+    const { toggleAuthDrawerWithView } = useContext(AuthContext);
+    const isUserLoggedIn = useLoginStatus();
+
     const [isUsefulButtonSelected, setIsUsefulButtonSelected] = useState(false);
     const [isNotUsefulButtonSelected, setIsNotUsefulButtonSelected] =
         useState(false);
@@ -547,6 +553,10 @@ const ReviewComponent = ({
                     disableShadow={true}
                     buttonIcon={<LikeIconEmpty />}
                     padding=".5rem .7rem"
+                    onClick={() => {
+                        if (isUserLoggedIn) return console.log('Vote dispatch');
+                        return toggleAuthDrawerWithView(true, 'LOGIN');
+                    }}
                 />
                 <GeneralButton
                     buttonLabel="Not Useful (0)"
@@ -561,6 +571,10 @@ const ReviewComponent = ({
                     disableShadow={true}
                     buttonIcon={<DislikeIconEmpty />}
                     padding=".5rem .7rem"
+                    onClick={() => {
+                        if (isUserLoggedIn) return console.log('Vote dispatch');
+                        return toggleAuthDrawerWithView(true, 'LOGIN');
+                    }}
                 />
                 <MobileFlagContainer>
                     <GeneralButton
