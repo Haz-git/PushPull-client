@@ -34,6 +34,7 @@ const updateReviewVotes = (
         case 'DELETE':
             if (isReviewIdInDataTable(reviewId, currData)) {
                 let updatedObj = { ...currData };
+                console.log(updatedObj);
                 delete updatedObj[reviewId];
                 return updatedObj;
             }

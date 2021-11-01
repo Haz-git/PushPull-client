@@ -10,4 +10,9 @@ interface userSignout {
     payload?: any;
 }
 
-export type AuthAction = userLogin | userSignout;
+interface userUpdate {
+    type: AuthActionType.USER_UPDATE_VOTES;
+    payload?: any;
+}
+
+export type AuthAction = userLogin | userSignout | userUpdate;

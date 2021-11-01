@@ -276,6 +276,10 @@ const UserAuthForm = ({
             password: userSignupDetails.password,
             username: userSignupDetails.username,
             redirect: false,
+            data: {
+                reviewsVoted: {},
+                savedWorkoutPrograms: {},
+            },
         })
             .then((value: any) => {
                 notifications.showNotification({
