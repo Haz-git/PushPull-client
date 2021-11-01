@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
+import Userfront from '@userfront/react';
 
 //Components:
 import { AuthContext } from '../../App';
@@ -299,6 +299,9 @@ interface IComponentProps {
     reviewAuthorImg: string;
     reviewAuthorId: string;
 }
+
+//Userfront init
+Userfront.init('5nxxrqn7');
 
 const ReviewComponent = ({
     reviewId,
