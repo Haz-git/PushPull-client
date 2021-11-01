@@ -367,40 +367,32 @@ const ReviewComponent = ({
         else return false;
     };
 
-    const renderSelectedButtons = () => {
-        if (areNoButtonsSelected()) {
-            return (
-                <>
-                    <GeneralButton
-                        buttonLabel={`Useful (${usefulScore})`}
-                        fontWeight="700"
-                        width="10rem"
-                        buttonBackground="transparent"
-                        buttonTextColor="#7678ED"
-                        textShadow="none"
-                        border="1px solid #7678ED"
-                        hoverTransform="none"
-                        hoverShadow="none"
-                        disableShadow={true}
-                        buttonIcon={<LikeIconEmpty />}
-                        padding=".5rem .7rem"
-                    />
-                    <GeneralButton
-                        buttonLabel={`Not Useful (${notUsefulScore})`}
-                        fontWeight="700"
-                        width="10rem"
-                        buttonBackground="transparent"
-                        buttonTextColor="#7678ED"
-                        textShadow="none"
-                        border="1px solid #7678ED"
-                        hoverTransform="none"
-                        hoverShadow="none"
-                        disableShadow={true}
-                        buttonIcon={<DislikeIconEmpty />}
-                        padding=".5rem .7rem"
-                    />
-                </>
-            );
+    const switchIfAlreadyVoted = (currVote: string) => {
+        if (currVote === 'USEFUL') {
+            setIsNotUsefulButtonSelected(!isNotUsefulButtonSelected);
+            setIsUsefulButtonSelected(true);
+        } else {
+            setIsUsefulButtonSelected(!isUsefulButtonSelected);
+            setIsNotUsefulButtonSelected(true);
+        }
+    };
+
+    const handleReviewVoteRequest = (requestType: string) => {
+        switch (requestType) {
+            case 'USEFUL':
+                //Check if no buttons are selected:
+                if (areNoButtonsSelected())
+                    return setIsUsefulButtonSelected(true);
+
+                //if passed above, then one of the two buttons are selected.
+                return switchIfAlreadyVoted('USEFUL');
+
+            case 'NOTUSEFUL':
+                if (areNoButtonsSelected())
+                    return setIsNotUsefulButtonSelected(true);
+                return switchIfAlreadyVoted('NOTUSEFUL');
+            default:
+                throw new Error('Vote request type not specified.');
         }
     };
 
@@ -554,7 +546,10 @@ const ReviewComponent = ({
                     buttonIcon={<LikeIconEmpty />}
                     padding=".5rem .7rem"
                     onClick={() => {
-                        if (isUserLoggedIn) return console.log('Vote dispatch');
+                        if (isUserLoggedIn) {
+                            handleReviewVoteRequest('USEFUL');
+                            console.log('vote should be dispatched');
+                        }
                         return toggleAuthDrawerWithView(true, 'LOGIN');
                     }}
                 />
@@ -572,7 +567,10 @@ const ReviewComponent = ({
                     buttonIcon={<DislikeIconEmpty />}
                     padding=".5rem .7rem"
                     onClick={() => {
-                        if (isUserLoggedIn) return console.log('Vote dispatch');
+                        if (isUserLoggedIn) {
+                            handleReviewVoteRequest('NOTUSEFUL');
+                            console.log('vote should be dispatched');
+                        }
                         return toggleAuthDrawerWithView(true, 'LOGIN');
                     }}
                 />
