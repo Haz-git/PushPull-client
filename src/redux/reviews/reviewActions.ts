@@ -2,7 +2,6 @@ import api from '../../api';
 import { Dispatch } from 'redux';
 import { ReviewAction } from './reviewInterfaces';
 import { ReviewActionType } from './action-types';
-
 import { useNotifications } from '@mantine/notifications';
 
 export const getReviews = (
@@ -47,8 +46,4 @@ export const addReview = (
             statusCallback(false);
         }
     };
-};
-
-export const voteReview = (voteType: string) => {
-    return async (dispatch: Dispatch<ReviewAction>) => {};
 };
