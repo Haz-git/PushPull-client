@@ -91,6 +91,7 @@ interface IComponentProps {
     username: string;
 }
 
+//Userfront init()
 Userfront.init('5nxxrqn7');
 
 const UserDropdown = ({
