@@ -26,20 +26,20 @@ import styled from 'styled-components';
 
 //Icons:
 import { Star } from '@styled-icons/evaicons-solid/Star';
-import { ThumbLike } from '@styled-icons/fluentui-system-regular/ThumbLike';
-import { ThumbDislike } from '@styled-icons/fluentui-system-regular/ThumbDislike';
+import { ThumbLike } from '@styled-icons/fluentui-system-filled/ThumbLike';
+import { ThumbDislike } from '@styled-icons/fluentui-system-filled/ThumbDislike';
 import { FlagPride } from '@styled-icons/fluentui-system-filled/FlagPride';
 
-const LikeIconEmpty = styled(ThumbLike)`
+const LikeIconEmpty = styled(ThumbLike)<ThumbProps>`
     height: 1.3rem;
     width: 1.3rem;
-    color: #7678ed;
+    color: ${(props) => props.color};
 `;
 
-const DislikeIconEmpty = styled(ThumbDislike)`
+const DislikeIconEmpty = styled(ThumbDislike)<ThumbProps>`
     height: 1.3rem;
     width: 1.3rem;
-    color: #7678ed;
+    color: ${(props) => props.color};
 `;
 
 const FlagIcon = styled(FlagPride)`
@@ -268,6 +268,10 @@ const ButtonsContainer = styled.div`
 `;
 
 //Interfaces:
+interface ThumbProps {
+    color?: string;
+}
+
 interface IStyledProps {
     color?: string;
     fontWeight?: string;
@@ -384,15 +388,31 @@ const ReviewComponent = ({
                 if (areNoButtonsSelected())
                     return setIsUsefulButtonSelected(true);
 
+                //if this button has already been selected, deselect it.
+                if (isUsefulButtonSelected)
+                    return setIsUsefulButtonSelected(false);
+
                 //if passed above, then one of the two buttons are selected.
-                return switchIfAlreadyVoted('USEFUL');
+                return switchIfAlreadyVoted(requestType);
 
             case 'NOTUSEFUL':
                 if (areNoButtonsSelected())
                     return setIsNotUsefulButtonSelected(true);
-                return switchIfAlreadyVoted('NOTUSEFUL');
+                if (isNotUsefulButtonSelected)
+                    return setIsNotUsefulButtonSelected(false);
+                return switchIfAlreadyVoted(requestType);
             default:
                 throw new Error('Vote request type not specified.');
+        }
+    };
+
+    const isBtnActive = (btnType: string) => {
+        if (btnType === 'USEFUL') {
+            if (isUsefulButtonSelected) return true;
+            return false;
+        } else {
+            if (isNotUsefulButtonSelected) return true;
+            return false;
         }
     };
 
@@ -536,42 +556,72 @@ const ReviewComponent = ({
                     buttonLabel="Useful (0)"
                     fontWeight="700"
                     width="10rem"
-                    buttonBackground="transparent"
-                    buttonTextColor="#7678ED"
+                    buttonBackground={`${
+                        isBtnActive('USEFUL') ? '#dedffb' : 'transparent'
+                    }`}
+                    buttonTextColor={`${
+                        isBtnActive('USEFUL') ? '#4245e6' : '#7678ED'
+                    }`}
                     textShadow="none"
-                    border="1px solid #7678ED"
+                    border={`${
+                        isBtnActive('USEFUL')
+                            ? '1px solid #dedffb'
+                            : '1px solid #7678ED'
+                    }`}
                     hoverTransform="none"
                     hoverShadow="none"
                     disableShadow={true}
-                    buttonIcon={<LikeIconEmpty />}
+                    buttonIcon={
+                        <LikeIconEmpty
+                            color={`${
+                                isBtnActive('USEFUL') ? '#4245e6' : '7678ed'
+                            }`}
+                        />
+                    }
                     padding=".5rem .7rem"
                     onClick={() => {
                         if (isUserLoggedIn) {
                             handleReviewVoteRequest('USEFUL');
                             console.log('vote should be dispatched');
+                        } else {
+                            return toggleAuthDrawerWithView(true, 'LOGIN');
                         }
-                        return toggleAuthDrawerWithView(true, 'LOGIN');
                     }}
                 />
                 <GeneralButton
                     buttonLabel="Not Useful (0)"
                     fontWeight="700"
                     width="10rem"
-                    buttonBackground="transparent"
-                    buttonTextColor="#7678ED"
+                    buttonBackground={`${
+                        isBtnActive('NOTUSEFUL') ? '#dedffb' : 'transparent'
+                    }`}
+                    buttonTextColor={`${
+                        isBtnActive('NOTUSEFUL') ? '#4245e6' : '#7678ED'
+                    }`}
                     textShadow="none"
-                    border="1px solid #7678ED"
+                    border={`${
+                        isBtnActive('NOTUSEFUL')
+                            ? '1px solid #dedffb'
+                            : '1px solid #7678ED'
+                    }`}
                     hoverTransform="none"
                     hoverShadow="none"
                     disableShadow={true}
-                    buttonIcon={<DislikeIconEmpty />}
+                    buttonIcon={
+                        <DislikeIconEmpty
+                            color={`${
+                                isBtnActive('NOTUSEFUL') ? '#4245e6' : '7678ed'
+                            }`}
+                        />
+                    }
                     padding=".5rem .7rem"
                     onClick={() => {
                         if (isUserLoggedIn) {
                             handleReviewVoteRequest('NOTUSEFUL');
                             console.log('vote should be dispatched');
+                        } else {
+                            return toggleAuthDrawerWithView(true, 'LOGIN');
                         }
-                        return toggleAuthDrawerWithView(true, 'LOGIN');
                     }}
                 />
                 <MobileFlagContainer>
