@@ -388,8 +388,16 @@ const ReviewComponent = ({
         switch (requestType) {
             case 'USEFUL':
                 //Check if no buttons are selected:
-                if (areNoButtonsSelected())
-                    return setIsUsefulButtonSelected(true);
+                if (areNoButtonsSelected()) {
+                    setIsUsefulButtonSelected(true);
+                    return Userfront.user.update({
+                        data: {
+                            reviewsVoted: {
+                                [reviewId]: 'USEFUL',
+                            },
+                        },
+                    });
+                }
 
                 //if this button has already been selected, deselect it.
                 if (isUsefulButtonSelected)
