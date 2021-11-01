@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { useContext } from 'react';
 
 //Components:
+import { AuthContext } from '../../App';
 import { deviceMin } from '../../../devices/breakpoints';
 import Rating from 'react-rating';
 import { Accordion, AccordionItem } from '@mantine/core';
@@ -13,6 +15,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import ExerciseCard from '../../add_review_page/add_review_page_components/ExerciseCard';
 import { Avatar } from '@mantine/core';
+import { isMobileOnly } from 'react-device-detect';
+import useLoginStatus from '../../../utils/hooks/useLoginStatus';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
@@ -172,14 +176,15 @@ const AuthorNameText = styled.h3`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 5rem;
+    max-width: 5rem;
+    margin-right: 0.25rem;
 
     @media ${deviceMin.mobileS} {
-        width: 10rem;
+        max-width: 10rem;
     }
 
     @media ${deviceMin.browsersmp} {
-        width: 15rem;
+        max-width: 15rem;
     }
 `;
 
@@ -189,6 +194,24 @@ const DetailsContainer = styled.div`
 
 const ReviewRTEContainer = styled.div`
     color: ${(props) => props.theme.mainText};
+
+    @media ${deviceMin.mobileS} {
+        margin-left: -3rem;
+        width: 16rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        width: 19rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        width: 22rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        margin-left: 0;
+        width: 100%;
+    }
 `;
 
 const ImprovementsContainer = styled.div`
@@ -199,6 +222,23 @@ const StatCardContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     column-gap: 1rem;
+`;
+
+const MobileStatContainer = styled.div`
+    display: block;
+
+    @media ${deviceMin.mobileS} {
+        margin-left: -2rem;
+        width: 14rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        width: 16rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        width: 16rem;
+    }
 `;
 
 const MobileFlagContainer = styled.div`
@@ -275,6 +315,9 @@ const ReviewComponent = ({
     reviewAuthorName,
     reviewAuthorImg,
 }: IComponentProps): JSX.Element => {
+    const { toggleAuthDrawerWithView } = useContext(AuthContext);
+    const isUserLoggedIn = useLoginStatus();
+
     const [isUsefulButtonSelected, setIsUsefulButtonSelected] = useState(false);
     const [isNotUsefulButtonSelected, setIsNotUsefulButtonSelected] =
         useState(false);
@@ -357,6 +400,20 @@ const ReviewComponent = ({
                         padding=".5rem .7rem"
                     />
                 </>
+            );
+        }
+    };
+
+    const renderStatCardsOnDevices = () => {
+        if (isMobileOnly) {
+            return (
+                <MobileStatContainer>
+                    {renderImprovedStats()}
+                </MobileStatContainer>
+            );
+        } else {
+            return (
+                <StatCardContainer>{renderImprovedStats()}</StatCardContainer>
             );
         }
     };
@@ -469,9 +526,7 @@ const ReviewComponent = ({
                     }}
                 >
                     <AccordionItem label={`Improved Stats`}>
-                        <StatCardContainer>
-                            {renderImprovedStats()}
-                        </StatCardContainer>
+                        {renderStatCardsOnDevices()}
                     </AccordionItem>
                     <AccordionItem label={`Author Review`}>
                         <ReviewRTEContainer>
@@ -498,6 +553,10 @@ const ReviewComponent = ({
                     disableShadow={true}
                     buttonIcon={<LikeIconEmpty />}
                     padding=".5rem .7rem"
+                    onClick={() => {
+                        if (isUserLoggedIn) return console.log('Vote dispatch');
+                        return toggleAuthDrawerWithView(true, 'LOGIN');
+                    }}
                 />
                 <GeneralButton
                     buttonLabel="Not Useful (0)"
@@ -512,6 +571,10 @@ const ReviewComponent = ({
                     disableShadow={true}
                     buttonIcon={<DislikeIconEmpty />}
                     padding=".5rem .7rem"
+                    onClick={() => {
+                        if (isUserLoggedIn) return console.log('Vote dispatch');
+                        return toggleAuthDrawerWithView(true, 'LOGIN');
+                    }}
                 />
                 <MobileFlagContainer>
                     <GeneralButton

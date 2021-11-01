@@ -48,3 +48,7 @@ export const addReview = (
         }
     };
 };
+
+export const voteReview = (voteType: string) => {
+    return async (dispatch: Dispatch<ReviewAction>) => {};
+};
