@@ -352,8 +352,11 @@ const ReviewComponent = ({
                 if (reviewsVoted[reviewId] === 'NOTUSEFUL')
                     setIsNotUsefulButtonSelected(true);
             }
+        } else {
+            setIsUsefulButtonSelected(false);
+            setIsNotUsefulButtonSelected(false);
         }
-    }, []);
+    }, [User]);
 
     //Destructures improved stats and renders out text for each stat:
     const renderImprovedStats = () => {
