@@ -24,14 +24,20 @@ export const userSignout = () => {
 
 export const voteReview = (reviewsVotedObject: any) => {
     return async (dispatch: Dispatch<AuthAction>) => {
-        console.log(reviewsVotedObject);
-        Userfront.user.update({
-            reviewsVoted: reviewsVotedObject,
-        });
-
-        dispatch({
-            type: AuthActionType.USER_UPDATE_VOTES,
-            payload: Userfront.user,
-        });
+        Userfront.user
+            .update({
+                data: {
+                    reviewsVoted: reviewsVotedObject,
+                },
+            })
+            .then((promise: any) => {
+                dispatch({
+                    type: AuthActionType.USER_UPDATE_VOTES,
+                    payload: promise,
+                });
+            })
+            .catch((err: any) => {
+                console.log(err);
+            });
     };
 };
