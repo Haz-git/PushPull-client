@@ -48,10 +48,12 @@ export const addReview = (
     };
 };
 
-export const updateReviewVotes = (reviewReqObj: any) => {
+export const updateReviewVotesInDb = (reviewReqObj: any) => {
     return async (dispatch: Dispatch<ReviewAction>) => {
         let response = await api.post(`/review/update_votes/`, {
-            reviewReqObj,
+            reviewRequest: reviewReqObj,
         });
+
+        console.log(response);
     };
 };
