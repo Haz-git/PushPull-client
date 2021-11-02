@@ -619,7 +619,7 @@ const ReviewComponent = ({
             </ImprovementsContainer>
             <ButtonsContainer>
                 <GeneralButton
-                    buttonLabel="Useful (0)"
+                    buttonLabel={`Useful (${usefulScore})`}
                     fontWeight="700"
                     width="10rem"
                     buttonBackground={`${
@@ -654,7 +654,7 @@ const ReviewComponent = ({
                     }}
                 />
                 <GeneralButton
-                    buttonLabel="Not Useful (0)"
+                    buttonLabel={`Not Useful (${notUsefulScore})`}
                     fontWeight="700"
                     width="10rem"
                     buttonBackground={`${
