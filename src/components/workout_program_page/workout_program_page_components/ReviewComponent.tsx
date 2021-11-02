@@ -424,6 +424,41 @@ const ReviewComponent = ({
 
                 //if passed above, then one of the two buttons are selected.
                 switchIfAlreadyVoted(requestType);
+                let Obj = updateReviewVotes(
+                    'UPDATE',
+                    'USEFUL',
+                    reviewId,
+                    currData
+                );
+                dispatch(voteReview(Obj));
+                break;
+            case 'NOTUSEFUL':
+                if (areNoButtonsSelected()) {
+                    setIsNotUsefulButtonSelected(true);
+                    let newObj = updateReviewVotes(
+                        'ADD',
+                        'NOTUSEFUL',
+                        reviewId,
+                        currData
+                    );
+                    dispatch(voteReview(newObj));
+
+                    break;
+                }
+
+                if (isNotUsefulButtonSelected) {
+                    setIsNotUsefulButtonSelected(false);
+                    let newObj = updateReviewVotes(
+                        'DELETE',
+                        'NOTUSEFUL',
+                        reviewId,
+                        currData
+                    );
+                    dispatch(voteReview(newObj));
+                    break;
+                }
+
+                switchIfAlreadyVoted(requestType);
                 let newObj = updateReviewVotes(
                     'UPDATE',
                     'NOTUSEFUL',
@@ -432,12 +467,6 @@ const ReviewComponent = ({
                 );
                 dispatch(voteReview(newObj));
                 break;
-            case 'NOTUSEFUL':
-                if (areNoButtonsSelected())
-                    return setIsNotUsefulButtonSelected(true);
-                if (isNotUsefulButtonSelected)
-                    return setIsNotUsefulButtonSelected(false);
-                return switchIfAlreadyVoted(requestType);
             default:
                 throw new Error('Vote request type not specified.');
         }
@@ -619,7 +648,6 @@ const ReviewComponent = ({
                     onClick={() => {
                         if (isUserLoggedIn) {
                             handleReviewVoteRequest('USEFUL');
-                            console.log('vote should be dispatched');
                         } else {
                             return toggleAuthDrawerWithView(true, 'LOGIN');
                         }
@@ -655,7 +683,6 @@ const ReviewComponent = ({
                     onClick={() => {
                         if (isUserLoggedIn) {
                             handleReviewVoteRequest('NOTUSEFUL');
-                            console.log('vote should be dispatched');
                         } else {
                             return toggleAuthDrawerWithView(true, 'LOGIN');
                         }
