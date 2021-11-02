@@ -341,7 +341,7 @@ const ReviewComponent = ({
     const [notUsefulValue, setNotUsefulValue] = useState(notUsefulScore);
 
     useEffect(() => {
-        if (User) {
+        if (User?.data?.reviewsVoted) {
             const {
                 data: { reviewsVoted },
             } = User;
@@ -428,8 +428,6 @@ const ReviewComponent = ({
                     dispatch(
                         updateReviewVotesInDb({
                             type: 'ADD_USEFUL_SCORE',
-                            currUsefulScore: usefulScore,
-                            currNotUsefulScore: notUsefulScore,
                             reviewId: reviewId,
                         })
                     );
@@ -451,8 +449,6 @@ const ReviewComponent = ({
                     dispatch(
                         updateReviewVotesInDb({
                             type: 'REMOVE_USEFUL_SCORE',
-                            currUsefulScore: usefulScore,
-                            currNotUsefulScore: notUsefulScore,
                             reviewId: reviewId,
                         })
                     );
@@ -473,8 +469,6 @@ const ReviewComponent = ({
                 dispatch(
                     updateReviewVotesInDb({
                         type: 'SWITCH_FROM_USEFUL_SCORE',
-                        currUsefulScore: usefulScore,
-                        currNotUsefulScore: notUsefulScore,
                         reviewId: reviewId,
                     })
                 );
@@ -493,8 +487,6 @@ const ReviewComponent = ({
                     dispatch(
                         updateReviewVotesInDb({
                             type: 'ADD_NOT_USEFUL_SCORE',
-                            currUsefulScore: usefulScore,
-                            currNotUsefulScore: notUsefulScore,
                             reviewId: reviewId,
                         })
                     );
@@ -515,8 +507,6 @@ const ReviewComponent = ({
                     dispatch(
                         updateReviewVotesInDb({
                             type: 'REMOVE_NOT_USEFUL_SCORE',
-                            currUsefulScore: usefulScore,
-                            currNotUsefulScore: notUsefulScore,
                             reviewId: reviewId,
                         })
                     );
@@ -536,8 +526,6 @@ const ReviewComponent = ({
                 dispatch(
                     updateReviewVotesInDb({
                         type: 'SWITCH_FROM_NOT_USEFUL_SCORE',
-                        currUsefulScore: usefulScore,
-                        currNotUsefulScore: notUsefulScore,
                         reviewId: reviewId,
                     })
                 );
