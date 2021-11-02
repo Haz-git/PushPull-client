@@ -47,3 +47,11 @@ export const addReview = (
         }
     };
 };
+
+export const updateReviewVotes = (reviewReqObj: any) => {
+    return async (dispatch: Dispatch<ReviewAction>) => {
+        let response = await api.post(`/review/update_votes/`, {
+            reviewReqObj,
+        });
+    };
+};
