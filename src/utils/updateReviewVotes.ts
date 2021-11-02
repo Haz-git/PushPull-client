@@ -2,7 +2,7 @@
     Helper util function, checks if key exists in current data hash table.
 */
 const isReviewIdInDataTable = (reviewId: string, currData: any) => {
-    return reviewId in currData;
+    if (currData) return reviewId in currData;
 };
 
 /*
@@ -34,7 +34,6 @@ const updateReviewVotes = (
         case 'DELETE':
             if (isReviewIdInDataTable(reviewId, currData)) {
                 let updatedObj = { ...currData };
-                console.log(updatedObj);
                 delete updatedObj[reviewId];
                 return updatedObj;
             }
