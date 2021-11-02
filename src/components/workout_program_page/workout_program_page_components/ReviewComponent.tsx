@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Userfront from '@userfront/react';
 
 //Components:
@@ -20,6 +20,7 @@ import { isMobileOnly } from 'react-device-detect';
 //Redux:
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { voteReview } from '../../../redux/auth/authActions';
+import { updateReviewVotesInDb } from '../../../redux/reviews/reviewActions';
 
 //Utils:
 import capitalize from '../../../utils/capitalize';
@@ -336,6 +337,24 @@ const ReviewComponent = ({
     const [isNotUsefulButtonSelected, setIsNotUsefulButtonSelected] =
         useState(false);
 
+    const [usefulValue, setUsefulValue] = useState(usefulScore);
+    const [notUsefulValue, setNotUsefulValue] = useState(notUsefulScore);
+
+    useEffect(() => {
+        if (User) {
+            const {
+                data: { reviewsVoted },
+            } = User;
+
+            if (reviewsVoted && reviewId in reviewsVoted) {
+                if (reviewsVoted[reviewId] === 'USEFUL')
+                    setIsUsefulButtonSelected(true);
+                if (reviewsVoted[reviewId] === 'NOTUSEFUL')
+                    setIsNotUsefulButtonSelected(true);
+            }
+        }
+    }, []);
+
     //Destructures improved stats and renders out text for each stat:
     const renderImprovedStats = () => {
         if (Object.keys(improvedStats).length > 0) {
@@ -398,6 +417,7 @@ const ReviewComponent = ({
                 //Check if no buttons are selected:
                 if (areNoButtonsSelected()) {
                     setIsUsefulButtonSelected(true);
+                    setUsefulValue(usefulValue + 1);
                     let newObj = updateReviewVotes(
                         'ADD',
                         'USEFUL',
@@ -405,6 +425,14 @@ const ReviewComponent = ({
                         currData
                     );
                     dispatch(voteReview(newObj));
+                    dispatch(
+                        updateReviewVotesInDb({
+                            type: 'ADD_USEFUL_SCORE',
+                            currUsefulScore: usefulScore,
+                            currNotUsefulScore: notUsefulScore,
+                            reviewId: reviewId,
+                        })
+                    );
 
                     break;
                 }
@@ -412,6 +440,7 @@ const ReviewComponent = ({
                 //if this button has already been selected, deselect it.
                 if (isUsefulButtonSelected) {
                     setIsUsefulButtonSelected(false);
+                    setUsefulValue(usefulValue - 1);
                     let newObj = updateReviewVotes(
                         'DELETE',
                         'USEFUL',
@@ -419,11 +448,21 @@ const ReviewComponent = ({
                         currData
                     );
                     dispatch(voteReview(newObj));
+                    dispatch(
+                        updateReviewVotesInDb({
+                            type: 'REMOVE_USEFUL_SCORE',
+                            currUsefulScore: usefulScore,
+                            currNotUsefulScore: notUsefulScore,
+                            reviewId: reviewId,
+                        })
+                    );
                     break;
                 }
 
                 //if passed above, then one of the two buttons are selected.
                 switchIfAlreadyVoted(requestType);
+                setUsefulValue(usefulValue + 1);
+                setNotUsefulValue(notUsefulValue - 1);
                 let Obj = updateReviewVotes(
                     'UPDATE',
                     'USEFUL',
@@ -431,10 +470,19 @@ const ReviewComponent = ({
                     currData
                 );
                 dispatch(voteReview(Obj));
+                dispatch(
+                    updateReviewVotesInDb({
+                        type: 'SWITCH_FROM_USEFUL_SCORE',
+                        currUsefulScore: usefulScore,
+                        currNotUsefulScore: notUsefulScore,
+                        reviewId: reviewId,
+                    })
+                );
                 break;
             case 'NOTUSEFUL':
                 if (areNoButtonsSelected()) {
                     setIsNotUsefulButtonSelected(true);
+                    setNotUsefulValue(notUsefulValue + 1);
                     let newObj = updateReviewVotes(
                         'ADD',
                         'NOTUSEFUL',
@@ -442,12 +490,21 @@ const ReviewComponent = ({
                         currData
                     );
                     dispatch(voteReview(newObj));
+                    dispatch(
+                        updateReviewVotesInDb({
+                            type: 'ADD_NOT_USEFUL_SCORE',
+                            currUsefulScore: usefulScore,
+                            currNotUsefulScore: notUsefulScore,
+                            reviewId: reviewId,
+                        })
+                    );
 
                     break;
                 }
 
                 if (isNotUsefulButtonSelected) {
                     setIsNotUsefulButtonSelected(false);
+                    setNotUsefulValue(notUsefulValue - 1);
                     let newObj = updateReviewVotes(
                         'DELETE',
                         'NOTUSEFUL',
@@ -455,10 +512,20 @@ const ReviewComponent = ({
                         currData
                     );
                     dispatch(voteReview(newObj));
+                    dispatch(
+                        updateReviewVotesInDb({
+                            type: 'REMOVE_NOT_USEFUL_SCORE',
+                            currUsefulScore: usefulScore,
+                            currNotUsefulScore: notUsefulScore,
+                            reviewId: reviewId,
+                        })
+                    );
                     break;
                 }
 
                 switchIfAlreadyVoted(requestType);
+                setNotUsefulValue(notUsefulValue + 1);
+                setUsefulValue(usefulValue - 1);
                 let newObj = updateReviewVotes(
                     'UPDATE',
                     'NOTUSEFUL',
@@ -466,6 +533,14 @@ const ReviewComponent = ({
                     currData
                 );
                 dispatch(voteReview(newObj));
+                dispatch(
+                    updateReviewVotesInDb({
+                        type: 'SWITCH_FROM_NOT_USEFUL_SCORE',
+                        currUsefulScore: usefulScore,
+                        currNotUsefulScore: notUsefulScore,
+                        reviewId: reviewId,
+                    })
+                );
                 break;
             default:
                 throw new Error('Vote request type not specified.');
@@ -619,7 +694,7 @@ const ReviewComponent = ({
             </ImprovementsContainer>
             <ButtonsContainer>
                 <GeneralButton
-                    buttonLabel="Useful (0)"
+                    buttonLabel={`Useful (${usefulValue})`}
                     fontWeight="700"
                     width="10rem"
                     buttonBackground={`${
@@ -654,7 +729,7 @@ const ReviewComponent = ({
                     }}
                 />
                 <GeneralButton
-                    buttonLabel="Not Useful (0)"
+                    buttonLabel={`Not Useful (${notUsefulValue})`}
                     fontWeight="700"
                     width="10rem"
                     buttonBackground={`${
