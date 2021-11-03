@@ -65,7 +65,10 @@ const MainWorkoutProgramPage = ({
     //Handles loaders for loading in reviews and workoutprogram stats:
     const [isWorkoutProgramLoaded, setIsWorkoutProgramLoaded] = useState(false);
     const [areReviewsLoaded, setAreReviewsLoaded] = useState(false);
+    const [areReviewsSorted, setAreReviewsSorted] = useState(false);
 
+    const handleReviewsSortedStatus = (status: boolean) =>
+        setAreReviewsSorted(status);
     const handleReviewsLoadedStatus = (status: boolean) =>
         setAreReviewsLoaded(status);
     const handleWorkoutProgramLoadedStatus = (status: boolean) =>
@@ -73,7 +76,9 @@ const MainWorkoutProgramPage = ({
 
     //Retrieves reviews based on sort:
     const [reviewSort, setReviewSort] = useState('updatedAt');
-    const handleReviewSort = (sort: string) => setReviewSort(sort);
+    const handleReviewSort = (sort: string) => {
+        setReviewSort(sort);
+    };
 
     //Handles report drawer for workoutprogram:
     const [stateReportDrawer, setStateReportDrawer] = useState(false);
@@ -83,7 +88,6 @@ const MainWorkoutProgramPage = ({
     //Handles report drawer for reviews:
     const [stateReviewReportDrawer, setStateReviewReportDrawer] =
         useState(false);
-    const [currentReviewId, setCurrentReviewId] = useState('');
     const openReviewReportDrawer = () => setStateReviewReportDrawer(true);
     const closeReviewReportDrawer = () => setStateReviewReportDrawer(false);
 
@@ -91,6 +95,12 @@ const MainWorkoutProgramPage = ({
         dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
         dispatch(getReviews(handleReviewsLoadedStatus, id, 1, reviewSort));
     }, []);
+
+    useEffect(() => {
+        dispatch(getReviews(handleReviewsSortedStatus, id, 1, reviewSort));
+    }, [reviewSort]);
+
+    console.log('component reloaded', areReviewsSorted);
 
     //Selector Hook:
     const { workoutPrograms } = useSelector(
@@ -170,6 +180,10 @@ const MainWorkoutProgramPage = ({
                             openReviewReportDrawer={openReviewReportDrawer}
                             handleReviewSort={handleReviewSort}
                             currReviewSort={reviewSort}
+                            handleReviewsSortedStatus={
+                                handleReviewsSortedStatus
+                            }
+                            areReviewsSorted={areReviewsSorted}
                         />
                     </>
                 ) : (
