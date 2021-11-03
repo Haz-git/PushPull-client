@@ -53,7 +53,5 @@ export const updateReviewVotesInDb = (reviewReqObj: any) => {
         let response = await api.post(`/review/update_votes/`, {
             reviewRequest: reviewReqObj,
         });
-
-        console.log(response);
     };
 };
