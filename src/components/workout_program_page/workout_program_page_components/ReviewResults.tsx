@@ -14,6 +14,7 @@ import { Accordion, AccordionItem } from '@mantine/core';
 import ReviewComponent from './ReviewComponent';
 import { ReactComponent as SurveySVG } from '../../../assets/survey_review.svg';
 import { StatOptionButton } from '../../search_page/search_page_components/SortByWheel';
+import ReviewResultsSkeletonLoader from './ReviewResultsSkeletonLoader';
 
 //Styles:
 import styled from 'styled-components';
@@ -48,6 +49,11 @@ const ProgramReviewsContainer = styled.div`
 `;
 
 const ProgramReviewsHeaderContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        display: block;
+        text-align: left;
+    }
+
     @media ${deviceMin.tablet} {
         display: flex;
         align-items: center;
@@ -56,11 +62,20 @@ const ProgramReviewsHeaderContainer = styled.div`
 `;
 
 const SortOptionsContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 0rem;
-    padding: 0rem 1rem;
+    @media ${deviceMin.mobileS} {
+        display: block;
+        text-align: left;
+        margin-top: 1rem;
+    }
+
+    @media ${deviceMin.tablet} {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 0rem;
+        padding: 0rem 1rem;
+        margin-top: 0rem;
+    }
 `;
 
 const ReviewCountLabel = styled.h2`
@@ -129,6 +144,8 @@ interface IComponentProps {
     openReviewReportDrawer: () => void;
     handleReviewSort: (sort: string) => void;
     currReviewSort: string;
+    handleReviewsSortedStatus: (status: boolean) => void;
+    areReviewsSorted: boolean;
 }
 
 const ReviewResults = ({
@@ -138,6 +155,8 @@ const ReviewResults = ({
     openReviewReportDrawer,
     handleReviewSort,
     currReviewSort,
+    handleReviewsSortedStatus,
+    areReviewsSorted,
 }: IComponentProps): JSX.Element => {
     //useWindowDimensions Hook:
     const { height } = useWindowDimensions();
@@ -145,11 +164,11 @@ const ReviewResults = ({
     //Selector Hook:
 
     const { currentPage, totalPages, totalItems } = useSelector(
-        (state: RootStateOrAny) => state.reviews.reviews
+        (state: RootStateOrAny) => state?.reviews?.reviews
     );
 
     const { reviews } = useSelector(
-        (state: RootStateOrAny) => state.reviews.reviews
+        (state: RootStateOrAny) => state?.reviews?.reviews
     );
 
     const checkSortOptionActive = (option: string) => {
@@ -234,20 +253,30 @@ const ReviewResults = ({
                     <SortOptionsContainer>
                         <StatOptionButton
                             isActive={checkSortOptionActive('updatedAt')}
-                            onClick={() => handleReviewSort('updatedAt')}
+                            onClick={() => {
+                                handleReviewsSortedStatus(false);
+                                handleReviewSort('updatedAt');
+                            }}
                         >
                             Newest
                         </StatOptionButton>
                         <StatOptionButton
                             isActive={checkSortOptionActive('usefulScore')}
-                            onClick={() => handleReviewSort('usefulScore')}
+                            onClick={() => {
+                                handleReviewsSortedStatus(false);
+                                handleReviewSort('usefulScore');
+                            }}
                         >
                             Most Useful
                         </StatOptionButton>
                     </SortOptionsContainer>
                 </ProgramReviewsHeaderContainer>
                 <ReviewContainer containerHeight={height}>
-                    {renderReviews()}
+                    {areReviewsSorted === true ? (
+                        <>{renderReviews()}</>
+                    ) : (
+                        <ReviewResultsSkeletonLoader />
+                    )}
                 </ReviewContainer>
             </ProgramReviewsContainer>
         </MainContainer>
