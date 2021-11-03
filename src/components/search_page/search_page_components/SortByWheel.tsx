@@ -44,7 +44,7 @@ const OptionsContainer = styled.div`
     }
 `;
 
-const StatOptionButton = styled.button<StyledProps>`
+export const StatOptionButton = styled.button<StyledProps>`
     margin: 0 0.25rem;
     background: #ffffff;
     color: ${(props) => props.theme.mainText};

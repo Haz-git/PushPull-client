@@ -71,7 +71,7 @@ const RightDrawerContainer = styled.div`
     margin-bottom: 2rem;
 `;
 
-const RightResultsContainer = styled.div`
+export const RightResultsContainer = styled.div`
     padding: 0rem 1.5rem;
 `;
 
