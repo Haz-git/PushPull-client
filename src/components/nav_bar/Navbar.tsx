@@ -59,8 +59,18 @@ const LogoContainer = styled.div`
         width: 10rem;
     }
 
+    @media ${deviceMin.mobileM} {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        height: 2.5rem;
+        width: 10rem;
+    }
+
     @media ${deviceMin.browserSm} {
-        height: 2rem;
+        height: 2.5rem;
         width: 10rem;
     }
 `;
