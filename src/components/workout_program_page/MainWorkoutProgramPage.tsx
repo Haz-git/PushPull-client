@@ -100,8 +100,6 @@ const MainWorkoutProgramPage = ({
         dispatch(getReviews(handleReviewsSortedStatus, id, 1, reviewSort));
     }, [reviewSort]);
 
-    console.log('component reloaded', areReviewsSorted);
-
     //Selector Hook:
     const { workoutPrograms } = useSelector(
         (state: RootStateOrAny) => state.workoutPrograms
