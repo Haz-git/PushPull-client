@@ -13,6 +13,7 @@ import { deviceMin } from '../../../devices/breakpoints';
 import { Accordion, AccordionItem } from '@mantine/core';
 import ReviewComponent from './ReviewComponent';
 import { ReactComponent as SurveySVG } from '../../../assets/survey_review.svg';
+import { StatOptionButton } from '../../search_page/search_page_components/SortByWheel';
 
 //Styles:
 import styled from 'styled-components';
@@ -44,6 +45,22 @@ const ProgramDescAccContainer = styled.div`
 
 const ProgramReviewsContainer = styled.div`
     margin-top: 2rem;
+`;
+
+const ProgramReviewsHeaderContainer = styled.div`
+    @media ${deviceMin.tablet} {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+`;
+
+const SortOptionsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0rem;
+    padding: 0rem 1rem;
 `;
 
 const ReviewCountLabel = styled.h2`
@@ -110,6 +127,8 @@ interface IComponentProps {
     programDesc: string;
     programId: string;
     openReviewReportDrawer: () => void;
+    handleReviewSort: (sort: string) => void;
+    currReviewSort: string;
 }
 
 const ReviewResults = ({
@@ -117,6 +136,8 @@ const ReviewResults = ({
     programDesc,
     programId,
     openReviewReportDrawer,
+    handleReviewSort,
+    currReviewSort,
 }: IComponentProps): JSX.Element => {
     //useWindowDimensions Hook:
     const { height } = useWindowDimensions();
@@ -130,6 +151,11 @@ const ReviewResults = ({
     const { reviews } = useSelector(
         (state: RootStateOrAny) => state.reviews.reviews
     );
+
+    const checkSortOptionActive = (option: string) => {
+        if (option === currReviewSort) return true;
+        return false;
+    };
 
     // Mapping Review Components:
     const renderReviews = () => {
@@ -203,7 +229,23 @@ const ReviewResults = ({
                 </ProgramDescAccContainer>
             </ProgramHeaderContainer>
             <ProgramReviewsContainer>
-                <ReviewCountLabel>{`${totalItems} Total Review(s)`}</ReviewCountLabel>
+                <ProgramReviewsHeaderContainer>
+                    <ReviewCountLabel>{`${totalItems} Total Review(s)`}</ReviewCountLabel>
+                    <SortOptionsContainer>
+                        <StatOptionButton
+                            isActive={checkSortOptionActive('updatedAt')}
+                            onClick={() => handleReviewSort('updatedAt')}
+                        >
+                            Newest
+                        </StatOptionButton>
+                        <StatOptionButton
+                            isActive={checkSortOptionActive('usefulScore')}
+                            onClick={() => handleReviewSort('usefulScore')}
+                        >
+                            Most Useful
+                        </StatOptionButton>
+                    </SortOptionsContainer>
+                </ProgramReviewsHeaderContainer>
                 <ReviewContainer containerHeight={height}>
                     {renderReviews()}
                 </ReviewContainer>
