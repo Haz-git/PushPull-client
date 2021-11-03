@@ -71,6 +71,10 @@ const MainWorkoutProgramPage = ({
     const handleWorkoutProgramLoadedStatus = (status: boolean) =>
         setIsWorkoutProgramLoaded(status);
 
+    //Retrieves reviews based on sort:
+    const [reviewSort, setReviewSort] = useState('updatedAt');
+    const handleReviewSort = (sort: string) => setReviewSort(sort);
+
     //Handles report drawer for workoutprogram:
     const [stateReportDrawer, setStateReportDrawer] = useState(false);
     const openReportDrawer = () => setStateReportDrawer(true);
@@ -85,7 +89,7 @@ const MainWorkoutProgramPage = ({
 
     useEffect(() => {
         dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
-        dispatch(getReviews(handleReviewsLoadedStatus, id, 1));
+        dispatch(getReviews(handleReviewsLoadedStatus, id, 1, reviewSort));
     }, []);
 
     //Selector Hook:
@@ -164,6 +168,8 @@ const MainWorkoutProgramPage = ({
                             programDesc={workoutPrograms.workoutProgramDesc}
                             programId={id}
                             openReviewReportDrawer={openReviewReportDrawer}
+                            handleReviewSort={handleReviewSort}
+                            currReviewSort={reviewSort}
                         />
                     </>
                 ) : (
