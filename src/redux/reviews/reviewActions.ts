@@ -7,10 +7,13 @@ import { useNotifications } from '@mantine/notifications';
 export const getReviews = (
     statusCallback: (status: boolean) => void,
     workoutProgramId: string,
-    page: number
+    page: number,
+    sort: string
 ) => {
     return async (dispatch: Dispatch<ReviewAction>) => {
-        let response = await api.get(`/reviews/all/${workoutProgramId}`);
+        let response = await api.get(
+            `/reviews/all/${workoutProgramId}/?sort=${sort}`
+        );
 
         const { count: totalItems } = response.data.reviews;
         const currentPage = page ? +page : 0;
