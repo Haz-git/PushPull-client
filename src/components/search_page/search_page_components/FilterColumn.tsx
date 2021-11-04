@@ -428,16 +428,6 @@ const FilterColumn = ({
                                     )}
                                     onClick={handleUserFilterChoiceSelection}
                                 />
-                                <ButtonDivider />
-                                <FilterChoice
-                                    name="category:aerobics"
-                                    choiceLabel="Aerobics"
-                                    isActive={setActiveStateForFilterChoice(
-                                        'category',
-                                        'aerobics'
-                                    )}
-                                    onClick={handleUserFilterChoiceSelection}
-                                />
                             </ButtonsContainer>
                         </MainContainer>
                     );
