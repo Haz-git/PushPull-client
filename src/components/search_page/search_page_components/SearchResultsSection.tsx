@@ -312,11 +312,7 @@ const SearchResultsSection = ({
                 </SearchResultsText>
             );
         } else if (totalItems === 0 && totalPages === 0) {
-            return (
-                <SearchResultsText>
-                    {`${totalItems} Search Results for '${currSearchTerm}'`}
-                </SearchResultsText>
-            );
+            return <SearchResultsText>{`No Results Found`}</SearchResultsText>;
         }
     };
 
