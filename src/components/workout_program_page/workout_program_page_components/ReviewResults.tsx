@@ -7,6 +7,7 @@ import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 //Redux:
 import { getReviews } from '../../../redux/reviews/reviewActions';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { updateReviewSortOption } from '../../../redux/sortOptions/sortOptionsActions';
 
 //Components:
 import { deviceMin } from '../../../devices/breakpoints';
@@ -15,9 +16,11 @@ import ReviewComponent from './ReviewComponent';
 import { ReactComponent as SurveySVG } from '../../../assets/survey_review.svg';
 import { StatOptionButton } from '../../search_page/search_page_components/SortByWheel';
 import ReviewResultsSkeletonLoader from './ReviewResultsSkeletonLoader';
+import { Pagination } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
+import { PaginationButtonContainer } from '../../search_page/search_page_components/SearchResultsSection';
 
 const MainContainer = styled.div`
     padding: 2rem 2rem;
@@ -142,8 +145,6 @@ interface IComponentProps {
     programDesc: string;
     programId: string;
     openReviewReportDrawer: () => void;
-    handleReviewSort: (sort: string) => void;
-    currReviewSort: string;
     handleReviewsSortedStatus: (status: boolean) => void;
     areReviewsSorted: boolean;
 }
@@ -153,13 +154,14 @@ const ReviewResults = ({
     programDesc,
     programId,
     openReviewReportDrawer,
-    handleReviewSort,
-    currReviewSort,
     handleReviewsSortedStatus,
     areReviewsSorted,
 }: IComponentProps): JSX.Element => {
     //useWindowDimensions Hook:
     const { height } = useWindowDimensions();
+
+    //Dispatch hook:
+    const dispatch = useDispatch();
 
     //Selector Hook:
 
@@ -171,9 +173,50 @@ const ReviewResults = ({
         (state: RootStateOrAny) => state?.reviews?.reviews
     );
 
+    const { reviewSort } = useSelector(
+        (state: RootStateOrAny) => state?.sortOptions
+    );
+
     const checkSortOptionActive = (option: string) => {
-        if (option === currReviewSort) return true;
+        if (option === reviewSort) return true;
         return false;
+    };
+
+    //Render pagination buttons:
+
+    const renderMantinePagination = () => {
+        if (
+            totalItems &&
+            currentPage &&
+            totalPages &&
+            reviews !== undefined &&
+            reviews.length !== 0
+        ) {
+            return (
+                <Pagination
+                    page={currentPage}
+                    total={totalPages}
+                    onChange={(page) => handlePaginationRequest(page)}
+                    styles={{
+                        item: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontWeight: 700,
+                        },
+                        active: {
+                            backgroundColor: '#e07133',
+                            color: '#ffffff',
+                        },
+                    }}
+                />
+            );
+        }
+    };
+
+    console.log('This is reviewSort prop: ', reviewSort);
+
+    const handlePaginationRequest = (page: number) => {
+        handleReviewsSortedStatus(false);
+        dispatch(getReviews(handleReviewsSortedStatus, programId, page));
     };
 
     // Mapping Review Components:
@@ -255,7 +298,14 @@ const ReviewResults = ({
                             isActive={checkSortOptionActive('updatedAt')}
                             onClick={() => {
                                 handleReviewsSortedStatus(false);
-                                handleReviewSort('updatedAt');
+                                dispatch(
+                                    updateReviewSortOption(
+                                        handleReviewsSortedStatus,
+                                        programId,
+                                        currentPage,
+                                        'updatedAt'
+                                    )
+                                );
                             }}
                         >
                             Newest
@@ -264,7 +314,14 @@ const ReviewResults = ({
                             isActive={checkSortOptionActive('usefulScore')}
                             onClick={() => {
                                 handleReviewsSortedStatus(false);
-                                handleReviewSort('usefulScore');
+                                dispatch(
+                                    updateReviewSortOption(
+                                        handleReviewsSortedStatus,
+                                        programId,
+                                        currentPage,
+                                        'usefulScore'
+                                    )
+                                );
                             }}
                         >
                             Most Useful
@@ -277,6 +334,9 @@ const ReviewResults = ({
                     ) : (
                         <ReviewResultsSkeletonLoader />
                     )}
+                    <PaginationButtonContainer>
+                        {renderMantinePagination()}
+                    </PaginationButtonContainer>
                 </ReviewContainer>
             </ProgramReviewsContainer>
         </MainContainer>

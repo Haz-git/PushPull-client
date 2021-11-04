@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { findWorkoutProgram } from '../../redux/workoutPrograms/workoutProgramActions';
 import { getReviews } from '../../redux/reviews/reviewActions';
+import { updateReviewSortOption } from '../../redux/sortOptions/sortOptionsActions';
 
 //Components:
 import { BrowserView, MobileOnlyView } from 'react-device-detect';
@@ -62,10 +63,21 @@ const MainWorkoutProgramPage = ({
     //Dispatch Hook:
     const dispatch = useDispatch();
 
+    //Selector Hook:
+    const { workoutPrograms } = useSelector(
+        (state: RootStateOrAny) => state.workoutPrograms
+    );
+
+    const { reviewSort } = useSelector(
+        (state: RootStateOrAny) => state?.sortOptions
+    );
+
     //Handles loaders for loading in reviews and workoutprogram stats:
     const [isWorkoutProgramLoaded, setIsWorkoutProgramLoaded] = useState(false);
     const [areReviewsLoaded, setAreReviewsLoaded] = useState(false);
-    const [areReviewsSorted, setAreReviewsSorted] = useState(false);
+
+    //Controls loading for reviews only. Set to true because default = sorted already.
+    const [areReviewsSorted, setAreReviewsSorted] = useState(true);
 
     const handleReviewsSortedStatus = (status: boolean) =>
         setAreReviewsSorted(status);
@@ -73,12 +85,6 @@ const MainWorkoutProgramPage = ({
         setAreReviewsLoaded(status);
     const handleWorkoutProgramLoadedStatus = (status: boolean) =>
         setIsWorkoutProgramLoaded(status);
-
-    //Retrieves reviews based on sort:
-    const [reviewSort, setReviewSort] = useState('updatedAt');
-    const handleReviewSort = (sort: string) => {
-        setReviewSort(sort);
-    };
 
     //Handles report drawer for workoutprogram:
     const [stateReportDrawer, setStateReportDrawer] = useState(false);
@@ -93,17 +99,8 @@ const MainWorkoutProgramPage = ({
 
     useEffect(() => {
         dispatch(findWorkoutProgram(id, handleWorkoutProgramLoadedStatus));
-        dispatch(getReviews(handleReviewsLoadedStatus, id, 1, reviewSort));
+        dispatch(getReviews(handleReviewsLoadedStatus, id, 1));
     }, []);
-
-    useEffect(() => {
-        dispatch(getReviews(handleReviewsSortedStatus, id, 1, reviewSort));
-    }, [reviewSort]);
-
-    //Selector Hook:
-    const { workoutPrograms } = useSelector(
-        (state: RootStateOrAny) => state.workoutPrograms
-    );
 
     return (
         <>
@@ -176,8 +173,6 @@ const MainWorkoutProgramPage = ({
                             programDesc={workoutPrograms.workoutProgramDesc}
                             programId={id}
                             openReviewReportDrawer={openReviewReportDrawer}
-                            handleReviewSort={handleReviewSort}
-                            currReviewSort={reviewSort}
                             handleReviewsSortedStatus={
                                 handleReviewsSortedStatus
                             }

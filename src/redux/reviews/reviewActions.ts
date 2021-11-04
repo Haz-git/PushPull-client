@@ -4,15 +4,30 @@ import { ReviewAction } from './reviewInterfaces';
 import { ReviewActionType } from './action-types';
 import { useNotifications } from '@mantine/notifications';
 
+interface SortState {
+    sortOptions: {
+        workoutProgramSort: string;
+        reviewSort: string;
+    };
+}
+
 export const getReviews = (
     statusCallback: (status: boolean) => void,
     workoutProgramId: string,
-    page: number,
-    sort: string
+    page: number
 ) => {
-    return async (dispatch: Dispatch<ReviewAction>) => {
+    return async (
+        dispatch: Dispatch<ReviewAction>,
+        getState: () => SortState
+    ) => {
+        const {
+            sortOptions: { reviewSort },
+        } = getState();
+
         let response = await api.get(
-            `/reviews/all/${workoutProgramId}/?sort=${sort}`
+            `/reviews/all/${workoutProgramId}/?sort=${reviewSort}&page=${
+                page - 1
+            }`
         );
 
         const { count: totalItems } = response.data.reviews;

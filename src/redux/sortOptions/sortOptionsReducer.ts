@@ -3,7 +3,7 @@ import { SortOptionAction } from './sortOptionsInterface';
 
 const initialState = {
     workoutProgramSort: 'alphabetical',
-    reviewSort: 'newest',
+    reviewSort: 'updatedAt',
 };
 
 const sortOptionReducer = (
