@@ -139,7 +139,7 @@ const MobilePillContainer = styled.div`
     }
 `;
 
-const PaginationButtonContainer = styled.div`
+export const PaginationButtonContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -278,7 +278,10 @@ const SearchResultsSection = ({
                     total={totalPages}
                     onChange={(page) => handlePaginationRequest(page)}
                     styles={{
-                        item: { color: 'rgba(0, 0, 34, 1)', fontWeight: '700' },
+                        item: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontWeight: 700,
+                        },
                         active: {
                             backgroundColor: '#e07133',
                             color: '#ffffff',
