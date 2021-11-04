@@ -212,8 +212,6 @@ const ReviewResults = ({
         }
     };
 
-    console.log('This is reviewSort prop: ', reviewSort);
-
     const handlePaginationRequest = (page: number) => {
         handleReviewsSortedStatus(false);
         dispatch(getReviews(handleReviewsSortedStatus, programId, page));
