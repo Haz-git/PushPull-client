@@ -27,6 +27,7 @@ import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 import GeneralModal from './general_components/GeneralModal';
 import FeedbackForm from './general_components/FeedbackForm';
 import PasswordResetForm from './auth_forms/PasswordResetForm';
+import ProfilePageView from './profile_page/ProfilePageView';
 import NotFound from './not_found_page/NotFound';
 
 //Signup Drawer
@@ -126,6 +127,11 @@ const App = () => {
                                         />
                                     </AuthContext.Provider>
                                 )}
+                            />
+                            <Route
+                                exact
+                                path="/user/:id"
+                                component={ProfilePageView}
                             />
                             <PrivateRoute
                                 exact
