@@ -11,6 +11,7 @@ import searchTermReducer from './searchTerms/searchTermsReducer';
 import sortOptionReducer from './sortOptions/sortOptionsReducer';
 import reviewReducer from './reviews/reviewReducer';
 import authReducer from './auth/authReducer';
+import profileReducer from './profile/profileReducer';
 
 //Persistence:
 const persistConfig = {
@@ -31,6 +32,7 @@ const appReducer = combineReducers({
     searchTerms: searchTermReducer,
     sortOptions: sortOptionReducer,
     reviews: reviewReducer,
+    profile: profileReducer,
 });
 
 //Persisting formReducer:

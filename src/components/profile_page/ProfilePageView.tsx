@@ -4,6 +4,7 @@ import { deviceMin } from '../../devices/breakpoints';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { findUserProfile } from '../../redux/profile/profileActions';
 
 //Components:
 import useLoginStatus from '../../utils/hooks/useLoginStatus';
@@ -83,10 +84,18 @@ const ProfilePageView = ({
         params: { id },
     },
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
     const isUserLoggedIn = useLoginStatus();
     const User = useSelector((state: RootStateOrAny) => state?.user?.user);
 
+    const fakeStatus = (status: boolean) => console.log(status);
+
+    useEffect(() => {
+        dispatch(findUserProfile(fakeStatus, id));
+    }, []);
+
     const isUserOwnProfile = () => {
+        //Determines if this is the user's own profile and if he/she's logged in. If this is true, we can omit the request to grab user profile, and use User state.
         if (isUserLoggedIn && User && User.username === id) return true;
         return false;
     };
