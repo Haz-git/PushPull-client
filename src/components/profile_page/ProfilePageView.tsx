@@ -14,9 +14,32 @@ import ActivityPanel from './profile_page_components/ActivityPanel';
 import styled from 'styled-components';
 
 const PrimaryWrapper = styled.div`
-    padding-left: 20%;
-    padding-right: 20%;
-    margin: 0 auto;
+    @media ${deviceMin.mobileS} {
+    }
+
+    @media ${deviceMin.tabletp} {
+        padding-left: 5%;
+        padding-right: 5%;
+        margin: 0 auto;
+    }
+
+    @media ${deviceMin.laptop} {
+        padding-left: 10%;
+        padding-right: 10%;
+        margin: 0 auto;
+    }
+
+    @media ${deviceMin.laptopL} {
+        padding-left: 15%;
+        padding-right: 15%;
+        margin: 0 auto;
+    }
+
+    @media ${deviceMin.desktopS} {
+        padding-left: 20%;
+        padding-right: 20%;
+        margin: 0 auto;
+    }
 `;
 
 const MainContainer = styled.section`
