@@ -8,24 +8,7 @@ export const findUserProfile = (
     userName: string
 ) => {
     return async (dispatch: Dispatch<ProfileAction>) => {
-        let response = await api.post(`/v0/users/find`, {
-            filters: {
-                conjunction: 'and',
-                filterGroups: [
-                    {
-                        conjunction: 'and',
-                        filters: [
-                            {
-                                attr: 'username',
-                                type: 'string',
-                                comparison: 'contains',
-                                value: `${userName}`,
-                            },
-                        ],
-                    },
-                ],
-            },
-        });
+        let response = await api.get(`/user/${userName}`);
 
         console.log(response);
     };
