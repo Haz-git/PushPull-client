@@ -88,6 +88,7 @@ const ProfilePageView = ({
     console.log(User);
 
     const isUserOwnProfile = () => {
+        //Determines if this is the user's own profile and if he/she's logged in. If this is true, we can omit the request to grab user profile, and use User state.
         if (isUserLoggedIn && User && User.username === id) return true;
         return false;
     };
