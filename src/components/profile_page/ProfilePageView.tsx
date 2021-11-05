@@ -85,6 +85,7 @@ const ProfilePageView = ({
 }: IComponentProps): JSX.Element => {
     const isUserLoggedIn = useLoginStatus();
     const User = useSelector((state: RootStateOrAny) => state?.user?.user);
+    console.log(User);
 
     const isUserOwnProfile = () => {
         if (isUserLoggedIn && User && User.username === id) return true;
