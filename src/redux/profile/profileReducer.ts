@@ -9,11 +9,11 @@ const profileReducer = (
 ) => {
     switch (action.type) {
         case ProfileActionType.USER_FIND_PROFILE:
-            return { ...state, profile: action.payload };
+            return { ...state, ...action.payload };
         case ProfileActionType.USER_UPDATE_PROFILE:
-            return { ...state, profile: action.payload };
+            return { ...state, ...action.payload };
         case ProfileActionType.USER_DELETE_PROFILE:
-            return { ...state, profile: action.payload };
+            return { ...state, ...action.payload };
 
         default:
             return state;
