@@ -1,4 +1,4 @@
-import userfrontApi from '../../api/userfrontApi';
+import api from '../../api';
 import { Dispatch } from 'redux';
 import { ProfileAction } from './profileInterfaces';
 import { ProfileActionType } from './action-types';
@@ -8,7 +8,7 @@ export const findUserProfile = (
     userName: string
 ) => {
     return async (dispatch: Dispatch<ProfileAction>) => {
-        let response = await userfrontApi.post(`/v0/users/find`, {
+        let response = await api.post(`/v0/users/find`, {
             filters: {
                 conjunction: 'and',
                 filterGroups: [
@@ -16,7 +16,7 @@ export const findUserProfile = (
                         conjunction: 'and',
                         filters: [
                             {
-                                attr: 'name',
+                                attr: 'username',
                                 type: 'string',
                                 comparison: 'contains',
                                 value: `${userName}`,
