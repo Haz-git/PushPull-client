@@ -1,9 +1,16 @@
 import axios from 'axios';
 import Userfront from '@userfront/react';
 
+let targetURL;
+
+if (process.env.NODE_ENV !== 'production') {
+    targetURL = 'http://localhost:8080/api';
+} else {
+    targetURL = 'https://rankmyworkout.herokuapp.com/api';
+}
+
 const axiosInstance = axios.create({
-    // baseURL: 'http://localhost:8080/api',
-    baseURL: 'https://rankmyworkout.herokuapp.com/api',
+    baseURL: targetURL,
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
