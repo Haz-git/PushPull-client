@@ -64,7 +64,7 @@ const MainContainer = styled.section`
 `;
 
 const ProfilePanelView = styled.div`
-    width: 18rem;
+    width: 20rem;
 `;
 
 const ActivityPanelView = styled.div``;
