@@ -18,7 +18,6 @@ const MainContainer = styled.section`
 `;
 
 const AvatarContainer = styled.div`
-    margin-bottom: 1rem;
     cursor: pointer;
 `;
 
@@ -73,12 +72,9 @@ const ProfilePanel = () => {
                 />
             </AvatarContainer>
             <DescriptionContainer>
-                <NameHeader>{queriedUser?.name || 'Harry Zhou'}</NameHeader>
+                <NameHeader>{queriedUser?.name}</NameHeader>
                 <UsernameHeader>{queriedUser?.username}</UsernameHeader>
-                <BioDesc>
-                    {queriedUser?.data?.userBio ||
-                        'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
-                </BioDesc>
+                <BioDesc>{queriedUser?.data?.userBio}</BioDesc>
             </DescriptionContainer>
         </MainContainer>
     );
