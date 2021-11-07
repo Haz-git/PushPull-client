@@ -119,7 +119,7 @@ const UserDropdown = ({
                                 src={image}
                                 size="sm"
                                 alt="User image"
-                                radius="sm"
+                                radius="xl"
                             />
                         </AvatarContainer>
                         <HeaderContainer>
