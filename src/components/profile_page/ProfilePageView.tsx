@@ -44,7 +44,7 @@ const PrimaryWrapper = styled.div`
 `;
 
 const MainContainer = styled.section`
-    height: 100vh;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 8fr;
     border: 1px solid black;
@@ -56,7 +56,7 @@ const MainContainer = styled.section`
     }
 
     @media ${deviceMin.tabletp} {
-        height: 100vh;
+        height: 100%;
         display: grid;
         grid-template-columns: 1fr 8fr;
         overflow: visible;

@@ -10,6 +10,11 @@ export const findUserProfile = (
     return async (dispatch: Dispatch<ProfileAction>) => {
         let response = await api.get(`/user/${userName}`);
 
-        console.log(response);
+        dispatch({
+            type: ProfileActionType.USER_FIND_PROFILE,
+            payload: response.data.userProfile,
+        });
+
+        if (response?.data?.userProfile) statusCallback(true);
     };
 };
