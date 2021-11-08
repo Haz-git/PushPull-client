@@ -104,7 +104,7 @@ const ProfilePageView = ({
         <PrimaryWrapper>
             <MainContainer>
                 <ProfilePanelView>
-                    <ProfilePanel />
+                    <ProfilePanel isUserOwnProfile={isUserOwnProfile()} />
                 </ProfilePanelView>
                 <ActivityPanelView>
                     <ActivityPanel />
