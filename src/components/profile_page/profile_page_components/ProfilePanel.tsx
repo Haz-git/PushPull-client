@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -126,6 +127,11 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const queriedUser = useSelector((state: RootStateOrAny) => state?.profile);
 
+    const [isUpdateUserFormOpen, setIsUpdateUserFormOpen] = useState(false);
+
+    const toggleUserUpdateForm = () =>
+        setIsUpdateUserFormOpen(!isUpdateUserFormOpen);
+
     const renderOptionalData = (type: string, data: any) => {
         switch (type) {
             case 'LOCATION':
@@ -194,6 +200,44 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
         ));
     };
 
+    const renderUserDetailsOrUpdateForm = () => {
+        if (!isUpdateUserFormOpen) {
+            return (
+                <>
+                    <DescriptionContainer>
+                        <NameHeader>
+                            {queriedUser?.name || 'Harry Zhou'}
+                        </NameHeader>
+                        <UsernameHeader>{queriedUser?.username}</UsernameHeader>
+                    </DescriptionContainer>
+                    <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
+                    <BioDescContainer>
+                        <BioDesc>
+                            {queriedUser?.data?.userBio ||
+                                'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
+                        </BioDesc>
+                    </BioDescContainer>
+                    <EditProfileContainer>
+                        {isUserOwnProfile && (
+                            <GeneralButton
+                                buttonLabel="Edit Profile"
+                                padding=".6rem .5rem"
+                                onClick={() => toggleUserUpdateForm()}
+                            />
+                        )}
+                    </EditProfileContainer>
+                    <>{renderOptionalDetails()}</>
+                </>
+            );
+        }
+
+        return (
+            <ProfilePanelUpdateForm
+                toggleUserUpdateForm={toggleUserUpdateForm}
+            />
+        );
+    };
+
     return (
         <MainContainer>
             <AvatarContainer>
@@ -204,27 +248,7 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                     size={280}
                 />
             </AvatarContainer>
-            <DescriptionContainer>
-                <NameHeader>{queriedUser?.name || 'Harry Zhou'}</NameHeader>
-                <UsernameHeader>{queriedUser?.username}</UsernameHeader>
-            </DescriptionContainer>
-            <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
-
-            <BioDescContainer>
-                <BioDesc>
-                    {queriedUser?.data?.userBio ||
-                        'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
-                </BioDesc>
-            </BioDescContainer>
-            <EditProfileContainer>
-                {isUserOwnProfile && (
-                    <GeneralButton
-                        buttonLabel="Edit Profile"
-                        padding=".6rem .5rem"
-                    />
-                )}
-            </EditProfileContainer>
-            <>{renderOptionalDetails()}</>
+            {renderUserDetailsOrUpdateForm()}
         </MainContainer>
     );
 };
