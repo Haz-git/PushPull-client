@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -10,6 +11,7 @@ import { Location } from '@styled-icons/typicons/Location';
 import { Link } from '@styled-icons/typicons/Link';
 import { SocialTwitter } from '@styled-icons/typicons/SocialTwitter';
 import { Badge } from '@mantine/core';
+import ProfilePanelUpdateForm from './ProfilePanelUpdateForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -49,7 +51,7 @@ const DescriptionContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 1rem 0;
+    margin: 1rem 0rem 0.5rem 0rem;
 `;
 
 const NameHeader = styled.h2`
@@ -71,7 +73,7 @@ const UsernameHeader = styled.h2`
 
 const MainBadgeContainer = styled.div`
     width: 100%;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -81,6 +83,10 @@ const MainBadgeContainer = styled.div`
 `;
 
 const BadgeContainer = styled.div``;
+
+const BioDescContainer = styled.div`
+    margin: 0.5rem 0rem 1.5rem 0rem;
+`;
 
 const BioDesc = styled.p`
     font-size: 1.15rem;
@@ -120,6 +126,11 @@ interface IComponentProps {
 const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const queriedUser = useSelector((state: RootStateOrAny) => state?.profile);
+
+    const [isUpdateUserFormOpen, setIsUpdateUserFormOpen] = useState(false);
+
+    const toggleUserUpdateForm = () =>
+        setIsUpdateUserFormOpen(!isUpdateUserFormOpen);
 
     const renderOptionalData = (type: string, data: any) => {
         switch (type) {
@@ -189,6 +200,44 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
         ));
     };
 
+    const renderUserDetailsOrUpdateForm = () => {
+        if (!isUpdateUserFormOpen) {
+            return (
+                <>
+                    <DescriptionContainer>
+                        <NameHeader>
+                            {queriedUser?.name || 'Harry Zhou'}
+                        </NameHeader>
+                        <UsernameHeader>{queriedUser?.username}</UsernameHeader>
+                    </DescriptionContainer>
+                    <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
+                    <BioDescContainer>
+                        <BioDesc>
+                            {queriedUser?.data?.userBio ||
+                                'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
+                        </BioDesc>
+                    </BioDescContainer>
+                    <EditProfileContainer>
+                        {isUserOwnProfile && (
+                            <GeneralButton
+                                buttonLabel="Edit Profile"
+                                padding=".6rem .5rem"
+                                onClick={() => toggleUserUpdateForm()}
+                            />
+                        )}
+                    </EditProfileContainer>
+                    <>{renderOptionalDetails()}</>
+                </>
+            );
+        }
+
+        return (
+            <ProfilePanelUpdateForm
+                toggleUserUpdateForm={toggleUserUpdateForm}
+            />
+        );
+    };
+
     return (
         <MainContainer>
             <AvatarContainer>
@@ -199,24 +248,7 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                     size={280}
                 />
             </AvatarContainer>
-            <DescriptionContainer>
-                <NameHeader>{queriedUser?.name || 'Harry Zhou'}</NameHeader>
-                <UsernameHeader>{queriedUser?.username}</UsernameHeader>
-                <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
-                <BioDesc>
-                    {queriedUser?.data?.userBio ||
-                        'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
-                </BioDesc>
-            </DescriptionContainer>
-            <EditProfileContainer>
-                {isUserOwnProfile && (
-                    <GeneralButton
-                        buttonLabel="Edit Profile"
-                        padding=".6rem .5rem"
-                    />
-                )}
-            </EditProfileContainer>
-            <>{renderOptionalDetails()}</>
+            {renderUserDetailsOrUpdateForm()}
         </MainContainer>
     );
 };
