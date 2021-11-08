@@ -16,19 +16,19 @@ import ProfilePanelUpdateForm from './ProfilePanelUpdateForm';
 //Styles:
 import styled from 'styled-components';
 
-const LocationIcon = styled(Location)`
+export const LocationIcon = styled(Location)`
     height: 2rem;
     width: 2rem;
     color: ${(props) => props.theme.subText};
 `;
 
-const LinkIcon = styled(Link)`
+export const LinkIcon = styled(Link)`
     height: 2rem;
     width: 2rem;
     color: ${(props) => props.theme.subText};
 `;
 
-const TwitterIcon = styled(SocialTwitter)`
+export const TwitterIcon = styled(SocialTwitter)`
     height: 2rem;
     width: 2rem;
     color: ${(props) => props.theme.subText};
