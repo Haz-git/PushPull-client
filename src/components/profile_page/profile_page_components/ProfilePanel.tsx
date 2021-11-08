@@ -5,6 +5,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 
 //Components:
 import { Avatar } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -48,16 +49,24 @@ const UsernameHeader = styled.h2`
 
 const BioDesc = styled.p`
     margin-top: 1rem;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 500;
     color: ${(props) => props.theme.mainText};
     width: 100%;
-    word-break: break-all;
+    word-break: break-word;
 `;
+
+const EditProfileContainer = styled.div``;
+
+const OptionalDescContainer = styled.div``;
 
 //Interfaces:
 
-const ProfilePanel = () => {
+interface IComponentProps {
+    isUserOwnProfile: boolean;
+}
+
+const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const queriedUser = useSelector((state: RootStateOrAny) => state?.profile);
 
@@ -72,10 +81,22 @@ const ProfilePanel = () => {
                 />
             </AvatarContainer>
             <DescriptionContainer>
-                <NameHeader>{queriedUser?.name}</NameHeader>
+                <NameHeader>{queriedUser?.name || 'Harry Zhou'}</NameHeader>
                 <UsernameHeader>{queriedUser?.username}</UsernameHeader>
-                <BioDesc>{queriedUser?.data?.userBio}</BioDesc>
+                <BioDesc>
+                    {queriedUser?.data?.userBio ||
+                        'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
+                </BioDesc>
             </DescriptionContainer>
+            <EditProfileContainer>
+                {isUserOwnProfile && (
+                    <GeneralButton
+                        buttonLabel="Edit Profile"
+                        padding=".6rem .5rem"
+                    />
+                )}
+            </EditProfileContainer>
+            <OptionalDescContainer></OptionalDescContainer>
         </MainContainer>
     );
 };
