@@ -6,9 +6,30 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 //Components:
 import { Avatar } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
+import { Location } from '@styled-icons/typicons/Location';
+import { Link } from '@styled-icons/typicons/Link';
+import { SocialTwitter } from '@styled-icons/typicons/SocialTwitter';
 
 //Styles:
 import styled from 'styled-components';
+
+const LocationIcon = styled(Location)`
+    height: 2rem;
+    width: 2rem;
+    color: ${(props) => props.theme.subText};
+`;
+
+const LinkIcon = styled(Link)`
+    height: 2rem;
+    width: 2rem;
+    color: ${(props) => props.theme.subText};
+`;
+
+const TwitterIcon = styled(SocialTwitter)`
+    height: 2rem;
+    width: 2rem;
+    color: ${(props) => props.theme.subText};
+`;
 
 const MainContainer = styled.section`
     padding: 2rem 1rem;
@@ -58,7 +79,24 @@ const BioDesc = styled.p`
 
 const EditProfileContainer = styled.div``;
 
-const OptionalDescContainer = styled.div``;
+const OptionalMainContainer = styled.div`
+    margin: 1rem 0rem;
+`;
+
+const OptionalContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0.25rem 0rem;
+`;
+
+const OptionalDescText = styled.p`
+    font-size: 1rem;
+    font-weight: 700;
+    color: ${(props) => props.theme.mainText};
+    width: 100%;
+    margin-left: 0.5rem;
+`;
 
 //Interfaces:
 
@@ -96,7 +134,26 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                     />
                 )}
             </EditProfileContainer>
-            <OptionalDescContainer></OptionalDescContainer>
+            <OptionalMainContainer>
+                <OptionalContainer>
+                    <LocationIcon />
+                    <OptionalDescText>
+                        {queriedUser?.data?.location || 'San Diego'}
+                    </OptionalDescText>
+                </OptionalContainer>
+                <OptionalContainer>
+                    <LinkIcon />
+                    <OptionalDescText>
+                        {queriedUser?.data?.website || 'test.com'}
+                    </OptionalDescText>
+                </OptionalContainer>
+                <OptionalContainer>
+                    <TwitterIcon />
+                    <OptionalDescText>
+                        {queriedUser?.data?.twitter || '@testTwitterhandle123'}
+                    </OptionalDescText>
+                </OptionalContainer>
+            </OptionalMainContainer>
         </MainContainer>
     );
 };
