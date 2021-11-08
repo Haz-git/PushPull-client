@@ -5,9 +5,32 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 
 //Components:
 import { Avatar } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
+import { Location } from '@styled-icons/typicons/Location';
+import { Link } from '@styled-icons/typicons/Link';
+import { SocialTwitter } from '@styled-icons/typicons/SocialTwitter';
+import { Badge } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
+
+const LocationIcon = styled(Location)`
+    height: 2rem;
+    width: 2rem;
+    color: ${(props) => props.theme.subText};
+`;
+
+const LinkIcon = styled(Link)`
+    height: 2rem;
+    width: 2rem;
+    color: ${(props) => props.theme.subText};
+`;
+
+const TwitterIcon = styled(SocialTwitter)`
+    height: 2rem;
+    width: 2rem;
+    color: ${(props) => props.theme.subText};
+`;
 
 const MainContainer = styled.section`
     padding: 2rem 1rem;
@@ -46,20 +69,101 @@ const UsernameHeader = styled.h2`
     word-break: break-all;
 `;
 
+const MainBadgeContainer = styled.div`
+    width: 100%;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    column-gap: 0.25rem;
+    row-gap: 0.25rem;
+`;
+
+const BadgeContainer = styled.div``;
+
 const BioDesc = styled.p`
-    margin-top: 1rem;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 500;
     color: ${(props) => props.theme.mainText};
     width: 100%;
-    word-break: break-all;
+    word-break: break-word;
+`;
+
+const EditProfileContainer = styled.div``;
+
+const OptionalMainContainer = styled.div`
+    margin: 1rem 0rem;
+`;
+
+const OptionalContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0.25rem 0rem;
+`;
+
+const OptionalDescText = styled.p`
+    font-size: 1rem;
+    font-weight: 700;
+    color: ${(props) => props.theme.subText};
+    width: 100%;
+    margin-left: 0.5rem;
 `;
 
 //Interfaces:
 
-const ProfilePanel = () => {
+interface IComponentProps {
+    isUserOwnProfile: boolean;
+}
+
+const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const queriedUser = useSelector((state: RootStateOrAny) => state?.profile);
+
+    const renderOptionalData = (type: string, data: any) => {
+        switch (type) {
+            case 'LOCATION':
+                return (
+                    <OptionalContainer>
+                        <LocationIcon />
+                        <OptionalDescText>{data}</OptionalDescText>
+                    </OptionalContainer>
+                );
+            case 'WEBSITE':
+                return (
+                    <OptionalContainer>
+                        <LinkIcon />
+                        <OptionalDescText>{data}</OptionalDescText>
+                    </OptionalContainer>
+                );
+            case 'TWITTER':
+                return (
+                    <OptionalContainer>
+                        <TwitterIcon />
+                        <OptionalDescText>{data}</OptionalDescText>
+                    </OptionalContainer>
+                );
+            default:
+                throw new Error(
+                    'No optional data type was entered, or something went wrong.'
+                );
+        }
+    };
+
+    const renderOptionalDetails = () => {
+        const { location, website, twitter } = queriedUser?.data || {}; //short circuit if undefined
+
+        if (!location && !website && !twitter) return null;
+
+        return (
+            <OptionalMainContainer>
+                <>{renderOptionalData('LOCATION', location)}</>
+                <>{renderOptionalData('WEBSITE', website)}</>
+                <>{renderOptionalData('TWITTER', twitter)}</>
+            </OptionalMainContainer>
+        );
+    };
 
     return (
         <MainContainer>
@@ -72,10 +176,54 @@ const ProfilePanel = () => {
                 />
             </AvatarContainer>
             <DescriptionContainer>
-                <NameHeader>{queriedUser?.name}</NameHeader>
+                <NameHeader>{queriedUser?.name || 'Harry Zhou'}</NameHeader>
                 <UsernameHeader>{queriedUser?.username}</UsernameHeader>
-                <BioDesc>{queriedUser?.data?.userBio}</BioDesc>
+                <MainBadgeContainer>
+                    <BadgeContainer>
+                        <Badge
+                            variant="gradient"
+                            gradient={{ from: 'teal', to: 'blue', deg: 30 }}
+                            size="lg"
+                            styles={{
+                                root: {
+                                    boxShadow:
+                                        'rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px',
+                                },
+                            }}
+                        >
+                            FOUNDER
+                        </Badge>
+                    </BadgeContainer>
+                    <BadgeContainer>
+                        <Badge
+                            variant="gradient"
+                            gradient={{ from: 'orange', to: 'red', deg: 60 }}
+                            size="lg"
+                            styles={{
+                                root: {
+                                    boxShadow:
+                                        'rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px',
+                                },
+                            }}
+                        >
+                            ADMIN
+                        </Badge>
+                    </BadgeContainer>
+                </MainBadgeContainer>
+                <BioDesc>
+                    {queriedUser?.data?.userBio ||
+                        'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
+                </BioDesc>
             </DescriptionContainer>
+            <EditProfileContainer>
+                {isUserOwnProfile && (
+                    <GeneralButton
+                        buttonLabel="Edit Profile"
+                        padding=".6rem .5rem"
+                    />
+                )}
+            </EditProfileContainer>
+            <>{renderOptionalDetails()}</>
         </MainContainer>
     );
 };
