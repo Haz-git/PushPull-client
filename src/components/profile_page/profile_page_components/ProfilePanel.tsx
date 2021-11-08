@@ -10,6 +10,7 @@ import { Location } from '@styled-icons/typicons/Location';
 import { Link } from '@styled-icons/typicons/Link';
 import { SocialTwitter } from '@styled-icons/typicons/SocialTwitter';
 import { Badge } from '@mantine/core';
+import ProfilePanelUpdateForm from './ProfilePanelUpdateForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -49,7 +50,7 @@ const DescriptionContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 1rem 0;
+    margin: 1rem 0rem 0.5rem 0rem;
 `;
 
 const NameHeader = styled.h2`
@@ -71,7 +72,7 @@ const UsernameHeader = styled.h2`
 
 const MainBadgeContainer = styled.div`
     width: 100%;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -81,6 +82,10 @@ const MainBadgeContainer = styled.div`
 `;
 
 const BadgeContainer = styled.div``;
+
+const BioDescContainer = styled.div`
+    margin: 0.5rem 0rem 1.5rem 0rem;
+`;
 
 const BioDesc = styled.p`
     font-size: 1.15rem;
@@ -202,12 +207,15 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
             <DescriptionContainer>
                 <NameHeader>{queriedUser?.name || 'Harry Zhou'}</NameHeader>
                 <UsernameHeader>{queriedUser?.username}</UsernameHeader>
-                <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
+            </DescriptionContainer>
+            <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
+
+            <BioDescContainer>
                 <BioDesc>
                     {queriedUser?.data?.userBio ||
                         'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
                 </BioDesc>
-            </DescriptionContainer>
+            </BioDescContainer>
             <EditProfileContainer>
                 {isUserOwnProfile && (
                     <GeneralButton
