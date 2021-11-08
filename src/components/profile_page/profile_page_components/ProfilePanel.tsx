@@ -93,7 +93,7 @@ const OptionalContainer = styled.div`
 const OptionalDescText = styled.p`
     font-size: 1rem;
     font-weight: 700;
-    color: ${(props) => props.theme.mainText};
+    color: ${(props) => props.theme.subText};
     width: 100%;
     margin-left: 0.5rem;
 `;
@@ -107,6 +107,50 @@ interface IComponentProps {
 const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const queriedUser = useSelector((state: RootStateOrAny) => state?.profile);
+
+    const renderOptionalData = (type: string, data: any) => {
+        switch (type) {
+            case 'LOCATION':
+                return (
+                    <OptionalContainer>
+                        <LocationIcon />
+                        <OptionalDescText>{data}</OptionalDescText>
+                    </OptionalContainer>
+                );
+            case 'WEBSITE':
+                return (
+                    <OptionalContainer>
+                        <LinkIcon />
+                        <OptionalDescText>{data}</OptionalDescText>
+                    </OptionalContainer>
+                );
+            case 'TWITTER':
+                return (
+                    <OptionalContainer>
+                        <TwitterIcon />
+                        <OptionalDescText>{data}</OptionalDescText>
+                    </OptionalContainer>
+                );
+            default:
+                throw new Error(
+                    'No optional data type was entered, or something went wrong.'
+                );
+        }
+    };
+
+    const renderOptionalDetails = () => {
+        const { location, website, twitter } = queriedUser?.data;
+
+        if (!location && !website && !twitter) return null;
+
+        return (
+            <OptionalMainContainer>
+                <>{renderOptionalData('LOCATION', location)}</>
+                <>{renderOptionalData('WEBSITE', website)}</>
+                <>{renderOptionalData('TWITTER', twitter)}</>
+            </OptionalMainContainer>
+        );
+    };
 
     return (
         <MainContainer>
@@ -134,26 +178,7 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                     />
                 )}
             </EditProfileContainer>
-            <OptionalMainContainer>
-                <OptionalContainer>
-                    <LocationIcon />
-                    <OptionalDescText>
-                        {queriedUser?.data?.location || 'San Diego'}
-                    </OptionalDescText>
-                </OptionalContainer>
-                <OptionalContainer>
-                    <LinkIcon />
-                    <OptionalDescText>
-                        {queriedUser?.data?.website || 'test.com'}
-                    </OptionalDescText>
-                </OptionalContainer>
-                <OptionalContainer>
-                    <TwitterIcon />
-                    <OptionalDescText>
-                        {queriedUser?.data?.twitter || '@testTwitterhandle123'}
-                    </OptionalDescText>
-                </OptionalContainer>
-            </OptionalMainContainer>
+            <>{renderOptionalDetails()}</>
         </MainContainer>
     );
 };
