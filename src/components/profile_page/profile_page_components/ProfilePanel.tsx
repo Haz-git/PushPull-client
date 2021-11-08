@@ -165,6 +165,30 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
         );
     };
 
+    const renderBadges = () => {
+        const { badges } = queriedUser?.data || {};
+
+        if (!badges) return null;
+
+        //Example Gradient: { from: 'teal', to: 'blue', deg: 30 }
+
+        return badges.map((badge: any) => (
+            <Badge
+                variant="gradient"
+                gradient={badge.badgeGrad}
+                size="lg"
+                styles={{
+                    root: {
+                        boxShadow:
+                            'rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px',
+                    },
+                }}
+            >
+                {badge.badgeTitle}
+            </Badge>
+        ));
+    };
+
     return (
         <MainContainer>
             <AvatarContainer>
@@ -178,38 +202,7 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
             <DescriptionContainer>
                 <NameHeader>{queriedUser?.name || 'Harry Zhou'}</NameHeader>
                 <UsernameHeader>{queriedUser?.username}</UsernameHeader>
-                <MainBadgeContainer>
-                    <BadgeContainer>
-                        <Badge
-                            variant="gradient"
-                            gradient={{ from: 'teal', to: 'blue', deg: 30 }}
-                            size="lg"
-                            styles={{
-                                root: {
-                                    boxShadow:
-                                        'rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px',
-                                },
-                            }}
-                        >
-                            FOUNDER
-                        </Badge>
-                    </BadgeContainer>
-                    <BadgeContainer>
-                        <Badge
-                            variant="gradient"
-                            gradient={{ from: 'orange', to: 'red', deg: 60 }}
-                            size="lg"
-                            styles={{
-                                root: {
-                                    boxShadow:
-                                        'rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px',
-                                },
-                            }}
-                        >
-                            ADMIN
-                        </Badge>
-                    </BadgeContainer>
-                </MainBadgeContainer>
+                <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
                 <BioDesc>
                     {queriedUser?.data?.userBio ||
                         'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
