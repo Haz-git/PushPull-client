@@ -183,21 +183,49 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
 
         //Example Gradient: { from: 'teal', to: 'blue', deg: 30 }
 
-        return badges.map((badge: any) => (
-            <Badge
-                variant="gradient"
-                gradient={badge.badgeGrad}
-                size="lg"
-                styles={{
-                    root: {
-                        boxShadow:
-                            'rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px',
-                    },
-                }}
-            >
-                {badge.badgeTitle}
-            </Badge>
-        ));
+        return (
+            <MainBadgeContainer>
+                {badges.map((badge: any) => (
+                    <Badge
+                        variant="gradient"
+                        gradient={badge.badgeGrad}
+                        size="lg"
+                        styles={{
+                            root: {
+                                boxShadow:
+                                    'rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px',
+                            },
+                        }}
+                    >
+                        {badge.badgeTitle}
+                    </Badge>
+                ))}
+            </MainBadgeContainer>
+        );
+    };
+
+    const renderBioDesc = () => {
+        const { userBio } = queriedUser?.data || {};
+
+        if (userBio)
+            return (
+                <BioDescContainer>
+                    <BioDesc>{userBio}</BioDesc>
+                </BioDescContainer>
+            );
+    };
+
+    const renderEditProfileButton = () => {
+        if (isUserOwnProfile)
+            return (
+                <EditProfileContainer>
+                    <GeneralButton
+                        buttonLabel="Edit Profile"
+                        padding=".6rem .5rem"
+                        onClick={() => toggleUserUpdateForm()}
+                    />
+                </EditProfileContainer>
+            );
     };
 
     const renderUserDetailsOrUpdateForm = () => {
@@ -209,18 +237,8 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                         <UsernameHeader>{queriedUser?.username}</UsernameHeader>
                     </DescriptionContainer>
                     <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
-                    <BioDescContainer>
-                        <BioDesc>{queriedUser?.data?.userBio}</BioDesc>
-                    </BioDescContainer>
-                    <EditProfileContainer>
-                        {isUserOwnProfile && (
-                            <GeneralButton
-                                buttonLabel="Edit Profile"
-                                padding=".6rem .5rem"
-                                onClick={() => toggleUserUpdateForm()}
-                            />
-                        )}
-                    </EditProfileContainer>
+                    <>{renderBioDesc()}</>
+                    <>{renderEditProfileButton()}</>
                     <>{renderOptionalDetails()}</>
                 </>
             );
