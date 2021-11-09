@@ -1,4 +1,9 @@
 import * as React from 'react';
+import { useState } from 'react';
+
+//Redux:
+import { useDispatch } from 'react-redux';
+import { updateUserProfile } from '../../../redux/profile/profileActions';
 
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
@@ -47,16 +52,52 @@ const ButtonContainer = styled.div`
 
 interface IComponentProps {
     toggleUserUpdateForm: () => void;
+    currName: string;
+    currBio: string;
+    currLocation: string;
+    currWebsite: string;
+    currTwitter: string;
 }
 
 const ProfilePanelUpdateForm = ({
     toggleUserUpdateForm,
+    currName,
+    currBio,
+    currLocation,
+    currWebsite,
+    currTwitter,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
+    const [userProfileUpdateDetails, setUserProfileUpdateDetails] = useState({
+        newName: currName,
+        newBio: currBio,
+        newLocation: currLocation,
+        newWebsite: currWebsite,
+        newTwitter: currTwitter,
+    });
+
+    const handleUserInput = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setUserProfileUpdateDetails({
+            ...userProfileUpdateDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const fakeCallback = (status: boolean) => console.log(status);
+
+    const handleUserSubmit = () => {
+        dispatch(updateUserProfile(fakeCallback, userProfileUpdateDetails));
+    };
+
     return (
         <MainContainer>
             <FormContainer>
                 <TextInputContainer>
                     <TextInput
+                        name="newName"
                         styles={{
                             label: {
                                 color: 'rgba(0, 0, 34, .7)',
@@ -75,10 +116,13 @@ const ProfilePanelUpdateForm = ({
                         required
                         label="Name"
                         placeholder="Name"
+                        onChange={(e) => handleUserInput(e)}
+                        maxLength={80}
                     />
                 </TextInputContainer>
                 <TextInputContainer>
                     <Textarea
+                        name="newBio"
                         styles={{
                             label: {
                                 color: 'rgba(0, 0, 34, .7)',
@@ -99,6 +143,8 @@ const ProfilePanelUpdateForm = ({
                         label="Bio"
                         placeholder="Tell everyone about you"
                         required
+                        onChange={(e) => handleUserInput(e)}
+                        maxLength={200}
                     />
                 </TextInputContainer>
                 <OptionalInputContainer>
@@ -107,6 +153,7 @@ const ProfilePanelUpdateForm = ({
                     </IconWrapper>
                     <OptionalInputWrapper>
                         <TextInput
+                            name="newLocation"
                             styles={{
                                 label: {
                                     color: 'rgba(0, 0, 34, .7)',
@@ -124,6 +171,8 @@ const ProfilePanelUpdateForm = ({
                             }}
                             required
                             placeholder="Location"
+                            onChange={(e) => handleUserInput(e)}
+                            maxLength={100}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
@@ -133,6 +182,7 @@ const ProfilePanelUpdateForm = ({
                     </IconWrapper>
                     <OptionalInputWrapper>
                         <TextInput
+                            name="newWebsite"
                             styles={{
                                 label: {
                                     color: 'rgba(0, 0, 34, .7)',
@@ -150,6 +200,8 @@ const ProfilePanelUpdateForm = ({
                             }}
                             required
                             placeholder="Website"
+                            onChange={(e) => handleUserInput(e)}
+                            maxLength={100}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
@@ -159,6 +211,7 @@ const ProfilePanelUpdateForm = ({
                     </IconWrapper>
                     <OptionalInputWrapper>
                         <TextInput
+                            name="newTwitter"
                             styles={{
                                 label: {
                                     color: 'rgba(0, 0, 34, .7)',
@@ -176,6 +229,8 @@ const ProfilePanelUpdateForm = ({
                             }}
                             required
                             placeholder="Twitter username"
+                            onChange={(e) => handleUserInput(e)}
+                            maxLength={100}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
@@ -183,7 +238,10 @@ const ProfilePanelUpdateForm = ({
             <ButtonContainer>
                 <GeneralButton
                     buttonLabel="Save"
-                    onClick={() => toggleUserUpdateForm()}
+                    onClick={() => {
+                        handleUserSubmit();
+                        toggleUserUpdateForm();
+                    }}
                     width="5rem"
                     buttonBackground="#41A312"
                     fontSize="1rem"

@@ -5,7 +5,7 @@ let targetURL;
 
 if (process.env.NODE_ENV !== 'production') {
     targetURL = 'http://localhost:8080/api';
-} else {
+} else if (process.env.NODE_ENV === 'production') {
     targetURL = 'https://rankmyworkout.herokuapp.com/api';
 }
 
