@@ -205,7 +205,7 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
     };
 
     const renderBioDesc = () => {
-        const { userBio } = queriedUser?.data || undefined;
+        const { userBio } = queriedUser?.data || {};
 
         if (userBio)
             return (
