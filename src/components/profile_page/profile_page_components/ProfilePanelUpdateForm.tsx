@@ -96,7 +96,7 @@ const ProfilePanelUpdateForm = ({
                                 maxHeight: '5rem',
                             },
                         }}
-                        label="User Bio"
+                        label="Bio"
                         placeholder="Tell everyone about you"
                         required
                     />
@@ -186,6 +186,8 @@ const ProfilePanelUpdateForm = ({
                     onClick={() => toggleUserUpdateForm()}
                     width="5rem"
                     buttonBackground="#41A312"
+                    fontSize="1rem"
+                    height="2rem"
                 />
                 <GeneralButton
                     buttonLabel="Cancel"
@@ -197,6 +199,8 @@ const ProfilePanelUpdateForm = ({
                     hoverShadow="none"
                     border="1px solid #c6c6c6"
                     onClick={() => toggleUserUpdateForm()}
+                    fontSize="1rem"
+                    height="2rem"
                 />
             </ButtonContainer>
         </MainContainer>
