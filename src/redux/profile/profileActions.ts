@@ -18,3 +18,12 @@ export const findUserProfile = (
         if (response?.data?.userProfile) statusCallback(true);
     };
 };
+
+export const updateUserProfile = (
+    statusCallback: (status: boolean) => void,
+    updateObject: any
+) => {
+    return async (dispatch: Dispatch<ProfileAction>) => {
+        console.log(updateObject);
+    };
+};
