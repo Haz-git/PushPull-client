@@ -205,17 +205,12 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
             return (
                 <>
                     <DescriptionContainer>
-                        <NameHeader>
-                            {queriedUser?.name || 'Harry Zhou'}
-                        </NameHeader>
+                        <NameHeader>{queriedUser?.name}</NameHeader>
                         <UsernameHeader>{queriedUser?.username}</UsernameHeader>
                     </DescriptionContainer>
                     <MainBadgeContainer>{renderBadges()}</MainBadgeContainer>
                     <BioDescContainer>
-                        <BioDesc>
-                            {queriedUser?.data?.userBio ||
-                                'UCSD M.S Candidate studying Human Biology with an emphasis in Molecular- and Micro- biology. Tech enthusiast, data wrangler, and software engineer.'}
-                        </BioDesc>
+                        <BioDesc>{queriedUser?.data?.userBio}</BioDesc>
                     </BioDescContainer>
                     <EditProfileContainer>
                         {isUserOwnProfile && (

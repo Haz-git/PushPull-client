@@ -27,11 +27,8 @@ export const updateUserProfile = (
 ) => {
     return async (dispatch: Dispatch<any>) => {
         //This route should only be accessible to logged in user.
-        console.log(`SENT TO SERVER:`, updateObject);
 
         let response = await api.post(`/user/update`, { updateObject });
-
-        console.log(`RESPONSE FROM SERVER:`, response);
 
         //We dispatch to update the profile view:
         dispatch({
@@ -39,7 +36,7 @@ export const updateUserProfile = (
             payload: response.data.userProfile,
         });
 
-        //Update the current user's auth state.
+        //Update the current user's auth state --> This is to match the user's auth state with the profile state (if the user is viewing their own profile)
 
         dispatch(userLogin(response.data.userProfile));
     };

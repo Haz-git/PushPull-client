@@ -118,6 +118,7 @@ const ProfilePanelUpdateForm = ({
                         placeholder="Name"
                         onChange={(e) => handleUserInput(e)}
                         maxLength={80}
+                        value={userProfileUpdateDetails.newName}
                     />
                 </TextInputContainer>
                 <TextInputContainer>
@@ -145,6 +146,7 @@ const ProfilePanelUpdateForm = ({
                         required
                         onChange={(e) => handleUserInput(e)}
                         maxLength={200}
+                        value={userProfileUpdateDetails.newBio}
                     />
                 </TextInputContainer>
                 <OptionalInputContainer>
@@ -173,6 +175,7 @@ const ProfilePanelUpdateForm = ({
                             placeholder="Location"
                             onChange={(e) => handleUserInput(e)}
                             maxLength={100}
+                            value={userProfileUpdateDetails.newLocation}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
@@ -202,6 +205,7 @@ const ProfilePanelUpdateForm = ({
                             placeholder="Website"
                             onChange={(e) => handleUserInput(e)}
                             maxLength={100}
+                            value={userProfileUpdateDetails.newWebsite}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
@@ -231,6 +235,7 @@ const ProfilePanelUpdateForm = ({
                             placeholder="Twitter username"
                             onChange={(e) => handleUserInput(e)}
                             maxLength={100}
+                            value={userProfileUpdateDetails.newTwitter}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
