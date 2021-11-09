@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import { updateUserProfile } from '../../../redux/profile/profileActions';
+
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
 import { TextInput } from '@mantine/core';
@@ -63,6 +67,8 @@ const ProfilePanelUpdateForm = ({
     currWebsite,
     currTwitter,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
     const [userProfileUpdateDetails, setUserProfileUpdateDetails] = useState({
         newName: currName,
         newBio: currBio,
@@ -80,7 +86,11 @@ const ProfilePanelUpdateForm = ({
         });
     };
 
-    console.log(userProfileUpdateDetails);
+    const fakeCallback = (status: boolean) => console.log(status);
+
+    const handleUserSubmit = () => {
+        dispatch(updateUserProfile(fakeCallback, userProfileUpdateDetails));
+    };
 
     return (
         <MainContainer>
@@ -228,7 +238,10 @@ const ProfilePanelUpdateForm = ({
             <ButtonContainer>
                 <GeneralButton
                     buttonLabel="Save"
-                    onClick={() => toggleUserUpdateForm()}
+                    onClick={() => {
+                        handleUserSubmit();
+                        toggleUserUpdateForm();
+                    }}
                     width="5rem"
                     buttonBackground="#41A312"
                     fontSize="1rem"
