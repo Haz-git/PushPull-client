@@ -234,6 +234,11 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
         return (
             <ProfilePanelUpdateForm
                 toggleUserUpdateForm={toggleUserUpdateForm}
+                currName={queriedUser?.name || ''}
+                currBio={queriedUser?.data?.userBio || ''}
+                currLocation={queriedUser?.data?.location || ''}
+                currWebsite={queriedUser?.data?.website || ''}
+                currTwitter={queriedUser?.data?.twitter || ''}
             />
         );
     };
