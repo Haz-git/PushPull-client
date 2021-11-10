@@ -48,7 +48,6 @@ const MainContainer = styled.section`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 8fr;
-    border: 1px solid black;
 
     @media ${deviceMin.mobileS} {
         display: block;
