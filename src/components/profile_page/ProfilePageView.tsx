@@ -32,8 +32,8 @@ const PrimaryWrapper = styled.div`
     }
 
     @media ${deviceMin.laptopL} {
-        padding-left: 15%;
-        padding-right: 15%;
+        padding-left: 10%;
+        padding-right: 10%;
         margin: 0 auto;
     }
 
@@ -48,7 +48,6 @@ const MainContainer = styled.section`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 8fr;
-    border: 1px solid black;
 
     @media ${deviceMin.mobileS} {
         display: block;
