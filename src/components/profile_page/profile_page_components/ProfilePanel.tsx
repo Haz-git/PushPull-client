@@ -34,7 +34,7 @@ export const TwitterIcon = styled(SocialTwitter)`
     color: ${(props) => props.theme.subText};
 `;
 
-const MainContainer = styled.section`
+export const MainContainer = styled.section`
     padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
@@ -42,11 +42,11 @@ const MainContainer = styled.section`
     // justify-content: center;
 `;
 
-const AvatarContainer = styled.div`
+export const AvatarContainer = styled.div`
     cursor: pointer;
 `;
 
-const DescriptionContainer = styled.div`
+export const DescriptionContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -84,7 +84,7 @@ const MainBadgeContainer = styled.div`
 
 const BadgeContainer = styled.div``;
 
-const BioDescContainer = styled.div`
+export const BioDescContainer = styled.div`
     margin: 0.5rem 0rem 1.5rem 0rem;
 `;
 
@@ -96,13 +96,13 @@ const BioDesc = styled.p`
     word-break: break-word;
 `;
 
-const EditProfileContainer = styled.div``;
+export const EditProfileContainer = styled.div``;
 
-const OptionalMainContainer = styled.div`
+export const OptionalMainContainer = styled.div`
     margin: 1rem 0rem;
 `;
 
-const OptionalContainer = styled.div`
+export const OptionalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;

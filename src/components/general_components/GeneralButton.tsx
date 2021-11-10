@@ -37,7 +37,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
 `;
 
 const IconContainer = styled.div<IGeneralButtonProps>`
-    margin-right: ${(props) => props.iconMargin};
+    margin: ${(props) => props.iconMargin};
 `;
 
 //Interface:
@@ -76,7 +76,7 @@ const GeneralButton = ({
     isDisabledOnLoading = false,
     buttonIcon,
     disableShadow = false,
-    iconMargin = '0.25rem',
+    iconMargin = '0rem 0.25rem 0rem 0rem',
     fontSize = '1em',
     hoverColor = 'none',
     fontWeight = '600',
