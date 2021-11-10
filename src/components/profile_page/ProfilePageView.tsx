@@ -10,6 +10,7 @@ import { findUserProfile } from '../../redux/profile/profileActions';
 import useLoginStatus from '../../utils/hooks/useLoginStatus';
 import ProfilePanel from './profile_page_components/ProfilePanel';
 import ActivityPanel from './profile_page_components/ActivityPanel';
+import ProfilePanelSkeleton from './profile_page_components/ProfilePanelSkeleton';
 
 //Styles:
 import styled from 'styled-components';
@@ -88,10 +89,13 @@ const ProfilePageView = ({
     const isUserLoggedIn = useLoginStatus();
     const User = useSelector((state: RootStateOrAny) => state?.user?.user);
 
-    const fakeStatus = (status: boolean) => console.log(status);
+    const [isProfilePanelLoaded, setIsProfilePanelLoaded] = useState(false);
+
+    const setStateProfilePanel = (state: boolean) =>
+        setIsProfilePanelLoaded(state);
 
     useEffect(() => {
-        dispatch(findUserProfile(fakeStatus, id));
+        dispatch(findUserProfile(setStateProfilePanel, id));
     }, []);
 
     const isUserOwnProfile = () => {
@@ -100,11 +104,17 @@ const ProfilePageView = ({
         return false;
     };
 
+    const renderProfilePanelIfLoaded = () => {
+        if (isProfilePanelLoaded)
+            return <ProfilePanel isUserOwnProfile={isUserOwnProfile()} />;
+        return <ProfilePanelSkeleton />;
+    };
+
     return (
         <PrimaryWrapper>
             <MainContainer>
                 <ProfilePanelView>
-                    <ProfilePanel isUserOwnProfile={isUserOwnProfile()} />
+                    {renderProfilePanelIfLoaded()}
                 </ProfilePanelView>
                 <ActivityPanelView>
                     <ActivityPanel />
