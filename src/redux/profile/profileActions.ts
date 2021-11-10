@@ -23,6 +23,7 @@ export const findUserProfile = (
 
 export const updateUserProfile = (
     statusCallback: (status: boolean) => void,
+    formCallback: () => void,
     updateObject: any
 ) => {
     return async (dispatch: Dispatch<any>) => {
@@ -39,5 +40,10 @@ export const updateUserProfile = (
         //Update the current user's auth state --> This is to match the user's auth state with the profile state (if the user is viewing their own profile)
 
         dispatch(userLogin(response.data.userProfile));
+
+        if (response?.data?.userProfile) {
+            statusCallback(false);
+            formCallback();
+        }
     };
 };
