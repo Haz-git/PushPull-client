@@ -54,7 +54,7 @@ export const DescriptionContainer = styled.div`
     margin: 1rem 0rem 0.5rem 0rem;
 `;
 
-const NameHeader = styled.h2`
+const NameHeader = styled.h1`
     font-size: 2rem;
     font-weight: 800;
     color: ${(props) => props.theme.mainText};
