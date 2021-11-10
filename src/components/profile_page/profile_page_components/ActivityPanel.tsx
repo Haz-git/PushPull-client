@@ -9,7 +9,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-    padding: 2rem 1rem;
+    padding: 3rem 1rem 0rem 2rem;
     display: flex;
     flex-direction: column;
 `;
