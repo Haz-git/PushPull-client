@@ -35,7 +35,7 @@ export const TwitterIcon = styled(SocialTwitter)`
 `;
 
 export const MainContainer = styled.section`
-    padding: 2rem 1rem;
+    padding: 3rem 1rem 0rem 1rem;
     display: flex;
     flex-direction: column;
     // align-items: center;
@@ -44,6 +44,7 @@ export const MainContainer = styled.section`
 
 export const AvatarContainer = styled.div`
     cursor: pointer;
+    border-radius: 100%;
 `;
 
 export const DescriptionContainer = styled.div`
@@ -264,6 +265,11 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                     alt="queried user profile image"
                     radius={280}
                     size={280}
+                    styles={{
+                        root: {
+                            border: '2px solid black',
+                        },
+                    }}
                 />
             </AvatarContainer>
             {renderUserDetailsOrUpdateForm()}
