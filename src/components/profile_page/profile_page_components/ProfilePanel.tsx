@@ -86,7 +86,9 @@ const MainBadgeContainer = styled.div`
 const BadgeContainer = styled.div``;
 
 export const BioDescContainer = styled.div`
-    margin: 0.5rem 0rem 1.5rem 0rem;
+    border-top: 1px solid #d6d6d6;
+    padding-top: 1rem;
+    margin: 0rem 0rem 1.5rem 0rem;
 `;
 
 const BioDesc = styled.p`
