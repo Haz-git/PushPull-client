@@ -32,8 +32,8 @@ const PrimaryWrapper = styled.div`
     }
 
     @media ${deviceMin.laptopL} {
-        padding-left: 15%;
-        padding-right: 15%;
+        padding-left: 10%;
+        padding-right: 10%;
         margin: 0 auto;
     }
 
