@@ -9,12 +9,13 @@ import { updateUserProfile } from '../../../redux/profile/profileActions';
 import GeneralButton from '../../general_components/GeneralButton';
 import { TextInput } from '@mantine/core';
 import { Textarea } from '@mantine/core';
-
+import { Loader } from '@mantine/core';
 //Styles:
 import styled from 'styled-components';
 import { LocationIcon, LinkIcon, TwitterIcon } from './ProfilePanel';
 
 const MainContainer = styled.div`
+    position: relative;
     width: 100%;
 `;
 
@@ -69,6 +70,8 @@ const ProfilePanelUpdateForm = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
+    const [isUpdateRequestLoading, setIsUpdateRequestLoading] = useState(false);
+
     const [userProfileUpdateDetails, setUserProfileUpdateDetails] = useState({
         newName: currName,
         newBio: currBio,
@@ -86,10 +89,23 @@ const ProfilePanelUpdateForm = ({
         });
     };
 
-    const fakeCallback = (status: boolean) => console.log(status);
+    const stateUpdateRequest = (state: boolean) =>
+        setIsUpdateRequestLoading(state);
 
     const handleUserSubmit = () => {
-        dispatch(updateUserProfile(fakeCallback, userProfileUpdateDetails));
+        setIsUpdateRequestLoading(true);
+
+        dispatch(
+            updateUserProfile(
+                stateUpdateRequest,
+                toggleUserUpdateForm,
+                userProfileUpdateDetails
+            )
+        );
+    };
+
+    const disableUserInputOnRequestHandle = () => {
+        if (isUpdateRequestLoading) return true;
     };
 
     return (
@@ -119,6 +135,7 @@ const ProfilePanelUpdateForm = ({
                         onChange={(e) => handleUserInput(e)}
                         maxLength={80}
                         value={userProfileUpdateDetails.newName}
+                        disabled={disableUserInputOnRequestHandle()}
                     />
                 </TextInputContainer>
                 <TextInputContainer>
@@ -147,6 +164,7 @@ const ProfilePanelUpdateForm = ({
                         onChange={(e) => handleUserInput(e)}
                         maxLength={200}
                         value={userProfileUpdateDetails.newBio}
+                        disabled={disableUserInputOnRequestHandle()}
                     />
                 </TextInputContainer>
                 <OptionalInputContainer>
@@ -176,6 +194,7 @@ const ProfilePanelUpdateForm = ({
                             onChange={(e) => handleUserInput(e)}
                             maxLength={100}
                             value={userProfileUpdateDetails.newLocation}
+                            disabled={disableUserInputOnRequestHandle()}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
@@ -206,6 +225,7 @@ const ProfilePanelUpdateForm = ({
                             onChange={(e) => handleUserInput(e)}
                             maxLength={100}
                             value={userProfileUpdateDetails.newWebsite}
+                            disabled={disableUserInputOnRequestHandle()}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
@@ -236,21 +256,30 @@ const ProfilePanelUpdateForm = ({
                             onChange={(e) => handleUserInput(e)}
                             maxLength={100}
                             value={userProfileUpdateDetails.newTwitter}
+                            disabled={disableUserInputOnRequestHandle()}
                         />
                     </OptionalInputWrapper>
                 </OptionalInputContainer>
             </FormContainer>
             <ButtonContainer>
                 <GeneralButton
-                    buttonLabel="Save"
+                    buttonLabel={
+                        isUpdateRequestLoading ? 'Updating...' : 'Save'
+                    }
                     onClick={() => {
                         handleUserSubmit();
-                        toggleUserUpdateForm();
                     }}
-                    width="5rem"
+                    width={isUpdateRequestLoading ? '8rem' : '5rem'}
                     buttonBackground="#41A312"
                     fontSize="1rem"
                     height="2rem"
+                    isDisabledOnLoading={disableUserInputOnRequestHandle()}
+                    buttonIcon={
+                        isUpdateRequestLoading ? (
+                            <Loader color="white" size="xs" />
+                        ) : null
+                    }
+                    iconMargin="0rem .3rem -.2rem 0rem"
                 />
                 <GeneralButton
                     buttonLabel="Cancel"
@@ -264,6 +293,7 @@ const ProfilePanelUpdateForm = ({
                     onClick={() => toggleUserUpdateForm()}
                     fontSize="1rem"
                     height="2rem"
+                    isDisabledOnLoading={disableUserInputOnRequestHandle()}
                 />
             </ButtonContainer>
         </MainContainer>
