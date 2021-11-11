@@ -120,6 +120,15 @@ const OptionalDescText = styled.p`
     margin-left: 0.5rem;
 `;
 
+const WebsiteLink = styled.a`
+    font-size: 1rem;
+    font-weight: 700;
+    color: ${(props) => props.theme.subText};
+    margin-left: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+`;
+
 //Interfaces:
 
 interface IComponentProps {
@@ -148,7 +157,13 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                 return (
                     <OptionalContainer>
                         <LinkIcon />
-                        <OptionalDescText>{data}</OptionalDescText>
+                        <WebsiteLink
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={`https://www.${data}`}
+                        >
+                            {data}
+                        </WebsiteLink>
                     </OptionalContainer>
                 );
             case 'TWITTER':
