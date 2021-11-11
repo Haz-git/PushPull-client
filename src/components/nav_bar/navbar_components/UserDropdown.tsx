@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { userSignout } from '../../../redux/auth/authActions';
 
 //Components:
+import historyObject from '../../../utils/historyObject';
 import GeneralButton from '../../../components/general_components/GeneralButton';
 import { Avatar } from '@mantine/core';
 import { Menu, MenuItem, MenuLabel, Divider, Text } from '@mantine/core';
@@ -17,11 +18,18 @@ import { useNotifications } from '@mantine/notifications';
 //Styles:
 import styled from 'styled-components';
 import { Exit } from '@styled-icons/boxicons-regular/Exit';
+import { UserCircle } from '@styled-icons/boxicons-regular/UserCircle';
 import { CaretDown } from '@styled-icons/ionicons-outline/CaretDown';
 
 const ExitIcon = styled(Exit)`
     height: 1.25rem;
     width: 1.25rem;
+    color: ${(props) => props.theme.mainText};
+`;
+
+const ProfileIcon = styled(UserCircle)`
+    height: 1.35rem;
+    width: 1.35rem;
     color: ${(props) => props.theme.mainText};
 `;
 
@@ -131,6 +139,13 @@ const UserDropdown = ({
                 zIndex={999}
                 size={checkIfMobile()}
             >
+                <MenuItem
+                    icon={<ProfileIcon />}
+                    onClick={() => historyObject.push(`/user/${username}`)}
+                >
+                    User Profile
+                </MenuItem>
+                <Divider />
                 <MenuItem
                     icon={<ExitIcon />}
                     onClick={() => {
