@@ -10,7 +10,7 @@ import historyObject from '../../utils/historyObject';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section`
+export const MainContainer = styled.section`
     @media ${deviceMin.mobileS} {
         display: flex;
         flex-direction: column-reverse;
@@ -29,12 +29,12 @@ const MainContainer = styled.section`
     }
 `;
 
-const MobileMainContainer = styled.section`
+export const MobileMainContainer = styled.section`
     display: block;
     text-align: center;
 `;
 
-const SVGContainer = styled.div`
+export const SVGContainer = styled.div`
     height: 100%;
     width: 100%;
     z-index: 1;
@@ -44,7 +44,7 @@ const SVGContainer = styled.div`
     }
 `;
 
-const MobileSVGContainer = styled.div`
+export const MobileSVGContainer = styled.div`
     z-index: 1;
     margin: 0 auto;
     @media ${deviceMin.tablet} {
@@ -53,13 +53,13 @@ const MobileSVGContainer = styled.div`
     }
 `;
 
-const TextContainer = styled.div`
+export const TextContainer = styled.div`
     @media ${deviceMin.laptopM} {
         padding-left: 10rem;
     }
 `;
 
-const MobileTextContainer = styled.div`
+export const MobileTextContainer = styled.div`
     display: block;
     position: relative;
     z-index: 10;
@@ -73,14 +73,14 @@ const MobileTextContainer = styled.div`
     }
 `;
 
-const ErrorCode = styled.h1`
+export const ErrorCode = styled.h1`
     font-size: 9rem;
     color: ${(props) => props.theme.accentColors.orange};
     font-weight: 800;
     margin-bottom: 2rem;
 `;
 
-const MobileErrorCode = styled.h1`
+export const MobileErrorCode = styled.h1`
     font-size: 9rem;
     color: ${(props) => props.theme.accentColors.orange};
     font-weight: 800;
@@ -101,7 +101,7 @@ const MobileErrorCode = styled.h1`
     }
 `;
 
-const HeaderText = styled.h2`
+export const HeaderText = styled.h2`
     font-size: 2.5rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 800;
@@ -116,7 +116,7 @@ const HeaderText = styled.h2`
     }
 `;
 
-const SubText = styled.h3`
+export const SubText = styled.h3`
     font-size: 1.5rem;
     color: ${(props) => props.theme.mainText};
     font-weight: 700;
@@ -131,9 +131,9 @@ const SubText = styled.h3`
     }
 `;
 
-const ButtonContainer = styled.div``;
+export const ButtonContainer = styled.div``;
 
-const MobileButtonContainer = styled.div`
+export const MobileButtonContainer = styled.div`
     width: 15rem;
     text-align: center;
     margin: 0 auto;

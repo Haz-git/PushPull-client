@@ -6,18 +6,24 @@ import { ProfileActionType } from './action-types';
 import { userLogin } from '../auth/authActions';
 
 export const findUserProfile = (
-    statusCallback: (status: boolean) => void,
+    loadingStatusCallback: (status: boolean) => void,
+    onFailCallback: (status: boolean) => void,
     userName: string
 ) => {
     return async (dispatch: Dispatch<ProfileAction>) => {
         let response = await api.get(`/user/${userName}`);
 
-        dispatch({
-            type: ProfileActionType.USER_FIND_PROFILE,
-            payload: response.data.userProfile,
-        });
+        if (response?.data?.userProfile !== 0) {
+            dispatch({
+                type: ProfileActionType.USER_FIND_PROFILE,
+                payload: response.data.userProfile,
+            });
 
-        if (response?.data?.userProfile) statusCallback(true);
+            loadingStatusCallback(true);
+        } else {
+            loadingStatusCallback(true);
+            onFailCallback(true);
+        }
     };
 };
 
