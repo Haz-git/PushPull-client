@@ -90,12 +90,17 @@ const ProfilePageView = ({
     const User = useSelector((state: RootStateOrAny) => state?.user?.user);
 
     const [isProfilePanelLoaded, setIsProfilePanelLoaded] = useState(false);
+    const [isUserNotFound, setIsUserNotFound] = useState(false);
 
     const setStateProfilePanel = (state: boolean) =>
         setIsProfilePanelLoaded(state);
 
+    const setStateIsUserNotFound = (state: boolean) => setIsUserNotFound(state);
+
     useEffect(() => {
-        dispatch(findUserProfile(setStateProfilePanel, id));
+        dispatch(
+            findUserProfile(setStateProfilePanel, setStateIsUserNotFound, id)
+        );
     }, []);
 
     const isUserOwnProfile = () => {
@@ -115,18 +120,24 @@ const ProfilePageView = ({
         return <ActivityPanelSkeleton />;
     };
 
-    return (
-        <PrimaryWrapper>
-            <MainContainer>
-                <ProfilePanelView>
-                    {renderProfilePanelIfLoaded()}
-                </ProfilePanelView>
-                <ActivityPanelView>
-                    {renderActivityPanelIfLoaded()}
-                </ActivityPanelView>
-            </MainContainer>
-        </PrimaryWrapper>
-    );
+    const renderProfilePageIfUserFound = () => {
+        if (!isUserNotFound) {
+            return (
+                <MainContainer>
+                    <ProfilePanelView>
+                        {renderProfilePanelIfLoaded()}
+                    </ProfilePanelView>
+                    <ActivityPanelView>
+                        {renderActivityPanelIfLoaded()}
+                    </ActivityPanelView>
+                </MainContainer>
+            );
+        }
+
+        return <div>NOT FOUND</div>;
+    };
+
+    return <PrimaryWrapper>{renderProfilePageIfUserFound()}</PrimaryWrapper>;
 };
 
 export default ProfilePageView;
