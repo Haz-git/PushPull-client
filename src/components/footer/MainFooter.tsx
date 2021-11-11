@@ -27,14 +27,14 @@ const MailIcon = styled(MailSend)`
 `;
 
 const CaretUpIcon = styled(CaretUp)`
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.3rem;
+    width: 1.3rem;
     color: #ffffff;
 `;
 
 const CaretDownIcon = styled(CaretDown)`
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.3rem;
+    width: 1.3rem;
     color: #ffffff;
 `;
 
@@ -113,11 +113,9 @@ const FooterTextBlock = styled.div`
 
 const FooterBlock = styled.div`
     @media ${deviceMin.mobileS} {
-        display: block;
-    }
-
-    @media ${deviceMin.mobileM} {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     @media ${deviceMin.tabletp} {
@@ -224,6 +222,16 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                                     fontSize=".8rem"
                                 />
                             </MobilePaddingSpacers>
+                            <MobilePaddingSpacers>
+                                <GeneralButton
+                                    buttonLabel="More"
+                                    fontSize=".8rem"
+                                    padding=".2rem .4rem"
+                                    buttonIcon={returnStateCollapseButtonIcon()}
+                                    onClick={() => setIsOpen(!isOpen)}
+                                    margin=".5rem auto"
+                                />
+                            </MobilePaddingSpacers>
                         </FooterBlock>
                     </MobileFlexContainer>
                     <Collapse in={isOpen}>
@@ -245,14 +253,6 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                             </MobileFooterTextLinks>
                         </MobileLinkContainer>
                     </Collapse>
-                    <GeneralButton
-                        height="1.5rem"
-                        buttonLabel=""
-                        padding=".2rem .5rem"
-                        borderRadius="none"
-                        buttonIcon={returnStateCollapseButtonIcon()}
-                        onClick={() => setIsOpen(!isOpen)}
-                    />
                 </MobileMainContainer>
             </MobileOnlyView>
         </>
