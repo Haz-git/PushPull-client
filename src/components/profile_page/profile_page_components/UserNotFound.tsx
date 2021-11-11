@@ -16,7 +16,6 @@ import {
     SubText,
     ButtonContainer,
     SVGContainer,
-    MobileMainContainer,
     MobileButtonContainer,
 } from '../../not_found_page/NotFound';
 
@@ -38,6 +37,12 @@ const MainContainer = styled.section`
         width: 100%;
         max-width: 100rem;
     }
+`;
+
+const MobileMainContainer = styled.section`
+    display: block;
+    text-align: center;
+    margin: 2rem auto;
 `;
 
 const MobileTextContainer = styled.div`
@@ -80,13 +85,20 @@ interface IComponentProps {
 }
 
 const UserNotFound = ({ requestedUser }: IComponentProps): JSX.Element => {
+    const truncateName = () => {
+        if (requestedUser.length > 15)
+            return requestedUser.substr(0, 15).concat('...');
+
+        return requestedUser;
+    };
+
     return (
         <>
             <BrowserView>
                 <MainContainer>
                     <TextContainer>
                         <ErrorCode>404</ErrorCode>
-                        <HeaderText>{requestedUser} was not found.</HeaderText>
+                        <HeaderText>{truncateName()} was not found.</HeaderText>
                         <SubText>Maybe they're lost in cyberspace?</SubText>
                         <ButtonContainer>
                             <GeneralButton
@@ -108,7 +120,7 @@ const UserNotFound = ({ requestedUser }: IComponentProps): JSX.Element => {
                         <UserNotFoundSVG />
                     </MobileSVGContainer>
                     <MobileTextContainer>
-                        <HeaderText>{requestedUser} was not found.</HeaderText>
+                        <HeaderText>{truncateName()} was not found.</HeaderText>
                         <SubText>Maybe they're lost in cyberspace?</SubText>
                         <MobileButtonContainer>
                             <GeneralButton
