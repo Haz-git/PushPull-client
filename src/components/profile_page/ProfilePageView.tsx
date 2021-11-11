@@ -14,6 +14,7 @@ import ProfilePanelSkeleton from './profile_page_components/ProfilePanelSkeleton
 
 //Styles:
 import styled from 'styled-components';
+import ActivityPanelSkeleton from './profile_page_components/ActivityPanelSkeleton';
 
 const PrimaryWrapper = styled.div`
     @media ${deviceMin.mobileS} {
@@ -109,6 +110,11 @@ const ProfilePageView = ({
         return <ProfilePanelSkeleton />;
     };
 
+    const renderActivityPanelIfLoaded = () => {
+        if (isProfilePanelLoaded) return <ActivityPanel />;
+        return <ActivityPanelSkeleton />;
+    };
+
     return (
         <PrimaryWrapper>
             <MainContainer>
@@ -116,7 +122,7 @@ const ProfilePageView = ({
                     {renderProfilePanelIfLoaded()}
                 </ProfilePanelView>
                 <ActivityPanelView>
-                    <ActivityPanel />
+                    {renderActivityPanelIfLoaded()}
                 </ActivityPanelView>
             </MainContainer>
         </PrimaryWrapper>
