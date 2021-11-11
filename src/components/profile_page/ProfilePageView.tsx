@@ -11,6 +11,7 @@ import useLoginStatus from '../../utils/hooks/useLoginStatus';
 import ProfilePanel from './profile_page_components/ProfilePanel';
 import ActivityPanel from './profile_page_components/ActivityPanel';
 import ProfilePanelSkeleton from './profile_page_components/ProfilePanelSkeleton';
+import UserNotFound from './profile_page_components/UserNotFound';
 
 //Styles:
 import styled from 'styled-components';
@@ -134,7 +135,7 @@ const ProfilePageView = ({
             );
         }
 
-        return <div>NOT FOUND</div>;
+        return <UserNotFound requestedUser={id} />;
     };
 
     return <PrimaryWrapper>{renderProfilePageIfUserFound()}</PrimaryWrapper>;
