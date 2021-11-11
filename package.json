@@ -47,7 +47,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "pushGit": "git checkout master && git merge dev && git push origin master && git checkout dev"
+        "pushGit": "git checkout master && git merge dev && git push origin master && git checkout dev",
+        "gitUpdate": "git pull && git checkout master && git pull && git checkout dev"
     },
     "eslintConfig": {
         "extends": [
