@@ -18,6 +18,20 @@ const axiosInstance = axios.create({
     },
 });
 
+axiosInstance.interceptors.request.use(
+    (config) => {
+        const token = Userfront.accessToken();
+
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+
+        return config;
+    },
+
+    (error) => Promise.reject(error)
+);
+
 //Check to see if need axios interceptors
 
 export default axiosInstance;
