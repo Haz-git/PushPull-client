@@ -30,12 +30,13 @@ const MainContainer = styled.section`
 
     @media ${deviceMin.laptopM} {
         display: grid;
-        align-items: center;
-        justify-content: center;
         grid-template-columns: 40% 60%;
-        margin: 5rem auto;
-        width: 100%;
-        max-width: 100rem;
+        margin: 3rem auto 0rem auto;
+        justify-content: space-evenly;
+        justify-items: space-evenly;
+        align-items: center;
+        width: 85rem;
+        height: 100%;
     }
 `;
 
