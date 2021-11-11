@@ -8,13 +8,13 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section`
+export const MainContainer = styled.section`
     padding: 3rem 1rem 0rem 2rem;
     display: flex;
     flex-direction: column;
 `;
 
-const PanelHeaderContainer = styled.div`
+export const PanelHeaderContainer = styled.div`
     margin-bottom: 2rem;
 `;
 
@@ -25,7 +25,7 @@ const PanelHeader = styled.h2`
     width: 100%;
 `;
 
-const PanelBlock = styled.div`
+export const PanelBlock = styled.div`
     margin-bottom: 2rem;
 `;
 
@@ -37,13 +37,13 @@ const SubPanelHeader = styled.h3`
     margin-bottom: 0.5rem;
 `;
 
-const WorkoutProgramContainer = styled.div`
+export const WorkoutProgramContainer = styled.div`
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
     padding: 2rem 2rem;
 `;
 
-const PostedReviewContainer = styled.div`
+export const PostedReviewContainer = styled.div`
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
     padding: 2rem 2rem;
