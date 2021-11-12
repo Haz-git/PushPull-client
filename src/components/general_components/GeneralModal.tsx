@@ -35,6 +35,7 @@ const GeneralModal = ({
                     },
                     header: {
                         marginBottom: '.5rem',
+                        padding: '0rem .5rem',
                     },
                 }}
                 opened={openBoolean}
