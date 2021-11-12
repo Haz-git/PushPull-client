@@ -140,6 +140,7 @@ const ProfilePageView = ({
                     <GeneralModal
                         openBoolean={stateAvatarModal}
                         closeFunc={() => setStateAvatarModal(false)}
+                        title="Update Avatar"
                     >
                         <UpdateProfileAvatarForm />
                     </GeneralModal>
