@@ -11,10 +11,17 @@ import { Location } from '@styled-icons/typicons/Location';
 import { Link } from '@styled-icons/typicons/Link';
 import { SocialTwitter } from '@styled-icons/typicons/SocialTwitter';
 import { Badge } from '@mantine/core';
+import { EditOutline } from '@styled-icons/evaicons-outline';
 import ProfilePanelUpdateForm from './ProfilePanelUpdateForm';
 
 //Styles:
 import styled from 'styled-components';
+
+const EditIcon = styled(EditOutline)`
+    height: 1.3rem;
+    width: 1.3rem;
+    color: #ffffff;
+`;
 
 export const LocationIcon = styled(Location)`
     height: 2rem;
@@ -43,8 +50,28 @@ export const MainContainer = styled.section`
 `;
 
 export const AvatarContainer = styled.div`
+    position: relative;
     cursor: pointer;
     border-radius: 100%;
+`;
+
+const AvatarBadgeContainer = styled.div`
+    position: absolute;
+    bottom: 2rem;
+    right: 1rem;
+`;
+
+const AvatarBadgeWrapper = styled.button`
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.1rem;
+    cursor: pointer;
 `;
 
 export const DescriptionContainer = styled.div`
@@ -288,6 +315,18 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                         },
                     }}
                 />
+                <AvatarBadgeContainer>
+                    <Badge
+                        variant="gradient"
+                        gradient={{ from: 'teal', to: 'blue', deg: 105 }}
+                        size="lg"
+                    >
+                        <AvatarBadgeWrapper>
+                            <EditIcon />
+                            Edit
+                        </AvatarBadgeWrapper>
+                    </Badge>
+                </AvatarBadgeContainer>
             </AvatarContainer>
             {renderUserDetailsOrUpdateForm()}
         </MainContainer>
