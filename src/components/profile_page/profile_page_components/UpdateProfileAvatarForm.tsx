@@ -3,6 +3,7 @@ import * as React from 'react';
 //Components:
 import { IMAGE_MIME_TYPE, Dropzone } from '@mantine/dropzone';
 import Text from '../../general_components/Text';
+import { Group } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -24,20 +25,20 @@ const DropzoneWrapper = styled.div`
 `;
 
 const ImageIcon = styled(ImageAdd)<ImageIconProps>`
-    height: 11rem;
-    width: 11rem;
+    height: 10rem;
+    width: 10rem;
     color: ${(props) => props.imageColor};
 `;
 
 const UploadIcon = styled(Upload)<ImageIconProps>`
-    height: 11rem;
-    width: 11rem;
+    height: 10rem;
+    width: 10rem;
     color: ${(props) => props.imageColor};
 `;
 
 const CancelIcon = styled(ErrorCircle)<ImageIconProps>`
-    height: 11rem;
-    width: 11rem;
+    height: 10rem;
+    width: 10rem;
     color: ${(props) => props.imageColor};
 `;
 
@@ -80,12 +81,16 @@ const UpdateProfileAvatarForm = () => {
         // See results in console after dropping files to Dropzone
         <MainContainer>
             <Dropzone
-                onDrop={console.log}
+                onDrop={(files: File[]) => console.log(files)}
                 maxSize={3 * 1024 ** 2}
                 accept={IMAGE_MIME_TYPE}
             >
                 {(status) => (
-                    <DropzoneWrapper>
+                    <Group
+                        position="center"
+                        spacing="xl"
+                        style={{ pointerEvents: 'none' }}
+                    >
                         <ImageUploadIcon status={status} />
 
                         <div>
@@ -96,14 +101,14 @@ const UpdateProfileAvatarForm = () => {
                                 fontWeight="600"
                             />
                             <Text
-                                text="Attach as many files as you like, each file
+                                text="Attach your new avatar, the file
                                 should not exceed 5mb"
                                 subText={true}
                                 fontSize=".9rem"
                                 fontWeight="500"
                             />
                         </div>
-                    </DropzoneWrapper>
+                    </Group>
                 )}
             </Dropzone>
         </MainContainer>
