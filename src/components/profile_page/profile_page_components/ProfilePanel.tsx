@@ -51,7 +51,6 @@ export const MainContainer = styled.section`
 
 export const AvatarContainer = styled.div`
     position: relative;
-    cursor: pointer;
     border-radius: 100%;
 `;
 
@@ -160,9 +159,13 @@ const WebsiteLink = styled.a`
 
 interface IComponentProps {
     isUserOwnProfile: boolean;
+    toggleAvatarModal: (state: boolean) => void;
 }
 
-const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
+const ProfilePanel = ({
+    isUserOwnProfile,
+    toggleAvatarModal,
+}: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const queriedUser = useSelector((state: RootStateOrAny) => state?.profile);
 
@@ -301,6 +304,26 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
         );
     };
 
+    const renderAvatarBadge = () => {
+        if (isUserOwnProfile)
+            return (
+                <AvatarBadgeContainer>
+                    <Badge
+                        variant="gradient"
+                        gradient={{ from: 'teal', to: 'blue', deg: 105 }}
+                        size="lg"
+                    >
+                        <AvatarBadgeWrapper
+                            onClick={() => toggleAvatarModal(true)}
+                        >
+                            <EditIcon />
+                            Edit
+                        </AvatarBadgeWrapper>
+                    </Badge>
+                </AvatarBadgeContainer>
+            );
+    };
+
     return (
         <MainContainer>
             <AvatarContainer>
@@ -315,18 +338,7 @@ const ProfilePanel = ({ isUserOwnProfile }: IComponentProps): JSX.Element => {
                         },
                     }}
                 />
-                <AvatarBadgeContainer>
-                    <Badge
-                        variant="gradient"
-                        gradient={{ from: 'teal', to: 'blue', deg: 105 }}
-                        size="lg"
-                    >
-                        <AvatarBadgeWrapper>
-                            <EditIcon />
-                            Edit
-                        </AvatarBadgeWrapper>
-                    </Badge>
-                </AvatarBadgeContainer>
+                {renderAvatarBadge()}
             </AvatarContainer>
             {renderUserDetailsOrUpdateForm()}
         </MainContainer>
