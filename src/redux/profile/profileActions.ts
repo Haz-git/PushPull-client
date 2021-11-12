@@ -20,6 +20,7 @@ export const findUserProfile = (
             });
 
             loadingStatusCallback(true);
+            onFailCallback(false);
         } else {
             loadingStatusCallback(true);
             onFailCallback(true);

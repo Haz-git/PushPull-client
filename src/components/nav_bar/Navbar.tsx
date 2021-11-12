@@ -29,9 +29,10 @@ const StyledNavbar = styled.nav`
     height: 3.75rem;
     padding: 0.5rem 1rem;
     text-align: left;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+    // border-bottom: 1px solid #d6d6d6;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
     z-index: 995;
 `;
 
