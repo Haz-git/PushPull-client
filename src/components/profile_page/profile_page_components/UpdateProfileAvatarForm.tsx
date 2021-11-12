@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { IMAGE_MIME_TYPE, Dropzone } from '@mantine/dropzone';
 import Text from '../../general_components/Text';
 import { Group } from '@mantine/core';
+import { Transition } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -12,7 +14,7 @@ import { ErrorCircle } from '@styled-icons/boxicons-regular';
 import { Upload } from '@styled-icons/boxicons-regular/Upload';
 
 const MainContainer = styled.section`
-    padding: 0rem 0.5rem;
+    padding: 1rem 0.5rem;
 `;
 
 const DropzoneWrapper = styled.div`
@@ -42,15 +44,15 @@ const CancelIcon = styled(ErrorCircle)<ImageIconProps>`
     color: ${(props) => props.imageColor};
 `;
 
-// const getIconColor = (status: any, theme: any) => {
-//   return status.accepted
-//     ? theme.colors[theme.primaryColor][6]
-//     : status.rejected
-//     ? theme.colors.red[6]
-//     : theme.colorScheme === 'dark'
-//     ? theme.colors.dark[0]
-//     : theme.black;
-// }
+const UploadedTextContainer = styled.div`
+    margin: 2rem 0rem;
+    padding: 1rem 1rem;
+    border: 1px solid #d6d6d6;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+`;
 
 //Interfaces:
 
@@ -77,13 +79,24 @@ const ImageUploadIcon = ({ status }: ImageUploadProps) => {
 };
 
 const UpdateProfileAvatarForm = () => {
+    const [uploadedFileName, setUploadedFileName] = useState('');
+    const [openTransition, setOpenTransition] = useState(false);
+
+    const handleOnFileDrop = (files: File[]) => {
+        console.log(files[0]);
+
+        setUploadedFileName(files[0].name);
+        setOpenTransition(true);
+    };
+
     return (
         // See results in console after dropping files to Dropzone
         <MainContainer>
             <Dropzone
-                onDrop={(files: File[]) => console.log(files)}
+                onDrop={(files: File[]) => handleOnFileDrop(files)}
                 maxSize={3 * 1024 ** 2}
                 accept={IMAGE_MIME_TYPE}
+                multiple={false}
             >
                 {(status) => (
                     <Group
@@ -95,7 +108,7 @@ const UpdateProfileAvatarForm = () => {
 
                         <div>
                             <Text
-                                text="Drag images here or click to select files"
+                                text="Drag image here or click to select file"
                                 fontSize="1.2rem"
                                 mainText={true}
                                 fontWeight="600"
@@ -105,12 +118,35 @@ const UpdateProfileAvatarForm = () => {
                                 should not exceed 5mb"
                                 subText={true}
                                 fontSize=".9rem"
-                                fontWeight="500"
+                                fontWeight="600"
                             />
                         </div>
                     </Group>
                 )}
             </Dropzone>
+            <Transition
+                mounted={openTransition}
+                transition="slide-down"
+                duration={400}
+                timingFunction="ease"
+            >
+                {(styles) => (
+                    <UploadedTextContainer style={styles}>
+                        <Text
+                            text="File Uploaded"
+                            fontSize="1rem"
+                            mainText={true}
+                            fontWeight="800"
+                        />
+                        <Text
+                            text={`${uploadedFileName}`}
+                            fontSize="1rem"
+                            fontWeight="600"
+                            subText={true}
+                        />
+                    </UploadedTextContainer>
+                )}
+            </Transition>
         </MainContainer>
     );
 };
