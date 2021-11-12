@@ -5,6 +5,7 @@
     "dependencies": {
         "@mantine/core": "^3.0.5",
         "@mantine/dates": "^3.0.5",
+        "@mantine/dropzone": "^3.1.8",
         "@mantine/hooks": "^3.0.5",
         "@mantine/notifications": "^3.0.5",
         "@mantine/rte": "^3.0.5",
