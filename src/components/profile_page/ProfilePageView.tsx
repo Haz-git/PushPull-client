@@ -12,6 +12,8 @@ import ProfilePanel from './profile_page_components/ProfilePanel';
 import ActivityPanel from './profile_page_components/ActivityPanel';
 import ProfilePanelSkeleton from './profile_page_components/ProfilePanelSkeleton';
 import UserNotFound from './profile_page_components/UserNotFound';
+import UpdateProfileAvatarForm from './profile_page_components/UpdateProfileAvatarForm';
+import GeneralModal from '../general_components/GeneralModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -92,6 +94,7 @@ const ProfilePageView = ({
 
     const [isProfilePanelLoaded, setIsProfilePanelLoaded] = useState(false);
     const [isUserNotFound, setIsUserNotFound] = useState(false);
+    const [stateAvatarModal, setStateAvatarModal] = useState(false);
 
     const setStateProfilePanel = (state: boolean) =>
         setIsProfilePanelLoaded(state);
@@ -114,7 +117,14 @@ const ProfilePageView = ({
 
     const renderProfilePanelIfLoaded = () => {
         if (isProfilePanelLoaded)
-            return <ProfilePanel isUserOwnProfile={isUserOwnProfile()} />;
+            return (
+                <ProfilePanel
+                    isUserOwnProfile={isUserOwnProfile()}
+                    toggleAvatarModal={(state: boolean) =>
+                        setStateAvatarModal(state)
+                    }
+                />
+            );
         return <ProfilePanelSkeleton />;
     };
 
@@ -126,14 +136,22 @@ const ProfilePageView = ({
     const renderProfilePageIfUserFound = () => {
         if (!isUserNotFound) {
             return (
-                <MainContainer>
-                    <ProfilePanelView>
-                        {renderProfilePanelIfLoaded()}
-                    </ProfilePanelView>
-                    <ActivityPanelView>
-                        {renderActivityPanelIfLoaded()}
-                    </ActivityPanelView>
-                </MainContainer>
+                <>
+                    <GeneralModal
+                        openBoolean={stateAvatarModal}
+                        closeFunc={() => setStateAvatarModal(false)}
+                    >
+                        <UpdateProfileAvatarForm />
+                    </GeneralModal>
+                    <MainContainer>
+                        <ProfilePanelView>
+                            {renderProfilePanelIfLoaded()}
+                        </ProfilePanelView>
+                        <ActivityPanelView>
+                            {renderActivityPanelIfLoaded()}
+                        </ActivityPanelView>
+                    </MainContainer>
+                </>
             );
         }
 
