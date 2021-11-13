@@ -9,6 +9,13 @@ const MainText = styled.p<IComponentProps>`
     font-weight: ${(props) => props.fontWeight};
     color: ${(props) => props.textColor};
     font-size: ${(props) => props.fontSize};
+    width: ${(props) => props.truncateWidth};
+    white-space: ${(props) =>
+        props.truncateWidth === '100%' ? 'normal' : 'nowrap'};
+    overflow: ${(props) =>
+        props.truncateWidth === '100%' ? 'visible' : 'hidden'};
+    text-overflow: ${(props) =>
+        props.truncateWidth === '100%' ? 'clip' : 'ellipsis'};
 `;
 
 //Interfaces:
@@ -20,6 +27,7 @@ interface IComponentProps {
     fontSize?: string;
     subText?: boolean;
     mainText?: boolean;
+    truncateWidth?: string;
 }
 
 const Text = ({
@@ -29,6 +37,7 @@ const Text = ({
     fontSize = '1rem',
     subText,
     mainText,
+    truncateWidth = '100%',
 }: IComponentProps): JSX.Element => {
     const renderTextColor = () => {
         if (textColor) return textColor;
@@ -41,6 +50,7 @@ const Text = ({
             fontWeight={fontWeight}
             textColor={renderTextColor()}
             fontSize={fontSize}
+            truncateWidth={truncateWidth}
         >
             {text}
         </MainText>
