@@ -50,8 +50,35 @@ const UploadedTextContainer = styled.div`
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
     display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    column-gap: 5rem;
+`;
+
+const TextContainer = styled.div`
+    display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
+`;
+
+// const FileNameContainer = styled.div`
+//     width: 100px;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+// `;
+
+const PreviewContainer = styled.div`
+    border: 1px solid #d6d6d6;
+    border-radius: 0.3rem;
+    padding: 0.25rem 0.25rem;
+`;
+
+const ImgPreview = styled.img`
+    display: block;
+    max-height: 5rem;
+    max-width: 5rem;
+    border-radius: 0.3rem;
 `;
 
 //Interfaces:
@@ -80,12 +107,13 @@ const ImageUploadIcon = ({ status }: ImageUploadProps) => {
 
 const UpdateProfileAvatarForm = () => {
     const [uploadedFileName, setUploadedFileName] = useState('');
+    const [uploadedFileURL, setUploadedFileURL] = useState('');
     const [openTransition, setOpenTransition] = useState(false);
 
     const handleOnFileDrop = (files: File[]) => {
-        console.log(files[0]);
-
+        console.log(files);
         setUploadedFileName(files[0].name);
+        setUploadedFileURL(URL.createObjectURL(files[0]));
         setOpenTransition(true);
     };
 
@@ -132,18 +160,24 @@ const UpdateProfileAvatarForm = () => {
             >
                 {(styles) => (
                     <UploadedTextContainer style={styles}>
-                        <Text
-                            text="File Uploaded"
-                            fontSize="1rem"
-                            mainText={true}
-                            fontWeight="800"
-                        />
-                        <Text
-                            text={`${uploadedFileName}`}
-                            fontSize="1rem"
-                            fontWeight="600"
-                            subText={true}
-                        />
+                        <TextContainer>
+                            <Text
+                                text="File Uploaded"
+                                fontSize="1rem"
+                                mainText={true}
+                                fontWeight="800"
+                            />
+                            <Text
+                                text={`${uploadedFileName}`}
+                                fontSize="1rem"
+                                fontWeight="600"
+                                subText={true}
+                                truncateWidth="11rem"
+                            />
+                        </TextContainer>
+                        <PreviewContainer>
+                            <ImgPreview src={uploadedFileURL} />
+                        </PreviewContainer>
                     </UploadedTextContainer>
                 )}
             </Transition>
