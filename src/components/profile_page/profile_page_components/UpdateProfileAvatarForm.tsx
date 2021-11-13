@@ -61,12 +61,14 @@ const TextContainer = styled.div`
     row-gap: 0.5rem;
 `;
 
-// const FileNameContainer = styled.div`
-//     width: 100px;
-//     white-space: nowrap;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-// `;
+const FileNameContainer = styled.div`
+    max-width: 11rem;
+    max-height: 5rem;
+    overflow-y: scroll;
+    padding: 0.25rem 0.25rem;
+    border: 1px solid #d6d6d6;
+    border-radius: 0.3rem;
+`;
 
 const PreviewContainer = styled.div`
     border: 1px solid #d6d6d6;
@@ -167,13 +169,14 @@ const UpdateProfileAvatarForm = () => {
                                 mainText={true}
                                 fontWeight="800"
                             />
-                            <Text
-                                text={`${uploadedFileName}`}
-                                fontSize="1rem"
-                                fontWeight="600"
-                                subText={true}
-                                truncateWidth="11rem"
-                            />
+                            <FileNameContainer>
+                                <Text
+                                    text={`${uploadedFileName}`}
+                                    fontSize="1rem"
+                                    fontWeight="600"
+                                    subText={true}
+                                />
+                            </FileNameContainer>
                         </TextContainer>
                         <PreviewContainer>
                             <ImgPreview src={uploadedFileURL} />
