@@ -7,6 +7,7 @@ import Text from '../../general_components/Text';
 import { Group } from '@mantine/core';
 import { Transition } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
+import getBase64 from '../../../utils/getBase64';
 
 //Styles:
 import styled from 'styled-components';
@@ -106,6 +107,10 @@ interface ImageIconProps {
     imageColor: string;
 }
 
+interface IComponentProps {
+    toggleModal: (status: boolean) => void;
+}
+
 //Helper Functions
 
 const ImageUploadIcon = ({ status }: ImageUploadProps) => {
@@ -120,15 +125,22 @@ const ImageUploadIcon = ({ status }: ImageUploadProps) => {
     return <ImageIcon imageColor="rgba(0, 0, 34, .6)" />;
 };
 
-const UpdateProfileAvatarForm = () => {
+const UpdateProfileAvatarForm = ({
+    toggleModal,
+}: IComponentProps): JSX.Element => {
     const [uploadedFileName, setUploadedFileName] = useState('');
     const [uploadedFileURL, setUploadedFileURL] = useState('');
     const [openTransition, setOpenTransition] = useState(false);
+    const [uploadedFileBase64, setUploadedFileBase64] = useState('');
 
     const handleOnFileDrop = (files: File[]) => {
-        console.log(files);
         setUploadedFileName(files[0].name);
         setUploadedFileURL(URL.createObjectURL(files[0]));
+
+        getBase64(files[0], (result: any) => {
+            setUploadedFileBase64(result);
+        });
+
         setOpenTransition(true);
     };
 
@@ -216,6 +228,7 @@ const UpdateProfileAvatarForm = () => {
                                 border="1px solid #c6c6c6"
                                 fontSize="1rem"
                                 height="2rem"
+                                onClick={() => toggleModal(false)}
                             />
                         </ButtonContainer>
                     </UploadedTextContainer>
