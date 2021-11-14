@@ -6,6 +6,7 @@ import { IMAGE_MIME_TYPE, Dropzone } from '@mantine/dropzone';
 import Text from '../../general_components/Text';
 import { Group } from '@mantine/core';
 import { Transition } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -14,7 +15,7 @@ import { ErrorCircle } from '@styled-icons/boxicons-regular';
 import { Upload } from '@styled-icons/boxicons-regular/Upload';
 
 const MainContainer = styled.section`
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.5rem 0rem 0.5rem;
 `;
 
 const DropzoneWrapper = styled.div`
@@ -49,10 +50,14 @@ const UploadedTextContainer = styled.div`
     padding: 1rem 1rem;
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
+`;
+
+const UploadContainerWrapper = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     column-gap: 5rem;
+    margin-bottom: 2rem;
 `;
 
 const TextContainer = styled.div`
@@ -81,6 +86,14 @@ const ImgPreview = styled.img`
     max-height: 5rem;
     max-width: 5rem;
     border-radius: 0.3rem;
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-right: 2rem;
 `;
 
 //Interfaces:
@@ -162,25 +175,49 @@ const UpdateProfileAvatarForm = () => {
             >
                 {(styles) => (
                     <UploadedTextContainer style={styles}>
-                        <TextContainer>
-                            <Text
-                                text="File Uploaded"
-                                fontSize="1rem"
-                                mainText={true}
-                                fontWeight="800"
-                            />
-                            <FileNameContainer>
+                        <UploadContainerWrapper>
+                            <TextContainer>
                                 <Text
-                                    text={`${uploadedFileName}`}
+                                    text="File Uploaded"
                                     fontSize="1rem"
-                                    fontWeight="600"
-                                    subText={true}
+                                    mainText={true}
+                                    fontWeight="800"
                                 />
-                            </FileNameContainer>
-                        </TextContainer>
-                        <PreviewContainer>
-                            <ImgPreview src={uploadedFileURL} />
-                        </PreviewContainer>
+                                <FileNameContainer>
+                                    <Text
+                                        text={`${uploadedFileName}`}
+                                        fontSize="1rem"
+                                        fontWeight="600"
+                                        subText={true}
+                                    />
+                                </FileNameContainer>
+                            </TextContainer>
+                            <PreviewContainer>
+                                <ImgPreview src={uploadedFileURL} />
+                            </PreviewContainer>
+                        </UploadContainerWrapper>
+                        <ButtonContainer>
+                            <GeneralButton
+                                buttonLabel="Save"
+                                width="5rem"
+                                buttonBackground="#41A312"
+                                fontSize="1rem"
+                                height="2rem"
+                                iconMargin="0rem .3rem -.2rem 0rem"
+                            />
+                            <GeneralButton
+                                buttonLabel="Cancel"
+                                width="6rem"
+                                buttonBackground="#ececec"
+                                buttonTextColor="rgba(0, 0, 34, 1)"
+                                textShadow="none"
+                                disableShadow={true}
+                                hoverShadow="none"
+                                border="1px solid #c6c6c6"
+                                fontSize="1rem"
+                                height="2rem"
+                            />
+                        </ButtonContainer>
                     </UploadedTextContainer>
                 )}
             </Transition>
