@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//redux:
+import { updateUserAvatar } from '../../../redux/profile/profileActions';
+import { useDispatch } from 'react-redux';
+
 //Components:
 import { IMAGE_MIME_TYPE, Dropzone } from '@mantine/dropzone';
 import Text from '../../general_components/Text';
@@ -128,6 +132,8 @@ const ImageUploadIcon = ({ status }: ImageUploadProps) => {
 const UpdateProfileAvatarForm = ({
     toggleModal,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
     const [uploadedFileName, setUploadedFileName] = useState('');
     const [uploadedFileURL, setUploadedFileURL] = useState('');
     const [openTransition, setOpenTransition] = useState(false);
@@ -142,6 +148,19 @@ const UpdateProfileAvatarForm = ({
         });
 
         setOpenTransition(true);
+    };
+
+    const fakeCallback = (status: boolean) => console.log(status);
+
+    const handleOnNewAvatarSubmit = () => {
+        if (uploadedFileName !== '' && uploadedFileBase64 !== '') {
+            dispatch(
+                updateUserAvatar(fakeCallback, {
+                    fileName: uploadedFileName,
+                    file: uploadedFileBase64,
+                })
+            );
+        }
     };
 
     return (
@@ -216,6 +235,7 @@ const UpdateProfileAvatarForm = ({
                                 fontSize="1rem"
                                 height="2rem"
                                 iconMargin="0rem .3rem -.2rem 0rem"
+                                onClick={() => handleOnNewAvatarSubmit()}
                             />
                             <GeneralButton
                                 buttonLabel="Cancel"

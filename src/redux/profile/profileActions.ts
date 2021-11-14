@@ -61,5 +61,8 @@ export const updateUserAvatar = (
 ) => {
     return async (dispatch: Dispatch<any>) => {
         //This route should only be accessible to logged in user.
+        console.log(avatarObject);
+
+        let response = await api.post(`/user/avatar/update`, { avatarObject });
     };
 };
