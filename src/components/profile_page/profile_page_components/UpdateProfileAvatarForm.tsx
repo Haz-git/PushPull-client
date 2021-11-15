@@ -12,6 +12,7 @@ import { Group } from '@mantine/core';
 import { Transition } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
 import getBase64 from '../../../utils/getBase64';
+import { Loader } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -134,6 +135,7 @@ const UpdateProfileAvatarForm = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
+    const [isUpdateRequestLoading, setIsUpdateRequestLoading] = useState(false);
     const [uploadedFileName, setUploadedFileName] = useState('');
     const [uploadedFileURL, setUploadedFileURL] = useState('');
     const [openTransition, setOpenTransition] = useState(false);
@@ -150,12 +152,19 @@ const UpdateProfileAvatarForm = ({
         setOpenTransition(true);
     };
 
-    const fakeCallback = (status: boolean) => console.log(status);
+    const stateUpdateRequest = (state: boolean) =>
+        setIsUpdateRequestLoading(state);
+
+    const disableUserInputOnRequestHandle = () => {
+        if (isUpdateRequestLoading) return true;
+        else return false;
+    };
 
     const handleOnNewAvatarSubmit = () => {
         if (uploadedFileName !== '' && uploadedFileBase64 !== '') {
+            setIsUpdateRequestLoading(true);
             dispatch(
-                updateUserAvatar(fakeCallback, {
+                updateUserAvatar(stateUpdateRequest, toggleModal, {
                     fileName: uploadedFileName,
                     file: uploadedFileBase64,
                 })
@@ -171,6 +180,7 @@ const UpdateProfileAvatarForm = ({
                 maxSize={3 * 1024 ** 2}
                 accept={IMAGE_MIME_TYPE}
                 multiple={false}
+                loading={disableUserInputOnRequestHandle()}
             >
                 {(status) => (
                     <Group
@@ -229,13 +239,27 @@ const UpdateProfileAvatarForm = ({
                         </UploadContainerWrapper>
                         <ButtonContainer>
                             <GeneralButton
-                                buttonLabel="Save"
-                                width="5rem"
+                                buttonLabel={
+                                    isUpdateRequestLoading
+                                        ? 'Updating...'
+                                        : 'Save'
+                                }
+                                onClick={() => {
+                                    handleOnNewAvatarSubmit();
+                                }}
+                                width={
+                                    isUpdateRequestLoading ? '8.5rem' : '5rem'
+                                }
                                 buttonBackground="#41A312"
                                 fontSize="1rem"
                                 height="2rem"
+                                isDisabledOnLoading={disableUserInputOnRequestHandle()}
+                                buttonIcon={
+                                    isUpdateRequestLoading ? (
+                                        <Loader color="white" size="xs" />
+                                    ) : null
+                                }
                                 iconMargin="0rem .3rem -.2rem 0rem"
-                                onClick={() => handleOnNewAvatarSubmit()}
                             />
                             <GeneralButton
                                 buttonLabel="Cancel"
