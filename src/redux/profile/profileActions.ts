@@ -57,6 +57,7 @@ export const updateUserProfile = (
 
 export const updateUserAvatar = (
     statusCallback: (status: boolean) => void,
+    modalCallback: (status: boolean) => void,
     avatarObject: any
 ) => {
     return async (dispatch: Dispatch<any>) => {
@@ -64,5 +65,17 @@ export const updateUserAvatar = (
         console.log(avatarObject);
 
         let response = await api.post(`/user/avatar/update`, { avatarObject });
+
+        dispatch({
+            type: ProfileActionType.USER_FIND_PROFILE,
+            payload: response.data.userProfile,
+        });
+
+        dispatch(userLogin(response.data.userProfile));
+
+        if (response?.data?.userProfile) {
+            statusCallback(false);
+            modalCallback(false);
+        }
     };
 };

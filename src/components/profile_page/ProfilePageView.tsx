@@ -64,6 +64,7 @@ const MainContainer = styled.section`
         display: grid;
         grid-template-columns: 1fr 8fr;
         overflow: visible;
+        padding: 0rem 0rem 2rem 0rem;
     }
 `;
 

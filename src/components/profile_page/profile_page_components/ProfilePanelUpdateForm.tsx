@@ -106,6 +106,7 @@ const ProfilePanelUpdateForm = ({
 
     const disableUserInputOnRequestHandle = () => {
         if (isUpdateRequestLoading) return true;
+        else return false;
     };
 
     return (
@@ -269,7 +270,7 @@ const ProfilePanelUpdateForm = ({
                     onClick={() => {
                         handleUserSubmit();
                     }}
-                    width={isUpdateRequestLoading ? '8rem' : '5rem'}
+                    width={isUpdateRequestLoading ? '8.5rem' : '5rem'}
                     buttonBackground="#41A312"
                     fontSize="1rem"
                     height="2rem"
