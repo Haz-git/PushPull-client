@@ -279,6 +279,11 @@ const UserAuthForm = ({
             data: {
                 reviewsVoted: {},
                 savedWorkoutPrograms: {},
+                imageKitAvatarDetails: {},
+                userBio: '',
+                location: '',
+                website: '',
+                twitter: '',
             },
         })
             .then((value: any) => {
