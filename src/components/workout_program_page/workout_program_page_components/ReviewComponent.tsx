@@ -351,7 +351,7 @@ const ReviewComponent = ({
             if (reviewsVoted && reviewId in reviewsVoted) {
                 if (reviewsVoted[reviewId] === 'USEFUL')
                     setIsUsefulButtonSelected(true);
-                if (reviewsVoted[reviewId] === 'NOTUSEFUL')
+                if (reviewsVoted[reviewId] === 'NOT_USEFUL')
                     setIsNotUsefulButtonSelected(true);
             }
         } else {
