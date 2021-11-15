@@ -101,6 +101,8 @@ const ProfilePageView = ({
 
     const setStateIsUserNotFound = (state: boolean) => setIsUserNotFound(state);
 
+    const handleAvatarModal = (state: boolean) => setStateAvatarModal(state);
+
     useEffect(() => {
         if (isProfilePanelLoaded) setIsProfilePanelLoaded(false);
         if (isUserNotFound) setIsUserNotFound(false);
@@ -142,7 +144,9 @@ const ProfilePageView = ({
                         closeFunc={() => setStateAvatarModal(false)}
                         title="Update Avatar"
                     >
-                        <UpdateProfileAvatarForm />
+                        <UpdateProfileAvatarForm
+                            toggleModal={handleAvatarModal}
+                        />
                     </GeneralModal>
                     <MainContainer>
                         <ProfilePanelView>
