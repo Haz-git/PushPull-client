@@ -60,10 +60,10 @@ const UploadedTextContainer = styled.div`
 
 const UploadContainerWrapper = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
     column-gap: 5rem;
-    margin-bottom: 2rem;
 `;
 
 const TextContainer = styled.div`
@@ -73,7 +73,7 @@ const TextContainer = styled.div`
 `;
 
 const FileNameContainer = styled.div`
-    max-width: 11rem;
+    max-width: 100%;
     max-height: 5rem;
     overflow-y: scroll;
     padding: 0.25rem 0.25rem;
@@ -85,12 +85,13 @@ const PreviewContainer = styled.div`
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
     padding: 0.25rem 0.25rem;
+    margin: 0.5rem 0rem;
 `;
 
 const ImgPreview = styled.img`
     display: block;
-    max-height: 5rem;
-    max-width: 5rem;
+    max-height: 18rem;
+    max-width: 18rem;
     border-radius: 0.3rem;
 `;
 
@@ -99,7 +100,6 @@ const ButtonContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 0.5rem;
-    margin-right: 2rem;
 `;
 
 //Interfaces:
