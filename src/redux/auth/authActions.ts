@@ -1,3 +1,4 @@
+import api from '../../api';
 import Userfront from '@userfront/react';
 import { Dispatch } from 'redux';
 import { AuthActionType } from './action-types';
@@ -22,22 +23,13 @@ export const userSignout = () => {
     };
 };
 
-export const voteReview = (reviewsVotedObject: any) => {
+export const voteReview = (reviewObject: any) => {
     return async (dispatch: Dispatch<AuthAction>) => {
-        Userfront.user
-            .update({
-                data: {
-                    reviewsVoted: reviewsVotedObject,
-                },
-            })
-            .then((promise: any) => {
-                dispatch({
-                    type: AuthActionType.USER_UPDATE_VOTES,
-                    payload: promise,
-                });
-            })
-            .catch((err: any) => {
-                console.log(err);
-            });
+        let response = await api.post(`/user/review/update`, { reviewObject });
+
+        dispatch({
+            type: AuthActionType.USER_UPDATE_VOTES,
+            payload: response.data.userDetails,
+        });
     };
 };
