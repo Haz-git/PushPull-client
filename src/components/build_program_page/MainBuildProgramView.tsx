@@ -27,6 +27,7 @@ const MainContainer = styled.section`
 
 const ProjectPanelView = styled.section`
     width: 20rem;
+    max-width: 20rem;
 `;
 
 const DashboardPanelView = styled.section``;
