@@ -1,7 +1,6 @@
 import * as React from 'react';
+import { Suspense } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
-
-//Components:
 
 //Styles:
 import styled from 'styled-components';
@@ -26,9 +25,19 @@ const MainContainer = styled.section`
     }
 `;
 
-const ProjectPanelView = styled.section``;
+const ProjectPanelView = styled.section`
+    width: 20rem;
+`;
 
 const DashboardPanelView = styled.section``;
+
+//Lazy Components:
+const ProjectPanel = React.lazy(
+    () => import('./build_program_components/ProjectPanel')
+);
+const DashboardPanel = React.lazy(
+    () => import('./build_program_components/DashboardPanel')
+);
 
 //Interfaces:
 
@@ -47,8 +56,14 @@ const MainBuildProgramView = ({
 }: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
-            <ProjectPanelView>Test</ProjectPanelView>
-            <DashboardPanelView>Test dashboard</DashboardPanelView>
+            <Suspense fallback={<div>Loading Temp...</div>}>
+                <ProjectPanelView>
+                    <ProjectPanel />
+                </ProjectPanelView>
+                <DashboardPanelView>
+                    <DashboardPanel />
+                </DashboardPanelView>
+            </Suspense>
         </MainContainer>
     );
 };
