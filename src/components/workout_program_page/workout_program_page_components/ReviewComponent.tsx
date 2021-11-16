@@ -346,8 +346,6 @@ const ReviewComponent = ({
                 data: { reviewsVoted },
             } = User;
 
-            console.log(reviewsVoted);
-
             if (reviewsVoted && reviewId in reviewsVoted) {
                 if (reviewsVoted[reviewId] === 'USEFUL')
                     setIsUsefulButtonSelected(true);
