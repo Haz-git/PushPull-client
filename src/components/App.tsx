@@ -29,6 +29,7 @@ import FeedbackForm from './general_components/FeedbackForm';
 import PasswordResetForm from './auth_forms/PasswordResetForm';
 import ProfilePageView from './profile_page/ProfilePageView';
 import NotFound from './not_found_page/NotFound';
+import MainBuildProgramView from './build_program_page/MainBuildProgramView';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
@@ -154,6 +155,16 @@ const App = () => {
                                         }
                                     />
                                 )}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/build/new/:id"
+                                authPath="/authenticate"
+                                isAuthenticated={isUserLoggedIn}
+                                component={MainBuildProgramView}
+                                toggleAuthDrawerWithView={
+                                    toggleAuthDrawerWithView
+                                }
                             />
                             <Route component={NotFound} />
                         </Switch>
