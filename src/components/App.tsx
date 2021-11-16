@@ -158,7 +158,7 @@ const App = () => {
                             />
                             <PrivateRoute
                                 exact
-                                path="/build/new/:id"
+                                path="/builder/dashboard"
                                 authPath="/authenticate"
                                 isAuthenticated={isUserLoggedIn}
                                 component={MainBuildProgramView}

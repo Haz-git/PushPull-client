@@ -75,9 +75,7 @@ const BodySectionMain = () => {
                 primaryButton={
                     <GeneralButton
                         buttonLabel="Build Program"
-                        onClick={() =>
-                            historyObject.push(`build/new/${uuid()}`)
-                        }
+                        onClick={() => historyObject.push(`builder/dashboard`)}
                         fontSize="1.25rem"
                         padding="1rem 1rem"
                     />
