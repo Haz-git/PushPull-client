@@ -95,7 +95,7 @@ const GlobalStyle = createGlobalStyle`
     
 
         @media(min-width: 320px) {
-            bottom: 4rem;
+            bottom: 2.75rem;
         }
 
         @media(min-width: 768px) {

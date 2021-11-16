@@ -109,6 +109,7 @@ const BodyDesc = styled.p<BodySectionProps>`
     color: ${(props) => props.subTextColor};
     font-weight: 600;
     margin: 2rem 0;
+    line-height: 140%;
 
     @media ${deviceMin.mobileS} {
         margin: 0.5rem 0;

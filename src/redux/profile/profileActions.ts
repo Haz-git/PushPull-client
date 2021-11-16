@@ -62,16 +62,14 @@ export const updateUserAvatar = (
 ) => {
     return async (dispatch: Dispatch<any>) => {
         //This route should only be accessible to logged in user.
-        console.log(avatarObject);
 
         let response = await api.post(`/user/avatar/update`, { avatarObject });
+        dispatch(userLogin(response.data.userProfile));
 
         dispatch({
             type: ProfileActionType.USER_FIND_PROFILE,
             payload: response.data.userProfile,
         });
-
-        dispatch(userLogin(response.data.userProfile));
 
         if (response?.data?.userProfile) {
             statusCallback(false);
