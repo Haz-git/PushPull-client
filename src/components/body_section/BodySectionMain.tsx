@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { deviceMin } from '../../devices/breakpoints';
+import { v4 as uuid } from 'uuid';
 
 //Components:
 import historyObject from '../../utils/historyObject';
@@ -40,7 +41,7 @@ const BodySectionMain = () => {
         <MainBodySectionContainer>
             <BodySection
                 textHeader="Find Your Next Workout"
-                textDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur metus sit amet dui finibus sodales."
+                textDesc=" No matter where you are in your fitness journey, PushPull can help! Check out our collection of workout programs, ranked and created by viewers like you."
                 primaryButton={
                     <GeneralButton
                         buttonLabel="Search Workouts"
@@ -54,11 +55,11 @@ const BodySectionMain = () => {
             <BodySection
                 isReversed={true}
                 textHeader="Add a Ranking"
-                textDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur metus sit amet dui finibus sodales."
+                textDesc="Have a program that you really love, or one you never want to try again? Let our community know by giving it a ranking!"
                 primaryButton={
                     <GeneralButton
                         buttonLabel="Add Ranking"
-                        onClick={() => console.log('In development')}
+                        onClick={() => historyObject.push('/search')}
                         fontSize="1.25rem"
                         padding="1rem 1rem"
                     />
@@ -69,12 +70,14 @@ const BodySectionMain = () => {
                 subTextColor="rgba(255, 255, 255, .7)"
             />
             <BodySection
-                textHeader="Can't Find Your Exercise?"
-                textDesc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur metus sit amet dui finibus sodales."
+                textHeader="Can't Find Your Workout?"
+                textDesc="If your custom workout program doesn't exist here, build it, suggest it, and add it to our growing list!"
                 primaryButton={
                     <GeneralButton
-                        buttonLabel="Add Exercise"
-                        onClick={() => console.log('test')}
+                        buttonLabel="Build Program"
+                        onClick={() =>
+                            historyObject.push(`build/new/${uuid()}`)
+                        }
                         fontSize="1.25rem"
                         padding="1rem 1rem"
                     />
