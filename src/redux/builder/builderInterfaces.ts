@@ -44,3 +44,14 @@ interface updateTemplate {
     type: BuilderActionType.USER_UPDATE_TEMPLATE;
     payload?: any;
 }
+
+export type BuilderAction =
+    | findProject
+    | addProject
+    | deleteProject
+    | updateProject
+    | addProjectMember
+    | deleteProjectMember
+    | addTemplate
+    | deleteTemplate
+    | updateTemplate;
