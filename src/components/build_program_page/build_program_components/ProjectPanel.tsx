@@ -1,5 +1,9 @@
 import React from 'react';
 
+//Redux:
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { addProject } from '../../../redux/builder/builderActions';
+
 //Components:
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
@@ -61,6 +65,8 @@ const CreateNewProjectContainer = styled.div`
 interface IMainContainer {}
 
 const ProjectPanel = () => {
+    const dispatch = useDispatch();
+
     return (
         <MainContainer>
             <ViewContainer>
@@ -78,7 +84,17 @@ const ProjectPanel = () => {
                 </ViewTextIcon>
             </ViewContainer>
             <CreateNewProjectContainer>
-                <GeneralButton buttonLabel="Create New Project" />
+                <GeneralButton
+                    buttonLabel="Create New Project"
+                    onClick={() =>
+                        dispatch(
+                            addProject((status) => console.log(status), {
+                                projectName: 'testProject',
+                                projectDesc: '',
+                            })
+                        )
+                    }
+                />
             </CreateNewProjectContainer>
         </MainContainer>
     );
