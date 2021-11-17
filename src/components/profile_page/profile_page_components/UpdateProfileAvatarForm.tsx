@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 //redux:
 import { updateUserAvatar } from '../../../redux/profile/profileActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
 //Components:
 import { IMAGE_MIME_TYPE, Dropzone } from '@mantine/dropzone';
@@ -134,6 +134,10 @@ const UpdateProfileAvatarForm = ({
     toggleModal,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const { fileId } = useSelector(
+        (state: RootStateOrAny) =>
+            state?.user?.user?.data?.imageKitAvatarDetails
+    );
 
     const [isUpdateRequestLoading, setIsUpdateRequestLoading] = useState(false);
     const [uploadedFileName, setUploadedFileName] = useState('');
@@ -167,6 +171,7 @@ const UpdateProfileAvatarForm = ({
                 updateUserAvatar(stateUpdateRequest, toggleModal, {
                     fileName: uploadedFileName,
                     file: uploadedFileBase64,
+                    previousAvatarId: fileId,
                 })
             );
         }
