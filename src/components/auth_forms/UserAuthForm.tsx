@@ -284,6 +284,9 @@ const UserAuthForm = ({
                 location: '',
                 website: '',
                 twitter: '',
+                builder: {
+                    projects: [],
+                },
             },
         })
             .then((value: any) => {

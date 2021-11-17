@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 import { isMobileOnly } from 'react-device-detect';
+import loadable from '@loadable/component';
 
 //Context:
 import { createContext } from 'react';
@@ -23,13 +24,13 @@ import MainFooter from './footer/MainFooter';
 import MainLandingPageView from './main_landing_page/MainLandingPageView';
 import MainSearchPage from './search_page/MainSearchPage';
 import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPage';
-import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
+// import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 import GeneralModal from './general_components/GeneralModal';
 import FeedbackForm from './general_components/FeedbackForm';
 import PasswordResetForm from './auth_forms/PasswordResetForm';
 import ProfilePageView from './profile_page/ProfilePageView';
 import NotFound from './not_found_page/NotFound';
-import MainBuildProgramView from './build_program_page/MainBuildProgramView';
+// import MainBuildProgramView from './build_program_page/MainBuildProgramView';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
@@ -42,6 +43,17 @@ const BugReportModalContainer = styled.div``;
 const SignupDrawerContainer = styled.div``;
 
 export const AuthContext = createContext<any>(null); //Default value set to null
+
+//Code-splitting, Loadable Components to decrease package size:
+const MainAddReviewPageView = loadable(
+    () => import('./add_review_page/MainAddReviewPageView'),
+    { fallback: <div>temp loading...</div> }
+);
+
+const MainBuildProgramView = loadable(
+    () => import('./build_program_page/MainBuildProgramView'),
+    { fallback: <div>temp loading...</div> }
+);
 
 const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);

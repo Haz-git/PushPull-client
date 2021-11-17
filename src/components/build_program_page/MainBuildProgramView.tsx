@@ -1,6 +1,10 @@
 import * as React from 'react';
-import { Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
+
+//Redux:
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { findProject } from '../../redux/builder/builderActions';
 
 //Styles:
 import styled from 'styled-components';
@@ -55,16 +59,27 @@ const MainBuildProgramView = ({
         params: { id },
     },
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+    const [isBuilderInfoLoaded, setIsBuilderInfoLoaded] = useState(false);
+
+    const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
+
+    useEffect(() => {
+        dispatch(findProject(setIsLoaded));
+    }, []);
+
     return (
         <MainContainer>
-            <Suspense fallback={<div>Loading Temp...</div>}>
-                <ProjectPanelView>
-                    <ProjectPanel />
-                </ProjectPanelView>
-                <DashboardPanelView>
-                    <DashboardPanel />
-                </DashboardPanelView>
-            </Suspense>
+            {isBuilderInfoLoaded && (
+                <Suspense fallback={<div>Loading Temp...</div>}>
+                    <ProjectPanelView>
+                        <ProjectPanel />
+                    </ProjectPanelView>
+                    <DashboardPanelView>
+                        <DashboardPanel />
+                    </DashboardPanelView>
+                </Suspense>
+            )}
         </MainContainer>
     );
 };

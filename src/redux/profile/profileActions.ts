@@ -36,7 +36,7 @@ export const updateUserProfile = (
     return async (dispatch: Dispatch<any>) => {
         //This route should only be accessible to logged in user.
 
-        let response = await api.post(`/user/update`, { updateObject });
+        let response = await api.post(`/user/details/update`, { updateObject });
 
         //We dispatch to update the profile view:
         dispatch({
