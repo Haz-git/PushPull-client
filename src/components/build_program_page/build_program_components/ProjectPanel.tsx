@@ -2,6 +2,7 @@ import React from 'react';
 
 //Components:
 import Text from '../../general_components/Text';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -10,20 +11,20 @@ import { DocumentCopy } from '@styled-icons/fluentui-system-regular/DocumentCopy
 import { ArrowUpload } from '@styled-icons/fluentui-system-regular/ArrowUpload';
 
 const RecentIcon = styled(Clock)`
-    height: 2rem;
-    width: 2rem;
+    height: 1.7rem;
+    width: 1.7rem;
     color: rgba(0, 0, 34, 1);
 `;
 
 const DocumentIcon = styled(DocumentCopy)`
-    height: 2rem;
-    width: 2rem;
+    height: 1.7rem;
+    width: 1.7rem;
     color: rgba(0, 0, 34, 1);
 `;
 
 const PublishIcon = styled(ArrowUpload)`
-    height: 2rem;
-    width: 2rem;
+    height: 1.7rem;
+    width: 1.7rem;
     color: rgba(0, 0, 34, 1);
 `;
 
@@ -51,6 +52,10 @@ const ViewTextIcon = styled.div`
     margin: 0rem 1rem 0rem 1rem;
 `;
 
+const CreateNewProjectContainer = styled.div`
+    padding: 1rem 1rem;
+`;
+
 //Interfaces:
 
 interface IMainContainer {}
@@ -61,17 +66,20 @@ const ProjectPanel = () => {
             <ViewContainer>
                 <ViewTextIcon>
                     <RecentIcon />
-                    <Text text="Recents" fontSize="1.2rem" fontWeight="500" />
+                    <Text text="Recents" fontSize="1rem" fontWeight="500" />
                 </ViewTextIcon>
                 <ViewTextIcon>
                     <PublishIcon />
-                    <Text text="Published" fontSize="1.2rem" fontWeight="500" />
+                    <Text text="Published" fontSize="1rem" fontWeight="500" />
                 </ViewTextIcon>
                 <ViewTextIcon>
                     <DocumentIcon />
-                    <Text text="Drafts" fontSize="1.2rem" fontWeight="500" />
+                    <Text text="Drafts" fontSize="1rem" fontWeight="500" />
                 </ViewTextIcon>
             </ViewContainer>
+            <CreateNewProjectContainer>
+                <GeneralButton buttonLabel="Create New Project" />
+            </CreateNewProjectContainer>
         </MainContainer>
     );
 };
