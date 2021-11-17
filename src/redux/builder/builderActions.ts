@@ -3,8 +3,10 @@ import { Dispatch } from 'redux';
 import { BuilderAction } from './builderInterfaces';
 import { BuilderActionType } from './action-types';
 
-export const findProject = () => {
-    return async (dispatch: Dispatch<BuilderAction>) => {};
+export const findProject = (statusCallback: (status: boolean) => void) => {
+    return async (dispatch: Dispatch<BuilderAction>) => {
+        statusCallback(true);
+    };
 };
 
 export const addProject = () => {
