@@ -66,7 +66,7 @@ const ProjectComponent = ({
                         <ColorSwatch
                             size={20}
                             radius={50}
-                            color={`#${projectColorHex}`}
+                            color={`${projectColorHex}`}
                         />
                     </SwatchContainer>
                     <Text text={projectName} fontSize="1rem" />
