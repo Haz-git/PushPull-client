@@ -65,9 +65,11 @@ const ProjectsContainer = styled.div``;
 
 //Interfaces:
 
-interface IMainContainer {}
+interface IComponentProps {
+    toggleProjectModal: (status: boolean) => void;
+}
 
-const ProjectPanel = () => {
+const ProjectPanel = ({ toggleProjectModal }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
@@ -110,14 +112,7 @@ const ProjectPanel = () => {
             <CreateNewProjectContainer>
                 <GeneralButton
                     buttonLabel="Create New Project"
-                    onClick={() =>
-                        dispatch(
-                            addProject((status) => console.log(status), {
-                                projectName: 'testProject',
-                                projectDesc: '',
-                            })
-                        )
-                    }
+                    onClick={() => toggleProjectModal(true)}
                 />
             </CreateNewProjectContainer>
         </MainContainer>
