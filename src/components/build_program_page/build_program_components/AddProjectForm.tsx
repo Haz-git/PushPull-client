@@ -14,6 +14,13 @@ import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
+import { Refresh } from '@styled-icons/evil/Refresh';
+
+const RandomIcon = styled(Refresh)`
+    height: 1.85rem;
+    width: 1.85rem;
+    color: rgba(0, 0, 34, 1);
+`;
 
 const MainContainer = styled.div`
     padding: 0rem 0.5rem 0rem 0.5rem;
@@ -23,6 +30,19 @@ const FormContainer = styled.div``;
 
 const InputContainer = styled.div`
     margin: 0rem 0rem 0.5rem 0rem;
+`;
+
+const RandomButton = styled.button`
+    outline: none;
+    border: none;
+    background: inherit;
+    padding: 0rem 0rem;
+    border-radius: 0.2rem;
+
+    :hover {
+        background: #ececec;
+        cursor: pointer;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -164,6 +184,11 @@ const AddProjectForm = ({
                         dropdownZIndex={9999}
                         onChange={(e: string) => setProjectColor(e)}
                         value={projectColor}
+                        rightSection={
+                            <RandomButton onClick={generateRandomHexColor}>
+                                <RandomIcon />
+                            </RandomButton>
+                        }
                     />
                 </InputContainer>
             </FormContainer>
