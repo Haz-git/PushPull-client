@@ -52,8 +52,46 @@ const AddProjectForm = ({
     const [projectDesc, setProjectDesc] = useState('');
     const [projectColor, setProjectColor] = useState('#ffffff');
 
+    const [hasError, setHasError] = useState(false);
+
+    const isProjectNameLengthOk = () => {
+        if (projectName.length === 0) return false;
+        if (projectName.length <= 3) return false;
+        if (projectName.length >= 4 && projectName.length <= 100) return true;
+
+        return false;
+    };
+
+    const generateRandomHexColor = () => {
+        setProjectColor(
+            '#'.concat(Math.floor(Math.random() * 16777215).toString(16))
+        );
+    };
+
+    const handleNewProjectSubmission = () => {
+        if (isProjectNameLengthOk()) {
+            return dispatch(
+                addProject((status: boolean) => console.log(status), {
+                    projectName,
+                    projectDesc,
+                    projectColorHex: projectColor,
+                })
+            );
+        }
+
+        return setHasError(true);
+    };
+
     return (
         <MainContainer>
+            {hasError && (
+                <TextContainer>
+                    <Text
+                        text="Please name your project between 4 - 100 characters."
+                        textColor="#AF1432"
+                    />
+                </TextContainer>
+            )}
             <FormContainer>
                 <InputContainer>
                     <TextInput
@@ -74,11 +112,13 @@ const AddProjectForm = ({
                         }}
                         required
                         label="Project Name"
-                        placeholder="Name your project"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setProjectName(e.target.value)
-                        }
+                        placeholder={'Name your project'}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            if (hasError) setHasError(false);
+                            setProjectName(e.target.value);
+                        }}
                         value={projectName}
+                        error={hasError}
                     />
                 </InputContainer>
                 <InputContainer>
@@ -100,7 +140,7 @@ const AddProjectForm = ({
                             },
                         }}
                         label="Project Description"
-                        placeholder="Project description can be changed at any time."
+                        placeholder="Project name, description, and color can be changed at any time."
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                             setProjectDesc(e.target.value)
                         }
@@ -135,6 +175,7 @@ const AddProjectForm = ({
                     fontSize="1rem"
                     height="2rem"
                     iconMargin="0rem .3rem -.2rem 0rem"
+                    onClick={handleNewProjectSubmission}
                 />
                 <GeneralButton
                     buttonLabel="Cancel"
