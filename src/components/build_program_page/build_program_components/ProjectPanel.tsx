@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Redux:
-import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import { addProject } from '../../../redux/builder/builderActions';
 
 //Components:
@@ -70,7 +70,6 @@ interface IComponentProps {
 }
 
 const ProjectPanel = ({ toggleProjectModal }: IComponentProps): JSX.Element => {
-    const dispatch = useDispatch();
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
     const renderBuilderProjects = () => {
