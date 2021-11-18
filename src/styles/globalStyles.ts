@@ -52,6 +52,12 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
+    .mantine-ColorInput-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
 
     .mantine-multi-select-input-input .mantine-multi-select-root {
         :focus {

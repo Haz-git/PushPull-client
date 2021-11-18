@@ -1,14 +1,26 @@
 import * as React from 'react';
+import { useState } from 'react';
+
+//Redux:
+import { useDispatch } from 'react-redux';
+import { addProject } from '../../../redux/builder/builderActions';
 
 //Components:
 import { TextInput } from '@mantine/core';
 import { Textarea } from '@mantine/core';
-import { ColorPicker } from '@mantine/core';
+import { ColorInput } from '@mantine/core';
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
+import { Refresh } from '@styled-icons/evil/Refresh';
+
+const RandomIcon = styled(Refresh)`
+    height: 1.85rem;
+    width: 1.85rem;
+    color: rgba(0, 0, 34, 1);
+`;
 
 const MainContainer = styled.div`
     padding: 0rem 0.5rem 0rem 0.5rem;
@@ -18,6 +30,19 @@ const FormContainer = styled.div``;
 
 const InputContainer = styled.div`
     margin: 0rem 0rem 0.5rem 0rem;
+`;
+
+const RandomButton = styled.button`
+    outline: none;
+    border: none;
+    background: inherit;
+    padding: 0rem 0rem;
+    border-radius: 0.2rem;
+
+    :hover {
+        background: #ececec;
+        cursor: pointer;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -41,8 +66,52 @@ interface IComponentProps {
 const AddProjectForm = ({
     toggleProjectModal,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
+    const [projectName, setProjectName] = useState('');
+    const [projectDesc, setProjectDesc] = useState('');
+    const [projectColor, setProjectColor] = useState('#ffffff');
+
+    const [hasError, setHasError] = useState(false);
+
+    const isProjectNameLengthOk = () => {
+        if (projectName.length === 0) return false;
+        if (projectName.length <= 3) return false;
+        if (projectName.length >= 4 && projectName.length <= 100) return true;
+
+        return false;
+    };
+
+    const generateRandomHexColor = () => {
+        setProjectColor(
+            '#'.concat(Math.floor(Math.random() * 16777215).toString(16))
+        );
+    };
+
+    const handleNewProjectSubmission = () => {
+        if (isProjectNameLengthOk()) {
+            return dispatch(
+                addProject((status: boolean) => console.log(status), {
+                    projectName,
+                    projectDesc,
+                    projectColorHex: projectColor,
+                })
+            );
+        }
+
+        return setHasError(true);
+    };
+
     return (
         <MainContainer>
+            {hasError && (
+                <TextContainer>
+                    <Text
+                        text="Please name your project between 4 - 100 characters."
+                        textColor="#AF1432"
+                    />
+                </TextContainer>
+            )}
             <FormContainer>
                 <InputContainer>
                     <TextInput
@@ -63,7 +132,13 @@ const AddProjectForm = ({
                         }}
                         required
                         label="Project Name"
-                        placeholder="Name your project"
+                        placeholder={'Name your project'}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            if (hasError) setHasError(false);
+                            setProjectName(e.target.value);
+                        }}
+                        value={projectName}
+                        error={hasError}
                     />
                 </InputContainer>
                 <InputContainer>
@@ -85,14 +160,36 @@ const AddProjectForm = ({
                             },
                         }}
                         label="Project Description"
-                        placeholder="Project description can be changed at any time."
+                        placeholder="Project name, description, and color can be changed at any time."
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                            setProjectDesc(e.target.value)
+                        }
+                        value={projectDesc}
                     />
                 </InputContainer>
                 <InputContainer>
-                    <TextContainer>
-                        <Text text="Color Swatch" subText={true} />
-                    </TextContainer>
-                    <ColorPicker size="xs" fullWidth={true} format="rgba" />
+                    <ColorInput
+                        styles={{
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                        }}
+                        placeholder="Pick color"
+                        label="Project Color"
+                        disallowInput
+                        dropdownZIndex={9999}
+                        onChange={(e: string) => setProjectColor(e)}
+                        value={projectColor}
+                        rightSection={
+                            <RandomButton onClick={generateRandomHexColor}>
+                                <RandomIcon />
+                            </RandomButton>
+                        }
+                    />
                 </InputContainer>
             </FormContainer>
             <ButtonContainer>
@@ -103,6 +200,7 @@ const AddProjectForm = ({
                     fontSize="1rem"
                     height="2rem"
                     iconMargin="0rem .3rem -.2rem 0rem"
+                    onClick={handleNewProjectSubmission}
                 />
                 <GeneralButton
                     buttonLabel="Cancel"
