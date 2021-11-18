@@ -34,7 +34,13 @@ const ButtonContainer = styled.div`
 
 //Interfaces:
 
-const AddProjectForm = () => {
+interface IComponentProps {
+    toggleProjectModal: (status: boolean) => void;
+}
+
+const AddProjectForm = ({
+    toggleProjectModal,
+}: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
             <FormContainer>
@@ -109,6 +115,7 @@ const AddProjectForm = () => {
                     border="1px solid #c6c6c6"
                     fontSize="1rem"
                     height="2rem"
+                    onClick={() => toggleProjectModal(false)}
                 />
             </ButtonContainer>
         </MainContainer>

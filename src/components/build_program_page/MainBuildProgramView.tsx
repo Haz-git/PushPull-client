@@ -84,7 +84,9 @@ const MainBuildProgramView = ({
                         closeFunc={() => setOpenAddProjectModal(false)}
                         title="Create Project"
                     >
-                        <AddProjectForm />
+                        <AddProjectForm
+                            toggleProjectModal={toggleProjectModal}
+                        />
                     </GeneralModal>
                     <>
                         <ProjectPanelView>
