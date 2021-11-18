@@ -2,6 +2,10 @@ import * as React from 'react';
 import { useState, useEffect, Suspense } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
+//Components:
+import AddProjectForm from './build_program_components/AddProjectForm';
+import GeneralModal from '../general_components/GeneralModal';
+
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { findProject } from '../../redux/builder/builderActions';
@@ -61,8 +65,11 @@ const MainBuildProgramView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const [isBuilderInfoLoaded, setIsBuilderInfoLoaded] = useState(false);
+    const [openAddProjectModal, setOpenAddProjectModal] = useState(false);
 
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
+    const toggleProjectModal = (status: boolean) =>
+        setOpenAddProjectModal(status);
 
     useEffect(() => {
         dispatch(findProject(setIsLoaded));
@@ -72,12 +79,23 @@ const MainBuildProgramView = ({
         <MainContainer>
             {isBuilderInfoLoaded && (
                 <Suspense fallback={<div>Loading Temp...</div>}>
-                    <ProjectPanelView>
-                        <ProjectPanel />
-                    </ProjectPanelView>
-                    <DashboardPanelView>
-                        <DashboardPanel />
-                    </DashboardPanelView>
+                    <GeneralModal
+                        openBoolean={openAddProjectModal}
+                        closeFunc={() => setOpenAddProjectModal(false)}
+                        title="Create Project"
+                    >
+                        <AddProjectForm />
+                    </GeneralModal>
+                    <>
+                        <ProjectPanelView>
+                            <ProjectPanel
+                                toggleProjectModal={toggleProjectModal}
+                            />
+                        </ProjectPanelView>
+                        <DashboardPanelView>
+                            <DashboardPanel />
+                        </DashboardPanelView>
+                    </>
                 </Suspense>
             )}
         </MainContainer>
