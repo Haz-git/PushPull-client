@@ -1,9 +1,14 @@
 import * as React from 'react';
+import { useState } from 'react';
+
+//Redux:
+import { useDispatch } from 'react-redux';
+import { addProject } from '../../../redux/builder/builderActions';
 
 //Components:
 import { TextInput } from '@mantine/core';
 import { Textarea } from '@mantine/core';
-import { ColorPicker } from '@mantine/core';
+import { ColorInput } from '@mantine/core';
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
 
@@ -41,6 +46,12 @@ interface IComponentProps {
 const AddProjectForm = ({
     toggleProjectModal,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
+    const [projectName, setProjectName] = useState('');
+    const [projectDesc, setProjectDesc] = useState('');
+    const [projectColor, setProjectColor] = useState('#ffffff');
+
     return (
         <MainContainer>
             <FormContainer>
@@ -64,6 +75,10 @@ const AddProjectForm = ({
                         required
                         label="Project Name"
                         placeholder="Name your project"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setProjectName(e.target.value)
+                        }
+                        value={projectName}
                     />
                 </InputContainer>
                 <InputContainer>
@@ -86,13 +101,30 @@ const AddProjectForm = ({
                         }}
                         label="Project Description"
                         placeholder="Project description can be changed at any time."
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                            setProjectDesc(e.target.value)
+                        }
+                        value={projectDesc}
                     />
                 </InputContainer>
                 <InputContainer>
-                    <TextContainer>
-                        <Text text="Color Swatch" subText={true} />
-                    </TextContainer>
-                    <ColorPicker size="xs" fullWidth={true} format="rgba" />
+                    <ColorInput
+                        styles={{
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                        }}
+                        placeholder="Pick color"
+                        label="Project Color"
+                        disallowInput
+                        dropdownZIndex={9999}
+                        onChange={(e: string) => setProjectColor(e)}
+                        value={projectColor}
+                    />
                 </InputContainer>
             </FormContainer>
             <ButtonContainer>
