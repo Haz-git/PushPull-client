@@ -8,9 +8,16 @@ import { ColorSwatch } from '@mantine/core';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-    padding: 1rem 1rem;
+    padding: 0.75rem 0.75rem;
     border: 1px solid black;
     margin: 0rem 0rem 1rem 0rem;
+`;
+
+const ProjectHeaderWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 `;
 
 const HeaderContainer = styled.div`
@@ -53,16 +60,18 @@ const ProjectComponent = ({
 }: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
-            <HeaderContainer>
-                <SwatchContainer>
-                    <ColorSwatch
-                        size={20}
-                        radius={50}
-                        color={`#${projectColorHex}`}
-                    />
-                </SwatchContainer>
-                <Text text={projectName} />
-            </HeaderContainer>
+            <ProjectHeaderWrapper>
+                <HeaderContainer>
+                    <SwatchContainer>
+                        <ColorSwatch
+                            size={20}
+                            radius={50}
+                            color={`#${projectColorHex}`}
+                        />
+                    </SwatchContainer>
+                    <Text text={projectName} fontSize="1rem" />
+                </HeaderContainer>
+            </ProjectHeaderWrapper>
         </MainContainer>
     );
 };
