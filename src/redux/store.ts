@@ -12,6 +12,7 @@ import sortOptionReducer from './sortOptions/sortOptionsReducer';
 import reviewReducer from './reviews/reviewReducer';
 import authReducer from './auth/authReducer';
 import profileReducer from './profile/profileReducer';
+import builderReducer from './builder/builderReducer';
 
 //Persistence:
 const persistConfig = {
@@ -33,6 +34,7 @@ const appReducer = combineReducers({
     sortOptions: sortOptionReducer,
     reviews: reviewReducer,
     profile: profileReducer,
+    builder: builderReducer,
 });
 
 //Persisting formReducer:

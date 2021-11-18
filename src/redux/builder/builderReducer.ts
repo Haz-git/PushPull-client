@@ -3,7 +3,7 @@ import { BuilderAction } from './builderInterfaces';
 
 const initialState = {};
 
-const profileReducer = (
+const builderReducer = (
     state: Object = initialState,
     action: BuilderAction
 ) => {
@@ -32,4 +32,4 @@ const profileReducer = (
     }
 };
 
-export default profileReducer;
+export default builderReducer;

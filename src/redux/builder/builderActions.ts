@@ -9,7 +9,12 @@ export const findProject = (statusCallback: (status: boolean) => void) => {
 
         console.log(response.data);
 
-        statusCallback(true);
+        dispatch({
+            type: BuilderActionType.USER_FIND_PROJECT,
+            payload: response.data.builder,
+        });
+
+        if (response.data) statusCallback(true);
     };
 };
 
@@ -22,9 +27,12 @@ export const addProject = (
             projectDetails,
         });
 
-        console.log(response.data);
+        dispatch({
+            type: BuilderActionType.USER_ADD_PROJECT,
+            payload: response.data.builder,
+        });
 
-        statusCallback(true);
+        if (response.data) statusCallback(true);
     };
 };
 

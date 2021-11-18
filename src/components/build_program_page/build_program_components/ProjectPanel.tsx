@@ -7,6 +7,7 @@ import { addProject } from '../../../redux/builder/builderActions';
 //Components:
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
+import ProjectComponent from './ProjectComponent';
 
 //Styles:
 import styled from 'styled-components';
@@ -60,12 +61,36 @@ const CreateNewProjectContainer = styled.div`
     padding: 1rem 1rem;
 `;
 
+const ProjectsContainer = styled.div``;
+
 //Interfaces:
 
-interface IMainContainer {}
+interface IComponentProps {
+    toggleProjectModal: (status: boolean) => void;
+}
 
-const ProjectPanel = () => {
+const ProjectPanel = ({ toggleProjectModal }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
+
+    const renderBuilderProjects = () => {
+        if (projects.length > 0) {
+            return projects.map((project: any) => (
+                <ProjectComponent
+                    key={project.projectUuid || 123141}
+                    createdBy={project.createdBy}
+                    projectColorHex={project.projectColorHex}
+                    projectDesc={project.projectDesc}
+                    projectMembers={project.projectMembers}
+                    projectTemplates={project.projectTemplates}
+                    projectName={project.projectName}
+                    updatedDate={project.updatedDate}
+                />
+            ));
+        } else {
+            return 'NO PROJECTS';
+        }
+    };
 
     return (
         <MainContainer>
@@ -83,17 +108,11 @@ const ProjectPanel = () => {
                     <Text text="Drafts" fontSize="1rem" fontWeight="500" />
                 </ViewTextIcon>
             </ViewContainer>
+            <ProjectsContainer>{renderBuilderProjects()}</ProjectsContainer>
             <CreateNewProjectContainer>
                 <GeneralButton
                     buttonLabel="Create New Project"
-                    onClick={() =>
-                        dispatch(
-                            addProject((status) => console.log(status), {
-                                projectName: 'testProject',
-                                projectDesc: '',
-                            })
-                        )
-                    }
+                    onClick={() => toggleProjectModal(true)}
                 />
             </CreateNewProjectContainer>
         </MainContainer>
