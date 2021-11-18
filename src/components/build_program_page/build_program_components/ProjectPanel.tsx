@@ -60,6 +60,8 @@ const CreateNewProjectContainer = styled.div`
     padding: 1rem 1rem;
 `;
 
+const ProjectsContainer = styled.div``;
+
 //Interfaces:
 
 interface IMainContainer {}
@@ -83,6 +85,7 @@ const ProjectPanel = () => {
                     <Text text="Drafts" fontSize="1rem" fontWeight="500" />
                 </ViewTextIcon>
             </ViewContainer>
+            <ProjectsContainer>test</ProjectsContainer>
             <CreateNewProjectContainer>
                 <GeneralButton
                     buttonLabel="Create New Project"
