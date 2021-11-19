@@ -14,6 +14,7 @@ import GeneralButton from '../../../components/general_components/GeneralButton'
 import { Avatar } from '@mantine/core';
 import { Menu, MenuItem, MenuLabel, Divider, Text } from '@mantine/core';
 import { useNotifications } from '@mantine/notifications';
+import { useLocation } from 'react-router-dom';
 
 //Styles:
 import styled from 'styled-components';
@@ -33,18 +34,18 @@ const ProfileIcon = styled(UserCircle)`
     color: ${(props) => props.theme.mainText};
 `;
 
-const CaretDownIcon = styled(CaretDown)`
+const CaretDownIcon = styled(CaretDown)<StyledProps>`
     height: 1.25rem;
     width: 1.25rem;
-    color: #c6c6c6;
+    color: ${(props) => (props.isBuilder ? '#ffffff' : '#c6c6c6')};
 `;
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<StyledProps>`
     cursor: pointer;
     transition: all 0.1s ease-in;
 
     &:hover {
-        background: #ececec;
+        background: ${(props) => (props.isBuilder ? 'none' : '#ececec')};
     }
 
     @media ${deviceMin.mobileS} {
@@ -56,11 +57,12 @@ const MainContainer = styled.div`
     }
 `;
 
-const DropdownContainer = styled.div`
+const DropdownContainer = styled.div<StyledProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #d3d3d3;
+    border: ${(props) =>
+        props.isBuilder ? '1px solid #ffffff' : '1px solid #d3d3d3'};
     border-radius: 0.3rem;
     padding: 0.5rem 0.5rem;
     column-gap: 0.75rem;
@@ -70,9 +72,9 @@ const AvatarContainer = styled.div``;
 
 const HeaderContainer = styled.div``;
 
-const UserDetailText = styled.h3`
+const UserDetailText = styled.h3<StyledProps>`
     font-size: 1rem;
-    color: ${(props) => props.theme.mainText};
+    color: ${(props) => (props.isBuilder ? '#ffffff' : props.theme.mainText)};
     font-weight: 800;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -99,6 +101,10 @@ interface IComponentProps {
     username: string;
 }
 
+interface StyledProps {
+    isBuilder: boolean;
+}
+
 //Userfront init()
 Userfront.init('5nxxrqn7');
 
@@ -107,6 +113,7 @@ const UserDropdown = ({
     image,
     username,
 }: IComponentProps): JSX.Element => {
+    const location = useLocation();
     const dispatch = useDispatch();
     const notifications = useNotifications();
     const [stateCollapse, setStateCollapse] = useState(false);
@@ -116,12 +123,17 @@ const UserDropdown = ({
         return 'lg';
     };
 
+    const checkIfBuilder = () => {
+        if (location.pathname.includes('builder')) return true;
+        return false;
+    };
+
     return (
-        <MainContainer>
+        <MainContainer isBuilder={checkIfBuilder()}>
             <Menu
                 placement="start"
                 control={
-                    <DropdownContainer>
+                    <DropdownContainer isBuilder={checkIfBuilder()}>
                         <AvatarContainer>
                             <Avatar
                                 src={image}
@@ -131,9 +143,11 @@ const UserDropdown = ({
                             />
                         </AvatarContainer>
                         <HeaderContainer>
-                            <UserDetailText>{username}</UserDetailText>
+                            <UserDetailText isBuilder={checkIfBuilder()}>
+                                {username}
+                            </UserDetailText>
                         </HeaderContainer>
-                        <CaretDownIcon />
+                        <CaretDownIcon isBuilder={checkIfBuilder()} />
                     </DropdownContainer>
                 }
                 zIndex={999}
