@@ -20,6 +20,8 @@ export const findProject = (statusCallback: (status: boolean) => void) => {
 
 export const addProject = (
     statusCallback: (status: boolean) => void,
+    modalCallback: (status: boolean) => void,
+    toggleNotif: () => void,
     projectDetails: any
 ) => {
     return async (dispatch: Dispatch<BuilderAction>) => {
@@ -32,7 +34,11 @@ export const addProject = (
             payload: response.data.builder,
         });
 
-        if (response.data) statusCallback(true);
+        if (response.data) {
+            statusCallback(false);
+            modalCallback(false);
+            toggleNotif();
+        } //isCreatingNewProject? Finished = false.
     };
 };
 
