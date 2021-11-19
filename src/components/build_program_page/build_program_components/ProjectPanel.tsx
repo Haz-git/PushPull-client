@@ -9,6 +9,7 @@ import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
 import ProjectComponent from './ProjectComponent';
 import { Loader } from '@mantine/core';
+import ProjectContextMenu from './ProjectContextMenu';
 
 //Styles:
 import styled from 'styled-components';
@@ -99,40 +100,47 @@ const ProjectPanel = ({
     };
 
     return (
-        <MainContainer>
-            <ViewContainer>
-                <ViewTextIcon>
-                    <RecentIcon />
-                    <Text text="Recents" fontSize="1rem" fontWeight="500" />
-                </ViewTextIcon>
-                <ViewTextIcon>
-                    <PublishIcon />
-                    <Text text="Published" fontSize="1rem" fontWeight="500" />
-                </ViewTextIcon>
-                <ViewTextIcon>
-                    <DocumentIcon />
-                    <Text text="Drafts" fontSize="1rem" fontWeight="500" />
-                </ViewTextIcon>
-            </ViewContainer>
-            <ProjectsContainer>{renderBuilderProjects()}</ProjectsContainer>
-            <CreateNewProjectContainer>
-                <GeneralButton
-                    buttonLabel={
-                        isCreatingNewProject
-                            ? 'Creating Project...'
-                            : 'Create New Project'
-                    }
-                    onClick={() => toggleProjectModal(true)}
-                    iconMargin="0rem .3rem -.2rem 0rem"
-                    buttonIcon={
-                        isCreatingNewProject ? (
-                            <Loader color="white" size="xs" />
-                        ) : null
-                    }
-                    isDisabledOnLoading={isCreatingNewProject}
-                />
-            </CreateNewProjectContainer>
-        </MainContainer>
+        <>
+            <MainContainer>
+                <ViewContainer>
+                    <ViewTextIcon>
+                        <RecentIcon />
+                        <Text text="Recents" fontSize="1rem" fontWeight="500" />
+                    </ViewTextIcon>
+                    <ViewTextIcon>
+                        <PublishIcon />
+                        <Text
+                            text="Published"
+                            fontSize="1rem"
+                            fontWeight="500"
+                        />
+                    </ViewTextIcon>
+                    <ViewTextIcon>
+                        <DocumentIcon />
+                        <Text text="Drafts" fontSize="1rem" fontWeight="500" />
+                    </ViewTextIcon>
+                </ViewContainer>
+                <ProjectsContainer>{renderBuilderProjects()}</ProjectsContainer>
+                <CreateNewProjectContainer>
+                    <GeneralButton
+                        buttonLabel={
+                            isCreatingNewProject
+                                ? 'Creating Project...'
+                                : 'Create New Project'
+                        }
+                        onClick={() => toggleProjectModal(true)}
+                        iconMargin="0rem .3rem -.2rem 0rem"
+                        buttonIcon={
+                            isCreatingNewProject ? (
+                                <Loader color="white" size="xs" />
+                            ) : null
+                        }
+                        isDisabledOnLoading={isCreatingNewProject}
+                    />
+                </CreateNewProjectContainer>
+            </MainContainer>
+            <ProjectContextMenu id={'PROJECTCOMPONENTCONTEXTMENU'} />
+        </>
     );
 };
 
