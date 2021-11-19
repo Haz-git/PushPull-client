@@ -7,6 +7,7 @@ import {
     isTablet,
     MobileOnlyView,
 } from 'react-device-detect';
+import { useLocation } from 'react-router-dom';
 
 //Components:
 import GeneralButton from '../general_components/GeneralButton';
@@ -160,6 +161,7 @@ interface IComponentProps {
 }
 
 const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
+    const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
 
     const identifyBrowserOrTablet = () => {
@@ -172,91 +174,101 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
         return <CaretUpIcon />;
     };
 
-    return (
-        <>
-            <CustomView condition={identifyBrowserOrTablet()}>
-                <MainContainer>
-                    <FooterTextBlock>
-                        <FooterText>
-                            © 2021 PushPull. All rights reserved.
-                        </FooterText>
-                    </FooterTextBlock>
-                    <FooterBlock>
-                        <GeneralButton
-                            buttonLabel="Feedback"
-                            width="7.5rem"
-                            onClick={bugReportHandler}
-                            padding=".4rem .4rem"
-                            buttonIcon={<MailIcon />}
-                            margin=".5rem auto"
-                        />
-                        <FooterTextLinks
-                            href="https://storyset.com"
-                            target="_blank"
-                        >
-                            Illustrations by StorySet
-                        </FooterTextLinks>
-                        <FooterTextLinks>Add a Review</FooterTextLinks>
-                        <FooterTextLinks>About Us</FooterTextLinks>
-                        <FooterTextLinks>Contact Us</FooterTextLinks>
-                    </FooterBlock>
-                </MainContainer>
-            </CustomView>
-            <MobileOnlyView>
-                <MobileMainContainer>
-                    <MobileFlexContainer>
-                        <FooterTextBlock>
-                            <MobilePaddingSpacers>
-                                <FooterText>© 2021 PushPull</FooterText>
-                            </MobilePaddingSpacers>
-                        </FooterTextBlock>
-                        <FooterBlock>
-                            <MobilePaddingSpacers>
+    console.log(location);
+
+    const renderFooter = () => {
+        if (!location.pathname.includes('builder')) {
+            return (
+                <>
+                    <CustomView condition={identifyBrowserOrTablet()}>
+                        <MainContainer>
+                            <FooterTextBlock>
+                                <FooterText>
+                                    © 2021 PushPull. All rights reserved.
+                                </FooterText>
+                            </FooterTextBlock>
+                            <FooterBlock>
                                 <GeneralButton
                                     buttonLabel="Feedback"
-                                    width="6rem"
+                                    width="7.5rem"
                                     onClick={bugReportHandler}
-                                    padding=".2rem .1rem"
+                                    padding=".4rem .4rem"
                                     buttonIcon={<MailIcon />}
                                     margin=".5rem auto"
-                                    fontSize=".8rem"
                                 />
-                            </MobilePaddingSpacers>
-                            <MobilePaddingSpacers>
-                                <GeneralButton
-                                    buttonLabel="More"
-                                    fontSize=".8rem"
-                                    padding=".2rem .4rem"
-                                    buttonIcon={returnStateCollapseButtonIcon()}
-                                    onClick={() => setIsOpen(!isOpen)}
-                                    margin=".5rem auto"
-                                />
-                            </MobilePaddingSpacers>
-                        </FooterBlock>
-                    </MobileFlexContainer>
-                    <Collapse in={isOpen}>
-                        <MobileLinkContainer>
-                            <MobileFooterTextLinks
-                                href="https://storyset.com"
-                                target="_blank"
-                            >
-                                Illustrations by StorySet
-                            </MobileFooterTextLinks>
-                            <MobileFooterTextLinks>
-                                Add a Review
-                            </MobileFooterTextLinks>
-                            <MobileFooterTextLinks>
-                                About Us
-                            </MobileFooterTextLinks>
-                            <MobileFooterTextLinks>
-                                Contact Us
-                            </MobileFooterTextLinks>
-                        </MobileLinkContainer>
-                    </Collapse>
-                </MobileMainContainer>
-            </MobileOnlyView>
-        </>
-    );
+                                <FooterTextLinks
+                                    href="https://storyset.com"
+                                    target="_blank"
+                                >
+                                    Illustrations by StorySet
+                                </FooterTextLinks>
+                                <FooterTextLinks>Add a Review</FooterTextLinks>
+                                <FooterTextLinks>About Us</FooterTextLinks>
+                                <FooterTextLinks>Contact Us</FooterTextLinks>
+                            </FooterBlock>
+                        </MainContainer>
+                    </CustomView>
+                    <MobileOnlyView>
+                        <MobileMainContainer>
+                            <MobileFlexContainer>
+                                <FooterTextBlock>
+                                    <MobilePaddingSpacers>
+                                        <FooterText>© 2021 PushPull</FooterText>
+                                    </MobilePaddingSpacers>
+                                </FooterTextBlock>
+                                <FooterBlock>
+                                    <MobilePaddingSpacers>
+                                        <GeneralButton
+                                            buttonLabel="Feedback"
+                                            width="6rem"
+                                            onClick={bugReportHandler}
+                                            padding=".2rem .1rem"
+                                            buttonIcon={<MailIcon />}
+                                            margin=".5rem auto"
+                                            fontSize=".8rem"
+                                        />
+                                    </MobilePaddingSpacers>
+                                    <MobilePaddingSpacers>
+                                        <GeneralButton
+                                            buttonLabel="More"
+                                            fontSize=".8rem"
+                                            padding=".2rem .4rem"
+                                            buttonIcon={returnStateCollapseButtonIcon()}
+                                            onClick={() => setIsOpen(!isOpen)}
+                                            margin=".5rem auto"
+                                        />
+                                    </MobilePaddingSpacers>
+                                </FooterBlock>
+                            </MobileFlexContainer>
+                            <Collapse in={isOpen}>
+                                <MobileLinkContainer>
+                                    <MobileFooterTextLinks
+                                        href="https://storyset.com"
+                                        target="_blank"
+                                    >
+                                        Illustrations by StorySet
+                                    </MobileFooterTextLinks>
+                                    <MobileFooterTextLinks>
+                                        Add a Review
+                                    </MobileFooterTextLinks>
+                                    <MobileFooterTextLinks>
+                                        About Us
+                                    </MobileFooterTextLinks>
+                                    <MobileFooterTextLinks>
+                                        Contact Us
+                                    </MobileFooterTextLinks>
+                                </MobileLinkContainer>
+                            </Collapse>
+                        </MobileMainContainer>
+                    </MobileOnlyView>
+                </>
+            );
+        } else {
+            return null;
+        }
+    };
+
+    return <>{renderFooter()}</>;
 };
 
 export default MainFooter;
