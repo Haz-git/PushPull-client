@@ -9,6 +9,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import Userfront from '@userfront/react';
 import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
+import { ReactComponent as DarkLogoSVG } from '../../assets/dark_logo.svg';
 import { Burger } from '@mantine/core';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
@@ -18,13 +19,14 @@ import useLoginStatus from '../../utils/hooks/useLoginStatus';
 //Styles:
 import styled from 'styled-components';
 
-const StyledNavbar = styled.nav`
+const StyledNavbar = styled.nav<NavbarProps>`
     top: 0;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: ${(props) => props.theme.lightBackground};
+    background: ${(props) =>
+        props.isBuilder ? '#2C2C2C' : props.theme.lightBackground};
     width: 100%;
     height: 3.75rem;
     padding: 0.5rem 1rem;
@@ -113,6 +115,10 @@ interface IComponentProps {
     toggleAuthDrawerWithView: (state: boolean, view: string) => void;
 }
 
+interface NavbarProps {
+    isBuilder: boolean;
+}
+
 //Userfront Initialization:
 
 Userfront.init('5nxxrqn7');
@@ -169,10 +175,20 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         }
     };
 
+    const checkIfBuilder = () => {
+        if (Location.pathname.includes('builder')) return true;
+        return false;
+    };
+
+    const renderLogoInBuilder = () => {
+        if (Location.pathname.includes('builder')) return <DarkLogoSVG />;
+        return <LogoSVG />;
+    };
+
     return (
-        <StyledNavbar>
+        <StyledNavbar isBuilder={checkIfBuilder()}>
             <LogoContainer>
-                <LogoSVG />
+                {renderLogoInBuilder()}
                 <StyledNavLogo to="/" />
             </LogoContainer>
             {renderAuthOptionsIfUserNotLoggedIn()}
