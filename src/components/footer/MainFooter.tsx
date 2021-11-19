@@ -174,8 +174,6 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
         return <CaretUpIcon />;
     };
 
-    console.log(location);
-
     const renderFooter = () => {
         if (!location.pathname.includes('builder')) {
             return (
