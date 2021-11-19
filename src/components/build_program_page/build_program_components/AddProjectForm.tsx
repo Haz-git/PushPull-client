@@ -11,6 +11,7 @@ import { Textarea } from '@mantine/core';
 import { ColorInput } from '@mantine/core';
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
+import { Loader } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -61,10 +62,14 @@ const ButtonContainer = styled.div`
 
 interface IComponentProps {
     toggleProjectModal: (status: boolean) => void;
+    isCreatingNewProject: boolean;
+    toggleIsCreatingNewProjectLoader: (status: boolean) => void;
 }
 
 const AddProjectForm = ({
     toggleProjectModal,
+    isCreatingNewProject,
+    toggleIsCreatingNewProjectLoader,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
@@ -90,12 +95,17 @@ const AddProjectForm = ({
 
     const handleNewProjectSubmission = () => {
         if (isProjectNameLengthOk()) {
+            toggleIsCreatingNewProjectLoader(true);
             return dispatch(
-                addProject((status: boolean) => console.log(status), {
-                    projectName,
-                    projectDesc,
-                    projectColorHex: projectColor,
-                })
+                addProject(
+                    toggleIsCreatingNewProjectLoader,
+                    toggleProjectModal,
+                    {
+                        projectName,
+                        projectDesc,
+                        projectColorHex: projectColor,
+                    }
+                )
             );
         }
 
@@ -139,6 +149,7 @@ const AddProjectForm = ({
                         }}
                         value={projectName}
                         error={hasError}
+                        disabled={isCreatingNewProject}
                     />
                 </InputContainer>
                 <InputContainer>
@@ -165,6 +176,7 @@ const AddProjectForm = ({
                             setProjectDesc(e.target.value)
                         }
                         value={projectDesc}
+                        disabled={isCreatingNewProject}
                     />
                 </InputContainer>
                 <InputContainer>
@@ -189,18 +201,27 @@ const AddProjectForm = ({
                                 <RandomIcon />
                             </RandomButton>
                         }
+                        disabled={isCreatingNewProject}
                     />
                 </InputContainer>
             </FormContainer>
             <ButtonContainer>
                 <GeneralButton
-                    buttonLabel="Save"
-                    width="5rem"
+                    buttonLabel={
+                        isCreatingNewProject ? 'Creating...' : 'Create'
+                    }
+                    width="8.5rem"
                     buttonBackground="#41A312"
                     fontSize="1rem"
                     height="2rem"
                     iconMargin="0rem .3rem -.2rem 0rem"
                     onClick={handleNewProjectSubmission}
+                    isDisabledOnLoading={isCreatingNewProject}
+                    buttonIcon={
+                        isCreatingNewProject ? (
+                            <Loader color="white" size="xs" />
+                        ) : null
+                    }
                 />
                 <GeneralButton
                     buttonLabel="Cancel"
@@ -214,6 +235,7 @@ const AddProjectForm = ({
                     fontSize="1rem"
                     height="2rem"
                     onClick={() => toggleProjectModal(false)}
+                    isDisabledOnLoading={isCreatingNewProject}
                 />
             </ButtonContainer>
         </MainContainer>
