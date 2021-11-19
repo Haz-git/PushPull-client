@@ -12,6 +12,7 @@ import { ColorInput } from '@mantine/core';
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
 import { Loader } from '@mantine/core';
+import { useNotifications } from '@mantine/notifications';
 
 //Styles:
 import styled from 'styled-components';
@@ -72,6 +73,7 @@ const AddProjectForm = ({
     toggleIsCreatingNewProjectLoader,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const notifications = useNotifications();
 
     const [projectName, setProjectName] = useState('');
     const [projectDesc, setProjectDesc] = useState('');
@@ -93,6 +95,15 @@ const AddProjectForm = ({
         );
     };
 
+    const toggleNotif = () => {
+        notifications.showNotification({
+            title: 'Your Project Has Been Created.',
+            message: 'Begin creating templates freely.',
+            color: 'orange',
+            autoClose: 2000,
+        });
+    };
+
     const handleNewProjectSubmission = () => {
         if (isProjectNameLengthOk()) {
             toggleIsCreatingNewProjectLoader(true);
@@ -100,6 +111,7 @@ const AddProjectForm = ({
                 addProject(
                     toggleIsCreatingNewProjectLoader,
                     toggleProjectModal,
+                    toggleNotif,
                     {
                         projectName,
                         projectDesc,
