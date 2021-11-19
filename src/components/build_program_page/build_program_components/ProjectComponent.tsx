@@ -3,6 +3,7 @@ import * as React from 'react';
 //Components:
 import Text from '../../general_components/Text';
 import { ColorSwatch } from '@mantine/core';
+import { useContextMenu } from 'react-contexify';
 
 //Styles:
 import styled from 'styled-components';
@@ -58,8 +59,17 @@ const ProjectComponent = ({
     projectName,
     updatedDate,
 }: IComponentProps): JSX.Element => {
+    const MENU_ID = 'PROJECTCOMPONENTCONTEXTMENU';
+    const { show } = useContextMenu({
+        id: MENU_ID,
+    });
+
+    const displayContextMenu = (event: React.MouseEvent) => {
+        event.preventDefault();
+        show(event);
+    };
     return (
-        <MainContainer>
+        <MainContainer onContextMenu={displayContextMenu}>
             <ProjectHeaderWrapper>
                 <HeaderContainer>
                     <SwatchContainer>
