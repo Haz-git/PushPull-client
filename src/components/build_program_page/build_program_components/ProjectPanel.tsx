@@ -8,6 +8,7 @@ import { addProject } from '../../../redux/builder/builderActions';
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
 import ProjectComponent from './ProjectComponent';
+import { Loader } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -67,9 +68,13 @@ const ProjectsContainer = styled.div``;
 
 interface IComponentProps {
     toggleProjectModal: (status: boolean) => void;
+    isCreatingNewProject: boolean;
 }
 
-const ProjectPanel = ({ toggleProjectModal }: IComponentProps): JSX.Element => {
+const ProjectPanel = ({
+    toggleProjectModal,
+    isCreatingNewProject,
+}: IComponentProps): JSX.Element => {
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
     const renderBuilderProjects = () => {
@@ -110,8 +115,19 @@ const ProjectPanel = ({ toggleProjectModal }: IComponentProps): JSX.Element => {
             <ProjectsContainer>{renderBuilderProjects()}</ProjectsContainer>
             <CreateNewProjectContainer>
                 <GeneralButton
-                    buttonLabel="Create New Project"
+                    buttonLabel={
+                        isCreatingNewProject
+                            ? 'Creating Project...'
+                            : 'Create New Project'
+                    }
                     onClick={() => toggleProjectModal(true)}
+                    iconMargin="0rem .3rem -.2rem 0rem"
+                    buttonIcon={
+                        isCreatingNewProject ? (
+                            <Loader color="white" size="xs" />
+                        ) : null
+                    }
+                    isDisabledOnLoading={isCreatingNewProject}
                 />
             </CreateNewProjectContainer>
         </MainContainer>
