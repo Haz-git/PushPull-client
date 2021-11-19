@@ -42,6 +42,8 @@ const MainContainer = styled.section`
     text-align: left;
     width: 20rem;
     max-width: 20rem;
+    padding-bottom: 7rem;
+    overflow-y: scroll;
 `;
 
 const ViewContainer = styled.div`
