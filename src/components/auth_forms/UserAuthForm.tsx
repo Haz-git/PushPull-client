@@ -294,7 +294,7 @@ const UserAuthForm = ({
                     title: 'Wooo! Your Account Has Been Created!',
                     message: `Welcome to Pushpull, ${value.username}. Please verify your account by email.`,
                     color: 'orange',
-                    autoClose: 20000,
+                    autoClose: 10000,
                 });
 
                 setUserSignupDetails({
@@ -328,7 +328,7 @@ const UserAuthForm = ({
                     title: `Welcome Back, ${Userfront.user.username}`,
                     message: `You've been successfully logged in.`,
                     color: 'orange',
-                    autoClose: 20000,
+                    autoClose: 10000,
                 });
 
                 if (hasRedirection && redirectPath && isAuthPath) {
@@ -357,7 +357,7 @@ const UserAuthForm = ({
                     title: 'An Email Has Been Sent!',
                     message: `Please check your inbox and follow the link.`,
                     color: 'orange',
-                    autoClose: 20000,
+                    autoClose: 10000,
                 });
 
                 setUserPasswordResetDetails({ email: '' });
@@ -384,7 +384,7 @@ const UserAuthForm = ({
                     title: 'Your Password Has Been Reset!',
                     message: `Make sure you keep it safe.`,
                     color: 'orange',
-                    autoClose: 20000,
+                    autoClose: 10000,
                 });
 
                 setUserNewPasswordDetails({ password: '', passwordVerify: '' });
