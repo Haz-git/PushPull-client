@@ -180,8 +180,8 @@ const App = () => {
                             />
                             <Route component={NotFound} />
                         </Switch>
+                        <MainFooter bugReportHandler={openBugReportModal} />
                     </Router>
-                    <MainFooter bugReportHandler={openBugReportModal} />
                 </>
             </ThemeProvider>
         </>
