@@ -66,10 +66,14 @@ const MainBuildProgramView = ({
     const dispatch = useDispatch();
     const [isBuilderInfoLoaded, setIsBuilderInfoLoaded] = useState(false);
     const [openAddProjectModal, setOpenAddProjectModal] = useState(false);
+    const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
 
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
     const toggleProjectModal = (status: boolean) =>
         setOpenAddProjectModal(status);
+
+    const toggleIsCreatingProjectLoader = (status: boolean) =>
+        setIsCreatingNewProject(status);
 
     useEffect(() => {
         dispatch(findProject(setIsLoaded));
@@ -86,12 +90,17 @@ const MainBuildProgramView = ({
                     >
                         <AddProjectForm
                             toggleProjectModal={toggleProjectModal}
+                            isCreatingNewProject={isCreatingNewProject}
+                            toggleIsCreatingNewProjectLoader={
+                                toggleIsCreatingProjectLoader
+                            }
                         />
                     </GeneralModal>
                     <>
                         <ProjectPanelView>
                             <ProjectPanel
                                 toggleProjectModal={toggleProjectModal}
+                                isCreatingNewProject={isCreatingNewProject}
                             />
                         </ProjectPanelView>
                         <DashboardPanelView>
