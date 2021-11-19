@@ -18,6 +18,7 @@ export const lightTheme = {
         green: '#41A312',
         blue: 'rgba(43, 90, 147,1)',
         purple: '#7678ED',
+        deepPurple: '#0F0628',
     },
     textShadows: {
         sm: '1px 1px 1px rgba(0,0,0,.25)',
