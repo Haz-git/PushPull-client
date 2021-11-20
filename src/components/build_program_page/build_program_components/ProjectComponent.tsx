@@ -48,6 +48,7 @@ interface IComponentProps {
     projectTemplates: any[];
     projectName: string;
     updatedDate: string;
+    projectUuid: string;
 }
 
 const ProjectComponent = ({
@@ -57,11 +58,15 @@ const ProjectComponent = ({
     projectMembers,
     projectTemplates,
     projectName,
+    projectUuid,
     updatedDate,
 }: IComponentProps): JSX.Element => {
     const MENU_ID = 'PROJECTCOMPONENTCONTEXTMENU';
     const { show } = useContextMenu({
         id: MENU_ID,
+        props: {
+            projectUuid,
+        },
     });
 
     const displayContextMenu = (event: React.MouseEvent) => {
