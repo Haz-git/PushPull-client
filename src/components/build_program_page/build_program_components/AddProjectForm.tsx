@@ -18,6 +18,7 @@ import { useNotifications } from '@mantine/notifications';
 import styled from 'styled-components';
 import { Refresh } from '@styled-icons/evil/Refresh';
 import { Checkmark } from '@styled-icons/fluentui-system-filled/Checkmark';
+import { Close } from '@styled-icons/remix-fill/Close';
 
 const RandomIcon = styled(Refresh)`
     height: 1.85rem;
@@ -26,6 +27,12 @@ const RandomIcon = styled(Refresh)`
 `;
 
 const CheckIcon = styled(Checkmark)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #ffffff;
+`;
+
+const CancelIcon = styled(Close)`
     height: 1.25rem;
     width: 1.25rem;
     color: #ffffff;
@@ -115,8 +122,18 @@ const AddProjectForm = ({
         return id;
     };
 
-    const updateNotif = (id: string) => {
-        notifications.updateNotification(id, {
+    const updateNotif = (id: string, status: boolean) => {
+        if (status !== true)
+            return notifications.updateNotification(id, {
+                id,
+                color: 'red',
+                title: 'Your Project Failed To Be Created.',
+                message:
+                    'An error might have occurred. Please report this bug.',
+                autoClose: 3000,
+                icon: <CancelIcon />,
+            });
+        return notifications.updateNotification(id, {
             id,
             color: 'teal',
             title: 'Your Project Has Been Created',
