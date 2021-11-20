@@ -98,7 +98,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .mantine-notification-root {
-    
+
 
         @media(min-width: 320px) {
             bottom: 2.75rem;
