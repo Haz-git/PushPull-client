@@ -46,6 +46,21 @@ export const updateProject = () => {
     return async (dispatch: Dispatch<BuilderAction>) => {};
 };
 
-export const deleteProject = () => {
-    return async (dispatch: Dispatch<BuilderAction>) => {};
+export const deleteProject = (
+    statusCallback: (status: boolean) => void,
+    toggleNotif: () => void,
+    projectId: string
+) => {
+    return async (dispatch: Dispatch<BuilderAction>) => {
+        let response = await api.delete(`/builder/project/delete/${projectId}`);
+
+        dispatch({
+            type: BuilderActionType.USER_DELETE_PROJECT,
+            payload: response.data.builder,
+        });
+
+        if (response.data) {
+            statusCallback(false);
+        }
+    };
 };
