@@ -22,25 +22,30 @@ export const addProject = (
     statusCallback: (status: boolean) => void,
     modalCallback: (status: boolean) => void,
     toggleNotif: () => string,
-    updateNotif: (id: string) => void,
+    updateNotif: (id: string, status: boolean) => void,
     projectDetails: any
 ) => {
     return async (dispatch: Dispatch<BuilderAction>) => {
         const id = toggleNotif();
-        let response = await api.post(`/builder/project/add`, {
-            projectDetails,
-        });
 
-        dispatch({
-            type: BuilderActionType.USER_ADD_PROJECT,
-            payload: response.data.builder,
-        });
-
-        if (response.data) {
+        try {
+            let response = await api.post(`/builder/project/add`, {
+                projectDetails,
+            });
+            dispatch({
+                type: BuilderActionType.USER_ADD_PROJECT,
+                payload: response.data.builder,
+            });
+            if (response.data) {
+                statusCallback(false);
+                modalCallback(false);
+                updateNotif(id, true);
+            }
+        } catch (err) {
             statusCallback(false);
             modalCallback(false);
-            updateNotif(id);
-        } //isCreatingNewProject? Finished = false.
+            updateNotif(id, false);
+        }
     };
 };
 
