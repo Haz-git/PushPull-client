@@ -1,5 +1,12 @@
 import * as React from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import {
+    deleteProject,
+    updateProject,
+} from '../../../redux/builder/builderActions';
+
 //Components:
 import { Menu, Item, Separator, theme, animation } from 'react-contexify';
 
@@ -61,6 +68,19 @@ interface IComponentProps {
 }
 
 const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
+    const handleDeleteProject = ({ props: { projectUuid } }: any) => {
+        console.log(projectUuid);
+        dispatch(
+            deleteProject(
+                (status) => console.log(status),
+                () => console.log('notif'),
+                projectUuid
+            )
+        );
+    };
+
     return (
         <StyledMenu id={id} animation={animation.fade} theme={theme.dark}>
             <Item>
@@ -77,7 +97,7 @@ const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
                 </ItemContainer>
             </Item>
             <Separator />
-            <Item>
+            <Item onClick={handleDeleteProject}>
                 <ItemContainer>
                     <DeleteIcon />
                     Delete Project
