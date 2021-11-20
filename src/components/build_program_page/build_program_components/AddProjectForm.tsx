@@ -17,11 +17,18 @@ import { useNotifications } from '@mantine/notifications';
 //Styles:
 import styled from 'styled-components';
 import { Refresh } from '@styled-icons/evil/Refresh';
+import { Checkmark } from '@styled-icons/fluentui-system-filled/Checkmark';
 
 const RandomIcon = styled(Refresh)`
     height: 1.85rem;
     width: 1.85rem;
     color: rgba(0, 0, 34, 1);
+`;
+
+const CheckIcon = styled(Checkmark)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #ffffff;
 `;
 
 const MainContainer = styled.div`
@@ -96,11 +103,26 @@ const AddProjectForm = ({
     };
 
     const toggleNotif = () => {
-        notifications.showNotification({
-            title: 'Your Project Has Been Created.',
-            message: 'Begin creating templates freely.',
+        let id = notifications.showNotification({
+            title: 'Your Project Is Being Created...',
+            message: 'Our monkeys are working hard.',
             color: 'orange',
-            autoClose: 2000,
+            autoClose: false,
+            disallowClose: true,
+            loading: true,
+        });
+
+        return id;
+    };
+
+    const updateNotif = (id: string) => {
+        notifications.updateNotification(id, {
+            id,
+            color: 'teal',
+            title: 'Your Project Has Been Created',
+            message: 'Being adding templates!',
+            autoClose: 3000,
+            icon: <CheckIcon />,
         });
     };
 
@@ -112,6 +134,7 @@ const AddProjectForm = ({
                     toggleIsCreatingNewProjectLoader,
                     toggleProjectModal,
                     toggleNotif,
+                    updateNotif,
                     {
                         projectName,
                         projectDesc,
