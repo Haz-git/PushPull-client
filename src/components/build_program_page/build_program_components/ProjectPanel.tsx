@@ -84,7 +84,8 @@ const ProjectPanel = ({
         if (projects.length > 0) {
             return projects.map((project: any) => (
                 <ProjectComponent
-                    key={project.projectUuid || 123141}
+                    key={project.projectUuid}
+                    projectUuid={project.projectUuid}
                     createdBy={project.createdBy}
                     projectColorHex={project.projectColorHex}
                     projectDesc={project.projectDesc}
