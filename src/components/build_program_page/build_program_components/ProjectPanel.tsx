@@ -71,6 +71,9 @@ const ProjectsContainer = styled.div``;
 
 interface IComponentProps {
     toggleProjectModal: (status: boolean) => void;
+    toggleRenameProjectModal: (status: boolean) => void;
+    toggleRecolorProjectModal: (status: boolean) => void;
+    toggleDeleteProjectModal: (status: boolean) => void;
     isCreatingNewProject: boolean;
 }
 

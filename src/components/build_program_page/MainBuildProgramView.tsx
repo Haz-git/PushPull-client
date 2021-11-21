@@ -87,6 +87,14 @@ const MainBuildProgramView = ({
         useState(false);
     const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
 
+    //Modal state handlers:
+    const toggleRenameProjectModal = (status: boolean) =>
+        setOpenRenameProjectModal(status);
+    const toggleDeleteProjectModal = (status: boolean) =>
+        setOpenDeleteProjectModal(status);
+    const toggleRecolorProjectModal = (status: boolean) =>
+        setOpenRecolorProjectModal(status);
+
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
     const toggleProjectModal = (status: boolean) =>
         setOpenAddProjectModal(status);
@@ -176,6 +184,15 @@ const MainBuildProgramView = ({
                             <ProjectPanel
                                 toggleProjectModal={toggleProjectModal}
                                 isCreatingNewProject={isCreatingNewProject}
+                                toggleDeleteProjectModal={
+                                    toggleDeleteProjectModal
+                                }
+                                toggleRecolorProjectModal={
+                                    toggleRecolorProjectModal
+                                }
+                                toggleRenameProjectModal={
+                                    toggleRenameProjectModal
+                                }
                             />
                         </ProjectPanelView>
                         <DashboardPanelView>
