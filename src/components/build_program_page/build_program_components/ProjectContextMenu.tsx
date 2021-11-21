@@ -9,11 +9,15 @@ import {
 
 //Components:
 import { Menu, Item, Separator, theme, animation } from 'react-contexify';
+import { useNotifications } from '@mantine/notifications';
 
 //Styles:
 import styled from 'styled-components';
 import 'react-contexify/dist/ReactContexify.css';
-
+import {
+    CheckIcon,
+    CancelIcon,
+} from '../build_program_components/AddProjectForm';
 import { Color } from '@styled-icons/fluentui-system-regular/Color';
 import { Rename } from '@styled-icons/fluentui-system-regular/Rename';
 import { Delete } from '@styled-icons/fluentui-system-regular/Delete';
@@ -69,13 +73,48 @@ interface IComponentProps {
 
 const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const notifications = useNotifications();
+
+    const toggleLoadingNotif = () => {
+        let id = notifications.showNotification({
+            title: 'Project Is Being Deleted...',
+            message: 'This is a non-reversable process.',
+            color: 'orange',
+            autoClose: false,
+            disallowClose: true,
+            loading: true,
+        });
+
+        return id;
+    };
+
+    const updateLoadingNotif = (id: string, status: boolean) => {
+        if (status !== true)
+            return notifications.updateNotification(id, {
+                id,
+                color: 'red',
+                title: 'Your Project Failed To Be Deleted!',
+                message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+                autoClose: 3000,
+                icon: <CancelIcon />,
+            });
+        return notifications.updateNotification(id, {
+            id,
+            color: 'teal',
+            title: 'Project Has Been Deleted!',
+            message: 'This is a non-reversable action.',
+            autoClose: 3000,
+            icon: <CheckIcon />,
+        });
+    };
 
     const handleDeleteProject = ({ props: { projectUuid } }: any) => {
         console.log(projectUuid);
         dispatch(
             deleteProject(
                 (status) => console.log(status),
-                () => console.log('notif'),
+                toggleLoadingNotif,
+                updateLoadingNotif,
                 projectUuid
             )
         );
