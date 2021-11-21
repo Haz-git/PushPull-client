@@ -4,6 +4,7 @@ import * as React from 'react';
 import Text from '../../general_components/Text';
 import { ColorSwatch } from '@mantine/core';
 import { useContextMenu } from 'react-contexify';
+import { Transition } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -49,6 +50,9 @@ interface IComponentProps {
     projectName: string;
     updatedDate: string;
     projectUuid: string;
+    toggleRenameProjectModal: (status: boolean) => void;
+    toggleRecolorProjectModal: (status: boolean) => void;
+    toggleDeleteProjectModal: (status: boolean) => void;
 }
 
 const ProjectComponent = ({
@@ -60,12 +64,18 @@ const ProjectComponent = ({
     projectName,
     projectUuid,
     updatedDate,
+    toggleRenameProjectModal,
+    toggleRecolorProjectModal,
+    toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
     const MENU_ID = 'PROJECTCOMPONENTCONTEXTMENU';
     const { show } = useContextMenu({
         id: MENU_ID,
         props: {
             projectUuid,
+            toggleRenameProjectModal,
+            toggleRecolorProjectModal,
+            toggleDeleteProjectModal,
         },
     });
 

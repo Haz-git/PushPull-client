@@ -80,6 +80,9 @@ interface IComponentProps {
 const ProjectPanel = ({
     toggleProjectModal,
     isCreatingNewProject,
+    toggleRenameProjectModal,
+    toggleRecolorProjectModal,
+    toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
@@ -96,6 +99,9 @@ const ProjectPanel = ({
                     projectTemplates={project.projectTemplates}
                     projectName={project.projectName}
                     updatedDate={project.updatedDate}
+                    toggleDeleteProjectModal={toggleDeleteProjectModal}
+                    toggleRecolorProjectModal={toggleRecolorProjectModal}
+                    toggleRenameProjectModal={toggleRenameProjectModal}
                 />
             ));
         } else {
