@@ -26,13 +26,13 @@ const RandomIcon = styled(Refresh)`
     color: rgba(0, 0, 34, 1);
 `;
 
-const CheckIcon = styled(Checkmark)`
+export const CheckIcon = styled(Checkmark)`
     height: 1.25rem;
     width: 1.25rem;
     color: #ffffff;
 `;
 
-const CancelIcon = styled(Close)`
+export const CancelIcon = styled(Close)`
     height: 1.25rem;
     width: 1.25rem;
     color: #ffffff;
