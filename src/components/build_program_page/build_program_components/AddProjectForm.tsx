@@ -137,7 +137,7 @@ const AddProjectForm = ({
             id,
             color: 'teal',
             title: 'Your Project Has Been Created',
-            message: 'Being adding templates!',
+            message: 'Begin adding templates!',
             autoClose: 3000,
             icon: <CheckIcon />,
         });
