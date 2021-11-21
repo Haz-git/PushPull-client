@@ -108,28 +108,43 @@ const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
         });
     };
 
-    const handleDeleteProject = ({ props: { projectUuid } }: any) => {
-        console.log(projectUuid);
-        dispatch(
-            deleteProject(
-                (status) => console.log(status),
-                toggleLoadingNotif,
-                updateLoadingNotif,
-                projectUuid
-            )
-        );
+    const handleDeleteProject = ({
+        props: { projectUuid, toggleDeleteProjectModal },
+    }: any) => {
+        toggleDeleteProjectModal(true);
+        // console.log(projectUuid);
+        // dispatch(
+        //     deleteProject(
+        //         (status) => console.log(status),
+        //         toggleLoadingNotif,
+        //         updateLoadingNotif,
+        //         projectUuid
+        //     )
+        // );
+    };
+
+    const handleRenameProject = ({
+        props: { projectUuid, toggleRenameProjectModal },
+    }: any) => {
+        toggleRenameProjectModal(true);
+    };
+
+    const handleRecolorProject = ({
+        props: { projectUuid, toggleRecolorProjectModal },
+    }: any) => {
+        toggleRecolorProjectModal(true);
     };
 
     return (
         <StyledMenu id={id} animation={animation.fade} theme={theme.dark}>
-            <Item>
+            <Item onClick={handleRenameProject}>
                 <ItemContainer>
                     <RenameIcon />
                     Rename Project
                 </ItemContainer>
             </Item>
             <Separator />
-            <Item>
+            <Item onClick={handleRecolorProject}>
                 <ItemContainer>
                     <ColorIcon />
                     Change Color
