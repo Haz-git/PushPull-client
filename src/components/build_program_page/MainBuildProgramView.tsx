@@ -4,6 +4,9 @@ import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
 import AddProjectForm from './build_program_components/AddProjectForm';
+import RenameProjectForm from './build_program_components/RenameProjectForm';
+import RecolorProjectForm from './build_program_components/RecolorProjectForm';
+import DeleteProjectForm from './build_program_components/DeleteProjectForm';
 import GeneralModal from '../general_components/GeneralModal';
 import { useNotifications } from '@mantine/notifications';
 
@@ -70,8 +73,18 @@ const MainBuildProgramView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
+
+    //Loading State:
+
     const [isBuilderInfoLoaded, setIsBuilderInfoLoaded] = useState(false);
+
+    //Modal States:
+
     const [openAddProjectModal, setOpenAddProjectModal] = useState(false);
+    const [openDeleteProjectModal, setOpenDeleteProjectModal] = useState(false);
+    const [openRenameProjectModal, setOpenRenameProjectModal] = useState(false);
+    const [openRecolorProjectModal, setOpenRecolorProjectModal] =
+        useState(false);
     const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
 
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
@@ -108,7 +121,7 @@ const MainBuildProgramView = ({
             id,
             color: 'teal',
             title: 'Welcome To Builder Mode.',
-            message: 'Your projects and templates have been loaded.',
+            message: 'Your projects and templates have been',
             autoClose: 3000,
             icon: <CheckIcon />,
         });
@@ -136,6 +149,27 @@ const MainBuildProgramView = ({
                                 toggleIsCreatingProjectLoader
                             }
                         />
+                    </GeneralModal>
+                    <GeneralModal
+                        openBoolean={openDeleteProjectModal}
+                        closeFunc={() => setOpenDeleteProjectModal(false)}
+                        title="Confirm Delete Project"
+                    >
+                        <DeleteProjectForm />
+                    </GeneralModal>
+                    <GeneralModal
+                        openBoolean={openRenameProjectModal}
+                        closeFunc={() => setOpenRenameProjectModal(false)}
+                        title="Rename Project"
+                    >
+                        <RenameProjectForm />
+                    </GeneralModal>
+                    <GeneralModal
+                        openBoolean={openRecolorProjectModal}
+                        closeFunc={() => console.log('experiment')}
+                        title="Recolor Project"
+                    >
+                        <RecolorProjectForm />
                     </GeneralModal>
                     <>
                         <ProjectPanelView>
