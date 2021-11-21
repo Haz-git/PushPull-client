@@ -67,19 +67,30 @@ export const updateProject = () => {
 
 export const deleteProject = (
     statusCallback: (status: boolean) => void,
-    toggleNotif: () => void,
+    toggleNotif: () => string,
+    updateNotif: (id: string, status: boolean) => void,
     projectId: string
 ) => {
     return async (dispatch: Dispatch<BuilderAction>) => {
-        let response = await api.delete(`/builder/project/delete/${projectId}`);
+        const id = toggleNotif();
 
-        dispatch({
-            type: BuilderActionType.USER_DELETE_PROJECT,
-            payload: response.data.builder,
-        });
+        try {
+            let response = await api.delete(
+                `/builder/project/delete/${projectId}`
+            );
 
-        if (response.data) {
+            dispatch({
+                type: BuilderActionType.USER_DELETE_PROJECT,
+                payload: response.data.builder,
+            });
+
+            if (response.data) {
+                statusCallback(false);
+                updateNotif(id, true);
+            }
+        } catch (err) {
             statusCallback(false);
+            updateNotif(id, false);
         }
     };
 };
