@@ -129,7 +129,8 @@ const MainBuildProgramView = ({
             id,
             color: 'teal',
             title: 'Welcome To Builder Mode.',
-            message: 'Your projects and templates have been',
+            message:
+                'Your projects and templates have been loaded successfully.',
             autoClose: 3000,
             icon: <CheckIcon />,
         });
@@ -174,7 +175,7 @@ const MainBuildProgramView = ({
                     </GeneralModal>
                     <GeneralModal
                         openBoolean={openRecolorProjectModal}
-                        closeFunc={() => console.log('experiment')}
+                        closeFunc={() => setOpenRecolorProjectModal(false)}
                         title="Recolor Project"
                     >
                         <RecolorProjectForm />
