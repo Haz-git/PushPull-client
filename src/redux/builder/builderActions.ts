@@ -3,18 +3,30 @@ import { Dispatch } from 'redux';
 import { BuilderAction } from './builderInterfaces';
 import { BuilderActionType } from './action-types';
 
-export const findProject = (statusCallback: (status: boolean) => void) => {
+export const findProject = (
+    statusCallback: (status: boolean) => void,
+    toggleNotif: () => string,
+    updateNotif: (id: string, status: boolean) => void
+) => {
     return async (dispatch: Dispatch<BuilderAction>) => {
-        let response = await api.get(`/builder/user`);
+        const id = toggleNotif();
 
-        console.log(response.data);
+        try {
+            let response = await api.get(`/builder/user`);
 
-        dispatch({
-            type: BuilderActionType.USER_FIND_PROJECT,
-            payload: response.data.builder,
-        });
+            dispatch({
+                type: BuilderActionType.USER_FIND_PROJECT,
+                payload: response.data.builder,
+            });
 
-        if (response.data) statusCallback(true);
+            if (response.data) {
+                statusCallback(true);
+                updateNotif(id, true);
+            }
+        } catch (err) {
+            statusCallback(false);
+            updateNotif(id, false);
+        }
     };
 };
 
