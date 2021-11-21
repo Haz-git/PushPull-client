@@ -5,6 +5,7 @@ import { deviceMin } from '../../devices/breakpoints';
 //Components:
 import AddProjectForm from './build_program_components/AddProjectForm';
 import GeneralModal from '../general_components/GeneralModal';
+import { useNotifications } from '@mantine/notifications';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -12,6 +13,10 @@ import { findProject } from '../../redux/builder/builderActions';
 
 //Styles:
 import styled from 'styled-components';
+import {
+    CheckIcon,
+    CancelIcon,
+} from './build_program_components/AddProjectForm';
 
 const MainContainer = styled.section`
     height: 100%;
@@ -64,6 +69,7 @@ const MainBuildProgramView = ({
     },
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const notifications = useNotifications();
     const [isBuilderInfoLoaded, setIsBuilderInfoLoaded] = useState(false);
     const [openAddProjectModal, setOpenAddProjectModal] = useState(false);
     const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
@@ -75,8 +81,43 @@ const MainBuildProgramView = ({
     const toggleIsCreatingProjectLoader = (status: boolean) =>
         setIsCreatingNewProject(status);
 
+    const toggleLoadingNotif = () => {
+        let id = notifications.showNotification({
+            title: 'Pulling Builder Details',
+            message: 'Please be patient as we pull your information.',
+            color: 'orange',
+            autoClose: false,
+            disallowClose: true,
+            loading: true,
+        });
+
+        return id;
+    };
+
+    const updateLoadingNotif = (id: string, status: boolean) => {
+        if (status !== true)
+            return notifications.updateNotification(id, {
+                id,
+                color: 'red',
+                title: 'Your Builder Details Failed To Be Loaded',
+                message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+                autoClose: 3000,
+                icon: <CancelIcon />,
+            });
+        return notifications.updateNotification(id, {
+            id,
+            color: 'teal',
+            title: 'Welcome To Builder Mode.',
+            message: 'Your projects and templates have been loaded.',
+            autoClose: 3000,
+            icon: <CheckIcon />,
+        });
+    };
+
     useEffect(() => {
-        dispatch(findProject(setIsLoaded));
+        dispatch(
+            findProject(setIsLoaded, toggleLoadingNotif, updateLoadingNotif)
+        );
     }, []);
 
     return (
