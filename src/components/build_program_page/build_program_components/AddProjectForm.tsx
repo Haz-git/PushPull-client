@@ -20,7 +20,7 @@ import { Refresh } from '@styled-icons/evil/Refresh';
 import { Checkmark } from '@styled-icons/fluentui-system-filled/Checkmark';
 import { Close } from '@styled-icons/remix-fill/Close';
 
-const RandomIcon = styled(Refresh)`
+export const RandomIcon = styled(Refresh)`
     height: 1.85rem;
     width: 1.85rem;
     color: rgba(0, 0, 34, 1);
@@ -48,7 +48,7 @@ export const InputContainer = styled.div`
     margin: 0rem 0rem 0.5rem 0rem;
 `;
 
-const RandomButton = styled.button`
+export const RandomButton = styled.button`
     outline: none;
     border: none;
     background: inherit;
