@@ -1,13 +1,18 @@
 import * as React from 'react';
 
 //Components:
+import { MainContainer } from './AddProjectForm';
 
 //Styles:
 
 //Interfaces:
 
-const RenameProjectForm = () => {
-    return <div>Rename Project Form.</div>;
+interface IComponentProps {
+    projectUuid: string;
+}
+
+const RenameProjectForm = ({ projectUuid }: IComponentProps): JSX.Element => {
+    return <MainContainer>Rename Project Form.</MainContainer>;
 };
 
 export default RenameProjectForm;

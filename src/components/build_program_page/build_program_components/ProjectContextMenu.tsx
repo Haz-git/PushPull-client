@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -75,6 +76,9 @@ const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
 
+    const [newProjectName, setNewProjectName] = useState('');
+    const [newProjectColor, setNewProjectColor] = useState('');
+
     const toggleLoadingNotif = () => {
         let id = notifications.showNotification({
             title: 'Project Is Being Deleted...',
@@ -111,7 +115,7 @@ const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
     const handleDeleteProject = ({
         props: { projectUuid, toggleDeleteProjectModal },
     }: any) => {
-        toggleDeleteProjectModal(true);
+        toggleDeleteProjectModal(true, projectUuid);
         // console.log(projectUuid);
         // dispatch(
         //     deleteProject(
@@ -126,13 +130,13 @@ const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
     const handleRenameProject = ({
         props: { projectUuid, toggleRenameProjectModal },
     }: any) => {
-        toggleRenameProjectModal(true);
+        toggleRenameProjectModal(true, projectUuid);
     };
 
     const handleRecolorProject = ({
         props: { projectUuid, toggleRecolorProjectModal },
     }: any) => {
-        toggleRecolorProjectModal(true);
+        toggleRecolorProjectModal(true, projectUuid);
     };
 
     return (
