@@ -44,7 +44,7 @@ export const MainContainer = styled.div`
 
 const FormContainer = styled.div``;
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
     margin: 0rem 0rem 0.5rem 0rem;
 `;
 
@@ -61,11 +61,11 @@ const RandomButton = styled.button`
     }
 `;
 
-const TextContainer = styled.div`
+export const TextContainer = styled.div`
     margin: 0rem 0rem 0.5rem 0rem;
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
