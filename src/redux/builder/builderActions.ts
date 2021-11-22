@@ -48,6 +48,7 @@ export const addProject = (
                 type: BuilderActionType.USER_ADD_PROJECT,
                 payload: response.data.builder,
             });
+
             if (response.data) {
                 statusCallback(false);
                 modalCallback(false);
@@ -64,14 +65,26 @@ export const addProject = (
 export const updateProject = (
     toggleNotif: () => string,
     updateNotif: (id: string, status: boolean) => void,
-    projectDetails: any
+    projectDetails: any,
+    projectUuid: string
 ) => {
     return async (dispatch: Dispatch<BuilderAction>) => {
         const id = toggleNotif();
 
         try {
-            console.log(projectDetails);
-            updateNotif(id, true);
+            let response = await api.put(
+                `/builder/project/update/${projectUuid}`,
+                {
+                    projectDetails,
+                }
+            );
+
+            dispatch({
+                type: BuilderActionType.USER_UPDATE_PROJECT,
+                payload: response.data.builder,
+            });
+
+            if (response.data) updateNotif(id, true);
         } catch (err) {
             updateNotif(id, false);
         }
