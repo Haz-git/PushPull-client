@@ -111,6 +111,7 @@ const GlobalStyle = createGlobalStyle`
 
     .mantine-notification-title {
         color: #ffffff;
+        font-size: .95rem;
     }
 
     .mantine-notification-description {
