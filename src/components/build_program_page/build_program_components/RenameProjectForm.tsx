@@ -84,9 +84,14 @@ const RenameProjectForm = ({
     const handleNewProjectNameSubmission = () => {
         if (isProjectNameLengthOk()) {
             dispatch(
-                updateProject(toggleLoadingNotif, updateLoadingNotif, {
-                    projectName: newProjectName,
-                })
+                updateProject(
+                    toggleLoadingNotif,
+                    updateLoadingNotif,
+                    {
+                        projectName: newProjectName,
+                    },
+                    projectUuid
+                )
             );
             return toggleRenameProjectModal(false);
         }
