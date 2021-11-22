@@ -12,11 +12,11 @@ import useLoginStatus from '../utils/hooks/useLoginStatus';
 
 //Style Imports:
 import styled from 'styled-components';
-import GlobalStyle from '../styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '../styles/themes';
 
 //Components:
+import CustomNotifProvider from '../components/custom_notif_provider/CustomNotifProvider';
 import PrivateRoute from './protect_route/PrivateRoute';
 import history from '../utils/historyObject';
 import Navbar from './nav_bar/Navbar';
@@ -75,37 +75,36 @@ const App = () => {
     return (
         <>
             <ThemeProvider theme={lightTheme}>
-                <GlobalStyle />
-                <>
-                    <SignupDrawerContainer>
-                        <GeneralDrawer
-                            openBoolean={stateAuthDrawer}
-                            closeFunc={() => setStateAuthDrawer(false)}
-                            title=""
-                            padding={0}
-                            size={isMobileOnly ? '100%' : '35rem'}
-                            position={isMobileOnly ? 'bottom' : 'right'}
-                        >
-                            <UserAuthForm
-                                formBackgroundColor="transparent"
-                                formShadow="none"
-                                authStateRenderView={stateAuthFormView}
-                                closeAuthDrawerContainer={
-                                    closeAuthDrawerContainer
-                                }
-                            />
-                        </GeneralDrawer>
-                    </SignupDrawerContainer>
-                    <BugReportModalContainer>
-                        <GeneralModal
-                            openBoolean={stateBugReportModal}
-                            closeFunc={closeBugReportModal}
-                            title="Send Feedback"
-                        >
-                            <FeedbackForm />
-                        </GeneralModal>
-                    </BugReportModalContainer>
-                    <Router history={history}>
+                <Router history={history}>
+                    <CustomNotifProvider>
+                        <SignupDrawerContainer>
+                            <GeneralDrawer
+                                openBoolean={stateAuthDrawer}
+                                closeFunc={() => setStateAuthDrawer(false)}
+                                title=""
+                                padding={0}
+                                size={isMobileOnly ? '100%' : '35rem'}
+                                position={isMobileOnly ? 'bottom' : 'right'}
+                            >
+                                <UserAuthForm
+                                    formBackgroundColor="transparent"
+                                    formShadow="none"
+                                    authStateRenderView={stateAuthFormView}
+                                    closeAuthDrawerContainer={
+                                        closeAuthDrawerContainer
+                                    }
+                                />
+                            </GeneralDrawer>
+                        </SignupDrawerContainer>
+                        <BugReportModalContainer>
+                            <GeneralModal
+                                openBoolean={stateBugReportModal}
+                                closeFunc={closeBugReportModal}
+                                title="Send Feedback"
+                            >
+                                <FeedbackForm />
+                            </GeneralModal>
+                        </BugReportModalContainer>
                         <Navbar
                             toggleAuthDrawerWithView={toggleAuthDrawerWithView}
                         />
@@ -181,8 +180,8 @@ const App = () => {
                             <Route component={NotFound} />
                         </Switch>
                         <MainFooter bugReportHandler={openBugReportModal} />
-                    </Router>
-                </>
+                    </CustomNotifProvider>
+                </Router>
             </ThemeProvider>
         </>
     );
