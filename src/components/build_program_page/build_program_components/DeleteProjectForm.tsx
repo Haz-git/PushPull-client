@@ -8,6 +8,7 @@ import * as React from 'react';
 
 interface IComponentProps {
     projectUuid: string;
+    toggleDeleteProjectModal: (status: boolean, projectUuid?: string) => void;
 }
 
 const DeleteProjectForm = ({ projectUuid }: IComponentProps): JSX.Element => {
