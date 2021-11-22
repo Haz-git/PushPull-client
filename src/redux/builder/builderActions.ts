@@ -61,8 +61,21 @@ export const addProject = (
     };
 };
 
-export const updateProject = () => {
-    return async (dispatch: Dispatch<BuilderAction>) => {};
+export const updateProject = (
+    toggleNotif: () => string,
+    updateNotif: (id: string, status: boolean) => void,
+    projectDetails: any
+) => {
+    return async (dispatch: Dispatch<BuilderAction>) => {
+        const id = toggleNotif();
+
+        try {
+            console.log(projectDetails);
+            updateNotif(id, true);
+        } catch (err) {
+            updateNotif(id, false);
+        }
+    };
 };
 
 export const deleteProject = (
