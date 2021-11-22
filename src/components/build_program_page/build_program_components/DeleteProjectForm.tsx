@@ -6,7 +6,11 @@ import * as React from 'react';
 
 //Interfaces:
 
-const DeleteProjectForm = () => {
+interface IComponentProps {
+    projectUuid: string;
+}
+
+const DeleteProjectForm = ({ projectUuid }: IComponentProps): JSX.Element => {
     return <div>Confirm Delete Project.</div>;
 };
 

@@ -38,7 +38,7 @@ export const CancelIcon = styled(Close)`
     color: #ffffff;
 `;
 
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
     padding: 0rem 0.5rem 0rem 0.5rem;
 `;
 

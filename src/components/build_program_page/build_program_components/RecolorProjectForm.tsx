@@ -6,7 +6,11 @@ import * as React from 'react';
 
 //Interfaces
 
-const RecolorProjectForm = () => {
+interface IComponentProps {
+    projectUuid: string;
+}
+
+const RecolorProjectForm = ({ projectUuid }: IComponentProps): JSX.Element => {
     return <div>Recolor Project...</div>;
 };
 
