@@ -180,7 +180,7 @@ const MainBuildProgramView = ({
                     <GeneralModal
                         openBoolean={openDeleteProjectModal}
                         closeFunc={() => setOpenDeleteProjectModal(false)}
-                        title="Confirm Delete Project"
+                        title="Confirm Project Deletion"
                     >
                         <DeleteProjectForm
                             projectUuid={selectedProject}
