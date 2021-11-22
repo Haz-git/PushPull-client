@@ -50,9 +50,9 @@ interface IComponentProps {
     projectName: string;
     updatedDate: string;
     projectUuid: string;
-    toggleRenameProjectModal: (status: boolean) => void;
-    toggleRecolorProjectModal: (status: boolean) => void;
-    toggleDeleteProjectModal: (status: boolean) => void;
+    toggleRenameProjectModal: (status: boolean, projectUuid: string) => void;
+    toggleRecolorProjectModal: (status: boolean, projectUuid: string) => void;
+    toggleDeleteProjectModal: (status: boolean, projectUuid: string) => void;
 }
 
 const ProjectComponent = ({
