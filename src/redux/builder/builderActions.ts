@@ -92,7 +92,6 @@ export const updateProject = (
 };
 
 export const deleteProject = (
-    statusCallback: (status: boolean) => void,
     toggleNotif: () => string,
     updateNotif: (id: string, status: boolean) => void,
     projectId: string
@@ -111,11 +110,9 @@ export const deleteProject = (
             });
 
             if (response.data) {
-                statusCallback(false);
                 updateNotif(id, true);
             }
         } catch (err) {
-            statusCallback(false);
             updateNotif(id, false);
         }
     };
