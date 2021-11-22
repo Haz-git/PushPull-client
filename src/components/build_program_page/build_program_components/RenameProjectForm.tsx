@@ -3,8 +3,10 @@ import { useState } from 'react';
 
 //Redux:
 import { useDispatch } from 'react-redux';
+import { updateProject } from '../../../redux/builder/builderActions';
 
 //Components:
+import { useNotifications } from '@mantine/notifications';
 
 //Styles:
 import {
@@ -12,6 +14,8 @@ import {
     TextContainer,
     InputContainer,
     ButtonContainer,
+    CheckIcon,
+    CancelIcon,
 } from './AddProjectForm';
 import Text from '../../general_components/Text';
 import { TextInput } from '@mantine/core';
@@ -22,12 +26,73 @@ import GeneralButton from '../../general_components/GeneralButton';
 
 interface IComponentProps {
     projectUuid: string;
+    toggleRenameProjectModal: (status: boolean, projectUuid?: string) => void;
 }
 
-const RenameProjectForm = ({ projectUuid }: IComponentProps): JSX.Element => {
+const RenameProjectForm = ({
+    projectUuid,
+    toggleRenameProjectModal,
+}: IComponentProps): JSX.Element => {
+    const notifications = useNotifications();
+    const dispatch = useDispatch();
     const [newProjectName, setNewProjectName] = useState('');
 
     const [hasError, setHasError] = useState(false);
+
+    const toggleLoadingNotif = () => {
+        let id = notifications.showNotification({
+            title: 'Project Is Being Renamed...',
+            message: '',
+            color: 'orange',
+            autoClose: false,
+            disallowClose: true,
+            loading: true,
+        });
+
+        return id;
+    };
+
+    const updateLoadingNotif = (id: string, status: boolean) => {
+        if (status !== true)
+            return notifications.updateNotification(id, {
+                id,
+                color: 'red',
+                title: 'Your Project Failed To Be Renamed!',
+                message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+                autoClose: 3000,
+                icon: <CancelIcon />,
+            });
+        return notifications.updateNotification(id, {
+            id,
+            color: 'teal',
+            title: 'Project Has Been Renamed!',
+            message: '',
+            autoClose: 3000,
+            icon: <CheckIcon />,
+        });
+    };
+
+    const isProjectNameLengthOk = () => {
+        if (newProjectName.length === 0) return false;
+        if (newProjectName.length <= 3) return false;
+        if (newProjectName.length >= 4 && newProjectName.length <= 100)
+            return true;
+
+        return false;
+    };
+
+    const handleNewProjectNameSubmission = () => {
+        if (isProjectNameLengthOk()) {
+            dispatch(
+                updateProject(toggleLoadingNotif, updateLoadingNotif, {
+                    projectName: newProjectName,
+                })
+            );
+            return toggleRenameProjectModal(false);
+        }
+
+        return setHasError(true);
+    };
 
     return (
         <MainContainer>
@@ -75,6 +140,7 @@ const RenameProjectForm = ({ projectUuid }: IComponentProps): JSX.Element => {
                     fontSize="1rem"
                     height="2rem"
                     iconMargin="0rem .3rem -.2rem 0rem"
+                    onClick={handleNewProjectNameSubmission}
                 />
                 <GeneralButton
                     buttonLabel="Cancel"
@@ -87,6 +153,7 @@ const RenameProjectForm = ({ projectUuid }: IComponentProps): JSX.Element => {
                     border="1px solid #c6c6c6"
                     fontSize="1rem"
                     height="2rem"
+                    onClick={() => toggleRenameProjectModal(false)}
                 />
             </ButtonContainer>
         </MainContainer>
