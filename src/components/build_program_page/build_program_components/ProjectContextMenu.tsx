@@ -1,12 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react';
 
 //Redux:
-import { useDispatch } from 'react-redux';
-import {
-    deleteProject,
-    updateProject,
-} from '../../../redux/builder/builderActions';
 
 //Components:
 import { Menu, Item, Separator, theme, animation } from 'react-contexify';
@@ -73,11 +67,7 @@ interface IComponentProps {
 }
 
 const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
-    const dispatch = useDispatch();
     const notifications = useNotifications();
-
-    const [newProjectName, setNewProjectName] = useState('');
-    const [newProjectColor, setNewProjectColor] = useState('');
 
     const toggleLoadingNotif = () => {
         let id = notifications.showNotification({
