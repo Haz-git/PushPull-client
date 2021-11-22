@@ -19,7 +19,6 @@ import {
 } from './AddProjectForm';
 import Text from '../../general_components/Text';
 import { TextInput } from '@mantine/core';
-import { Loader } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
 
 //Interfaces:
