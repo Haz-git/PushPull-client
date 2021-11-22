@@ -87,13 +87,25 @@ const MainBuildProgramView = ({
         useState(false);
     const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
 
+    //Project Id states:
+    const [selectedProject, setSelectedProject] = useState('');
+
     //Modal state handlers:
-    const toggleRenameProjectModal = (status: boolean) =>
+    const toggleRenameProjectModal = (status: boolean, projectUuid: string) => {
+        setSelectedProject(projectUuid);
         setOpenRenameProjectModal(status);
-    const toggleDeleteProjectModal = (status: boolean) =>
+    };
+    const toggleDeleteProjectModal = (status: boolean, projectUuid: string) => {
+        setSelectedProject(projectUuid);
         setOpenDeleteProjectModal(status);
-    const toggleRecolorProjectModal = (status: boolean) =>
+    };
+    const toggleRecolorProjectModal = (
+        status: boolean,
+        projectUuid: string
+    ) => {
+        setSelectedProject(projectUuid);
         setOpenRecolorProjectModal(status);
+    };
 
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
     const toggleProjectModal = (status: boolean) =>
@@ -164,21 +176,21 @@ const MainBuildProgramView = ({
                         closeFunc={() => setOpenDeleteProjectModal(false)}
                         title="Confirm Delete Project"
                     >
-                        <DeleteProjectForm />
+                        <DeleteProjectForm projectUuid={selectedProject} />
                     </GeneralModal>
                     <GeneralModal
                         openBoolean={openRenameProjectModal}
                         closeFunc={() => setOpenRenameProjectModal(false)}
                         title="Rename Project"
                     >
-                        <RenameProjectForm />
+                        <RenameProjectForm projectUuid={selectedProject} />
                     </GeneralModal>
                     <GeneralModal
                         openBoolean={openRecolorProjectModal}
                         closeFunc={() => setOpenRecolorProjectModal(false)}
                         title="Recolor Project"
                     >
-                        <RecolorProjectForm />
+                        <RecolorProjectForm projectUuid={selectedProject} />
                     </GeneralModal>
                     <>
                         <ProjectPanelView>
