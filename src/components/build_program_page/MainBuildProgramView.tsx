@@ -9,7 +9,6 @@ import RecolorProjectForm from './build_program_components/RecolorProjectForm';
 import DeleteProjectForm from './build_program_components/DeleteProjectForm';
 import GeneralModal from '../general_components/GeneralModal';
 import { useNotifications } from '@mantine/notifications';
-import LoadProgress from '../nprogress/LoadProgress';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -166,16 +165,7 @@ const MainBuildProgramView = ({
     return (
         <SuspenseWrapper>
             {isBuilderInfoLoaded && (
-                <Suspense
-                    fallback={
-                        <LoadProgress
-                            isLoadBuilderMode={true}
-                            isAnimating={true}
-                            minimum={0}
-                            incrementDuration={500}
-                        />
-                    }
-                >
+                <Suspense fallback={<div>Render Skeleton here..</div>}>
                     <MainContainer>
                         <GeneralModal
                             openBoolean={openAddProjectModal}
