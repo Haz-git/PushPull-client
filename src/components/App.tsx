@@ -16,6 +16,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '../styles/themes';
 
 //Components:
+import LoadProgress from '../components/nprogress/LoadProgress';
 import CustomNotifProvider from '../components/custom_notif_provider/CustomNotifProvider';
 import PrivateRoute from './protect_route/PrivateRoute';
 import history from '../utils/historyObject';
@@ -24,13 +25,11 @@ import MainFooter from './footer/MainFooter';
 import MainLandingPageView from './main_landing_page/MainLandingPageView';
 import MainSearchPage from './search_page/MainSearchPage';
 import MainWorkoutProgramPage from './workout_program_page/MainWorkoutProgramPage';
-// import MainAddReviewPageView from './add_review_page/MainAddReviewPageView';
 import GeneralModal from './general_components/GeneralModal';
 import FeedbackForm from './general_components/FeedbackForm';
 import PasswordResetForm from './auth_forms/PasswordResetForm';
 import ProfilePageView from './profile_page/ProfilePageView';
 import NotFound from './not_found_page/NotFound';
-// import MainBuildProgramView from './build_program_page/MainBuildProgramView';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
@@ -112,7 +111,13 @@ const App = () => {
                             <Route
                                 exact
                                 path="/"
-                                component={MainLandingPageView}
+                                // component={MainLandingPageView}
+                                render={(props) => (
+                                    <LoadProgress
+                                        {...props}
+                                        isAnimating={true}
+                                    />
+                                )}
                             />
                             <Route
                                 exact
