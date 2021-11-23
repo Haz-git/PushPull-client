@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
 
     }
 
-    @media screen and (min-width: 320px) {
+    /* @media screen and (min-width: 320px) {
         body {
             padding-bottom: 3.5rem;
         }
@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
         body {
             padding-bottom: 3.5rem;
         }
-    }
+    } */
 
     a {
         text-decoration: none;
