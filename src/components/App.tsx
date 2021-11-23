@@ -111,13 +111,13 @@ const App = () => {
                             <Route
                                 exact
                                 path="/"
-                                // component={MainLandingPageView}
-                                render={(props) => (
-                                    <LoadProgress
-                                        {...props}
-                                        isAnimating={true}
-                                    />
-                                )}
+                                component={MainLandingPageView}
+                                // render={(props) => (
+                                //     <LoadProgress
+                                //         {...props}
+                                //         isAnimating={true}
+                                //     />
+                                // )}
                             />
                             <Route
                                 exact
