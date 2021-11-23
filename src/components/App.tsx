@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 import { isMobileOnly } from 'react-device-detect';
+import pMinDelay from 'p-min-delay';
 import loadable from '@loadable/component';
 
 //Context:
@@ -16,6 +17,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '../styles/themes';
 
 //Components:
+import LoadingIndicatorWithDelay from './nprogress/LoadingIndicatorWithDelay';
 import LoadProgress from '../components/nprogress/LoadProgress';
 import CustomNotifProvider from '../components/custom_notif_provider/CustomNotifProvider';
 import PrivateRoute from './protect_route/PrivateRoute';
@@ -45,7 +47,10 @@ export const AuthContext = createContext<any>(null); //Default value set to null
 
 //Code-splitting, Loadable Components to decrease package size:
 const MainAddReviewPageView = loadable(
-    () => import('./add_review_page/MainAddReviewPageView'),
+    () =>
+        import(
+            /* webpackPrefetch: true */ './add_review_page/MainAddReviewPageView'
+        ),
     {
         fallback: (
             <LoadProgress
@@ -59,7 +64,10 @@ const MainAddReviewPageView = loadable(
 );
 
 const MainBuildProgramView = loadable(
-    () => import('./build_program_page/MainBuildProgramView'),
+    () =>
+        import(
+            /* webpackPrefetch: true */ './build_program_page/MainBuildProgramView'
+        ),
     {
         fallback: (
             <LoadProgress
