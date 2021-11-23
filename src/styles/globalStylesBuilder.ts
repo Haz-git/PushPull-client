@@ -111,11 +111,12 @@ const GlobalStyle = createGlobalStyle`
 
     .mantine-notification-title {
         color: #ffffff;
-        font-size: .95rem;
+        font-weight: 900;
     }
 
     .mantine-notification-description {
         color: #ffffff;
+        font-weight: 200;
     }
 
 `;
