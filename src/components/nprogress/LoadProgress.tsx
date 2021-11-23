@@ -31,7 +31,7 @@ const LoadProgress = ({ isAnimating }: IComponentProps): JSX.Element => {
 
     return (
         <MainContainer>
-            <ProgressContainer>LOADING!!</ProgressContainer>
+            <ProgressContainer>LOADING!!!</ProgressContainer>
         </MainContainer>
     );
 };
