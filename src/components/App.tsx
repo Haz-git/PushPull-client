@@ -46,12 +46,30 @@ export const AuthContext = createContext<any>(null); //Default value set to null
 //Code-splitting, Loadable Components to decrease package size:
 const MainAddReviewPageView = loadable(
     () => import('./add_review_page/MainAddReviewPageView'),
-    { fallback: <div>temp loading...</div> }
+    {
+        fallback: (
+            <LoadProgress
+                isLoadBuilderMode={false}
+                isAnimating={true}
+                minimum={0}
+                incrementDuration={500}
+            />
+        ),
+    }
 );
 
 const MainBuildProgramView = loadable(
     () => import('./build_program_page/MainBuildProgramView'),
-    { fallback: <div>temp loading...</div> }
+    {
+        fallback: (
+            <LoadProgress
+                isLoadBuilderMode={true}
+                isAnimating={true}
+                minimum={0}
+                incrementDuration={500}
+            />
+        ),
+    }
 );
 
 const App = () => {
@@ -112,12 +130,6 @@ const App = () => {
                                 exact
                                 path="/"
                                 component={MainLandingPageView}
-                                // render={(props) => (
-                                //     <LoadProgress
-                                //         {...props}
-                                //         isAnimating={true}
-                                //     />
-                                // )}
                             />
                             <Route
                                 exact
