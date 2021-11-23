@@ -9,6 +9,7 @@ import RecolorProjectForm from './build_program_components/RecolorProjectForm';
 import DeleteProjectForm from './build_program_components/DeleteProjectForm';
 import GeneralModal from '../general_components/GeneralModal';
 import { useNotifications } from '@mantine/notifications';
+import LoadProgress from '../nprogress/LoadProgress';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -20,6 +21,8 @@ import {
     CheckIcon,
     CancelIcon,
 } from './build_program_components/AddProjectForm';
+
+const SuspenseWrapper = styled.section``;
 
 const MainContainer = styled.section`
     height: 100%;
@@ -161,77 +164,92 @@ const MainBuildProgramView = ({
     }, []);
 
     return (
-        <MainContainer>
+        <SuspenseWrapper>
             {isBuilderInfoLoaded && (
-                <Suspense fallback={<div>Loading Temp...</div>}>
-                    <GeneralModal
-                        openBoolean={openAddProjectModal}
-                        closeFunc={() => setOpenAddProjectModal(false)}
-                        title="Create Project"
-                    >
-                        <AddProjectForm
-                            toggleProjectModal={toggleProjectModal}
-                            isCreatingNewProject={isCreatingNewProject}
-                            toggleIsCreatingNewProjectLoader={
-                                toggleIsCreatingProjectLoader
-                            }
+                <Suspense
+                    fallback={
+                        <LoadProgress
+                            isLoadBuilderMode={true}
+                            isAnimating={true}
+                            minimum={0}
+                            incrementDuration={500}
                         />
-                    </GeneralModal>
-                    <GeneralModal
-                        openBoolean={openDeleteProjectModal}
-                        closeFunc={() => setOpenDeleteProjectModal(false)}
-                        title="Confirm Project Deletion"
-                    >
-                        <DeleteProjectForm
-                            projectUuid={selectedProject}
-                            toggleDeleteProjectModal={toggleDeleteProjectModal}
-                        />
-                    </GeneralModal>
-                    <GeneralModal
-                        openBoolean={openRenameProjectModal}
-                        closeFunc={() => setOpenRenameProjectModal(false)}
-                        title="Rename Project"
-                    >
-                        <RenameProjectForm
-                            projectUuid={selectedProject}
-                            toggleRenameProjectModal={toggleRenameProjectModal}
-                        />
-                    </GeneralModal>
-                    <GeneralModal
-                        openBoolean={openRecolorProjectModal}
-                        closeFunc={() => setOpenRecolorProjectModal(false)}
-                        title="Recolor Project"
-                    >
-                        <RecolorProjectForm
-                            projectUuid={selectedProject}
-                            toggleRecolorProjectModal={
-                                toggleRecolorProjectModal
-                            }
-                        />
-                    </GeneralModal>
-                    <>
-                        <ProjectPanelView>
-                            <ProjectPanel
+                    }
+                >
+                    <MainContainer>
+                        <GeneralModal
+                            openBoolean={openAddProjectModal}
+                            closeFunc={() => setOpenAddProjectModal(false)}
+                            title="Create Project"
+                        >
+                            <AddProjectForm
                                 toggleProjectModal={toggleProjectModal}
                                 isCreatingNewProject={isCreatingNewProject}
+                                toggleIsCreatingNewProjectLoader={
+                                    toggleIsCreatingProjectLoader
+                                }
+                            />
+                        </GeneralModal>
+                        <GeneralModal
+                            openBoolean={openDeleteProjectModal}
+                            closeFunc={() => setOpenDeleteProjectModal(false)}
+                            title="Confirm Project Deletion"
+                        >
+                            <DeleteProjectForm
+                                projectUuid={selectedProject}
                                 toggleDeleteProjectModal={
                                     toggleDeleteProjectModal
                                 }
-                                toggleRecolorProjectModal={
-                                    toggleRecolorProjectModal
-                                }
+                            />
+                        </GeneralModal>
+                        <GeneralModal
+                            openBoolean={openRenameProjectModal}
+                            closeFunc={() => setOpenRenameProjectModal(false)}
+                            title="Rename Project"
+                        >
+                            <RenameProjectForm
+                                projectUuid={selectedProject}
                                 toggleRenameProjectModal={
                                     toggleRenameProjectModal
                                 }
                             />
-                        </ProjectPanelView>
-                        <DashboardPanelView>
-                            <DashboardPanel />
-                        </DashboardPanelView>
-                    </>
+                        </GeneralModal>
+                        <GeneralModal
+                            openBoolean={openRecolorProjectModal}
+                            closeFunc={() => setOpenRecolorProjectModal(false)}
+                            title="Recolor Project"
+                        >
+                            <RecolorProjectForm
+                                projectUuid={selectedProject}
+                                toggleRecolorProjectModal={
+                                    toggleRecolorProjectModal
+                                }
+                            />
+                        </GeneralModal>
+                        <>
+                            <ProjectPanelView>
+                                <ProjectPanel
+                                    toggleProjectModal={toggleProjectModal}
+                                    isCreatingNewProject={isCreatingNewProject}
+                                    toggleDeleteProjectModal={
+                                        toggleDeleteProjectModal
+                                    }
+                                    toggleRecolorProjectModal={
+                                        toggleRecolorProjectModal
+                                    }
+                                    toggleRenameProjectModal={
+                                        toggleRenameProjectModal
+                                    }
+                                />
+                            </ProjectPanelView>
+                            <DashboardPanelView>
+                                <DashboardPanel />
+                            </DashboardPanelView>
+                        </>
+                    </MainContainer>
                 </Suspense>
             )}
-        </MainContainer>
+        </SuspenseWrapper>
     );
 };
 
