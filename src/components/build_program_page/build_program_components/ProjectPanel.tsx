@@ -87,7 +87,7 @@ const ProjectPanel = ({
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
     const renderBuilderProjects = () => {
-        if (projects.length > 0) {
+        if (projects && projects.length > 0) {
             return projects.map((project: any) => (
                 <ProjectComponent
                     key={project.projectUuid}
