@@ -29,6 +29,7 @@ const MainContainer = styled.section`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 8fr;
+    background: #ffffff;
 
     @media ${deviceMin.mobileS} {
         display: block;
@@ -46,8 +47,8 @@ const MainContainer = styled.section`
 `;
 
 const ProjectPanelView = styled.section`
-    width: 20rem;
-    max-width: 20rem;
+    width: 16rem;
+    max-width: 16rem;
 `;
 
 const DashboardPanelView = styled.section``;
