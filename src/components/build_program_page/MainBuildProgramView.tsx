@@ -9,6 +9,7 @@ import RecolorProjectForm from './build_program_components/RecolorProjectForm';
 import DeleteProjectForm from './build_program_components/DeleteProjectForm';
 import GeneralModal from '../general_components/GeneralModal';
 import { useNotifications } from '@mantine/notifications';
+import LoadProgress from '../nprogress/LoadProgress';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -57,6 +58,16 @@ const ProjectPanel = React.lazy(
 const DashboardPanel = React.lazy(
     () => import('./build_program_components/DashboardPanel')
 );
+
+// const ProjectPanel = React.lazy(async () => {
+//     await new Promise((resolve) => setTimeout(resolve, 3000));
+//     return import('./build_program_components/ProjectPanel');
+// });
+
+// const DashboardPanel = React.lazy(async () => {
+//     await new Promise((resolve) => setTimeout(resolve, 3000));
+//     return import('./build_program_components/DashboardPanel');
+// });
 
 //Interfaces:
 
@@ -164,8 +175,17 @@ const MainBuildProgramView = ({
 
     return (
         <SuspenseWrapper>
-            {isBuilderInfoLoaded && (
-                <Suspense fallback={<div>Render Skeleton here..</div>}>
+            <Suspense
+                fallback={
+                    <LoadProgress
+                        isLoadBuilderMode={true}
+                        isAnimating={true}
+                        minimum={0.9}
+                        incrementDuration={100}
+                    />
+                }
+            >
+                {isBuilderInfoLoaded ? (
                     <MainContainer>
                         <GeneralModal
                             openBoolean={openAddProjectModal}
@@ -237,8 +257,15 @@ const MainBuildProgramView = ({
                             </DashboardPanelView>
                         </>
                     </MainContainer>
-                </Suspense>
-            )}
+                ) : (
+                    <LoadProgress
+                        isLoadBuilderMode={true}
+                        isAnimating={true}
+                        minimum={0.6}
+                        incrementDuration={100}
+                    />
+                )}
+            </Suspense>
         </SuspenseWrapper>
     );
 };
