@@ -1,5 +1,8 @@
 import React from 'react';
 
+//Router:
+import { useRouteMatch, Link } from 'react-router-dom';
+
 //Redux:
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { addProject } from '../../../redux/builder/builderActions';
@@ -52,13 +55,15 @@ const ViewContainer = styled.div`
     border-bottom: 1px solid #d6d6d6;
 `;
 
-const ViewTextIcon = styled.div`
+const ViewTextButton = styled(Link)`
     display: flex;
     align-items: center;
     justify-content: flex-start;
     column-gap: 1rem;
-    padding: 0rem 0rem 1rem 0rem;
-    margin: 0rem 1rem 0rem 1rem;
+    padding: 0.5rem 0.5rem;
+    margin: 0rem 1rem 0.5rem 1rem;
+    border: none;
+    background: transparent;
 `;
 
 const CreateNewProjectContainer = styled.div`
@@ -84,6 +89,7 @@ const ProjectPanel = ({
     toggleRecolorProjectModal,
     toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
+    let { url } = useRouteMatch();
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
     const renderBuilderProjects = () => {
@@ -113,22 +119,22 @@ const ProjectPanel = ({
         <>
             <MainContainer>
                 <ViewContainer>
-                    <ViewTextIcon>
+                    <ViewTextButton to={`/builder/dashboard/recents`}>
                         <RecentIcon />
                         <Text text="Recents" fontSize="1rem" fontWeight="500" />
-                    </ViewTextIcon>
-                    <ViewTextIcon>
+                    </ViewTextButton>
+                    <ViewTextButton to={`/builder/dashboard/published`}>
                         <PublishIcon />
                         <Text
                             text="Published"
                             fontSize="1rem"
                             fontWeight="500"
                         />
-                    </ViewTextIcon>
-                    <ViewTextIcon>
+                    </ViewTextButton>
+                    <ViewTextButton to={`/builder/dashboard/drafts`}>
                         <DocumentIcon />
                         <Text text="Drafts" fontSize="1rem" fontWeight="500" />
-                    </ViewTextIcon>
+                    </ViewTextButton>
                 </ViewContainer>
                 <ProjectsContainer>{renderBuilderProjects()}</ProjectsContainer>
                 <CreateNewProjectContainer>
