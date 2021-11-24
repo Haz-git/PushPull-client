@@ -27,7 +27,6 @@ const ViewLabel = styled.div`
 
 const DashboardPanel = () => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
-    console.log(dashboardView);
 
     const renderViewLabel = () => {
         if (dashboardView) {
