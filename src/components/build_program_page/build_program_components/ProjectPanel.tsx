@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 
 //Router:
 import { useRouteMatch, Link } from 'react-router-dom';
@@ -89,7 +90,6 @@ const ProjectPanel = ({
     toggleRecolorProjectModal,
     toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
-    let { url } = useRouteMatch();
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
     const renderBuilderProjects = () => {
