@@ -1,7 +1,12 @@
 import * as React from 'react';
 
+//Router:
+import { useParams } from 'react-router-dom';
+
 const DashboardPanel = () => {
-    return <div>Dashboard Panel</div>;
+    let { dashboardView } = useParams<{ dashboardView: string }>();
+    console.log(dashboardView);
+    return <div>{dashboardView || 'dashboard'}</div>;
 };
 
 export default DashboardPanel;
