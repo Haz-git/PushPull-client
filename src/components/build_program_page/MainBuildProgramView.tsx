@@ -72,18 +72,10 @@ const DashboardPanel = React.lazy(
 //Interfaces:
 
 interface IComponentProps {
-    match: {
-        params: {
-            id: any;
-        };
-    };
+    match: any;
 }
 
-const MainBuildProgramView = ({
-    match: {
-        params: { id },
-    },
-}: IComponentProps): JSX.Element => {
+const MainBuildProgramView = ({ match }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
 
