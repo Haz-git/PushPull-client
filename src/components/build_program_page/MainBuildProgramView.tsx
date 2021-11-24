@@ -21,6 +21,7 @@ import {
     CheckIcon,
     CancelIcon,
 } from './build_program_components/AddProjectForm';
+import historyObject from '../../utils/historyObject';
 
 const SuspenseWrapper = styled.section``;
 
@@ -72,10 +73,18 @@ const DashboardPanel = React.lazy(
 //Interfaces:
 
 interface IComponentProps {
-    match: any;
+    match: {
+        params: {
+            dashboardView: string;
+        };
+    };
 }
 
-const MainBuildProgramView = ({ match }: IComponentProps): JSX.Element => {
+const MainBuildProgramView = ({
+    match: {
+        params: { dashboardView },
+    },
+}: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
 
@@ -160,6 +169,10 @@ const MainBuildProgramView = ({ match }: IComponentProps): JSX.Element => {
     };
 
     useEffect(() => {
+        const validViews = ['recents', 'published', 'drafts', 'project'];
+        if (!validViews.includes(dashboardView)) {
+            historyObject.push('/builder/dashboard/recents');
+        }
         dispatch(
             findProject(setIsLoaded, toggleLoadingNotif, updateLoadingNotif)
         );
