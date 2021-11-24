@@ -14,7 +14,8 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
         min-height: 100%;
         position: relative;
-        background: rgba(244, 244, 244, 1);
+        /* background: rgba(244, 244, 244, 1); */
+        background: #ffffff;
         font-family: 'Lato', sans-serif, helvetica;
         -webkit-overflow-scrolling: touch;
 
