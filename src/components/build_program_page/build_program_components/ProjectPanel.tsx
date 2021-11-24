@@ -45,8 +45,8 @@ const MainContainer = styled.section`
     border-right: 1px solid #d6d6d6;
     height: 100%;
     text-align: left;
-    width: 20rem;
-    max-width: 20rem;
+    width: 16rem;
+    max-width: 16rem;
     padding-bottom: 7rem;
     overflow-y: scroll;
 `;
