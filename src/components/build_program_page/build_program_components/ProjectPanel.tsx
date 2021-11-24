@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 
 //Router:
-import { useRouteMatch, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 //Redux:
 import { RootStateOrAny, useSelector } from 'react-redux';
@@ -56,15 +56,15 @@ const ViewContainer = styled.div`
     border-bottom: 1px solid #d6d6d6;
 `;
 
-const ViewTextButton = styled(Link)`
+const ViewTextButton = styled(Link)<IViewTextButton>`
     display: flex;
     align-items: center;
     justify-content: flex-start;
     column-gap: 1rem;
-    padding: 0.5rem 0.5rem;
-    margin: 0rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0rem 0rem 0.5rem 0rem;
     border: none;
-    background: transparent;
+    background: ${(props) => (props.isSelected ? '#f8dcce' : 'transparent')};
 `;
 
 const CreateNewProjectContainer = styled.div`
@@ -74,6 +74,10 @@ const CreateNewProjectContainer = styled.div`
 const ProjectsContainer = styled.div``;
 
 //Interfaces:
+
+interface IViewTextButton {
+    isSelected: boolean;
+}
 
 interface IComponentProps {
     toggleProjectModal: (status: boolean) => void;
@@ -90,6 +94,7 @@ const ProjectPanel = ({
     toggleRecolorProjectModal,
     toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
+    let { dashboardView } = useParams<{ dashboardView: string }>();
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
 
     const renderBuilderProjects = () => {
@@ -115,15 +120,29 @@ const ProjectPanel = ({
         }
     };
 
+    const renderSelectedButtons = (key: string) => {
+        if (dashboardView && dashboardView === key) {
+            return true;
+        }
+
+        return false;
+    };
+
     return (
         <>
             <MainContainer>
                 <ViewContainer>
-                    <ViewTextButton to={`/builder/dashboard/recents`}>
+                    <ViewTextButton
+                        to={`/builder/dashboard/recents`}
+                        isSelected={renderSelectedButtons('recents')}
+                    >
                         <RecentIcon />
                         <Text text="Recents" fontSize="1rem" fontWeight="500" />
                     </ViewTextButton>
-                    <ViewTextButton to={`/builder/dashboard/published`}>
+                    <ViewTextButton
+                        to={`/builder/dashboard/published`}
+                        isSelected={renderSelectedButtons('published')}
+                    >
                         <PublishIcon />
                         <Text
                             text="Published"
@@ -131,7 +150,10 @@ const ProjectPanel = ({
                             fontWeight="500"
                         />
                     </ViewTextButton>
-                    <ViewTextButton to={`/builder/dashboard/drafts`}>
+                    <ViewTextButton
+                        to={`/builder/dashboard/drafts`}
+                        isSelected={renderSelectedButtons('drafts')}
+                    >
                         <DocumentIcon />
                         <Text text="Drafts" fontSize="1rem" fontWeight="500" />
                     </ViewTextButton>
