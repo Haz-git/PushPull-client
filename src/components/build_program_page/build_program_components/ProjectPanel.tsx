@@ -15,6 +15,9 @@ import ProjectComponent from './ProjectComponent';
 import { Loader } from '@mantine/core';
 import ProjectContextMenu from './ProjectContextMenu';
 
+//Utils:
+import useQuery from '../../../utils/hooks/useQuery';
+
 //Styles:
 import styled from 'styled-components';
 import { Clock } from '@styled-icons/fluentui-system-regular/Clock';
@@ -95,7 +98,21 @@ const ProjectPanel = ({
     toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
+    let query = useQuery();
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
+
+    const renderSelectedButtons = (key: string) => {
+        if (dashboardView && dashboardView === key) {
+            return true;
+        }
+
+        if (dashboardView === 'project') {
+            let currentProjectView = query.get('uuid');
+            if (currentProjectView === key) return true;
+        }
+
+        return false;
+    };
 
     const renderBuilderProjects = () => {
         if (projects && projects.length > 0) {
@@ -113,19 +130,12 @@ const ProjectPanel = ({
                     toggleDeleteProjectModal={toggleDeleteProjectModal}
                     toggleRecolorProjectModal={toggleRecolorProjectModal}
                     toggleRenameProjectModal={toggleRenameProjectModal}
+                    isSelected={renderSelectedButtons(project.projectUuid)}
                 />
             ));
         } else {
             return 'NO PROJECTS';
         }
-    };
-
-    const renderSelectedButtons = (key: string) => {
-        if (dashboardView && dashboardView === key) {
-            return true;
-        }
-
-        return false;
     };
 
     return (
