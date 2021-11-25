@@ -27,7 +27,7 @@ const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    column-gap: 2rem;
+    column-gap: 1rem;
 `;
 
 const SwatchContainer = styled.div`
@@ -94,7 +94,11 @@ const ProjectComponent = ({
                             color={`${projectColorHex}`}
                         />
                     </SwatchContainer>
-                    <Text text={projectName} fontSize="1rem" />
+                    <Text
+                        text={projectName}
+                        fontSize="1rem"
+                        truncateWidth="9rem"
+                    />
                 </HeaderContainer>
             </ProjectHeaderWrapper>
         </MainContainer>
