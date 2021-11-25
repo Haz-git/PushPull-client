@@ -12,9 +12,14 @@ import historyObject from '../../../utils/historyObject';
 
 const MainContainer = styled.div<IMainContainerProps>`
     padding: 0.75rem 0.75rem;
-    border: 1px solid black;
-    margin: 0rem 0rem 1rem 0rem;
-    background: ${(props) => (props.$isSelected ? '#f8dcce' : 'transparent')};
+    margin: 0rem 0.5rem 0.5rem 0.5rem;
+    background: ${(props) => (props.$isSelected ? '#f8dcce' : '#ffffff')};
+    border-radius: 0.2rem;
+
+    box-shadow: ${(props) =>
+        props.$isSelected
+            ? 'none'
+            : 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;'};
 `;
 
 const ProjectHeaderWrapper = styled.div`
@@ -108,14 +113,14 @@ const ProjectComponent = ({
                     <SwatchContainer>
                         <ColorSwatch
                             size={20}
-                            radius={50}
+                            radius={3}
                             color={`${projectColorHex}`}
                         />
                     </SwatchContainer>
                     <Text
                         text={projectName}
                         fontSize="1rem"
-                        truncateWidth="9rem"
+                        truncateWidth="12rem"
                     />
                 </HeaderContainer>
             </ProjectHeaderWrapper>
