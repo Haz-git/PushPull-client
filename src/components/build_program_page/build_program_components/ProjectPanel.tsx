@@ -23,6 +23,7 @@ import styled from 'styled-components';
 import { Clock } from '@styled-icons/fluentui-system-regular/Clock';
 import { DocumentCopy } from '@styled-icons/fluentui-system-regular/DocumentCopy';
 import { ArrowUpload } from '@styled-icons/fluentui-system-regular/ArrowUpload';
+import { AppFolder } from '@styled-icons/fluentui-system-filled/AppFolder';
 
 const RecentIcon = styled(Clock)`
     height: 1.7rem;
@@ -37,6 +38,12 @@ const DocumentIcon = styled(DocumentCopy)`
 `;
 
 const PublishIcon = styled(ArrowUpload)`
+    height: 1.7rem;
+    width: 1.7rem;
+    color: rgba(0, 0, 34, 1);
+`;
+
+const ProjectIcon = styled(AppFolder)`
     height: 1.7rem;
     width: 1.7rem;
     color: rgba(0, 0, 34, 1);
@@ -68,6 +75,16 @@ const ViewTextButton = styled(Link)<IViewTextButton>`
     margin: 0rem 0rem 0.5rem 0rem;
     border: none;
     background: ${(props) => (props.$isSelected ? '#f8dcce' : 'transparent')};
+`;
+
+const ProjectHeader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0rem 0rem 0.5rem 0rem;
+    border: none;
 `;
 
 const CreateNewProjectContainer = styled.div`
@@ -168,7 +185,17 @@ const ProjectPanel = ({
                         <Text text="Drafts" fontSize="1rem" fontWeight="500" />
                     </ViewTextButton>
                 </ViewContainer>
-                <ProjectsContainer>{renderBuilderProjects()}</ProjectsContainer>
+                <ProjectsContainer>
+                    <ProjectHeader>
+                        <ProjectIcon />
+                        <Text
+                            text="Projects"
+                            fontSize="1rem"
+                            fontWeight="500"
+                        />
+                    </ProjectHeader>
+                    {renderBuilderProjects()}
+                </ProjectsContainer>
                 <CreateNewProjectContainer>
                     <GeneralButton
                         buttonLabel={
