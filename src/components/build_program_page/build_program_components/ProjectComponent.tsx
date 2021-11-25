@@ -8,11 +8,13 @@ import { Transition } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
+import historyObject from '../../../utils/historyObject';
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<IMainContainer>`
     padding: 0.75rem 0.75rem;
     border: 1px solid black;
     margin: 0rem 0rem 1rem 0rem;
+    background: ${(props) => (props.isSelected ? '#f8dcce' : 'transparent')};
 `;
 
 const ProjectHeaderWrapper = styled.div`
@@ -36,6 +38,10 @@ const SwatchContainer = styled.div`
 `;
 
 //Interfaces:
+interface IMainContainer {
+    isSelected: boolean;
+}
+
 interface IComponentProps {
     createdBy: {
         createdDate: string;
@@ -53,6 +59,7 @@ interface IComponentProps {
     toggleRenameProjectModal: (status: boolean, projectUuid: string) => void;
     toggleRecolorProjectModal: (status: boolean, projectUuid: string) => void;
     toggleDeleteProjectModal: (status: boolean, projectUuid: string) => void;
+    isSelected: boolean;
 }
 
 const ProjectComponent = ({
@@ -67,6 +74,7 @@ const ProjectComponent = ({
     toggleRenameProjectModal,
     toggleRecolorProjectModal,
     toggleDeleteProjectModal,
+    isSelected,
 }: IComponentProps): JSX.Element => {
     const MENU_ID = 'PROJECTCOMPONENTCONTEXTMENU';
     const { show } = useContextMenu({
@@ -83,8 +91,17 @@ const ProjectComponent = ({
         event.preventDefault();
         show(event);
     };
+
+    const componentClickHandler = (e: React.MouseEvent) => {
+        historyObject.push(`/builder/dashboard/project?uuid=${projectUuid}`);
+    };
+
     return (
-        <MainContainer onContextMenu={displayContextMenu}>
+        <MainContainer
+            onContextMenu={displayContextMenu}
+            isSelected={isSelected}
+            onClick={componentClickHandler}
+        >
             <ProjectHeaderWrapper>
                 <HeaderContainer>
                     <SwatchContainer>
