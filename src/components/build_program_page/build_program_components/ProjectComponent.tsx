@@ -10,11 +10,11 @@ import { Transition } from '@mantine/core';
 import styled from 'styled-components';
 import historyObject from '../../../utils/historyObject';
 
-const MainContainer = styled.div<IMainContainer>`
+const MainContainer = styled.div<IMainContainerProps>`
     padding: 0.75rem 0.75rem;
     border: 1px solid black;
     margin: 0rem 0rem 1rem 0rem;
-    background: ${(props) => (props.isSelected ? '#f8dcce' : 'transparent')};
+    background: ${(props) => (props.$isSelected ? '#f8dcce' : 'transparent')};
 `;
 
 const ProjectHeaderWrapper = styled.div`
@@ -30,6 +30,7 @@ const HeaderContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     column-gap: 1rem;
+    cursor: default;
 `;
 
 const SwatchContainer = styled.div`
@@ -38,8 +39,8 @@ const SwatchContainer = styled.div`
 `;
 
 //Interfaces:
-interface IMainContainer {
-    isSelected: boolean;
+interface IMainContainerProps {
+    $isSelected: boolean;
 }
 
 interface IComponentProps {
@@ -74,7 +75,7 @@ const ProjectComponent = ({
     toggleRenameProjectModal,
     toggleRecolorProjectModal,
     toggleDeleteProjectModal,
-    isSelected,
+    isSelected = false,
 }: IComponentProps): JSX.Element => {
     const MENU_ID = 'PROJECTCOMPONENTCONTEXTMENU';
     const { show } = useContextMenu({
@@ -99,7 +100,7 @@ const ProjectComponent = ({
     return (
         <MainContainer
             onContextMenu={displayContextMenu}
-            isSelected={isSelected}
+            $isSelected={isSelected}
             onClick={componentClickHandler}
         >
             <ProjectHeaderWrapper>
