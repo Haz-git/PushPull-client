@@ -67,7 +67,7 @@ const ViewTextButton = styled(Link)<IViewTextButton>`
     padding: 0.5rem 1rem;
     margin: 0rem 0rem 0.5rem 0rem;
     border: none;
-    background: ${(props) => (props.isSelected ? '#f8dcce' : 'transparent')};
+    background: ${(props) => (props.$isSelected ? '#f8dcce' : 'transparent')};
 `;
 
 const CreateNewProjectContainer = styled.div`
@@ -79,7 +79,7 @@ const ProjectsContainer = styled.div``;
 //Interfaces:
 
 interface IViewTextButton {
-    isSelected: boolean;
+    $isSelected: boolean;
 }
 
 interface IComponentProps {
@@ -144,14 +144,14 @@ const ProjectPanel = ({
                 <ViewContainer>
                     <ViewTextButton
                         to={`/builder/dashboard/recents`}
-                        isSelected={renderSelectedButtons('recents')}
+                        $isSelected={renderSelectedButtons('recents')}
                     >
                         <RecentIcon />
                         <Text text="Recents" fontSize="1rem" fontWeight="500" />
                     </ViewTextButton>
                     <ViewTextButton
                         to={`/builder/dashboard/published`}
-                        isSelected={renderSelectedButtons('published')}
+                        $isSelected={renderSelectedButtons('published')}
                     >
                         <PublishIcon />
                         <Text
@@ -162,7 +162,7 @@ const ProjectPanel = ({
                     </ViewTextButton>
                     <ViewTextButton
                         to={`/builder/dashboard/drafts`}
-                        isSelected={renderSelectedButtons('drafts')}
+                        $isSelected={renderSelectedButtons('drafts')}
                     >
                         <DocumentIcon />
                         <Text text="Drafts" fontSize="1rem" fontWeight="500" />
