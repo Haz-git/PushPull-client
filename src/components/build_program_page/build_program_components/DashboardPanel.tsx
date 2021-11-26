@@ -34,9 +34,12 @@ const DashboardItemContainer = styled.div`
 
 const TemplateContainer = styled.div`
     flex-grow: 4;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 12rem));
 `;
 
 const ProjectInformationContainer = styled.div`
+    padding: 1rem 1rem;
     flex-grow: 1;
 `;
 
@@ -44,6 +47,7 @@ const TemplateExample = styled.div`
     height: 10rem;
     width: 10rem;
     border: 1px solid black;
+    margin: 1rem 1rem;
 `;
 
 //Interfaces:
@@ -85,6 +89,13 @@ const DashboardPanel = () => {
             </ViewLabelContainer>
             <DashboardItemContainer>
                 <TemplateContainer>
+                    <TemplateExample />
+                    <TemplateExample />
+                    <TemplateExample />
+                    <TemplateExample />
+                    <TemplateExample />
+                    <TemplateExample />
+                    <TemplateExample />
                     <TemplateExample />
                 </TemplateContainer>
                 <ProjectInformationContainer>
