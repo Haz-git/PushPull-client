@@ -99,7 +99,9 @@ const ProjectComponent = ({
     };
 
     const componentClickHandler = (e: React.MouseEvent) => {
-        historyObject.push(`/builder/dashboard/project?uuid=${projectUuid}`);
+        historyObject.push(
+            `/builder/dashboard/project?name=${projectName}&uuid=${projectUuid}`
+        );
     };
 
     return (
