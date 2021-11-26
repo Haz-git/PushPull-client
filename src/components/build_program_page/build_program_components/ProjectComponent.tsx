@@ -4,7 +4,6 @@ import * as React from 'react';
 import Text from '../../general_components/Text';
 import { ColorSwatch } from '@mantine/core';
 import { useContextMenu } from 'react-contexify';
-import { Transition } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
