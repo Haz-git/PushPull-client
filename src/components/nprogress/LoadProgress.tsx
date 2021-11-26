@@ -33,7 +33,7 @@ const ProgressContainer = styled.div`
 `;
 
 const ProgressLogoContainer = styled.div`
-    width: 30rem;
+    width: 15rem;
 `;
 
 const ProgressText = styled.h1<IStyledProps>`
@@ -45,7 +45,7 @@ const ProgressText = styled.h1<IStyledProps>`
 
 const ProgressBarContainer = styled.div`
     height: 1rem;
-    width: 30rem;
+    width: 20rem;
 `;
 
 //Interfaces:
@@ -88,7 +88,7 @@ const LoadProgress = ({
                     </ProgressText>
                     <ProgressBarContainer>
                         <Progress
-                            size="xl"
+                            size="md"
                             value={progress * 100}
                             styles={{
                                 root: {
