@@ -24,6 +24,28 @@ const ViewLabel = styled.div`
     margin-left: 2rem;
 `;
 
+const DashboardItemContainer = styled.div`
+    width; 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+`;
+
+const TemplateContainer = styled.div`
+    flex-grow: 4;
+`;
+
+const ProjectInformationContainer = styled.div`
+    flex-grow: 1;
+`;
+
+const TemplateExample = styled.div`
+    height: 10rem;
+    width: 10rem;
+    border: 1px solid black;
+`;
+
 //Interfaces:
 
 const DashboardPanel = () => {
@@ -61,6 +83,14 @@ const DashboardPanel = () => {
                     />
                 </ViewLabel>
             </ViewLabelContainer>
+            <DashboardItemContainer>
+                <TemplateContainer>
+                    <TemplateExample />
+                </TemplateContainer>
+                <ProjectInformationContainer>
+                    Project Info here
+                </ProjectInformationContainer>
+            </DashboardItemContainer>
         </MainContainer>
     );
 };
