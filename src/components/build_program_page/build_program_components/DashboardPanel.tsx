@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import Text from '../../general_components/Text';
+import useQuery from '../../../utils/hooks/useQuery';
 
 //Router:
 import { useParams } from 'react-router-dom';
@@ -27,6 +28,7 @@ const ViewLabel = styled.div`
 
 const DashboardPanel = () => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
+    let query = useQuery();
 
     const renderViewLabel = () => {
         if (dashboardView) {
@@ -37,6 +39,9 @@ const DashboardPanel = () => {
                     return 'Published Templates';
                 case 'drafts':
                     return 'Drafts In Progress';
+                case 'project':
+                    let projName = query.get('name');
+                    return projName || 'Project';
                 default:
                     return undefined;
             }
