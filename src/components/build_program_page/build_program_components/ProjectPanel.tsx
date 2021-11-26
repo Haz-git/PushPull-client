@@ -24,6 +24,13 @@ import { Clock } from '@styled-icons/fluentui-system-regular/Clock';
 import { DocumentCopy } from '@styled-icons/fluentui-system-regular/DocumentCopy';
 import { ArrowUpload } from '@styled-icons/fluentui-system-regular/ArrowUpload';
 import { AppFolder } from '@styled-icons/fluentui-system-filled/AppFolder';
+import { Add } from '@styled-icons/fluentui-system-regular/Add';
+
+const AddIcon = styled(Add)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: rgba(0, 0, 34, 1);
+`;
 
 const RecentIcon = styled(Clock)`
     height: 1.7rem;
@@ -62,7 +69,7 @@ const MainContainer = styled.section`
 `;
 
 const ViewContainer = styled.div`
-    margin: 1rem 0rem 1rem 0rem;
+    margin: 1rem 0rem 0rem 0rem;
     border-bottom: 1px solid #d6d6d6;
 `;
 
@@ -76,22 +83,24 @@ const ViewTextButton = styled(Link)<IViewTextButton>`
     border: none;
     background: ${(props) => (props.$isSelected ? '#f8dcce' : 'transparent')};
 `;
+const ProjectsContainer = styled.div`
+    padding: 1rem 0rem;
+`;
 
 const ProjectHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
     column-gap: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0rem 1rem 0.5rem 1rem;
     margin: 0rem 0rem 0.5rem 0rem;
     border: none;
 `;
 
 const CreateNewProjectContainer = styled.div`
-    padding: 1rem 1rem;
+    border-top: 1px solid #d6d6d6;
+    padding: 1rem 0.5rem;
 `;
-
-const ProjectsContainer = styled.div``;
 
 //Interfaces:
 
@@ -204,13 +213,25 @@ const ProjectPanel = ({
                                 : 'Create New Project'
                         }
                         onClick={() => toggleProjectModal(true)}
-                        iconMargin="0rem .3rem -.2rem 0rem"
+                        iconMargin="0rem 1rem .1rem 0rem"
                         buttonIcon={
                             isCreatingNewProject ? (
                                 <Loader color="white" size="xs" />
-                            ) : null
+                            ) : (
+                                <AddIcon />
+                            )
                         }
                         isDisabledOnLoading={isCreatingNewProject}
+                        padding=".4rem .2rem"
+                        width="100%"
+                        hoverShadow="none"
+                        hoverTransform="none"
+                        hoverColor="#d6d6d6"
+                        buttonBackground="#ffffff"
+                        disableShadow={true}
+                        textShadow="none"
+                        border="1px solid #d6d6d6"
+                        buttonTextColor="rgba(0, 0, 34, 1)"
                     />
                 </CreateNewProjectContainer>
             </MainContainer>
