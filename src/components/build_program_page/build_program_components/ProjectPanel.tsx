@@ -87,6 +87,13 @@ const ProjectsContainer = styled.div`
     padding: 1rem 0rem;
 `;
 
+const NoProjectContainer = styled.div`
+    padding: 0.75rem 0.75rem;
+    margin: 0rem 0.5rem 0rem 0.5rem;
+    border-radius: 0.3rem;
+    background: #ececec;
+`;
+
 const ProjectHeader = styled.div`
     display: flex;
     align-items: center;
@@ -160,7 +167,11 @@ const ProjectPanel = ({
                 />
             ));
         } else {
-            return 'NO PROJECTS';
+            return (
+                <NoProjectContainer>
+                    <Text text="No Projects" subText={true} />
+                </NoProjectContainer>
+            );
         }
     };
 
