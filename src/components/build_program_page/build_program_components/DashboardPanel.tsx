@@ -22,6 +22,7 @@ const MainContainer = styled.section`
 const ViewLabelContainer = styled.div`
     border-bottom: 1px solid #d6d6d6;
     padding: 1rem 0rem;
+    margin-bottom: 1rem;
 `;
 
 const ViewLabel = styled.div`
@@ -37,13 +38,12 @@ const DashboardItemContainer = styled.div`
 `;
 
 const TemplateContainer = styled.div`
-    flex-grow: 4;
+    flex-grow: 5;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10rem, 12rem));
 `;
 
 const ProjectInformationContainer = styled.div`
-    padding: 1rem 1rem;
     flex-grow: 1;
 `;
 
