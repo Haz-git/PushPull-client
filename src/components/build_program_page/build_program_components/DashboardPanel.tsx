@@ -6,6 +6,7 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 //Components:
 import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
+import ProjectInfo from './ProjectInfo';
 
 //Router:
 import { useParams } from 'react-router-dom';
@@ -137,7 +138,7 @@ const DashboardPanel = () => {
                             <TemplateExample />
                         </TemplateContainer>
                         <ProjectInformationContainer>
-                            Project Info here
+                            <ProjectInfo currProject={findUserProject()} />
                         </ProjectInformationContainer>
                     </>
                 );
