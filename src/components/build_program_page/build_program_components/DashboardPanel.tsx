@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+//Redux:
+import { useSelector, RootStateOrAny } from 'react-redux';
+
 //Components:
 import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
@@ -54,9 +57,51 @@ const TemplateExample = styled.div`
 
 const DashboardPanel = () => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
+    const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
     let query = useQuery();
 
-    const renderViewLabel = () => {
+    const identifyIfProject = () => {
+        if (dashboardView === 'project') return true;
+        return false;
+    };
+
+    const findUserProject = () => {
+        let projectUuid = query.get('uuid');
+        let targetProject = projects.find(
+            (project: any) => project.projectUuid === projectUuid
+        );
+        if (targetProject) return targetProject;
+    };
+
+    const renderDashboardView = () => {
+        if (
+            (identifyIfProject() && findUserProject()) ||
+            (!identifyIfProject() && dashboardView === 'recents') ||
+            dashboardView === 'published' ||
+            dashboardView === 'drafts'
+        ) {
+            return (
+                <>
+                    <ViewLabelContainer>
+                        <ViewLabel>
+                            <Text
+                                text={renderViewLabelText()}
+                                fontSize="1.1rem"
+                                fontWeight="900"
+                            />
+                        </ViewLabel>
+                    </ViewLabelContainer>
+                    <DashboardItemContainer>
+                        {renderProjectInformation()}
+                    </DashboardItemContainer>
+                </>
+            );
+        }
+
+        return 'Project not found. Either this project does not exist, or the link is incorrect.';
+    };
+
+    const renderViewLabelText = () => {
         if (dashboardView) {
             switch (dashboardView) {
                 case 'recents':
@@ -76,34 +121,44 @@ const DashboardPanel = () => {
         return undefined;
     };
 
-    return (
-        <MainContainer>
-            <ViewLabelContainer>
-                <ViewLabel>
-                    <Text
-                        text={renderViewLabel()}
-                        fontSize="1.1rem"
-                        fontWeight="900"
-                    />
-                </ViewLabel>
-            </ViewLabelContainer>
-            <DashboardItemContainer>
-                <TemplateContainer>
-                    <TemplateExample />
-                    <TemplateExample />
-                    <TemplateExample />
-                    <TemplateExample />
-                    <TemplateExample />
-                    <TemplateExample />
-                    <TemplateExample />
-                    <TemplateExample />
-                </TemplateContainer>
-                <ProjectInformationContainer>
-                    Project Info here
-                </ProjectInformationContainer>
-            </DashboardItemContainer>
-        </MainContainer>
-    );
+    const renderProjectInformation = () => {
+        if (identifyIfProject()) {
+            if (findUserProject()) {
+                return (
+                    <>
+                        <TemplateContainer>
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                        </TemplateContainer>
+                        <ProjectInformationContainer>
+                            Project Info here
+                        </ProjectInformationContainer>
+                    </>
+                );
+            }
+        }
+
+        return (
+            <TemplateContainer>
+                <TemplateExample />
+                <TemplateExample />
+                <TemplateExample />
+                <TemplateExample />
+                <TemplateExample />
+                <TemplateExample />
+                <TemplateExample />
+                <TemplateExample />
+            </TemplateContainer>
+        );
+    };
+
+    return <MainContainer>{renderDashboardView()}</MainContainer>;
 };
 
 export default DashboardPanel;
