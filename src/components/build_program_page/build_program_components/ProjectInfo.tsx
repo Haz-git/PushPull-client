@@ -18,6 +18,9 @@ const EditIcon = styled(Edit)`
 
 const MainContainer = styled.div`
     padding: 1rem 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+    border-radius: 0.4rem;
+    background: #ececec;
 `;
 
 const InfoHeaderContainer = styled.div`
