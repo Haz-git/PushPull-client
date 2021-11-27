@@ -4,12 +4,13 @@ import * as React from 'react';
 import { ColorSwatch } from '@mantine/core';
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
+import DividerLine from '../../general_components/DividerLine';
 
 //Styles:
 import styled from 'styled-components';
-import { Add } from '@styled-icons/fluentui-system-regular/Add';
+import { Edit } from '@styled-icons/fluentui-system-filled/Edit';
 
-const AddIcon = styled(Add)`
+const EditIcon = styled(Edit)`
     height: 1.25rem;
     width: 1.25rem;
     color: rgba(0, 0, 34, 0.7);
@@ -57,7 +58,7 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
         return (
             <GeneralButton
                 buttonLabel="Add a description"
-                iconMargin="0rem 1rem .1rem 0rem"
+                iconMargin="0rem .5rem .1rem 0rem"
                 padding=".3rem 0rem"
                 width="12rem"
                 hoverShadow="none"
@@ -65,7 +66,7 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
                 hoverColor="#d6d6d6"
                 buttonBackground="#ffffff"
                 disableShadow={true}
-                buttonIcon={<AddIcon />}
+                buttonIcon={<EditIcon />}
                 textShadow="none"
                 border="1px solid #d6d6d6"
                 buttonTextColor="rgba(0, 0, 34, .7)"
@@ -86,10 +87,15 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
                         fontSize="1.5rem"
                         fontWeight="800"
                         mainText={true}
+                        truncateWidth="9rem"
                     />
                 </InfoHeader>
             </InfoHeaderContainer>
             <InfoDesc>{renderProjectDesc()}</InfoDesc>
+            <DividerLine
+                border="1px solid #d6d6d6"
+                margin="1.5rem 0rem 1.5rem 0rem"
+            />
         </MainContainer>
     );
 };
