@@ -33,7 +33,7 @@ const DashboardItemContainer = styled.div`
     width; 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
 `;
 
@@ -44,7 +44,7 @@ const TemplateContainer = styled.div`
 `;
 
 const ProjectInformationContainer = styled.div`
-    flex-grow: 1;
+    flex-grow: 0;
 `;
 
 const TemplateExample = styled.div`
