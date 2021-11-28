@@ -99,7 +99,7 @@ const DashboardPanel = () => {
             );
         }
 
-        return 'Project not found. Either this project does not exist, or the link is incorrect.';
+        return 'Project not found. Either this project does not exist, has been deleted, or the link is incorrect.';
     };
 
     const renderViewLabelText = () => {
