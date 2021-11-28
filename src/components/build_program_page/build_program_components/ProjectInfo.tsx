@@ -23,6 +23,7 @@ const MainContainer = styled.div`
     margin: 0rem 1rem 0rem 1rem;
     border-radius: 0.4rem;
     background: #f1f1f1;
+    max-width: 30rem;
 `;
 
 const InfoHeaderContainer = styled.div`
@@ -31,18 +32,50 @@ const InfoHeaderContainer = styled.div`
     justify-content: flex-start;
     column-gap: 1rem;
     margin-bottom: 1.5rem;
-    max-width: 16rem;
+    min-width: 0;
+    width: 100%;
 `;
 
 const InfoSwatch = styled.div`
-    flex-grow: 1;
+    flex-grow: 0;
 `;
 
 const InfoHeader = styled.div`
-    flex-grow: 2;
+    flex-grow: 8;
+    min-width: 0;
+    width: 100%;
+    word-break: break-word;
 `;
 
-const InfoDesc = styled.div``;
+const InfoDesc = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    column-gap: 0.5rem;
+    width: 100%;
+    min-width: 0;
+`;
+const EditButton = styled.button`
+    flex-grow: 0;
+    padding: 0.2rem 0.2rem;
+    border-radius: 50%;
+    border: 1px solid #d6d6d6;
+
+    &:hover {
+        background: #d6d6d6;
+    }
+`;
+
+const DescContainer = styled.div`
+    flex-grow: 8;
+    overflow-y: scroll;
+    max-height: 6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(0, 0, 34, 0.7);
+    min-width: 0;
+    width: 15rem;
+`;
 
 const CreatedBy = styled.div``;
 
@@ -79,12 +112,12 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
     const renderProjectDesc = () => {
         if (projectDesc !== '')
             return (
-                <Text
-                    text={projectDesc}
-                    fontSize="1.05rem"
-                    fontWeight="600"
-                    subText={true}
-                />
+                <>
+                    <DescContainer>{projectDesc}</DescContainer>
+                    <EditButton>
+                        <EditIcon />
+                    </EditButton>
+                </>
             );
 
         return (
@@ -133,7 +166,7 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
             />
             <CreatedBy>
                 <CreatedByHeader>
-                    <Text text="Created By" fontSize="1rem" fontWeight="800" />
+                    <Text text="Created By" fontSize="1rem" fontWeight="700" />
                 </CreatedByHeader>
                 <CreatedByBox>
                     <Avatar
