@@ -38,7 +38,7 @@ const DashboardItemContainer = styled.div`
 `;
 
 const TemplateContainer = styled.div`
-    flex-grow: 8;
+    flex-grow: 10;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10rem, 12rem));
 `;
