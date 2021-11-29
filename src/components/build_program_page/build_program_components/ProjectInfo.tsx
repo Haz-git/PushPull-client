@@ -123,8 +123,6 @@ const ProjectInfo = ({
         projectUuid,
     } = currProject;
 
-    console.log(projectDesc);
-
     const renderProjectDesc = () => {
         if (projectDesc !== '')
             return (
