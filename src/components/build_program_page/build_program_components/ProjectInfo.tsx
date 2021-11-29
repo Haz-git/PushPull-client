@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { Avatar, ColorSwatch } from '@mantine/core';
@@ -7,6 +8,9 @@ import GeneralButton from '../../general_components/GeneralButton';
 import DividerLine from '../../general_components/DividerLine';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import dayjs from 'dayjs';
+
+//Redux:
+import { useDispatch } from 'react-redux';
 
 //Styles:
 import styled from 'styled-components';
@@ -23,7 +27,8 @@ const MainContainer = styled.div`
     margin: 0rem 1.5rem 0rem 1.5rem;
     border-radius: 0.4rem;
     background: #f1f1f1;
-    max-width: 25rem;
+    width: 22.5rem;
+    max-width: 22.5rem;
 `;
 
 const InfoHeaderContainer = styled.div`
@@ -99,6 +104,7 @@ interface IComponentProps {
 
 const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
     dayjs.extend(LocalizedFormat);
+    const dispatch = useDispatch();
     const {
         projectColorHex,
         projectDesc,
@@ -107,6 +113,7 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
         projectTemplates,
         updatedDate,
         createdBy,
+        projectUuid,
     } = currProject;
 
     const renderProjectDesc = () => {
@@ -114,7 +121,7 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
             return (
                 <>
                     <DescContainer>{projectDesc}</DescContainer>
-                    <EditButton>
+                    <EditButton onClick={() => {}}>
                         <EditIcon />
                     </EditButton>
                 </>
@@ -136,6 +143,7 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
                 border="1px solid #d6d6d6"
                 buttonTextColor="rgba(0, 0, 34, .7)"
                 fontSize="1rem"
+                onClick={() => {}}
             />
         );
     };
