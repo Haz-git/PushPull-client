@@ -295,7 +295,7 @@ const RatingColumn = ({
             <ReturnButtonContainer>
                 <GeneralButton
                     onClick={() => historyObject.push('/search')}
-                    buttonIcon={<CaretLeftIcon />}
+                    buttonIconLeft={<CaretLeftIcon />}
                     disableShadow={true}
                     hoverShadow="none"
                     hoverTransform="none"
@@ -318,7 +318,7 @@ const RatingColumn = ({
                     hoverTransform="none"
                     hoverShadow="none"
                     disableShadow={true}
-                    buttonIcon={<FlagIcon />}
+                    buttonIconLeft={<FlagIcon />}
                     padding=".45rem .4rem"
                 />
             </ReturnButtonContainer>
@@ -345,7 +345,7 @@ const RatingColumn = ({
                     buttonLabel="Submit a Review"
                     padding=".6rem .5rem"
                     width="16rem"
-                    buttonIcon={<PencilIcon />}
+                    buttonIconLeft={<PencilIcon />}
                     hoverTransform="none"
                     onClick={() => {
                         //Once finalized, if user not logged in, render login form or signup form.

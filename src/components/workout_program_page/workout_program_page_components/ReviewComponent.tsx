@@ -582,7 +582,7 @@ const ReviewComponent = ({
                         hoverTransform="none"
                         hoverShadow="none"
                         disableShadow={true}
-                        buttonIcon={<FlagIcon />}
+                        buttonIconLeft={<FlagIcon />}
                         padding=".5rem .7rem"
                         onClick={() => openReviewReportDrawer()}
                     />
@@ -707,7 +707,7 @@ const ReviewComponent = ({
                     hoverTransform="none"
                     hoverShadow="none"
                     disableShadow={true}
-                    buttonIcon={
+                    buttonIconLeft={
                         <LikeIconEmpty
                             color={`${
                                 isBtnActive('USEFUL') ? '#4245e6' : '7678ed'
@@ -742,7 +742,7 @@ const ReviewComponent = ({
                     hoverTransform="none"
                     hoverShadow="none"
                     disableShadow={true}
-                    buttonIcon={
+                    buttonIconLeft={
                         <DislikeIconEmpty
                             color={`${
                                 isBtnActive('NOTUSEFUL') ? '#4245e6' : '7678ed'
@@ -770,7 +770,7 @@ const ReviewComponent = ({
                         hoverTransform="none"
                         hoverShadow="none"
                         disableShadow={true}
-                        buttonIcon={<FlagIcon />}
+                        buttonIconLeft={<FlagIcon />}
                         padding=".5rem .7rem"
                         onClick={() => openReviewReportDrawer()}
                     />

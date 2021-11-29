@@ -141,7 +141,7 @@ const ProjectInfo = ({
         return (
             <GeneralButton
                 buttonLabel="Add a description"
-                iconMargin="0rem .5rem .1rem 0rem"
+                leftIconMargin="0rem .5rem .1rem 0rem"
                 padding=".3rem 0rem"
                 width="12rem"
                 hoverShadow="none"
@@ -149,7 +149,7 @@ const ProjectInfo = ({
                 hoverColor="#d6d6d6"
                 buttonBackground="#ffffff"
                 disableShadow={true}
-                buttonIcon={<EditIcon />}
+                buttonIconLeft={<EditIcon />}
                 textShadow="none"
                 border="1px solid #d6d6d6"
                 buttonTextColor="rgba(0, 0, 34, .7)"

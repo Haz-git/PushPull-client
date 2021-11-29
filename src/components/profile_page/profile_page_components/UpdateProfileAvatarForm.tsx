@@ -259,12 +259,12 @@ const UpdateProfileAvatarForm = ({
                                 fontSize="1rem"
                                 height="2rem"
                                 isDisabledOnLoading={disableUserInputOnRequestHandle()}
-                                buttonIcon={
+                                buttonIconLeft={
                                     isUpdateRequestLoading ? (
                                         <Loader color="white" size="xs" />
                                     ) : null
                                 }
-                                iconMargin="0rem .3rem -.2rem 0rem"
+                                leftIconMargin="0rem .3rem -.2rem 0rem"
                             />
                             <GeneralButton
                                 buttonLabel="Cancel"

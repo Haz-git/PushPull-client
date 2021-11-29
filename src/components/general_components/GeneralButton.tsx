@@ -36,8 +36,12 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     }
 `;
 
-const IconContainer = styled.div<IGeneralButtonProps>`
-    margin: ${(props) => props.iconMargin};
+const LeftIconContainer = styled.div<IGeneralButtonProps>`
+    margin: ${(props) => props.leftIconMargin};
+`;
+
+const RightIconContainer = styled.div<IGeneralButtonProps>`
+    margin: ${(props) => props.rightIconMargin};
 `;
 
 //Interface:
@@ -49,9 +53,11 @@ interface IGeneralButtonProps {
     buttonBackground?: string;
     buttonTextColor?: string;
     isDisabledOnLoading?: boolean;
-    buttonIcon?: JSX.Element | null;
+    buttonIconLeft?: JSX.Element | null;
+    buttonIconRight?: JSX.Element | null;
     disableShadow?: boolean;
-    iconMargin?: string;
+    leftIconMargin?: string;
+    rightIconMargin?: string;
     fontSize?: string;
     hoverColor?: string;
     fontWeight?: string;
@@ -74,9 +80,11 @@ const GeneralButton = ({
     buttonTextColor = 'white',
     onClick,
     isDisabledOnLoading = false,
-    buttonIcon,
+    buttonIconLeft,
+    buttonIconRight,
     disableShadow = false,
-    iconMargin = '0rem 0.25rem 0rem 0rem',
+    leftIconMargin = '0rem 0.25rem 0rem 0rem',
+    rightIconMargin = '0rem 0rem 0rem .25rem',
     fontSize = '1em',
     hoverColor = 'none',
     fontWeight = '600',
@@ -114,10 +122,13 @@ const GeneralButton = ({
                 borderRadius={borderRadius}
                 type={type}
             >
-                <IconContainer iconMargin={iconMargin}>
-                    {buttonIcon && buttonIcon}
-                </IconContainer>
+                <LeftIconContainer leftIconMargin={leftIconMargin}>
+                    {buttonIconLeft && buttonIconLeft}
+                </LeftIconContainer>
                 {buttonLabel}
+                <RightIconContainer rightIconMargin={rightIconMargin}>
+                    {buttonIconRight && buttonIconRight}
+                </RightIconContainer>
             </StyledGeneralButton>
         </>
     );

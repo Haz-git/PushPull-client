@@ -119,7 +119,7 @@ const DescProjectForm = ({
                     buttonBackground="#41A312"
                     fontSize="1rem"
                     height="2rem"
-                    iconMargin="0rem .3rem -.2rem 0rem"
+                    leftIconMargin="0rem .3rem -.2rem 0rem"
                     onClick={handleNewProjectDescSubmission}
                 />
                 <GeneralButton

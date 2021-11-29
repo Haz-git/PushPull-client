@@ -155,9 +155,9 @@ const ExerciseCard = ({
                         buttonBackground="#AF1432"
                         disableShadow={true}
                         width="100%"
-                        buttonIcon={<DeleteIcon />}
+                        buttonIconLeft={<DeleteIcon />}
                         buttonLabel=""
-                        iconMargin="0"
+                        leftIconMargin="0"
                         hoverShadow="none"
                         borderRadius="0rem .2rem .2rem 0rem"
                         onClick={() => removeExerciseCard(exerciseId)}

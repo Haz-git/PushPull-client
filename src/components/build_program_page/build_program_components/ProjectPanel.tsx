@@ -224,8 +224,8 @@ const ProjectPanel = ({
                                 : 'Create New Project'
                         }
                         onClick={() => toggleProjectModal(true)}
-                        iconMargin="0rem 1rem .1rem 0rem"
-                        buttonIcon={
+                        leftIconMargin="0rem 1rem .1rem 0rem"
+                        buttonIconLeft={
                             isCreatingNewProject ? (
                                 <Loader color="white" size="xs" />
                             ) : (

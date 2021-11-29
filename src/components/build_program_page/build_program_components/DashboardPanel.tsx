@@ -7,11 +7,19 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
 import ProjectInfo from './ProjectInfo';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Router:
 import { useParams } from 'react-router-dom';
 //Styles:
 import styled from 'styled-components';
+import { Template } from '@styled-icons/heroicons-solid/Template';
+
+const TemplateIcon = styled(Template)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #e07133;
+`;
 
 const MainContainer = styled.section`
     background: #ffffff;
@@ -20,6 +28,9 @@ const MainContainer = styled.section`
 `;
 
 const ViewLabelContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     top: 3.75rem;
     position: sticky;
     border-bottom: 1px solid #d6d6d6;
@@ -27,14 +38,17 @@ const ViewLabelContainer = styled.div`
     margin-bottom: 1rem;
     background: #ffffff;
     z-index: 50;
+    column-gap: 1.5rem;
 `;
 
 const ViewLabel = styled.div`
     margin-left: 2rem;
 `;
 
+const TemplateButtonContainer = styled.div``;
+
 const DashboardItemContainer = styled.div`
-    width; 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -107,6 +121,24 @@ const DashboardPanel = ({
                                 fontWeight="900"
                             />
                         </ViewLabel>
+                        <TemplateButtonContainer>
+                            <GeneralButton
+                                buttonLabel="New Template File"
+                                leftIconMargin="0rem .5rem 0rem 0rem"
+                                padding=".4rem .4rem"
+                                width="100%"
+                                hoverShadow="none"
+                                hoverTransform="none"
+                                hoverColor="#d6d6d6"
+                                buttonBackground="#ffffff"
+                                disableShadow={true}
+                                textShadow="none"
+                                border="1px solid #d6d6d6"
+                                buttonTextColor="rgba(0, 0, 34, 1)"
+                                buttonIconLeft={<TemplateIcon />}
+                                margin="0 0"
+                            />
+                        </TemplateButtonContainer>
                     </ViewLabelContainer>
                     <DashboardItemContainer>
                         {renderProjectInformation()}
@@ -144,34 +176,6 @@ const DashboardPanel = ({
                 return (
                     <>
                         <TemplateContainer>
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
                             <TemplateExample />
                             <TemplateExample />
                             <TemplateExample />

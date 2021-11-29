@@ -191,7 +191,7 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                                     width="7.5rem"
                                     onClick={bugReportHandler}
                                     padding=".4rem .4rem"
-                                    buttonIcon={<MailIcon />}
+                                    buttonIconLeft={<MailIcon />}
                                     margin=".5rem auto"
                                 />
                                 <FooterTextLinks
@@ -221,7 +221,7 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                                             width="6rem"
                                             onClick={bugReportHandler}
                                             padding=".2rem .1rem"
-                                            buttonIcon={<MailIcon />}
+                                            buttonIconLeft={<MailIcon />}
                                             margin=".5rem auto"
                                             fontSize=".8rem"
                                         />
@@ -231,7 +231,7 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                                             buttonLabel="More"
                                             fontSize=".8rem"
                                             padding=".2rem .4rem"
-                                            buttonIcon={returnStateCollapseButtonIcon()}
+                                            buttonIconLeft={returnStateCollapseButtonIcon()}
                                             onClick={() => setIsOpen(!isOpen)}
                                             margin=".5rem auto"
                                         />
