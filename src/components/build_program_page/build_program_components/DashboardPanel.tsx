@@ -20,9 +20,13 @@ const MainContainer = styled.section`
 `;
 
 const ViewLabelContainer = styled.div`
+    top: 3.75rem;
+    position: sticky;
     border-bottom: 1px solid #d6d6d6;
     padding: 1rem 0rem;
     margin-bottom: 1rem;
+    background: #ffffff;
+    z-index: 50;
 `;
 
 const ViewLabel = styled.div`
@@ -45,6 +49,8 @@ const TemplateContainer = styled.div`
 
 const ProjectInformationContainer = styled.div`
     flex-grow: 0;
+    top: 8.15rem;
+    position: sticky;
 `;
 
 const TemplateExample = styled.div`
@@ -138,6 +144,30 @@ const DashboardPanel = ({
                 return (
                     <>
                         <TemplateContainer>
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
                             <TemplateExample />
                             <TemplateExample />
                             <TemplateExample />
