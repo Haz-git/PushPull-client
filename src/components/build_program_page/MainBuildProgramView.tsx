@@ -215,7 +215,7 @@ const MainBuildProgramView = ({
                         </GeneralModal>
                         <GeneralModal
                             openBoolean={openDescProjectModal}
-                            closeFunc={() => setOpenDescProjectModal}
+                            closeFunc={() => setOpenDescProjectModal(false)}
                             title="Edit Description"
                         >
                             <DescProjectForm
@@ -276,7 +276,9 @@ const MainBuildProgramView = ({
                                 />
                             </ProjectPanelView>
                             <DashboardPanelView>
-                                <DashboardPanel />
+                                <DashboardPanel
+                                    toggleNewDescModal={toggleDescProjectModal}
+                                />
                             </DashboardPanelView>
                         </>
                     </MainContainer>
