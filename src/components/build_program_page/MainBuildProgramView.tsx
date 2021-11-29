@@ -104,6 +104,9 @@ const MainBuildProgramView = ({
     const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
     const [openDescProjectModal, setOpenDescProjectModal] = useState(false);
 
+    //Curr project Desc:
+    const [currTargetProjectDesc, setCurrTargetProjectDesc] = useState('');
+
     //Project Id states:
     const [selectedProject, setSelectedProject] = useState('');
 
@@ -130,8 +133,13 @@ const MainBuildProgramView = ({
         setOpenRecolorProjectModal(status);
     };
 
-    const toggleDescProjectModal = (status: boolean, projectUuid?: string) => {
+    const toggleDescProjectModal = (
+        status: boolean,
+        projectUuid?: string,
+        currProjectDesc?: string
+    ) => {
         if (projectUuid) setSelectedProject(projectUuid);
+        if (currProjectDesc) setCurrTargetProjectDesc(currProjectDesc);
         setOpenDescProjectModal(status);
     };
 
@@ -221,6 +229,7 @@ const MainBuildProgramView = ({
                             <DescProjectForm
                                 projectUuid={selectedProject}
                                 toggleDescProjectModal={toggleDescProjectModal}
+                                currProjectDesc={currTargetProjectDesc}
                             />
                         </GeneralModal>
                         <GeneralModal
