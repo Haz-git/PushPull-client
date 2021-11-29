@@ -56,7 +56,17 @@ const TemplateExample = styled.div`
 
 //Interfaces:
 
-const DashboardPanel = () => {
+interface IDashboardPanel {
+    toggleNewDescModal: (
+        status: boolean,
+        projectUuid: string,
+        currProjectDesc: string
+    ) => void;
+}
+
+const DashboardPanel = ({
+    toggleNewDescModal,
+}: IDashboardPanel): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
     const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
     let query = useQuery();
@@ -138,7 +148,10 @@ const DashboardPanel = () => {
                             <TemplateExample />
                         </TemplateContainer>
                         <ProjectInformationContainer>
-                            <ProjectInfo currProject={findUserProject()} />
+                            <ProjectInfo
+                                currProject={findUserProject()}
+                                toggleNewDescModal={toggleNewDescModal}
+                            />
                         </ProjectInformationContainer>
                     </>
                 );
