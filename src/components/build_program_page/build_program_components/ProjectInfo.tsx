@@ -20,10 +20,10 @@ const EditIcon = styled(Edit)`
 
 const MainContainer = styled.div`
     padding: 1rem 1rem;
-    margin: 0rem 1rem 0rem 1rem;
+    margin: 0rem 1.5rem 0rem 1.5rem;
     border-radius: 0.4rem;
     background: #f1f1f1;
-    max-width: 30rem;
+    max-width: 25rem;
 `;
 
 const InfoHeaderContainer = styled.div`
