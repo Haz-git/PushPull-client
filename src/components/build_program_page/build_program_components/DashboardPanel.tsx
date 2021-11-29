@@ -14,11 +14,18 @@ import { useParams } from 'react-router-dom';
 //Styles:
 import styled from 'styled-components';
 import { Template } from '@styled-icons/heroicons-solid/Template';
+import { Plus } from '@styled-icons/heroicons-solid/Plus';
 
 const TemplateIcon = styled(Template)`
     height: 1.5rem;
     width: 1.5rem;
     color: #e07133;
+`;
+
+const PlusIcon = styled(Plus)`
+    height: 1.1rem;
+    width: 1.1rem;
+    color: rgba(0, 0, 34, 0.7);
 `;
 
 const MainContainer = styled.section`
@@ -136,6 +143,8 @@ const DashboardPanel = ({
                                 border="1px solid #d6d6d6"
                                 buttonTextColor="rgba(0, 0, 34, 1)"
                                 buttonIconLeft={<TemplateIcon />}
+                                buttonIconRight={<PlusIcon />}
+                                rightIconMargin="0rem 0rem .15rem .5rem"
                                 margin="0 0"
                             />
                         </TemplateButtonContainer>
