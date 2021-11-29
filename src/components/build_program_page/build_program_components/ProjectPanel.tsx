@@ -24,12 +24,19 @@ import { Clock } from '@styled-icons/fluentui-system-regular/Clock';
 import { DocumentCopy } from '@styled-icons/fluentui-system-regular/DocumentCopy';
 import { ArrowUpload } from '@styled-icons/fluentui-system-regular/ArrowUpload';
 import { AppFolder } from '@styled-icons/fluentui-system-filled/AppFolder';
+import { Folder } from '@styled-icons/fluentui-system-filled/Folder';
 import { Add } from '@styled-icons/fluentui-system-regular/Add';
 
 const AddIcon = styled(Add)`
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1.1rem;
+    width: 1.1rem;
     color: rgba(0, 0, 34, 1);
+`;
+
+const FolderIcon = styled(Folder)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: rgba(0, 0, 34, 0.7);
 `;
 
 const RecentIcon = styled(Clock)`
@@ -224,14 +231,16 @@ const ProjectPanel = ({
                                 : 'Create New Project'
                         }
                         onClick={() => toggleProjectModal(true)}
-                        leftIconMargin="0rem 1rem .1rem 0rem"
-                        buttonIconLeft={
+                        rightIconMargin="0rem 0rem .1rem .5rem"
+                        buttonIconRight={
                             isCreatingNewProject ? (
                                 <Loader color="white" size="xs" />
                             ) : (
                                 <AddIcon />
                             )
                         }
+                        buttonIconLeft={<FolderIcon />}
+                        leftIconMargin="0rem .5rem 0rem 0rem"
                         isDisabledOnLoading={isCreatingNewProject}
                         padding=".4rem .2rem"
                         width="100%"
