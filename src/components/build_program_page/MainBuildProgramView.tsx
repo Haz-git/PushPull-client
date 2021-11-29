@@ -7,6 +7,7 @@ import AddProjectForm from './build_program_components/AddProjectForm';
 import RenameProjectForm from './build_program_components/RenameProjectForm';
 import RecolorProjectForm from './build_program_components/RecolorProjectForm';
 import DeleteProjectForm from './build_program_components/DeleteProjectForm';
+import DescProjectForm from './build_program_components/DescProjectForm';
 import GeneralModal from '../general_components/GeneralModal';
 import { useNotifications } from '@mantine/notifications';
 import LoadProgress from '../nprogress/LoadProgress';
@@ -101,6 +102,7 @@ const MainBuildProgramView = ({
     const [openRecolorProjectModal, setOpenRecolorProjectModal] =
         useState(false);
     const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
+    const [openDescProjectModal, setOpenDescProjectModal] = useState(false);
 
     //Project Id states:
     const [selectedProject, setSelectedProject] = useState('');
@@ -126,6 +128,11 @@ const MainBuildProgramView = ({
     ) => {
         if (projectUuid) setSelectedProject(projectUuid);
         setOpenRecolorProjectModal(status);
+    };
+
+    const toggleDescProjectModal = (status: boolean, projectUuid?: string) => {
+        if (projectUuid) setSelectedProject(projectUuid);
+        setOpenDescProjectModal(status);
     };
 
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
@@ -204,6 +211,16 @@ const MainBuildProgramView = ({
                                 toggleIsCreatingNewProjectLoader={
                                     toggleIsCreatingProjectLoader
                                 }
+                            />
+                        </GeneralModal>
+                        <GeneralModal
+                            openBoolean={openDescProjectModal}
+                            closeFunc={() => setOpenDescProjectModal}
+                            title="Edit Description"
+                        >
+                            <DescProjectForm
+                                projectUuid={selectedProject}
+                                toggleDescProjectModal={toggleDescProjectModal}
                             />
                         </GeneralModal>
                         <GeneralModal
