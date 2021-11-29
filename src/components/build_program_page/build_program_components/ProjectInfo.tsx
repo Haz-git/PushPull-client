@@ -100,11 +100,18 @@ const CreatedByBox = styled.div`
 
 interface IComponentProps {
     currProject: any;
+    toggleNewDescModal: (
+        status: boolean,
+        projectUuid: string,
+        currProjectDesc: string
+    ) => void;
 }
 
-const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
+const ProjectInfo = ({
+    currProject,
+    toggleNewDescModal,
+}: IComponentProps): JSX.Element => {
     dayjs.extend(LocalizedFormat);
-    const dispatch = useDispatch();
     const {
         projectColorHex,
         projectDesc,
@@ -121,7 +128,11 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
             return (
                 <>
                     <DescContainer>{projectDesc}</DescContainer>
-                    <EditButton onClick={() => {}}>
+                    <EditButton
+                        onClick={() =>
+                            toggleNewDescModal(true, projectUuid, projectDesc)
+                        }
+                    >
                         <EditIcon />
                     </EditButton>
                 </>
@@ -143,7 +154,9 @@ const ProjectInfo = ({ currProject }: IComponentProps): JSX.Element => {
                 border="1px solid #d6d6d6"
                 buttonTextColor="rgba(0, 0, 34, .7)"
                 fontSize="1rem"
-                onClick={() => {}}
+                onClick={() =>
+                    toggleNewDescModal(true, projectUuid, projectDesc)
+                }
             />
         );
     };
