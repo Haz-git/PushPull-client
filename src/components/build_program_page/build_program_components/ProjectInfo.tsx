@@ -23,14 +23,12 @@ const EditIcon = styled(Edit)`
 `;
 
 const MainContainer = styled.div`
-    top: 4.5rem;
-    position: sticky;
     padding: 1rem 1rem;
     margin: 0rem 1.5rem 0rem 1.5rem;
     border-radius: 0.4rem;
     background: #f1f1f1;
-    width: 22.5rem;
-    max-width: 22.5rem;
+    width: 25rem;
+    max-width: 25rem;
 `;
 
 const InfoHeaderContainer = styled.div`
