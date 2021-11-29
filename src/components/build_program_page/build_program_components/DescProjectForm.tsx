@@ -105,8 +105,7 @@ const DescProjectForm = ({
                         },
                     }}
                     required
-                    label="New Project Name"
-                    placeholder={'Rename your project'}
+                    label="New Project Description"
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                         setNewProjectDesc(e.target.value);
                     }}
