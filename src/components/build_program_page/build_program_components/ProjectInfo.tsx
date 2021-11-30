@@ -9,6 +9,9 @@ import DividerLine from '../../general_components/DividerLine';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import dayjs from 'dayjs';
 
+//Utils:
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+
 //Redux:
 import { useDispatch } from 'react-redux';
 
@@ -71,15 +74,16 @@ const EditButton = styled.button`
     }
 `;
 
-const DescContainer = styled.div`
+const DescContainer = styled.div<StyledProps>`
     flex-grow: 8;
     overflow-y: scroll;
-    max-height: 6rem;
+    max-height: ${(props) => `${props.height - 420}px`};
     font-size: 1rem;
     font-weight: 600;
     color: rgba(0, 0, 34, 0.7);
     min-width: 0;
     width: 15rem;
+    white-space: pre-wrap;
 `;
 
 const CreatedBy = styled.div``;
@@ -98,6 +102,10 @@ const CreatedByBox = styled.div`
 
 //Interfaces:
 
+interface StyledProps {
+    height: number;
+}
+
 interface IComponentProps {
     currProject: any;
     toggleNewDescModal: (
@@ -112,6 +120,7 @@ const ProjectInfo = ({
     toggleNewDescModal,
 }: IComponentProps): JSX.Element => {
     dayjs.extend(LocalizedFormat);
+    const { height } = useWindowDimensions();
     const {
         projectColorHex,
         projectDesc,
@@ -127,7 +136,7 @@ const ProjectInfo = ({
         if (projectDesc !== '')
             return (
                 <>
-                    <DescContainer>{projectDesc}</DescContainer>
+                    <DescContainer height={height}>{projectDesc}</DescContainer>
                     <EditButton
                         onClick={() =>
                             toggleNewDescModal(true, projectUuid, projectDesc)
