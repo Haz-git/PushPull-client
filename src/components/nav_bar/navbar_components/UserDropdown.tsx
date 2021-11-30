@@ -21,6 +21,7 @@ import styled from 'styled-components';
 import { Exit } from '@styled-icons/boxicons-regular/Exit';
 import { UserCircle } from '@styled-icons/boxicons-regular/UserCircle';
 import { CaretDown } from '@styled-icons/ionicons-outline/CaretDown';
+import { Tools } from '@styled-icons/remix-fill/Tools';
 
 const ExitIcon = styled(Exit)`
     height: 1.25rem;
@@ -38,6 +39,12 @@ const CaretDownIcon = styled(CaretDown)<StyledProps>`
     height: 1.25rem;
     width: 1.25rem;
     color: ${(props) => (props.isBuilder ? '#ffffff' : '#c6c6c6')};
+`;
+
+const ToolsIcon = styled(Tools)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: ${(props) => props.theme.mainText};
 `;
 
 const MainContainer = styled.div<StyledProps>`
@@ -158,6 +165,15 @@ const UserDropdown = ({
                     onClick={() => historyObject.push(`/user/${username}`)}
                 >
                     User Profile
+                </MenuItem>
+                <Divider />
+                <MenuItem
+                    icon={<ToolsIcon />}
+                    onClick={() =>
+                        historyObject.push(`/builder/dashboard/recents`)
+                    }
+                >
+                    Builder Mode
                 </MenuItem>
                 <Divider />
                 <MenuItem
