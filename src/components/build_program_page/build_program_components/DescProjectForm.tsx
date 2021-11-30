@@ -102,6 +102,8 @@ const DescProjectForm = ({
                             fontFamily: 'Lato, sans-serif',
                             fontSize: '.9rem',
                             fontWeight: 500,
+                            maxHeight: '30rem',
+                            height: '15rem',
                         },
                     }}
                     required
