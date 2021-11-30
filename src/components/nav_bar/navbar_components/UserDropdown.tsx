@@ -23,16 +23,16 @@ import { UserCircle } from '@styled-icons/boxicons-regular/UserCircle';
 import { CaretDown } from '@styled-icons/ionicons-outline/CaretDown';
 import { Tools } from '@styled-icons/remix-fill/Tools';
 
-const ExitIcon = styled(Exit)`
+const ExitIcon = styled(Exit)<StyledProps>`
     height: 1.25rem;
     width: 1.25rem;
-    color: ${(props) => props.theme.mainText};
+    color: ${(props) => (props.isBuilder ? '#ffffff' : props.theme.mainText)};
 `;
 
-const ProfileIcon = styled(UserCircle)`
+const ProfileIcon = styled(UserCircle)<StyledProps>`
     height: 1.35rem;
     width: 1.35rem;
-    color: ${(props) => props.theme.mainText};
+    color: ${(props) => (props.isBuilder ? '#ffffff' : props.theme.mainText)};
 `;
 
 const CaretDownIcon = styled(CaretDown)<StyledProps>`
@@ -41,10 +41,10 @@ const CaretDownIcon = styled(CaretDown)<StyledProps>`
     color: ${(props) => (props.isBuilder ? '#ffffff' : '#c6c6c6')};
 `;
 
-const ToolsIcon = styled(Tools)`
+const ToolsIcon = styled(Tools)<StyledProps>`
     height: 1.25rem;
     width: 1.25rem;
-    color: ${(props) => props.theme.mainText};
+    color: ${(props) => (props.isBuilder ? '#ffffff' : props.theme.mainText)};
 `;
 
 const MainContainer = styled.div<StyledProps>`
@@ -112,6 +112,26 @@ interface StyledProps {
     isBuilder: boolean;
 }
 
+//Dropdown Styles:
+
+const builderStyles = {
+    body: {
+        background: '#2c2c2c',
+    },
+    item: {
+        background: '#2c2c2c',
+    },
+    itemLabel: {
+        color: '#ffffff',
+    },
+    itemIcon: {
+        color: '#ffffff',
+    },
+    itemHovered: {
+        background: 'rgba(66, 99, 235, 1)',
+    },
+};
+
 //Userfront init()
 Userfront.init('5nxxrqn7');
 
@@ -135,9 +155,14 @@ const UserDropdown = ({
         return false;
     };
 
+    const returnBuilderStyles = () => {
+        if (checkIfBuilder()) return builderStyles;
+    };
+
     return (
         <MainContainer isBuilder={checkIfBuilder()}>
             <Menu
+                styles={returnBuilderStyles()}
                 placement="start"
                 control={
                     <DropdownContainer isBuilder={checkIfBuilder()}>
@@ -161,14 +186,14 @@ const UserDropdown = ({
                 size={checkIfMobile()}
             >
                 <MenuItem
-                    icon={<ProfileIcon />}
+                    icon={<ProfileIcon isBuilder={checkIfBuilder()} />}
                     onClick={() => historyObject.push(`/user/${username}`)}
                 >
                     User Profile
                 </MenuItem>
                 <Divider />
                 <MenuItem
-                    icon={<ToolsIcon />}
+                    icon={<ToolsIcon isBuilder={checkIfBuilder()} />}
                     onClick={() =>
                         historyObject.push(`/builder/dashboard/recents`)
                     }
@@ -177,7 +202,7 @@ const UserDropdown = ({
                 </MenuItem>
                 <Divider />
                 <MenuItem
-                    icon={<ExitIcon />}
+                    icon={<ExitIcon isBuilder={checkIfBuilder()} />}
                     onClick={() => {
                         Userfront.logout({ redirect: false });
                         dispatch(userSignout());
