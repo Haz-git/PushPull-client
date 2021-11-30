@@ -70,7 +70,7 @@ const TemplateContainer = styled.div`
 
 const ProjectInformationContainer = styled.div`
     flex-grow: 0;
-    top: 8.15rem;
+    top: 10rem;
     position: sticky;
 `;
 
@@ -185,6 +185,34 @@ const DashboardPanel = ({
                 return (
                     <>
                         <TemplateContainer>
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
+                            <TemplateExample />
                             <TemplateExample />
                             <TemplateExample />
                             <TemplateExample />
