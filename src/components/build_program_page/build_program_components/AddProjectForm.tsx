@@ -155,7 +155,7 @@ const AddProjectForm = ({
                     {
                         projectName,
                         projectDesc,
-                        projectColorHex: projectColor,
+                        projectColor,
                     }
                 )
             );
