@@ -44,6 +44,9 @@ export const addProject = (
             let response = await api.post(`/builder/project/add`, {
                 projectDetails,
             });
+
+            console.log(response);
+
             dispatch({
                 type: BuilderActionType.USER_ADD_PROJECT,
                 payload: response.data.builder,
