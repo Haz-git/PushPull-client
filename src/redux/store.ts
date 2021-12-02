@@ -34,7 +34,7 @@ const appReducer = combineReducers({
     sortOptions: sortOptionReducer,
     reviews: reviewReducer,
     profile: profileReducer,
-    builder: builderReducer,
+    builderProjects: builderReducer,
 });
 
 //Persisting formReducer:
