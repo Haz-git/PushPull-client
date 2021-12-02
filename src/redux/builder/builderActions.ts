@@ -14,6 +14,8 @@ export const findProject = (
         try {
             let response = await api.get(`/builder/user`);
 
+            console.log(response);
+
             dispatch({
                 type: BuilderActionType.USER_FIND_PROJECT,
                 payload: response.data.builder,
