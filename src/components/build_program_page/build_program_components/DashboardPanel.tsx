@@ -8,6 +8,7 @@ import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
 import ProjectInfo from './ProjectInfo';
 import GeneralButton from '../../general_components/GeneralButton';
+import ProjectNotFound from './ProjectNotFound';
 
 //Router:
 import { useParams } from 'react-router-dom';
@@ -158,7 +159,7 @@ const DashboardPanel = ({
             );
         }
 
-        return 'Project not found. Either this project does not exist, has been deleted, or the link is incorrect.';
+        return <ProjectNotFound />;
     };
 
     const renderViewLabelText = () => {
