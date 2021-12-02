@@ -172,7 +172,7 @@ const ProjectPanel = ({
                     toggleDeleteProjectModal={toggleDeleteProjectModal}
                     toggleRecolorProjectModal={toggleRecolorProjectModal}
                     toggleRenameProjectModal={toggleRenameProjectModal}
-                    isSelected={renderSelectedButtons(project.projectUuid)}
+                    isSelected={renderSelectedButtons(project.id)}
                 />
             ));
         } else {
