@@ -122,14 +122,14 @@ const ProjectInfo = ({
     dayjs.extend(LocalizedFormat);
     const { height } = useWindowDimensions();
     const {
-        projectColorHex,
+        projectColor,
         projectDesc,
         projectMembers,
         projectName,
         projectTemplates,
         updatedDate,
         createdBy,
-        projectUuid,
+        id,
     } = currProject;
 
     const renderProjectDesc = () => {
@@ -139,7 +139,7 @@ const ProjectInfo = ({
                     <DescContainer height={height}>{projectDesc}</DescContainer>
                     <EditButton
                         onClick={() =>
-                            toggleNewDescModal(true, projectUuid, projectDesc)
+                            toggleNewDescModal(true, id, projectDesc)
                         }
                     >
                         <EditIcon />
@@ -163,9 +163,7 @@ const ProjectInfo = ({
                 border="1px solid #d6d6d6"
                 buttonTextColor="rgba(0, 0, 34, .7)"
                 fontSize="1rem"
-                onClick={() =>
-                    toggleNewDescModal(true, projectUuid, projectDesc)
-                }
+                onClick={() => toggleNewDescModal(true, id, projectDesc)}
             />
         );
     };
@@ -178,7 +176,7 @@ const ProjectInfo = ({
         <MainContainer>
             <InfoHeaderContainer>
                 <InfoSwatch>
-                    <ColorSwatch size={35} radius={5} color={projectColorHex} />
+                    <ColorSwatch size={35} radius={5} color={projectColor} />
                 </InfoSwatch>
                 <InfoHeader>
                     <Text

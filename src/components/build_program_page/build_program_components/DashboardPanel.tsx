@@ -95,7 +95,9 @@ const DashboardPanel = ({
     toggleNewDescModal,
 }: IDashboardPanel): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
-    const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
+    const builderProjects = useSelector(
+        (state: RootStateOrAny) => state?.builderProjects
+    );
     let query = useQuery();
 
     const identifyIfProject = () => {
@@ -105,8 +107,8 @@ const DashboardPanel = ({
 
     const findUserProject = () => {
         let projectUuid = query.get('uuid');
-        let targetProject = projects.find(
-            (project: any) => project.projectUuid === projectUuid
+        let targetProject = builderProjects.find(
+            (project: any) => project.id === projectUuid
         );
         if (targetProject) return targetProject;
     };

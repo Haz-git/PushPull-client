@@ -139,7 +139,9 @@ const ProjectPanel = ({
 }: IComponentProps): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
     let query = useQuery();
-    const { projects } = useSelector((state: RootStateOrAny) => state?.builder);
+    const builderProjects = useSelector(
+        (state: RootStateOrAny) => state?.builderProjects
+    );
 
     const renderSelectedButtons = (key: string) => {
         if (dashboardView && dashboardView === key) {
@@ -155,13 +157,13 @@ const ProjectPanel = ({
     };
 
     const renderBuilderProjects = () => {
-        if (projects && projects.length > 0) {
-            return projects.map((project: any) => (
+        if (builderProjects && builderProjects.length > 0) {
+            return builderProjects.map((project: any) => (
                 <ProjectComponent
-                    key={project.projectUuid}
-                    projectUuid={project.projectUuid}
+                    key={project.id}
+                    projectUuid={project.id}
                     createdBy={project.createdBy}
-                    projectColorHex={project.projectColorHex}
+                    projectColorHex={project.projectColor}
                     projectDesc={project.projectDesc}
                     projectMembers={project.projectMembers}
                     projectTemplates={project.projectTemplates}
