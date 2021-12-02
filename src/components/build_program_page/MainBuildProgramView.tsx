@@ -164,8 +164,8 @@ const MainBuildProgramView = ({
     };
 
     const updateLoadingNotif = (id: string, status: boolean) => {
-        if (status !== true)
-            return notifications.updateNotification(id, {
+        if (status !== true) {
+            notifications.updateNotification(id, {
                 id,
                 color: 'red',
                 title: 'Your Builder Details Failed To Be Loaded',
@@ -173,6 +173,9 @@ const MainBuildProgramView = ({
                 autoClose: 3000,
                 icon: <CancelIcon />,
             });
+
+            return historyObject.push('/');
+        }
         return notifications.updateNotification(id, {
             id,
             color: 'teal',
