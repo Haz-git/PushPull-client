@@ -6,7 +6,6 @@ import { useParams, Link } from 'react-router-dom';
 
 //Redux:
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { addProject } from '../../../redux/builder/builderActions';
 
 //Components:
 import Text from '../../general_components/Text';
@@ -17,6 +16,8 @@ import ProjectContextMenu from './ProjectContextMenu';
 
 //Utils:
 import useQuery from '../../../utils/hooks/useQuery';
+import { deviceMin } from '../../../devices/breakpoints';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -69,10 +70,18 @@ const MainContainer = styled.section`
     border-right: 1px solid #d6d6d6;
     height: 100%;
     text-align: left;
-    width: 16rem;
-    max-width: 16rem;
     padding-bottom: 7rem;
     overflow-y: scroll;
+
+    @media ${deviceMin.laptop} {
+        width: 12rem;
+        max-width: 12rem;
+    }
+
+    @media ${deviceMin.laptopL} {
+        width: 16rem;
+        max-width: 16rem;
+    }
 `;
 
 const ViewContainer = styled.div`
@@ -138,6 +147,7 @@ const ProjectPanel = ({
     toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
+    let { width } = useWindowDimensions();
     let query = useQuery();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
@@ -182,6 +192,16 @@ const ProjectPanel = ({
                 </NoProjectContainer>
             );
         }
+    };
+
+    const truncateBtnLabel = (label: 'DEFAULT' | 'INPROGRESS') => {
+        if (label !== 'INPROGRESS') {
+            if (width && width < 1440) return 'New Project';
+            return 'Create New Project';
+        }
+
+        if (width && width < 1440) return 'Creating...';
+        return 'Creating Project...';
     };
 
     return (
@@ -229,8 +249,8 @@ const ProjectPanel = ({
                     <GeneralButton
                         buttonLabel={
                             isCreatingNewProject
-                                ? 'Creating Project...'
-                                : 'Create New Project'
+                                ? truncateBtnLabel('INPROGRESS')
+                                : truncateBtnLabel('DEFAULT')
                         }
                         onClick={() => toggleProjectModal(true)}
                         rightIconMargin="0rem 0rem .1rem .5rem"
