@@ -55,7 +55,7 @@ const ViewLabelContainer = styled.div`
     z-index: 50;
 
     @media ${deviceMin.mobileS} {
-        padding: 1rem 1rem;
+        padding: 0.25rem 1rem;
         column-gap: 1rem;
     }
 
@@ -71,7 +71,15 @@ const ViewLabel = styled.div`
     }
 `;
 
-const TemplateButtonContainer = styled.div``;
+const TemplateButtonContainer = styled.div`
+    @media ${deviceMin.mobileS} {
+        margin-left: auto;
+    }
+
+    @media ${deviceMin.tabletp} {
+        margin-left: 0;
+    }
+`;
 
 const DashboardItemContainer = styled.div`
     width: 100%;
@@ -134,6 +142,11 @@ const DashboardPanel = ({
     let query = useQuery();
 
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+    const [isProjectPanelDrawerOpened, setStateProjectDrawer] = useState(false);
+
+    const toggleProjectDrawer = (status: boolean) => {
+        setStateProjectDrawer(status);
+    };
 
     const identifyIfProject = () => {
         if (dashboardView === 'project') return true;
@@ -156,7 +169,7 @@ const DashboardPanel = ({
                         opened={isBurgerOpened}
                         onClick={() => setIsBurgerOpened((o) => !o)}
                         color="rgba(224, 113, 51, 1)"
-                        size={25}
+                        size={22}
                     />
                 </BurgerContainer>
             );
