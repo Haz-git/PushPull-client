@@ -11,6 +11,8 @@ import ProjectInfo from './ProjectInfo';
 import GeneralButton from '../../general_components/GeneralButton';
 import ProjectNotFound from './ProjectNotFound';
 import { Burger } from '@mantine/core';
+import ProjectPanel from './ProjectPanel';
+import { Transition } from '@mantine/core';
 
 //utils:
 import { deviceMin } from '../../../devices/breakpoints';
@@ -37,7 +39,6 @@ const PlusIcon = styled(Plus)`
 
 const MainContainer = styled.section`
     background: #ffffff;
-    height: 100%;
     width: 100%;
 `;
 
@@ -81,8 +82,24 @@ const TemplateButtonContainer = styled.div`
     }
 `;
 
+const CustomDrawer = styled.div<CustomDrawerProps>`
+    top: 7.3rem;
+    position: fixed;
+    z-index: 99 !important;
+    margin-top: -9px;
+    height: 100%;
+
+    @media ${deviceMin.mobileS} {
+        margin-top: -16px;
+    }
+
+    @media ${deviceMin.mobileM} {
+        margin-top: -9px;
+    }
+`;
 const DashboardItemContainer = styled.div`
     width: 100%;
+    z-index: 30;
 
     @media ${deviceMin.mobileS} {
         display: block;
@@ -123,19 +140,33 @@ const TemplateExample = styled.div`
 
 //Interfaces:
 
+interface CustomDrawerProps {
+    $height: number;
+}
+
 interface IDashboardPanel {
     toggleNewDescModal: (
         status: boolean,
         projectUuid: string,
         currProjectDesc: string
     ) => void;
+    toggleProjectModal: (status: boolean) => void;
+    toggleRenameProjectModal: (status: boolean, projectUuid: string) => void;
+    toggleRecolorProjectModal: (status: boolean, projectUuid: string) => void;
+    toggleDeleteProjectModal: (status: boolean, projectUuid: string) => void;
+    isCreatingNewProject: boolean;
 }
 
 const DashboardPanel = ({
     toggleNewDescModal,
+    toggleProjectModal,
+    isCreatingNewProject,
+    toggleRenameProjectModal,
+    toggleRecolorProjectModal,
+    toggleDeleteProjectModal,
 }: IDashboardPanel): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
-    const { width } = useWindowDimensions();
+    const { width, height } = useWindowDimensions();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
     );
@@ -162,12 +193,12 @@ const DashboardPanel = ({
     };
 
     const renderBurgerMenuOnMobile = () => {
-        if (width && width <= 1024) {
+        if (width && width < 1024) {
             return (
                 <BurgerContainer>
                     <Burger
-                        opened={isBurgerOpened}
-                        onClick={() => setIsBurgerOpened((o) => !o)}
+                        opened={isProjectPanelDrawerOpened}
+                        onClick={() => setStateProjectDrawer((x) => !x)}
                         color="rgba(224, 113, 51, 1)"
                         size={22}
                     />
@@ -267,6 +298,30 @@ const DashboardPanel = ({
                             {renderBtn()}
                         </TemplateButtonContainer>
                     </ViewLabelContainer>
+                    <Transition
+                        mounted={isProjectPanelDrawerOpened}
+                        transition="scale-x"
+                        duration={200}
+                        timingFunction="ease"
+                    >
+                        {(styles) => (
+                            <CustomDrawer style={styles} $height={height}>
+                                <ProjectPanel
+                                    toggleProjectModal={toggleProjectModal}
+                                    isCreatingNewProject={isCreatingNewProject}
+                                    toggleDeleteProjectModal={
+                                        toggleDeleteProjectModal
+                                    }
+                                    toggleRecolorProjectModal={
+                                        toggleRecolorProjectModal
+                                    }
+                                    toggleRenameProjectModal={
+                                        toggleRenameProjectModal
+                                    }
+                                />
+                            </CustomDrawer>
+                        )}
+                    </Transition>
                     <DashboardItemContainer>
                         {renderProjectInformation()}
                     </DashboardItemContainer>
