@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Redux:
 import { useSelector, RootStateOrAny } from 'react-redux';
@@ -9,9 +10,11 @@ import useQuery from '../../../utils/hooks/useQuery';
 import ProjectInfo from './ProjectInfo';
 import GeneralButton from '../../general_components/GeneralButton';
 import ProjectNotFound from './ProjectNotFound';
+import { Burger } from '@mantine/core';
 
 //utils:
 import { deviceMin } from '../../../devices/breakpoints';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Router:
 import { useParams } from 'react-router-dom';
@@ -38,6 +41,8 @@ const MainContainer = styled.section`
     width: 100%;
 `;
 
+const BurgerContainer = styled.div``;
+
 const ViewLabelContainer = styled.div`
     display: flex;
     align-items: center;
@@ -45,25 +50,42 @@ const ViewLabelContainer = styled.div`
     top: 3.75rem;
     position: sticky;
     border-bottom: 1px solid #d6d6d6;
-    padding: 1rem 0rem;
     margin-bottom: 1rem;
     background: #ffffff;
     z-index: 50;
-    column-gap: 1.5rem;
+
+    @media ${deviceMin.mobileS} {
+        padding: 1rem 1rem;
+        column-gap: 1rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        padding: 1rem 0rem;
+        column-gap: 1.5rem;
+    }
 `;
 
 const ViewLabel = styled.div`
-    margin-left: 2rem;
+    @media ${deviceMin.tabletp} {
+        margin-left: 2rem;
+    }
 `;
 
 const TemplateButtonContainer = styled.div``;
 
 const DashboardItemContainer = styled.div`
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.tabletp} {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
 `;
 
 const TemplateContainer = styled.div`
@@ -73,9 +95,15 @@ const TemplateContainer = styled.div`
 `;
 
 const ProjectInformationContainer = styled.div`
-    flex-grow: 0;
-    top: 10rem;
-    position: sticky;
+    @media ${deviceMin.mobileS} {
+        display: block;
+    }
+
+    @media ${deviceMin.tabletp} {
+        flex-grow: 0;
+        top: 10rem;
+        position: sticky;
+    }
 `;
 
 const TemplateExample = styled.div`
@@ -99,10 +127,13 @@ const DashboardPanel = ({
     toggleNewDescModal,
 }: IDashboardPanel): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
+    const { width } = useWindowDimensions();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
     );
     let query = useQuery();
+
+    const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
     const identifyIfProject = () => {
         if (dashboardView === 'project') return true;
@@ -117,6 +148,90 @@ const DashboardPanel = ({
         if (targetProject) return targetProject;
     };
 
+    const renderBurgerMenuOnMobile = () => {
+        if (width && width <= 1024) {
+            return (
+                <BurgerContainer>
+                    <Burger
+                        opened={isBurgerOpened}
+                        onClick={() => setIsBurgerOpened((o) => !o)}
+                        color="rgba(224, 113, 51, 1)"
+                        size={25}
+                    />
+                </BurgerContainer>
+            );
+        }
+    };
+
+    const renderBtn = () => {
+        if (width) {
+            if (width <= 320)
+                return (
+                    <GeneralButton
+                        buttonLabel="Template"
+                        padding=".3rem .3rem"
+                        width="100%"
+                        hoverShadow="none"
+                        hoverTransform="none"
+                        hoverColor="#d6d6d6"
+                        buttonBackground="#ffffff"
+                        disableShadow={true}
+                        textShadow="none"
+                        border="1px solid #d6d6d6"
+                        buttonTextColor="rgba(0, 0, 34, 1)"
+                        buttonIconRight={<PlusIcon />}
+                        rightIconMargin="0rem 0rem .15rem .25rem"
+                        fontSize=".9rem"
+                        margin="0 0"
+                    />
+                );
+
+            if (width >= 360 && width <= 375)
+                return (
+                    <GeneralButton
+                        buttonLabel="New Template"
+                        leftIconMargin="0rem .5rem 0rem 0rem"
+                        padding=".4rem .4rem"
+                        width="100%"
+                        hoverShadow="none"
+                        hoverTransform="none"
+                        hoverColor="#d6d6d6"
+                        buttonBackground="#ffffff"
+                        disableShadow={true}
+                        textShadow="none"
+                        border="1px solid #d6d6d6"
+                        buttonTextColor="rgba(0, 0, 34, 1)"
+                        buttonIconLeft={<TemplateIcon />}
+                        buttonIconRight={<PlusIcon />}
+                        rightIconMargin="0rem 0rem .15rem .5rem"
+                        margin="0 0"
+                    />
+                );
+
+            if (width > 375)
+                return (
+                    <GeneralButton
+                        buttonLabel="New Template File"
+                        leftIconMargin="0rem .5rem 0rem 0rem"
+                        padding=".4rem .4rem"
+                        width="100%"
+                        hoverShadow="none"
+                        hoverTransform="none"
+                        hoverColor="#d6d6d6"
+                        buttonBackground="#ffffff"
+                        disableShadow={true}
+                        textShadow="none"
+                        border="1px solid #d6d6d6"
+                        buttonTextColor="rgba(0, 0, 34, 1)"
+                        buttonIconLeft={<TemplateIcon />}
+                        buttonIconRight={<PlusIcon />}
+                        rightIconMargin="0rem 0rem .15rem .5rem"
+                        margin="0 0"
+                    />
+                );
+        }
+    };
+
     const renderDashboardView = () => {
         if (
             (identifyIfProject() && findUserProject()) ||
@@ -127,6 +242,7 @@ const DashboardPanel = ({
             return (
                 <>
                     <ViewLabelContainer>
+                        {renderBurgerMenuOnMobile()}
                         <ViewLabel>
                             <Text
                                 text={renderViewLabelText()}
@@ -135,24 +251,7 @@ const DashboardPanel = ({
                             />
                         </ViewLabel>
                         <TemplateButtonContainer>
-                            <GeneralButton
-                                buttonLabel="New Template File"
-                                leftIconMargin="0rem .5rem 0rem 0rem"
-                                padding=".4rem .4rem"
-                                width="100%"
-                                hoverShadow="none"
-                                hoverTransform="none"
-                                hoverColor="#d6d6d6"
-                                buttonBackground="#ffffff"
-                                disableShadow={true}
-                                textShadow="none"
-                                border="1px solid #d6d6d6"
-                                buttonTextColor="rgba(0, 0, 34, 1)"
-                                buttonIconLeft={<TemplateIcon />}
-                                buttonIconRight={<PlusIcon />}
-                                rightIconMargin="0rem 0rem .15rem .5rem"
-                                margin="0 0"
-                            />
+                            {renderBtn()}
                         </TemplateButtonContainer>
                     </ViewLabelContainer>
                     <DashboardItemContainer>
@@ -169,11 +268,11 @@ const DashboardPanel = ({
         if (dashboardView) {
             switch (dashboardView) {
                 case 'recents':
-                    return 'Recently Viewed';
+                    return 'Recents';
                 case 'published':
-                    return 'Published Templates';
+                    return 'Published';
                 case 'drafts':
-                    return 'Drafts In Progress';
+                    return 'Drafts';
                 case 'project':
                     let projName = query.get('name');
                     return projName || 'Project';
@@ -190,6 +289,12 @@ const DashboardPanel = ({
             if (findUserProject()) {
                 return (
                     <>
+                        <ProjectInformationContainer>
+                            <ProjectInfo
+                                currProject={findUserProject()}
+                                toggleNewDescModal={toggleNewDescModal}
+                            />
+                        </ProjectInformationContainer>
                         <TemplateContainer>
                             <TemplateExample />
                             <TemplateExample />
@@ -224,12 +329,6 @@ const DashboardPanel = ({
                             <TemplateExample />
                             <TemplateExample />
                         </TemplateContainer>
-                        <ProjectInformationContainer>
-                            <ProjectInfo
-                                currProject={findUserProject()}
-                                toggleNewDescModal={toggleNewDescModal}
-                            />
-                        </ProjectInformationContainer>
                     </>
                 );
             }
