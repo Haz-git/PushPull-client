@@ -99,6 +99,10 @@ const GeneralButton = ({
     borderRadius = '0.2rem',
     type = 'submit',
 }: IGeneralButtonProps): JSX.Element => {
+    const renderBtnLabel = () => {
+        if (buttonLabel !== '') return buttonLabel;
+        return null;
+    };
     return (
         <>
             <StyledGeneralButton
@@ -125,7 +129,7 @@ const GeneralButton = ({
                 <LeftIconContainer leftIconMargin={leftIconMargin}>
                     {buttonIconLeft && buttonIconLeft}
                 </LeftIconContainer>
-                {buttonLabel}
+                {renderBtnLabel()}
                 <RightIconContainer rightIconMargin={rightIconMargin}>
                     {buttonIconRight && buttonIconRight}
                 </RightIconContainer>
