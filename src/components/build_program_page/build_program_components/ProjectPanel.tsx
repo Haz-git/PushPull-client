@@ -75,8 +75,8 @@ const MainContainer = styled.section<IMainContainer>`
     z-index: 80;
 
     @media ${deviceMin.mobileS} {
-        width: 10rem;
-        max-width: 10rem;
+        width: 11rem;
+        max-width: 11rem;
     }
 
     @media ${deviceMin.mobileM} {
