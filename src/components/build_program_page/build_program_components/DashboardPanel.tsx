@@ -10,6 +10,9 @@ import ProjectInfo from './ProjectInfo';
 import GeneralButton from '../../general_components/GeneralButton';
 import ProjectNotFound from './ProjectNotFound';
 
+//utils:
+import { deviceMin } from '../../../devices/breakpoints';
+
 //Router:
 import { useParams } from 'react-router-dom';
 //Styles:
