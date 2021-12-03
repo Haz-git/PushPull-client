@@ -99,6 +99,7 @@ const MainBuildProgramView = ({
     //Loading State:
 
     const [isBuilderInfoLoaded, setIsBuilderInfoLoaded] = useState(false);
+    const [isProgressLoading, setIsProgressLoading] = useState(true);
 
     //Modal States:
 
@@ -171,6 +172,7 @@ const MainBuildProgramView = ({
 
     const updateLoadingNotif = (id: string, status: boolean) => {
         if (status !== true) {
+            setIsProgressLoading(false);
             notifications.updateNotification(id, {
                 id,
                 color: 'red',
@@ -180,7 +182,9 @@ const MainBuildProgramView = ({
                 icon: <CancelIcon />,
             });
 
-            return historyObject.push('/');
+            return setTimeout(() => {
+                historyObject.push('/');
+            }, 3000);
         }
         return notifications.updateNotification(id, {
             id,
@@ -209,7 +213,7 @@ const MainBuildProgramView = ({
                 fallback={
                     <LoadProgress
                         isLoadBuilderMode={true}
-                        isAnimating={true}
+                        isAnimating={isProgressLoading}
                         minimum={0.9}
                         incrementDuration={100}
                     />
@@ -303,7 +307,7 @@ const MainBuildProgramView = ({
                 ) : (
                     <LoadProgress
                         isLoadBuilderMode={true}
-                        isAnimating={true}
+                        isAnimating={isProgressLoading}
                         minimum={0.6}
                         incrementDuration={100}
                     />
