@@ -14,24 +14,12 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
         min-height: 100%;
         position: relative;
-        /* background: rgba(244, 244, 244, 1); */
         background: #ffffff;
         font-family: 'Lato', sans-serif, helvetica;
         -webkit-overflow-scrolling: touch;
 
     }
 
-    /* @media screen and (min-width: 320px) {
-        body {
-            padding-bottom: 3.5rem;
-        }
-    }
-
-    @media screen and (min-width: 800px) {
-        body {
-            padding-bottom: 3.5rem;
-        }
-    } */
 
     a {
         text-decoration: none;
