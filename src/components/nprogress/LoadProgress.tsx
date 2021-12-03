@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
 import { useNProgress } from '@tanem/react-nprogress';
@@ -40,12 +41,28 @@ const ProgressText = styled.h1<IStyledProps>`
     font-size: 1.5rem;
     font-weight: 500;
     color: ${(props) =>
-        props.isLoadBuilderMode ? '#ffffff' : props.theme.subText}; ;
+        props.isLoadBuilderMode ? '#ffffff' : props.theme.subText};
+
+    @media ${deviceMin.mobileS} {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    @media ${deviceMin.browserSm} {
+        font-size: 1.5rem;
+    }
 `;
 
 const ProgressBarContainer = styled.div`
     height: 1rem;
-    width: 20rem;
+
+    @media ${deviceMin.mobileS} {
+        width: 17rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        width: 20rem;
+    }
 `;
 
 //Interfaces:
