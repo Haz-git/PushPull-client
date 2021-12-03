@@ -28,6 +28,7 @@ const SuspenseWrapper = styled.section``;
 
 const MainContainer = styled.section`
     background: #ffffff;
+    width: 100%;
 
     @media ${deviceMin.mobileS} {
         display: block;
@@ -37,9 +38,13 @@ const MainContainer = styled.section`
     @media ${deviceMin.laptop} {
         height: 100%;
         display: grid;
-        grid-template-columns: 1fr 8fr;
+        grid-template-columns: 12rem auto;
         overflow: visible;
         padding: 0rem 0rem 2rem 0rem;
+    }
+
+    @media ${deviceMin.laptopL} {
+        grid-template-columns: 16rem auto;
     }
 `;
 
