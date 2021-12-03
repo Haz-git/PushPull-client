@@ -27,18 +27,14 @@ import historyObject from '../../utils/historyObject';
 const SuspenseWrapper = styled.section``;
 
 const MainContainer = styled.section`
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 8fr;
     background: #ffffff;
 
     @media ${deviceMin.mobileS} {
         display: block;
         height: 100%;
-        overflow: hidden;
     }
 
-    @media ${deviceMin.tabletp} {
+    @media ${deviceMin.laptop} {
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 8fr;
@@ -48,8 +44,13 @@ const MainContainer = styled.section`
 `;
 
 const ProjectPanelView = styled.section`
-    width: 16rem;
-    max-width: 16rem;
+    @media ${deviceMin.mobileS} {
+        display: none;
+    }
+
+    @media ${deviceMin.laptop} {
+        display: block;
+    }
 `;
 
 const DashboardPanelView = styled.section``;
