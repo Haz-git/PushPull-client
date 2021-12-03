@@ -64,7 +64,7 @@ const ProjectIcon = styled(AppFolder)`
     color: rgba(0, 0, 34, 1);
 `;
 
-const MainContainer = styled.section`
+const MainContainer = styled.section<IMainContainer>`
     background: #ffffff;
     position: fixed;
     border-right: 1px solid #d6d6d6;
@@ -72,6 +72,17 @@ const MainContainer = styled.section`
     text-align: left;
     padding-bottom: 7rem;
     overflow-y: scroll;
+    z-index: 80;
+
+    @media ${deviceMin.mobileS} {
+        width: 10rem;
+        max-width: 10rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        width: 11rem;
+        max-width: 11rem;
+    }
 
     @media ${deviceMin.laptop} {
         width: 12rem;
@@ -127,6 +138,9 @@ const CreateNewProjectContainer = styled.div`
 
 //Interfaces:
 
+interface IMainContainer {
+    $height: number;
+}
 interface IViewTextButton {
     $isSelected: boolean;
 }
@@ -147,7 +161,7 @@ const ProjectPanel = ({
     toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
-    let { width } = useWindowDimensions();
+    let { width, height } = useWindowDimensions();
     let query = useQuery();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
@@ -206,7 +220,7 @@ const ProjectPanel = ({
 
     return (
         <>
-            <MainContainer>
+            <MainContainer $height={height}>
                 <ViewContainer>
                     <ViewTextButton
                         to={`/builder/dashboard/recents`}
