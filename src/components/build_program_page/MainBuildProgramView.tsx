@@ -68,16 +68,6 @@ const DashboardPanel = React.lazy(
     () => import('./build_program_components/DashboardPanel')
 );
 
-// const ProjectPanel = React.lazy(async () => {
-//     await new Promise((resolve) => setTimeout(resolve, 3000));
-//     return import('./build_program_components/ProjectPanel');
-// });
-
-// const DashboardPanel = React.lazy(async () => {
-//     await new Promise((resolve) => setTimeout(resolve, 3000));
-//     return import('./build_program_components/DashboardPanel');
-// });
-
 //Interfaces:
 
 interface IComponentProps {
@@ -296,6 +286,17 @@ const MainBuildProgramView = ({
                             </ProjectPanelView>
                             <DashboardPanelView>
                                 <DashboardPanel
+                                    toggleProjectModal={toggleProjectModal}
+                                    isCreatingNewProject={isCreatingNewProject}
+                                    toggleDeleteProjectModal={
+                                        toggleDeleteProjectModal
+                                    }
+                                    toggleRecolorProjectModal={
+                                        toggleRecolorProjectModal
+                                    }
+                                    toggleRenameProjectModal={
+                                        toggleRenameProjectModal
+                                    }
                                     toggleNewDescModal={toggleDescProjectModal}
                                 />
                             </DashboardPanelView>
