@@ -106,7 +106,7 @@ const LoadProgress = ({
                     <ProgressBarContainer>
                         <Progress
                             size="md"
-                            value={progress * 100}
+                            value={isAnimating ? progress * 100 : 0}
                             styles={{
                                 root: {
                                     background: '#ffffff',
@@ -131,7 +131,7 @@ const LoadProgress = ({
                 <ProgressBarContainer>
                     <Progress
                         size="xl"
-                        value={progress * 100}
+                        value={isAnimating ? progress * 100 : 0}
                         styles={{
                             root: {
                                 background: '#ffffff',
