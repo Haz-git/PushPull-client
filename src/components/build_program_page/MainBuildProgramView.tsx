@@ -173,18 +173,15 @@ const MainBuildProgramView = ({
     const updateLoadingNotif = (id: string, status: boolean) => {
         if (status !== true) {
             setIsProgressLoading(false);
-            notifications.updateNotification(id, {
+            historyObject.push('/');
+            return notifications.updateNotification(id, {
                 id,
                 color: 'red',
                 title: 'Your Builder Details Failed To Be Loaded',
                 message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
-                autoClose: 3000,
+                autoClose: 10000,
                 icon: <CancelIcon />,
             });
-
-            return setTimeout(() => {
-                historyObject.push('/');
-            }, 3000);
         }
         return notifications.updateNotification(id, {
             id,
