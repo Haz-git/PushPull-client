@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
 //Components:
@@ -9,6 +10,13 @@ import { useContextMenu } from 'react-contexify';
 //Styles:
 import styled from 'styled-components';
 import historyObject from '../../../utils/historyObject';
+import { Options } from '@styled-icons/fluentui-system-regular/Options';
+
+const OptionsIcon = styled(Options)`
+    height: 1.25rem;
+    width: 1.25rem;
+    color: rgba(0, 0, 34, 0.7);
+`;
 
 const MainContainer = styled.div<IMainContainerProps>`
     display: block;
@@ -39,6 +47,17 @@ const HeaderContainer = styled.div`
     justify-content: flex-start;
     column-gap: 1rem;
     cursor: default;
+`;
+
+const MobileOptionsButton = styled.button`
+    border: none;
+    background: transparent;
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.1rem;
+
+    &:hover {
+        background: #ececec;
+    }
 `;
 
 const SwatchContainer = styled.div`
@@ -86,6 +105,7 @@ const ProjectComponent = ({
     isSelected = false,
 }: IComponentProps): JSX.Element => {
     const MENU_ID = 'PROJECTCOMPONENTCONTEXTMENU';
+    const menuRef = useRef<HTMLDivElement | null>(null);
     const { show } = useContextMenu({
         id: MENU_ID,
         props: {
@@ -107,11 +127,43 @@ const ProjectComponent = ({
         show(event);
     };
 
+    const displayContextMenuOnMobile = (event: React.MouseEvent) => {
+        if (event.cancelable) event.preventDefault();
+        const posRef = menuRef.current?.getBoundingClientRect();
+
+        if (posRef) {
+            return show(event, {
+                position: {
+                    x: posRef.x,
+                    y: posRef.y - 55,
+                },
+            });
+        }
+
+        return show(event, {
+            position: {
+                x: 0,
+                y: 0,
+            },
+        });
+    };
+
+    const renderOptionsIconOnMobile = () => {
+        if (isMobile) {
+            return (
+                <MobileOptionsButton onClick={displayContextMenuOnMobile}>
+                    <OptionsIcon />
+                </MobileOptionsButton>
+            );
+        }
+    };
+
     return (
         <MainContainer
             onContextMenu={displayContextMenu}
             $isSelected={isSelected}
             onClick={componentClickHandler}
+            ref={menuRef}
         >
             <ProjectHeaderWrapper>
                 <HeaderContainer>
@@ -127,6 +179,7 @@ const ProjectComponent = ({
                         fontSize="1rem"
                         truncateWidth="10rem"
                     />
+                    {renderOptionsIconOnMobile()}
                 </HeaderContainer>
             </ProjectHeaderWrapper>
         </MainContainer>
