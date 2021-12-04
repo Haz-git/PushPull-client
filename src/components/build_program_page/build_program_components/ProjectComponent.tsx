@@ -5,7 +5,6 @@ import { isMobile } from 'react-device-detect';
 import Text from '../../general_components/Text';
 import { ColorSwatch } from '@mantine/core';
 import { useContextMenu } from 'react-contexify';
-import useLongPress from '../../../utils/hooks/useLongPress';
 
 //Styles:
 import styled from 'styled-components';
@@ -97,81 +96,41 @@ const ProjectComponent = ({
         },
     });
 
-    const onLongPress = (event: React.MouseEvent) => {
-        if (event.cancelable) event.preventDefault();
-        show(event);
-    };
-
     const componentClickHandler = (e: React.MouseEvent) => {
         historyObject.push(
             `/builder/dashboard/project?name=${projectName}&uuid=${projectUuid}`
         );
     };
-    const longPressEvent = useLongPress(
-        onLongPress as any,
-        componentClickHandler
-    );
 
     const displayContextMenu = (event: React.MouseEvent) => {
         if (event.cancelable) event.preventDefault();
         show(event);
     };
 
-    const renderDifferentMenuOnDeviceChange = () => {
-        if (isMobile) {
-            return (
-                <MainContainer
-                    onContextMenu={displayContextMenu}
-                    $isSelected={isSelected}
-                    {...longPressEvent}
-                >
-                    <ProjectHeaderWrapper>
-                        <HeaderContainer>
-                            <SwatchContainer>
-                                <ColorSwatch
-                                    size={20}
-                                    radius={3}
-                                    color={`${projectColorHex}`}
-                                />
-                            </SwatchContainer>
-                            <Text
-                                text={projectName}
-                                fontSize="1rem"
-                                truncateWidth="10rem"
-                            />
-                        </HeaderContainer>
-                    </ProjectHeaderWrapper>
-                </MainContainer>
-            );
-        } else {
-            return (
-                <MainContainer
-                    onContextMenu={displayContextMenu}
-                    $isSelected={isSelected}
-                    onClick={componentClickHandler}
-                >
-                    <ProjectHeaderWrapper>
-                        <HeaderContainer>
-                            <SwatchContainer>
-                                <ColorSwatch
-                                    size={20}
-                                    radius={3}
-                                    color={`${projectColorHex}`}
-                                />
-                            </SwatchContainer>
-                            <Text
-                                text={projectName}
-                                fontSize="1rem"
-                                truncateWidth="10rem"
-                            />
-                        </HeaderContainer>
-                    </ProjectHeaderWrapper>
-                </MainContainer>
-            );
-        }
-    };
-
-    return renderDifferentMenuOnDeviceChange();
+    return (
+        <MainContainer
+            onContextMenu={displayContextMenu}
+            $isSelected={isSelected}
+            onClick={componentClickHandler}
+        >
+            <ProjectHeaderWrapper>
+                <HeaderContainer>
+                    <SwatchContainer>
+                        <ColorSwatch
+                            size={20}
+                            radius={3}
+                            color={`${projectColorHex}`}
+                        />
+                    </SwatchContainer>
+                    <Text
+                        text={projectName}
+                        fontSize="1rem"
+                        truncateWidth="10rem"
+                    />
+                </HeaderContainer>
+            </ProjectHeaderWrapper>
+        </MainContainer>
+    );
 };
 
 export default ProjectComponent;
