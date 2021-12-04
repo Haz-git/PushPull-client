@@ -106,15 +106,6 @@ const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
         props: { projectUuid, toggleDeleteProjectModal },
     }: any) => {
         toggleDeleteProjectModal(true, projectUuid);
-        // console.log(projectUuid);
-        // dispatch(
-        //     deleteProject(
-        //         (status) => console.log(status),
-        //         toggleLoadingNotif,
-        //         updateLoadingNotif,
-        //         projectUuid
-        //     )
-        // );
     };
 
     const handleRenameProject = ({
