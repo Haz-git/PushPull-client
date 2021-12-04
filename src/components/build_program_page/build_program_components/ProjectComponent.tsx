@@ -1,19 +1,24 @@
 import * as React from 'react';
+import { isMobile } from 'react-device-detect';
 
 //Components:
 import Text from '../../general_components/Text';
 import { ColorSwatch } from '@mantine/core';
 import { useContextMenu } from 'react-contexify';
+import useLongPress from '../../../utils/hooks/useLongPress';
 
 //Styles:
 import styled from 'styled-components';
 import historyObject from '../../../utils/historyObject';
 
 const MainContainer = styled.div<IMainContainerProps>`
+    display: block;
     padding: 0.75rem 0.75rem;
     margin: 0rem 0.5rem 0.5rem 0.5rem;
     background: ${(props) => (props.$isSelected ? '#f8dcce' : '#ffffff')};
     border-radius: 0.2rem;
+    border: none;
+    text-decoration: none;
 
     box-shadow: ${(props) =>
         props.$isSelected
@@ -92,8 +97,8 @@ const ProjectComponent = ({
         },
     });
 
-    const displayContextMenu = (event: React.MouseEvent) => {
-        event.preventDefault();
+    const onLongPress = (event: React.MouseEvent) => {
+        if (event.cancelable) event.preventDefault();
         show(event);
     };
 
@@ -102,31 +107,71 @@ const ProjectComponent = ({
             `/builder/dashboard/project?name=${projectName}&uuid=${projectUuid}`
         );
     };
-
-    return (
-        <MainContainer
-            onContextMenu={displayContextMenu}
-            $isSelected={isSelected}
-            onClick={componentClickHandler}
-        >
-            <ProjectHeaderWrapper>
-                <HeaderContainer>
-                    <SwatchContainer>
-                        <ColorSwatch
-                            size={20}
-                            radius={3}
-                            color={`${projectColorHex}`}
-                        />
-                    </SwatchContainer>
-                    <Text
-                        text={projectName}
-                        fontSize="1rem"
-                        truncateWidth="12rem"
-                    />
-                </HeaderContainer>
-            </ProjectHeaderWrapper>
-        </MainContainer>
+    const longPressEvent = useLongPress(
+        onLongPress as any,
+        componentClickHandler
     );
+
+    const displayContextMenu = (event: React.MouseEvent) => {
+        if (event.cancelable) event.preventDefault();
+        show(event);
+    };
+
+    const renderDifferentMenuOnDeviceChange = () => {
+        if (isMobile) {
+            return (
+                <MainContainer
+                    onContextMenu={displayContextMenu}
+                    $isSelected={isSelected}
+                    {...longPressEvent}
+                >
+                    <ProjectHeaderWrapper>
+                        <HeaderContainer>
+                            <SwatchContainer>
+                                <ColorSwatch
+                                    size={20}
+                                    radius={3}
+                                    color={`${projectColorHex}`}
+                                />
+                            </SwatchContainer>
+                            <Text
+                                text={projectName}
+                                fontSize="1rem"
+                                truncateWidth="10rem"
+                            />
+                        </HeaderContainer>
+                    </ProjectHeaderWrapper>
+                </MainContainer>
+            );
+        } else {
+            return (
+                <MainContainer
+                    onContextMenu={displayContextMenu}
+                    $isSelected={isSelected}
+                    onClick={componentClickHandler}
+                >
+                    <ProjectHeaderWrapper>
+                        <HeaderContainer>
+                            <SwatchContainer>
+                                <ColorSwatch
+                                    size={20}
+                                    radius={3}
+                                    color={`${projectColorHex}`}
+                                />
+                            </SwatchContainer>
+                            <Text
+                                text={projectName}
+                                fontSize="1rem"
+                                truncateWidth="10rem"
+                            />
+                        </HeaderContainer>
+                    </ProjectHeaderWrapper>
+                </MainContainer>
+            );
+        }
+    };
+
+    return renderDifferentMenuOnDeviceChange();
 };
 
 export default ProjectComponent;
