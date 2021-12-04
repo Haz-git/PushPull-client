@@ -328,8 +328,50 @@ const DashboardPanel = ({
                 </>
             );
         }
-
-        return <ProjectNotFound />;
+        return (
+            <>
+                <ViewLabelContainer>
+                    {renderBurgerMenuOnMobile()}
+                    <ViewLabel>
+                        <Text
+                            text={renderViewLabelText()}
+                            fontSize="1.1rem"
+                            fontWeight="900"
+                        />
+                    </ViewLabel>
+                    <TemplateButtonContainer>
+                        {renderBtn()}
+                    </TemplateButtonContainer>
+                </ViewLabelContainer>
+                <Transition
+                    mounted={isProjectPanelDrawerOpened}
+                    transition="scale-x"
+                    duration={200}
+                    timingFunction="ease"
+                >
+                    {(styles) => (
+                        <CustomDrawer style={styles} $height={height}>
+                            <ProjectPanel
+                                toggleProjectModal={toggleProjectModal}
+                                isCreatingNewProject={isCreatingNewProject}
+                                toggleDeleteProjectModal={
+                                    toggleDeleteProjectModal
+                                }
+                                toggleRecolorProjectModal={
+                                    toggleRecolorProjectModal
+                                }
+                                toggleRenameProjectModal={
+                                    toggleRenameProjectModal
+                                }
+                            />
+                        </CustomDrawer>
+                    )}
+                </Transition>
+                <div>
+                    <ProjectNotFound />
+                </div>
+            </>
+        );
     };
 
     const renderViewLabelText = () => {
@@ -345,11 +387,11 @@ const DashboardPanel = ({
                     let projName = query.get('name');
                     return projName || 'Project';
                 default:
-                    return undefined;
+                    return 'Not Found';
             }
         }
 
-        return undefined;
+        return 'Not Found';
     };
 
     const renderProjectInformation = () => {
