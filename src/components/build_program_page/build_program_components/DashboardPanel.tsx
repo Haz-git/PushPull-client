@@ -276,7 +276,7 @@ const DashboardPanel = ({
         }
     };
 
-    const renderDashboardView = () => {
+    const renderNotFoundView = () => {
         if (
             (identifyIfProject() && findUserProject()) ||
             (!identifyIfProject() && dashboardView === 'recents') ||
@@ -284,50 +284,20 @@ const DashboardPanel = ({
             dashboardView === 'drafts'
         ) {
             return (
-                <>
-                    <ViewLabelContainer>
-                        {renderBurgerMenuOnMobile()}
-                        <ViewLabel>
-                            <Text
-                                text={renderViewLabelText()}
-                                fontSize="1.1rem"
-                                fontWeight="900"
-                            />
-                        </ViewLabel>
-                        <TemplateButtonContainer>
-                            {renderBtn()}
-                        </TemplateButtonContainer>
-                    </ViewLabelContainer>
-                    <Transition
-                        mounted={isProjectPanelDrawerOpened}
-                        transition="scale-x"
-                        duration={200}
-                        timingFunction="ease"
-                    >
-                        {(styles) => (
-                            <CustomDrawer style={styles} $height={height}>
-                                <ProjectPanel
-                                    toggleProjectModal={toggleProjectModal}
-                                    isCreatingNewProject={isCreatingNewProject}
-                                    toggleDeleteProjectModal={
-                                        toggleDeleteProjectModal
-                                    }
-                                    toggleRecolorProjectModal={
-                                        toggleRecolorProjectModal
-                                    }
-                                    toggleRenameProjectModal={
-                                        toggleRenameProjectModal
-                                    }
-                                />
-                            </CustomDrawer>
-                        )}
-                    </Transition>
-                    <DashboardItemContainer>
-                        {renderProjectInformation()}
-                    </DashboardItemContainer>
-                </>
+                <DashboardItemContainer>
+                    {renderProjectInformation()}
+                </DashboardItemContainer>
             );
         }
+
+        return (
+            <div>
+                <ProjectNotFound />
+            </div>
+        );
+    };
+
+    const renderDashboardView = () => {
         return (
             <>
                 <ViewLabelContainer>
@@ -367,9 +337,7 @@ const DashboardPanel = ({
                         </CustomDrawer>
                     )}
                 </Transition>
-                <div>
-                    <ProjectNotFound />
-                </div>
+                {renderNotFoundView()}
             </>
         );
     };
