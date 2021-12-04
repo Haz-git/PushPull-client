@@ -117,7 +117,7 @@ const RecolorProjectForm = ({
             <ButtonContainer>
                 <GeneralButton
                     buttonLabel="Recolor"
-                    width="6rem"
+                    width="7rem"
                     buttonBackground="#41A312"
                     fontSize="1rem"
                     height="2rem"

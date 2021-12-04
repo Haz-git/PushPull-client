@@ -139,7 +139,7 @@ const RenameProjectForm = ({
             <ButtonContainer>
                 <GeneralButton
                     buttonLabel="Rename"
-                    width="6rem"
+                    width="7rem"
                     buttonBackground="#41A312"
                     fontSize="1rem"
                     height="2rem"
