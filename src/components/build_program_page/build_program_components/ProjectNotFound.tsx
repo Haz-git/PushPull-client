@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+//utils:
+import { deviceMin } from '../../../devices/breakpoints';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+
 //Components:
 import { ReactComponent as NoProjectSVG } from '../../../assets/no_project_found.svg';
 import Text from '../../general_components/Text';
@@ -13,12 +17,31 @@ const MainContainer = styled.section`
     align-items: center;
     justify-content: center;
     align-content: center;
+    padding: 1rem 1rem;
 `;
 
 const SVGContainer = styled.div`
-    height: 20rem;
-    width: 20rem;
     margin: 5rem 0rem;
+
+    @media ${deviceMin.mobileS} {
+        height: 10rem;
+        width: 10rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        height: 13rem;
+        width: 13rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        height: 15rem;
+        width: 15rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        height: 18rem;
+        width: 18rem;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -28,6 +51,15 @@ const TextContainer = styled.div`
 `;
 
 const ProjectNotFound = () => {
+    const { width } = useWindowDimensions();
+
+    const renderNotFoundText = () => {
+        if (width <= 320) return '1rem';
+        if (width <= 375) return '1.1rem';
+        if (width <= 415) return '1.2rem';
+        if (width >= 768) return '1.3rem';
+    };
+
     return (
         <MainContainer>
             <SVGContainer>
@@ -36,7 +68,7 @@ const ProjectNotFound = () => {
             <TextContainer>
                 <Text
                     text="Your project could not be found. It was deleted, or your project link is incorrect."
-                    fontSize="1.5rem"
+                    fontSize={`${renderNotFoundText()}`}
                     fontWeight="800"
                 />
             </TextContainer>
