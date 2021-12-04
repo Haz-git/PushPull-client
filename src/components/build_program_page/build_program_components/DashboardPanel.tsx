@@ -234,7 +234,6 @@ const DashboardPanel = ({
                 return (
                     <GeneralButton
                         buttonLabel="New Template"
-                        leftIconMargin="0rem .5rem 0rem 0rem"
                         padding=".4rem .4rem"
                         width="100%"
                         hoverShadow="none"
@@ -245,7 +244,6 @@ const DashboardPanel = ({
                         textShadow="none"
                         border="1px solid #d6d6d6"
                         buttonTextColor="rgba(0, 0, 34, 1)"
-                        buttonIconLeft={<TemplateIcon />}
                         buttonIconRight={<PlusIcon />}
                         rightIconMargin="0rem 0rem .15rem .5rem"
                         margin="0 0"
@@ -255,7 +253,7 @@ const DashboardPanel = ({
             if (width > 375)
                 return (
                     <GeneralButton
-                        buttonLabel="New Template File"
+                        buttonLabel="New Template"
                         leftIconMargin="0rem .5rem 0rem 0rem"
                         padding=".4rem .4rem"
                         width="100%"
@@ -297,6 +295,13 @@ const DashboardPanel = ({
         );
     };
 
+    const truncateViewLabelTextOnMobile = () => {
+        if (width <= 320) return '6rem';
+        if (width <= 375) return '7rem';
+        if (width >= 414) return '8rem';
+        if (width < 414 && width <= 1024) return '15rem';
+    };
+
     const renderDashboardView = () => {
         return (
             <>
@@ -307,6 +312,7 @@ const DashboardPanel = ({
                             text={renderViewLabelText()}
                             fontSize="1.1rem"
                             fontWeight="900"
+                            truncateWidth={truncateViewLabelTextOnMobile()}
                         />
                     </ViewLabel>
                     <TemplateButtonContainer>
