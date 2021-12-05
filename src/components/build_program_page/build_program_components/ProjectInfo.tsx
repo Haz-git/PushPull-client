@@ -11,6 +11,7 @@ import dayjs from 'dayjs';
 
 //Utils:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+import { deviceMin } from '../../../devices/breakpoints';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -27,11 +28,17 @@ const EditIcon = styled(Edit)`
 
 const MainContainer = styled.div`
     padding: 1rem 1rem;
-    margin: 0rem 1.5rem 0rem 1.5rem;
     border-radius: 0.4rem;
     background: #f1f1f1;
-    width: 25rem;
-    max-width: 25rem;
+    max-width: 100%;
+
+    @media ${deviceMin.mobileS} {
+        margin: 0rem 0.5rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        margin: 0rem 0.5rem;
+    }
 `;
 
 const InfoHeaderContainer = styled.div`
