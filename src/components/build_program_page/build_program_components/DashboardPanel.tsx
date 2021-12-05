@@ -51,7 +51,6 @@ const ViewLabelContainer = styled.div`
     top: 3.75rem;
     position: sticky;
     border-bottom: 1px solid #d6d6d6;
-    margin-bottom: 1rem;
     background: #ffffff;
     z-index: 50;
 
@@ -63,6 +62,7 @@ const ViewLabelContainer = styled.div`
     @media ${deviceMin.tabletp} {
         padding: 1rem 0rem;
         column-gap: 1.5rem;
+        margin-bottom: 1rem;
     }
 `;
 
@@ -83,25 +83,16 @@ const TemplateButtonContainer = styled.div`
 `;
 
 const CustomDrawer = styled.div<CustomDrawerProps>`
-    top: 7.3rem;
     position: fixed;
     z-index: 99 !important;
-    margin-top: -9px;
     height: 100%;
-
-    @media ${deviceMin.mobileS} {
-        margin-top: -16px;
-    }
-
-    @media ${deviceMin.mobileM} {
-        margin-top: -9px;
-    }
 `;
 const DashboardItemContainer = styled.div`
     width: 100%;
     z-index: 30;
 
     @media ${deviceMin.mobileS} {
+        margin-top: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
