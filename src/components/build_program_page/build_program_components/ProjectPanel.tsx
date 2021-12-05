@@ -80,8 +80,18 @@ const MainContainer = styled.section<IMainContainer>`
     }
 
     @media ${deviceMin.mobileM} {
-        width: 11rem;
-        max-width: 11rem;
+        width: 12rem;
+        max-width: 12rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        width: 13rem;
+        max-width: 13rem;
+    }
+
+    @media ${deviceMin.browserSm} {
+        width: 14rem;
+        max-width: 14rem;
     }
 
     @media ${deviceMin.laptop} {
