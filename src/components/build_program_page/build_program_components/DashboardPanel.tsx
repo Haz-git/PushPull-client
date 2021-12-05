@@ -110,6 +110,7 @@ const DashboardItemContainer = styled.div`
         flex-direction: row-reverse;
         justify-content: space-between;
         align-items: flex-start;
+        padding: 0rem 1rem;
     }
 `;
 
@@ -121,7 +122,7 @@ const TemplateContainer = styled.div`
     @media ${deviceMin.tabletp} {
         flex-grow: 10;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(10rem, 12rem));
+        grid-template-columns: repeat(auto-fill, minmax(9rem, 12rem));
     }
 `;
 
@@ -131,7 +132,7 @@ const ProjectInformationContainer = styled.div`
     }
 
     @media ${deviceMin.tabletp} {
-        flex-grow: 0;
+        flex-grow: 0.5;
         top: 10rem;
         position: sticky;
     }
