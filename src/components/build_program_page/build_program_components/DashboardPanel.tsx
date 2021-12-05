@@ -173,7 +173,6 @@ const DashboardPanel = ({
     );
     let query = useQuery();
 
-    const [isBurgerOpened, setIsBurgerOpened] = useState(false);
     const [isProjectPanelDrawerOpened, setStateProjectDrawer] = useState(false);
 
     const toggleProjectDrawer = (status: boolean) => {
