@@ -30,13 +30,18 @@ const MainContainer = styled.div`
     padding: 1rem 1rem;
     border-radius: 0.4rem;
     background: #f1f1f1;
-    max-width: 100%;
 
     @media ${deviceMin.mobileS} {
+        max-width: 19rem;
         margin: 0rem 0.5rem;
     }
 
-    @media ${deviceMin.tabletp} {
+    @media ${deviceMin.mobileS} {
+        max-width: 23rem;
+    }
+
+    @media ${deviceMin.mobileL} {
+        max-width: 25rem;
         margin: 0rem 0.5rem;
     }
 `;

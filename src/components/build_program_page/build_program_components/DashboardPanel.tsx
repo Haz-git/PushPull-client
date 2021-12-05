@@ -102,7 +102,10 @@ const DashboardItemContainer = styled.div`
     z-index: 30;
 
     @media ${deviceMin.mobileS} {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     @media ${deviceMin.tabletp} {
@@ -132,7 +135,7 @@ const ProjectInformationContainer = styled.div`
     }
 
     @media ${deviceMin.tabletp} {
-        flex-grow: 0.5;
+        flex-grow: 0;
         top: 10rem;
         position: sticky;
     }
