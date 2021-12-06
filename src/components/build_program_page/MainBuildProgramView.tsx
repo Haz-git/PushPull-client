@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, Suspense } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
+import { isMobile } from 'react-device-detect';
 
 //Components:
 import AddProjectForm from './build_program_components/AddProjectForm';
@@ -269,21 +270,25 @@ const MainBuildProgramView = ({
                             />
                         </GeneralModal>
                         <MainContainer>
-                            <ProjectPanelView>
-                                <ProjectPanel
-                                    toggleProjectModal={toggleProjectModal}
-                                    isCreatingNewProject={isCreatingNewProject}
-                                    toggleDeleteProjectModal={
-                                        toggleDeleteProjectModal
-                                    }
-                                    toggleRecolorProjectModal={
-                                        toggleRecolorProjectModal
-                                    }
-                                    toggleRenameProjectModal={
-                                        toggleRenameProjectModal
-                                    }
-                                />
-                            </ProjectPanelView>
+                            {isMobile && (
+                                <ProjectPanelView>
+                                    <ProjectPanel
+                                        toggleProjectModal={toggleProjectModal}
+                                        isCreatingNewProject={
+                                            isCreatingNewProject
+                                        }
+                                        toggleDeleteProjectModal={
+                                            toggleDeleteProjectModal
+                                        }
+                                        toggleRecolorProjectModal={
+                                            toggleRecolorProjectModal
+                                        }
+                                        toggleRenameProjectModal={
+                                            toggleRenameProjectModal
+                                        }
+                                    />
+                                </ProjectPanelView>
+                            )}
                             <DashboardPanelView>
                                 <DashboardPanel
                                     toggleProjectModal={toggleProjectModal}
