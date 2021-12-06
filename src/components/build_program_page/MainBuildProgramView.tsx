@@ -207,7 +207,7 @@ const MainBuildProgramView = ({
                 }
             >
                 {isBuilderInfoLoaded ? (
-                    <MainContainer>
+                    <>
                         <GeneralModal
                             openBoolean={openAddProjectModal}
                             closeFunc={() => setOpenAddProjectModal(false)}
@@ -246,7 +246,8 @@ const MainBuildProgramView = ({
                         </GeneralModal>
                         <GeneralModal
                             openBoolean={openRenameProjectModal}
-                            closeFunc={() => setOpenRenameProjectModal(false)}
+                            // closeFunc={() => setOpenRenameProjectModal(false)}
+                            closeFunc={() => console.log('test')}
                             title="Rename Project"
                         >
                             <RenameProjectForm
@@ -268,7 +269,7 @@ const MainBuildProgramView = ({
                                 }
                             />
                         </GeneralModal>
-                        <>
+                        <MainContainer>
                             <ProjectPanelView>
                                 <ProjectPanel
                                     toggleProjectModal={toggleProjectModal}
@@ -300,8 +301,8 @@ const MainBuildProgramView = ({
                                     toggleNewDescModal={toggleDescProjectModal}
                                 />
                             </DashboardPanelView>
-                        </>
-                    </MainContainer>
+                        </MainContainer>
+                    </>
                 ) : (
                     <LoadProgress
                         isLoadBuilderMode={true}
