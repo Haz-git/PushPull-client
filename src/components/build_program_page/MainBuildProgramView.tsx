@@ -12,6 +12,9 @@ import GeneralModal from '../general_components/GeneralModal';
 import { useNotifications } from '@mantine/notifications';
 import LoadProgress from '../nprogress/LoadProgress';
 
+//utils:
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
+
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { findProject } from '../../redux/builder/builderActions';
@@ -85,6 +88,7 @@ const MainBuildProgramView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
+    const { width } = useWindowDimensions();
 
     //Loading State:
 
@@ -194,6 +198,23 @@ const MainBuildProgramView = ({
         );
     }, []);
 
+    const renderProjectsPanelIfWidthAllows = () => {
+        if (width >= 1024)
+            return (
+                <ProjectPanelView>
+                    <ProjectPanel
+                        toggleProjectModal={toggleProjectModal}
+                        isCreatingNewProject={isCreatingNewProject}
+                        toggleDeleteProjectModal={toggleDeleteProjectModal}
+                        toggleRecolorProjectModal={toggleRecolorProjectModal}
+                        toggleRenameProjectModal={toggleRenameProjectModal}
+                    />
+                </ProjectPanelView>
+            );
+
+        return null;
+    };
+
     return (
         <SuspenseWrapper>
             <Suspense
@@ -269,22 +290,7 @@ const MainBuildProgramView = ({
                             />
                         </GeneralModal>
                         <MainContainer>
-                            <ProjectPanelView>
-                                <ProjectPanel
-                                    toggleProjectModal={toggleProjectModal}
-                                    isCreatingNewProject={isCreatingNewProject}
-                                    toggleDeleteProjectModal={
-                                        toggleDeleteProjectModal
-                                    }
-                                    toggleRecolorProjectModal={
-                                        toggleRecolorProjectModal
-                                    }
-                                    toggleRenameProjectModal={
-                                        toggleRenameProjectModal
-                                    }
-                                />
-                            </ProjectPanelView>
-
+                            {renderProjectsPanelIfWidthAllows()}
                             <DashboardPanelView>
                                 <DashboardPanel
                                     toggleProjectModal={toggleProjectModal}
