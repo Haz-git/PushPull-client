@@ -246,8 +246,7 @@ const MainBuildProgramView = ({
                         </GeneralModal>
                         <GeneralModal
                             openBoolean={openRenameProjectModal}
-                            // closeFunc={() => setOpenRenameProjectModal(false)}
-                            closeFunc={() => console.log('test')}
+                            closeFunc={() => setOpenRenameProjectModal(false)}
                             title="Rename Project"
                         >
                             <RenameProjectForm
