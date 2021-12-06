@@ -98,6 +98,11 @@ const RenameProjectForm = ({
         return setHasError(true);
     };
 
+    const handleTextOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (hasError) setHasError(false);
+        setNewProjectName(e.target.value);
+    };
+
     return (
         <MainContainer>
             {hasError && (
@@ -110,6 +115,7 @@ const RenameProjectForm = ({
             )}
             <InputContainer>
                 <TextInput
+                    type="text"
                     styles={{
                         label: {
                             color: 'rgba(0, 0, 34, .7)',
@@ -128,11 +134,8 @@ const RenameProjectForm = ({
                     required
                     label="New Project Name"
                     placeholder={'Rename your project'}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        if (hasError) setHasError(false);
-                        setNewProjectName(e.target.value);
-                    }}
                     value={newProjectName}
+                    onChange={handleTextOnChange}
                     error={hasError}
                 />
             </InputContainer>
