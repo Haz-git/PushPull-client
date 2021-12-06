@@ -80,7 +80,7 @@ const RecolorProjectForm = ({
             updateProject(
                 toggleLoadingNotif,
                 updateLoadingNotif,
-                { projectColorHex: newProjectColor },
+                { projectColor: newProjectColor },
                 projectUuid
             )
         );
