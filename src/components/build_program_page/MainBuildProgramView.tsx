@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, Suspense } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
+import { isMobile } from 'react-device-detect';
 
 //Components:
 import AddProjectForm from './build_program_components/AddProjectForm';

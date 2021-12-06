@@ -275,7 +275,7 @@ const LevelRecommendationForm = ({
                                     fontWeight: 700,
                                 },
                             }}
-                            onChange={(val) =>
+                            onChange={(val: number) =>
                                 onSVGSelectHandler('followLength', val)
                             }
                         />
