@@ -270,21 +270,25 @@ const MainBuildProgramView = ({
                             />
                         </GeneralModal>
                         <MainContainer>
-                            <ProjectPanelView>
-                                <ProjectPanel
-                                    toggleProjectModal={toggleProjectModal}
-                                    isCreatingNewProject={isCreatingNewProject}
-                                    toggleDeleteProjectModal={
-                                        toggleDeleteProjectModal
-                                    }
-                                    toggleRecolorProjectModal={
-                                        toggleRecolorProjectModal
-                                    }
-                                    toggleRenameProjectModal={
-                                        toggleRenameProjectModal
-                                    }
-                                />
-                            </ProjectPanelView>
+                            {isMobile && (
+                                <ProjectPanelView>
+                                    <ProjectPanel
+                                        toggleProjectModal={toggleProjectModal}
+                                        isCreatingNewProject={
+                                            isCreatingNewProject
+                                        }
+                                        toggleDeleteProjectModal={
+                                            toggleDeleteProjectModal
+                                        }
+                                        toggleRecolorProjectModal={
+                                            toggleRecolorProjectModal
+                                        }
+                                        toggleRenameProjectModal={
+                                            toggleRenameProjectModal
+                                        }
+                                    />
+                                </ProjectPanelView>
+                            )}
                             <DashboardPanelView>
                                 <DashboardPanel
                                     toggleProjectModal={toggleProjectModal}
