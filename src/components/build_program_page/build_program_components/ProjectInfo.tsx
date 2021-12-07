@@ -29,7 +29,7 @@ const EditIcon = styled(Edit)`
 const MainContainer = styled.div`
     padding: 1rem 1rem;
     border-radius: 0.4rem;
-    background: #f1f1f1;
+    background: #ffffff;
 
     @media ${deviceMin.mobileS} {
         max-width: 19rem;
