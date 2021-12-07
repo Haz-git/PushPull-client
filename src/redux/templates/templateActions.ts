@@ -8,21 +8,26 @@ export const findTemplates = (
     projectUuid: string | null
 ) => {
     return async (dispatch: Dispatch<TemplateAction>) => {
-        try {
-            let response = await api.get(`/template/project/${projectUuid}`);
+        if (projectUuid) {
+            try {
+                let response = await api.get(
+                    `/template/project/${projectUuid}`
+                );
 
-            console.log(response.data);
+                console.log(response.data);
 
-            dispatch({
-                type: TemplateActionType.USER_FIND_TEMPLATE,
-                payload: response.data.builder,
-            });
+                dispatch({
+                    type: TemplateActionType.USER_FIND_TEMPLATE,
+                    payload: response.data.builder,
+                });
 
-            if (response?.data?.status === 'Success') {
-                statusCallback(true);
+                if (response?.data?.status === 'Success') {
+                    statusCallback(true);
+                }
+            } catch (err) {
+                statusCallback(false);
             }
-        } catch (err) {
-            statusCallback(false);
         }
+        statusCallback(false);
     };
 };
