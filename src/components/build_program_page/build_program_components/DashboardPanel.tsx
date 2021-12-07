@@ -133,13 +133,6 @@ const ProjectInformationContainer = styled.div`
     }
 `;
 
-const TemplateExample = styled.div`
-    height: 10rem;
-    width: 10rem;
-    border: 1px solid black;
-    margin: 1rem 1rem;
-`;
-
 //Interfaces:
 
 interface CustomDrawerProps {
