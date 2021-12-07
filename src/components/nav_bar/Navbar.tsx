@@ -15,9 +15,17 @@ import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
 import UserDropdown from './navbar_components/UserDropdown';
 import useLoginStatus from '../../utils/hooks/useLoginStatus';
+import { Tooltip } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
+import { CaretLeft } from '@styled-icons/fluentui-system-filled/CaretLeft';
+
+const LeftIcon = styled(CaretLeft)`
+    height: 3rem;
+    width: 2rem;
+    color: #ffffff;
+`;
 
 const StyledNavbar = styled.nav<NavbarProps>`
     top: 0;
@@ -37,6 +45,21 @@ const StyledNavbar = styled.nav<NavbarProps>`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
     z-index: 995;
 `;
+
+const LeftWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -0.5rem;
+`;
+
+const BuilderBackButtonContainer = styled.div`
+    margin-right: 0.5rem;
+    background: #525252;
+    border-radius: 0.3rem;
+`;
+
+const BuilderBackButton = styled(Link)``;
 
 const StyledNavLogo = styled(Link)`
     left: 0;
@@ -78,6 +101,7 @@ const LogoContainer = styled.div`
     }
 `;
 
+const AuthContainer = styled.div``;
 const ButtonsContainer = styled.div`
     @media ${deviceMin.mobileS} {
         display: none;
@@ -190,13 +214,37 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         return '/';
     };
 
+    const renderBuilderBackButton = () => {
+        if (checkIfBuilder())
+            return (
+                <BuilderBackButtonContainer>
+                    <Tooltip
+                        placement="start"
+                        transition="rotate-left"
+                        withArrow
+                        label="Back to homepage"
+                    >
+                        <BuilderBackButton to="/">
+                            <LeftIcon />
+                        </BuilderBackButton>
+                    </Tooltip>
+                </BuilderBackButtonContainer>
+            );
+        return null;
+    };
+
     return (
         <StyledNavbar isBuilder={checkIfBuilder()}>
-            <LogoContainer>
-                {renderLogoInBuilder()}
-                <StyledNavLogo to={returnLogoLink()} />
-            </LogoContainer>
-            {renderAuthOptionsIfUserNotLoggedIn()}
+            <LeftWrapper>
+                {renderBuilderBackButton()}
+                <LogoContainer>
+                    {renderLogoInBuilder()}
+                    <StyledNavLogo to={returnLogoLink()} />
+                </LogoContainer>
+            </LeftWrapper>
+            <AuthContainer>
+                {renderAuthOptionsIfUserNotLoggedIn()}
+            </AuthContainer>
             <GeneralDrawer
                 openBoolean={isBurgerOpened}
                 closeFunc={() => setIsBurgerOpened(false)}
