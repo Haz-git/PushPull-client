@@ -13,6 +13,7 @@ import ProjectNotFound from './ProjectNotFound';
 import { Burger } from '@mantine/core';
 import ProjectPanel from './ProjectPanel';
 import { Transition } from '@mantine/core';
+import ProjectTemplates from './ProjectTemplates';
 
 //utils:
 import { deviceMin } from '../../../devices/breakpoints';
@@ -380,38 +381,7 @@ const DashboardPanel = ({
                             />
                         </ProjectInformationContainer>
                         <TemplateContainer>
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
-                            <TemplateExample />
+                            <ProjectTemplates />
                         </TemplateContainer>
                     </>
                 );
@@ -420,14 +390,7 @@ const DashboardPanel = ({
 
         return (
             <TemplateContainer>
-                <TemplateExample />
-                <TemplateExample />
-                <TemplateExample />
-                <TemplateExample />
-                <TemplateExample />
-                <TemplateExample />
-                <TemplateExample />
-                <TemplateExample />
+                <ProjectTemplates />
             </TemplateContainer>
         );
     };
