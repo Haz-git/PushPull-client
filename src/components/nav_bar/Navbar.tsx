@@ -185,11 +185,16 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         return <LogoSVG />;
     };
 
+    const returnLogoLink = () => {
+        if (checkIfBuilder()) return '/builder/dashboard/recents';
+        return '/';
+    };
+
     return (
         <StyledNavbar isBuilder={checkIfBuilder()}>
             <LogoContainer>
                 {renderLogoInBuilder()}
-                <StyledNavLogo to="/" />
+                <StyledNavLogo to={returnLogoLink()} />
             </LogoContainer>
             {renderAuthOptionsIfUserNotLoggedIn()}
             <GeneralDrawer
