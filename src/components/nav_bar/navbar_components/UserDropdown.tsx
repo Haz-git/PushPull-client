@@ -56,6 +56,10 @@ const MainContainer = styled.div<StyledProps>`
     }
 
     @media ${deviceMin.mobileS} {
+        max-width: 5rem;
+    }
+
+    @media ${deviceMin.mobileM} {
         max-width: 8rem;
     }
 
@@ -72,7 +76,14 @@ const DropdownContainer = styled.div<StyledProps>`
         props.isBuilder ? '1px solid #ffffff' : '1px solid #d3d3d3'};
     border-radius: 0.3rem;
     padding: 0.5rem 0.5rem;
-    column-gap: 0.75rem;
+
+    @media ${deviceMin.mobileS} {
+        column-gap: 0.25rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        column-gap: 0.75rem;
+    }
 `;
 
 const AvatarContainer = styled.div``;
@@ -88,10 +99,11 @@ const UserDetailText = styled.h3<StyledProps>`
     white-space: nowrap;
 
     @media ${deviceMin.mobileS} {
-        max-width: 2rem;
+        display: none;
     }
 
     @media ${deviceMin.mobileM} {
+        display: block;
         max-width: 3rem;
     }
 
