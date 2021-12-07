@@ -321,8 +321,8 @@ const DashboardPanel = ({
                 </ViewLabelContainer>
                 <Transition
                     mounted={isProjectPanelDrawerOpened}
-                    transition="scale-x"
-                    duration={200}
+                    transition="pop-top-left"
+                    duration={175}
                     timingFunction="ease"
                 >
                     {(styles) => (
