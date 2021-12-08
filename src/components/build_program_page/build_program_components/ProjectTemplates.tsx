@@ -17,16 +17,17 @@ import useQuery from '../../../utils/hooks/useQuery';
 const ProjectTemplates = () => {
     const dispatch = useDispatch();
     const query = useQuery();
+    const projectUuid = query.get('uuid');
     const [isProjectsLoaded, setIsProjectsLoaded] = useState(false);
 
     useEffect(() => {
         dispatch(
             findTemplates(
                 (status: boolean) => setIsProjectsLoaded(status),
-                query.get('uuid')
+                projectUuid
             )
         );
-    }, []);
+    }, [projectUuid]);
 
     return <div>Project Templates...</div>;
 };
