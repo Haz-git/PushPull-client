@@ -9,7 +9,6 @@ import { findTemplates } from '../../../redux/templates/templateActions';
 import TemplateComponentSkeleton from './TemplateComponentSkeleton';
 
 //Utils:
-import useQuery from '../../../utils/hooks/useQuery';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Styles:
@@ -33,13 +32,21 @@ const MainContainer = styled.div`
 
 //Interfaces:
 
-const ProjectTemplates = () => {
+interface IComponentProps {
+    projectUuid: string | null;
+}
+
+const ProjectTemplates = ({ projectUuid }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
-    const query = useQuery();
-    const projectUuid = query.get('uuid');
+    const templates = useSelector(
+        (state: RootStateOrAny) => state?.projectTemplates
+    );
+
+    //Loader State:
     const [isProjectsLoaded, setIsProjectsLoaded] = useState(false);
 
     useEffect(() => {
+        if (isProjectsLoaded) setIsProjectsLoaded(!isProjectsLoaded);
         dispatch(
             findTemplates(
                 (status: boolean) => setIsProjectsLoaded(status),
@@ -48,10 +55,18 @@ const ProjectTemplates = () => {
         );
     }, [projectUuid]);
 
+    const renderProjectTemplates = () => {
+        if (templates && templates.length > 0) {
+            return templates.map((template: any) => <>template </>);
+        }
+
+        return <>NO TEMPLATES</>;
+    };
+
     return (
         <MainContainer>
             {isProjectsLoaded ? (
-                <>PROJECTS LOADED</>
+                <>{renderProjectTemplates()}</>
             ) : (
                 <>
                     <TemplateComponentSkeleton />
