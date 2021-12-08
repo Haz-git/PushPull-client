@@ -34,22 +34,27 @@ const MainContainer = styled.div`
 
 interface IComponentProps {
     projectUuid: string | null;
+    dashboardTemplatesLoadedCallback: (status: boolean) => void;
 }
 
-const ProjectTemplates = ({ projectUuid }: IComponentProps): JSX.Element => {
+const ProjectTemplates = ({
+    projectUuid,
+    dashboardTemplatesLoadedCallback,
+}: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const templates = useSelector(
         (state: RootStateOrAny) => state?.projectTemplates
     );
 
     //Loader State:
-    const [isProjectsLoaded, setIsProjectsLoaded] = useState(false);
+    const [areTemplatesLoaded, setAreTemplatesLoaded] = useState(false);
 
     useEffect(() => {
-        if (isProjectsLoaded) setIsProjectsLoaded(!isProjectsLoaded);
+        if (areTemplatesLoaded) setAreTemplatesLoaded(!areTemplatesLoaded);
         dispatch(
             findTemplates(
-                (status: boolean) => setIsProjectsLoaded(status),
+                (status: boolean) => setAreTemplatesLoaded(status),
+                dashboardTemplatesLoadedCallback,
                 projectUuid
             )
         );
@@ -65,7 +70,7 @@ const ProjectTemplates = ({ projectUuid }: IComponentProps): JSX.Element => {
 
     return (
         <MainContainer>
-            {isProjectsLoaded ? (
+            {areTemplatesLoaded ? (
                 <>{renderProjectTemplates()}</>
             ) : (
                 <>

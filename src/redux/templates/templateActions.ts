@@ -4,7 +4,8 @@ import { TemplateAction } from './templateInterfaces';
 import { TemplateActionType } from './action-types';
 
 export const findTemplates = (
-    statusCallback: (status: boolean) => void,
+    projectTemplatesCallback: (status: boolean) => void,
+    dashboardCallback: (status: boolean) => void,
     projectUuid: string | null
 ) => {
     return async (dispatch: Dispatch<TemplateAction>) => {
@@ -17,11 +18,12 @@ export const findTemplates = (
             });
 
             if (response.data.status === 'Success') {
-                statusCallback(true);
+                projectTemplatesCallback(true);
+                dashboardCallback(true);
             }
         } catch (err) {
-            console.log(err);
-            statusCallback(false);
+            projectTemplatesCallback(false);
+            dashboardCallback(false);
         }
     };
 };

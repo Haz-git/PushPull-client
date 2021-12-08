@@ -171,7 +171,11 @@ const DashboardPanel = ({
     const projectUuid = query.get('uuid');
 
     const [isTemplateBeingAdded, setIsTemplateBeingAdded] = useState(false);
+    const [areTemplatesLoaded, setAreTemplatesLoaded] = useState(false);
     const [isProjectPanelDrawerOpened, setStateProjectDrawer] = useState(false);
+
+    const renderAddTemplateButtonIfTemplatesAreLoaded = (status: boolean) =>
+        setAreTemplatesLoaded(status);
 
     const toggleProjectDrawer = (status: boolean) => {
         setStateProjectDrawer(status);
@@ -225,7 +229,7 @@ const DashboardPanel = ({
     };
 
     const renderAddTemplateButton = () => {
-        if (width) {
+        if (areTemplatesLoaded && width) {
             if (width <= 320)
                 return (
                     <GeneralButton
@@ -295,6 +299,8 @@ const DashboardPanel = ({
                     />
                 );
         }
+
+        return null;
     };
 
     const renderNotFoundView = () => {
@@ -403,7 +409,12 @@ const DashboardPanel = ({
                             />
                         </ProjectInformationContainer>
                         <TemplateContainer>
-                            <ProjectTemplates projectUuid={projectUuid} />
+                            <ProjectTemplates
+                                projectUuid={projectUuid}
+                                dashboardTemplatesLoadedCallback={
+                                    renderAddTemplateButtonIfTemplatesAreLoaded
+                                }
+                            />
                         </TemplateContainer>
                     </>
                 );
@@ -412,7 +423,12 @@ const DashboardPanel = ({
 
         return (
             <TemplateContainer>
-                <ProjectTemplates projectUuid={projectUuid} />
+                <ProjectTemplates
+                    projectUuid={projectUuid}
+                    dashboardTemplatesLoadedCallback={
+                        renderAddTemplateButtonIfTemplatesAreLoaded
+                    }
+                />
             </TemplateContainer>
         );
     };
