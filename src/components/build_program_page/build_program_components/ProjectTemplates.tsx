@@ -6,11 +6,30 @@ import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { findTemplates } from '../../../redux/templates/templateActions';
 
 //Components:
+import TemplateComponentSkeleton from './TemplateComponentSkeleton';
 
 //Utils:
 import useQuery from '../../../utils/hooks/useQuery';
+import { deviceMin } from '../../../devices/breakpoints';
 
 //Styles:
+import styled from 'styled-components';
+
+const MainContainer = styled.div`
+    padding-top: 1rem;
+
+    @media ${deviceMin.mobileS} {
+        display: flex;
+        flex-direction: column;
+        row-gap: 2rem;
+    }
+
+    @media ${deviceMin.tabletp} {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18rem, 20rem));
+        row-gap: 2rem;
+    }
+`;
 
 //Interfaces:
 
@@ -29,7 +48,22 @@ const ProjectTemplates = () => {
         );
     }, [projectUuid]);
 
-    return <div>Project Templates...</div>;
+    return (
+        <MainContainer>
+            {isProjectsLoaded ? (
+                <>PROJECTS LOADED</>
+            ) : (
+                <>
+                    <TemplateComponentSkeleton />
+                    <TemplateComponentSkeleton />
+                    <TemplateComponentSkeleton />
+                    <TemplateComponentSkeleton />
+                    <TemplateComponentSkeleton />
+                    <TemplateComponentSkeleton />
+                </>
+            )}
+        </MainContainer>
+    );
 };
 
 export default ProjectTemplates;
