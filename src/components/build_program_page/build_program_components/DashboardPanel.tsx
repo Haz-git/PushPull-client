@@ -164,6 +164,7 @@ const DashboardPanel = ({
         (state: RootStateOrAny) => state?.builderProjects
     );
     let query = useQuery();
+    const projectUuid = query.get('uuid');
 
     const [isProjectPanelDrawerOpened, setStateProjectDrawer] = useState(false);
 
@@ -177,7 +178,6 @@ const DashboardPanel = ({
     };
 
     const findUserProject = () => {
-        let projectUuid = query.get('uuid');
         let targetProject = builderProjects.find(
             (project: any) => project.id === projectUuid
         );
@@ -372,7 +372,7 @@ const DashboardPanel = ({
                             />
                         </ProjectInformationContainer>
                         <TemplateContainer>
-                            <ProjectTemplates />
+                            <ProjectTemplates projectUuid={projectUuid} />
                         </TemplateContainer>
                     </>
                 );
@@ -381,7 +381,7 @@ const DashboardPanel = ({
 
         return (
             <TemplateContainer>
-                <ProjectTemplates />
+                <ProjectTemplates projectUuid={projectUuid} />
             </TemplateContainer>
         );
     };
