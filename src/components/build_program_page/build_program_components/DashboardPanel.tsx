@@ -116,8 +116,6 @@ const TemplateContainer = styled.div`
 
     @media ${deviceMin.tabletp} {
         flex-grow: 10;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(9rem, 12rem));
     }
 `;
 
