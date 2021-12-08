@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 
 //Redux:
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { addTemplate } from '../../../redux/templates/templateActions';
 
 //Components:
 import Text from '../../general_components/Text';
@@ -18,6 +19,7 @@ import ProjectTemplates from './ProjectTemplates';
 //utils:
 import { deviceMin } from '../../../devices/breakpoints';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+import { v4 as uuid } from 'uuid';
 
 //Router:
 import { useParams } from 'react-router-dom';
@@ -25,6 +27,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Template } from '@styled-icons/heroicons-solid/Template';
 import { Plus } from '@styled-icons/heroicons-solid/Plus';
+import historyObject from '../../../utils/historyObject';
 
 const TemplateIcon = styled(Template)`
     height: 1.5rem;
@@ -160,12 +163,14 @@ const DashboardPanel = ({
 }: IDashboardPanel): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
     const { width, height } = useWindowDimensions();
+    const dispatch = useDispatch();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
     );
     let query = useQuery();
     const projectUuid = query.get('uuid');
 
+    const [isTemplateBeingAdded, setIsTemplateBeingAdded] = useState(false);
     const [isProjectPanelDrawerOpened, setStateProjectDrawer] = useState(false);
 
     const toggleProjectDrawer = (status: boolean) => {
@@ -199,7 +204,27 @@ const DashboardPanel = ({
         }
     };
 
-    const renderBtn = () => {
+    const handleAddNewTemplate = () => {
+        setIsTemplateBeingAdded(true);
+        const templateUuid = uuid();
+        let templateDetails = {
+            templateFileTitle: 'Untitled',
+            id: templateUuid,
+            projectDetails: {
+                projectUuid: projectUuid,
+            },
+        };
+
+        dispatch(
+            addTemplate((status: boolean) => {
+                setIsTemplateBeingAdded(status);
+                if (status !== true)
+                    historyObject.push(`/file/${templateUuid}`);
+            }, templateDetails)
+        );
+    };
+
+    const renderAddTemplateButton = () => {
         if (width) {
             if (width <= 320)
                 return (
@@ -219,6 +244,8 @@ const DashboardPanel = ({
                         rightIconMargin="0rem 0rem .15rem .25rem"
                         fontSize=".9rem"
                         margin="0 0"
+                        isDisabledOnLoading={isTemplateBeingAdded}
+                        onClick={handleAddNewTemplate}
                     />
                 );
 
@@ -239,6 +266,8 @@ const DashboardPanel = ({
                         buttonIconRight={<PlusIcon />}
                         rightIconMargin="0rem 0rem .15rem .5rem"
                         margin="0 0"
+                        isDisabledOnLoading={isTemplateBeingAdded}
+                        onClick={handleAddNewTemplate}
                     />
                 );
 
@@ -261,6 +290,8 @@ const DashboardPanel = ({
                         buttonIconRight={<PlusIcon />}
                         rightIconMargin="0rem 0rem .15rem .5rem"
                         margin="0 0"
+                        isDisabledOnLoading={isTemplateBeingAdded}
+                        onClick={handleAddNewTemplate}
                     />
                 );
         }
@@ -308,7 +339,7 @@ const DashboardPanel = ({
                         />
                     </ViewLabel>
                     <TemplateButtonContainer>
-                        {renderBtn()}
+                        {renderAddTemplateButton()}
                     </TemplateButtonContainer>
                 </ViewLabelContainer>
                 <Transition
