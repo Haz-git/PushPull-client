@@ -80,6 +80,23 @@ const MainBuildProgramView = loadable(
     }
 );
 
+const MainBuildTemplateView = loadable(
+    () =>
+        import(
+            /* webpackPrefetch: true */ './build_template_page/MainBuildTemplateView'
+        ),
+    {
+        fallback: (
+            <LoadProgress
+                isLoadBuilderMode={true}
+                isAnimating={true}
+                minimum={0}
+                incrementDuration={500}
+            />
+        ),
+    }
+);
+
 const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
@@ -198,6 +215,16 @@ const App = () => {
                                 authPath="/authenticate"
                                 isAuthenticated={isUserLoggedIn}
                                 component={MainBuildProgramView}
+                                toggleAuthDrawerWithView={
+                                    toggleAuthDrawerWithView
+                                }
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/file/:fileUuid"
+                                authPath="/authenticate"
+                                isAuthenticated={isUserLoggedIn}
+                                component={MainBuildTemplateView}
                                 toggleAuthDrawerWithView={
                                     toggleAuthDrawerWithView
                                 }
