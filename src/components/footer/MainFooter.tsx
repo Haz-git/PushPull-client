@@ -175,7 +175,10 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
     };
 
     const renderFooter = () => {
-        if (!location.pathname.includes('builder')) {
+        if (
+            !location.pathname.includes('builder') &&
+            !location.pathname.includes('file')
+        ) {
             return (
                 <>
                     <CustomView condition={identifyBrowserOrTablet()}>

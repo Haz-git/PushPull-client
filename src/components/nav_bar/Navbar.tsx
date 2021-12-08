@@ -199,23 +199,27 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         }
     };
 
-    const checkIfBuilder = () => {
-        if (Location.pathname.includes('builder')) return true;
+    const checkIfBuilderOrFile = () => {
+        if (
+            Location.pathname.includes('builder') ||
+            Location.pathname.includes('file')
+        )
+            return true;
         return false;
     };
 
     const renderLogoInBuilder = () => {
-        if (Location.pathname.includes('builder')) return <DarkLogoSVG />;
+        if (checkIfBuilderOrFile()) return <DarkLogoSVG />;
         return <LogoSVG />;
     };
 
     const returnLogoLink = () => {
-        if (checkIfBuilder()) return '/builder/dashboard/recents';
+        if (checkIfBuilderOrFile()) return '/builder/dashboard/recents';
         return '/';
     };
 
     const renderBuilderBackButton = () => {
-        if (checkIfBuilder())
+        if (checkIfBuilderOrFile())
             return (
                 <BuilderBackButtonContainer>
                     <Tooltip
@@ -234,7 +238,7 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     };
 
     return (
-        <StyledNavbar isBuilder={checkIfBuilder()}>
+        <StyledNavbar isBuilder={checkIfBuilderOrFile()}>
             <LeftWrapper>
                 {renderBuilderBackButton()}
                 <LogoContainer>

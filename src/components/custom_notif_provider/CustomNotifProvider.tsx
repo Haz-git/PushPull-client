@@ -13,8 +13,12 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
     const Location = useLocation();
     const { width } = useWindowDimensions();
 
-    const checkIfBuilder = () => {
-        if (Location.pathname.includes('builder')) return true;
+    const checkIfBuilderOrFile = () => {
+        if (
+            Location.pathname.includes('builder') ||
+            Location.pathname.includes('file')
+        )
+            return true;
         return false;
     };
 
@@ -24,7 +28,7 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
     };
 
     const renderNotificationProviderOnURL = () => {
-        if (!checkIfBuilder()) {
+        if (!checkIfBuilderOrFile()) {
             return (
                 <>
                     <GlobalStyle />

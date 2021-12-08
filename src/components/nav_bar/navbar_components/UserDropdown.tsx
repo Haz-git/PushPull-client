@@ -152,7 +152,7 @@ const UserDropdown = ({
     image,
     username,
 }: IComponentProps): JSX.Element => {
-    const location = useLocation();
+    const Location = useLocation();
     const dispatch = useDispatch();
     const notifications = useNotifications();
     const [stateCollapse, setStateCollapse] = useState(false);
@@ -162,22 +162,26 @@ const UserDropdown = ({
         return 'lg';
     };
 
-    const checkIfBuilder = () => {
-        if (location.pathname.includes('builder')) return true;
+    const checkIfBuilderOrFile = () => {
+        if (
+            Location.pathname.includes('builder') ||
+            Location.pathname.includes('file')
+        )
+            return true;
         return false;
     };
 
     const returnBuilderStyles = () => {
-        if (checkIfBuilder()) return builderStyles;
+        if (checkIfBuilderOrFile()) return builderStyles;
     };
 
     return (
-        <MainContainer isBuilder={checkIfBuilder()}>
+        <MainContainer isBuilder={checkIfBuilderOrFile()}>
             <Menu
                 styles={returnBuilderStyles()}
                 placement="start"
                 control={
-                    <DropdownContainer isBuilder={checkIfBuilder()}>
+                    <DropdownContainer isBuilder={checkIfBuilderOrFile()}>
                         <AvatarContainer>
                             <Avatar
                                 src={image}
@@ -187,25 +191,25 @@ const UserDropdown = ({
                             />
                         </AvatarContainer>
                         <HeaderContainer>
-                            <UserDetailText isBuilder={checkIfBuilder()}>
+                            <UserDetailText isBuilder={checkIfBuilderOrFile()}>
                                 {username}
                             </UserDetailText>
                         </HeaderContainer>
-                        <CaretDownIcon isBuilder={checkIfBuilder()} />
+                        <CaretDownIcon isBuilder={checkIfBuilderOrFile()} />
                     </DropdownContainer>
                 }
                 zIndex={999}
                 size={checkIfMobile()}
             >
                 <MenuItem
-                    icon={<ProfileIcon isBuilder={checkIfBuilder()} />}
+                    icon={<ProfileIcon isBuilder={checkIfBuilderOrFile()} />}
                     onClick={() => historyObject.push(`/user/${username}`)}
                 >
                     User Profile
                 </MenuItem>
                 <Divider />
                 <MenuItem
-                    icon={<ToolsIcon isBuilder={checkIfBuilder()} />}
+                    icon={<ToolsIcon isBuilder={checkIfBuilderOrFile()} />}
                     onClick={() =>
                         historyObject.push(`/builder/dashboard/recents`)
                     }
@@ -214,7 +218,7 @@ const UserDropdown = ({
                 </MenuItem>
                 <Divider />
                 <MenuItem
-                    icon={<ExitIcon isBuilder={checkIfBuilder()} />}
+                    icon={<ExitIcon isBuilder={checkIfBuilderOrFile()} />}
                     onClick={() => {
                         Userfront.logout({ redirect: false });
                         dispatch(userSignout());
