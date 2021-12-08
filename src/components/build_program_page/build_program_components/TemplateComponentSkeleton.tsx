@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const TemplateContainer = styled.div`
     height: 15rem;
-    width: 20rem;
+    width: 18rem;
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
 `;
