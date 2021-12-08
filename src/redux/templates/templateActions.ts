@@ -8,26 +8,23 @@ export const findTemplates = (
     projectUuid: string | null
 ) => {
     return async (dispatch: Dispatch<TemplateAction>) => {
-        if (projectUuid) {
-            try {
-                let response = await api.get(
-                    `/template/project/${projectUuid}`
-                );
+        try {
+            let response = await api.get(`/template/project/${projectUuid}`);
 
-                console.log(response.data);
-
+            if (response.data.templates.length > 0) {
+                //If templates are 0, dispatch will throw not iterable error. We will not dispatch in this case.
                 dispatch({
                     type: TemplateActionType.USER_FIND_TEMPLATE,
                     payload: response.data.builder,
                 });
-
-                if (response?.data?.status === 'Success') {
-                    statusCallback(true);
-                }
-            } catch (err) {
-                statusCallback(false);
             }
+
+            if (response.data.status === 'Success') {
+                statusCallback(true);
+            }
+        } catch (err) {
+            console.log(err);
+            statusCallback(false);
         }
-        statusCallback(false);
     };
 };
