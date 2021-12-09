@@ -11,8 +11,8 @@ import styled from 'styled-components';
 import { Template } from '@styled-icons/heroicons-solid/Template';
 
 const TemplateIcon = styled(Template)`
-    height: 1.75rem;
-    width: 1.75rem;
+    height: 2rem;
+    width: 2rem;
     color: #e07133;
 `;
 
@@ -26,7 +26,7 @@ const MainContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    height: 75%;
+    height: 70%;
     background: #f4f4f4;
     width: 100%;
     border-bottom: 1px solid #d6d6d6;
@@ -35,7 +35,7 @@ const ImageContainer = styled.div`
 `;
 
 const DescContainer = styled.div`
-    height: 25%;
+    height: 30%;
     padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
@@ -92,14 +92,14 @@ const TemplateComponent = ({
                 <TextContainer>
                     <Text
                         text={templateFileTitle}
-                        fontSize=".9rem"
+                        fontSize="1rem"
                         truncateWidth="16rem"
                     />
                     <TextDivider />
                     <Text
                         subText={true}
                         text={`Edited ${processTime(updatedAt)}`}
-                        fontSize=".8rem"
+                        fontSize=".9rem"
                     />
                 </TextContainer>
             </DescContainer>
