@@ -30,7 +30,8 @@ const ImageContainer = styled.div`
     background: #f4f4f4;
     width: 100%;
     border-bottom: 1px solid #d6d6d6;
-    border-radius: 0.3rem;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
 `;
 
 const DescContainer = styled.div`
