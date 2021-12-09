@@ -54,6 +54,9 @@ const ProjectTemplates = ({
     //Loader State:
     const [areTemplatesLoaded, setAreTemplatesLoaded] = useState(false);
 
+    //State hander for selected template components:
+    const [selectedTemplate, setSelectedTemplate] = useState('');
+
     useEffect(() => {
         if (areTemplatesLoaded) setAreTemplatesLoaded(!areTemplatesLoaded);
         dispatch(
@@ -65,6 +68,11 @@ const ProjectTemplates = ({
         );
     }, [projectUuid]);
 
+    const isTemplateSelected = (id: string) => {
+        if (id !== selectedTemplate) return false;
+        return true;
+    };
+
     const renderProjectTemplates = () => {
         if (templates && templates.length > 0) {
             return templates.map((template: any) => (
@@ -75,6 +83,8 @@ const ProjectTemplates = ({
                     id={template.id}
                     updatedAt={template.updatedAt}
                     key={template.id}
+                    isSelected={isTemplateSelected(template.id)}
+                    onSelectTemplate={() => setSelectedTemplate(template.id)}
                 />
             ));
         }
