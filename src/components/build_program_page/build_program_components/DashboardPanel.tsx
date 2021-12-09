@@ -114,10 +114,12 @@ const DashboardItemContainer = styled.div`
 
 const TemplateContainer = styled.div`
     @media ${deviceMin.mobileS} {
+        margin: 1rem 0rem 4rem 0rem;
         display: block;
     }
 
     @media ${deviceMin.tabletp} {
+        margin: 0;
         flex-grow: 10;
     }
 `;
