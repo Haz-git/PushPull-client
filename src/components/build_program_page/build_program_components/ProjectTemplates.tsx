@@ -66,6 +66,7 @@ const ProjectTemplates = ({
             return templates.map((template: any) => (
                 <TemplateComponent
                     templateFileTitle={template.templateFileTitle}
+                    templateSnapshot={template.templateSnapshot}
                     createdAt={template.createdAt}
                     id={template.id}
                     updatedAt={template.updatedAt}
