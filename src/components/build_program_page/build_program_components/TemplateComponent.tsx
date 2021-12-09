@@ -16,20 +16,26 @@ const TemplateIcon = styled(Template)`
     color: #e07133;
 `;
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<MainContainerProps>`
     height: 15rem;
     width: 100%;
-    border: 1px solid #d6d6d6;
+    border: ${(props) =>
+        props.isSelected ? '1px solid #e07133' : '1px solid #d6d6d6'};
     border-radius: 0.3rem;
     display: flex;
     flex-direction: column;
+    box-shadow: ${(props) =>
+        props.isSelected
+            ? 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'
+            : 'none'};
 `;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<MainContainerProps>`
     height: 70%;
     background: #f4f4f4;
     width: 100%;
-    border-bottom: 1px solid #d6d6d6;
+    border-bottom: ${(props) =>
+        props.isSelected ? '1px solid #e07133' : '1px solid #d6d6d6'};
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
 `;
@@ -56,12 +62,18 @@ const TextDivider = styled.div`
 `;
 
 //Interfaces:
+
+interface MainContainerProps {
+    isSelected: boolean;
+}
 interface IComponentProps {
     templateFileTitle: string;
     templateSnapshot: string | null;
     createdAt: string;
     id: string;
     updatedAt: string;
+    onSelectTemplate: () => void;
+    isSelected: boolean;
 }
 
 const TemplateComponent = ({
@@ -70,6 +82,8 @@ const TemplateComponent = ({
     createdAt,
     id,
     updatedAt,
+    onSelectTemplate,
+    isSelected,
 }: IComponentProps): JSX.Element => {
     dayjs.extend(RelativeTime);
 
@@ -82,9 +96,24 @@ const TemplateComponent = ({
         return <img src={templateSnapshot} alt="template snapshot img" />;
     };
 
+    const EntityClickHandler = (e: React.MouseEvent) => {
+        //Treat single click and double clicks differently:
+
+        if (e.detail === 1) {
+            onSelectTemplate();
+            console.log('single click');
+        } else if (e.detail === 2) {
+            //Highlight the entity:
+            onSelectTemplate();
+            console.log('Double click');
+        }
+    };
+
     return (
-        <MainContainer>
-            <ImageContainer>{processSnapshot()}</ImageContainer>
+        <MainContainer onClick={EntityClickHandler} isSelected={isSelected}>
+            <ImageContainer isSelected={isSelected}>
+                {processSnapshot()}
+            </ImageContainer>
             <DescContainer>
                 <IconContainer>
                     <TemplateIcon />
