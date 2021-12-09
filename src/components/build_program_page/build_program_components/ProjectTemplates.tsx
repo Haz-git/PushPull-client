@@ -6,6 +6,7 @@ import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { findTemplates } from '../../../redux/templates/templateActions';
 
 //Components:
+import TemplateComponent from './TemplateComponent';
 import TemplateComponentSkeleton from './TemplateComponentSkeleton';
 
 //Utils:
@@ -62,7 +63,15 @@ const ProjectTemplates = ({
 
     const renderProjectTemplates = () => {
         if (templates && templates.length > 0) {
-            return templates.map((template: any) => <>template </>);
+            return templates.map((template: any) => (
+                <TemplateComponent
+                    templateFileTitle={template.templateFileTitle}
+                    createdAt={template.createdAt}
+                    id={template.id}
+                    updatedAt={template.updatedAt}
+                    key={template.id}
+                />
+            ));
         }
 
         return <>NO TEMPLATES</>;
