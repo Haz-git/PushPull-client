@@ -4,6 +4,7 @@ import * as React from 'react';
 import Text from '../../general_components/Text';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
+import { ReactComponent as ConsSVG } from '../../../assets/template_working.svg';
 
 //Styles:
 import styled from 'styled-components';
@@ -16,7 +17,7 @@ const TemplateIcon = styled(Template)`
 `;
 
 const MainContainer = styled.div`
-    height: 13.5rem;
+    height: 13rem;
     width: 18rem;
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
@@ -26,7 +27,10 @@ const MainContainer = styled.div`
 
 const ImageContainer = styled.div`
     height: 10rem;
-    background: #ececec;
+    background: #f4f4f4;
+    width: 100%;
+    border-bottom: 1px solid #d6d6d6;
+    border-radius: 0.3rem;
 `;
 
 const DescContainer = styled.div`
@@ -45,6 +49,10 @@ const TextContainer = styled.div`
     justify-content: flex-start;
 `;
 
+const TextDivider = styled.div`
+    height: 0.1rem;
+`;
+
 //Interfaces:
 interface IComponentProps {
     templateFileTitle: string;
@@ -56,6 +64,7 @@ interface IComponentProps {
 
 const TemplateComponent = ({
     templateFileTitle,
+    templateSnapshot,
     createdAt,
     id,
     updatedAt,
@@ -66,18 +75,28 @@ const TemplateComponent = ({
         if (time) return dayjs(time).fromNow();
     };
 
+    const processSnapshot = () => {
+        if (!templateSnapshot) return <ConsSVG />;
+        return <img src={templateSnapshot} />;
+    };
+
     return (
         <MainContainer>
-            <ImageContainer>Img</ImageContainer>
+            <ImageContainer>{processSnapshot()}</ImageContainer>
             <DescContainer>
                 <IconContainer>
                     <TemplateIcon />
                 </IconContainer>
                 <TextContainer>
-                    <Text text={templateFileTitle} fontSize=".9rem" />
+                    <Text
+                        text={templateFileTitle}
+                        fontSize=".9rem"
+                        truncateWidth="16rem"
+                    />
+                    <TextDivider />
                     <Text
                         subText={true}
-                        text={processTime(updatedAt)}
+                        text={`Edited ${processTime(updatedAt)}`}
                         fontSize=".8rem"
                     />
                 </TextContainer>
