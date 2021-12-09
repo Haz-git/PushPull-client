@@ -16,18 +16,22 @@ import { deviceMin } from '../../../devices/breakpoints';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-    padding-top: 1rem;
-
     @media ${deviceMin.mobileS} {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
         row-gap: 2rem;
     }
 
     @media ${deviceMin.tabletp} {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(18rem, 20rem));
+        grid-template-columns: repeat(auto-fill, minmax(16rem, auto));
+        align-items: stretch;
+        justify-content: stretch;
         row-gap: 2rem;
+        column-gap: 2rem;
+        margin: 1rem 1rem 0rem 1rem;
     }
 `;
 

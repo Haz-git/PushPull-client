@@ -17,8 +17,8 @@ const TemplateIcon = styled(Template)`
 `;
 
 const MainContainer = styled.div`
-    height: 13rem;
-    width: 18rem;
+    height: 15rem;
+    width: 100%;
     border: 1px solid #d6d6d6;
     border-radius: 0.3rem;
     display: flex;
@@ -26,7 +26,7 @@ const MainContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    height: 10rem;
+    height: 75%;
     background: #f4f4f4;
     width: 100%;
     border-bottom: 1px solid #d6d6d6;
@@ -35,7 +35,8 @@ const ImageContainer = styled.div`
 `;
 
 const DescContainer = styled.div`
-    padding: 0.5rem 0.5rem;
+    height: 25%;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -78,7 +79,7 @@ const TemplateComponent = ({
 
     const processSnapshot = () => {
         if (!templateSnapshot) return <ConsSVG />;
-        return <img src={templateSnapshot} />;
+        return <img src={templateSnapshot} alt="template snapshot img" />;
     };
 
     return (
