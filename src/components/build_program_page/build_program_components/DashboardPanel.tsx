@@ -97,17 +97,14 @@ const DashboardItemContainer = styled.div`
 
     @media ${deviceMin.mobileS} {
         margin-top: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        display: block;
     }
 
     @media ${deviceMin.tabletp} {
         display: flex;
         flex-direction: row-reverse;
-        justify-content: space-between;
-        align-items: flex-start;
+        justify-content: stretch;
+        align-items: stretch;
         padding: 0rem 1rem;
     }
 `;
@@ -115,12 +112,15 @@ const DashboardItemContainer = styled.div`
 const TemplateContainer = styled.div`
     @media ${deviceMin.mobileS} {
         margin: 1rem 0rem 4rem 0rem;
-        display: block;
+        overflow-x: hidden;
+        padding: 0rem 1rem;
     }
 
     @media ${deviceMin.tabletp} {
+        overflow-x: visible;
         margin: 0;
         flex-grow: 10;
+        padding: 0;
     }
 `;
 
