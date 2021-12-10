@@ -3,9 +3,13 @@ import { useRef, useState } from 'react';
 
 //Redux:
 import { useDispatch } from 'react-redux';
-import { updateTemplate } from '../../../redux/templates/templateActions';
+import {
+    deleteTemplate,
+    updateTemplate,
+} from '../../../redux/templates/templateActions';
 
 //Components:
+import { useNotifications } from '@mantine/notifications';
 import Text from '../../general_components/Text';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
@@ -18,6 +22,10 @@ import { useClickOutside } from '@mantine/hooks';
 //Styles:
 import styled from 'styled-components';
 import { Template } from '@styled-icons/heroicons-solid/Template';
+import {
+    CancelIcon,
+    CheckIcon,
+} from '../../build_program_page/build_program_components/AddProjectForm';
 
 const TemplateIcon = styled(Template)`
     height: 2rem;
@@ -101,6 +109,7 @@ const TemplateComponent = ({
     projectUuid,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const notifications = useNotifications();
 
     const [stateTitleInput, setStateTitleInput] = useState(false);
     const [newTemplateFileTitle, setNewTemplateFileTitle] =
@@ -123,13 +132,57 @@ const TemplateComponent = ({
     dayjs.extend(RelativeTime);
     const MENU_ID = 'TEMPLATECOMPONENTCONTEXTMENU';
     const menuRef = useRef<HTMLDivElement | null>(null);
+    const handleDeleteRequest = () => {
+        dispatch(
+            deleteTemplate(
+                toggleLoadingNotif,
+                updateLoadingNotif,
+                id,
+                projectUuid
+            )
+        );
+    };
     const { show } = useContextMenu({
         id: MENU_ID,
         props: {
             templateUuid: id,
             toggleNewTitleInput: (state: boolean) => setStateTitleInput(state),
+            handleDeleteRequest,
         },
     });
+
+    const toggleLoadingNotif = () => {
+        let id = notifications.showNotification({
+            title: 'Template is being deleted...',
+            message: '',
+            color: 'orange',
+            autoClose: false,
+            disallowClose: true,
+            loading: true,
+        });
+
+        return id;
+    };
+
+    const updateLoadingNotif = (id: string, status: boolean) => {
+        if (status !== true)
+            return notifications.updateNotification(id, {
+                id,
+                color: 'red',
+                title: 'Your template failed to be deleted',
+                message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+                autoClose: 3000,
+                icon: <CancelIcon />,
+            });
+        return notifications.updateNotification(id, {
+            id,
+            color: 'teal',
+            title: 'Your template has been deleted',
+            message: '',
+            autoClose: 3000,
+            icon: <CheckIcon />,
+        });
+    };
 
     const processTime = (time: string) => {
         if (time) return dayjs(time).fromNow();
