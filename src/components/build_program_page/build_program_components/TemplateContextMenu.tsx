@@ -14,6 +14,7 @@ import {
     RenameIcon,
     DeleteIcon,
 } from './ProjectContextMenu';
+import historyObject from '../../../utils/historyObject';
 
 const NewTabIcon = styled(WindowMultiple)`
     color: #ffffff;
@@ -31,10 +32,14 @@ interface IComponentProps {
     id: string | number;
 }
 
+const handleOpen = ({ props: { templateUuid } }: any) => {
+    historyObject.push(`/file/${templateUuid}`);
+};
+
 const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
     return (
         <StyledMenu id={id} animation={animation.fade} theme={theme.dark}>
-            <Item>
+            <Item onClick={handleOpen}>
                 <ItemContainer>
                     <BrowserIcon />
                     Open
