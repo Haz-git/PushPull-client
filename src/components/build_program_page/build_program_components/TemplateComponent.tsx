@@ -31,6 +31,10 @@ const MainContainer = styled.div<MainContainerProps>`
         props.isSelected
             ? 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'
             : 'none'};
+    -webkit-user-select: none; /* Chrome all / Safari all */
+    -moz-user-select: none; /* Firefox all */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Likely future */
 `;
 
 const ImageContainer = styled.div<MainContainerProps>`
