@@ -6,7 +6,7 @@ import { Menu, Item, Separator, theme, animation } from 'react-contexify';
 //Styles:
 import 'react-contexify/dist/ReactContexify.css';
 import styled from 'styled-components';
-import { Open } from '@styled-icons/fluentui-system-filled/Open';
+import { WindowMultiple } from '@styled-icons/fluentui-system-regular/WindowMultiple';
 import { Window } from '@styled-icons/fluentui-system-regular/Window';
 import {
     ItemContainer,
@@ -15,10 +15,10 @@ import {
     DeleteIcon,
 } from './ProjectContextMenu';
 
-const NewTabIcon = styled(Open)`
+const NewTabIcon = styled(WindowMultiple)`
     color: #ffffff;
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1.3rem;
+    width: 1.3rem;
 `;
 
 const BrowserIcon = styled(Window)`
