@@ -54,12 +54,14 @@ export const addTemplate = (
 export const updateTemplate = (
     statusCallback: (status: boolean) => void,
     templateId: string,
-    templateDetails: any
+    templateDetails: any,
+    projectUuid?: string | null
 ) => {
     return async (dispatch: Dispatch<TemplateAction>) => {
         try {
-            let response = await api.put(`/template/update`, {
+            let response = await api.put(`/template/update/${templateId}`, {
                 templateDetails,
+                projectUuid,
             });
 
             dispatch({
