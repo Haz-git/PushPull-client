@@ -46,10 +46,13 @@ const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
                 `http://${window.location.host}/file/${templateUuid}`
             );
         }
-
         return window.open(
             `https://${window.location.host}/file/${templateUuid}`
         );
+    };
+
+    const handleNewTitleInput = ({ props: { toggleNewTitleInput } }: any) => {
+        toggleNewTitleInput(true);
     };
 
     return (
@@ -68,7 +71,7 @@ const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
                 </ItemContainer>
             </Item>
             <Separator />
-            <Item>
+            <Item onClick={handleNewTitleInput}>
                 <ItemContainer>
                     <RenameIcon />
                     Rename Template
