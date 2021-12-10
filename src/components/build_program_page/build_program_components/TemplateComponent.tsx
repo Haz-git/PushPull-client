@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+
+//Redux:
+import { useDispatch } from 'react-redux';
+import { updateTemplate } from '../../../redux/templates/templateActions';
 
 //Components:
 import Text from '../../general_components/Text';
@@ -8,6 +12,8 @@ import dayjs from 'dayjs';
 import { ReactComponent as ConsSVG } from '../../../assets/template_working.svg';
 import historyObject from '../../../utils/historyObject';
 import { useContextMenu } from 'react-contexify';
+import { TextInput } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
 
 //Styles:
 import styled from 'styled-components';
@@ -65,7 +71,7 @@ const TextContainer = styled.div`
 `;
 
 const TextDivider = styled.div`
-    height: 0.1rem;
+    height: 0.25rem;
 `;
 
 //Interfaces:
@@ -81,6 +87,7 @@ interface IComponentProps {
     updatedAt: string;
     onSelectTemplate: () => void;
     isSelected: boolean;
+    projectUuid: string | null;
 }
 
 const TemplateComponent = ({
@@ -91,7 +98,28 @@ const TemplateComponent = ({
     updatedAt,
     onSelectTemplate,
     isSelected,
+    projectUuid,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
+    const [stateTitleInput, setStateTitleInput] = useState(false);
+    const [newTemplateFileTitle, setNewTemplateFileTitle] =
+        useState(templateFileTitle);
+
+    const inputRef = useClickOutside(() => {
+        dispatch(
+            updateTemplate(
+                () => {},
+                id,
+                {
+                    templateFileTitle: newTemplateFileTitle,
+                },
+                projectUuid
+            )
+        );
+        setStateTitleInput(false);
+    });
+
     dayjs.extend(RelativeTime);
     const MENU_ID = 'TEMPLATECOMPONENTCONTEXTMENU';
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -99,6 +127,7 @@ const TemplateComponent = ({
         id: MENU_ID,
         props: {
             templateUuid: id,
+            toggleNewTitleInput: (state: boolean) => setStateTitleInput(state),
         },
     });
 
@@ -129,6 +158,62 @@ const TemplateComponent = ({
         show(event);
     };
 
+    const onTextInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+        setNewTemplateFileTitle(e.target.value);
+
+    const handleOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            dispatch(
+                updateTemplate(
+                    () => {},
+                    id,
+                    {
+                        templateFileTitle: newTemplateFileTitle,
+                    },
+                    projectUuid
+                )
+            );
+            setStateTitleInput(false);
+        }
+    };
+
+    const renderTitleOrInputForRename = () => {
+        if (!stateTitleInput)
+            return (
+                <Text
+                    text={newTemplateFileTitle}
+                    fontSize="1rem"
+                    truncateWidth="16rem"
+                />
+            );
+
+        return (
+            <TextInput
+                ref={inputRef}
+                autoFocus
+                value={newTemplateFileTitle}
+                variant="filled"
+                required
+                onChange={onTextInput}
+                styles={{
+                    root: {
+                        padding: '0 0',
+                        margin: '0 0',
+                    },
+                    input: {
+                        border: 'none',
+                        padding: '0rem 0rem 0rem .5rem',
+                        margin: '0 0',
+                        height: '.85rem',
+                        fontSize: '.95rem',
+                        fontWeight: 700,
+                    },
+                }}
+                onKeyPress={handleOnKeyPress}
+            />
+        );
+    };
+
     return (
         <MainContainer
             onClick={EntityClickHandler}
@@ -144,11 +229,7 @@ const TemplateComponent = ({
                     <TemplateIcon />
                 </IconContainer>
                 <TextContainer>
-                    <Text
-                        text={templateFileTitle}
-                        fontSize="1rem"
-                        truncateWidth="16rem"
-                    />
+                    {renderTitleOrInputForRename()}
                     <TextDivider />
                     <Text
                         subText={true}
