@@ -85,6 +85,7 @@ const ProjectTemplates = ({
                     key={template.id}
                     isSelected={isTemplateSelected(template.id)}
                     onSelectTemplate={() => setSelectedTemplate(template.id)}
+                    projectUuid={projectUuid}
                 />
             ));
         }
