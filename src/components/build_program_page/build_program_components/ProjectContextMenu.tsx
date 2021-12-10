@@ -23,20 +23,20 @@ const ColorIcon = styled(Color)`
     width: 1.3rem;
 `;
 
-const RenameIcon = styled(Rename)`
+export const RenameIcon = styled(Rename)`
     color: #ffffff;
     height: 1.3rem;
     width: 1.3rem;
 `;
 
-const DeleteIcon = styled(Delete)`
+export const DeleteIcon = styled(Delete)`
     color: #ffffff;
     height: 1.5rem;
     width: 1.5rem;
     margin: -0.8rem -0.1rem;
 `;
 
-const StyledMenu = styled(Menu)`
+export const StyledMenu = styled(Menu)`
     .react-contexify__item {
         padding: 0;
         margin: 0;
@@ -54,7 +54,7 @@ const StyledMenu = styled(Menu)`
     }
 `;
 
-const ItemContainer = styled.div`
+export const ItemContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
