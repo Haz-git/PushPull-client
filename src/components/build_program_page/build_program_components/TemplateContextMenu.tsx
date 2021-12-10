@@ -2,7 +2,6 @@ import * as React from 'react';
 
 //Components:
 import { Menu, Item, Separator, theme, animation } from 'react-contexify';
-import { useLocation } from 'react-router-dom';
 
 //Styles:
 import 'react-contexify/dist/ReactContexify.css';
@@ -55,6 +54,10 @@ const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
         toggleNewTitleInput(true);
     };
 
+    const handleDelete = ({ props: { handleDeleteRequest } }: any) => {
+        handleDeleteRequest();
+    };
+
     return (
         <StyledMenu id={id} animation={animation.fade} theme={theme.dark}>
             <Item onClick={handleOpen}>
@@ -78,7 +81,7 @@ const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
                 </ItemContainer>
             </Item>
             <Separator />
-            <Item>
+            <Item onClick={handleDelete}>
                 <ItemContainer>
                     <DeleteIcon />
                     Delete Template
