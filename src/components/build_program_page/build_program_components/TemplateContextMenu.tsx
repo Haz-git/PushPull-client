@@ -24,14 +24,14 @@ const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
             <Item>
                 <ItemContainer>
                     <RenameIcon />
-                    Rename Project
+                    Rename Template
                 </ItemContainer>
             </Item>
             <Separator />
             <Item>
                 <ItemContainer>
                     <DeleteIcon />
-                    Delete Project
+                    Delete Template
                 </ItemContainer>
             </Item>
         </StyledMenu>
