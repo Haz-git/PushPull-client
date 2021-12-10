@@ -4,15 +4,11 @@ import * as React from 'react';
 
 //Components:
 import { Menu, Item, Separator, theme, animation } from 'react-contexify';
-import { useNotifications } from '@mantine/notifications';
 
 //Styles:
 import styled from 'styled-components';
 import 'react-contexify/dist/ReactContexify.css';
-import {
-    CheckIcon,
-    CancelIcon,
-} from '../build_program_components/AddProjectForm';
+
 import { Color } from '@styled-icons/fluentui-system-regular/Color';
 import { Rename } from '@styled-icons/fluentui-system-regular/Rename';
 import { Delete } from '@styled-icons/fluentui-system-regular/Delete';
@@ -67,8 +63,6 @@ interface IComponentProps {
 }
 
 const ProjectContextMenu = ({ id }: IComponentProps): JSX.Element => {
-    const notifications = useNotifications();
-
     const handleDeleteProject = ({
         props: { projectUuid, toggleDeleteProjectModal },
     }: any) => {
