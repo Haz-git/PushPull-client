@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRef } from 'react';
 
 //Components:
 import Text from '../../general_components/Text';
@@ -6,6 +7,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import { ReactComponent as ConsSVG } from '../../../assets/template_working.svg';
 import historyObject from '../../../utils/historyObject';
+import { useContextMenu } from 'react-contexify';
 
 //Styles:
 import styled from 'styled-components';
@@ -87,6 +89,11 @@ const TemplateComponent = ({
     isSelected,
 }: IComponentProps): JSX.Element => {
     dayjs.extend(RelativeTime);
+    const MENU_ID = 'TEMPLATECOMPONENTCONTEXTMENU';
+    const menuRef = useRef<HTMLDivElement | null>(null);
+    const { show } = useContextMenu({
+        id: MENU_ID,
+    });
 
     const processTime = (time: string) => {
         if (time) return dayjs(time).fromNow();
@@ -109,8 +116,19 @@ const TemplateComponent = ({
         }
     };
 
+    const displayContextMenu = (event: React.MouseEvent) => {
+        if (event.cancelable) event.preventDefault();
+        onSelectTemplate();
+        show(event);
+    };
+
     return (
-        <MainContainer onClick={EntityClickHandler} isSelected={isSelected}>
+        <MainContainer
+            onClick={EntityClickHandler}
+            isSelected={isSelected}
+            onContextMenu={displayContextMenu}
+            ref={menuRef}
+        >
             <ImageContainer isSelected={isSelected}>
                 {processSnapshot()}
             </ImageContainer>
