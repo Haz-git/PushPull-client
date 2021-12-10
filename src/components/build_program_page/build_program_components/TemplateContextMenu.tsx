@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import { Menu, Item, Separator, theme, animation } from 'react-contexify';
+import { useLocation } from 'react-router-dom';
 
 //Styles:
 import 'react-contexify/dist/ReactContexify.css';
@@ -32,11 +33,25 @@ interface IComponentProps {
     id: string | number;
 }
 
-const handleOpen = ({ props: { templateUuid } }: any) => {
-    historyObject.push(`/file/${templateUuid}`);
-};
-
 const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
+    const handleOpen = ({ props: { templateUuid } }: any) => {
+        historyObject.push(`/file/${templateUuid}`);
+    };
+
+    const handleOpenInNewTab = ({ props: { templateUuid } }: any) => {
+        let currHost = window.location.host;
+
+        if (currHost.includes('localhost')) {
+            return window.open(
+                `http://${window.location.host}/file/${templateUuid}`
+            );
+        }
+
+        return window.open(
+            `https://${window.location.host}/file/${templateUuid}`
+        );
+    };
+
     return (
         <StyledMenu id={id} animation={animation.fade} theme={theme.dark}>
             <Item onClick={handleOpen}>
@@ -46,7 +61,7 @@ const TemplateContextMenu = ({ id }: IComponentProps): JSX.Element => {
                 </ItemContainer>
             </Item>
             <Separator />
-            <Item>
+            <Item onClick={handleOpenInNewTab}>
                 <ItemContainer>
                     <NewTabIcon />
                     Open In New Tab
