@@ -93,6 +93,9 @@ const TemplateComponent = ({
     const menuRef = useRef<HTMLDivElement | null>(null);
     const { show } = useContextMenu({
         id: MENU_ID,
+        props: {
+            templateUuid: id,
+        },
     });
 
     const processTime = (time: string) => {
