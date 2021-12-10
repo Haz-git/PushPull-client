@@ -5,6 +5,7 @@ import Text from '../../general_components/Text';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import { ReactComponent as ConsSVG } from '../../../assets/template_working.svg';
+import historyObject from '../../../utils/historyObject';
 
 //Styles:
 import styled from 'styled-components';
@@ -101,11 +102,10 @@ const TemplateComponent = ({
 
         if (e.detail === 1) {
             onSelectTemplate();
-            console.log('single click');
         } else if (e.detail === 2) {
             //Highlight the entity:
             onSelectTemplate();
-            console.log('Double click');
+            historyObject.push(`/file/${id}`);
         }
     };
 
