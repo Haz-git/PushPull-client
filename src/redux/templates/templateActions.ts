@@ -78,3 +78,31 @@ export const updateTemplate = (
         }
     };
 };
+
+export const deleteTemplate = (
+    toggleNotif: () => string,
+    updateNotif: (id: string, status: boolean) => void,
+    templateId: string,
+    projectUuid?: string | null
+) => {
+    return async (dispatch: Dispatch<TemplateAction>) => {
+        const id = toggleNotif();
+
+        try {
+            let response = await api.delete(
+                `/template/delete/${templateId}?projectId=${projectUuid}`
+            );
+
+            dispatch({
+                type: TemplateActionType.USER_DELETE_TEMPLATE,
+                payload: response.data.templates,
+            });
+
+            if (response.data) {
+                updateNotif(id, true);
+            }
+        } catch (err) {
+            updateNotif(id, false);
+        }
+    };
+};
