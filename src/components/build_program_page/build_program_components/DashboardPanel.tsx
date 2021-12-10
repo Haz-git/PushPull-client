@@ -15,6 +15,7 @@ import { Burger } from '@mantine/core';
 import ProjectPanel from './ProjectPanel';
 import { Transition } from '@mantine/core';
 import ProjectTemplates from './ProjectTemplates';
+import TemplateContextMenu from './TemplateContextMenu';
 
 //utils:
 import { deviceMin } from '../../../devices/breakpoints';
@@ -435,7 +436,12 @@ const DashboardPanel = ({
         );
     };
 
-    return <MainContainer>{renderDashboardView()}</MainContainer>;
+    return (
+        <MainContainer>
+            {renderDashboardView()}
+            <TemplateContextMenu id={'TEMPLATECOMPONENTCONTEXTMENU'} />
+        </MainContainer>
+    );
 };
 
 export default DashboardPanel;
