@@ -50,3 +50,29 @@ export const addTemplate = (
         }
     };
 };
+
+export const updateTemplate = (
+    statusCallback: (status: boolean) => void,
+    templateId: string,
+    templateDetails: any
+) => {
+    return async (dispatch: Dispatch<TemplateAction>) => {
+        try {
+            let response = await api.put(`/template/update`, {
+                templateDetails,
+            });
+
+            dispatch({
+                type: TemplateActionType.USER_UPDATE_TEMPLATE,
+                payload: response.data.templates,
+            });
+
+            if (response.data.status === 'Success') {
+                statusCallback(false);
+            }
+        } catch (err) {
+            console.log(err);
+            statusCallback(true);
+        }
+    };
+};
