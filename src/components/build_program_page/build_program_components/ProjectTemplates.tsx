@@ -6,8 +6,10 @@ import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { findTemplates } from '../../../redux/templates/templateActions';
 
 //Components:
+import { ReactComponent as NoTemplateSVG } from '../../../assets/template_none.svg';
 import TemplateComponent from './TemplateComponent';
 import TemplateComponentSkeleton from './TemplateComponentSkeleton';
+import Text from '../../general_components/Text';
 
 //Utils:
 import { deviceMin } from '../../../devices/breakpoints';
@@ -33,6 +35,25 @@ const MainContainer = styled.div`
         column-gap: 2rem;
         margin: 1rem 1rem 0rem 1rem;
     }
+`;
+
+const NoTemplatesContainer = styled.div`
+    cursor: default;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem 1rem;
+`;
+
+const SVGContainer = styled.div``;
+
+const TextContainer = styled.div`
+    padding: 1rem 1rem;
+    background: #ececec;
+    border-radius: 0.4rem;
 `;
 
 //Interfaces:
@@ -81,40 +102,57 @@ const ProjectTemplates = ({
 
     const renderProjectTemplates = () => {
         if (templates && templates.length > 0) {
-            return templates.map((template: any) => (
-                <TemplateComponent
-                    templateFileTitle={template.templateFileTitle}
-                    templateSnapshot={template.templateSnapshot}
-                    createdAt={template.createdAt}
-                    id={template.id}
-                    updatedAt={template.updatedAt}
-                    key={template.id}
-                    isSelected={isTemplateSelected(template.id)}
-                    onSelectTemplate={() => setSelectedTemplate(template.id)}
-                    projectUuid={projectUuid}
-                    toggleDeleteTemplateModal={toggleDeleteTemplateModal}
-                />
-            ));
+            return (
+                <MainContainer>
+                    {templates.map((template: any) => (
+                        <TemplateComponent
+                            templateFileTitle={template.templateFileTitle}
+                            templateSnapshot={template.templateSnapshot}
+                            createdAt={template.createdAt}
+                            id={template.id}
+                            updatedAt={template.updatedAt}
+                            key={template.id}
+                            isSelected={isTemplateSelected(template.id)}
+                            onSelectTemplate={() =>
+                                setSelectedTemplate(template.id)
+                            }
+                            projectUuid={projectUuid}
+                            toggleDeleteTemplateModal={
+                                toggleDeleteTemplateModal
+                            }
+                        />
+                    ))}
+                </MainContainer>
+            );
         }
 
-        return <>NO TEMPLATES</>;
+        return (
+            <NoTemplatesContainer>
+                <SVGContainer>
+                    <NoTemplateSVG />
+                </SVGContainer>
+                <TextContainer>
+                    <Text text="You don't have any templates here yet." />
+                </TextContainer>
+            </NoTemplatesContainer>
+        );
     };
 
     return (
-        <MainContainer>
+        <>
             {areTemplatesLoaded ? (
                 <>{renderProjectTemplates()}</>
             ) : (
-                <>
+                <MainContainer>
                     <TemplateComponentSkeleton />
                     <TemplateComponentSkeleton />
                     <TemplateComponentSkeleton />
                     <TemplateComponentSkeleton />
                     <TemplateComponentSkeleton />
                     <TemplateComponentSkeleton />
-                </>
+                </MainContainer>
             )}
-        </MainContainer>
+        </>
     );
 };
 
