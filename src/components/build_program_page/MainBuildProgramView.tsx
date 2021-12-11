@@ -104,6 +104,8 @@ const MainBuildProgramView = ({
         useState(false);
     const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
     const [openDescProjectModal, setOpenDescProjectModal] = useState(false);
+    const [openDeleteTemplateModal, setOpenDeleteTemplateModal] =
+        useState(false);
 
     //Curr project Desc:
     const [currTargetProjectDesc, setCurrTargetProjectDesc] = useState('');
@@ -143,6 +145,12 @@ const MainBuildProgramView = ({
         if (currProjectDesc) setCurrTargetProjectDesc(currProjectDesc);
         setOpenDescProjectModal(status);
     };
+
+    const toggleDeleteTemplateModal = (
+        status: boolean,
+        templateId: string,
+        projectUuid?: string | null
+    ) => {};
 
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
     const toggleProjectModal = (status: boolean) =>
@@ -233,6 +241,8 @@ const MainBuildProgramView = ({
                             openBoolean={openAddProjectModal}
                             closeFunc={() => setOpenAddProjectModal(false)}
                             title="Create Project"
+                            closeOnClickOutside={false}
+                            hideCloseButton={true}
                         >
                             <AddProjectForm
                                 toggleProjectModal={toggleProjectModal}
