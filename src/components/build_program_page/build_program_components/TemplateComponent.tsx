@@ -260,6 +260,7 @@ const TemplateComponent = ({
                         height: '.85rem',
                         fontSize: '.95rem',
                         fontWeight: 700,
+                        width: '100%',
                     },
                 }}
                 onKeyPress={handleOnKeyPress}
