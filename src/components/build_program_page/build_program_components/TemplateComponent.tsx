@@ -211,9 +211,9 @@ const TemplateComponent = ({
                 ref={inputRef}
                 autoFocus
                 value={newTemplateFileTitle}
-                variant="filled"
                 required
                 onChange={onTextInput}
+                size="xs"
                 styles={{
                     root: {
                         padding: '0 0',
