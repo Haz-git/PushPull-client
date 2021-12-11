@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { NormalizeCSS } from '@mantine/core';
-// import './styles/notifStyles.css';
 import App from './components/App';
 
 //Redux:
