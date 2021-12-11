@@ -40,11 +40,17 @@ const MainContainer = styled.div`
 interface IComponentProps {
     projectUuid: string | null;
     dashboardTemplatesLoadedCallback: (status: boolean) => void;
+    toggleDeleteTemplateModal: (
+        status: boolean,
+        templateId: string,
+        projectUuid?: string | null
+    ) => void;
 }
 
 const ProjectTemplates = ({
     projectUuid,
     dashboardTemplatesLoadedCallback,
+    toggleDeleteTemplateModal,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const templates = useSelector(
@@ -86,6 +92,7 @@ const ProjectTemplates = ({
                     isSelected={isTemplateSelected(template.id)}
                     onSelectTemplate={() => setSelectedTemplate(template.id)}
                     projectUuid={projectUuid}
+                    toggleDeleteTemplateModal={toggleDeleteTemplateModal}
                 />
             ));
         }

@@ -153,6 +153,11 @@ interface IDashboardPanel {
     toggleRenameProjectModal: (status: boolean, projectUuid: string) => void;
     toggleRecolorProjectModal: (status: boolean, projectUuid: string) => void;
     toggleDeleteProjectModal: (status: boolean, projectUuid: string) => void;
+    toggleDeleteTemplateModal: (
+        status: boolean,
+        templateId: string,
+        projectUuid?: string | null
+    ) => void;
     isCreatingNewProject: boolean;
 }
 
@@ -163,6 +168,7 @@ const DashboardPanel = ({
     toggleRenameProjectModal,
     toggleRecolorProjectModal,
     toggleDeleteProjectModal,
+    toggleDeleteTemplateModal,
 }: IDashboardPanel): JSX.Element => {
     let { dashboardView } = useParams<{ dashboardView: string }>();
     const { width, height } = useWindowDimensions();
@@ -417,6 +423,9 @@ const DashboardPanel = ({
                                 dashboardTemplatesLoadedCallback={
                                     renderAddTemplateButtonIfTemplatesAreLoaded
                                 }
+                                toggleDeleteTemplateModal={
+                                    toggleDeleteTemplateModal
+                                }
                             />
                         </TemplateContainer>
                     </>
@@ -431,6 +440,7 @@ const DashboardPanel = ({
                     dashboardTemplatesLoadedCallback={
                         renderAddTemplateButtonIfTemplatesAreLoaded
                     }
+                    toggleDeleteTemplateModal={toggleDeleteTemplateModal}
                 />
             </TemplateContainer>
         );

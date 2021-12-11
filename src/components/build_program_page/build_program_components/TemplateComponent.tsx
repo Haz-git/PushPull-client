@@ -96,6 +96,11 @@ interface IComponentProps {
     onSelectTemplate: () => void;
     isSelected: boolean;
     projectUuid: string | null;
+    toggleDeleteTemplateModal: (
+        status: boolean,
+        templateId: string,
+        projectUuid?: string | null
+    ) => void;
 }
 
 const TemplateComponent = ({
@@ -107,6 +112,7 @@ const TemplateComponent = ({
     onSelectTemplate,
     isSelected,
     projectUuid,
+    toggleDeleteTemplateModal,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
@@ -133,14 +139,7 @@ const TemplateComponent = ({
     const MENU_ID = 'TEMPLATECOMPONENTCONTEXTMENU';
     const menuRef = useRef<HTMLDivElement | null>(null);
     const handleDeleteRequest = () => {
-        dispatch(
-            deleteTemplate(
-                toggleLoadingNotif,
-                updateLoadingNotif,
-                id,
-                projectUuid
-            )
-        );
+        toggleDeleteTemplateModal(true, id, projectUuid);
     };
     const { show } = useContextMenu({
         id: MENU_ID,
@@ -150,39 +149,6 @@ const TemplateComponent = ({
             handleDeleteRequest,
         },
     });
-
-    const toggleLoadingNotif = () => {
-        let id = notifications.showNotification({
-            title: 'Template is being deleted...',
-            message: '',
-            color: 'orange',
-            autoClose: false,
-            disallowClose: true,
-            loading: true,
-        });
-
-        return id;
-    };
-
-    const updateLoadingNotif = (id: string, status: boolean) => {
-        if (status !== true)
-            return notifications.updateNotification(id, {
-                id,
-                color: 'red',
-                title: 'Your template failed to be deleted',
-                message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
-                autoClose: 3000,
-                icon: <CancelIcon />,
-            });
-        return notifications.updateNotification(id, {
-            id,
-            color: 'teal',
-            title: 'Your template has been deleted',
-            message: '',
-            autoClose: 3000,
-            icon: <CheckIcon />,
-        });
-    };
 
     const processTime = (time: string) => {
         if (time) return dayjs(time).fromNow();

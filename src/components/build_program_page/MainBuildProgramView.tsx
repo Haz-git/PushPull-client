@@ -312,7 +312,13 @@ const MainBuildProgramView = ({
                             closeFunc={() => setOpenDeleteTemplateModal(false)}
                             title="Confirm Template Deletion"
                         >
-                            <TemplateDeleteForm />
+                            <TemplateDeleteForm
+                                projectUuid={selectedProject}
+                                templateId={selectedTemplate}
+                                toggleDeleteTemplateModal={
+                                    toggleDeleteTemplateModal
+                                }
+                            />
                         </GeneralModal>
                         <MainContainer>
                             {renderProjectsPanelIfWidthAllows()}
@@ -330,6 +336,9 @@ const MainBuildProgramView = ({
                                         toggleRenameProjectModal
                                     }
                                     toggleNewDescModal={toggleDescProjectModal}
+                                    toggleDeleteTemplateModal={
+                                        toggleDeleteTemplateModal
+                                    }
                                 />
                             </DashboardPanelView>
                         </MainContainer>
