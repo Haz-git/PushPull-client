@@ -11,6 +11,7 @@ import DescProjectForm from './build_program_components/DescProjectForm';
 import GeneralModal from '../general_components/GeneralModal';
 import { useNotifications } from '@mantine/notifications';
 import LoadProgress from '../nprogress/LoadProgress';
+import TemplateDeleteForm from './build_program_components/TemplateDeleteForm';
 
 //utils:
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
@@ -113,6 +114,9 @@ const MainBuildProgramView = ({
     //Project Id states:
     const [selectedProject, setSelectedProject] = useState('');
 
+    //Selected template states:
+    const [selectedTemplate, setSelectedTemplate] = useState('');
+
     //Modal state handlers:
     const toggleRenameProjectModal = (
         status: boolean,
@@ -150,7 +154,11 @@ const MainBuildProgramView = ({
         status: boolean,
         templateId: string,
         projectUuid?: string | null
-    ) => {};
+    ) => {
+        if (projectUuid) setSelectedProject(projectUuid);
+        if (templateId) setSelectedTemplate(templateId);
+        setOpenDeleteTemplateModal(status);
+    };
 
     const setIsLoaded = (status: boolean) => setIsBuilderInfoLoaded(status);
     const toggleProjectModal = (status: boolean) =>
@@ -298,6 +306,13 @@ const MainBuildProgramView = ({
                                     toggleRecolorProjectModal
                                 }
                             />
+                        </GeneralModal>
+                        <GeneralModal
+                            openBoolean={openDeleteTemplateModal}
+                            closeFunc={() => setOpenDeleteTemplateModal(false)}
+                            title="Confirm Template Deletion"
+                        >
+                            <TemplateDeleteForm />
                         </GeneralModal>
                         <MainContainer>
                             {renderProjectsPanelIfWidthAllows()}
