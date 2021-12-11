@@ -43,7 +43,7 @@ const StyledNavbar = styled.nav<NavbarProps>`
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
-    z-index: 995;
+    z-index: 99;
 `;
 
 const LeftWrapper = styled.div`
