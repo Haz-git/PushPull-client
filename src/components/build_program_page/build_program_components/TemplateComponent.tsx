@@ -52,7 +52,7 @@ const MainContainer = styled.div<MainContainerProps>`
 `;
 
 const ImageContainer = styled.div<MainContainerProps>`
-    height: 70%;
+    height: 11rem;
     background: #f4f4f4;
     width: 100%;
     border-bottom: ${(props) =>
@@ -62,7 +62,7 @@ const ImageContainer = styled.div<MainContainerProps>`
 `;
 
 const DescContainer = styled.div`
-    height: 30%;
+    height: 4rem;
     padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
