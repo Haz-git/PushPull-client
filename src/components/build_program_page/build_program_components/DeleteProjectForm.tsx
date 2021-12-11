@@ -11,12 +11,9 @@ import { useNotifications } from '@mantine/notifications';
 import styled from 'styled-components';
 import {
     MainContainer,
-    InputContainer,
     ButtonContainer,
     CheckIcon,
     CancelIcon,
-    RandomButton,
-    RandomIcon,
 } from './AddProjectForm';
 import GeneralButton from '../../general_components/GeneralButton';
 import Text from '../../general_components/Text';
