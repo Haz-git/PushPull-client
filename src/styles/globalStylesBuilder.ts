@@ -80,6 +80,12 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    .mantine-TextInput-filledVariant {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
     .mantine-Textarea-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
