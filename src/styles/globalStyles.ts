@@ -59,45 +59,46 @@ const GlobalStyle = createGlobalStyle`
     }
 
 
-    .mantine-multi-select-input-input .mantine-multi-select-root {
+    .mantine-MultiSelectInput-input .mantine-MultiSelect-root {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
 
     }
 
-    .mantine-rich-text-editor-root {
+    .mantine-RichTextEditor-root {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
 
     }
 
-    .mantine-number-input-input {
+    .mantine-NumberInput-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
     }
 
-    .mantine-select-input {
+    .mantine-Select-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
     }
 
-    .mantine-text-input-input {
+    .mantine-TextInput-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
     }
 
-    .mantine-textarea-input {
+    .mantine-Textarea-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
     }
 
-    .mantine-notification-root {
+
+    .mantine-Notification-root {
 
 
         @media(min-width: 320px) {
