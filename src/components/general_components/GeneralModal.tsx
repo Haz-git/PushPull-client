@@ -13,6 +13,8 @@ interface IGeneralModal {
     children: React.ReactNode;
     size?: string;
     title?: string;
+    closeOnClickOutside?: boolean;
+    hideCloseButton?: boolean;
 }
 
 const GeneralModal = ({
@@ -21,10 +23,14 @@ const GeneralModal = ({
     children,
     size = 'md',
     title = 'Modal',
+    closeOnClickOutside = true,
+    hideCloseButton = false,
 }: IGeneralModal): JSX.Element => {
     return (
         <>
             <Modal
+                hideCloseButton={hideCloseButton}
+                closeOnClickOutside={closeOnClickOutside}
                 title={title}
                 styles={{
                     title: {
