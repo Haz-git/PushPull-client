@@ -29,6 +29,8 @@ const GeneralModal = ({
     return (
         <>
             <Modal
+                centered={true}
+                zIndex={99999}
                 hideCloseButton={hideCloseButton}
                 closeOnClickOutside={closeOnClickOutside}
                 title={title}
