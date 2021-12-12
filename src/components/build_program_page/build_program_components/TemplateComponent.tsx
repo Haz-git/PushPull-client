@@ -4,10 +4,7 @@ import { isMobile } from 'react-device-detect';
 
 //Redux:
 import { useDispatch } from 'react-redux';
-import {
-    deleteTemplate,
-    updateTemplate,
-} from '../../../redux/templates/templateActions';
+import { updateTemplate } from '../../../redux/templates/templateActions';
 
 //Components:
 import { useNotifications } from '@mantine/notifications';
@@ -19,6 +16,7 @@ import historyObject from '../../../utils/historyObject';
 import { useContextMenu } from 'react-contexify';
 import { TextInput } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -86,7 +84,6 @@ const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    max-width: 10rem;
 `;
 
 const TextDivider = styled.div`
@@ -137,7 +134,7 @@ const TemplateComponent = ({
     toggleDeleteTemplateModal,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
-    const notifications = useNotifications();
+    const { width } = useWindowDimensions();
 
     const [stateTitleInput, setStateTitleInput] = useState(false);
     const [newTemplateFileTitle, setNewTemplateFileTitle] =
@@ -218,13 +215,19 @@ const TemplateComponent = ({
         }
     };
 
+    const truncateTemplateNameOnWindowDimensions = () => {
+        if (width <= 320) return '10rem';
+        if (width <= 375) return '13rem';
+        else return '15rem';
+    };
+
     const renderTitleOrInputForRename = () => {
         if (!stateTitleInput)
             return (
                 <Text
                     text={newTemplateFileTitle}
                     fontSize="1rem"
-                    truncateWidth="16rem"
+                    truncateWidth={truncateTemplateNameOnWindowDimensions()}
                 />
             );
 
