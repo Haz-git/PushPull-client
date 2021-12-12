@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 //Redux:
 import { useDispatch } from 'react-redux';
@@ -22,10 +23,13 @@ import { useClickOutside } from '@mantine/hooks';
 //Styles:
 import styled from 'styled-components';
 import { Template } from '@styled-icons/heroicons-solid/Template';
-import {
-    CancelIcon,
-    CheckIcon,
-} from '../../build_program_page/build_program_components/AddProjectForm';
+import { Options } from '@styled-icons/ionicons-outline/Options';
+
+const OptionsIcon = styled(Options)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: rgba(0, 0, 34, 0.7);
+`;
 
 const TemplateIcon = styled(Template)`
     height: 2rem;
@@ -62,6 +66,12 @@ const ImageContainer = styled.div<MainContainerProps>`
 `;
 
 const DescContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const DescWrapper = styled.div`
     height: 4rem;
     padding: 0.5rem 1rem;
     display: flex;
@@ -76,10 +86,22 @@ const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    max-width: 10rem;
 `;
 
 const TextDivider = styled.div`
     height: 0.25rem;
+`;
+
+const OptionsContainer = styled.div``;
+
+const OptionsButton = styled.button`
+    border-radius: 0.3rem;
+    padding: 0.25rem 0.25rem;
+    background: #ececec;
+    border: none;
+    text-decoration: none;
+    margin-right: 1rem;
 `;
 
 //Interfaces:
@@ -137,7 +159,7 @@ const TemplateComponent = ({
 
     dayjs.extend(RelativeTime);
     const MENU_ID = 'TEMPLATECOMPONENTCONTEXTMENU';
-    const menuRef = useRef<HTMLDivElement | null>(null);
+    const templateRef = useRef<HTMLDivElement | null>(null);
     const handleDeleteRequest = () => {
         toggleDeleteTemplateModal(true, id, projectUuid);
     };
@@ -234,29 +256,65 @@ const TemplateComponent = ({
         );
     };
 
+    const renderOptionsIconOnMobile = () => {
+        if (isMobile) {
+            return (
+                <OptionsContainer>
+                    <OptionsButton onClick={renderContextMenuOnMobile}>
+                        <OptionsIcon />
+                    </OptionsButton>
+                </OptionsContainer>
+            );
+        }
+    };
+
+    const renderContextMenuOnMobile = (event: React.MouseEvent) => {
+        if (event.cancelable) event.preventDefault();
+        const posRef = templateRef.current?.getBoundingClientRect();
+
+        if (posRef) {
+            return show(event, {
+                position: {
+                    x: posRef.x,
+                    y: posRef.y,
+                },
+            });
+        }
+
+        return show(event, {
+            position: {
+                x: 0,
+                y: 0,
+            },
+        });
+    };
+
     return (
         <MainContainer
             onClick={EntityClickHandler}
             isSelected={isSelected}
             onContextMenu={displayContextMenu}
-            ref={menuRef}
+            ref={templateRef}
         >
             <ImageContainer isSelected={isSelected}>
                 {processSnapshot()}
             </ImageContainer>
             <DescContainer>
-                <IconContainer>
-                    <TemplateIcon />
-                </IconContainer>
-                <TextContainer>
-                    {renderTitleOrInputForRename()}
-                    <TextDivider />
-                    <Text
-                        subText={true}
-                        text={`Edited ${processTime(updatedAt)}`}
-                        fontSize=".9rem"
-                    />
-                </TextContainer>
+                <DescWrapper>
+                    <IconContainer>
+                        <TemplateIcon />
+                    </IconContainer>
+                    <TextContainer>
+                        {renderTitleOrInputForRename()}
+                        <TextDivider />
+                        <Text
+                            subText={true}
+                            text={`Edited ${processTime(updatedAt)}`}
+                            fontSize=".9rem"
+                        />
+                    </TextContainer>
+                </DescWrapper>
+                {renderOptionsIconOnMobile()}
             </DescContainer>
         </MainContainer>
     );
