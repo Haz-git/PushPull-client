@@ -6,11 +6,18 @@ import { TemplateActionType } from './action-types';
 export const findTemplates = (
     projectTemplatesCallback: (status: boolean) => void,
     dashboardCallback: (status: boolean) => void,
-    projectUuid: string | null
+    projectUuid: string | null,
+    dashboardView: string | null
 ) => {
     return async (dispatch: Dispatch<TemplateAction>) => {
         try {
-            let response = await api.get(`/template/project/${projectUuid}`);
+            let response;
+
+            if (!projectUuid && dashboardView) {
+                response = await api.get(`/template/project/${dashboardView}`);
+            } else {
+                response = await api.get(`/template/project/${projectUuid}`);
+            }
 
             dispatch({
                 type: TemplateActionType.USER_FIND_TEMPLATE,
