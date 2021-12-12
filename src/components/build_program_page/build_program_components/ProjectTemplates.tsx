@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { findTemplates } from '../../../redux/templates/templateActions';
 
+//Router:
+import { useParams } from 'react-router-dom';
+
 //Components:
 import { ReactComponent as NoTemplateSVG } from '../../../assets/template_none.svg';
 import TemplateComponent from './TemplateComponent';
@@ -73,6 +76,7 @@ const ProjectTemplates = ({
     dashboardTemplatesLoadedCallback,
     toggleDeleteTemplateModal,
 }: IComponentProps): JSX.Element => {
+    let { dashboardView } = useParams<{ dashboardView: string }>();
     const dispatch = useDispatch();
     const templates = useSelector(
         (state: RootStateOrAny) => state?.projectTemplates
@@ -84,16 +88,41 @@ const ProjectTemplates = ({
     //State hander for selected template components:
     const [selectedTemplate, setSelectedTemplate] = useState('');
 
+    const isNonProjectView = () => {
+        if (
+            !projectUuid &&
+            dashboardView !== 'project' &&
+            (dashboardView === 'recents' ||
+                dashboardView === 'published' ||
+                dashboardView === 'drafts')
+        )
+            return true;
+
+        return false;
+    };
+
     useEffect(() => {
         if (areTemplatesLoaded) setAreTemplatesLoaded(!areTemplatesLoaded);
-        dispatch(
-            findTemplates(
-                (status: boolean) => setAreTemplatesLoaded(status),
-                dashboardTemplatesLoadedCallback,
-                projectUuid
-            )
-        );
-    }, [projectUuid]);
+        if (isNonProjectView()) {
+            dispatch(
+                findTemplates(
+                    (status: boolean) => setAreTemplatesLoaded(status),
+                    dashboardTemplatesLoadedCallback,
+                    null,
+                    dashboardView
+                )
+            );
+        } else {
+            dispatch(
+                findTemplates(
+                    (status: boolean) => setAreTemplatesLoaded(status),
+                    dashboardTemplatesLoadedCallback,
+                    projectUuid,
+                    null
+                )
+            );
+        }
+    }, [projectUuid, dashboardView]);
 
     const isTemplateSelected = (id: string) => {
         if (id !== selectedTemplate) return false;
