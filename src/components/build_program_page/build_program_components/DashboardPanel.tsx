@@ -223,9 +223,7 @@ const DashboardPanel = ({
         let templateDetails = {
             templateFileTitle: 'Untitled',
             id: templateUuid,
-            projectDetails: {
-                projectUuid: projectUuid,
-            },
+            projectId: projectUuid,
         };
 
         dispatch(
