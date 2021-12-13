@@ -141,6 +141,8 @@ const ProjectInfo = ({
         projectTemplates,
         updatedDate,
         createdBy,
+        userId,
+        userImg,
         id,
     } = currProject;
 
@@ -210,7 +212,7 @@ const ProjectInfo = ({
                 </CreatedByHeader>
                 <CreatedByBox>
                     <Avatar
-                        src={createdBy.userImage}
+                        src={userImg}
                         size="sm"
                         alt="User image"
                         radius="xl"
