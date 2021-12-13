@@ -291,7 +291,6 @@ const MainAddReviewPageView = ({
             usefulScore: 0,
             notUsefulScore: 0,
             flaggedCount: 0,
-            reviewAuthorId: `${User?.uuid || 'UnknownUuidError'}`,
             reviewAuthorName: `${User?.username || 'Anonymous'}`,
             reviewAuthorImg: `${User?.image || 'UnknownImgLinkError'}`,
         };
