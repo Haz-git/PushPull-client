@@ -49,6 +49,7 @@ const GeneralModal = ({
                 onClose={closeFunc}
                 size={size}
                 overflow="outside"
+                zIndex={500}
             >
                 {children}
             </Modal>
