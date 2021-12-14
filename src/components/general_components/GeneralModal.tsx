@@ -30,7 +30,6 @@ const GeneralModal = ({
         <>
             <Modal
                 centered={false}
-                zIndex={99}
                 hideCloseButton={hideCloseButton}
                 closeOnClickOutside={closeOnClickOutside}
                 title={title}
