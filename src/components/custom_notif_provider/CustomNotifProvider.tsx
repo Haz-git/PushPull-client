@@ -32,7 +32,11 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
             return (
                 <>
                     <GlobalStyle />
-                    <NotificationsProvider position="bottom-left" limit={5}>
+                    <NotificationsProvider
+                        position="bottom-left"
+                        limit={5}
+                        zIndex={89}
+                    >
                         {children}
                     </NotificationsProvider>
                 </>
@@ -42,7 +46,11 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
         return (
             <>
                 <GlobalStylesBuilder />
-                <NotificationsProvider position={repositionNotif()} limit={5}>
+                <NotificationsProvider
+                    position={repositionNotif()}
+                    limit={5}
+                    zIndex={89}
+                >
                     {children}
                 </NotificationsProvider>
             </>

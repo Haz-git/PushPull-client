@@ -32,6 +32,7 @@ const GeneralModal = ({
                 centered={false}
                 hideCloseButton={hideCloseButton}
                 closeOnClickOutside={closeOnClickOutside}
+                zIndex={99}
                 title={title}
                 styles={{
                     title: {
