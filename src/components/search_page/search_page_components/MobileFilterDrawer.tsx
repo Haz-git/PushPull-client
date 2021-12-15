@@ -3,6 +3,7 @@ import * as React from 'react';
 //Components:
 import FilterColumn from './FilterColumn';
 import { Drawer } from '@mantine/core';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -24,11 +25,13 @@ const MobileFilterDrawer = ({
     handleIsResultsLoaded,
     handleDrawerState,
 }: IComponentProps): JSX.Element => {
+    const { height } = useWindowDimensions();
+
     return (
         <>
             <Drawer
                 position="bottom"
-                size="95vh"
+                size={`${height}px`}
                 shadow="xs"
                 opened={isOpen}
                 onClose={() => closeFunc(false)}
