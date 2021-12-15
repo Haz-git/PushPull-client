@@ -180,9 +180,7 @@ Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
-    const Template = useSelector(
-        (state: RootStateOrAny) => state.projectTemplates
-    );
+    const template = useSelector((state: RootStateOrAny) => state?.template);
     const Location = useLocation();
     const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
@@ -314,12 +312,12 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     };
 
     const renderTemplateTitle = () => {
-        if (checkIfFile() && Template)
+        if (checkIfFile() && template)
             return (
                 <TemplateTitleContainer>
                     <Text
                         textColor="#ffffff"
-                        text={`${Template[0]?.templateFileTitle}`}
+                        text={`${template?.templateFileTitle}`}
                         fontSize="1rem"
                         fontWeight="700"
                     />
