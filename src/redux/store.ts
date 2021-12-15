@@ -13,6 +13,7 @@ import reviewReducer from './reviews/reviewReducer';
 import authReducer from './auth/authReducer';
 import profileReducer from './profile/profileReducer';
 import builderReducer from './builder/builderReducer';
+import projectTemplateReducer from './templates/projectTemplateReducer';
 import templateReducer from './templates/templateReducer';
 
 //Persistence:
@@ -36,7 +37,8 @@ const appReducer = combineReducers({
     reviews: reviewReducer,
     profile: profileReducer,
     builderProjects: builderReducer,
-    projectTemplates: templateReducer,
+    projectTemplates: projectTemplateReducer,
+    template: templateReducer,
 });
 
 //Persisting formReducer:
