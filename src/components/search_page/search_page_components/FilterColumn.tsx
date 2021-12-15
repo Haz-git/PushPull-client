@@ -112,10 +112,15 @@ export const ReturnButton = styled.button`
 const OtherButtonContainer = styled.div`
     position: absolute;
     padding: 0rem 1rem;
-    // top: 90vh;
-    // transform: translateY(-180%);
-    bottom: 1rem;
     width: 100%;
+
+    @media ${deviceMin.mobileS} {
+        bottom: 0rem;
+    }
+
+    @media ${deviceMin.mobileM} {
+        bottom: 1rem;
+    }
 `;
 
 //interfaces:
@@ -147,7 +152,7 @@ const FilterColumn = ({
     }
 
     //Height window dimension:
-    const { height } = useWindowDimensions();
+    const { height, width } = useWindowDimensions();
 
     //Redux dispatch hook:
     const dispatch = useDispatch();
@@ -340,6 +345,11 @@ const FilterColumn = ({
                             <OtherButtonContainer>
                                 <GeneralButton
                                     buttonLabel="Reset All Filters"
+                                    padding={
+                                        width <= 320
+                                            ? '.4rem .4rem'
+                                            : '.8rem 1rem'
+                                    }
                                     margin=".75rem 0"
                                     onClick={() => {
                                         handleIsResultsLoaded(false);
@@ -352,6 +362,11 @@ const FilterColumn = ({
                                 />
                                 <GeneralButton
                                     buttonLabel="Suggest New Program"
+                                    padding={
+                                        width <= 320
+                                            ? '.4rem .4rem'
+                                            : '.8rem 1rem'
+                                    }
                                     onClick={() => {
                                         if (mobileFilterColumnCloseFunc)
                                             mobileFilterColumnCloseFunc(false);
