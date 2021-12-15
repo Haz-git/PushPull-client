@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 import { TemplateAction } from './templateInterfaces';
 import { TemplateActionType } from './action-types';
 
+//Project Templates or View- specific template actions.
+
 export const findTemplates = (
     projectTemplatesCallback: (status: boolean) => void,
     dashboardCallback: (status: boolean) => void,
@@ -110,6 +112,28 @@ export const deleteTemplate = (
             }
         } catch (err) {
             updateNotif(id, false);
+        }
+    };
+};
+
+//Template - Specific actions:
+
+export const queryTemplate = (
+    templateId: string,
+    callBack: (status: boolean) => void
+) => {
+    return async (dispatch: Dispatch<TemplateAction>) => {
+        try {
+            let response = await api.get(`/template/query/${templateId}`);
+
+            dispatch({
+                type: TemplateActionType.USER_QUERY_TEMPLATE,
+                payload: response.data.template,
+            });
+
+            if (response) callBack(true);
+        } catch (err) {
+            callBack(false);
         }
     };
 };
