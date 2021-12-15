@@ -62,6 +62,7 @@ const BuilderBackButtonContainer = styled.div`
     margin-right: 0.5rem;
     background: #525252;
     border-radius: 0.3rem;
+    width: 1.8rem;
 `;
 
 const BuilderBackButton = styled(Link)``;
