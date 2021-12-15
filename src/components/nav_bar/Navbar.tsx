@@ -7,10 +7,11 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
 import Userfront from '@userfront/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import { ReactComponent as DarkLogoSVG } from '../../assets/dark_logo.svg';
 import { Burger } from '@mantine/core';
+import Text from '../general_components/Text';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
 import UserDropdown from './navbar_components/UserDropdown';
@@ -37,7 +38,7 @@ const StyledNavbar = styled.nav<NavbarProps>`
         props.isBuilder ? '#2C2C2C' : props.theme.lightBackground};
     width: 100%;
     height: 3.75rem;
-    padding: 0.5rem 1rem;
+    // padding: 0.5rem 1rem;
     text-align: left;
     // border-bottom: 1px solid #d6d6d6;
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
@@ -46,11 +47,15 @@ const StyledNavbar = styled.nav<NavbarProps>`
     z-index: 99;
 `;
 
-const LeftWrapper = styled.div`
+const LeftWrapper = styled.div<LeftWrapperProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: -0.5rem;
+    // margin-left: -0.5rem;
+    margin-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-right: ${(props) => (props.isFile ? '1px solid #ffffff' : 'none')};
+    height: 3.75rem;
 `;
 
 const BuilderBackButtonContainer = styled.div`
@@ -61,7 +66,7 @@ const BuilderBackButtonContainer = styled.div`
 
 const BuilderBackButton = styled(Link)``;
 
-const StyledNavLogo = styled(Link)`
+const StyledNavLogo = styled(NavLink)`
     left: 0;
     height: 100%;
     width: 100%;
@@ -101,7 +106,28 @@ const LogoContainer = styled.div`
     }
 `;
 
-const AuthContainer = styled.div``;
+const TemplateTitleContainer = styled.div``;
+
+const AuthContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+`;
+
+const TemplateButtonsContainer = styled.div`
+    height: 3.75rem;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    margin-right: 1rem;
+    padding: 0rem 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
+`;
+
 const ButtonsContainer = styled.div`
     @media ${deviceMin.mobileS} {
         display: none;
@@ -143,12 +169,19 @@ interface NavbarProps {
     isBuilder: boolean;
 }
 
+interface LeftWrapperProps {
+    isFile: boolean;
+}
+
 //Userfront Initialization:
 
 Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
+    const Template = useSelector(
+        (state: RootStateOrAny) => state.projectTemplates
+    );
     const Location = useLocation();
     const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
@@ -208,45 +241,116 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         return false;
     };
 
+    const checkIfBuilder = () => {
+        if (Location.pathname.includes('builder')) return true;
+        return false;
+    };
+
+    const checkIfFile = () => {
+        if (Location.pathname.includes('file')) return true;
+        return false;
+    };
+
     const renderLogoInBuilder = () => {
         if (checkIfBuilderOrFile()) return <DarkLogoSVG />;
         return <LogoSVG />;
     };
 
+    const renderNavLink = () => {
+        if (checkIfFile()) return null;
+        return <StyledNavLogo to={returnLogoLink()} />;
+    };
+
+    const isLinkActive = () => {
+        if (checkIfFile()) return false;
+        return true;
+    };
+
     const returnLogoLink = () => {
-        if (checkIfBuilderOrFile()) return '/builder/dashboard/recents';
+        if (checkIfBuilderOrFile()) {
+            if (checkIfBuilder()) return '/builder/dashboard/recents';
+            if (checkIfFile()) return '';
+        }
         return '/';
     };
 
     const renderBuilderBackButton = () => {
         if (checkIfBuilderOrFile())
+            if (checkIfBuilder()) {
+                return (
+                    <BuilderBackButtonContainer>
+                        <Tooltip
+                            placement="start"
+                            transition="rotate-left"
+                            withArrow
+                            label="Back to homepage"
+                        >
+                            <BuilderBackButton to="/">
+                                <LeftIcon />
+                            </BuilderBackButton>
+                        </Tooltip>
+                    </BuilderBackButtonContainer>
+                );
+            }
+
+        if (checkIfFile()) {
             return (
                 <BuilderBackButtonContainer>
                     <Tooltip
                         placement="start"
                         transition="rotate-left"
                         withArrow
-                        label="Back to homepage"
+                        label="Back to projects"
                     >
-                        <BuilderBackButton to="/">
+                        <BuilderBackButton to="/builder/dashboard/recents">
                             <LeftIcon />
                         </BuilderBackButton>
                     </Tooltip>
                 </BuilderBackButtonContainer>
             );
+        }
+        return null;
+    };
+
+    const renderTemplateTitle = () => {
+        if (checkIfFile() && Template)
+            return (
+                <TemplateTitleContainer>
+                    <Text
+                        textColor="#ffffff"
+                        text={`${Template[0]?.templateFileTitle}`}
+                        fontSize="1rem"
+                        fontWeight="700"
+                    />
+                </TemplateTitleContainer>
+            );
+        return null;
+    };
+
+    const renderTemplateButtons = () => {
+        if (checkIfFile())
+            return (
+                <TemplateButtonsContainer>
+                    <GeneralButton buttonLabel="Save" />
+                    <GeneralButton buttonLabel="Publish" />
+                </TemplateButtonsContainer>
+            );
+
         return null;
     };
 
     return (
         <StyledNavbar isBuilder={checkIfBuilderOrFile()}>
-            <LeftWrapper>
+            <LeftWrapper isFile={checkIfFile()}>
                 {renderBuilderBackButton()}
                 <LogoContainer>
                     {renderLogoInBuilder()}
-                    <StyledNavLogo to={returnLogoLink()} />
+                    {renderNavLink()}
                 </LogoContainer>
             </LeftWrapper>
+            {renderTemplateTitle()}
             <AuthContainer>
+                {renderTemplateButtons()}
                 {renderAuthOptionsIfUserNotLoggedIn()}
             </AuthContainer>
             <GeneralDrawer
