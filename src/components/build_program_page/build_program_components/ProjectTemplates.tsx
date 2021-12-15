@@ -31,7 +31,7 @@ const MainContainer = styled.div`
 
     @media ${deviceMin.tabletp} {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(16rem, auto));
+        grid-template-columns: repeat(auto-fill, minmax(17rem, auto));
         align-items: stretch;
         justify-content: stretch;
         row-gap: 2rem;
