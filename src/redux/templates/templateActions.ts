@@ -131,9 +131,9 @@ export const queryTemplate = (
                 payload: response.data.template,
             });
 
-            if (response) callBack(true);
+            if (response) callBack(false);
         } catch (err) {
-            callBack(false);
+            callBack(true);
         }
     };
 };
