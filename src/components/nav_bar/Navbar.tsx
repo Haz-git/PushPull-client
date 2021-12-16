@@ -180,7 +180,7 @@ Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
-    const template = useSelector((state: RootStateOrAny) => state?.template);
+    const template = useSelector((state: RootStateOrAny) => state.template);
     const Location = useLocation();
     const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
@@ -260,11 +260,6 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         return <StyledNavLogo to={returnLogoLink()} />;
     };
 
-    const isLinkActive = () => {
-        if (checkIfFile()) return false;
-        return true;
-    };
-
     const returnLogoLink = () => {
         if (checkIfBuilderOrFile()) {
             if (checkIfBuilder()) return '/builder/dashboard/recents';
@@ -317,7 +312,7 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
                 <TemplateTitleContainer>
                     <Text
                         textColor="#ffffff"
-                        text={`${template?.templateFileTitle}`}
+                        text={`${template.templateFileTitle}`}
                         fontSize="1rem"
                         fontWeight="700"
                     />
