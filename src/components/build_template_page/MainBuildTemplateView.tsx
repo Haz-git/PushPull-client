@@ -20,31 +20,29 @@ interface IComponentProps {
             fileUuid: string;
         };
     };
+    rest: any;
 }
 
 const MainBuildTemplateView = ({
-    isTemplateLoading,
-    controlTemplateLoadingStatus,
     match: {
         params: { fileUuid },
     },
+    ...rest
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        controlTemplateLoadingStatus(true);
-        dispatch(queryTemplate(fileUuid, controlTemplateLoadingStatus));
+        // controlTemplateLoadingStatus(true);
+        dispatch(
+            queryTemplate(fileUuid, (status: boolean) => console.log(status))
+        );
     }, []);
 
     const template = useSelector((state: RootStateOrAny) => state?.template);
 
     return (
         <>
-            {!isTemplateLoading ? (
-                <div>Template view </div>
-            ) : (
-                <div>loading</div>
-            )}
+            <div>Template view </div>
         </>
     );
 };
