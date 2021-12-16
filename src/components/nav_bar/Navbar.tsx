@@ -164,6 +164,7 @@ const MobileButtonsContainer = styled.div`
 
 interface IComponentProps {
     toggleAuthDrawerWithView: (state: boolean, view: string) => void;
+    isTemplateLoading: boolean;
 }
 
 interface NavbarProps {
@@ -178,12 +179,17 @@ interface LeftWrapperProps {
 
 Userfront.init('5nxxrqn7');
 
-const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
+const Navbar = ({
+    toggleAuthDrawerWithView,
+    isTemplateLoading,
+}: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
     const template = useSelector((state: RootStateOrAny) => state.template);
     const Location = useLocation();
     const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+
+    console.log(isTemplateLoading);
 
     const renderAuthOptionsIfUserNotLoggedIn = () => {
         if (isUserLoggedIn) {
@@ -307,7 +313,7 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     };
 
     const renderTemplateTitle = () => {
-        if (checkIfFile() && template)
+        if (!isTemplateLoading && checkIfFile() && template)
             return (
                 <TemplateTitleContainer>
                     <Text
