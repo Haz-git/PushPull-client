@@ -200,7 +200,7 @@ const TemplateComponent = ({
         setNewTemplateFileTitle(e.target.value);
 
     const handleOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && newTemplateFileTitle !== '') {
             dispatch(
                 updateTemplate(
                     () => {},
