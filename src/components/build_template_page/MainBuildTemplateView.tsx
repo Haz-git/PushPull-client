@@ -13,6 +13,8 @@ import { queryTemplate } from '../../redux/templates/templateActions';
 //Interfaces:
 
 interface IComponentProps {
+    controlTemplateLoadingStatus: (status: boolean) => void;
+    isTemplateLoading: boolean;
     match: {
         params: {
             fileUuid: string;
@@ -21,24 +23,30 @@ interface IComponentProps {
 }
 
 const MainBuildTemplateView = ({
+    isTemplateLoading,
+    controlTemplateLoadingStatus,
     match: {
         params: { fileUuid },
     },
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
-    const [isTemplateLoaded, setIsTemplateLoaded] = useState(false);
 
     useEffect(() => {
-        dispatch(
-            queryTemplate(fileUuid, (status: boolean) =>
-                setIsTemplateLoaded(status)
-            )
-        );
+        controlTemplateLoadingStatus(true);
+        dispatch(queryTemplate(fileUuid, controlTemplateLoadingStatus));
     }, []);
 
     const template = useSelector((state: RootStateOrAny) => state?.template);
 
-    return <>template view</>;
+    return (
+        <>
+            {!isTemplateLoading ? (
+                <div>Template view </div>
+            ) : (
+                <div>loading</div>
+            )}
+        </>
+    );
 };
 
 export default MainBuildTemplateView;
