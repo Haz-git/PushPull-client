@@ -227,10 +227,6 @@ const App = () => {
                                 authPath="/authenticate"
                                 isAuthenticated={isUserLoggedIn}
                                 component={MainBuildTemplateView}
-                                controlTemplateLoadingStatus={(
-                                    status: boolean
-                                ) => setIsTemplateLoading(status)}
-                                isTemplateLoading={isTemplateLoading}
                                 toggleAuthDrawerWithView={
                                     toggleAuthDrawerWithView
                                 }
