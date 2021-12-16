@@ -13,21 +13,17 @@ import { queryTemplate } from '../../redux/templates/templateActions';
 //Interfaces:
 
 interface IComponentProps {
-    controlTemplateLoadingStatus: (status: boolean) => void;
-    isTemplateLoading: boolean;
     match: {
         params: {
             fileUuid: string;
         };
     };
-    rest: any;
 }
 
 const MainBuildTemplateView = ({
     match: {
         params: { fileUuid },
     },
-    ...rest
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
