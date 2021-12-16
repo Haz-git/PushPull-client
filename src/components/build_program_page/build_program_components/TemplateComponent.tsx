@@ -218,7 +218,7 @@ const TemplateComponent = ({
     const truncateTemplateNameOnWindowDimensions = () => {
         if (width <= 320) return '10rem';
         if (width <= 375) return '13rem';
-        else return '15rem';
+        else return '13.5rem';
     };
 
     const renderTitleOrInputForRename = () => {
