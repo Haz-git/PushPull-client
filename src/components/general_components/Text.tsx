@@ -27,7 +27,7 @@ interface IComponentProps {
     fontSize?: string;
     subText?: boolean;
     mainText?: boolean;
-    truncateWidth?: string;
+    truncateWidth?: string | undefined;
 }
 
 const Text = ({
