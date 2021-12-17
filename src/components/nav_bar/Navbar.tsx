@@ -47,14 +47,13 @@ const StyledNavbar = styled.nav<NavbarProps>`
     z-index: 99;
 `;
 
-const LeftWrapper = styled.div<LeftWrapperProps>`
+const LeftWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     // margin-left: -0.5rem;
     margin-left: 0.5rem;
     padding-right: 0.5rem;
-    border-right: ${(props) => (props.isFile ? '1px solid #ffffff' : 'none')};
     height: 3.75rem;
 `;
 
@@ -170,10 +169,6 @@ interface NavbarProps {
     isBuilder: boolean;
 }
 
-interface LeftWrapperProps {
-    isFile: boolean;
-}
-
 //Userfront Initialization:
 
 Userfront.init('5nxxrqn7');
@@ -182,9 +177,6 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
 
     const template = useSelector((state: RootStateOrAny) => state.template);
-    const isLoading = useSelector(
-        (state: RootStateOrAny) => state?.uiLoader?.isLoading
-    );
     const Location = useLocation();
     const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
@@ -235,133 +227,55 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         }
     };
 
-    const checkIfBuilderOrFile = () => {
-        if (
-            Location.pathname.includes('builder') ||
-            Location.pathname.includes('file')
-        )
-            return true;
-        return false;
-    };
-
     const checkIfBuilder = () => {
         if (Location.pathname.includes('builder')) return true;
         return false;
     };
 
-    const checkIfFile = () => {
-        if (Location.pathname.includes('file')) return true;
-        return false;
-    };
-
     const renderLogoInBuilder = () => {
-        if (checkIfBuilderOrFile()) return <DarkLogoSVG />;
+        if (checkIfBuilder()) return <DarkLogoSVG />;
         return <LogoSVG />;
     };
 
-    const renderNavLink = () => {
-        if (checkIfFile()) return null;
-        return <StyledNavLogo to={returnLogoLink()} />;
-    };
-
     const returnLogoLink = () => {
-        if (checkIfBuilderOrFile()) {
+        if (checkIfBuilder()) {
             if (checkIfBuilder()) return '/builder/dashboard/recents';
-            if (checkIfFile()) return '';
         }
         return '/';
     };
 
     const renderBuilderBackButton = () => {
-        if (checkIfBuilderOrFile())
-            if (checkIfBuilder()) {
-                return (
-                    <BuilderBackButtonContainer>
-                        <Tooltip
-                            placement="start"
-                            transition="rotate-left"
-                            withArrow
-                            label="Back to homepage"
-                        >
-                            <BuilderBackButton to="/">
-                                <LeftIcon />
-                            </BuilderBackButton>
-                        </Tooltip>
-                    </BuilderBackButtonContainer>
-                );
-            }
-
-        if (checkIfFile()) {
+        if (checkIfBuilder()) {
             return (
                 <BuilderBackButtonContainer>
                     <Tooltip
                         placement="start"
                         transition="rotate-left"
                         withArrow
-                        label="Back to projects"
+                        label="Back to homepage"
                     >
-                        <BuilderBackButton to="/builder/dashboard/recents">
+                        <BuilderBackButton to="/">
                             <LeftIcon />
                         </BuilderBackButton>
                     </Tooltip>
                 </BuilderBackButtonContainer>
             );
         }
-        return null;
-    };
-
-    const renderTemplateTitle = () => {
-        if (isLoading) {
-            return (
-                <TemplateTitleContainer>
-                    <Text
-                        textColor="#ffffff"
-                        text={`Loading`}
-                        fontSize="1rem"
-                        fontWeight="700"
-                    />
-                </TemplateTitleContainer>
-            );
-        }
-
-        if (!isLoading && checkIfFile() && template)
-            return (
-                <TemplateTitleContainer>
-                    <Text
-                        textColor="#ffffff"
-                        text={`${template.templateFileTitle}`}
-                        fontSize="1rem"
-                        fontWeight="700"
-                    />
-                </TemplateTitleContainer>
-            );
-        return null;
-    };
-
-    const renderTemplateButtons = () => {
-        if (checkIfFile())
-            return (
-                <TemplateButtonsContainer>
-                    <GeneralButton buttonLabel="Save" />
-                    <GeneralButton buttonLabel="Publish" />
-                </TemplateButtonsContainer>
-            );
 
         return null;
     };
 
     return (
-        <StyledNavbar isBuilder={checkIfBuilderOrFile()}>
-            <LeftWrapper isFile={checkIfFile()}>
+        <StyledNavbar isBuilder={checkIfBuilder()}>
+            <LeftWrapper>
                 {renderBuilderBackButton()}
                 <LogoContainer>
-                    {renderLogoInBuilder()}
-                    {renderNavLink()}
+                    <StyledNavLogo to={returnLogoLink()}>
+                        {renderLogoInBuilder()}
+                    </StyledNavLogo>
                 </LogoContainer>
             </LeftWrapper>
-            {renderTemplateTitle()}
             <AuthContainer>
-                {renderTemplateButtons()}
                 {renderAuthOptionsIfUserNotLoggedIn()}
             </AuthContainer>
             <GeneralDrawer
