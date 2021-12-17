@@ -37,7 +37,7 @@ const ProgressLogoContainer = styled.div`
 `;
 
 const ProgressText = styled.h1<IStyledProps>`
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 500;
     color: ${(props) => (props.darkMode ? '#ffffff' : '#1b0c0c')};
 
@@ -47,7 +47,7 @@ const ProgressText = styled.h1<IStyledProps>`
     }
 
     @media ${deviceMin.browserSm} {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
     }
 `;
 
