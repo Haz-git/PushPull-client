@@ -142,3 +142,12 @@ export const queryTemplate = (templateId: string) => {
         }
     };
 };
+
+export const clearTemplate = () => {
+    return async (dispatch: Dispatch<any>) => {
+        dispatch({
+            type: TemplateActionType.USER_CLEAR_TEMPLATE,
+            payload: {},
+        });
+    };
+};

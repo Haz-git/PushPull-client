@@ -24,9 +24,15 @@ interface queryTemplate {
     payload?: any;
 }
 
+interface clearTemplate {
+    type: TemplateActionType.USER_CLEAR_TEMPLATE;
+    payload?: any;
+}
+
 export type TemplateAction =
     | findTemplate
     | addTemplate
     | updateTemplate
     | deleteTemplate
-    | queryTemplate;
+    | queryTemplate
+    | clearTemplate;
