@@ -101,7 +101,6 @@ const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
-    const [isTemplateLoading, setIsTemplateLoading] = useState(false);
 
     const isUserLoggedIn = useLoginStatus();
 
@@ -150,7 +149,6 @@ const App = () => {
                         </BugReportModalContainer>
                         <Navbar
                             toggleAuthDrawerWithView={toggleAuthDrawerWithView}
-                            isTemplateLoading={isTemplateLoading}
                         />
                         <Switch>
                             <Route
