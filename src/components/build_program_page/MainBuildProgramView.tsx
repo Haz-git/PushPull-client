@@ -35,7 +35,6 @@ const SuspenseWrapper = styled.section`
 const MainContainer = styled.section`
     background: #ffffff;
     width: 100%;
-    padding-top: 3.75rem;
 
     @media ${deviceMin.mobileS} {
         display: block;
@@ -43,6 +42,8 @@ const MainContainer = styled.section`
     }
 
     @media ${deviceMin.laptop} {
+        padding-top: 3.75rem;
+
         height: 100%;
         display: grid;
         grid-template-columns: 12rem auto;
@@ -239,7 +240,7 @@ const MainBuildProgramView = ({
             <Suspense
                 fallback={
                     <LoadProgress
-                        isLoadBuilderMode={true}
+                        darkMode={true}
                         isAnimating={isProgressLoading}
                         minimum={0.9}
                         incrementDuration={100}
@@ -348,7 +349,7 @@ const MainBuildProgramView = ({
                     </>
                 ) : (
                     <LoadProgress
-                        isLoadBuilderMode={true}
+                        darkMode={true}
                         isAnimating={isProgressLoading}
                         minimum={0.6}
                         incrementDuration={100}
