@@ -3,13 +3,11 @@ import { useState, useEffect } from 'react';
 
 //Components:
 import LoadProgress from '../nprogress/LoadProgress';
+import Toolbar from './build_template_components/Toolbar';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
-import {
-    queryTemplate,
-    clearTemplate,
-} from '../../redux/templates/templateActions';
+import { queryTemplate } from '../../redux/templates/templateActions';
 
 //Styles:
 
