@@ -106,26 +106,11 @@ const LogoContainer = styled.div`
     }
 `;
 
-const TemplateTitleContainer = styled.div``;
-
 const AuthContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 0.5rem;
-`;
-
-const TemplateButtonsContainer = styled.div`
-    height: 3.75rem;
-    border-left: 1px solid #ffffff;
-    border-right: 1px solid #ffffff;
     margin-right: 1rem;
-    padding: 0rem 1rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 1rem;
 `;
 
 const ButtonsContainer = styled.div`
