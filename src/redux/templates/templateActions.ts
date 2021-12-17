@@ -3,6 +3,12 @@ import { Dispatch } from 'redux';
 import { TemplateAction } from './templateInterfaces';
 import { TemplateActionType } from './action-types';
 
+//Loader ui actions:
+import {
+    invokeLoaderState,
+    disableLoaderState,
+} from '../uiLoader/uiLoaderActions';
+
 //Project Templates or View- specific template actions.
 
 export const findTemplates = (
@@ -118,22 +124,21 @@ export const deleteTemplate = (
 
 //Template - Specific actions:
 
-export const queryTemplate = (
-    templateId: string,
-    callBack: (status: boolean) => void
-) => {
-    return async (dispatch: Dispatch<TemplateAction>) => {
+export const queryTemplate = (templateId: string) => {
+    return async (dispatch: Dispatch<any>) => {
         try {
             let response = await api.get(`/template/query/${templateId}`);
+
+            dispatch(invokeLoaderState());
 
             dispatch({
                 type: TemplateActionType.USER_QUERY_TEMPLATE,
                 payload: response.data.template,
             });
 
-            if (response) callBack(false);
+            if (response) dispatch(disableLoaderState());
         } catch (err) {
-            callBack(true);
+            dispatch(disableLoaderState());
         }
     };
 };
