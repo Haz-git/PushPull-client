@@ -88,6 +88,7 @@ const MainBuildTemplateView = loadable(
     {
         fallback: (
             <LoadProgress
+                loadingText="Generating Template..."
                 darkMode={true}
                 isAnimating={true}
                 minimum={0}
