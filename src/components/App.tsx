@@ -54,7 +54,7 @@ const MainAddReviewPageView = loadable(
     {
         fallback: (
             <LoadProgress
-                isLoadBuilderMode={false}
+                darkMode={false}
                 isAnimating={true}
                 minimum={0}
                 incrementDuration={500}
@@ -71,7 +71,7 @@ const MainBuildProgramView = loadable(
     {
         fallback: (
             <LoadProgress
-                isLoadBuilderMode={true}
+                darkMode={true}
                 isAnimating={true}
                 minimum={0}
                 incrementDuration={500}
@@ -88,7 +88,7 @@ const MainBuildTemplateView = loadable(
     {
         fallback: (
             <LoadProgress
-                isLoadBuilderMode={true}
+                darkMode={true}
                 isAnimating={true}
                 minimum={0}
                 incrementDuration={500}
