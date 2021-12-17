@@ -156,7 +156,7 @@ const TemplateComponent = ({
 
     dayjs.extend(RelativeTime);
     const MENU_ID = 'TEMPLATECOMPONENTCONTEXTMENU';
-    const templateRef = useRef<HTMLDivElement | null>(null);
+    const optionsContainerRef = useRef<HTMLButtonElement | null>(null);
     const handleDeleteRequest = () => {
         toggleDeleteTemplateModal(true, id, projectUuid);
     };
@@ -263,7 +263,10 @@ const TemplateComponent = ({
         if (isMobile) {
             return (
                 <OptionsContainer>
-                    <OptionsButton onClick={renderContextMenuOnMobile}>
+                    <OptionsButton
+                        onClick={renderContextMenuOnMobile}
+                        ref={optionsContainerRef}
+                    >
                         <OptionsIcon />
                     </OptionsButton>
                 </OptionsContainer>
@@ -273,7 +276,7 @@ const TemplateComponent = ({
 
     const renderContextMenuOnMobile = (event: React.MouseEvent) => {
         if (event.cancelable) event.preventDefault();
-        const posRef = templateRef.current?.getBoundingClientRect();
+        const posRef = optionsContainerRef.current?.getBoundingClientRect();
 
         if (posRef) {
             return show(event, {
@@ -297,7 +300,6 @@ const TemplateComponent = ({
             onClick={EntityClickHandler}
             isSelected={isSelected}
             onContextMenu={displayContextMenu}
-            ref={templateRef}
         >
             <ImageContainer isSelected={isSelected}>
                 {processSnapshot()}
