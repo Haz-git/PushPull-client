@@ -29,16 +29,23 @@ const MainBuildTemplateView = ({
 
     useEffect(() => {
         // controlTemplateLoadingStatus(true);
-        dispatch(
-            queryTemplate(fileUuid, (status: boolean) => console.log(status))
-        );
+        dispatch(queryTemplate(fileUuid));
     }, []);
 
+    const isLoading = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.isLoading
+    );
+
+    console.log('isLoading from Template view', isLoading);
     const template = useSelector((state: RootStateOrAny) => state?.template);
 
     return (
         <>
-            <div>Template view </div>
+            {isLoading === true ? (
+                <div>Loading</div>
+            ) : (
+                <div>Template view </div>
+            )}
         </>
     );
 };
