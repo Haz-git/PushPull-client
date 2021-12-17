@@ -7,7 +7,6 @@ const uiLoaderReducer = (state: {} = initialState, action: uiLoaderAction) => {
     switch (action.type) {
         case uiLoaderActionType.START_LOADER_STATE:
             return { ...action.payload };
-
         case uiLoaderActionType.END_LOADER_STATE:
             return { ...action.payload };
         default:
