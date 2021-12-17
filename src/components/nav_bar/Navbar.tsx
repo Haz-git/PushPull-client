@@ -265,53 +265,58 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
         return null;
     };
 
-    return (
-        <StyledNavbar isBuilder={checkIfBuilder()}>
-            <LeftWrapper>
-                {renderBuilderBackButton()}
-                <LogoContainer>
-                    <StyledNavLogo to={returnLogoLink()}>
-                        {renderLogoInBuilder()}
-                    </StyledNavLogo>
-                </LogoContainer>
-            </LeftWrapper>
-            <AuthContainer>
-                {renderAuthOptionsIfUserNotLoggedIn()}
-            </AuthContainer>
-            <GeneralDrawer
-                openBoolean={isBurgerOpened}
-                closeFunc={() => setIsBurgerOpened(false)}
-                position="right"
-                size="50%"
-                padding={0}
-                title=""
-            >
-                <MobileButtonsContainer>
-                    <GeneralButton
-                        buttonLabel="Log in"
-                        padding=".45rem .7rem"
-                        buttonBackground="#ffffff"
-                        buttonTextColor="#7678ED"
-                        textShadow="none"
-                        border="2px solid #7678ED"
-                        onClick={() => {
-                            setIsBurgerOpened(false);
-                            toggleAuthDrawerWithView(true, 'LOGIN');
-                        }}
-                    />
+    const controlRenderNavbar = () => {
+        if (Location.pathname.includes('file')) return null;
+        return (
+            <StyledNavbar isBuilder={checkIfBuilder()}>
+                <LeftWrapper>
+                    {renderBuilderBackButton()}
+                    <LogoContainer>
+                        <StyledNavLogo to={returnLogoLink()}>
+                            {renderLogoInBuilder()}
+                        </StyledNavLogo>
+                    </LogoContainer>
+                </LeftWrapper>
+                <AuthContainer>
+                    {renderAuthOptionsIfUserNotLoggedIn()}
+                </AuthContainer>
+                <GeneralDrawer
+                    openBoolean={isBurgerOpened}
+                    closeFunc={() => setIsBurgerOpened(false)}
+                    position="right"
+                    size="50%"
+                    padding={0}
+                    title=""
+                >
+                    <MobileButtonsContainer>
+                        <GeneralButton
+                            buttonLabel="Log in"
+                            padding=".45rem .7rem"
+                            buttonBackground="#ffffff"
+                            buttonTextColor="#7678ED"
+                            textShadow="none"
+                            border="2px solid #7678ED"
+                            onClick={() => {
+                                setIsBurgerOpened(false);
+                                toggleAuthDrawerWithView(true, 'LOGIN');
+                            }}
+                        />
 
-                    <GeneralButton
-                        buttonLabel="Sign up"
-                        padding=".6rem .7rem"
-                        onClick={() => {
-                            setIsBurgerOpened(false);
-                            toggleAuthDrawerWithView(true, 'SIGNUP');
-                        }}
-                    />
-                </MobileButtonsContainer>
-            </GeneralDrawer>
-        </StyledNavbar>
-    );
+                        <GeneralButton
+                            buttonLabel="Sign up"
+                            padding=".6rem .7rem"
+                            onClick={() => {
+                                setIsBurgerOpened(false);
+                                toggleAuthDrawerWithView(true, 'SIGNUP');
+                            }}
+                        />
+                    </MobileButtonsContainer>
+                </GeneralDrawer>
+            </StyledNavbar>
+        );
+    };
+
+    return <>{controlRenderNavbar()}</>;
 };
 
 export default Navbar;
