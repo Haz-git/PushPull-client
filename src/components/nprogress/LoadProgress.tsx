@@ -17,12 +17,11 @@ const ProgressContainerWrapper = styled.div<IStyledProps>`
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: ${(props) =>
-        props.isLoadBuilderMode
-            ? `calc(100vh - 3.5rem)`
-            : `calc(100vh - 7.25rem)`};
+    /* min-height: ${(props) =>
+        props.darkMode ? `calc(100vh - 3.5rem)` : `calc(100vh - 7.25rem)`}; */
+    height: 100vh;
     background-color: ${(props) =>
-        props.isLoadBuilderMode ? '#2c2c2c' : 'rgba(244, 244, 244, 1)'};
+        props.darkMode ? '#2c2c2c' : 'rgba(244, 244, 244, 1)'};
 `;
 
 const ProgressContainer = styled.div`
@@ -40,8 +39,7 @@ const ProgressLogoContainer = styled.div`
 const ProgressText = styled.h1<IStyledProps>`
     font-size: 1.5rem;
     font-weight: 500;
-    color: ${(props) =>
-        props.isLoadBuilderMode ? '#ffffff' : props.theme.subText};
+    color: ${(props) => (props.darkMode ? '#ffffff' : '#1b0c0c')};
 
     @media ${deviceMin.mobileS} {
         font-size: 1.1rem;
@@ -68,23 +66,25 @@ const ProgressBarContainer = styled.div`
 //Interfaces:
 
 interface IStyledProps {
-    isLoadBuilderMode: boolean;
+    darkMode: boolean;
 }
 
 interface IComponentProps {
-    isLoadBuilderMode: boolean;
+    darkMode: boolean;
     isAnimating: boolean;
     animationDuration?: number;
     minimum?: number;
     incrementDuration?: number;
+    loadingText?: string;
 }
 
 const LoadProgress = ({
-    isLoadBuilderMode = true,
+    darkMode = false,
     isAnimating,
     animationDuration = 200,
     minimum = 0,
     incrementDuration = 800,
+    loadingText = 'Entering Builder Mode...',
 }: IComponentProps): JSX.Element => {
     const { isFinished, progress } = useNProgress({
         isAnimating,
@@ -93,44 +93,19 @@ const LoadProgress = ({
         minimum,
     });
 
+    const renderLogo = () => {
+        if (darkMode) return <DarkLogoSVG />;
+        return <LogoSVG />;
+    };
+
     const renderLoadProgress = () => {
-        if (isLoadBuilderMode && isLoadBuilderMode === true) {
-            return (
-                <>
-                    <ProgressLogoContainer>
-                        <DarkLogoSVG />
-                    </ProgressLogoContainer>
-                    <ProgressText isLoadBuilderMode={isLoadBuilderMode}>
-                        Entering Builder Mode...
-                    </ProgressText>
-                    <ProgressBarContainer>
-                        <Progress
-                            size="md"
-                            value={isAnimating ? progress * 100 : 0}
-                            styles={{
-                                root: {
-                                    background: '#ffffff',
-                                },
-                                bar: {
-                                    background: '#e07133',
-                                },
-                            }}
-                        />
-                    </ProgressBarContainer>
-                </>
-            );
-        }
         return (
             <>
-                <ProgressLogoContainer>
-                    <LogoSVG />
-                </ProgressLogoContainer>
-                <ProgressText isLoadBuilderMode={isLoadBuilderMode}>
-                    Entering Review Form...
-                </ProgressText>
+                <ProgressLogoContainer>{renderLogo()}</ProgressLogoContainer>
+                <ProgressText darkMode={darkMode}>{loadingText}</ProgressText>
                 <ProgressBarContainer>
                     <Progress
-                        size="xl"
+                        size="md"
                         value={isAnimating ? progress * 100 : 0}
                         styles={{
                             root: {
@@ -148,7 +123,7 @@ const LoadProgress = ({
 
     return (
         <MainContainer>
-            <ProgressContainerWrapper isLoadBuilderMode={isLoadBuilderMode}>
+            <ProgressContainerWrapper darkMode={darkMode}>
                 <ProgressContainer>{renderLoadProgress()}</ProgressContainer>
             </ProgressContainerWrapper>
         </MainContainer>
