@@ -15,6 +15,7 @@ import profileReducer from './profile/profileReducer';
 import builderReducer from './builder/builderReducer';
 import projectTemplateReducer from './templates/projectTemplateReducer';
 import templateReducer from './templates/templateReducer';
+import uiLoaderReducer from './uiLoader/uiLoaderReducer';
 
 //Persistence:
 const persistConfig = {
@@ -39,6 +40,7 @@ const appReducer = combineReducers({
     builderProjects: builderReducer,
     projectTemplates: projectTemplateReducer,
     template: templateReducer,
+    uiLoader: uiLoaderReducer,
 });
 
 //Persisting formReducer:
