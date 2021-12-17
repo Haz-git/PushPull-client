@@ -28,11 +28,14 @@ import {
 } from './build_program_components/AddProjectForm';
 import historyObject from '../../utils/historyObject';
 
-const SuspenseWrapper = styled.section``;
+const SuspenseWrapper = styled.section`
+    padding-top: 3.75rem;
+`;
 
 const MainContainer = styled.section`
     background: #ffffff;
     width: 100%;
+    padding-top: 3.75rem;
 
     @media ${deviceMin.mobileS} {
         display: block;
