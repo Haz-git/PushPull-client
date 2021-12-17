@@ -6,7 +6,10 @@ import LoadProgress from '../nprogress/LoadProgress';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
-import { queryTemplate } from '../../redux/templates/templateActions';
+import {
+    queryTemplate,
+    clearTemplate,
+} from '../../redux/templates/templateActions';
 
 //Styles:
 
