@@ -43,9 +43,17 @@ const MainBuildTemplateView = ({
     return (
         <>
             {isLoading === true ? (
-                <div>Loading</div>
+                <LoadProgress
+                    darkMode={true}
+                    isAnimating={true}
+                    loadingText="Generating Template..."
+                    minimum={50}
+                />
             ) : (
-                <div>Template view </div>
+                <>
+                    <Toolbar />
+                    <div>Template view </div>
+                </>
             )}
         </>
     );
