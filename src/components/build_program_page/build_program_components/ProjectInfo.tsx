@@ -36,12 +36,12 @@ const MainContainer = styled.div`
         margin: 0rem 0.5rem;
     }
 
-    @media ${deviceMin.mobileS} {
+    @media ${deviceMin.mobileM} {
         max-width: 23rem;
     }
 
     @media ${deviceMin.mobileL} {
-        max-width: 25rem;
+        max-width: 23.5rem;
         margin: 0rem 0.5rem;
     }
 `;
