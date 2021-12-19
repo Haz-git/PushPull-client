@@ -37,7 +37,6 @@ const MainBuildTemplateView = ({
         (state: RootStateOrAny) => state?.uiLoader?.isLoading
     );
 
-    console.log('isLoading from Template view', isLoading);
     const template = useSelector((state: RootStateOrAny) => state?.template);
 
     return (
