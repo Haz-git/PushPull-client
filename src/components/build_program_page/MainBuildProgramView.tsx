@@ -43,7 +43,6 @@ const MainContainer = styled.section`
 
     @media ${deviceMin.laptop} {
         padding-top: 3.75rem;
-
         height: 100%;
         display: grid;
         grid-template-columns: 12rem auto;

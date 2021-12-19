@@ -5,12 +5,18 @@ import * as React from 'react';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section``;
+const MainContainer = styled.section`
+    width: 100%;
+`;
 
 //Interfaces:
 
 const EditingSurface = () => {
-    return <MainContainer>Editing Surface for template</MainContainer>;
+    return (
+        <MainContainer>
+            <div>TEETSTSETSETSE</div>
+        </MainContainer>
+    );
 };
 
 export default EditingSurface;
