@@ -11,7 +11,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import { ReactComponent as DarkLogoSVG } from '../../assets/dark_logo.svg';
 import { Burger } from '@mantine/core';
-import Text from '../general_components/Text';
 import GeneralDrawer from '../general_components/GeneralDrawer';
 import GeneralButton from '../../components/general_components/GeneralButton';
 import UserDropdown from './navbar_components/UserDropdown';
