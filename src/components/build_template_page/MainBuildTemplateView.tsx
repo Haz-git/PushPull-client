@@ -5,6 +5,7 @@ import { deviceMin } from '../../devices/breakpoints';
 //Components:
 import LoadProgress from '../nprogress/LoadProgress';
 import Toolbar from './build_template_components/Toolbar';
+import EditingSurface from './build_template_components/EditingSurface';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -75,7 +76,7 @@ const MainBuildTemplateView = ({
             ) : (
                 <MainContainer>
                     <Toolbar />
-                    <div>Template view </div>
+                    <EditingSurface />
                 </MainContainer>
             )}
         </>
