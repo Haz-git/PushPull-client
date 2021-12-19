@@ -50,8 +50,7 @@ const MainContainer = styled.section`
 
 const LogoContainer = styled.div`
     position: relative;
-    height: 2rem;
-    width: 10rem;
+    border-bottom: 1px solid #525252;
 
     @media ${deviceMin.mobileS} {
         height: 2rem;
@@ -69,8 +68,9 @@ const LogoContainer = styled.div`
     }
 
     @media ${deviceMin.browserSm} {
-        height: 2.5rem;
-        width: 10rem;
+        padding: 1rem 1rem;
+        height: 4.5rem;
+        width: 100%;
     }
 `;
 
