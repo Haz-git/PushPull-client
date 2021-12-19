@@ -95,8 +95,8 @@ const MainContainer = styled.section<IMainContainer>`
     }
 
     @media ${deviceMin.laptop} {
-        width: 12rem;
-        max-width: 12rem;
+        width: 15rem;
+        max-width: 15rem;
     }
 
     @media ${deviceMin.laptopL} {
