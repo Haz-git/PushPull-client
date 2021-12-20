@@ -114,6 +114,34 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 200;
     }
 
+    .mantine-Accordion-item {
+        border: none;
+        border-bottom: 1px solid #525252;
+        background: #2c2c2c;
+    }
+
+    .mantine-Accordion-control:hover {
+        background-color: #2c2c2c;
+    }
+
+    .mantine-Accordion-item:hover {
+        background-color: #2c2c2c!important;
+        background: #2c2c2c !important;
+    }
+
+    .mantine-Accordion-icon {
+        color: #ffffff;
+    }
+
+    .mantine-Accordion-label {
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    .mantine-Accordion-content {
+        height: 100%;
+    }
+
 `;
 
 export default GlobalStyle;
