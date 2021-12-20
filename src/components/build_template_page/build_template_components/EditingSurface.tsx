@@ -4,7 +4,6 @@ import { deviceMin } from '../../../devices/breakpoints';
 //Components:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import GridLayout from 'react-grid-layout';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 //Styles:
 import 'react-grid-layout/css/styles.css';
@@ -63,24 +62,27 @@ const EditingSurface = () => {
         { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
         { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
         { i: 'c', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'd', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'e', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'f', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'g', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'h', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'i', x: 4, y: 0, w: 1, h: 2 },
     ];
 
     return (
         <MainContainer height={height} width={width}>
-            <TransformWrapper initialScale={1}>
-                <TransformComponent>
-                    <GridLayout
-                        layout={layout}
-                        cols={12}
-                        rowHeight={25}
-                        width={width}
-                    >
-                        <TestDraggableDiv key="a">a</TestDraggableDiv>
-                        <TestDraggableDiv key="b">b</TestDraggableDiv>
-                        <TestDraggableDiv key="c">c</TestDraggableDiv>
-                    </GridLayout>
-                </TransformComponent>
-            </TransformWrapper>
+            <GridLayout layout={layout} cols={12} rowHeight={25} width={width}>
+                <TestDraggableDiv key="a">a</TestDraggableDiv>
+                <TestDraggableDiv key="b">b</TestDraggableDiv>
+                <TestDraggableDiv key="c">c</TestDraggableDiv>
+                <TestDraggableDiv key="d">d</TestDraggableDiv>
+                <TestDraggableDiv key="e">e</TestDraggableDiv>
+                <TestDraggableDiv key="f">f</TestDraggableDiv>
+                <TestDraggableDiv key="g">g</TestDraggableDiv>
+                <TestDraggableDiv key="h">h</TestDraggableDiv>
+                <TestDraggableDiv key="i">i</TestDraggableDiv>
+            </GridLayout>
         </MainContainer>
     );
 };
