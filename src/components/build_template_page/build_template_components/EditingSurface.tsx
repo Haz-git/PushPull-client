@@ -2,13 +2,15 @@ import * as React from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Components:
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section`
-    width: 100%;
-    height: 100%;
+const MainContainer = styled.section<IMainContainerProps>`
+    width: ${({ width }) => `${width}px`};
+    height: ${({ height }) => `${height}px`};
+    background: #9e1818;
 
     /*
         Incredibly frustrating working with this css. I have the exact same grid logic implemented for MainBuildProgramView, but for some reason grid-template-columns does not push the Editing surface the right of the Toolbar. It works perfectly without these media queries in the programview, but these below must be included in editing surface... css???
@@ -41,19 +43,17 @@ const MainContainer = styled.section`
 
 //Interfaces:
 
+interface IMainContainerProps {
+    height: number;
+    width: number;
+}
+
 const EditingSurface = () => {
+    const { width, height } = useWindowDimensions();
+
     return (
-        <MainContainer>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
-            <div>TEETSTSETSETSE</div>
+        <MainContainer height={height} width={width}>
+            test
         </MainContainer>
     );
 };
