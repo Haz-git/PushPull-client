@@ -6,6 +6,7 @@ import { deviceMin } from '../../devices/breakpoints';
 import LoadProgress from '../nprogress/LoadProgress';
 import Toolbar from './build_template_components/Toolbar';
 import EditingSurface from './build_template_components/EditingSurface';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -52,17 +53,15 @@ const MainBuildTemplateView = ({
     },
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
-
     useEffect(() => {
         // controlTemplateLoadingStatus(true);
         dispatch(queryTemplate(fileUuid));
     }, []);
-
     const isLoading = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.isLoading
     );
 
-    const template = useSelector((state: RootStateOrAny) => state?.template);
+    const [isPanningDisabled, setStatePanning] = useState(true);
 
     return (
         <>
@@ -76,7 +75,11 @@ const MainBuildTemplateView = ({
             ) : (
                 <MainContainer>
                     <Toolbar />
-                    <EditingSurface />
+                    <TransformWrapper panning={{ disabled: isPanningDisabled }}>
+                        <TransformComponent>
+                            <EditingSurface />
+                        </TransformComponent>
+                    </TransformWrapper>
                 </MainContainer>
             )}
         </>
