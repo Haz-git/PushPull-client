@@ -3,6 +3,7 @@ import { deviceMin } from '../../../devices/breakpoints';
 
 //Components:
 import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
+import BlocksContainer from './BlocksContainer';
 
 //Styles:
 import styled from 'styled-components';
@@ -10,7 +11,6 @@ import styled from 'styled-components';
 const MainContainer = styled.section`
     background: #2c2c2c;
     position: fixed;
-    border-right: 1px solid #d6d6d6;
     height: 100%;
     text-align: left;
     overflow-y: scroll;
@@ -81,6 +81,8 @@ const Toolbar = () => {
             <LogoContainer>
                 <DarkLogoSVG />
             </LogoContainer>
+            <BlocksContainer blockTitle="Blocks" />
+            <BlocksContainer blockTitle="Favorited blocks" />
         </MainContainer>
     );
 };
