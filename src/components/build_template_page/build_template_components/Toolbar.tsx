@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
+//Redux:
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+
 //Components:
 import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
 import BlocksContainer from './BlocksContainer';
@@ -79,6 +82,8 @@ const AccordionContainer = styled.div``;
 //Interfaces:
 
 const Toolbar = () => {
+    const template = useSelector((state: RootStateOrAny) => state?.template);
+
     return (
         <MainContainer>
             <LogoContainer>
@@ -87,13 +92,11 @@ const Toolbar = () => {
             <AccordionContainer>
                 <Accordion iconPosition="right" multiple>
                     <Accordion.Item label="Blocks">
-                        Colors, fonts, shadows and many other parts are
-                        customizable to fit your design needs
+                        {template.templateBlocks || 'No blocks here.'}
                     </Accordion.Item>
-                    <Accordion.Item label="Favorited blocks">
-                        Configure components appearance and behavior with vast
-                        amount of settings or overwrite any part of component
-                        styles
+                    <Accordion.Item label="Saved blocks">
+                        {template.templateSavedBlocks ||
+                            'No saved blocks here.'}
                     </Accordion.Item>
                 </Accordion>
             </AccordionContainer>
