@@ -4,6 +4,7 @@ import { deviceMin } from '../../../devices/breakpoints';
 //Components:
 import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
 import BlocksContainer from './BlocksContainer';
+import { Accordion } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -73,6 +74,8 @@ const LogoContainer = styled.div`
     }
 `;
 
+const AccordionContainer = styled.div``;
+
 //Interfaces:
 
 const Toolbar = () => {
@@ -81,8 +84,19 @@ const Toolbar = () => {
             <LogoContainer>
                 <DarkLogoSVG />
             </LogoContainer>
-            <BlocksContainer blockTitle="Blocks" />
-            <BlocksContainer blockTitle="Favorited blocks" />
+            <AccordionContainer>
+                <Accordion iconPosition="right" multiple>
+                    <Accordion.Item label="Blocks">
+                        Colors, fonts, shadows and many other parts are
+                        customizable to fit your design needs
+                    </Accordion.Item>
+                    <Accordion.Item label="Favorited blocks">
+                        Configure components appearance and behavior with vast
+                        amount of settings or overwrite any part of component
+                        styles
+                    </Accordion.Item>
+                </Accordion>
+            </AccordionContainer>
         </MainContainer>
     );
 };
