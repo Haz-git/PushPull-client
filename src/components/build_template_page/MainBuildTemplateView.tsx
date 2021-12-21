@@ -62,7 +62,7 @@ const MainBuildTemplateView = ({
     );
 
     const [isPanningDisabled, setStatePanning] = useState(true);
-    const togglePanning = () => setStatePanning(!isPanningDisabled);
+    const togglePanningStatus = () => setStatePanning(!isPanningDisabled);
 
     return (
         <>
@@ -76,7 +76,7 @@ const MainBuildTemplateView = ({
             ) : (
                 <MainContainer>
                     <Toolbar
-                        togglePanningStatus={togglePanning}
+                        togglePanningStatus={togglePanningStatus}
                         isPanningDisabled={isPanningDisabled}
                     />
                     <TransformWrapper panning={{ disabled: isPanningDisabled }}>
