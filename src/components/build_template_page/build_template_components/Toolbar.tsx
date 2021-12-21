@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Redux:
@@ -83,6 +84,12 @@ const AccordionContainer = styled.div``;
 
 const Toolbar = () => {
     const template = useSelector((state: RootStateOrAny) => state?.template);
+    const [templateBlocks, setTemplateBlocks] = useState(
+        template?.templateBlocks
+    );
+    const [savedBlocks, setSavedBlocks] = useState(
+        template?.templateSavedBlocks
+    );
 
     return (
         <MainContainer>
@@ -92,11 +99,10 @@ const Toolbar = () => {
             <AccordionContainer>
                 <Accordion iconPosition="right" multiple>
                     <Accordion.Item label="Blocks">
-                        {template.templateBlocks || 'No blocks here.'}
+                        {templateBlocks || 'No blocks here.'}
                     </Accordion.Item>
                     <Accordion.Item label="Saved blocks">
-                        {template.templateSavedBlocks ||
-                            'No saved blocks here.'}
+                        {savedBlocks || 'No saved blocks here.'}
                     </Accordion.Item>
                 </Accordion>
             </AccordionContainer>
