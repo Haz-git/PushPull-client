@@ -88,7 +88,6 @@ export const updateTemplate = (
                 statusCallback(false);
             }
         } catch (err) {
-            console.log(err);
             statusCallback(true);
         }
     };
