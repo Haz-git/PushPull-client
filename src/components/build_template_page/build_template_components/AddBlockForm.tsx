@@ -4,7 +4,8 @@ import React from 'react';
 import GeneralButton from '../../general_components/GeneralButton';
 
 //Redux:
-
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { updateTemplate } from '../../../redux/templates/templateActions';
 //Styles:
 import styled from 'styled-components';
 
@@ -14,15 +15,37 @@ const MainContainer = styled.div`
 
 //Interfaces:
 
-interface IComponentProps {}
+interface IComponentProps {
+    closeModal: () => void;
+}
 
-const AddBlockForm = () => {
+const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+    const currTemplate = useSelector(
+        (state: RootStateOrAny) => state?.template
+    );
+
+    const dispatchBlock = () => {
+        dispatch(
+            updateTemplate(
+                (status: boolean) => console.log('dispatched'),
+                currTemplate.id,
+                {
+                    templateBlocks: { blockTitle: 'Test1' },
+                },
+                currTemplate.projectId
+            )
+        );
+
+        closeModal();
+    };
+
     return (
         <MainContainer>
             <div>
                 <GeneralButton
                     buttonLabel="Click to add test block"
-                    onClick={() => console.log('test')}
+                    onClick={dispatchBlock}
                 />
             </div>
         </MainContainer>

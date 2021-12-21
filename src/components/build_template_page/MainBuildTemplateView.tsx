@@ -83,7 +83,9 @@ const MainBuildTemplateView = ({
                         openBoolean={openBlockModal}
                         closeFunc={() => setOpenBlockModal(false)}
                     >
-                        <AddBlockForm />
+                        <AddBlockForm
+                            closeModal={() => setOpenBlockModal(false)}
+                        />
                     </GeneralModal>
                     <MainContainer>
                         <Toolbar
