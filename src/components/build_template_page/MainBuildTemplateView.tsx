@@ -7,6 +7,8 @@ import LoadProgress from '../nprogress/LoadProgress';
 import Toolbar from './build_template_components/Toolbar';
 import EditingSurface from './build_template_components/EditingSurface';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import GeneralModal from '../general_components/GeneralModal';
+import AddBlockForm from './build_template_components/AddBlockForm';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -60,9 +62,11 @@ const MainBuildTemplateView = ({
     const isLoading = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.isLoading
     );
-
     const [isPanningDisabled, setStatePanning] = useState(true);
     const togglePanningStatus = () => setStatePanning(!isPanningDisabled);
+
+    const [openBlockModal, setOpenBlockModal] = useState(false);
+    const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
 
     return (
         <>
@@ -74,17 +78,28 @@ const MainBuildTemplateView = ({
                     minimum={50}
                 />
             ) : (
-                <MainContainer>
-                    <Toolbar
-                        togglePanningStatus={togglePanningStatus}
-                        isPanningDisabled={isPanningDisabled}
-                    />
-                    <TransformWrapper panning={{ disabled: isPanningDisabled }}>
-                        <TransformComponent>
-                            <EditingSurface />
-                        </TransformComponent>
-                    </TransformWrapper>
-                </MainContainer>
+                <>
+                    <GeneralModal
+                        openBoolean={openBlockModal}
+                        closeFunc={() => setOpenBlockModal(false)}
+                    >
+                        <AddBlockForm />
+                    </GeneralModal>
+                    <MainContainer>
+                        <Toolbar
+                            controlBlockModal={controlBlockModal}
+                            togglePanningStatus={togglePanningStatus}
+                            isPanningDisabled={isPanningDisabled}
+                        />
+                        <TransformWrapper
+                            panning={{ disabled: isPanningDisabled }}
+                        >
+                            <TransformComponent>
+                                <EditingSurface />
+                            </TransformComponent>
+                        </TransformWrapper>
+                    </MainContainer>
+                </>
             )}
         </>
     );
