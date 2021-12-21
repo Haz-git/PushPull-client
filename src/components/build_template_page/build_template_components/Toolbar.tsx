@@ -91,9 +91,18 @@ const ToolsContainer = styled.div`
     display: grid;
     grid-template-columns: auto auto auto;
 `;
+
 //Interfaces:
 
-const Toolbar = () => {
+interface IComponentProps {
+    togglePanningStatus: () => void;
+    isPanningDisabled: boolean;
+}
+
+const Toolbar = ({
+    togglePanningStatus,
+    isPanningDisabled,
+}: IComponentProps): JSX.Element => {
     const template = useSelector((state: RootStateOrAny) => state?.template);
     const [templateBlocks, setTemplateBlocks] = useState(
         template?.templateBlocks
@@ -124,7 +133,12 @@ const Toolbar = () => {
                         historyObject.push('/builder/dashboard/recents')
                     }
                 />
-                <GeneralButton buttonLabel="Pan" />
+                <GeneralButton
+                    buttonLabel={
+                        isPanningDisabled ? 'Activate pan' : 'Disable pan'
+                    }
+                    onClick={togglePanningStatus}
+                />
                 <GeneralButton buttonLabel="Add" />
             </ToolsContainer>
         </MainContainer>
