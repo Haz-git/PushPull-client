@@ -97,11 +97,13 @@ const ToolsContainer = styled.div`
 interface IComponentProps {
     togglePanningStatus: () => void;
     isPanningDisabled: boolean;
+    controlBlockModal: (state: boolean) => void;
 }
 
 const Toolbar = ({
     togglePanningStatus,
     isPanningDisabled,
+    controlBlockModal,
 }: IComponentProps): JSX.Element => {
     const template = useSelector((state: RootStateOrAny) => state?.template);
     const [templateBlocks, setTemplateBlocks] = useState(
@@ -119,6 +121,10 @@ const Toolbar = ({
             <AccordionContainer>
                 <Accordion iconPosition="right" multiple>
                     <Accordion.Item label="Blocks">
+                        <GeneralButton
+                            buttonLabel="Add Block"
+                            onClick={() => controlBlockModal(true)}
+                        />
                         {templateBlocks || 'No blocks here.'}
                     </Accordion.Item>
                     <Accordion.Item label="Saved blocks">
