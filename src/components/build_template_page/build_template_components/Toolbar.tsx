@@ -6,14 +6,18 @@ import { deviceMin } from '../../../devices/breakpoints';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 
 //Components:
+import historyObject from '../../../utils/historyObject';
 import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
 import BlocksContainer from './BlocksContainer';
 import { Accordion } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
+    display: grid;
+    grid-template-rows: 4.5rem auto 10%;
     background: #2c2c2c;
     position: fixed;
     height: 100%;
@@ -78,8 +82,15 @@ const LogoContainer = styled.div`
     }
 `;
 
-const AccordionContainer = styled.div``;
+const AccordionContainer = styled.div`
+    align-self: start;
+`;
 
+const ToolsContainer = styled.div`
+    align-self: end;
+    display: grid;
+    grid-template-columns: auto auto auto;
+`;
 //Interfaces:
 
 const Toolbar = () => {
@@ -106,6 +117,16 @@ const Toolbar = () => {
                     </Accordion.Item>
                 </Accordion>
             </AccordionContainer>
+            <ToolsContainer>
+                <GeneralButton
+                    buttonLabel="Exit"
+                    onClick={() =>
+                        historyObject.push('/builder/dashboard/recents')
+                    }
+                />
+                <GeneralButton buttonLabel="Pan" />
+                <GeneralButton buttonLabel="Add" />
+            </ToolsContainer>
         </MainContainer>
     );
 };
