@@ -58,6 +58,8 @@ interface IMainContainerProps {
 const EditingSurface = () => {
     const { width, height } = useWindowDimensions();
 
+    console.log('render Editing Surface');
+
     const layout = [
         { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
         { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
