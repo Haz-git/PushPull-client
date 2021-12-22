@@ -160,10 +160,10 @@ export const addTemplateBlock = (templateId: string, blockDetails: any) => {
             );
 
             console.log(response);
-            // dispatch({
-            //     type: TemplateActionType.USER_ADD_BLOCK,
-            //     payload: response.data.template,
-            // })
+            dispatch({
+                type: TemplateActionType.USER_ADD_BLOCK,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.log(err);
         }
