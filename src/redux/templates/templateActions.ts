@@ -121,7 +121,7 @@ export const deleteTemplate = (
     };
 };
 
-//Template - Specific actions:
+//Template Builder - Specific actions:
 
 export const queryTemplate = (templateId: string) => {
     return async (dispatch: Dispatch<any>) => {
@@ -148,5 +148,24 @@ export const clearTemplate = () => {
             type: TemplateActionType.USER_CLEAR_TEMPLATE,
             payload: {},
         });
+    };
+};
+
+export const addTemplateBlock = (templateId: string, blockDetails: any) => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+            let response = await api.post(
+                `/template/blocks/add/${templateId}`,
+                { blockDetails: blockDetails }
+            );
+
+            console.log(response);
+            // dispatch({
+            //     type: TemplateActionType.USER_ADD_BLOCK,
+            //     payload: response.data.template,
+            // })
+        } catch (err) {
+            console.log(err);
+        }
     };
 };
