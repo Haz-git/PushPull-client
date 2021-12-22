@@ -29,10 +29,28 @@ interface clearTemplate {
     payload?: any;
 }
 
+interface addTemplateBlock {
+    type: TemplateActionType.USER_ADD_BLOCK;
+    payload?: any;
+}
+
+interface updateTemplateBlock {
+    type: TemplateActionType.USER_UPDATE_BLOCK;
+    payload?: any;
+}
+
+interface deleteTemplateBlock {
+    type: TemplateActionType.USER_DELETE_BLOCK;
+    payload?: any;
+}
+
 export type TemplateAction =
     | findTemplate
     | addTemplate
     | updateTemplate
     | deleteTemplate
     | queryTemplate
-    | clearTemplate;
+    | clearTemplate
+    | addTemplateBlock
+    | updateTemplateBlock
+    | deleteTemplateBlock;
