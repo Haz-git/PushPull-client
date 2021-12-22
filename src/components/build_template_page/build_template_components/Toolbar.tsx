@@ -106,12 +106,14 @@ const Toolbar = ({
     controlBlockModal,
 }: IComponentProps): JSX.Element => {
     const template = useSelector((state: RootStateOrAny) => state?.template);
-    const [templateBlocks, setTemplateBlocks] = useState(
-        template?.templateBlocks
-    );
-    const [savedBlocks, setSavedBlocks] = useState(
-        template?.templateSavedBlocks
-    );
+
+    const renderTemplateBlocks = () => {
+        if (template?.templateBlocks) {
+            return template.templateBlocks.map((block: any) => (
+                <div>{block.blockTitle}</div>
+            ));
+        }
+    };
 
     return (
         <MainContainer>
@@ -125,11 +127,9 @@ const Toolbar = ({
                             buttonLabel="Add Block"
                             onClick={() => controlBlockModal(true)}
                         />
-                        {templateBlocks || 'No blocks here.'}
+                        {renderTemplateBlocks()}
                     </Accordion.Item>
-                    <Accordion.Item label="Saved blocks">
-                        {savedBlocks || 'No saved blocks here.'}
-                    </Accordion.Item>
+                    <Accordion.Item label="Saved blocks"></Accordion.Item>
                 </Accordion>
             </AccordionContainer>
             <ToolsContainer>
