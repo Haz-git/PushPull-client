@@ -110,7 +110,15 @@ const Toolbar = ({
     const renderTemplateBlocks = () => {
         if (template?.templateBlocks) {
             return template.templateBlocks.map((block: any) => (
-                <div>{block.blockTitle}</div>
+                <div
+                    draggable={true}
+                    unselectable="on"
+                    onDragStart={(e) =>
+                        e.dataTransfer.setData('text/plain', '')
+                    }
+                >
+                    {block.blockTitle}
+                </div>
             ));
         }
     };
