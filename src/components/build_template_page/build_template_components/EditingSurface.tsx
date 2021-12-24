@@ -58,8 +58,6 @@ interface IMainContainerProps {
 const EditingSurface = () => {
     const { width, height } = useWindowDimensions();
 
-    console.log('render Editing Surface');
-
     const layout = [
         { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
         { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
@@ -72,9 +70,26 @@ const EditingSurface = () => {
         { i: 'i', x: 4, y: 0, w: 1, h: 2 },
     ];
 
+    const onDrop = (layout: any, layoutItem: any, _event: any) => {
+        alert(
+            `Dropped element props:\n${JSON.stringify(
+                layoutItem,
+                ['x', 'y', 'w', 'h'],
+                2
+            )}`
+        );
+    };
+
     return (
         <MainContainer height={height} width={width}>
-            <GridLayout layout={layout} cols={12} rowHeight={25} width={width}>
+            <GridLayout
+                layout={layout}
+                cols={12}
+                rowHeight={25}
+                width={width}
+                onDrop={onDrop}
+                isDroppable={true}
+            >
                 <TestDraggableDiv key="a">a</TestDraggableDiv>
                 <TestDraggableDiv key="b">b</TestDraggableDiv>
                 <TestDraggableDiv key="c">c</TestDraggableDiv>
