@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Components:
@@ -57,8 +58,7 @@ interface IMainContainerProps {
 
 const EditingSurface = () => {
     const { width, height } = useWindowDimensions();
-
-    const layout = [
+    const [gridLayout, setGridLayout] = useState([
         { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
         { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
         { i: 'c', x: 4, y: 0, w: 1, h: 2 },
@@ -68,37 +68,30 @@ const EditingSurface = () => {
         { i: 'g', x: 4, y: 0, w: 1, h: 2 },
         { i: 'h', x: 4, y: 0, w: 1, h: 2 },
         { i: 'i', x: 4, y: 0, w: 1, h: 2 },
-    ];
+    ]);
 
     const onDrop = (layout: any, layoutItem: any, _event: any) => {
-        alert(
-            `Dropped element props:\n${JSON.stringify(
-                layoutItem,
-                ['x', 'y', 'w', 'h'],
-                2
-            )}`
-        );
+        console.log(layout, layoutItem);
+        setGridLayout(layout);
+    };
+
+    const renderGridBlocks = () => {
+        return gridLayout.map((block: any) => (
+            <TestDraggableDiv key={block.i}>{block.i}</TestDraggableDiv>
+        ));
     };
 
     return (
         <MainContainer height={height} width={width}>
             <GridLayout
-                layout={layout}
+                layout={gridLayout}
                 cols={12}
                 rowHeight={25}
                 width={width}
                 onDrop={onDrop}
                 isDroppable={true}
             >
-                <TestDraggableDiv key="a">a</TestDraggableDiv>
-                <TestDraggableDiv key="b">b</TestDraggableDiv>
-                <TestDraggableDiv key="c">c</TestDraggableDiv>
-                <TestDraggableDiv key="d">d</TestDraggableDiv>
-                <TestDraggableDiv key="e">e</TestDraggableDiv>
-                <TestDraggableDiv key="f">f</TestDraggableDiv>
-                <TestDraggableDiv key="g">g</TestDraggableDiv>
-                <TestDraggableDiv key="h">h</TestDraggableDiv>
-                <TestDraggableDiv key="i">i</TestDraggableDiv>
+                {renderGridBlocks()}
             </GridLayout>
         </MainContainer>
     );
