@@ -116,6 +116,7 @@ const Toolbar = ({
                     onDragStart={(e) =>
                         e.dataTransfer.setData('text/plain', '')
                     }
+                    id="test"
                 >
                     {block.blockTitle}
                 </div>
