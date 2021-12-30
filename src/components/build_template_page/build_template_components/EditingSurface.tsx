@@ -2,6 +2,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
+//Redux:
+import { RootStateOrAny, useSelector } from 'react-redux';
+
 //Components:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import GridLayout from 'react-grid-layout';
@@ -57,6 +60,11 @@ interface IMainContainerProps {
 }
 
 const EditingSurface = () => {
+    const selectedBlock = useSelector(
+        (state: RootStateOrAny) => state?.toolbarSelectedBlock
+    );
+
+    console.log(selectedBlock);
     const { width, height } = useWindowDimensions();
     const [gridLayout, setGridLayout] = useState([
         { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
@@ -71,7 +79,7 @@ const EditingSurface = () => {
     ]);
 
     const onDrop = (layout: any, layoutItem: any, _event: any) => {
-        console.log(layout, layoutItem);
+        console.log(layout, layoutItem, _event);
         setGridLayout(layout);
     };
 
@@ -90,7 +98,11 @@ const EditingSurface = () => {
                 width={width}
                 onDrop={onDrop}
                 isDroppable={true}
-                droppingItem={{ i: 'Block', w: 1, h: 1 }}
+                droppingItem={{
+                    i: selectedBlock?.i || 'Error: Undefined',
+                    w: 1,
+                    h: 1,
+                }}
             >
                 {renderGridBlocks()}
             </GridLayout>
