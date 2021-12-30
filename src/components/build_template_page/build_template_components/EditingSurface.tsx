@@ -48,6 +48,10 @@ const MainContainer = styled.section<IMainContainerProps>`
     }
 `;
 
+const GridContainer = styled.div`
+    border: 1px solid black;
+`;
+
 const TestDraggableDiv = styled.div`
     background: salmon;
     border: 1px solid black;
@@ -68,11 +72,11 @@ const EditingSurface = () => {
     console.log(selectedBlock);
     const { width, height } = useWindowDimensions();
     const [gridLayout, setGridLayout] = useState([
-        { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
-        { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-        { i: 'c', x: 4, y: 0, w: 1, h: 2 },
-        { i: 'd', x: 4, y: 0, w: 1, h: 2 },
-        { i: 'e', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'Day 1', x: 0, y: 0, w: 1, h: 2, static: true },
+        { i: 'Day 2', x: 1, y: 0, w: 1, h: 2, static: true },
+        { i: 'Day 3', x: 2, y: 0, w: 1, h: 2, static: true },
+        { i: 'Day 4', x: 3, y: 0, w: 1, h: 2, static: true },
+        { i: 'Day 5', x: 4, y: 0, w: 1, h: 2, static: true },
         { i: 'f', x: 4, y: 0, w: 1, h: 2 },
         { i: 'g', x: 4, y: 0, w: 1, h: 2 },
         { i: 'h', x: 4, y: 0, w: 1, h: 2 },
@@ -92,21 +96,23 @@ const EditingSurface = () => {
 
     return (
         <MainContainer height={height} width={width}>
-            <GridLayout
-                layout={gridLayout}
-                cols={12}
-                rowHeight={25}
-                width={width - 274}
-                onDrop={onDrop}
-                isDroppable={true}
-                droppingItem={{
-                    i: selectedBlock?.i || 'Error: Undefined',
-                    w: 1,
-                    h: 1,
-                }}
-            >
-                {renderGridBlocks()}
-            </GridLayout>
+            <GridContainer>
+                <GridLayout
+                    layout={gridLayout}
+                    cols={5}
+                    rowHeight={25}
+                    width={width - 274}
+                    onDrop={onDrop}
+                    isDroppable={true}
+                    droppingItem={{
+                        i: selectedBlock?.i || 'Error: Undefined',
+                        w: 1,
+                        h: 1,
+                    }}
+                >
+                    {renderGridBlocks()}
+                </GridLayout>
+            </GridContainer>
         </MainContainer>
     );
 };
