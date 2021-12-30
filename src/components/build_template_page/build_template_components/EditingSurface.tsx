@@ -90,6 +90,7 @@ const EditingSurface = () => {
                 width={width}
                 onDrop={onDrop}
                 isDroppable={true}
+                droppingItem={{ i: 'Block', w: 1, h: 1 }}
             >
                 {renderGridBlocks()}
             </GridLayout>
