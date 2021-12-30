@@ -132,6 +132,7 @@ const Toolbar = ({
                         e.dataTransfer.setData('text/plain', '')
                     }
                     id={block.i}
+                    key={block.i}
                 >
                     {block.blockTitle}
                 </div>
