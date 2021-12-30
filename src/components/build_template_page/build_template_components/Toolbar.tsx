@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import {
+    selectBlock,
+    deselectBlock,
+} from '../../../redux/selectedBlock/selectedBlockActions';
 
 //Components:
 import historyObject from '../../../utils/historyObject';
@@ -105,12 +109,23 @@ const Toolbar = ({
     isPanningDisabled,
     controlBlockModal,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
+
+    useEffect(() => {
+        return () => {
+            dispatch(deselectBlock());
+        };
+    }, []);
 
     const renderTemplateBlocks = () => {
         if (template?.templateBlocks) {
             return template.templateBlocks.map((block: any) => (
                 <div
+                    onDragStartCapture={() =>
+                        dispatch(selectBlock({ i: block.i }))
+                    }
+                    onClick={() => dispatch(selectBlock({ i: block.i }))}
                     draggable={true}
                     unselectable="on"
                     onDragStart={(e) =>
