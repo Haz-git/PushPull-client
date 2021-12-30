@@ -6,9 +6,7 @@ export const selectBlock = (block: any) => {
     return async (dispatch: Dispatch<SelectBlockAction>) => {
         dispatch({
             type: SelectedBlockActionType.USER_SELECT_BLOCK,
-            payload: {
-                block,
-            },
+            payload: block,
         });
     };
 };
