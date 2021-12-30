@@ -1,0 +1,4 @@
+export enum SelectedBlockActionType {
+    USER_SELECT_BLOCK = 'USER_SELECT_BLOCK',
+    USER_DESELECT_BLOCK = 'USER_DESELECT_BLOCK',
+}
