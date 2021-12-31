@@ -7,7 +7,7 @@ import * as React from 'react';
 //Interfaces:
 
 interface IComponentProps {
-    type?: 'EXERCISE' | null;
+    type?: 'EXERCISE' | 'DATE';
     blockTitle?: string;
     uuid?: string;
     i?: string;
