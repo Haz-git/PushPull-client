@@ -72,15 +72,15 @@ const EditingSurface = () => {
     console.log(selectedBlock);
     const { width, height } = useWindowDimensions();
     const [gridLayout, setGridLayout] = useState([
-        { i: 'Day 1', x: 0, y: 0, w: 1, h: 2, static: true },
-        { i: 'Day 2', x: 1, y: 0, w: 1, h: 2, static: true },
-        { i: 'Day 3', x: 2, y: 0, w: 1, h: 2, static: true },
-        { i: 'Day 4', x: 3, y: 0, w: 1, h: 2, static: true },
-        { i: 'Day 5', x: 4, y: 0, w: 1, h: 2, static: true },
-        { i: 'f', x: 4, y: 0, w: 1, h: 2 },
-        { i: 'g', x: 4, y: 0, w: 1, h: 2 },
-        { i: 'h', x: 4, y: 0, w: 1, h: 2 },
-        { i: 'i', x: 4, y: 0, w: 1, h: 2 },
+        { i: 'Day 1', x: 0, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
+        { i: 'Day 2', x: 1, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
+        { i: 'Day 3', x: 2, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
+        { i: 'Day 4', x: 3, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
+        { i: 'Day 5', x: 4, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
+        { i: 'f', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
+        { i: 'g', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
+        { i: 'h', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
+        { i: 'i', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
     ]);
 
     const onDrop = (layout: any, layoutItem: any, _event: any) => {
