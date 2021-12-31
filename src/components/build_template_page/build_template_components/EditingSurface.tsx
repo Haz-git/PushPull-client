@@ -8,8 +8,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 //Components:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import GridLayout from 'react-grid-layout';
-import { v4 as uuid } from 'uuid';
-
+import DraggableBlock from './DraggableBlock';
 //Styles:
 import 'react-grid-layout/css/styles.css';
 import styled from 'styled-components';
@@ -91,7 +90,7 @@ const EditingSurface = () => {
 
     const renderGridBlocks = () => {
         return gridLayout.map((block: any) => (
-            <TestDraggableDiv key={block.i}>{block.i}</TestDraggableDiv>
+            <DraggableBlock key={block.i}>{block.i}</DraggableBlock>
         ));
     };
 
