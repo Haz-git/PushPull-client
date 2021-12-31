@@ -12,7 +12,7 @@ import {
 //Components:
 import historyObject from '../../../utils/historyObject';
 import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
-import BlocksContainer from './BlocksContainer';
+import { v4 as uuid } from 'uuid';
 import { Accordion } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
 
@@ -123,9 +123,11 @@ const Toolbar = ({
             return template.templateBlocks.map((block: any) => (
                 <div
                     onDragStartCapture={() =>
-                        dispatch(selectBlock({ i: block.i }))
+                        dispatch(selectBlock({ i: block.i, uuid: uuid() }))
                     }
-                    onClick={() => dispatch(selectBlock({ i: block.i }))}
+                    onClick={() =>
+                        dispatch(selectBlock({ i: block.i, uuid: uuid() }))
+                    }
                     draggable={true}
                     unselectable="on"
                     onDragStart={(e) =>

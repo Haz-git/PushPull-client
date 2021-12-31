@@ -8,6 +8,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 //Components:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import GridLayout from 'react-grid-layout';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import 'react-grid-layout/css/styles.css';
@@ -105,9 +106,9 @@ const EditingSurface = () => {
                     onDrop={onDrop}
                     isDroppable={true}
                     droppingItem={{
-                        i: selectedBlock?.i || 'Error: Undefined',
+                        i: selectedBlock?.uuid || 'Error: Undefined',
                         w: 1,
-                        h: 1,
+                        h: 2,
                     }}
                 >
                     {renderGridBlocks()}
