@@ -123,10 +123,18 @@ const Toolbar = ({
             return template.templateBlocks.map((block: any) => (
                 <div
                     onDragStartCapture={() =>
-                        dispatch(selectBlock({ i: block.i, uuid: uuid() }))
+                        dispatch(
+                            selectBlock({
+                                i: block.blockTitle.concat(`_${uuid()}`),
+                            })
+                        )
                     }
                     onClick={() =>
-                        dispatch(selectBlock({ i: block.i, uuid: uuid() }))
+                        dispatch(
+                            selectBlock({
+                                i: block.blockTitle.concat(`_${uuid()}`),
+                            })
+                        )
                     }
                     draggable={true}
                     unselectable="on"

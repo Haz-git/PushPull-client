@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 //Components:
+import BlockTypeExercise from './BlockTypeExercise';
+import BlockTypeDate from './BlockTypeDate';
 
 //Styles:
 
@@ -8,7 +10,7 @@ import * as React from 'react';
 
 interface IComponentProps {
     type?: 'EXERCISE' | 'DATE';
-    blockTitle?: string;
+    blockTitle: string;
     uuid?: string;
     i?: string;
     x?: number;
@@ -46,6 +48,14 @@ const DraggableBlock = React.forwardRef(
         }: IComponentProps,
         ref: any
     ): JSX.Element => {
+        const identifyAndReturnBlockType = () => {
+            if (type && type === 'DATE') {
+                return <BlockTypeDate blockTitle={blockTitle} />;
+            }
+
+            return <BlockTypeExercise blockTitle={blockTitle} />;
+        };
+
         return (
             <div
                 style={{ border: '1px solid red', ...style }}
@@ -54,7 +64,7 @@ const DraggableBlock = React.forwardRef(
                 ref={ref}
                 {...rest}
             >
-                {children}
+                {identifyAndReturnBlockType()}
             </div>
         );
     }

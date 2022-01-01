@@ -6,6 +6,7 @@ import { deviceMin } from '../../../devices/breakpoints';
 import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
+import { v4 as uuid } from 'uuid';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import GridLayout from 'react-grid-layout';
 import DraggableBlock from './DraggableBlock';
@@ -72,25 +73,78 @@ const EditingSurface = () => {
     console.log(selectedBlock);
     const { width, height } = useWindowDimensions();
     const [gridLayout, setGridLayout] = useState([
-        { i: 'Day 1', x: 0, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
-        { i: 'Day 2', x: 1, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
-        { i: 'Day 3', x: 2, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
-        { i: 'Day 4', x: 3, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
-        { i: 'Day 5', x: 4, y: 0, w: 1, h: 2, static: true, type: 'DATE' },
-        { i: 'f', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
-        { i: 'g', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
-        { i: 'h', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
-        { i: 'i', x: 4, y: 0, w: 1, h: 2, type: 'EXERCISE' },
+        {
+            i: 'Day 1_'.concat(uuid()),
+            x: 0,
+            y: 0,
+            w: 1,
+            h: 2,
+            static: true,
+            type: 'DATE',
+            blockTitle: 'Day 1',
+        },
+        {
+            i: 'Day 2_'.concat(uuid()),
+            x: 1,
+            y: 0,
+            w: 1,
+            h: 2,
+            static: true,
+            type: 'DATE',
+            blockTitle: 'Day 2',
+        },
+        {
+            i: 'Day 3_'.concat(uuid()),
+            x: 2,
+            y: 0,
+            w: 1,
+            h: 2,
+            static: true,
+            type: 'DATE',
+            blockTitle: 'Day 3',
+        },
+        {
+            i: 'Day 4_'.concat(uuid()),
+            x: 3,
+            y: 0,
+            w: 1,
+            h: 2,
+            static: true,
+            type: 'DATE',
+            blockTitle: 'Day 4',
+        },
+        {
+            i: 'Day 5_'.concat(uuid()),
+            x: 4,
+            y: 0,
+            w: 1,
+            h: 2,
+            static: true,
+            type: 'DATE',
+            blockTitle: 'Day 5',
+        },
     ]);
 
     const onDrop = (layout: any, layoutItem: any, _event: any) => {
-        console.log(layout, layoutItem, _event);
         setGridLayout(layout);
+    };
+
+    const identifyDateBlocks = (id: string) => {
+        if (id && id.includes('Day')) return true;
+        return false;
     };
 
     const renderGridBlocks = () => {
         return gridLayout.map((block: any) => (
-            <DraggableBlock key={block.i}>{block.i}</DraggableBlock>
+            <DraggableBlock
+                key={
+                    identifyDateBlocks(block.i)
+                        ? block.i
+                        : block.i.split('_')[1]
+                }
+                blockTitle={block.i.split('_')[0]}
+                type={block.type}
+            />
         ));
     };
 
@@ -105,7 +159,7 @@ const EditingSurface = () => {
                     onDrop={onDrop}
                     isDroppable={true}
                     droppingItem={{
-                        i: selectedBlock?.uuid || 'Error: Undefined',
+                        i: selectedBlock?.i || 'Error: Undefined',
                         w: 1,
                         h: 2,
                     }}

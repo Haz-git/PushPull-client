@@ -10,7 +10,7 @@ interface IComponentProps {
 }
 
 const BlockTypeDate = ({ blockTitle }: IComponentProps): JSX.Element => {
-    return <div>{blockTitle}</div>;
+    return <div>{`Date: ${blockTitle}`}</div>;
 };
 
 export default BlockTypeDate;
