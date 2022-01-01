@@ -7,8 +7,8 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+import { DragDropContext } from 'react-beautiful-dnd';
 //Styles:
-import 'react-grid-layout/css/styles.css';
 import styled from 'styled-components';
 
 const MainContainer = styled.section<IMainContainerProps>`
