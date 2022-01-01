@@ -11,7 +11,7 @@ interface IComponentProps {
 }
 
 const BlockTypeExercise = ({ blockTitle }: IComponentProps): JSX.Element => {
-    return <div>Exercise block...</div>;
+    return <div>{blockTitle}</div>;
 };
 
 export default BlockTypeExercise;
