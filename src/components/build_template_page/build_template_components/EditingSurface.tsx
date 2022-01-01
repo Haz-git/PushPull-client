@@ -6,10 +6,7 @@ import { deviceMin } from '../../../devices/breakpoints';
 import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
-import { v4 as uuid } from 'uuid';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
-import GridLayout from 'react-grid-layout';
-import DraggableBlock from './DraggableBlock';
 //Styles:
 import 'react-grid-layout/css/styles.css';
 import styled from 'styled-components';
@@ -72,101 +69,10 @@ const EditingSurface = () => {
 
     console.log(selectedBlock);
     const { width, height } = useWindowDimensions();
-    const [gridLayout, setGridLayout] = useState([
-        {
-            i: 'Day 1_'.concat(uuid()),
-            x: 0,
-            y: 0,
-            w: 1,
-            h: 2,
-            static: true,
-            type: 'DATE',
-            blockTitle: 'Day 1',
-        },
-        {
-            i: 'Day 2_'.concat(uuid()),
-            x: 1,
-            y: 0,
-            w: 1,
-            h: 2,
-            static: true,
-            type: 'DATE',
-            blockTitle: 'Day 2',
-        },
-        {
-            i: 'Day 3_'.concat(uuid()),
-            x: 2,
-            y: 0,
-            w: 1,
-            h: 2,
-            static: true,
-            type: 'DATE',
-            blockTitle: 'Day 3',
-        },
-        {
-            i: 'Day 4_'.concat(uuid()),
-            x: 3,
-            y: 0,
-            w: 1,
-            h: 2,
-            static: true,
-            type: 'DATE',
-            blockTitle: 'Day 4',
-        },
-        {
-            i: 'Day 5_'.concat(uuid()),
-            x: 4,
-            y: 0,
-            w: 1,
-            h: 2,
-            static: true,
-            type: 'DATE',
-            blockTitle: 'Day 5',
-        },
-    ]);
-
-    const onDrop = (layout: any, layoutItem: any, _event: any) => {
-        setGridLayout(layout);
-    };
-
-    const identifyDateBlocks = (id: string) => {
-        if (id && id.includes('Day')) return true;
-        return false;
-    };
-
-    const renderGridBlocks = () => {
-        return gridLayout.map((block: any) => (
-            <DraggableBlock
-                key={
-                    identifyDateBlocks(block.i)
-                        ? block.i
-                        : block.i.split('_')[1]
-                }
-                blockTitle={block.i.split('_')[0]}
-                type={block.type}
-            />
-        ));
-    };
 
     return (
         <MainContainer height={height} width={width}>
-            <GridContainer>
-                <GridLayout
-                    layout={gridLayout}
-                    cols={5}
-                    rowHeight={25}
-                    width={width - 274}
-                    onDrop={onDrop}
-                    isDroppable={true}
-                    droppingItem={{
-                        i: selectedBlock?.i || 'Error: Undefined',
-                        w: 1,
-                        h: 2,
-                    }}
-                >
-                    {renderGridBlocks()}
-                </GridLayout>
-            </GridContainer>
+            <GridContainer></GridContainer>
         </MainContainer>
     );
 };
