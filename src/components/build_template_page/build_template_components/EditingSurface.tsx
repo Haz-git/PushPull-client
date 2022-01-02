@@ -7,6 +7,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
 import ListGrid from './ListGrid';
+import MultipleLists from './MultipleLists';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
@@ -72,7 +73,7 @@ const EditingSurface = () => {
     return (
         <MainContainer height={height} width={width}>
             <GridContainer>
-                <ListGrid />
+                <MultipleLists />
             </GridContainer>
         </MainContainer>
     );
