@@ -24,7 +24,7 @@ interface IComponentProps {
     elements: any;
 }
 
-const DraggableElement = ({
+const DroppableElement = ({
     prefix,
     elements,
 }: IComponentProps): JSX.Element => {
@@ -49,4 +49,4 @@ const DraggableElement = ({
     );
 };
 
-export default DraggableElement;
+export default DroppableElement;

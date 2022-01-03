@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 //Components:
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import DraggableElement from './DraggableElement';
+import DroppableElement from './DroppableElement';
 
 //Styles:
 import styled from 'styled-components';
@@ -89,7 +89,7 @@ const MultipleLists = () => {
             <DragDropContext onDragEnd={onDragEnd}>
                 <ListGridContainer>
                     {lists.map((listKey: any) => (
-                        <DraggableElement
+                        <DroppableElement
                             elements={elements[listKey]}
                             key={listKey}
                             prefix={listKey}
