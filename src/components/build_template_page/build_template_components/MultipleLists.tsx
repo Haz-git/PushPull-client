@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 //Components:
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import DroppableElement from './DroppableElement';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
@@ -25,7 +26,7 @@ const ListGridContainer = styled.div`
 //Fake data gen:
 const getItems = (count: any, prefix: any) =>
     Array.from({ length: count }, (v, k) => k).map((k) => {
-        const randomId = Math.floor(Math.random() * 1000);
+        const randomId = uuid();
         return {
             id: `item-${randomId}`,
             prefix,
