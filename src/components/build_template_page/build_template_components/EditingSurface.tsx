@@ -72,9 +72,7 @@ const EditingSurface = () => {
 
     return (
         <MainContainer height={height} width={width}>
-            <GridContainer>
-                <MultipleLists />
-            </GridContainer>
+            <GridContainer>{/* <MultipleLists /> */}</GridContainer>
         </MainContainer>
     );
 };
