@@ -49,10 +49,8 @@ const addToList = (list: any, index: any, element: any) => {
 const lists = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
 
 const generateLists = () =>
-    lists.reduce(
-        (acc, listKey) => ({ ...acc, [listKey]: getItems(10, listKey) }),
-        {}
-    );
+    //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
+    lists.reduce((acc, listKey) => ({ ...acc, [listKey]: [] }), {});
 
 //Interfaces:
 
