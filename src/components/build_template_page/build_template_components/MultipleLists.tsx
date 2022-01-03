@@ -3,197 +3,102 @@ import { useState, useEffect } from 'react';
 
 //Components:
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import DraggableElement from './DraggableElement';
 
 //Styles:
+import styled from 'styled-components';
+
+const DragDropContextContainer = styled.div`
+    padding: 1rem 1rem;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+`;
+
+const ListGridContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 1rem;
+`;
+
+//Helper Functions:
+
+//Fake data gen:
+const getItems = (count: any, prefix: any) =>
+    Array.from({ length: count }, (v, k) => k).map((k) => {
+        const randomId = Math.floor(Math.random() * 1000);
+        return {
+            id: `item-${randomId}`,
+            prefix,
+            content: `item ${randomId}`,
+        };
+    });
+
+const removeFromList = (list: any, index: any) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(index, 1);
+    return [removed, result];
+};
+
+const addToList = (list: any, index: any, element: any) => {
+    const result = Array.from(list);
+    result.splice(index, 0, element);
+    return result;
+};
+
+const lists = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+
+const generateLists = () =>
+    lists.reduce(
+        (acc, listKey) => ({ ...acc, [listKey]: getItems(10, listKey) }),
+        {}
+    );
 
 //Interfaces:
 
-const ListGrid = () => {
-    const [items, setItems] = useState([] as any);
-    const [selected, setSelected] = useState([] as any);
-
-    //Fake data gen:
-    const getItems = (count: number, offset = 0) =>
-        Array.from({ length: count }, (v, k) => k).map((k) => ({
-            id: `item-${k + offset}`,
-            content: `item ${k + offset}`,
-        }));
+const MultipleLists = () => {
+    const [elements, setElements] = useState(generateLists()) as any;
 
     useEffect(() => {
-        setItems(getItems(10));
-        setSelected(getItems(5, 10));
+        setElements(generateLists());
     }, []);
 
-    //Reorder results:
-    const reorder = (list: any, startIndex: number, endIndex: number) => {
-        const result = Array.from(list);
-        const [removed] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, removed);
-
-        return result;
-    };
-
-    // Move item from one list to other
-    const move = (
-        source: any,
-        destination: any,
-        droppableSource: any,
-        droppableDestination: any
-    ) => {
-        const sourceClone = Array.from(source);
-        const destClone = Array.from(destination);
-        const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-        destClone.splice(droppableDestination.index, 0, removed);
-
-        const result = {} as any;
-        result[droppableSource.droppableId] = sourceClone;
-        result[droppableDestination.droppableId] = destClone;
-
-        return result;
-    };
-
-    const grid = 10;
-
-    const getItemStyle = (isDragging: any, draggableStyle: any) => ({
-        // some basic styles to make the items look a bit nicer
-        userSelect: 'none',
-        padding: grid * 2,
-        margin: `0 0 ${grid}px 0`,
-
-        // change background colour if dragging
-        background: isDragging ? 'lightgreen' : 'grey',
-
-        // styles we need to apply on draggables
-        ...draggableStyle,
-    });
-
-    const getListStyle = (isDraggingOver: any) => ({
-        background: isDraggingOver ? 'lightblue' : 'lightgrey',
-        padding: grid,
-        width: 250,
-    });
-
-    const id2List = {
-        droppable: 'items',
-        droppable2: 'selected',
-    };
-
-    const getList = (id: any) => {
-        if (id === 'items') return items;
-        return selected;
-    };
-
     const onDragEnd = (result: any) => {
-        const { source, destination } = result;
-        // dropped outside the list
         if (!result.destination) {
             return;
         }
-        // Sorting in same list
-        if (source.droppableId === destination.droppableId) {
-            const items = reorder(
-                getList(source.droppableId),
-                source.index,
-                destination.index
-            );
+        const listCopy = { ...(elements as any) };
 
-            if (source.droppableId === 'droppable2') {
-                setSelected(items);
-            }
+        const sourceList = listCopy[result.source.droppableId];
+        const [removedElement, newSourceList] = removeFromList(
+            sourceList,
+            result.source.index
+        );
+        listCopy[result.source.droppableId] = newSourceList;
+        const destinationList = listCopy[result.destination.droppableId];
+        listCopy[result.destination.droppableId] = addToList(
+            destinationList,
+            result.destination.index,
+            removedElement
+        );
 
-            setItems(items);
-        }
-        // Interlist movement
-        else {
-            const result = move(
-                getList(source.droppableId),
-                getList(destination.droppableId),
-                source,
-                destination
-            );
-
-            setItems(result.droppable);
-            setSelected(result.droppable2);
-        }
-
-        // const reorderedItems = reorder(
-        //     items,
-        //     result.source.index,
-        //     result.destination.index
-        // );
-
-        // setItems(reorderedItems);
+        setElements(listCopy);
     };
 
     return (
-        <div style={{ display: 'flex' }}>
+        <DragDropContextContainer>
             <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="droppable">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                        >
-                            {items.map((item: any, index: any) => (
-                                <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    index={index}
-                                >
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            {item.content}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-                <Droppable droppableId="droppable2">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                        >
-                            {selected.map((item: any, index: any) => (
-                                <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    index={index}
-                                >
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            {item.content}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
+                <ListGridContainer>
+                    {lists.map((listKey: any) => (
+                        <DraggableElement
+                            elements={elements[listKey]}
+                            key={listKey}
+                            prefix={listKey}
+                        />
+                    ))}
+                </ListGridContainer>
             </DragDropContext>
-        </div>
+        </DragDropContextContainer>
     );
 };
 
-export default ListGrid;
+export default MultipleLists;
