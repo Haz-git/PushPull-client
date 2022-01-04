@@ -18,6 +18,7 @@ import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
+import DroppableElement from './DroppableElement';
 
 const MainContainer = styled.section`
     display: grid;
@@ -102,15 +103,20 @@ interface IComponentProps {
     togglePanningStatus: () => void;
     isPanningDisabled: boolean;
     controlBlockModal: (state: boolean) => void;
+    lists: any;
+    elements: any;
 }
 
 const Toolbar = ({
     togglePanningStatus,
     isPanningDisabled,
     controlBlockModal,
+    lists,
+    elements,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
+    console.log(elements);
 
     useEffect(() => {
         return () => {
@@ -162,6 +168,13 @@ const Toolbar = ({
                             buttonLabel="Add Block"
                             onClick={() => controlBlockModal(true)}
                         />
+                        {lists.map((listKey: any) => (
+                            <DroppableElement
+                                elements={elements[listKey]}
+                                key={listKey}
+                                prefix={listKey}
+                            />
+                        ))}
                         {renderTemplateBlocks()}
                     </Accordion.Item>
                     <Accordion.Item label="Saved blocks"></Accordion.Item>
