@@ -112,7 +112,6 @@ const Toolbar = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
-    console.log(elements);
 
     useEffect(() => {
         return () => {
