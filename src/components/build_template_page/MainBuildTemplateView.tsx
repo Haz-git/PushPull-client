@@ -7,7 +7,6 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import LoadProgress from '../nprogress/LoadProgress';
 import Toolbar from './build_template_components/Toolbar';
 import EditingSurface from './build_template_components/EditingSurface';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import GeneralModal from '../general_components/GeneralModal';
 import AddBlockForm from './build_template_components/AddBlockForm';
 import { v4 as uuid } from 'uuid';
@@ -19,7 +18,9 @@ import { queryTemplate } from '../../redux/templates/templateActions';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section`
+const MainContainer = styled.section``;
+
+const EditingSurfaceGridWrapper = styled.div`
     background: #ffffff;
     width: 100%;
 
@@ -113,8 +114,6 @@ const MainBuildTemplateView = ({
     const isLoading = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.isLoading
     );
-    const [isPanningDisabled, setStatePanning] = useState(true);
-    const togglePanningStatus = () => setStatePanning(!isPanningDisabled);
 
     const [openBlockModal, setOpenBlockModal] = useState(false);
     const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
@@ -174,23 +173,18 @@ const MainBuildTemplateView = ({
                     </GeneralModal>
                     <MainContainer>
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <Toolbar
-                                controlBlockModal={controlBlockModal}
-                                togglePanningStatus={togglePanningStatus}
-                                isPanningDisabled={isPanningDisabled}
-                                lists={[lists[0]]}
-                                elements={returnToolbarElements()}
-                            />
-                            <TransformWrapper
-                                panning={{ disabled: isPanningDisabled }}
-                            >
-                                <TransformComponent>
-                                    <EditingSurface
-                                        lists={lists.slice(1)}
-                                        elements={returnEditingSurfaceElements()}
-                                    />
-                                </TransformComponent>
-                            </TransformWrapper>
+                            <EditingSurfaceGridWrapper>
+                                <Toolbar
+                                    controlBlockModal={controlBlockModal}
+                                    lists={[lists[0]]}
+                                    elements={returnToolbarElements()}
+                                />
+
+                                <EditingSurface
+                                    lists={lists.slice(1)}
+                                    elements={returnEditingSurfaceElements()}
+                                />
+                            </EditingSurfaceGridWrapper>
                         </DragDropContext>
                     </MainContainer>
                 </>
