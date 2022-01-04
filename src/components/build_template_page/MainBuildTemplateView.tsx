@@ -66,11 +66,23 @@ const addToList = (list: any, index: any, element: any) => {
     return result;
 };
 
-const lists = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+const lists = [
+    'Blocks',
+    'Day 1',
+    'Day 2',
+    'Day 3',
+    'Day 4',
+    'Day 5',
+    'Day 6',
+    'Day 7',
+];
 
 const generateLists = () =>
     //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
-    lists.reduce((acc, listKey) => ({ ...acc, [listKey]: [] }), {});
+    lists.reduce(
+        (acc, listKey) => ({ ...acc, [listKey]: getItems(4, listKey) }),
+        {}
+    );
 
 //Interfaces:
 
@@ -129,6 +141,18 @@ const MainBuildTemplateView = ({
         setElements(listCopy);
     };
 
+    const returnToolbarElements = () => {
+        let newElements = {} as any;
+        newElements['Blocks'] = elements[Object.keys(elements)[0]];
+        return newElements;
+    };
+
+    const returnEditingSurfaceElements = () => {
+        let newElements = { ...elements };
+        delete newElements[Object.keys(newElements)[0]];
+        return newElements;
+    };
+
     return (
         <>
             {isLoading === true ? (
@@ -154,12 +178,17 @@ const MainBuildTemplateView = ({
                                 controlBlockModal={controlBlockModal}
                                 togglePanningStatus={togglePanningStatus}
                                 isPanningDisabled={isPanningDisabled}
+                                lists={[lists[0]]}
+                                elements={returnToolbarElements()}
                             />
                             <TransformWrapper
                                 panning={{ disabled: isPanningDisabled }}
                             >
                                 <TransformComponent>
-                                    <EditingSurface />
+                                    <EditingSurface
+                                        lists={lists.slice(1)}
+                                        elements={returnEditingSurfaceElements()}
+                                    />
                                 </TransformComponent>
                             </TransformWrapper>
                         </DragDropContext>
