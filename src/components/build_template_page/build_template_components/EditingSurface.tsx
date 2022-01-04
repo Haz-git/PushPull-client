@@ -6,10 +6,9 @@ import { deviceMin } from '../../../devices/breakpoints';
 import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
-import ListGrid from './ListGrid';
 import MultipleLists from './MultipleLists';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
-
+import DroppableElement from './DroppableElement';
 //Styles:
 import styled from 'styled-components';
 
@@ -52,6 +51,12 @@ const GridContainer = styled.div`
     border: 1px solid black;
 `;
 
+const ListGridContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 1rem;
+`;
+
 const TestDraggableDiv = styled.div`
     background: salmon;
     border: 1px solid black;
@@ -64,7 +69,12 @@ interface IMainContainerProps {
     width: number;
 }
 
-const EditingSurface = () => {
+interface IComponentProps {
+    lists: any;
+    elements: any;
+}
+
+const EditingSurface = ({ lists, elements }: IComponentProps): JSX.Element => {
     const selectedBlock = useSelector(
         (state: RootStateOrAny) => state?.toolbarSelectedBlock
     );
@@ -72,7 +82,17 @@ const EditingSurface = () => {
 
     return (
         <MainContainer height={height} width={width}>
-            <GridContainer>{/* <MultipleLists /> */}</GridContainer>
+            <GridContainer>
+                <ListGridContainer>
+                    {lists.map((listKey: any) => (
+                        <DroppableElement
+                            elements={elements[listKey]}
+                            key={listKey}
+                            prefix={listKey}
+                        />
+                    ))}
+                </ListGridContainer>
+            </GridContainer>
         </MainContainer>
     );
 };
