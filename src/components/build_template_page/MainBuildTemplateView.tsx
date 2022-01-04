@@ -81,7 +81,10 @@ const lists = [
 const generateLists = () =>
     //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
     lists.reduce(
-        (acc, listKey) => ({ ...acc, [listKey]: getItems(4, listKey) }),
+        (acc: any, listKey: any) => ({
+            ...acc,
+            [listKey]: getItems(4, listKey),
+        }),
         {}
     );
 
@@ -119,6 +122,7 @@ const MainBuildTemplateView = ({
     const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
 
     const onDragEnd = (result: any) => {
+        console.log(result);
         if (!result.destination) {
             return;
         }
