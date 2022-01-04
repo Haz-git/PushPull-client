@@ -100,16 +100,12 @@ const ToolsContainer = styled.div`
 //Interfaces:
 
 interface IComponentProps {
-    togglePanningStatus: () => void;
-    isPanningDisabled: boolean;
     controlBlockModal: (state: boolean) => void;
     lists: any;
     elements: any;
 }
 
 const Toolbar = ({
-    togglePanningStatus,
-    isPanningDisabled,
     controlBlockModal,
     lists,
     elements,
@@ -186,12 +182,6 @@ const Toolbar = ({
                     onClick={() =>
                         historyObject.push('/builder/dashboard/recents')
                     }
-                />
-                <GeneralButton
-                    buttonLabel={
-                        isPanningDisabled ? 'Activate pan' : 'Disable pan'
-                    }
-                    onClick={togglePanningStatus}
                 />
                 <GeneralButton buttonLabel="Add" />
             </ToolsContainer>
