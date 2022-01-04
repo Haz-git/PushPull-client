@@ -28,10 +28,18 @@ const DroppableElement = ({
     prefix,
     elements,
 }: IComponentProps): JSX.Element => {
+    const disableDropForToolbar = () => {
+        if (prefix === 'Blocks') return true;
+        return false;
+    };
+
     return (
         <DroppableStyles>
             <ColumnHeader>{prefix}</ColumnHeader>
-            <Droppable droppableId={`${prefix}`}>
+            <Droppable
+                droppableId={`${prefix}`}
+                isDropDisabled={disableDropForToolbar()}
+            >
                 {(provided: any) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                         {elements?.map((item: any, index: any) => (
