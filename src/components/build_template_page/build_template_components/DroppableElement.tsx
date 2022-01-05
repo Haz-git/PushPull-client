@@ -31,13 +31,17 @@ const DroppableElement = ({
     columnIndex,
 }: IComponentProps): JSX.Element => {
     //The naming for this DroppableElement should be changed in the future to something like Columns, as this represents the Day columns on the editing surface and the individual blocks column in the toolbar.
-    const disableDropForToolbar = () => {
+    const disableDragAndDropForToolbar = () => {
         if (prefix === 'Blocks') return true;
         return false;
     };
 
     return (
-        <Draggable draggableId={`${prefix}`} index={columnIndex}>
+        <Draggable
+            draggableId={`${prefix}`}
+            index={columnIndex}
+            isDragDisabled={disableDragAndDropForToolbar()}
+        >
             {(provided) => (
                 <DroppableStyles
                     {...provided.draggableProps}
@@ -48,7 +52,7 @@ const DroppableElement = ({
                     </ColumnHeader>
                     <Droppable
                         droppableId={`${prefix}`}
-                        isDropDisabled={disableDropForToolbar()}
+                        isDropDisabled={disableDragAndDropForToolbar()}
                     >
                         {(provided: any) => (
                             <div

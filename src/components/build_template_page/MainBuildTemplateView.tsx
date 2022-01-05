@@ -147,23 +147,20 @@ const MainBuildTemplateView = ({
 
         //Check if user moved column instead of item:
         if (type === 'column') {
-            if (result.destination.droppableId !== 'Blocks') {
-                console.log(
-                    `Source: ${result.source.index}, Destination: ${result.destination.index}`
-                );
-                //Create copy
-                const newColumnOrder = Array.from(columns);
-                newColumnOrder.splice(result.source.index + 1, 1);
-                newColumnOrder.splice(
-                    result.destination.index + 1,
-                    0,
-                    result.draggableId
-                );
+            console.log(
+                `Source: ${result.source.index}, Destination: ${result.destination.index}`
+            );
+            //Create copy
+            const newColumnOrder = Array.from(columns);
+            //Adding +1 is to factor for the 'Blocks' column.
+            newColumnOrder.splice(result.source.index + 1, 1);
+            newColumnOrder.splice(
+                result.destination.index + 1,
+                0,
+                result.draggableId
+            );
 
-                setColumns(newColumnOrder);
-                return;
-            }
-
+            setColumns(newColumnOrder);
             return;
         }
 
