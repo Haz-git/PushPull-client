@@ -143,38 +143,31 @@ const MainBuildTemplateView = ({
 
         //Only remove element from list if source is not 'Blocks' or 'Saved Blocks' from toolbar.
 
+        let manipulatedElement, newSourceList;
+
         if (result.source.droppableId !== 'Blocks') {
-            const [removedElement, newSourceList] = removeFromList(
+            [manipulatedElement, newSourceList] = removeFromList(
                 sourceList,
                 result.source.index
             );
-
-            listCopy[result.source.droppableId] = newSourceList;
-
-            const destinationList = listCopy[result.destination.droppableId];
-
-            listCopy[result.destination.droppableId] = addToList(
-                destinationList,
-                result.destination.index,
-                removedElement
-            );
-
-            setElements(listCopy);
         } else {
-            const [duplicatedElement, newSourceList] = duplicateFromList(
+            [manipulatedElement, newSourceList] = duplicateFromList(
                 sourceList,
                 result.source.index
             );
-            listCopy[result.source.droppableId] = newSourceList;
-            const destinationList = listCopy[result.destination.droppableId];
-            listCopy[result.destination.droppableId] = addToList(
-                destinationList,
-                result.destination.index,
-                duplicatedElement
-            );
-
-            setElements(listCopy);
         }
+
+        listCopy[result.source.droppableId] = newSourceList;
+
+        const destinationList = listCopy[result.destination.droppableId];
+
+        listCopy[result.destination.droppableId] = addToList(
+            destinationList,
+            result.destination.index,
+            manipulatedElement
+        );
+
+        setElements(listCopy);
     };
 
     const returnToolbarElements = () => {
