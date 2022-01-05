@@ -47,6 +47,7 @@ const DroppableElement = ({
                                 key={item.id}
                                 item={item}
                                 index={index}
+                                content={item.content}
                             />
                         ))}
                         {provided.placeholder}
