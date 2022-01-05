@@ -6,26 +6,39 @@ import { Draggable } from 'react-beautiful-dnd';
 //Styles:
 import styled from 'styled-components';
 
+const MainContainer = styled.div`
+    padding: 0.5rem 0.5rem;
+    margin: 0.5rem 0.5rem;
+    border-radius: 0.4rem;
+    background: salmon;
+`;
+
 //Interfaces:
 
 interface IComponentProps {
     item: any;
     index: any;
+    content: any;
 }
 
-const BlockTypeExercise = ({ item, index }: IComponentProps): JSX.Element => {
+const BlockTypeExercise = ({
+    item,
+    index,
+    content,
+}: IComponentProps): JSX.Element => {
     return (
         <Draggable draggableId={item.id} index={index}>
             {(provided, snapshot) => {
                 return (
-                    <div
+                    <MainContainer
                         ref={provided.innerRef}
                         data-snapshot={snapshot}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                     >
-                        {item.id}
-                    </div>
+                        <div>{`ID :${item.id}`}</div>
+                        <div>{content}</div>
+                    </MainContainer>
                 );
             }}
         </Draggable>
