@@ -49,16 +49,28 @@ const getItems = (count: any, prefix: any) =>
     Array.from({ length: count }, (v, k) => k).map((k) => {
         const randomId = uuid();
         return {
-            id: `item-${randomId}`,
+            id: `${randomId}`,
             prefix,
-            content: `item ${randomId}`,
+            content: `CONTENT = ${(Math.random() + 1)
+                .toString(36)
+                .substring(7)}`,
         };
     });
 
 const removeFromList = (list: any, index: any) => {
     const result = Array.from(list);
     const [removed] = result.splice(index, 1);
+    console.log(removed);
     return [removed, result];
+};
+
+const duplicateFromList = (list: any, index: any) => {
+    const result = Array.from(list);
+    const originalDuplicated: any = result[index];
+    //We can't have the same id, but we should have the same content.
+    let newDuplicated = { ...originalDuplicated };
+    newDuplicated.id = `${uuid()}`;
+    return [newDuplicated, result];
 };
 
 const addToList = (list: any, index: any, element: any) => {
@@ -122,26 +134,47 @@ const MainBuildTemplateView = ({
     const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
 
     const onDragEnd = (result: any) => {
-        console.log(result);
         if (!result.destination) {
             return;
         }
         const listCopy = { ...(elements as any) };
 
         const sourceList = listCopy[result.source.droppableId];
-        const [removedElement, newSourceList] = removeFromList(
-            sourceList,
-            result.source.index
-        );
-        listCopy[result.source.droppableId] = newSourceList;
-        const destinationList = listCopy[result.destination.droppableId];
-        listCopy[result.destination.droppableId] = addToList(
-            destinationList,
-            result.destination.index,
-            removedElement
-        );
 
-        setElements(listCopy);
+        //Only remove element from list if source is not 'Blocks' or 'Saved Blocks' from toolbar.
+
+        if (result.source.droppableId !== 'Blocks') {
+            const [removedElement, newSourceList] = removeFromList(
+                sourceList,
+                result.source.index
+            );
+
+            listCopy[result.source.droppableId] = newSourceList;
+
+            const destinationList = listCopy[result.destination.droppableId];
+
+            listCopy[result.destination.droppableId] = addToList(
+                destinationList,
+                result.destination.index,
+                removedElement
+            );
+
+            setElements(listCopy);
+        } else {
+            const [duplicatedElement, newSourceList] = duplicateFromList(
+                sourceList,
+                result.source.index
+            );
+            listCopy[result.source.droppableId] = newSourceList;
+            const destinationList = listCopy[result.destination.droppableId];
+            listCopy[result.destination.droppableId] = addToList(
+                destinationList,
+                result.destination.index,
+                duplicatedElement
+            );
+
+            setElements(listCopy);
+        }
     };
 
     const returnToolbarElements = () => {
