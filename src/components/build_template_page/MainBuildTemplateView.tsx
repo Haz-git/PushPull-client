@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import LoadProgress from '../nprogress/LoadProgress';
 import Toolbar from './build_template_components/Toolbar';
 import EditingSurface from './build_template_components/EditingSurface';
@@ -42,64 +42,6 @@ const EditingSurfaceGridWrapper = styled.div`
     }
 `;
 
-//Helper Functions: For DragDropContext
-
-//Fake data gen:
-const getItems = (count: any, prefix: any) =>
-    Array.from({ length: count }, (v, k) => k).map((k) => {
-        const randomId = uuid();
-        return {
-            id: `${randomId}`,
-            prefix,
-            content: `CONTENT = ${(Math.random() + 1)
-                .toString(36)
-                .substring(7)}`,
-        };
-    });
-
-const removeFromList = (list: any, index: any) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(index, 1);
-    console.log(removed);
-    return [removed, result];
-};
-
-const duplicateFromList = (list: any, index: any) => {
-    const result = Array.from(list);
-    const originalDuplicated: any = result[index];
-    //We can't have the same id, but we should have the same content.
-    let newDuplicated = { ...originalDuplicated };
-    newDuplicated.id = `${uuid()}`;
-    return [newDuplicated, result];
-};
-
-const addToList = (list: any, index: any, element: any) => {
-    const result = Array.from(list);
-    result.splice(index, 0, element);
-    return result;
-};
-
-const lists = [
-    'Blocks',
-    'Day 1',
-    'Day 2',
-    'Day 3',
-    'Day 4',
-    'Day 5',
-    'Day 6',
-    'Day 7',
-];
-
-const generateLists = () =>
-    //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
-    lists.reduce(
-        (acc: any, listKey: any) => ({
-            ...acc,
-            [listKey]: getItems(4, listKey),
-        }),
-        {}
-    );
-
 //Interfaces:
 
 interface IComponentProps {
@@ -117,6 +59,42 @@ const MainBuildTemplateView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
+    //Initialization helper function:
+
+    const [columns, setColumns] = useState([
+        'Blocks',
+        'Day 1',
+        'Day 2',
+        'Day 3',
+        'Day 4',
+        'Day 5',
+        'Day 6',
+        'Day 7',
+    ]);
+
+    //Fake data gen:
+    const getItems = (count: any, prefix: any) =>
+        Array.from({ length: count }, (v, k) => k).map((k) => {
+            const randomId = uuid();
+            return {
+                id: `${randomId}`,
+                prefix,
+                content: `CONTENT = ${(Math.random() + 1)
+                    .toString(36)
+                    .substring(7)}`,
+            };
+        });
+
+    const generateLists = () =>
+        //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
+        columns.reduce(
+            (acc: any, listKey: any) => ({
+                ...acc,
+                [listKey]: getItems(4, listKey),
+            }),
+            {}
+        );
+
     //Elements for drag drop context:
     const [elements, setElements] = useState(generateLists()) as any;
 
@@ -133,13 +111,61 @@ const MainBuildTemplateView = ({
     const [openBlockModal, setOpenBlockModal] = useState(false);
     const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
 
+    //Helper Functions: For DragDropContext
+
+    const removeFromList = (list: any, index: any) => {
+        const result = Array.from(list);
+        const [removed] = result.splice(index, 1);
+        return [removed, result];
+    };
+
+    const duplicateFromList = (list: any, index: any) => {
+        const result = Array.from(list);
+        const originalDuplicated: any = result[index];
+        //We can't have the same id, but we should have the same content.
+        let newDuplicated = { ...originalDuplicated };
+        newDuplicated.id = `${uuid()}`;
+        return [newDuplicated, result];
+    };
+
+    const addToList = (list: any, index: any, element: any) => {
+        const result = Array.from(list);
+        result.splice(index, 0, element);
+        return result;
+    };
+
     const onDragEnd = (result: any) => {
+        const { type } = result;
+        console.log(result.destination);
+
         if (!result.destination) {
             return;
         }
         const listCopy = { ...(elements as any) };
 
         const sourceList = listCopy[result.source.droppableId];
+
+        //Check if user moved column instead of item:
+        if (type === 'column') {
+            if (result.destination.droppableId !== 'Blocks') {
+                console.log(
+                    `Source: ${result.source.index}, Destination: ${result.destination.index}`
+                );
+                //Create copy
+                const newColumnOrder = Array.from(columns);
+                newColumnOrder.splice(result.source.index + 1, 1);
+                newColumnOrder.splice(
+                    result.destination.index + 1,
+                    0,
+                    result.draggableId
+                );
+
+                setColumns(newColumnOrder);
+                return;
+            }
+
+            return;
+        }
 
         //Only remove element from list if source is not 'Blocks' or 'Saved Blocks' from toolbar.
 
@@ -166,6 +192,8 @@ const MainBuildTemplateView = ({
             result.destination.index,
             manipulatedElement
         );
+
+        console.log(listCopy);
 
         setElements(listCopy);
     };
@@ -203,18 +231,31 @@ const MainBuildTemplateView = ({
                     </GeneralModal>
                     <MainContainer>
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <EditingSurfaceGridWrapper>
-                                <Toolbar
-                                    controlBlockModal={controlBlockModal}
-                                    lists={[lists[0]]}
-                                    elements={returnToolbarElements()}
-                                />
-
-                                <EditingSurface
-                                    lists={lists.slice(1)}
-                                    elements={returnEditingSurfaceElements()}
-                                />
-                            </EditingSurfaceGridWrapper>
+                            <Droppable
+                                droppableId="all-columns"
+                                direction="horizontal"
+                                type="column"
+                            >
+                                {(provided) => (
+                                    <EditingSurfaceGridWrapper
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef} //According to https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md, innerRef was replaced with ref via the React16 forwardRef API.
+                                    >
+                                        <Toolbar
+                                            controlBlockModal={
+                                                controlBlockModal
+                                            }
+                                            lists={[columns[0]]}
+                                            elements={returnToolbarElements()}
+                                        />
+                                        <EditingSurface
+                                            lists={columns.slice(1)}
+                                            elements={returnEditingSurfaceElements()}
+                                        />
+                                        {provided.placeholder}
+                                    </EditingSurfaceGridWrapper>
+                                )}
+                            </Droppable>
                         </DragDropContext>
                     </MainContainer>
                 </>
