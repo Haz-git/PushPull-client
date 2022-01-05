@@ -59,6 +59,8 @@ const MainBuildTemplateView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
+    const [disableDrop, setDisableDrop] = useState(false);
+
     //Initialization helper function:
 
     const [columns, setColumns] = useState([
@@ -136,7 +138,6 @@ const MainBuildTemplateView = ({
 
     const onDragEnd = (result: any) => {
         const { type } = result;
-        console.log(result.destination);
 
         if (!result.destination) {
             return;
@@ -147,9 +148,9 @@ const MainBuildTemplateView = ({
 
         //Check if user moved column instead of item:
         if (type === 'column') {
-            console.log(
-                `Source: ${result.source.index}, Destination: ${result.destination.index}`
-            );
+            // console.log(
+            //     `Source: ${result.source.index}, Destination: ${result.destination.index}`
+            // );
             //Create copy
             const newColumnOrder = Array.from(columns);
             //Adding +1 is to factor for the 'Blocks' column.
