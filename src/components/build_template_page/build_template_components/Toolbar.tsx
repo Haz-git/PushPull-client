@@ -163,11 +163,12 @@ const Toolbar = ({
                             buttonLabel="Add Block"
                             onClick={() => controlBlockModal(true)}
                         />
-                        {lists.map((listKey: any) => (
+                        {lists.map((listKey: any, index: any) => (
                             <DroppableElement
                                 elements={elements[listKey]}
                                 key={listKey}
                                 prefix={listKey}
+                                columnIndex={index}
                             />
                         ))}
                         {renderTemplateBlocks()}
