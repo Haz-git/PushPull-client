@@ -87,11 +87,12 @@ const MultipleLists = () => {
         <DragDropContextContainer>
             <DragDropContext onDragEnd={onDragEnd}>
                 <ListGridContainer>
-                    {lists.map((listKey: any) => (
+                    {lists.map((listKey: any, index: any) => (
                         <DroppableElement
                             elements={elements[listKey]}
                             key={listKey}
                             prefix={listKey}
+                            columnIndex={index}
                         />
                     ))}
                 </ListGridContainer>

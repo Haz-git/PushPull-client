@@ -8,7 +8,9 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 //Components:
 import MultipleLists from './MultipleLists';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+import { Droppable } from 'react-beautiful-dnd';
 import DroppableElement from './DroppableElement';
+
 //Styles:
 import styled from 'styled-components';
 
@@ -83,15 +85,28 @@ const EditingSurface = ({ lists, elements }: IComponentProps): JSX.Element => {
     return (
         <MainContainer height={height} width={width}>
             <GridContainer>
-                <ListGridContainer>
-                    {lists.map((listKey: any) => (
-                        <DroppableElement
-                            elements={elements[listKey]}
-                            key={listKey}
-                            prefix={listKey}
-                        />
-                    ))}
-                </ListGridContainer>
+                <Droppable
+                    droppableId="editing-surface-columns"
+                    direction="horizontal"
+                    type="column"
+                >
+                    {(provided) => (
+                        <ListGridContainer
+                            {...provided.droppableProps}
+                            ref={provided.innerRef} //According to https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md, innerRef was replaced with ref via the React16 forwardRef API.
+                        >
+                            {lists.map((listKey: any, index: any) => (
+                                <DroppableElement
+                                    elements={elements[listKey]}
+                                    key={listKey}
+                                    prefix={listKey}
+                                    columnIndex={index}
+                                />
+                            ))}
+                            {provided.placeholder}
+                        </ListGridContainer>
+                    )}
+                </Droppable>
             </GridContainer>
         </MainContainer>
     );
