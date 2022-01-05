@@ -38,9 +38,14 @@ const DroppableElement = ({
 
     return (
         <Draggable draggableId={`${prefix}`} index={columnIndex}>
-            {() => (
-                <DroppableStyles>
-                    <ColumnHeader>{prefix}</ColumnHeader>
+            {(provided) => (
+                <DroppableStyles
+                    {...provided.draggableProps}
+                    ref={provided.innerRef}
+                >
+                    <ColumnHeader {...provided.dragHandleProps}>
+                        {prefix}
+                    </ColumnHeader>
                     <Droppable
                         droppableId={`${prefix}`}
                         isDropDisabled={disableDropForToolbar()}
