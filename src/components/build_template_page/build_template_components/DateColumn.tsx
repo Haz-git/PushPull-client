@@ -25,12 +25,11 @@ interface IComponentProps {
     columnIndex: any;
 }
 
-const DroppableElement = ({
+const DateColumn = ({
     prefix,
     elements,
     columnIndex,
 }: IComponentProps): JSX.Element => {
-    //The naming for this DroppableElement should be changed in the future to something like Columns, as this represents the Day columns on the editing surface and the individual blocks column in the toolbar.
     const disableDragAndDropForToolbar = () => {
         if (prefix === 'Blocks') return true;
         return false;
@@ -77,4 +76,4 @@ const DroppableElement = ({
     );
 };
 
-export default DroppableElement;
+export default DateColumn;
