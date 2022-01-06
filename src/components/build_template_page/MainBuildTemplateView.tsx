@@ -59,12 +59,11 @@ const MainBuildTemplateView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
-    const [disableDrop, setDisableDrop] = useState(false);
-
     //Initialization helper function:
 
-    const [columns, setColumns] = useState([
-        'Blocks',
+    //Column States for DnD functionality:
+
+    const [editingSurfaceColumns, setEditingSurfaceColumns] = useState([
         'Day 1',
         'Day 2',
         'Day 3',
@@ -73,6 +72,8 @@ const MainBuildTemplateView = ({
         'Day 6',
         'Day 7',
     ]);
+
+    const [toolbarColumns, setToolbarColumns] = useState(['Blocks']);
 
     //Fake data gen:
     const getItems = (count: any, prefix: any) =>
@@ -87,9 +88,9 @@ const MainBuildTemplateView = ({
             };
         });
 
-    const generateLists = () =>
+    const generateLists = (list: any) =>
         //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
-        columns.reduce(
+        list.reduce(
             (acc: any, listKey: any) => ({
                 ...acc,
                 [listKey]: getItems(4, listKey),
@@ -98,11 +99,17 @@ const MainBuildTemplateView = ({
         );
 
     //Elements for drag drop context:
-    const [elements, setElements] = useState(generateLists()) as any;
+    const [editingSurfaceElements, setEditingSurfaceElements] = useState(
+        generateLists(editingSurfaceColumns)
+    ) as any;
+    const [toolbarElements, setToolbarElements] = useState(
+        generateLists(toolbarColumns)
+    ) as any;
 
     useEffect(() => {
         // controlTemplateLoadingStatus(true);
-        setElements(generateLists());
+        setEditingSurfaceElements(generateLists(editingSurfaceColumns));
+        setToolbarElements(generateLists(toolbarColumns));
         dispatch(queryTemplate(fileUuid));
     }, []);
 
@@ -136,77 +143,81 @@ const MainBuildTemplateView = ({
         return result;
     };
 
+    // const onDragEnd = (result: any) => {
+    //     const { type } = result;
+
+    //     if (!result.destination) {
+    //         return;
+    //     }
+    //     const listCopy = { ...(elements as any) };
+
+    //     const sourceList = listCopy[result.source.droppableId];
+
+    //     //Check if user moved column instead of item:
+    //     if (type === 'column') {
+    //         // console.log(
+    //         //     `Source: ${result.source.index}, Destination: ${result.destination.index}`
+    //         // );
+    //         //Create copy
+    //         const newColumnOrder = Array.from(columns);
+    //         //Adding +1 is to factor for the 'Blocks' column.
+    //         newColumnOrder.splice(result.source.index + 1, 1);
+    //         newColumnOrder.splice(
+    //             result.destination.index + 1,
+    //             0,
+    //             result.draggableId
+    //         );
+
+    //         setColumns(newColumnOrder);
+    //         return;
+    //     }
+
+    //     //Only remove element from list if source is not 'Blocks' or 'Saved Blocks' from toolbar.
+
+    //     let manipulatedElement, newSourceList;
+
+    //     if (result.source.droppableId !== 'Blocks') {
+    //         [manipulatedElement, newSourceList] = removeFromList(
+    //             sourceList,
+    //             result.source.index
+    //         );
+    //     } else {
+    //         [manipulatedElement, newSourceList] = duplicateFromList(
+    //             sourceList,
+    //             result.source.index
+    //         );
+    //     }
+
+    //     listCopy[result.source.droppableId] = newSourceList;
+
+    //     const destinationList = listCopy[result.destination.droppableId];
+
+    //     listCopy[result.destination.droppableId] = addToList(
+    //         destinationList,
+    //         result.destination.index,
+    //         manipulatedElement
+    //     );
+
+    //     console.log(listCopy);
+
+    //     setElements(listCopy);
+    // };
+
     const onDragEnd = (result: any) => {
-        const { type } = result;
-
-        if (!result.destination) {
-            return;
-        }
-        const listCopy = { ...(elements as any) };
-
-        const sourceList = listCopy[result.source.droppableId];
-
-        //Check if user moved column instead of item:
-        if (type === 'column') {
-            // console.log(
-            //     `Source: ${result.source.index}, Destination: ${result.destination.index}`
-            // );
-            //Create copy
-            const newColumnOrder = Array.from(columns);
-            //Adding +1 is to factor for the 'Blocks' column.
-            newColumnOrder.splice(result.source.index + 1, 1);
-            newColumnOrder.splice(
-                result.destination.index + 1,
-                0,
-                result.draggableId
-            );
-
-            setColumns(newColumnOrder);
-            return;
-        }
-
-        //Only remove element from list if source is not 'Blocks' or 'Saved Blocks' from toolbar.
-
-        let manipulatedElement, newSourceList;
-
-        if (result.source.droppableId !== 'Blocks') {
-            [manipulatedElement, newSourceList] = removeFromList(
-                sourceList,
-                result.source.index
-            );
-        } else {
-            [manipulatedElement, newSourceList] = duplicateFromList(
-                sourceList,
-                result.source.index
-            );
-        }
-
-        listCopy[result.source.droppableId] = newSourceList;
-
-        const destinationList = listCopy[result.destination.droppableId];
-
-        listCopy[result.destination.droppableId] = addToList(
-            destinationList,
-            result.destination.index,
-            manipulatedElement
-        );
-
-        console.log(listCopy);
-
-        setElements(listCopy);
+        console.log(result);
     };
 
-    const returnToolbarElements = () => {
-        let newElements = {} as any;
-        newElements['Blocks'] = elements[Object.keys(elements)[0]];
-        return newElements;
-    };
+    // const returnToolbarElements = () => {
+    //     let newElements = {} as any;
+    //     newElements['Blocks'] = elements[Object.keys(elements)[0]];
+    //     return newElements;
+    // };
 
-    const returnEditingSurfaceElements = () => {
-        let newElements = { ...elements };
-        delete newElements[Object.keys(newElements)[0]];
-        return newElements;
-    };
+    // const returnEditingSurfaceElements = () => {
+    //     let newElements = { ...elements };
+    //     delete newElements[Object.keys(newElements)[0]];
+    //     return newElements;
+    // };
 
     return (
         <>
@@ -229,31 +240,27 @@ const MainBuildTemplateView = ({
                     </GeneralModal>
                     <MainContainer>
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <Droppable
-                                droppableId="all-columns"
-                                direction="horizontal"
-                                type="column"
-                            >
-                                {(provided) => (
-                                    <EditingSurfaceGridWrapper
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef} //According to https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md, innerRef was replaced with ref via the React16 forwardRef API.
-                                    >
-                                        <Toolbar
-                                            controlBlockModal={
-                                                controlBlockModal
-                                            }
-                                            lists={[columns[0]]}
-                                            elements={returnToolbarElements()}
-                                        />
+                            <EditingSurfaceGridWrapper>
+                                <Toolbar
+                                    controlBlockModal={controlBlockModal}
+                                    lists={toolbarColumns}
+                                    elements={toolbarElements}
+                                />
+                                <Droppable
+                                    droppableId="editing-surface-columns"
+                                    direction="horizontal"
+                                    type="column"
+                                >
+                                    {(provided) => (
                                         <EditingSurface
-                                            lists={columns.slice(1)}
-                                            elements={returnEditingSurfaceElements()}
+                                            {...provided.droppableProps}
+                                            ref={provided.innerRef} //According to https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md, innerRef was replaced with ref via the React16 forwardRef API.
+                                            lists={editingSurfaceColumns}
+                                            elements={editingSurfaceElements}
                                         />
-                                        {provided.placeholder}
-                                    </EditingSurfaceGridWrapper>
-                                )}
-                            </Droppable>
+                                    )}
+                                </Droppable>
+                            </EditingSurfaceGridWrapper>
                         </DragDropContext>
                     </MainContainer>
                 </>
