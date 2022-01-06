@@ -15,10 +15,12 @@ import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
 import { v4 as uuid } from 'uuid';
 import { Accordion } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
+import BlockTypeExercise from './BlockTypeExercise';
+import { Droppable } from 'react-beautiful-dnd';
+import BlockColumn from './BlockColumn';
 
 //Styles:
 import styled from 'styled-components';
-import DroppableElement from './DateColumn';
 
 const MainContainer = styled.section`
     display: grid;
@@ -163,6 +165,24 @@ const Toolbar = ({
                             buttonLabel="Add Block"
                             onClick={() => controlBlockModal(true)}
                         />
+                        <Droppable
+                            droppableId="toolbar-columns"
+                            type={'EXERCISE_BLOCK'}
+                        >
+                            {(provided: any) => (
+                                <div
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    {lists?.map((listKey: any, index: any) => (
+                                        <BlockColumn
+                                            elements={elements[listKey]}
+                                            prefix={listKey}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                        </Droppable>
                         {/* {lists.map((listKey: any, index: any) => (
                             <DroppableElement
                                 elements={elements[listKey]}
