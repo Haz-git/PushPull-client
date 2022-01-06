@@ -18,7 +18,7 @@ import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
-import DroppableElement from './DroppableElement';
+import DroppableElement from './DateColumn';
 
 const MainContainer = styled.section`
     display: grid;
@@ -163,14 +163,14 @@ const Toolbar = ({
                             buttonLabel="Add Block"
                             onClick={() => controlBlockModal(true)}
                         />
-                        {lists.map((listKey: any, index: any) => (
+                        {/* {lists.map((listKey: any, index: any) => (
                             <DroppableElement
                                 elements={elements[listKey]}
                                 key={listKey}
                                 prefix={listKey}
                                 columnIndex={index}
                             />
-                        ))}
+                        ))} */}
                         {renderTemplateBlocks()}
                     </Accordion.Item>
                     <Accordion.Item label="Saved blocks"></Accordion.Item>
