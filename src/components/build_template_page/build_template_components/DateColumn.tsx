@@ -30,17 +30,8 @@ const DateColumn = ({
     elements,
     columnIndex,
 }: IComponentProps): JSX.Element => {
-    const disableDragAndDropForToolbar = () => {
-        if (prefix === 'Blocks') return true;
-        return false;
-    };
-
     return (
-        <Draggable
-            draggableId={`${prefix}`}
-            index={columnIndex}
-            isDragDisabled={disableDragAndDropForToolbar()}
-        >
+        <Draggable draggableId={`${prefix}`} index={columnIndex}>
             {(provided) => (
                 <DroppableStyles
                     {...provided.draggableProps}
@@ -51,7 +42,7 @@ const DateColumn = ({
                     </ColumnHeader>
                     <Droppable
                         droppableId={`${prefix}`}
-                        isDropDisabled={disableDragAndDropForToolbar()}
+                        type={`EXERCISE_BLOCK`}
                     >
                         {(provided: any) => (
                             <div
