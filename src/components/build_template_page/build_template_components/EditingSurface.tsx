@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { deviceMin } from '../../../devices/breakpoints';
 
 //Redux:
@@ -7,7 +7,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Components:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
-import DroppableElement from './DroppableElement';
+import DateColumn from './DateColumn';
 
 //Styles:
 import styled from 'styled-components';
@@ -74,28 +74,30 @@ interface IComponentProps {
     elements: any;
 }
 
-const EditingSurface = ({ lists, elements }: IComponentProps): JSX.Element => {
-    const selectedBlock = useSelector(
-        (state: RootStateOrAny) => state?.toolbarSelectedBlock
-    );
-    const { width, height } = useWindowDimensions();
+const EditingSurface = forwardRef(
+    ({ lists, elements }: IComponentProps, ref: any): JSX.Element => {
+        const selectedBlock = useSelector(
+            (state: RootStateOrAny) => state?.toolbarSelectedBlock
+        );
+        const { width, height } = useWindowDimensions();
 
-    return (
-        <MainContainer height={height} width={width}>
-            <GridContainer>
-                <ListGridContainer>
-                    {lists.map((listKey: any, index: any) => (
-                        <DroppableElement
-                            elements={elements[listKey]}
-                            key={listKey}
-                            prefix={listKey}
-                            columnIndex={index}
-                        />
-                    ))}
-                </ListGridContainer>
-            </GridContainer>
-        </MainContainer>
-    );
-};
+        return (
+            <MainContainer height={height} width={width} ref={ref}>
+                <GridContainer>
+                    <ListGridContainer>
+                        {lists.map((listKey: any, index: any) => (
+                            <DateColumn
+                                elements={elements[listKey]}
+                                key={listKey}
+                                prefix={listKey}
+                                columnIndex={index}
+                            />
+                        ))}
+                    </ListGridContainer>
+                </GridContainer>
+            </MainContainer>
+        );
+    }
+);
 
 export default EditingSurface;
