@@ -59,8 +59,6 @@ const MainBuildTemplateView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
 
-    //Initialization helper function:
-
     //Column States for DnD functionality:
 
     const [editingSurfaceColumns, setEditingSurfaceColumns] = useState([
@@ -204,7 +202,7 @@ const MainBuildTemplateView = ({
     // };
 
     const onDragEnd = (result: any) => {
-        console.log(result);
+        // console.log(result);
     };
 
     // const returnToolbarElements = () => {
