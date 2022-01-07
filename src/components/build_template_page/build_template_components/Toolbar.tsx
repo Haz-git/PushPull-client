@@ -168,6 +168,7 @@ const Toolbar = ({
                         <Droppable
                             droppableId="toolbar-columns"
                             type={'EXERCISE_BLOCK'}
+                            isDropDisabled={true}
                         >
                             {(provided: any) => (
                                 <div
