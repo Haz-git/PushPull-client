@@ -28,7 +28,11 @@ const BlockColumn = ({ prefix, elements }: IComponentProps): JSX.Element => {
     return (
         <DroppableStyles>
             <ColumnHeader>{prefix}</ColumnHeader>
-            <Droppable droppableId={`${prefix}`} type={'EXERCISE_BLOCK'}>
+            <Droppable
+                droppableId={`${prefix}`}
+                type={'EXERCISE_BLOCK'}
+                isDropDisabled={true}
+            >
                 {(provided: any) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                         {elements?.map((item: any, index: any) => (
