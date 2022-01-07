@@ -178,6 +178,7 @@ const Toolbar = ({
                                         <BlockColumn
                                             elements={elements[listKey]}
                                             prefix={listKey}
+                                            key={listKey}
                                         />
                                     ))}
                                 </div>
