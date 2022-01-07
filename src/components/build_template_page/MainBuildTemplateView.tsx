@@ -126,13 +126,11 @@ const MainBuildTemplateView = ({
         return [removed, result];
     };
 
-    const duplicateFromToolbarBlockColumn = (list: any, index: any) => {
-        const result = Array.from(list);
-        const originalDuplicated: any = result[index];
+    const duplicateBlockFromToolbarWithNewId = (item: any) => {
         //We can't have the same id, but we should have the same content.
-        let newDuplicated = { ...originalDuplicated };
+        let newDuplicated = { ...item };
         newDuplicated.id = `${uuid()}`;
-        return [newDuplicated, result];
+        return newDuplicated;
     };
 
     const addToList = (list: any, index: any, element: any) => {
@@ -147,12 +145,16 @@ const MainBuildTemplateView = ({
         if (!result.destination) {
             return;
         }
-        const listCopy = { ...(editingSurfaceElements as any) };
+        const editingSurfaceList = { ...(editingSurfaceElements as any) };
+        const toolbarList = { ...(toolbarElements as any) };
 
-        const sourceList = listCopy[result.source.droppableId];
+        const editingSurfaceSourceList =
+            editingSurfaceList[result.source.droppableId];
+
+        const toolbarSourceList = toolbarList[result.source.droppableId];
 
         //Check if user moved column instead of item:
-        if (type === 'column') {
+        if (type === 'editing-surface-column') {
             // console.log(
             //     `Source: ${result.source.index}, Destination: ${result.destination.index}`
             // );
@@ -175,29 +177,41 @@ const MainBuildTemplateView = ({
         let manipulatedElement, newSourceList;
 
         if (result.source.droppableId !== 'Blocks') {
+            //Control elements passed between date columns on editing surface.
             [manipulatedElement, newSourceList] = removeFromList(
-                sourceList,
+                editingSurfaceSourceList,
                 result.source.index
             );
+
+            editingSurfaceList[result.source.droppableId] = newSourceList;
+
+            const destinationList =
+                editingSurfaceList[result.destination.droppableId];
+
+            editingSurfaceList[result.destination.droppableId] = addToList(
+                destinationList,
+                result.destination.index,
+                manipulatedElement
+            );
+
+            setEditingSurfaceElements(editingSurfaceList);
         } else {
-            [manipulatedElement, newSourceList] =
-                duplicateFromToolbarBlockColumn(
-                    sourceList,
-                    result.source.index
-                );
+            //Element is passed from toolbar (BlockColumn) to DateColumn
+            manipulatedElement = duplicateBlockFromToolbarWithNewId(
+                toolbarSourceList[result.source.index]
+            );
+
+            const destinationList =
+                editingSurfaceList[result.destination.droppableId];
+
+            editingSurfaceList[result.destination.droppableId] = addToList(
+                destinationList,
+                result.destination.index,
+                manipulatedElement
+            );
+
+            setEditingSurfaceElements(editingSurfaceList);
         }
-
-        listCopy[result.source.droppableId] = newSourceList;
-
-        const destinationList = listCopy[result.destination.droppableId];
-
-        listCopy[result.destination.droppableId] = addToList(
-            destinationList,
-            result.destination.index,
-            manipulatedElement
-        );
-
-        setEditingSurfaceElements(listCopy);
     };
 
     return (
@@ -230,7 +244,7 @@ const MainBuildTemplateView = ({
                                 <Droppable
                                     droppableId="editing-surface-columns"
                                     direction="horizontal"
-                                    type="column"
+                                    type="editing-surface-column"
                                 >
                                     {(provided) => (
                                         <EditingSurface
