@@ -126,7 +126,7 @@ const MainBuildTemplateView = ({
         return [removed, result];
     };
 
-    const duplicateFromList = (list: any, index: any) => {
+    const duplicateFromToolbarBlockColumn = (list: any, index: any) => {
         const result = Array.from(list);
         const originalDuplicated: any = result[index];
         //We can't have the same id, but we should have the same content.
@@ -141,81 +141,64 @@ const MainBuildTemplateView = ({
         return result;
     };
 
-    // const onDragEnd = (result: any) => {
-    //     const { type } = result;
-
-    //     if (!result.destination) {
-    //         return;
-    //     }
-    //     const listCopy = { ...(elements as any) };
-
-    //     const sourceList = listCopy[result.source.droppableId];
-
-    //     //Check if user moved column instead of item:
-    //     if (type === 'column') {
-    //         // console.log(
-    //         //     `Source: ${result.source.index}, Destination: ${result.destination.index}`
-    //         // );
-    //         //Create copy
-    //         const newColumnOrder = Array.from(columns);
-    //         //Adding +1 is to factor for the 'Blocks' column.
-    //         newColumnOrder.splice(result.source.index + 1, 1);
-    //         newColumnOrder.splice(
-    //             result.destination.index + 1,
-    //             0,
-    //             result.draggableId
-    //         );
-
-    //         setColumns(newColumnOrder);
-    //         return;
-    //     }
-
-    //     //Only remove element from list if source is not 'Blocks' or 'Saved Blocks' from toolbar.
-
-    //     let manipulatedElement, newSourceList;
-
-    //     if (result.source.droppableId !== 'Blocks') {
-    //         [manipulatedElement, newSourceList] = removeFromList(
-    //             sourceList,
-    //             result.source.index
-    //         );
-    //     } else {
-    //         [manipulatedElement, newSourceList] = duplicateFromList(
-    //             sourceList,
-    //             result.source.index
-    //         );
-    //     }
-
-    //     listCopy[result.source.droppableId] = newSourceList;
-
-    //     const destinationList = listCopy[result.destination.droppableId];
-
-    //     listCopy[result.destination.droppableId] = addToList(
-    //         destinationList,
-    //         result.destination.index,
-    //         manipulatedElement
-    //     );
-
-    //     console.log(listCopy);
-
-    //     setElements(listCopy);
-    // };
-
     const onDragEnd = (result: any) => {
-        // console.log(result);
+        const { type } = result;
+
+        if (!result.destination) {
+            return;
+        }
+        const listCopy = { ...(editingSurfaceElements as any) };
+
+        const sourceList = listCopy[result.source.droppableId];
+
+        //Check if user moved column instead of item:
+        if (type === 'column') {
+            // console.log(
+            //     `Source: ${result.source.index}, Destination: ${result.destination.index}`
+            // );
+            //Create copy
+            const newColumnOrder = Array.from(editingSurfaceColumns);
+            //Adding +1 is to factor for the 'Blocks' column.
+            newColumnOrder.splice(result.source.index, 1);
+            newColumnOrder.splice(
+                result.destination.index,
+                0,
+                result.draggableId
+            );
+
+            setEditingSurfaceColumns(newColumnOrder);
+            return;
+        }
+
+        //Only remove element from list if source is not 'Blocks' or 'Saved Blocks' from toolbar.
+
+        let manipulatedElement, newSourceList;
+
+        if (result.source.droppableId !== 'Blocks') {
+            [manipulatedElement, newSourceList] = removeFromList(
+                sourceList,
+                result.source.index
+            );
+        } else {
+            [manipulatedElement, newSourceList] =
+                duplicateFromToolbarBlockColumn(
+                    sourceList,
+                    result.source.index
+                );
+        }
+
+        listCopy[result.source.droppableId] = newSourceList;
+
+        const destinationList = listCopy[result.destination.droppableId];
+
+        listCopy[result.destination.droppableId] = addToList(
+            destinationList,
+            result.destination.index,
+            manipulatedElement
+        );
+
+        setEditingSurfaceElements(listCopy);
     };
-
-    // const returnToolbarElements = () => {
-    //     let newElements = {} as any;
-    //     newElements['Blocks'] = elements[Object.keys(elements)[0]];
-    //     return newElements;
-    // };
-
-    // const returnEditingSurfaceElements = () => {
-    //     let newElements = { ...elements };
-    //     delete newElements[Object.keys(newElements)[0]];
-    //     return newElements;
-    // };
 
     return (
         <>
