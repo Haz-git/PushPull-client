@@ -16,7 +16,6 @@ const MainContainer = styled.section<IMainContainerProps>`
     width: ${({ width }) => `${width - 274}px`};
     height: ${({ height }) => `${height}px`};
     background: #ffffff;
-    border: 1px solid black;
 
     /*
         Incredibly frustrating working with this css. I have the exact same grid logic implemented for MainBuildProgramView, but for some reason grid-template-columns does not push the Editing surface the right of the Toolbar. It works perfectly without these media queries in the programview, but these below must be included in editing surface... css???
@@ -47,14 +46,12 @@ const MainContainer = styled.section<IMainContainerProps>`
     }
 `;
 
-const GridContainer = styled.div`
-    border: 1px solid black;
-`;
+const GridContainer = styled.div``;
 
 const ListGridContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    column-gap: 1rem;
+    grid-template-columns: repeat(7, auto);
+    width: 100%;
 `;
 
 const TestDraggableDiv = styled.div`
