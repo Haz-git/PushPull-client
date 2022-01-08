@@ -15,7 +15,6 @@ import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
 import { v4 as uuid } from 'uuid';
 import { Accordion } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
-import BlockTypeExercise from './BlockTypeExercise';
 import { Droppable } from 'react-beautiful-dnd';
 import BlockColumn from './BlockColumn';
 
