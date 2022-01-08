@@ -8,13 +8,14 @@ import BlockTypeExercise from './BlockTypeExercise';
 import styled from 'styled-components';
 const ColumnHeader = styled.div`
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 `;
 
 const DroppableStyles = styled.div`
-    padding: 10px;
-    border-radius: 6px;
-    background: #d4d4d4;
+    padding: 1rem;
+    background: #ffffff;
+    border-right: 1px solid #ebe6fb;
+    height: 100vh;
 `;
 
 //Interfaces:
