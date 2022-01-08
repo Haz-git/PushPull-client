@@ -7,15 +7,9 @@ import BlockTypeExercise from './BlockTypeExercise';
 //Styles:
 import styled from 'styled-components';
 
-const ColumnHeader = styled.div`
-    text-transform: uppercase;
-    margin-bottom: 20px;
-`;
-
-const DroppableStyles = styled.div`
-    padding: 10px;
+const MainContainer = styled.div`
     border-radius: 6px;
-    background: #d4d4d4;
+    background: transparent;
 `;
 
 //Interfaces:
@@ -26,8 +20,7 @@ interface IComponentProps {
 
 const BlockColumn = ({ prefix, elements }: IComponentProps): JSX.Element => {
     return (
-        <DroppableStyles>
-            <ColumnHeader>{prefix}</ColumnHeader>
+        <MainContainer>
             <Droppable
                 droppableId={`${prefix}`}
                 type={'EXERCISE_BLOCK'}
@@ -46,7 +39,7 @@ const BlockColumn = ({ prefix, elements }: IComponentProps): JSX.Element => {
                     </div>
                 )}
             </Droppable>
-        </DroppableStyles>
+        </MainContainer>
     );
 };
 
