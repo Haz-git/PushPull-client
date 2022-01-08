@@ -6,16 +6,22 @@ import BlockTypeExercise from './BlockTypeExercise';
 
 //Styles:
 import styled from 'styled-components';
+
 const ColumnHeader = styled.div`
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    font-weight: 700;
+`;
+
+const HeaderDivider = styled.div`
+    margin: 0.5rem 0rem;
+    height: 4px;
+    border-radius: 0.5rem;
+    background: #d6d6d6;
 `;
 
 const DroppableStyles = styled.div`
     padding: 1rem;
     background: #ffffff;
-    border-right: 1px solid #ebe6fb;
-    height: 100vh;
+    border-right: 2px solid #ebe6fb;
 `;
 
 //Interfaces:
@@ -41,6 +47,7 @@ const DateColumn = ({
                     <ColumnHeader {...provided.dragHandleProps}>
                         {prefix}
                     </ColumnHeader>
+                    <HeaderDivider />
                     <Droppable
                         droppableId={`${prefix}`}
                         type={`EXERCISE_BLOCK`}
