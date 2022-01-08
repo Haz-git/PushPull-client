@@ -33,7 +33,6 @@ const EditingSurfaceGridWrapper = styled.div`
         height: 100%;
         display: grid;
         grid-template-columns: 12rem auto;
-        overflow: visible;
         padding: 0rem 0rem 2rem 0rem;
     }
 
