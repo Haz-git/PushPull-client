@@ -103,6 +103,9 @@ const MainBuildTemplateView = ({
         generateLists(toolbarColumns)
     ) as any;
 
+    console.log(editingSurfaceElements);
+    console.log(toolbarElements);
+
     useEffect(() => {
         // controlTemplateLoadingStatus(true);
         setEditingSurfaceElements(generateLists(editingSurfaceColumns));
