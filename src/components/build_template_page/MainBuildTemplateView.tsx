@@ -97,16 +97,14 @@ const MainBuildTemplateView = ({
 
     //Elements for drag drop context:
     const [editingSurfaceElements, setEditingSurfaceElements] = useState(
-        generateLists(editingSurfaceColumns)
+        {}
     ) as any;
-    const [toolbarElements, setToolbarElements] = useState(
-        generateLists(toolbarColumns)
-    ) as any;
+    const [toolbarElements, setToolbarElements] = useState({}) as any;
 
     useEffect(() => {
         // controlTemplateLoadingStatus(true);
-        setEditingSurfaceElements(generateLists(editingSurfaceColumns));
-        setToolbarElements(generateLists(toolbarColumns));
+        // setEditingSurfaceElements(generateLists(editingSurfaceColumns));
+        // setToolbarElements(generateLists(toolbarColumns));
         dispatch(queryTemplate(fileUuid));
     }, []);
 
