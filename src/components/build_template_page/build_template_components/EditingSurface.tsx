@@ -48,18 +48,18 @@ const MainContainer = styled.section<IMainContainerProps>`
 
 const GridContainer = styled.div``;
 
-const ListGridContainer = styled.div`
+const ListGridContainer = styled.div<IListGridContainer>`
     display: grid;
     grid-template-columns: repeat(7, auto);
     width: 100%;
-`;
-
-const TestDraggableDiv = styled.div`
-    background: salmon;
-    border: 1px solid black;
+    height: ${(props) => `${props.height + 32}px`};
 `;
 
 //Interfaces:
+
+interface IListGridContainer {
+    height: number;
+}
 
 interface IMainContainerProps {
     height: number;
@@ -81,7 +81,7 @@ const EditingSurface = forwardRef(
         return (
             <MainContainer height={height} width={width} ref={ref}>
                 <GridContainer>
-                    <ListGridContainer>
+                    <ListGridContainer height={height}>
                         {lists.map((listKey: any, index: any) => (
                             <DateColumn
                                 elements={elements[listKey]}
