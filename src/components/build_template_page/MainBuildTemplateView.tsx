@@ -61,7 +61,7 @@ const generateLists = (list: any, blocks: any) =>
     list.reduce(
         (acc: any, listKey: any) => ({
             ...acc,
-            [listKey]: blocks,
+            [listKey]: blocks || [],
         }),
         {}
     );
