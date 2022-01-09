@@ -9,7 +9,7 @@ const templateReducer = (state: {} = initialState, action: TemplateAction) => {
             return { ...action.payload };
         case TemplateActionType.USER_CLEAR_TEMPLATE:
             return { ...action.payload };
-        case TemplateActionType.USER_ADD_BLOCK:
+        case TemplateActionType.USER_ADD_TOOLBAR_BLOCK:
             return { ...action.payload };
         case TemplateActionType.USER_UPDATE_BLOCK:
             return { ...action.payload };

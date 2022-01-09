@@ -151,7 +151,7 @@ export const clearTemplate = () => {
     };
 };
 
-export const addTemplateBlock = (templateId: string, blockDetails: any) => {
+export const addToolbarBlock = (templateId: string, blockDetails: any) => {
     return async (dispatch: Dispatch<any>) => {
         try {
             let response = await api.post(
@@ -161,7 +161,7 @@ export const addTemplateBlock = (templateId: string, blockDetails: any) => {
 
             console.log(response);
             dispatch({
-                type: TemplateActionType.USER_ADD_BLOCK,
+                type: TemplateActionType.USER_ADD_TOOLBAR_BLOCK,
                 payload: response.data.template,
             });
         } catch (err) {

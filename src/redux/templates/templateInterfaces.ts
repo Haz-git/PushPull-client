@@ -29,8 +29,8 @@ interface clearTemplate {
     payload?: any;
 }
 
-interface addTemplateBlock {
-    type: TemplateActionType.USER_ADD_BLOCK;
+interface addToolbarBlock {
+    type: TemplateActionType.USER_ADD_TOOLBAR_BLOCK;
     payload?: any;
 }
 
@@ -51,6 +51,6 @@ export type TemplateAction =
     | deleteTemplate
     | queryTemplate
     | clearTemplate
-    | addTemplateBlock
+    | addToolbarBlock
     | updateTemplateBlock
     | deleteTemplateBlock;
