@@ -21,7 +21,8 @@ const HeaderDivider = styled.div`
 const DroppableStyles = styled.div`
     padding: 1rem;
     background: #ffffff;
-    border-right: 2px solid #ebe6fb;
+    border-right: 1px solid #ebe6fb;
+    border-left: 1px solid #ebe6fb;
 `;
 
 //Interfaces:
