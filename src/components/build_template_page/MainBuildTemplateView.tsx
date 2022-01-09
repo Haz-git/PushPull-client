@@ -41,6 +41,31 @@ const EditingSurfaceGridWrapper = styled.div`
     }
 `;
 
+//Helper functions:
+
+//Fake data gen:
+const getItems = (count: any, prefix: any) =>
+    Array.from({ length: count }, (v, k) => k).map((k) => {
+        const randomId = uuid();
+        return {
+            id: `${randomId}`,
+            prefix,
+            content: `CONTENT = ${(Math.random() + 1)
+                .toString(36)
+                .substring(7)}`,
+        };
+    });
+
+const generateLists = (list: any, blocks: any) =>
+    //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
+    list.reduce(
+        (acc: any, listKey: any) => ({
+            ...acc,
+            [listKey]: blocks,
+        }),
+        {}
+    );
+
 //Interfaces:
 
 interface IComponentProps {
@@ -57,6 +82,18 @@ const MainBuildTemplateView = ({
     },
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(queryTemplate(fileUuid));
+    }, []);
+
+    //Toolbar and EditingSurface States:
+    const toolbarBlocks = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateToolbarBlocks
+    );
+
+    const editingSurfaceBlocks = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
+    );
 
     //Column States for DnD functionality:
 
@@ -72,29 +109,6 @@ const MainBuildTemplateView = ({
 
     const [toolbarColumns, setToolbarColumns] = useState(['Blocks']);
 
-    //Fake data gen:
-    const getItems = (count: any, prefix: any) =>
-        Array.from({ length: count }, (v, k) => k).map((k) => {
-            const randomId = uuid();
-            return {
-                id: `${randomId}`,
-                prefix,
-                content: `CONTENT = ${(Math.random() + 1)
-                    .toString(36)
-                    .substring(7)}`,
-            };
-        });
-
-    const generateLists = (list: any) =>
-        //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
-        list.reduce(
-            (acc: any, listKey: any) => ({
-                ...acc,
-                [listKey]: getItems(4, listKey),
-            }),
-            {}
-        );
-
     //Elements for drag drop context:
     const [editingSurfaceElements, setEditingSurfaceElements] = useState(
         {}
@@ -102,11 +116,11 @@ const MainBuildTemplateView = ({
     const [toolbarElements, setToolbarElements] = useState({}) as any;
 
     useEffect(() => {
-        // controlTemplateLoadingStatus(true);
-        // setEditingSurfaceElements(generateLists(editingSurfaceColumns));
-        // setToolbarElements(generateLists(toolbarColumns));
-        dispatch(queryTemplate(fileUuid));
-    }, []);
+        setEditingSurfaceElements(
+            generateLists(editingSurfaceColumns, editingSurfaceBlocks)
+        );
+        setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
+    }, [toolbarBlocks, editingSurfaceBlocks]);
 
     const isLoading = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.isLoading
@@ -152,12 +166,8 @@ const MainBuildTemplateView = ({
 
         //Check if user moved column instead of item:
         if (type === 'editing-surface-column') {
-            // console.log(
-            //     `Source: ${result.source.index}, Destination: ${result.destination.index}`
-            // );
             //Create copy
             const newColumnOrder = Array.from(editingSurfaceColumns);
-            //Adding +1 is to factor for the 'Blocks' column.
             newColumnOrder.splice(result.source.index, 1);
             newColumnOrder.splice(
                 result.destination.index,
