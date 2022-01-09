@@ -5,7 +5,7 @@ import GeneralButton from '../../general_components/GeneralButton';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { addTemplateBlock } from '../../../redux/templates/templateActions';
+import { addToolbarBlock } from '../../../redux/templates/templateActions';
 //Styles:
 import styled from 'styled-components';
 
@@ -27,7 +27,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
     const dispatchBlock = () => {
         dispatch(
-            addTemplateBlock(currTemplate.id, {
+            addToolbarBlock(currTemplate.id, {
                 blockTitle: 'Test Block 1',
             })
         );
