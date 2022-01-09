@@ -155,7 +155,7 @@ export const addToolbarBlock = (templateId: string, blockDetails: any) => {
     return async (dispatch: Dispatch<any>) => {
         try {
             let response = await api.post(
-                `/template/blocks/add/${templateId}`,
+                `/template/toolbar/add/${templateId}`,
                 { blockDetails: blockDetails }
             );
 
