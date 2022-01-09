@@ -11,6 +11,7 @@ const MainContainer = styled.div`
     padding: 0.5rem 0.5rem;
     border-radius: 0.4rem;
     background: salmon;
+    width: 100%;
 `;
 
 //Interfaces:
