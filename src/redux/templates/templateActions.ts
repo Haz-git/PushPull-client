@@ -159,7 +159,6 @@ export const addToolbarBlock = (templateId: string, blockDetails: any) => {
                 { blockDetails: blockDetails }
             );
 
-            console.log(response);
             dispatch({
                 type: TemplateActionType.USER_ADD_TOOLBAR_BLOCK,
                 payload: response.data.template,
@@ -178,9 +177,15 @@ export const addEditingSurfaceBlock = (
         try {
             let response = await api.post(
                 `/template/surface/add/${templateId}`,
-                { blockDetails }
+                { blockDetails: blockDetails }
             );
+
             console.log(response);
+
+            dispatch({
+                type: TemplateActionType.USER_ADD_EDITING_SURFACE_BLOCK,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.log(err);
         }

@@ -34,6 +34,11 @@ interface addToolbarBlock {
     payload?: any;
 }
 
+interface addEditingSurfaceBlock {
+    type: TemplateActionType.USER_ADD_EDITING_SURFACE_BLOCK;
+    payload?: any;
+}
+
 interface updateTemplateBlock {
     type: TemplateActionType.USER_UPDATE_BLOCK;
     payload?: any;
@@ -52,5 +57,6 @@ export type TemplateAction =
     | queryTemplate
     | clearTemplate
     | addToolbarBlock
+    | addEditingSurfaceBlock
     | updateTemplateBlock
     | deleteTemplateBlock;
