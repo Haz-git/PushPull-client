@@ -98,6 +98,10 @@ const MainBuildTemplateView = ({
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
+    const isLoading = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.isLoading
+    );
+
     //Column States for DnD functionality:
 
     const [editingSurfaceColumns, setEditingSurfaceColumns] = useState([
@@ -112,6 +116,9 @@ const MainBuildTemplateView = ({
 
     const [toolbarColumns, setToolbarColumns] = useState(['Blocks']);
 
+    //We'll manage the current week right here. For now, it's limited to 1 week.
+    const [weekId, setWeekId] = useState();
+
     //Elements for drag drop context:
     const [editingSurfaceElements, setEditingSurfaceElements] = useState(
         {}
@@ -119,15 +126,12 @@ const MainBuildTemplateView = ({
     const [toolbarElements, setToolbarElements] = useState({}) as any;
 
     useEffect(() => {
-        setEditingSurfaceElements(
-            generateLists(editingSurfaceColumns, editingSurfaceBlocks)
-        );
-        setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
-    }, [toolbarBlocks, editingSurfaceBlocks]);
-
-    const isLoading = useSelector(
-        (state: RootStateOrAny) => state?.uiLoader?.isLoading
-    );
+        if (editingSurfaceBlocks && toolbarBlocks) {
+            setEditingSurfaceElements(editingSurfaceBlocks[0]['weekContent']);
+            setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
+            setWeekId(editingSurfaceBlocks[0]['weekId']);
+        }
+    }, [toolbarBlocks, editingSurfaceBlocks, setEditingSurfaceElements]);
 
     const [openBlockModal, setOpenBlockModal] = useState(false);
     const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
@@ -207,7 +211,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    weekId: 'none',
+                    weekId: weekId,
                     weekContent: editingSurfaceList,
                 })
             );
@@ -229,7 +233,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    weekId: 'none',
+                    weekId: weekId,
                     weekContent: editingSurfaceList,
                 })
             );
