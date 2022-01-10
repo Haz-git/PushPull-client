@@ -26,7 +26,6 @@ const DroppableStyles = styled.div`
 `;
 
 //Interfaces:
-
 interface IComponentProps {
     prefix: any;
     elements: any;
