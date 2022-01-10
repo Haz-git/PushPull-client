@@ -13,7 +13,10 @@ import { v4 as uuid } from 'uuid';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
-import { queryTemplate } from '../../redux/templates/templateActions';
+import {
+    addEditingSurfaceBlock,
+    queryTemplate,
+} from '../../redux/templates/templateActions';
 
 //Styles:
 import styled from 'styled-components';
@@ -202,6 +205,12 @@ const MainBuildTemplateView = ({
             );
 
             setEditingSurfaceElements(editingSurfaceList);
+            dispatch(
+                addEditingSurfaceBlock(fileUuid, {
+                    weekId: 'none',
+                    weekContent: editingSurfaceList,
+                })
+            );
         } else {
             //Element is passed from toolbar (BlockColumn) to DateColumn
             manipulatedElement = duplicateBlockFromToolbarWithNewId(
@@ -218,6 +227,12 @@ const MainBuildTemplateView = ({
             );
 
             setEditingSurfaceElements(editingSurfaceList);
+            dispatch(
+                addEditingSurfaceBlock(fileUuid, {
+                    weekId: 'none',
+                    weekContent: editingSurfaceList,
+                })
+            );
         }
     };
 
