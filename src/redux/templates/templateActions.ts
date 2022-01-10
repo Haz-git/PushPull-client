@@ -169,3 +169,20 @@ export const addToolbarBlock = (templateId: string, blockDetails: any) => {
         }
     };
 };
+
+export const addEditingSurfaceBlock = (
+    templateId: string,
+    blockDetails: any
+) => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+            let response = await api.post(
+                `/template/surface/add/${templateId}`,
+                { blockDetails: blockDetails }
+            );
+            console.log(response);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+};
