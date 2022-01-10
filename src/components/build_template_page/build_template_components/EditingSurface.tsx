@@ -50,7 +50,7 @@ const GridContainer = styled.div``;
 
 const ListGridContainer = styled.div<IListGridContainer>`
     display: grid;
-    grid-template-columns: repeat(7, minmax(auto, 20.5rem));
+    grid-template-columns: repeat(7, minmax(auto, 20rem));
     width: 100%;
     height: ${(props) => `${props.height + 32}px`};
 `;
