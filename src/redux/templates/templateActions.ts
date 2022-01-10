@@ -178,7 +178,7 @@ export const addEditingSurfaceBlock = (
         try {
             let response = await api.post(
                 `/template/surface/add/${templateId}`,
-                { blockDetails: blockDetails }
+                { blockDetails }
             );
             console.log(response);
         } catch (err) {
