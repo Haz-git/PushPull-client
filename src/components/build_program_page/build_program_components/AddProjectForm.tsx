@@ -6,12 +6,9 @@ import { useDispatch } from 'react-redux';
 import { addProject } from '../../../redux/builder/builderActions';
 
 //Components:
-import { TextInput } from '@mantine/core';
-import { Textarea } from '@mantine/core';
-import { ColorInput } from '@mantine/core';
+import { TextInput, Textarea, ColorInput, Loader } from '@mantine/core';
 import Text from '../../general_components/Text';
 import GeneralButton from '../../general_components/GeneralButton';
-import { Loader } from '@mantine/core';
 import { useNotifications } from '@mantine/notifications';
 
 //Styles:

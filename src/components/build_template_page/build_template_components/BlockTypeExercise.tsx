@@ -8,10 +8,20 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
     margin: 1rem 0rem;
-    padding: 0.5rem 0.5rem;
     border-radius: 0.4rem;
-    background: salmon;
+    background: #ffffff;
     width: 100%;
+    border: 2px solid #d6d6d6;
+`;
+
+const BlockHeader = styled.div`
+    padding: 0.5rem 0rem 0.5rem 0.5rem;
+`;
+
+const Divider = styled.div`
+    height: 1px;
+    width: 100%;
+    background: #d6d6d6;
 `;
 
 //Interfaces:
@@ -19,14 +29,15 @@ const MainContainer = styled.div`
 interface IComponentProps {
     item: any;
     index: any;
-    content: any;
+    blockDetails: any;
 }
 
 const BlockTypeExercise = ({
     item,
     index,
-    content,
+    blockDetails,
 }: IComponentProps): JSX.Element => {
+    const { name, desc, sets, reps } = blockDetails;
     return (
         <Draggable draggableId={item.id} index={index}>
             {(provided, snapshot) => {
@@ -37,8 +48,8 @@ const BlockTypeExercise = ({
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                     >
-                        <div>{`ID :${item.id}`}</div>
-                        <div>{content}</div>
+                        <BlockHeader>{name}</BlockHeader>
+                        <Divider />
                     </MainContainer>
                 );
             }}

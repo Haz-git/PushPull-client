@@ -180,8 +180,6 @@ export const addEditingSurfaceBlock = (
                 { blockDetails: blockDetails }
             );
 
-            console.log(response);
-
             dispatch({
                 type: TemplateActionType.USER_ADD_EDITING_SURFACE_BLOCK,
                 payload: response.data.template,

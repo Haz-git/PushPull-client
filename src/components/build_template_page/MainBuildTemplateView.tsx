@@ -252,6 +252,7 @@ const MainBuildTemplateView = ({
             ) : (
                 <>
                     <GeneralModal
+                        title="Add New Block"
                         openBoolean={openBlockModal}
                         closeFunc={() => setOpenBlockModal(false)}
                     >
