@@ -17,10 +17,6 @@ const MainContainer = styled.section<IMainContainerProps>`
     height: ${({ height }) => `${height}px`};
     background: #ffffff;
 
-    /*
-        Incredibly frustrating working with this css. I have the exact same grid logic implemented for MainBuildProgramView, but for some reason grid-template-columns does not push the Editing surface the right of the Toolbar. It works perfectly without these media queries in the programview, but these below must be included in editing surface... css???
-    */
-
     @media ${deviceMin.mobileS} {
         margin-left: 11rem;
     }
