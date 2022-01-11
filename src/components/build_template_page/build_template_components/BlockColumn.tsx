@@ -33,7 +33,7 @@ const BlockColumn = ({ prefix, elements }: IComponentProps): JSX.Element => {
                                 key={item.id}
                                 item={item}
                                 index={index}
-                                content={item.content}
+                                blockDetails={item.blockDetails}
                             />
                         ))}
                     </div>
