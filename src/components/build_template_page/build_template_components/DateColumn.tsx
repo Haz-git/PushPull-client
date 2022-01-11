@@ -62,7 +62,7 @@ const DateColumn = ({
                                         key={item.id}
                                         item={item}
                                         index={index}
-                                        content={item.content}
+                                        blockDetails={item.blockDetails}
                                     />
                                 ))}
                                 {provided.placeholder}
