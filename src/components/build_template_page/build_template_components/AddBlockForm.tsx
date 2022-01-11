@@ -48,30 +48,38 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     const [userInput, setUserInput] = useState({
         name: '',
         desc: '',
-        sets: '',
-        reps: '',
+        sets: '0',
+        reps: '0',
     });
 
     //Error state:
     const [hasError, setHasError] = useState(false);
+
+    const checkUserBeforeSubmission = () => {
+        if (userInput.name === '') {
+            return false;
+        }
+
+        return true;
+    };
 
     const handleUserInput = (name: string, val: string | number) => {
         setUserInput({
             ...userInput,
             [name]: val,
         });
-
-        console.log(userInput);
     };
 
     const dispatchBlock = () => {
-        dispatch(
-            addToolbarBlock(currTemplate.id, {
-                blockTitle: 'Test Block 1',
-            })
-        );
+        if (checkUserBeforeSubmission()) {
+            dispatch(
+                addToolbarBlock(currTemplate.id, { blockDetails: userInput })
+            );
 
-        closeModal();
+            return closeModal();
+        }
+
+        return setHasError(true);
     };
 
     return (
