@@ -6,7 +6,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const MainText = styled.p<IComponentProps>`
-    font-weight: ${(props) => props.fontWeight};
+    font-family: 'Lato';
+    font-weight: ${(props) => Number(props.fontWeight)};
     color: ${(props) => props.textColor};
     font-size: ${(props) => props.fontSize};
     width: ${(props) => props.truncateWidth};
@@ -16,6 +17,8 @@ const MainText = styled.p<IComponentProps>`
         props.truncateWidth === '100%' ? 'visible' : 'hidden'};
     text-overflow: ${(props) =>
         props.truncateWidth === '100%' ? 'clip' : 'ellipsis'};
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 `;
 
 //Interfaces:
