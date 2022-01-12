@@ -55,12 +55,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     //Error state:
     const [hasError, setHasError] = useState(false);
 
-    const checkUserBeforeSubmission = () => {
-        if (userInput.name === '') {
-            return false;
-        }
-
-        return true;
+    const hasBlockName = () => {
+        return userInput.name !== '';
     };
 
     const handleUserInput = (name: string, val: string | number) => {
@@ -71,7 +67,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     };
 
     const dispatchBlock = () => {
-        if (checkUserBeforeSubmission()) {
+        if (hasBlockName()) {
             dispatch(
                 addToolbarBlock(currTemplate.id, { blockDetails: userInput })
             );
