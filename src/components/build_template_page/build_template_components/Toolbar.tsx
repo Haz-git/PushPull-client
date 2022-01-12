@@ -112,45 +112,12 @@ const Toolbar = ({
     elements,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
-    const template = useSelector((state: RootStateOrAny) => state?.template);
 
     useEffect(() => {
         return () => {
             dispatch(deselectBlock());
         };
     }, []);
-
-    const renderTemplateBlocks = () => {
-        if (template?.templateBlocks) {
-            return template.templateBlocks.map((block: any) => (
-                <div
-                    onDragStartCapture={() =>
-                        dispatch(
-                            selectBlock({
-                                i: block.blockTitle.concat(`_${uuid()}`),
-                            })
-                        )
-                    }
-                    onClick={() =>
-                        dispatch(
-                            selectBlock({
-                                i: block.blockTitle.concat(`_${uuid()}`),
-                            })
-                        )
-                    }
-                    draggable={true}
-                    unselectable="on"
-                    onDragStart={(e) =>
-                        e.dataTransfer.setData('text/plain', '')
-                    }
-                    id={block.i}
-                    key={block.i}
-                >
-                    {block.blockTitle}
-                </div>
-            ));
-        }
-    };
 
     return (
         <MainContainer>
@@ -184,15 +151,6 @@ const Toolbar = ({
                                 </div>
                             )}
                         </Droppable>
-                        {/* {lists.map((listKey: any, index: any) => (
-                            <DroppableElement
-                                elements={elements[listKey]}
-                                key={listKey}
-                                prefix={listKey}
-                                columnIndex={index}
-                            />
-                        ))} */}
-                        {renderTemplateBlocks()}
                     </Accordion.Item>
                     <Accordion.Item label="Saved blocks"></Accordion.Item>
                 </Accordion>
