@@ -98,9 +98,13 @@ const MainBuildTemplateView = ({
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
-    const isLoading = useSelector(
+    const isMainViewLoading = useSelector(
         (state: RootStateOrAny) =>
             state?.uiLoader?.mainBuildTemplateView?.isLoading
+    );
+
+    const isAddBlockModalLoading = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.addBlockModal?.isLoading
     );
 
     //Column States for DnD functionality:
@@ -243,7 +247,7 @@ const MainBuildTemplateView = ({
 
     return (
         <>
-            {isLoading === true ? (
+            {isMainViewLoading === true ? (
                 <LoadProgress
                     darkMode={true}
                     isAnimating={true}
@@ -256,6 +260,7 @@ const MainBuildTemplateView = ({
                         title="Add New Block"
                         openBoolean={openBlockModal}
                         closeFunc={() => setOpenBlockModal(false)}
+                        isLoading={isAddBlockModalLoading}
                     >
                         <AddBlockForm
                             closeModal={() => setOpenBlockModal(false)}
