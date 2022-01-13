@@ -99,7 +99,8 @@ const MainBuildTemplateView = ({
     );
 
     const isLoading = useSelector(
-        (state: RootStateOrAny) => state?.uiLoader?.isLoading
+        (state: RootStateOrAny) =>
+            state?.uiLoader?.mainBuildTemplateView?.isLoading
     );
 
     //Column States for DnD functionality:
