@@ -2,6 +2,7 @@ import api from '../../api';
 import { Dispatch } from 'redux';
 import { TemplateAction } from './templateInterfaces';
 import { TemplateActionType } from './action-types';
+import { loaderTypes } from '../uiLoader/loader-types';
 
 //Loader ui actions:
 import {
@@ -128,16 +129,20 @@ export const queryTemplate = (templateId: string) => {
         try {
             let response = await api.get(`/template/query/${templateId}`);
 
-            dispatch(invokeLoaderState());
+            dispatch(invokeLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
 
             dispatch({
                 type: TemplateActionType.USER_QUERY_TEMPLATE,
                 payload: response.data.template,
             });
 
-            if (response) dispatch(disableLoaderState());
+            if (response) {
+                dispatch(
+                    disableLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW)
+                );
+            }
         } catch (err) {
-            dispatch(disableLoaderState());
+            dispatch(disableLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
         }
     };
 };
@@ -151,7 +156,11 @@ export const clearTemplate = () => {
     };
 };
 
-export const addToolbarBlock = (templateId: string, blockDetails: any) => {
+export const addToolbarBlock = (
+    templateId: string,
+    blockDetails: any,
+    closeAddBlockModal: () => void
+) => {
     return async (dispatch: Dispatch<any>) => {
         try {
             let response = await api.post(
@@ -159,12 +168,20 @@ export const addToolbarBlock = (templateId: string, blockDetails: any) => {
                 { blockDetails: blockDetails }
             );
 
+            dispatch(invokeLoaderState(loaderTypes.ADD_BLOCK_MODAL));
+
             dispatch({
                 type: TemplateActionType.USER_ADD_TOOLBAR_BLOCK,
                 payload: response.data.template,
             });
+
+            if (response) {
+                dispatch(disableLoaderState(loaderTypes.ADD_BLOCK_MODAL));
+                closeAddBlockModal();
+            }
         } catch (err) {
             console.log(err);
+            dispatch(disableLoaderState(loaderTypes.ADD_BLOCK_MODAL));
         }
     };
 };
