@@ -65,6 +65,24 @@ const PopoverContainer = styled.div`
     right: -0.25rem;
 `;
 
+const PopoverChildrenFlexWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 6rem;
+`;
+
+const PopoverChildrenContainer = styled.div`
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    cursor: pointer;
+    width: 100%;
+
+    &:hover {
+        background: #ececec;
+    }
+`;
+
 const BlockHeader = styled.div`
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 `;
@@ -126,6 +144,7 @@ const BlockTypeExercise = ({
                         >
                             <PopoverContainer>
                                 <Popover
+                                    noFocusTrap
                                     gutter={10}
                                     position="left"
                                     placement="start"
@@ -147,10 +166,27 @@ const BlockTypeExercise = ({
                                     styles={{
                                         popover: {
                                             position: 'static',
+                                            margin: '0 0',
+                                            padding: '0 0',
+                                        },
+                                        inner: {
+                                            padding: '0 0',
+                                            margin: '0 0',
                                         },
                                     }}
                                 >
-                                    <div>test</div>
+                                    <PopoverChildrenFlexWrapper>
+                                        <PopoverChildrenContainer>
+                                            <Text text="Edit" />
+                                        </PopoverChildrenContainer>
+                                        <Divider />
+                                        <PopoverChildrenContainer>
+                                            <Text
+                                                text="Delete"
+                                                textColor="#AF1432"
+                                            />
+                                        </PopoverChildrenContainer>
+                                    </PopoverChildrenFlexWrapper>
                                 </Popover>
                             </PopoverContainer>
                             <BlockHeader>
