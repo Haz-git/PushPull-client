@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { Draggable } from 'react-beautiful-dnd';
 import Text from '../../general_components/Text';
+import { Popover } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -14,8 +16,8 @@ const MoreDots = styled(MoreHorizontal)`
     width: 1rem;
 `;
 
-const HoverableButton = styled.button`
-    opacity: 0;
+const HoverableButton = styled.button<IHoverableButtonProps>`
+    opacity: ${({ isActive }) => (isActive ? '100' : '0')};
     display: block;
     height: 1.5rem;
     width: 1.5rem;
@@ -57,6 +59,30 @@ const MainContainer = styled.div`
     }
 `;
 
+const PopoverContainer = styled.div`
+    position: absolute;
+    top: -1rem;
+    right: -0.25rem;
+`;
+
+const PopoverChildrenFlexWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 6rem;
+`;
+
+const PopoverChildrenContainer = styled.div`
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    cursor: pointer;
+    width: 100%;
+
+    &:hover {
+        background: #ececec;
+    }
+`;
+
 const BlockHeader = styled.div`
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 `;
@@ -79,6 +105,10 @@ const ExerciseDetails = styled.div``;
 
 //Interfaces:
 
+interface IHoverableButtonProps {
+    isActive: boolean;
+}
+
 interface IComponentProps {
     item: any;
     index: any;
@@ -92,49 +122,104 @@ const BlockTypeExercise = ({
 }: IComponentProps): JSX.Element => {
     const { name, sets, reps } = blockDetails;
 
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const [isHoverableButtonActive, setIsHoverableButtonActive] =
+        useState(false);
+
+    const handleUserClickHoverableButton = () => {
+        setIsHoverableButtonActive(true);
+        setIsPopoverOpen(true);
+    };
+
     return (
-        <Draggable draggableId={item.id} index={index}>
-            {(provided, snapshot) => {
-                return (
-                    <MainContainer
-                        ref={provided.innerRef}
-                        data-snapshot={snapshot}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                    >
-                        <HoverableButton>
-                            <MoreDots />
-                        </HoverableButton>
-                        <BlockHeader>
-                            <Text
-                                text={name}
-                                fontSize=".95rem"
-                                fontWeight="800"
-                            />
-                        </BlockHeader>
-                        <Divider />
-                        <BlockExerciseLengthContainer>
-                            <ExerciseDetails>
+        <>
+            <Draggable draggableId={item.id} index={index}>
+                {(provided, snapshot) => {
+                    return (
+                        <MainContainer
+                            ref={provided.innerRef}
+                            data-snapshot={snapshot}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                        >
+                            <PopoverContainer>
+                                <Popover
+                                    noFocusTrap
+                                    gutter={10}
+                                    position="left"
+                                    placement="start"
+                                    opened={isPopoverOpen}
+                                    onClose={() => {
+                                        setIsPopoverOpen(false);
+                                        setIsHoverableButtonActive(false);
+                                    }}
+                                    target={
+                                        <HoverableButton
+                                            isActive={isHoverableButtonActive}
+                                            onClick={
+                                                handleUserClickHoverableButton
+                                            }
+                                        >
+                                            <MoreDots />
+                                        </HoverableButton>
+                                    }
+                                    styles={{
+                                        popover: {
+                                            position: 'static',
+                                            margin: '0 0',
+                                            padding: '0 0',
+                                        },
+                                        inner: {
+                                            padding: '0 0',
+                                            margin: '0 0',
+                                        },
+                                    }}
+                                >
+                                    <PopoverChildrenFlexWrapper>
+                                        <PopoverChildrenContainer>
+                                            <Text text="Edit" />
+                                        </PopoverChildrenContainer>
+                                        <Divider />
+                                        <PopoverChildrenContainer>
+                                            <Text
+                                                text="Delete"
+                                                textColor="#AF1432"
+                                            />
+                                        </PopoverChildrenContainer>
+                                    </PopoverChildrenFlexWrapper>
+                                </Popover>
+                            </PopoverContainer>
+                            <BlockHeader>
                                 <Text
-                                    text={`${sets} Sets`}
-                                    fontSize=".9rem"
-                                    fontWeight="600"
-                                    subText={true}
+                                    text={name}
+                                    fontSize=".95rem"
+                                    fontWeight="800"
                                 />
-                            </ExerciseDetails>
-                            <ExerciseDetails>
-                                <Text
-                                    text={`${reps} Reps`}
-                                    fontSize=".9rem"
-                                    fontWeight="600"
-                                    subText={true}
-                                />
-                            </ExerciseDetails>
-                        </BlockExerciseLengthContainer>
-                    </MainContainer>
-                );
-            }}
-        </Draggable>
+                            </BlockHeader>
+                            <Divider />
+                            <BlockExerciseLengthContainer>
+                                <ExerciseDetails>
+                                    <Text
+                                        text={`${sets} Sets`}
+                                        fontSize=".9rem"
+                                        fontWeight="600"
+                                        subText={true}
+                                    />
+                                </ExerciseDetails>
+                                <ExerciseDetails>
+                                    <Text
+                                        text={`${reps} Reps`}
+                                        fontSize=".9rem"
+                                        fontWeight="600"
+                                        subText={true}
+                                    />
+                                </ExerciseDetails>
+                            </BlockExerciseLengthContainer>
+                        </MainContainer>
+                    );
+                }}
+            </Draggable>
+        </>
     );
 };
 
