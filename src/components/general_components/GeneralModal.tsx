@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import { Modal } from '@mantine/core';
+import { LoadingOverlay } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
@@ -15,6 +16,7 @@ interface IGeneralModal {
     title?: string;
     closeOnClickOutside?: boolean;
     hideCloseButton?: boolean;
+    isLoading?: boolean;
 }
 
 const GeneralModal = ({
@@ -25,6 +27,7 @@ const GeneralModal = ({
     title = 'Modal',
     closeOnClickOutside = true,
     hideCloseButton = false,
+    isLoading = false,
 }: IGeneralModal): JSX.Element => {
     return (
         <>
@@ -35,6 +38,9 @@ const GeneralModal = ({
                 zIndex={99}
                 title={title}
                 styles={{
+                    modal: {
+                        position: 'relative',
+                    },
                     title: {
                         color: 'rgba(0, 0, 34, 1)',
                         fontFamily: 'Lato, sans-serif',
@@ -51,7 +57,14 @@ const GeneralModal = ({
                 size={size}
                 overflow="outside"
             >
-                {children}
+                <LoadingOverlay
+                    visible={isLoading}
+                    overlayColor="#d6d6d6"
+                    overlayOpacity={0.6}
+                    loaderProps={{ size: 'lg', color: 'orange' }}
+                    transitionDuration={500}
+                />
+                <>{children}</>
             </Modal>
         </>
     );
