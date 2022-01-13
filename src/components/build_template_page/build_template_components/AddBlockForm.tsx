@@ -4,7 +4,6 @@ import { useState } from 'react';
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
 import { TextInput, Textarea, NumberInput } from '@mantine/core';
-import { LoadingOverlay } from '@mantine/core';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -47,10 +46,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         (state: RootStateOrAny) => state?.template
     );
 
-    const isLoading = useSelector(
-        (state: RootStateOrAny) => state?.uiLoader?.addBlockModal?.isLoading
-    );
-
     //Modal input state
     const [userInput, setUserInput] = useState({
         name: '',
@@ -89,12 +84,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
     return (
         <MainContainer>
-            <LoadingOverlay
-                visible={isLoading}
-                overlayColor="#d6d6d6"
-                overlayOpacity={0.4}
-                loaderProps={{ size: 'md', color: 'orange' }}
-            />
             <FormContainer>
                 <TextInput
                     styles={{
