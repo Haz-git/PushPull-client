@@ -1,0 +1,4 @@
+export enum loaderTypes {
+    MAIN_BUILD_TEMPLATE_VIEW = 'MAIN_BUILD_TEMPLATE_VIEW',
+    ADD_BLOCK_MODAL = 'ADD_BLOCK_MODAL',
+}
