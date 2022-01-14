@@ -3,6 +3,7 @@ import React from 'react';
 //Components:
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import BlockTypeExercise from './BlockTypeExercise';
+import { BlockTypes } from './BlockTypeExercise';
 
 //Styles:
 import styled from 'styled-components';
@@ -59,10 +60,13 @@ const DateColumn = ({
                             >
                                 {elements?.map((item: any, index: any) => (
                                     <BlockTypeExercise
+                                        blockId={item.id}
                                         key={item.id}
                                         item={item}
                                         index={index}
                                         blockDetails={item.blockDetails}
+                                        blockType={BlockTypes.EDITING_SURFACE}
+                                        columnPrefix={`${prefix}`}
                                     />
                                 ))}
                                 {provided.placeholder}

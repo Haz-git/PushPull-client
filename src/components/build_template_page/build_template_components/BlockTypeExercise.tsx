@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import {
+    deleteEditingSurfaceBlock,
+    deleteToolbarBlock,
+} from '../../../redux/templates/templateActions';
+
 //Components:
 import { Draggable } from 'react-beautiful-dnd';
 import Text from '../../general_components/Text';
@@ -73,7 +80,11 @@ const PopoverChildrenFlexWrapper = styled.div`
     width: 6rem;
 `;
 
-const PopoverChildrenContainer = styled.div`
+const PopoverChildrenButton = styled.button`
+    background: #ffffff;
+    text-decoration: none;
+    border: none;
+    text-align: left;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
     cursor: pointer;
     width: 100%;
@@ -105,6 +116,10 @@ const ExerciseDetails = styled.div``;
 
 //Interfaces:
 
+export enum BlockTypes {
+    TOOLBAR = 'TOOLBAR',
+    EDITING_SURFACE = 'EDITING_SURFACE',
+}
 interface IHoverableButtonProps {
     isActive: boolean;
 }
@@ -113,22 +128,54 @@ interface IComponentProps {
     item: any;
     index: any;
     blockDetails: any;
+    blockId: string;
+    blockType: BlockTypes.TOOLBAR | BlockTypes.EDITING_SURFACE;
+    columnPrefix?: string;
 }
 
 const BlockTypeExercise = ({
+    blockId,
     item,
     index,
     blockDetails,
+    blockType,
+    columnPrefix,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+    const templateId = useSelector(
+        (state: RootStateOrAny) => state?.template?.id
+    );
+
+    //In the future, there should be a way to change view based on weekId. For now, it's limited to 1 week.
+    const weekId = useSelector(
+        (state: RootStateOrAny) =>
+            state?.template?.templateEditingSurfaceBlocks[0].weekId
+    );
+
     const { name, sets, reps } = blockDetails;
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const [isHoverableButtonActive, setIsHoverableButtonActive] =
         useState(false);
 
-    const handleUserClickHoverableButton = () => {
+    const handleUserClickHoverableButton = (): void => {
         setIsHoverableButtonActive(true);
         setIsPopoverOpen(true);
+    };
+
+    const handleUserDeleteBlock = (): Function => {
+        if (blockType === BlockTypes.EDITING_SURFACE) {
+            return dispatch(
+                deleteEditingSurfaceBlock(
+                    templateId,
+                    blockId,
+                    weekId,
+                    columnPrefix
+                )
+            );
+        }
+
+        return dispatch(deleteToolbarBlock(templateId, blockId));
     };
 
     return (
@@ -176,16 +223,18 @@ const BlockTypeExercise = ({
                                     }}
                                 >
                                     <PopoverChildrenFlexWrapper>
-                                        <PopoverChildrenContainer>
+                                        <PopoverChildrenButton>
                                             <Text text="Edit" />
-                                        </PopoverChildrenContainer>
+                                        </PopoverChildrenButton>
                                         <Divider />
-                                        <PopoverChildrenContainer>
+                                        <PopoverChildrenButton
+                                            onClick={handleUserDeleteBlock}
+                                        >
                                             <Text
                                                 text="Delete"
                                                 textColor="#AF1432"
                                             />
-                                        </PopoverChildrenContainer>
+                                        </PopoverChildrenButton>
                                     </PopoverChildrenFlexWrapper>
                                 </Popover>
                             </PopoverContainer>
