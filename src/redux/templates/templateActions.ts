@@ -196,12 +196,10 @@ export const deleteToolbarBlock = (
                 `/template/toolbar/delete/${templateId}?blockId=${blockId}`
             );
 
-            console.log(response);
-
-            // dispatch({
-            //     type: TemplateActionType.USER_DELETE_TOOLBAR_BLOCK,
-            //     payload: response.data.template,
-            // });
+            dispatch({
+                type: TemplateActionType.USER_DELETE_TOOLBAR_BLOCK,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.warn(err);
         }
