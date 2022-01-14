@@ -186,6 +186,13 @@ export const addToolbarBlock = (
     };
 };
 
+export const deleteToolbarBlock = (templateId: string) => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+        } catch (err) {}
+    };
+};
+
 export const addEditingSurfaceBlock = (
     templateId: string,
     blockDetails: any
@@ -204,5 +211,12 @@ export const addEditingSurfaceBlock = (
         } catch (err) {
             console.log(err);
         }
+    };
+};
+
+export const deleteEditingSurfaceBlock = (templateId: string) => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+        } catch (err) {}
     };
 };
