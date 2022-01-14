@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import {
+    deleteEditingSurfaceBlock,
+    deleteToolbarBlock,
+} from '../../../redux/templates/templateActions';
+
 //Components:
 import { Draggable } from 'react-beautiful-dnd';
 import Text from '../../general_components/Text';
@@ -73,7 +80,11 @@ const PopoverChildrenFlexWrapper = styled.div`
     width: 6rem;
 `;
 
-const PopoverChildrenContainer = styled.div`
+const PopoverChildrenButton = styled.button`
+    background: #ffffff;
+    text-decoration: none;
+    border: none;
+    text-align: left;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
     cursor: pointer;
     width: 100%;
@@ -105,6 +116,10 @@ const ExerciseDetails = styled.div``;
 
 //Interfaces:
 
+export enum BlockTypes {
+    TOOLBAR = 'TOOLBAR',
+    EDITING_SURFACE = 'EDITING_SURFACE',
+}
 interface IHoverableButtonProps {
     isActive: boolean;
 }
@@ -114,6 +129,7 @@ interface IComponentProps {
     index: any;
     blockDetails: any;
     blockId: string;
+    blockType: BlockTypes.TOOLBAR | BlockTypes.EDITING_SURFACE;
 }
 
 const BlockTypeExercise = ({
@@ -121,6 +137,7 @@ const BlockTypeExercise = ({
     item,
     index,
     blockDetails,
+    blockType,
 }: IComponentProps): JSX.Element => {
     const { name, sets, reps } = blockDetails;
 
@@ -178,16 +195,16 @@ const BlockTypeExercise = ({
                                     }}
                                 >
                                     <PopoverChildrenFlexWrapper>
-                                        <PopoverChildrenContainer>
+                                        <PopoverChildrenButton>
                                             <Text text="Edit" />
-                                        </PopoverChildrenContainer>
+                                        </PopoverChildrenButton>
                                         <Divider />
-                                        <PopoverChildrenContainer>
+                                        <PopoverChildrenButton>
                                             <Text
                                                 text="Delete"
                                                 textColor="#AF1432"
                                             />
-                                        </PopoverChildrenContainer>
+                                        </PopoverChildrenButton>
                                     </PopoverChildrenFlexWrapper>
                                 </Popover>
                             </PopoverContainer>
