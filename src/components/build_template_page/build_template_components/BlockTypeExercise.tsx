@@ -113,9 +113,11 @@ interface IComponentProps {
     item: any;
     index: any;
     blockDetails: any;
+    blockId: string;
 }
 
 const BlockTypeExercise = ({
+    blockId,
     item,
     index,
     blockDetails,
