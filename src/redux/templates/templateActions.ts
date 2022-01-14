@@ -197,6 +197,11 @@ export const deleteToolbarBlock = (
             );
 
             console.log(response);
+
+            // dispatch({
+            //     type: TemplateActionType.USER_DELETE_TOOLBAR_BLOCK,
+            //     payload: response.data.template,
+            // });
         } catch (err) {
             console.warn(err);
         }
@@ -227,15 +232,19 @@ export const addEditingSurfaceBlock = (
 export const deleteEditingSurfaceBlock = (
     templateId: string,
     blockId: string,
-    weekId: string
+    weekId: string,
+    columnPrefix: string | undefined
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
             let response = await api.delete(
-                `/template/surface/delete/${templateId}?blockId=${blockId}&weekId=${weekId}`
+                `/template/surface/delete/${templateId}?blockId=${blockId}&weekId=${weekId}&columnPrefix=${columnPrefix}`
             );
 
-            console.log(response);
+            dispatch({
+                type: TemplateActionType.USER_DELETE_EDITING_SURFACE_BLOCK,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.warn(err);
         }

@@ -39,13 +39,23 @@ interface addEditingSurfaceBlock {
     payload?: any;
 }
 
-interface updateTemplateBlock {
-    type: TemplateActionType.USER_UPDATE_BLOCK;
+interface updateEditingSurfaceBlock {
+    type: TemplateActionType.USER_UPDATE_EDITING_SURFACE_BLOCK;
     payload?: any;
 }
 
-interface deleteTemplateBlock {
-    type: TemplateActionType.USER_DELETE_BLOCK;
+interface updateToolbarBlock {
+    type: TemplateActionType.USER_UPDATE_TOOLBAR_BLOCK;
+    payload?: any;
+}
+
+interface deleteEditingSurfaceBlock {
+    type: TemplateActionType.USER_DELETE_EDITING_SURFACE_BLOCK;
+    payload?: any;
+}
+
+interface deleteToolbarBlock {
+    type: TemplateActionType.USER_DELETE_TOOLBAR_BLOCK;
     payload?: any;
 }
 
@@ -58,5 +68,7 @@ export type TemplateAction =
     | clearTemplate
     | addToolbarBlock
     | addEditingSurfaceBlock
-    | updateTemplateBlock
-    | deleteTemplateBlock;
+    | updateEditingSurfaceBlock
+    | updateToolbarBlock
+    | deleteEditingSurfaceBlock
+    | deleteToolbarBlock;
