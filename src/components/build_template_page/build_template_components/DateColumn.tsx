@@ -3,6 +3,7 @@ import React from 'react';
 //Components:
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import BlockTypeExercise from './BlockTypeExercise';
+import { BlockTypes } from './BlockTypeExercise';
 
 //Styles:
 import styled from 'styled-components';
@@ -64,6 +65,7 @@ const DateColumn = ({
                                         item={item}
                                         index={index}
                                         blockDetails={item.blockDetails}
+                                        blockType={BlockTypes.EDITING_SURFACE}
                                     />
                                 ))}
                                 {provided.placeholder}
