@@ -66,6 +66,7 @@ const DateColumn = ({
                                         index={index}
                                         blockDetails={item.blockDetails}
                                         blockType={BlockTypes.EDITING_SURFACE}
+                                        columnPrefix={`${prefix}`}
                                     />
                                 ))}
                                 {provided.placeholder}
