@@ -3,6 +3,7 @@ import * as React from 'react';
 //Components:
 import { Droppable } from 'react-beautiful-dnd';
 import BlockTypeExercise from './BlockTypeExercise';
+import { BlockTypes } from './BlockTypeExercise';
 
 //Styles:
 import styled from 'styled-components';
@@ -35,6 +36,7 @@ const BlockColumn = ({ prefix, elements }: IComponentProps): JSX.Element => {
                                 item={item}
                                 index={index}
                                 blockDetails={item.blockDetails}
+                                blockType={BlockTypes.TOOLBAR}
                             />
                         ))}
                     </div>
