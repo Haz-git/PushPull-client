@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 
 //Redux:
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import {
     deleteEditingSurfaceBlock,
     deleteToolbarBlock,
@@ -139,15 +139,27 @@ const BlockTypeExercise = ({
     blockDetails,
     blockType,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+    const templateId = useSelector(
+        (state: RootStateOrAny) => state?.template?.id
+    );
     const { name, sets, reps } = blockDetails;
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const [isHoverableButtonActive, setIsHoverableButtonActive] =
         useState(false);
 
-    const handleUserClickHoverableButton = () => {
+    const handleUserClickHoverableButton = (): void => {
         setIsHoverableButtonActive(true);
         setIsPopoverOpen(true);
+    };
+
+    const handleUserDeleteBlock = (): Function => {
+        if (blockType === BlockTypes.EDITING_SURFACE) {
+            return dispatch(deleteEditingSurfaceBlock(templateId, blockId));
+        }
+
+        return dispatch(deleteToolbarBlock(templateId, blockId));
     };
 
     return (
@@ -199,7 +211,9 @@ const BlockTypeExercise = ({
                                             <Text text="Edit" />
                                         </PopoverChildrenButton>
                                         <Divider />
-                                        <PopoverChildrenButton>
+                                        <PopoverChildrenButton
+                                            onClick={handleUserDeleteBlock}
+                                        >
                                             <Text
                                                 text="Delete"
                                                 textColor="#AF1432"
