@@ -226,12 +226,13 @@ export const addEditingSurfaceBlock = (
 
 export const deleteEditingSurfaceBlock = (
     templateId: string,
-    blockId: string
+    blockId: string,
+    weekId: string
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
             let response = await api.delete(
-                `/template/surface/delete/${templateId}?blockId=${blockId}`
+                `/template/surface/delete/${templateId}?blockId=${blockId}&weekId=${weekId}`
             );
 
             console.log(response);
