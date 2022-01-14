@@ -31,6 +31,7 @@ const BlockColumn = ({ prefix, elements }: IComponentProps): JSX.Element => {
                         {elements?.map((item: any, index: any) => (
                             <BlockTypeExercise
                                 key={item.id}
+                                blockId={item.id}
                                 item={item}
                                 index={index}
                                 blockDetails={item.blockDetails}

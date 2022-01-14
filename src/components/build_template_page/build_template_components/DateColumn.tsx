@@ -59,6 +59,7 @@ const DateColumn = ({
                             >
                                 {elements?.map((item: any, index: any) => (
                                     <BlockTypeExercise
+                                        blockId={item.id}
                                         key={item.id}
                                         item={item}
                                         index={index}
