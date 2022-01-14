@@ -130,6 +130,7 @@ interface IComponentProps {
     blockDetails: any;
     blockId: string;
     blockType: BlockTypes.TOOLBAR | BlockTypes.EDITING_SURFACE;
+    columnPrefix?: string;
 }
 
 const BlockTypeExercise = ({
@@ -138,6 +139,7 @@ const BlockTypeExercise = ({
     index,
     blockDetails,
     blockType,
+    columnPrefix,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const templateId = useSelector(
@@ -164,7 +166,12 @@ const BlockTypeExercise = ({
     const handleUserDeleteBlock = (): Function => {
         if (blockType === BlockTypes.EDITING_SURFACE) {
             return dispatch(
-                deleteEditingSurfaceBlock(templateId, blockId, weekId)
+                deleteEditingSurfaceBlock(
+                    templateId,
+                    blockId,
+                    weekId,
+                    columnPrefix
+                )
             );
         }
 
