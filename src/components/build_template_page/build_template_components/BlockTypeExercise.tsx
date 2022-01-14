@@ -143,6 +143,13 @@ const BlockTypeExercise = ({
     const templateId = useSelector(
         (state: RootStateOrAny) => state?.template?.id
     );
+
+    //In the future, there should be a way to change view based on weekId. For now, it's limited to 1 week.
+    const weekId = useSelector(
+        (state: RootStateOrAny) =>
+            state?.template?.templateEditingSurfaceBlocks[0].weekId
+    );
+
     const { name, sets, reps } = blockDetails;
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -156,7 +163,9 @@ const BlockTypeExercise = ({
 
     const handleUserDeleteBlock = (): Function => {
         if (blockType === BlockTypes.EDITING_SURFACE) {
-            return dispatch(deleteEditingSurfaceBlock(templateId, blockId));
+            return dispatch(
+                deleteEditingSurfaceBlock(templateId, blockId, weekId)
+            );
         }
 
         return dispatch(deleteToolbarBlock(templateId, blockId));
