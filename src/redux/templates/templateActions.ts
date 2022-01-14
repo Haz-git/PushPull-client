@@ -186,10 +186,20 @@ export const addToolbarBlock = (
     };
 };
 
-export const deleteToolbarBlock = (templateId: string) => {
+export const deleteToolbarBlock = (
+    templateId: string,
+    blockId: string
+): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-        } catch (err) {}
+            let response = await api.delete(
+                `/template/toolbar/delete/${templateId}?blockId=${blockId}`
+            );
+
+            console.log(response);
+        } catch (err) {
+            console.warn(err);
+        }
     };
 };
 
@@ -214,9 +224,19 @@ export const addEditingSurfaceBlock = (
     };
 };
 
-export const deleteEditingSurfaceBlock = (templateId: string) => {
+export const deleteEditingSurfaceBlock = (
+    templateId: string,
+    blockId: string
+): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-        } catch (err) {}
+            let response = await api.delete(
+                `/template/surface/delete/${templateId}?blockId=${blockId}`
+            );
+
+            console.log(response);
+        } catch (err) {
+            console.warn(err);
+        }
     };
 };
