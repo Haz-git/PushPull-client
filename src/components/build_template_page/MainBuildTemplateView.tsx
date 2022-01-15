@@ -89,15 +89,6 @@ const MainBuildTemplateView = ({
         dispatch(queryTemplate(fileUuid));
     }, []);
 
-    //Toolbar and EditingSurface States:
-    const toolbarBlocks = useSelector(
-        (state: RootStateOrAny) => state?.template?.templateToolbarBlocks
-    );
-
-    const editingSurfaceBlocks = useSelector(
-        (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
-    );
-
     const isMainViewLoading = useSelector(
         (state: RootStateOrAny) =>
             state?.uiLoader?.mainBuildTemplateView?.isLoading
@@ -105,6 +96,14 @@ const MainBuildTemplateView = ({
 
     const isAddBlockModalLoading = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.addBlockModal?.isLoading
+    );
+
+    const toolbarBlocks = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateToolbarBlocks
+    );
+
+    const editingSurfaceBlocks = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
     //Column States for DnD functionality:
@@ -136,7 +135,7 @@ const MainBuildTemplateView = ({
             setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
             setWeekId(editingSurfaceBlocks[0]['weekId']);
         }
-    }, [toolbarBlocks, editingSurfaceBlocks, setEditingSurfaceElements]);
+    }, [toolbarBlocks, editingSurfaceBlocks]);
 
     const [openBlockModal, setOpenBlockModal] = useState(false);
     const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
