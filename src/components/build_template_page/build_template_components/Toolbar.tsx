@@ -20,6 +20,13 @@ import BlockColumn from './BlockColumn';
 
 //Styles:
 import styled from 'styled-components';
+import { IosArrowLeft } from '@styled-icons/fluentui-system-filled/IosArrowLeft';
+
+const ExitIcon = styled(IosArrowLeft)`
+    color: #ffffff;
+    height: 1rem;
+    width: 1rem;
+`;
 
 const MainContainer = styled.section`
     display: grid;
@@ -94,8 +101,7 @@ const AccordionContainer = styled.div`
 
 const ToolsContainer = styled.div`
     align-self: end;
-    display: grid;
-    grid-template-columns: auto auto auto;
+    width: 100%;
 `;
 
 //Interfaces:
@@ -157,12 +163,13 @@ const Toolbar = ({
             </AccordionContainer>
             <ToolsContainer>
                 <GeneralButton
-                    buttonLabel="Exit"
+                    buttonLabel="Return to Programs"
                     onClick={() =>
                         historyObject.push('/builder/dashboard/recents')
                     }
+                    width="100%"
+                    buttonIconLeft={<ExitIcon />}
                 />
-                <GeneralButton buttonLabel="Add" />
             </ToolsContainer>
         </MainContainer>
     );
