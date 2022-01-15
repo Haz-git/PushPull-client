@@ -26,7 +26,6 @@ const DroppableStyles = styled.div`
     border-left: 1px solid #ebe6fb;
 `;
 
-//Interfaces:
 interface IComponentProps {
     prefix: any;
     elements: any;
@@ -38,6 +37,13 @@ const DateColumn = ({
     elements,
     columnIndex,
 }: IComponentProps): JSX.Element => {
+    const getListStyle = (isDraggingOver: any) => ({
+        background: isDraggingOver ? '#ececec' : '#ffffff',
+        height: '100%',
+        borderRadius: '.3rem',
+        width: '100%',
+    });
+
     return (
         <Draggable draggableId={`${prefix}`} index={columnIndex}>
             {(provided) => (
@@ -53,10 +59,11 @@ const DateColumn = ({
                         droppableId={`${prefix}`}
                         type={`EXERCISE_BLOCK`}
                     >
-                        {(provided: any) => (
+                        {(provided: any, snapshot: any) => (
                             <div
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
+                                style={getListStyle(snapshot.isDraggingOver)}
                             >
                                 {elements?.map((item: any, index: any) => (
                                     <BlockTypeExercise
