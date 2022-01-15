@@ -127,9 +127,9 @@ export const deleteTemplate = (
 export const queryTemplate = (templateId: string) => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            let response = await api.get(`/template/query/${templateId}`);
-
             dispatch(invokeLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
+
+            let response = await api.get(`/template/query/${templateId}`);
 
             dispatch({
                 type: TemplateActionType.USER_QUERY_TEMPLATE,
