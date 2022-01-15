@@ -2,6 +2,9 @@ import { uiLoaderActionType } from './action-types';
 import { uiLoaderAction } from './uiLoaderInterfaces';
 
 const initialState: any = {
+    statusTemplateBlocks: {
+        isLoading: false,
+    },
     mainBuildTemplateView: {
         isLoading: false,
     },
@@ -16,6 +19,10 @@ const uiLoaderReducer = (state: {} = initialState, action: uiLoaderAction) => {
             return { ...state, addBlockModal: action.payload };
         case uiLoaderActionType.START_MAINBUILDTEMPLATEVIEW_LOADER:
             return { ...state, mainBuildTemplateView: action.payload };
+        case uiLoaderActionType.START_TEMPLATE_BLOCK_LOADER:
+            return { ...state, statusTemplateBlocks: action.payload };
+        case uiLoaderActionType.END_TEMPLATE_BLOCK_LOADER:
+            return { ...state, statusTemplateBlocks: action.payload };
         case uiLoaderActionType.END_ADDBLOCKMODAL_LOADER:
             return { ...state, addBlockModal: action.payload };
         case uiLoaderActionType.END_MAINBUILDTEMPLATEVIEW_LOADER:
