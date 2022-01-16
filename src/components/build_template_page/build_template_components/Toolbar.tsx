@@ -20,6 +20,20 @@ import BlockColumn from './BlockColumn';
 
 //Styles:
 import styled from 'styled-components';
+import { IosArrowLeft } from '@styled-icons/fluentui-system-filled/IosArrowLeft';
+import { ContentSettings } from 'styled-icons/fluentui-system-filled';
+
+const SettingsIcon = styled(ContentSettings)`
+    color: #ffffff;
+    height: 1.75rem;
+    width: 1.75rem;
+`;
+
+const ExitIcon = styled(IosArrowLeft)`
+    color: #ffffff;
+    height: 1.25rem;
+    width: 1.25rem;
+`;
 
 const MainContainer = styled.section`
     display: grid;
@@ -94,19 +108,20 @@ const AccordionContainer = styled.div`
 
 const ToolsContainer = styled.div`
     align-self: end;
-    display: grid;
-    grid-template-columns: auto auto auto;
+    width: 100%;
 `;
 
 //Interfaces:
 
 interface IComponentProps {
+    controlGlobalModal: (state: boolean) => void;
     controlBlockModal: (state: boolean) => void;
     lists: any;
     elements: any;
 }
 
 const Toolbar = ({
+    controlGlobalModal,
     controlBlockModal,
     lists,
     elements,
@@ -157,12 +172,31 @@ const Toolbar = ({
             </AccordionContainer>
             <ToolsContainer>
                 <GeneralButton
-                    buttonLabel="Exit"
+                    height="3.5rem"
+                    buttonLabel="Global Settings"
+                    onClick={() => controlGlobalModal(true)}
+                    width="100%"
+                    buttonIconLeft={<SettingsIcon />}
+                    buttonBackground="transparent"
+                    borderBottom="1px solid #525252"
+                    borderTop="1px solid #525252"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
+                />
+                <GeneralButton
+                    height="3.5rem"
+                    buttonLabel="Back to Programs"
                     onClick={() =>
                         historyObject.push('/builder/dashboard/recents')
                     }
+                    width="100%"
+                    buttonIconLeft={<ExitIcon />}
+                    buttonBackground="transparent"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
                 />
-                <GeneralButton buttonLabel="Add" />
             </ToolsContainer>
         </MainContainer>
     );
