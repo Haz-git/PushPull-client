@@ -7,6 +7,10 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     align-items: center;
     justify-content: center;
     border: ${(props) => props.border};
+    border-top: ${(props) => props.borderTop};
+    border-bottom: ${(props) => props.borderBottom};
+    border-left: ${(props) => props.borderLeft};
+    border-right: ${(props) => props.borderRight};
     margin: ${(props) => props.margin};
     background: ${(props) => props.buttonBackground};
     padding: ${(props) => props.padding};
@@ -68,6 +72,10 @@ interface IGeneralButtonProps {
     margin?: string;
     textShadow?: string;
     border?: string;
+    borderTop?: string;
+    borderBottom?: string;
+    borderLeft?: string;
+    borderRight?: string;
     height?: string;
     borderRadius?: string;
     type?: 'button' | 'submit' | 'reset';
@@ -95,6 +103,10 @@ const GeneralButton = ({
     margin = '0rem 0rem',
     textShadow = 'rgba(0, 0, 34, .5) 1px 1px 0',
     border = 'none',
+    borderTop = 'none',
+    borderBottom = 'none',
+    borderLeft = 'none',
+    borderRight = 'none',
     height = 'auto',
     borderRadius = '0.2rem',
     type = 'submit',
@@ -125,6 +137,10 @@ const GeneralButton = ({
                 height={height}
                 borderRadius={borderRadius}
                 type={type}
+                borderTop={borderTop}
+                borderBottom={borderBottom}
+                borderLeft={borderLeft}
+                borderRight={borderRight}
             >
                 <LeftIconContainer leftIconMargin={leftIconMargin}>
                     {buttonIconLeft && buttonIconLeft}
