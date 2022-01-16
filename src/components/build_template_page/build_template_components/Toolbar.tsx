@@ -21,11 +21,18 @@ import BlockColumn from './BlockColumn';
 //Styles:
 import styled from 'styled-components';
 import { IosArrowLeft } from '@styled-icons/fluentui-system-filled/IosArrowLeft';
+import { ContentSettings } from 'styled-icons/fluentui-system-filled';
+
+const SettingsIcon = styled(ContentSettings)`
+    color: #ffffff;
+    height: 1.75rem;
+    width: 1.75rem;
+`;
 
 const ExitIcon = styled(IosArrowLeft)`
     color: #ffffff;
-    height: 1rem;
-    width: 1rem;
+    height: 1.25rem;
+    width: 1.25rem;
 `;
 
 const MainContainer = styled.section`
@@ -168,7 +175,7 @@ const Toolbar = ({
                     buttonLabel="Global Settings"
                     onClick={() => console.log('Open Global Modal')}
                     width="100%"
-                    buttonIconLeft={<ExitIcon />}
+                    buttonIconLeft={<SettingsIcon />}
                     buttonBackground="transparent"
                     borderBottom="1px solid #525252"
                     borderTop="1px solid #525252"
