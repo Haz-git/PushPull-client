@@ -107,12 +107,14 @@ const ToolsContainer = styled.div`
 //Interfaces:
 
 interface IComponentProps {
+    controlGlobalModal: (state: boolean) => void;
     controlBlockModal: (state: boolean) => void;
     lists: any;
     elements: any;
 }
 
 const Toolbar = ({
+    controlGlobalModal,
     controlBlockModal,
     lists,
     elements,
@@ -163,12 +165,28 @@ const Toolbar = ({
             </AccordionContainer>
             <ToolsContainer>
                 <GeneralButton
-                    buttonLabel="Return to Programs"
+                    buttonLabel="Global Settings"
+                    onClick={() => console.log('Open Global Modal')}
+                    width="100%"
+                    buttonIconLeft={<ExitIcon />}
+                    buttonBackground="transparent"
+                    borderBottom="1px solid #525252"
+                    borderTop="1px solid #525252"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
+                />
+                <GeneralButton
+                    buttonLabel="Back to Programs"
                     onClick={() =>
                         historyObject.push('/builder/dashboard/recents')
                     }
                     width="100%"
                     buttonIconLeft={<ExitIcon />}
+                    buttonBackground="transparent"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
                 />
             </ToolsContainer>
         </MainContainer>
