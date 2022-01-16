@@ -9,6 +9,7 @@ import Toolbar from './build_template_components/Toolbar';
 import EditingSurface from './build_template_components/EditingSurface';
 import GeneralModal from '../general_components/GeneralModal';
 import AddBlockForm from './build_template_components/AddBlockForm';
+import GlobalSettingsForm from './build_template_components/GlobalSettingsForm';
 import { v4 as uuid } from 'uuid';
 
 //Redux:
@@ -137,8 +138,15 @@ const MainBuildTemplateView = ({
         }
     }, [toolbarBlocks, editingSurfaceBlocks]);
 
+    // Modal for viewing and editing Global Inputs:
+    const [openGlobalModal, setOpenGlobalModal] = useState(false);
+    const controlGlobalModal = (state: boolean): void =>
+        setOpenGlobalModal(state);
+
+    // Block modal for adding Blocks:
     const [openBlockModal, setOpenBlockModal] = useState(false);
-    const controlBlockModal = (state: boolean) => setOpenBlockModal(state);
+    const controlBlockModal = (state: boolean): void =>
+        setOpenBlockModal(state);
 
     //Helper Functions: For DragDropContext
 
@@ -255,6 +263,13 @@ const MainBuildTemplateView = ({
                 />
             ) : (
                 <>
+                    <GeneralModal
+                        title="Template Global Settings"
+                        openBoolean={openGlobalModal}
+                        closeFunc={() => setOpenGlobalModal(false)}
+                    >
+                        <GlobalSettingsForm />
+                    </GeneralModal>
                     <GeneralModal
                         title="Add New Block"
                         openBoolean={openBlockModal}
