@@ -285,6 +285,7 @@ const MainBuildTemplateView = ({
                             <EditingSurfaceGridWrapper>
                                 <Toolbar
                                     controlBlockModal={controlBlockModal}
+                                    controlGlobalModal={controlGlobalModal}
                                     lists={toolbarColumns}
                                     elements={toolbarElements}
                                 />
