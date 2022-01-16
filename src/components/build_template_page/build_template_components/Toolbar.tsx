@@ -172,8 +172,9 @@ const Toolbar = ({
             </AccordionContainer>
             <ToolsContainer>
                 <GeneralButton
+                    height="3.5rem"
                     buttonLabel="Global Settings"
-                    onClick={() => console.log('Open Global Modal')}
+                    onClick={() => controlGlobalModal(true)}
                     width="100%"
                     buttonIconLeft={<SettingsIcon />}
                     buttonBackground="transparent"
@@ -184,6 +185,7 @@ const Toolbar = ({
                     hoverShadow="none"
                 />
                 <GeneralButton
+                    height="3.5rem"
                     buttonLabel="Back to Programs"
                     onClick={() =>
                         historyObject.push('/builder/dashboard/recents')
