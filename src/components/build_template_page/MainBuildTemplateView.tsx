@@ -269,7 +269,9 @@ const MainBuildTemplateView = ({
                         openBoolean={openGlobalModal}
                         closeFunc={() => setOpenGlobalModal(false)}
                     >
-                        <GlobalSettingsForm />
+                        <GlobalSettingsForm
+                            toggleGlobalSettingsModal={controlGlobalModal}
+                        />
                     </GeneralModal>
                     <GeneralModal
                         closeOnClickOutside={false}
