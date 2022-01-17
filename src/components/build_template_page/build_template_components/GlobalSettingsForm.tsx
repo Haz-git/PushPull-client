@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 //Components:
 import Text from '../../general_components/Text';
-import { TextInput, Textarea, NumberInput } from '@mantine/core';
+import { TextInput, Textarea, Select } from '@mantine/core';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -18,8 +18,13 @@ const MainContainer = styled.div`
 
 const FormContainer = styled.div``;
 
+const Spacer = styled.div`
+    height: 1rem;
+`;
+
 export const GlobalSettingsForm = () => {
     const dispatch = useDispatch();
+    //TODO: Rename userInputs to viewerInputs as it makes more sense.
     const {
         templateFileTitle,
         templateFileDesc,
@@ -28,6 +33,10 @@ export const GlobalSettingsForm = () => {
         templateUserInputs,
     } = useSelector((state: RootStateOrAny) => state?.template);
 
+    //Error state:
+    const [hasError, setHasError] = useState(false);
+
+    //Modal Error State:
     const [templateState, setTemplateState] = useState({
         title: templateFileTitle,
         desc: templateFileDesc,
@@ -46,7 +55,6 @@ export const GlobalSettingsForm = () => {
     return (
         <MainContainer>
             <FormContainer>
-                {' '}
                 <TextInput
                     styles={{
                         label: {
@@ -65,15 +73,73 @@ export const GlobalSettingsForm = () => {
                     }}
                     required
                     label="Template Title"
-                    placeholder={templateFileTitle}
-                    disabled={true}
-                    // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    //     if (hasError) setHasError(false);
-                    //     handleUserInput('name', e.target.value);
-                    // }}
-                    // value={userInput.name}
-                    // error={hasError}
+                    placeholder={templateState.title}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        if (hasError) {
+                            setHasError(false);
+                        }
+                        handleUserInput('title', e.target.value);
+                    }}
+                    value={templateState.title}
+                    error={hasError}
+                />
+                <Spacer />
+                <Textarea
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                            height: '8rem',
+                        },
+                    }}
+                    label="Template Description"
+                    placeholder={templateState.desc}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                        handleUserInput('desc', e.target.value);
+                    }}
+                    value={templateState.desc}
                     // disabled={isCreatingNewProject}
+                />
+                <Spacer />
+                <Select
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                        },
+                    }}
+                    label="Template Measurement Unit"
+                    placeholder="Choose a Category"
+                    data={[
+                        {
+                            value: 'IMPERIAL',
+                            label: 'Imperial System (Lbs)',
+                        },
+                        {
+                            value: 'METRIC',
+                            label: 'Metric System (Kg)',
+                        },
+                    ]}
+                    value={templateState.unit}
+                    required
                 />
             </FormContainer>
         </MainContainer>
