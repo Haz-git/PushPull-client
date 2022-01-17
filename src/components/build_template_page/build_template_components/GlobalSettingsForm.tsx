@@ -107,7 +107,6 @@ export const GlobalSettingsForm = () => {
                         handleUserInput('desc', e.target.value);
                     }}
                     value={templateState.desc}
-                    // disabled={isCreatingNewProject}
                 />
                 <Spacer />
                 <Select
@@ -139,6 +138,9 @@ export const GlobalSettingsForm = () => {
                         },
                     ]}
                     value={templateState.unit}
+                    onChange={(value: string) => {
+                        handleUserInput('unit', value);
+                    }}
                     required
                 />
             </FormContainer>
