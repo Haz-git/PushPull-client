@@ -264,6 +264,7 @@ const MainBuildTemplateView = ({
             ) : (
                 <>
                     <GeneralModal
+                        closeOnClickOutside={false}
                         title="Template Global Settings"
                         openBoolean={openGlobalModal}
                         closeFunc={() => setOpenGlobalModal(false)}
@@ -271,6 +272,7 @@ const MainBuildTemplateView = ({
                         <GlobalSettingsForm />
                     </GeneralModal>
                     <GeneralModal
+                        closeOnClickOutside={false}
                         title="Add New Block"
                         openBoolean={openBlockModal}
                         closeFunc={() => setOpenBlockModal(false)}
