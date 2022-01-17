@@ -200,7 +200,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             </FormContainer>
             <ButtonContainer>
                 <GeneralButton
-                    buttonLabel="Click to add test block"
+                    buttonLabel="Add Block"
                     onClick={dispatchBlock}
                 />
             </ButtonContainer>
