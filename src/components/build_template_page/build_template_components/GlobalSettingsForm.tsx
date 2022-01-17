@@ -4,9 +4,11 @@ import { useState } from 'react';
 //Components:
 import Text from '../../general_components/Text';
 import { TextInput, Textarea, Select } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { updateTemplate } from '../../../redux/templates/templateActions';
 
 //Styles:
 import styled from 'styled-components';
@@ -22,7 +24,29 @@ const Spacer = styled.div`
     height: 1rem;
 `;
 
-export const GlobalSettingsForm = () => {
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 0.5rem;
+    padding: 1rem 0rem 0rem 0rem;
+`;
+
+interface ITemplateStateObject {
+    templateFileTitle: string;
+    templateFileDesc: string;
+    templateWeightUnit: string;
+    templateLegend: any[];
+    templateUserInputs: any[];
+}
+
+interface IComponentProps {
+    toggleGlobalSettingsModal: (state: boolean) => void;
+}
+
+export const GlobalSettingsForm = ({
+    toggleGlobalSettingsModal,
+}: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     //TODO: Rename userInputs to viewerInputs as it makes more sense.
     const {
@@ -31,6 +55,8 @@ export const GlobalSettingsForm = () => {
         templateWeightUnit,
         templateLegend,
         templateUserInputs,
+        projectId,
+        id,
     } = useSelector((state: RootStateOrAny) => state?.template);
 
     //Error state:
@@ -38,11 +64,11 @@ export const GlobalSettingsForm = () => {
 
     //Modal Error State:
     const [templateState, setTemplateState] = useState({
-        title: templateFileTitle,
-        desc: templateFileDesc,
-        unit: templateWeightUnit,
-        legend: templateLegend,
-        userInput: templateUserInputs,
+        templateFileTitle: templateFileTitle,
+        templateFileDesc: templateFileDesc,
+        templateWeightUnit: templateWeightUnit,
+        templateLegend: templateLegend,
+        templateUserInputs: templateUserInputs,
     });
 
     const handleUserInput = (name: string, val: string | number | []): void => {
@@ -50,6 +76,69 @@ export const GlobalSettingsForm = () => {
             ...templateState,
             [name]: val,
         });
+    };
+
+    const checkTemplateTitleLength = (): boolean => {
+        if (templateState.templateFileTitle.length > 0) {
+            return true;
+        }
+        return false;
+    };
+
+    const filterBetweenUserInputAndState = (
+        stateObject: any,
+        userObject: any
+    ): any[] => {
+        return Object.keys(userObject).filter(
+            (item: any) => userObject[item] !== stateObject[item]
+        );
+        //Don't know how to get rid of TS Error without using 'any' here..
+    };
+
+    const convertNewChangeArrayToObject = (array: any[]): any => {
+        if (!array.length) {
+            return {};
+        }
+        let changeObj = {} as ITemplateStateObject;
+
+        array.forEach((item: keyof ITemplateStateObject) => {
+            changeObj[item] = templateState[item];
+        });
+
+        return changeObj;
+    };
+
+    const findUserNewChanges = (): any => {
+        const newChanges = filterBetweenUserInputAndState(
+            {
+                templateFileTitle,
+                templateFileDesc,
+                templateWeightUnit,
+                templateLegend,
+                templateUserInputs,
+            },
+            templateState
+        );
+
+        return convertNewChangeArrayToObject(newChanges);
+    };
+
+    const handleSaveGlobalSettings = () => {
+        if (!checkTemplateTitleLength()) {
+            setHasError(true);
+            return;
+        }
+
+        dispatch(
+            updateTemplate(
+                (status) => console.log(status),
+                id,
+                findUserNewChanges(),
+                projectId
+            )
+        );
+
+        return toggleGlobalSettingsModal(false);
     };
 
     return (
@@ -73,14 +162,14 @@ export const GlobalSettingsForm = () => {
                     }}
                     required
                     label="Template Title"
-                    placeholder={templateState.title}
+                    placeholder={templateState.templateFileTitle}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         if (hasError) {
                             setHasError(false);
                         }
-                        handleUserInput('title', e.target.value);
+                        handleUserInput('templateFileTitle', e.target.value);
                     }}
-                    value={templateState.title}
+                    value={templateState.templateFileTitle}
                     error={hasError}
                 />
                 <Spacer />
@@ -102,11 +191,11 @@ export const GlobalSettingsForm = () => {
                         },
                     }}
                     label="Template Description"
-                    placeholder={templateState.desc}
+                    placeholder={templateState.templateFileDesc}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                        handleUserInput('desc', e.target.value);
+                        handleUserInput('templateFileDesc', e.target.value);
                     }}
-                    value={templateState.desc}
+                    value={templateState.templateFileDesc}
                 />
                 <Spacer />
                 <Select
@@ -137,12 +226,37 @@ export const GlobalSettingsForm = () => {
                             label: 'Metric System (Kg)',
                         },
                     ]}
-                    value={templateState.unit}
+                    value={templateState.templateWeightUnit}
                     onChange={(value: string) => {
-                        handleUserInput('unit', value);
+                        handleUserInput('templateWeightUnit', value);
                     }}
                     required
                 />
+                <Spacer />
+                <ButtonContainer>
+                    <GeneralButton
+                        buttonLabel="Save"
+                        width="6rem"
+                        buttonBackground="#41A312"
+                        fontSize="1rem"
+                        height="2rem"
+                        leftIconMargin="0rem .3rem -.2rem 0rem"
+                        onClick={() => handleSaveGlobalSettings()}
+                    />
+                    <GeneralButton
+                        buttonLabel="Cancel"
+                        width="6rem"
+                        buttonBackground="#ececec"
+                        buttonTextColor="rgba(0, 0, 34, 1)"
+                        textShadow="none"
+                        disableShadow={true}
+                        hoverShadow="none"
+                        border="1px solid #c6c6c6"
+                        fontSize="1rem"
+                        height="2rem"
+                        onClick={() => toggleGlobalSettingsModal(false)}
+                    />
+                </ButtonContainer>
             </FormContainer>
         </MainContainer>
     );
