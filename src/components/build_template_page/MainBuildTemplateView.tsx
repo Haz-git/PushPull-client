@@ -9,7 +9,7 @@ import Toolbar from './build_template_components/Toolbar';
 import EditingSurface from './build_template_components/EditingSurface';
 import GeneralModal from '../general_components/GeneralModal';
 import AddBlockForm from './build_template_components/AddBlockForm';
-import GlobalSettingsForm from './build_template_components/GlobalSettingsForm';
+import { GlobalSettingsForm } from './build_template_components/GlobalSettingsForm';
 import { v4 as uuid } from 'uuid';
 
 //Redux:
