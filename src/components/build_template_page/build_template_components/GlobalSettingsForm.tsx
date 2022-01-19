@@ -131,6 +131,7 @@ export const GlobalSettingsForm = ({
                 (status) => console.log(status),
                 id,
                 findUserNewChanges(),
+                true,
                 projectId
             )
         );
