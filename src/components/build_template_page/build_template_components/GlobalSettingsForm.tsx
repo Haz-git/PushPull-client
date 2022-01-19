@@ -126,17 +126,16 @@ export const GlobalSettingsForm = ({
             return;
         }
 
-        dispatch(
+        return dispatch(
             updateTemplate(
-                (status) => console.log(status),
+                (status) => {},
                 id,
                 findUserNewChanges(),
                 true,
-                projectId
+                projectId,
+                toggleGlobalSettingsModal
             )
         );
-
-        return toggleGlobalSettingsModal(false);
     };
 
     return (
