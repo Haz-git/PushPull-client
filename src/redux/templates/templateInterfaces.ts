@@ -1,21 +1,26 @@
 import { TemplateActionType } from './action-types';
 
-interface findTemplate {
-    type: TemplateActionType.USER_FIND_TEMPLATE;
+interface findTemplateInProjectDashboard {
+    type: TemplateActionType.USER_FIND_TEMPLATE_IN_PROJECT_DASHBOARD;
     payload?: any;
 }
 
-interface addTemplate {
-    type: TemplateActionType.USER_ADD_TEMPLATE;
+interface addTemplateToProjectDashboard {
+    type: TemplateActionType.USER_ADD_TEMPLATE_TO_PROJECT_DASHBOARD;
     payload?: any;
 }
 
+interface updateTemplateInProjectDashboard {
+    type: TemplateActionType.USER_UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD;
+    payload?: any;
+}
+
+interface deleteTemplateFromProjectDashboard {
+    type: TemplateActionType.USER_DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD;
+    payload?: any;
+}
 interface updateTemplate {
     type: TemplateActionType.USER_UPDATE_TEMPLATE;
-    payload?: any;
-}
-interface deleteTemplate {
-    type: TemplateActionType.USER_DELETE_TEMPLATE;
     payload?: any;
 }
 
@@ -60,10 +65,11 @@ interface deleteToolbarBlock {
 }
 
 export type TemplateAction =
-    | findTemplate
-    | addTemplate
+    | findTemplateInProjectDashboard
+    | addTemplateToProjectDashboard
+    | updateTemplateInProjectDashboard
+    | deleteTemplateFromProjectDashboard
     | updateTemplate
-    | deleteTemplate
     | queryTemplate
     | clearTemplate
     | addToolbarBlock

@@ -79,10 +79,7 @@ export const GlobalSettingsForm = ({
     };
 
     const checkTemplateTitleLength = (): boolean => {
-        if (templateState.templateFileTitle.length > 0) {
-            return true;
-        }
-        return false;
+        return templateState.templateFileTitle.length;
     };
 
     const filterBetweenUserInputAndState = (
@@ -134,6 +131,7 @@ export const GlobalSettingsForm = ({
                 (status) => console.log(status),
                 id,
                 findUserNewChanges(),
+                true,
                 projectId
             )
         );

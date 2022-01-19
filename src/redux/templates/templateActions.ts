@@ -29,7 +29,7 @@ export const findTemplates = (
             }
 
             dispatch({
-                type: TemplateActionType.USER_FIND_TEMPLATE,
+                type: TemplateActionType.USER_FIND_TEMPLATE_IN_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -53,7 +53,7 @@ export const addTemplate = (
             let response = await api.post(`/template/add`, { templateDetails });
 
             dispatch({
-                type: TemplateActionType.USER_ADD_TEMPLATE,
+                type: TemplateActionType.USER_ADD_TEMPLATE_TO_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -71,6 +71,7 @@ export const updateTemplate = (
     statusCallback: (status: boolean) => void,
     templateId: string,
     templateDetails: any,
+    isInTemplateBuilderMode: true | false,
     projectUuid?: string | null
 ) => {
     return async (dispatch: Dispatch<TemplateAction>) => {
@@ -80,9 +81,19 @@ export const updateTemplate = (
                 projectUuid,
             });
 
+            const templateBuilderObject = response.data.templates[0];
+            const projectTemplateArray = response.data.templates;
+
+            if (isInTemplateBuilderMode) {
+                dispatch({
+                    type: TemplateActionType.USER_UPDATE_TEMPLATE,
+                    payload: templateBuilderObject,
+                });
+            }
+
             dispatch({
-                type: TemplateActionType.USER_UPDATE_TEMPLATE,
-                payload: response.data.templates,
+                type: TemplateActionType.USER_UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD,
+                payload: projectTemplateArray,
             });
 
             if (response.data.status === 'Success') {
@@ -109,7 +120,7 @@ export const deleteTemplate = (
             );
 
             dispatch({
-                type: TemplateActionType.USER_DELETE_TEMPLATE,
+                type: TemplateActionType.USER_DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
