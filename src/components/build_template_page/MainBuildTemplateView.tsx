@@ -148,6 +148,11 @@ const MainBuildTemplateView = ({
     const controlBlockModal = (state: boolean): void =>
         setOpenBlockModal(state);
 
+    //Loader state for global settings modal on update
+    const { isLoading: isGlobalSettingsModalLoading } = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.globalSettingsModal
+    );
+
     //Helper Functions: For DragDropContext
 
     const removeFromList = (list: any, index: any) => {
@@ -268,6 +273,7 @@ const MainBuildTemplateView = ({
                         title="Template Global Settings"
                         openBoolean={openGlobalModal}
                         closeFunc={() => setOpenGlobalModal(false)}
+                        isLoading={isGlobalSettingsModalLoading}
                     >
                         <GlobalSettingsForm
                             toggleGlobalSettingsModal={controlGlobalModal}
