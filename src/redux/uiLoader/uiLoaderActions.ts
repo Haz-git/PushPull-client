@@ -26,6 +26,13 @@ export const invokeLoaderState = (loaderType: string) => {
                         isLoading: true,
                     },
                 });
+            case 'GLOBAL_SETTINGS_MODAL':
+                return dispatch({
+                    type: uiLoaderActionType.START_GLOBALSETTINGSMODAL_LOADER,
+                    payload: {
+                        isLoading: true,
+                    },
+                });
             default:
                 throw new Error('No loaderType was provided');
         }
@@ -52,6 +59,13 @@ export const disableLoaderState = (loaderType: string) => {
             case 'ADD_BLOCK_MODAL':
                 return dispatch({
                     type: uiLoaderActionType.END_ADDBLOCKMODAL_LOADER,
+                    payload: {
+                        isLoading: false,
+                    },
+                });
+            case 'GLOBAL_SETTINGS_MODAL':
+                return dispatch({
+                    type: uiLoaderActionType.END_GLOBALSETTINGSMODAL_LOADER,
                     payload: {
                         isLoading: false,
                     },
