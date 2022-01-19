@@ -148,6 +148,7 @@ const TemplateComponent = ({
                 {
                     templateFileTitle: newTemplateFileTitle,
                 },
+                false,
                 projectUuid
             )
         );
@@ -208,6 +209,7 @@ const TemplateComponent = ({
                     {
                         templateFileTitle: newTemplateFileTitle,
                     },
+                    false,
                     projectUuid
                 )
             );
