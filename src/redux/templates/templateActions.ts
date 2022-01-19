@@ -72,10 +72,15 @@ export const updateTemplate = (
     templateId: string,
     templateDetails: any,
     isInTemplateBuilderMode: true | false,
-    projectUuid?: string | null
+    projectUuid?: string | null,
+    controlGlobalSettingsModal?: (state: boolean) => void
 ) => {
-    return async (dispatch: Dispatch<TemplateAction>) => {
+    return async (dispatch: Dispatch<any>) => {
         try {
+            if (isInTemplateBuilderMode) {
+                dispatch(invokeLoaderState(loaderTypes.GLOBAL_SETTINGS_MODAL));
+            }
+
             let response = await api.put(`/template/update/${templateId}`, {
                 templateDetails,
                 projectUuid,
@@ -89,6 +94,12 @@ export const updateTemplate = (
                     type: TemplateActionType.USER_UPDATE_TEMPLATE,
                     payload: templateBuilderObject,
                 });
+
+                dispatch(disableLoaderState(loaderTypes.GLOBAL_SETTINGS_MODAL));
+
+                if (controlGlobalSettingsModal) {
+                    controlGlobalSettingsModal(false);
+                }
             }
 
             dispatch({
