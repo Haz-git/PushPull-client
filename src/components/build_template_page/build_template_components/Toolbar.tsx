@@ -22,6 +22,7 @@ import BlockColumn from './BlockColumn';
 import styled from 'styled-components';
 import { IosArrowLeft } from '@styled-icons/fluentui-system-filled/IosArrowLeft';
 import { ContentSettings } from 'styled-icons/fluentui-system-filled';
+import { UserVoice } from '@styled-icons/boxicons-solid/UserVoice';
 
 const SettingsIcon = styled(ContentSettings)`
     color: #ffffff;
@@ -33,6 +34,12 @@ const ExitIcon = styled(IosArrowLeft)`
     color: #ffffff;
     height: 1.25rem;
     width: 1.25rem;
+`;
+
+const ViewerInteractionsIcon = styled(UserVoice)`
+    color: #ffffff;
+    height: 1.75rem;
+    width: 1.75rem;
 `;
 
 const MainContainer = styled.section`
@@ -171,6 +178,19 @@ const Toolbar = ({
                 </Accordion>
             </AccordionContainer>
             <ToolsContainer>
+                <GeneralButton
+                    height="3.5rem"
+                    buttonLabel="Viewer Interactions"
+                    // onClick={() => controlGlobalModal(true)}
+                    width="100%"
+                    buttonIconLeft={<ViewerInteractionsIcon />}
+                    buttonBackground="transparent"
+                    borderBottom="1px solid #525252"
+                    borderTop="1px solid #525252"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
+                />
                 <GeneralButton
                     height="3.5rem"
                     buttonLabel="Global Settings"
