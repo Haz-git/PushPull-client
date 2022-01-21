@@ -91,6 +91,8 @@ const RemoveButton = styled.button`
 
 const ViewerInteractionsForm = () => {
     const [isAddColorPopoverOpen, setStatusAddColorPopover] = useState(false);
+    const [isAddUserInputPopoverOpen, setStatusAddUserInputPopover] =
+        useState(false);
 
     return (
         <MainContainer>
@@ -173,21 +175,23 @@ const ViewerInteractionsForm = () => {
                     <Popover
                         noClickOutside={true}
                         noEscape={true}
-                        title="Add New Color"
-                        onClose={() => setStatusAddColorPopover(false)}
+                        title="Add Viewer Questions"
+                        onClose={() => setStatusAddUserInputPopover(false)}
                         placement="start"
                         position="bottom"
                         withCloseButton={true}
-                        opened={isAddColorPopoverOpen}
+                        opened={isAddUserInputPopoverOpen}
                         target={
                             <AddButton
-                                onClick={() => setStatusAddColorPopover(true)}
+                                onClick={() =>
+                                    setStatusAddUserInputPopover(true)
+                                }
                             >
                                 <AddIcon />
                             </AddButton>
                         }
                     >
-                        <AddColorForm />
+                        <AddViewerInputForm />
                     </Popover>
                     <RemoveButton>
                         <SubtractIcon />

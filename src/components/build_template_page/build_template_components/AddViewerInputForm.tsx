@@ -5,5 +5,5 @@ import * as React from 'react';
 //Styles:
 
 export const AddViewerInputForm = () => {
-    return <div>Dummy form for viewer inputs</div>;
+    return <div>Form currently under construction.</div>;
 };
