@@ -21,6 +21,7 @@ import {
 
 //Styles:
 import styled from 'styled-components';
+import ViewerInteractionsForm from './build_template_components/ViewerInteractionsForm';
 
 const MainContainer = styled.section``;
 
@@ -138,15 +139,24 @@ const MainBuildTemplateView = ({
         }
     }, [toolbarBlocks, editingSurfaceBlocks]);
 
+    // Modal control for Viewer interactions:
+    const [openViewerInteractionsModal, setOpenViewerInteractionsModal] =
+        useState(false);
+    const controlViewerInteractionsModal = (state: boolean): void => {
+        setOpenViewerInteractionsModal(state);
+    };
+
     // Modal for viewing and editing Global Inputs:
     const [openGlobalModal, setOpenGlobalModal] = useState(false);
-    const controlGlobalModal = (state: boolean): void =>
+    const controlGlobalModal = (state: boolean): void => {
         setOpenGlobalModal(state);
+    };
 
     // Block modal for adding Blocks:
     const [openBlockModal, setOpenBlockModal] = useState(false);
-    const controlBlockModal = (state: boolean): void =>
+    const controlBlockModal = (state: boolean): void => {
         setOpenBlockModal(state);
+    };
 
     //Loader state for global settings modal on update
     const { isLoading: isGlobalSettingsModalLoading } = useSelector(
@@ -269,6 +279,15 @@ const MainBuildTemplateView = ({
             ) : (
                 <>
                     <GeneralModal
+                        size="lg"
+                        closeOnClickOutside={false}
+                        title="Viewer Interactions Settings"
+                        openBoolean={openViewerInteractionsModal}
+                        closeFunc={() => setOpenViewerInteractionsModal(false)}
+                    >
+                        <ViewerInteractionsForm />
+                    </GeneralModal>
+                    <GeneralModal
                         closeOnClickOutside={false}
                         title="Template Global Settings"
                         openBoolean={openGlobalModal}
@@ -294,6 +313,9 @@ const MainBuildTemplateView = ({
                         <DragDropContext onDragEnd={onDragEnd}>
                             <EditingSurfaceGridWrapper>
                                 <Toolbar
+                                    controlViewerInteractionsModal={
+                                        controlViewerInteractionsModal
+                                    }
                                     controlBlockModal={controlBlockModal}
                                     controlGlobalModal={controlGlobalModal}
                                     lists={toolbarColumns}
