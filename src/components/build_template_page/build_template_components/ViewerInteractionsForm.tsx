@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { Info } from '@styled-icons/fluentui-system-filled/Info';
 
 const InfoIcon = styled(Info)`
+    margin-bottom: -0.02rem;
     height: 1.5rem;
     width: 1.5rem;
     color: #e07133;
@@ -26,13 +27,22 @@ const OptionHeader = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    margin-bottom: 0.5rem;
 `;
 
 const LegendContainer = styled.div`
-    margin: 1rem 0;
+    margin: 1.5rem 0;
 `;
 
 const ViewerInputsContainer = styled.div``;
+
+const ActionContainer = styled.div`
+    border: 1px solid #d6d6d6;
+    background: #ececec;
+    border-radius: 0.3rem;
+    height: 10rem;
+    width: 100%;
+`;
 
 const ViewerInteractionsForm = () => {
     return (
@@ -64,6 +74,7 @@ const ViewerInteractionsForm = () => {
                         <InfoIcon />
                     </Tooltip>
                 </OptionHeader>
+                <ActionContainer></ActionContainer>
             </LegendContainer>
             <ViewerInputsContainer>
                 <OptionHeader>
@@ -86,6 +97,7 @@ const ViewerInteractionsForm = () => {
                         <InfoIcon />
                     </Tooltip>
                 </OptionHeader>
+                <ActionContainer></ActionContainer>
             </ViewerInputsContainer>
         </MainContainer>
     );
