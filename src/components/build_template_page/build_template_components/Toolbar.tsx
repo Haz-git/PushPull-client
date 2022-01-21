@@ -121,6 +121,7 @@ const ToolsContainer = styled.div`
 //Interfaces:
 
 interface IComponentProps {
+    controlViewerInteractionsModal: (state: boolean) => void;
     controlGlobalModal: (state: boolean) => void;
     controlBlockModal: (state: boolean) => void;
     lists: any;
@@ -128,6 +129,7 @@ interface IComponentProps {
 }
 
 const Toolbar = ({
+    controlViewerInteractionsModal,
     controlGlobalModal,
     controlBlockModal,
     lists,
@@ -181,7 +183,7 @@ const Toolbar = ({
                 <GeneralButton
                     height="3.5rem"
                     buttonLabel="Viewer Interactions"
-                    // onClick={() => controlGlobalModal(true)}
+                    onClick={() => controlViewerInteractionsModal(true)}
                     width="100%"
                     buttonIconLeft={<ViewerInteractionsIcon />}
                     buttonBackground="transparent"
