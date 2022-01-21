@@ -123,6 +123,9 @@ const ViewerInteractionsForm = () => {
                 <ActionContainer></ActionContainer>
                 <ActionableButtonContainer>
                     <Popover
+                        noClickOutside={true}
+                        noEscape={true}
+                        title="Add New Color"
                         onClose={() => setStatusAddColorPopover(false)}
                         placement="start"
                         position="bottom"
