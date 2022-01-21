@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -11,7 +12,11 @@ const MainContainer = styled.div``;
 const FormContainer = styled.div``;
 
 const Divider = styled.div`
-    height: 0.5rem;
+    height: 0.4rem;
+`;
+
+const ButtonContainer = styled.div`
+    margin: 1rem 0rem 0rem 0rem;
 `;
 
 const AddColorForm = () => {
@@ -97,6 +102,9 @@ const AddColorForm = () => {
                     // disabled={isCreatingNewProject}
                 />
             </FormContainer>
+            <ButtonContainer>
+                <GeneralButton buttonLabel="Save Color" padding=".5rem .2rem" />
+            </ButtonContainer>
         </MainContainer>
     );
 };
