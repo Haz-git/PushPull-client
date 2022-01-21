@@ -5,7 +5,8 @@ import { useState } from 'react';
 import Text from '../../general_components/Text';
 import { Tooltip } from '@mantine/core';
 import { Popover } from '@mantine/core';
-import AddColorForm from './AddColorForm';
+import { AddColorForm } from './AddColorForm';
+import { AddViewerInputForm } from './AddViewerInputForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -90,6 +91,8 @@ const RemoveButton = styled.button`
 
 const ViewerInteractionsForm = () => {
     const [isAddColorPopoverOpen, setStatusAddColorPopover] = useState(false);
+    const [isAddUserInputPopoverOpen, setStatusAddUserInputPopover] =
+        useState(false);
 
     return (
         <MainContainer>
@@ -169,9 +172,27 @@ const ViewerInteractionsForm = () => {
                 </OptionHeader>
                 <ActionContainer></ActionContainer>
                 <ActionableButtonContainer>
-                    <AddButton>
-                        <AddIcon />
-                    </AddButton>
+                    <Popover
+                        noClickOutside={true}
+                        noEscape={true}
+                        title="Add Viewer Questions"
+                        onClose={() => setStatusAddUserInputPopover(false)}
+                        placement="start"
+                        position="bottom"
+                        withCloseButton={true}
+                        opened={isAddUserInputPopoverOpen}
+                        target={
+                            <AddButton
+                                onClick={() =>
+                                    setStatusAddUserInputPopover(true)
+                                }
+                            >
+                                <AddIcon />
+                            </AddButton>
+                        }
+                    >
+                        <AddViewerInputForm />
+                    </Popover>
                     <RemoveButton>
                         <SubtractIcon />
                     </RemoveButton>

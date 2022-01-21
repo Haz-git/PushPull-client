@@ -19,7 +19,7 @@ const ButtonContainer = styled.div`
     margin: 1rem 0rem 0rem 0rem;
 `;
 
-const AddColorForm = () => {
+export const AddColorForm = () => {
     return (
         <MainContainer>
             <FormContainer>
@@ -108,5 +108,3 @@ const AddColorForm = () => {
         </MainContainer>
     );
 };
-
-export default AddColorForm;

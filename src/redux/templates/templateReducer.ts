@@ -13,6 +13,8 @@ const templateReducer = (state: {} = initialState, action: TemplateAction) => {
             return { ...action.payload };
         case TemplateActionType.USER_ADD_TOOLBAR_BLOCK:
             return { ...action.payload };
+        case TemplateActionType.USER_REORDER_EDITING_SURFACE_COLUMN:
+            return { ...action.payload };
         case TemplateActionType.USER_ADD_EDITING_SURFACE_BLOCK:
             return { ...action.payload };
         case TemplateActionType.USER_UPDATE_EDITING_SURFACE_BLOCK:
