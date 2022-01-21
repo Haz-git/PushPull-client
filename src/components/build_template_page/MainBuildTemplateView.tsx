@@ -279,6 +279,7 @@ const MainBuildTemplateView = ({
             ) : (
                 <>
                     <GeneralModal
+                        size="lg"
                         closeOnClickOutside={false}
                         title="Viewer Interactions Settings"
                         openBoolean={openViewerInteractionsModal}
