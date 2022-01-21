@@ -270,3 +270,17 @@ export const deleteEditingSurfaceBlock = (
         }
     };
 };
+
+export const reorderEditingSurfaceColumn = (
+    templateId: string,
+    weekId: string,
+    newColumnOrder: any[]
+): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+            //fetch here
+        } catch (err) {
+            //error handle
+        }
+    };
+};
