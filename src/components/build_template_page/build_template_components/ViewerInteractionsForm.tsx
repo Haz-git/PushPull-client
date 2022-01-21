@@ -71,7 +71,7 @@ const AddButton = styled.button`
     text-decoration: none;
     background: #e07133;
     padding: 0.15rem 0.15rem;
-    border-radius: 0.3rem;
+    border-radius: 0.2rem;
     cursor: pointer;
     margin-right: 0.15rem;
 `;
@@ -81,7 +81,7 @@ const RemoveButton = styled.button`
     text-decoration: none;
     background: #e07133;
     padding: 0.15rem 0.15rem;
-    border-radius: 0.4rem;
+    border-radius: 0.2rem;
     cursor: pointer;
 `;
 
@@ -147,6 +147,14 @@ const ViewerInteractionsForm = () => {
                     </Tooltip>
                 </OptionHeader>
                 <ActionContainer></ActionContainer>
+                <ActionableButtonContainer>
+                    <AddButton>
+                        <AddIcon />
+                    </AddButton>
+                    <RemoveButton>
+                        <SubtractIcon />
+                    </RemoveButton>
+                </ActionableButtonContainer>
             </ViewerInputsContainer>
         </MainContainer>
     );
