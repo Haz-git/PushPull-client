@@ -273,7 +273,7 @@ export const deleteEditingSurfaceBlock = (
 
 export const reorderEditingSurfaceColumn = (
     templateId: string,
-    weekId: string,
+    weekId: string | undefined,
     newColumnOrder: any[]
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
