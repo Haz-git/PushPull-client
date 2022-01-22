@@ -278,9 +278,17 @@ export const reorderEditingSurfaceColumn = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            console.log('Caught:', templateId, weekId, newColumnOrder);
+            let response = await api.post(
+                `/template/surface/reorder/${templateId}`,
+                { reorderDetails: { weekId, newColumnOrder } }
+            );
+
+            dispatch({
+                type: TemplateActionType.USER_REORDER_EDITING_SURFACE_COLUMN,
+                payload: response.data.template,
+            });
         } catch (err) {
-            //error handle
+            console.warn(err);
         }
     };
 };
