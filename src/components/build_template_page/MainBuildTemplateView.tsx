@@ -17,6 +17,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import {
     addEditingSurfaceBlock,
     queryTemplate,
+    reorderEditingSurfaceColumn,
 } from '../../redux/templates/templateActions';
 
 //Styles:
@@ -123,7 +124,7 @@ const MainBuildTemplateView = ({
     const [toolbarColumns, setToolbarColumns] = useState(['Blocks']);
 
     //We'll manage the current week right here. For now, it's limited to 1 week.
-    const [weekId, setWeekId] = useState();
+    const [weekId, setWeekId] = useState('Undefined');
 
     //Elements for drag drop context:
     const [editingSurfaceElements, setEditingSurfaceElements] = useState(
@@ -210,6 +211,11 @@ const MainBuildTemplateView = ({
             );
 
             setEditingSurfaceColumns(newColumnOrder);
+
+            dispatch(
+                reorderEditingSurfaceColumn(fileUuid, weekId, newColumnOrder)
+            );
+
             return;
         }
 

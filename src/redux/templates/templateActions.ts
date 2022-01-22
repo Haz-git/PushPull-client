@@ -278,7 +278,7 @@ export const reorderEditingSurfaceColumn = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            //fetch here
+            console.log('Caught:', templateId, weekId, newColumnOrder);
         } catch (err) {
             //error handle
         }
