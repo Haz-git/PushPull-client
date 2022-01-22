@@ -278,7 +278,7 @@ export const reorderEditingSurfaceColumn = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            let response = await api.post(
+            const response = await api.post(
                 `/template/surface/reorder/${templateId}`,
                 { reorderDetails: { weekId, newColumnOrder } }
             );
