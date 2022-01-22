@@ -134,6 +134,7 @@ const MainBuildTemplateView = ({
 
     useEffect(() => {
         if (editingSurfaceBlocks && toolbarBlocks) {
+            setEditingSurfaceColumns(editingSurfaceBlocks[0]['weekOrder']);
             setEditingSurfaceElements(editingSurfaceBlocks[0]['weekContent']);
             setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
             setWeekId(editingSurfaceBlocks[0]['weekId']);
