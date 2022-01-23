@@ -288,7 +288,25 @@ export const reorderEditingSurfaceColumn = (
                 payload: response.data.template,
             });
         } catch (err) {
-            console.warn(err);
+            console.error(err);
+        }
+    };
+};
+
+export const renameEditingSurfaceColumn = (
+    templateId: string,
+    weekId: string | undefined,
+    oldColumnName: string,
+    newColumnName: string
+): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+            // dispatch({
+            //     type: TemplateActionType.RENAME_EDITING_SURFACE_COLUMN,
+            //     payload: response.data.template,
+            // });
+        } catch (err) {
+            console.error(err);
         }
     };
 };

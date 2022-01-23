@@ -39,6 +39,11 @@ interface addToolbarBlock {
     payload?: any;
 }
 
+interface renameEditingSurfaceColumn {
+    type: TemplateActionType.RENAME_EDITING_SURFACE_COLUMN;
+    payload?: any;
+}
+
 interface reorderEditingSurfaceColumn {
     type: TemplateActionType.REORDER_EDITING_SURFACE_COLUMN;
     payload?: any;
@@ -78,6 +83,7 @@ export type TemplateAction =
     | queryTemplate
     | clearTemplate
     | addToolbarBlock
+    | renameEditingSurfaceColumn
     | reorderEditingSurfaceColumn
     | addEditingSurfaceBlock
     | updateEditingSurfaceBlock
