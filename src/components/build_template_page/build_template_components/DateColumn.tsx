@@ -4,12 +4,29 @@ import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import BlockTypeExercise from './BlockTypeExercise';
 import { BlockTypes } from './BlockTypeExercise';
+import Text from '../../general_components/Text';
 
 //Styles:
 import styled from 'styled-components';
+import { Edit } from '@styled-icons/fluentui-system-filled/Edit';
 
-const ColumnHeader = styled.div`
-    font-weight: 700;
+const EditIcon = styled(Edit)`
+    height: 1.2rem;
+    width: 1.2rem;
+    color: #e07133;
+`;
+
+const ColumnHeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const ColumnHeaderButton = styled.button`
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
 `;
 
 const HeaderDivider = styled.div`
@@ -51,9 +68,12 @@ const DateColumn = ({
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                 >
-                    <ColumnHeader {...provided.dragHandleProps}>
-                        {prefix}
-                    </ColumnHeader>
+                    <ColumnHeaderContainer {...provided.dragHandleProps}>
+                        <Text text={prefix} />
+                        <ColumnHeaderButton>
+                            <EditIcon />
+                        </ColumnHeaderButton>
+                    </ColumnHeaderContainer>
                     <HeaderDivider />
                     <Droppable
                         droppableId={`${prefix}`}
