@@ -1,10 +1,18 @@
 import React from 'react';
+import { useState } from 'react';
+
+//Redux:
+import { useDispatch } from 'react-redux';
+import { renameEditingSurfaceColumn } from '../../../redux/templates/templateActions';
 
 //Components:
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import BlockTypeExercise from './BlockTypeExercise';
 import { BlockTypes } from './BlockTypeExercise';
 import Text from '../../general_components/Text';
+import { v4 as uuid } from 'uuid';
+import { TextInput } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
 
 //Styles:
 import styled from 'styled-components';
@@ -54,6 +62,76 @@ const DateColumn = ({
     elements,
     columnIndex,
 }: IComponentProps): JSX.Element => {
+    const [newColumnName, setNewColumnName] = useState(prefix);
+    const [isEditModeOn, setIsEditModeOn] = useState(false);
+
+    const inputRef = useClickOutside(() => {
+        if (newColumnName !== '' && newColumnName !== prefix) {
+            console.log('Dispatch here.');
+        }
+
+        setIsEditModeOn(false);
+    });
+
+    const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setNewColumnName(e.target.value);
+    };
+
+    const handleOnKeyPress = (
+        e: React.KeyboardEvent<HTMLInputElement>
+    ): void => {
+        if (
+            e.key === 'Enter' &&
+            newColumnName !== '' &&
+            newColumnName !== prefix
+        ) {
+            console.log('Dispatch here.');
+        }
+        setIsEditModeOn(false);
+    };
+
+    const renderInputFieldOnEdit = (): JSX.Element => {
+        if (!isEditModeOn) {
+            return (
+                <>
+                    <Text text={newColumnName} />
+                    <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
+                        <EditIcon />
+                    </ColumnHeaderButton>
+                </>
+            );
+        }
+
+        return (
+            <TextInput
+                ref={inputRef}
+                autoFocus
+                value={newColumnName}
+                required
+                onChange={handleUserInput}
+                size="xs"
+                styles={{
+                    root: {
+                        padding: '0 0',
+                        margin: '-.2rem 0rem 0rem 0rem',
+                    },
+                    input: {
+                        fontFamily: 'Lato',
+                        border: 'none',
+                        padding: '0rem 0rem 0rem .5rem',
+                        margin: '0 0',
+                        height: '1.4rem',
+                        fontSize: '1rem',
+                        fontWeight: 700,
+                        width: '100%',
+                        minHeight: '0',
+                    },
+                }}
+                onKeyPress={handleOnKeyPress}
+            />
+        );
+    };
+
     const getListStyle = (isDraggingOver: any) => ({
         background: isDraggingOver ? '#ececec' : '#ffffff',
         height: '100%',
@@ -69,10 +147,7 @@ const DateColumn = ({
                     ref={provided.innerRef}
                 >
                     <ColumnHeaderContainer {...provided.dragHandleProps}>
-                        <Text text={prefix} />
-                        <ColumnHeaderButton>
-                            <EditIcon />
-                        </ColumnHeaderButton>
+                        {renderInputFieldOnEdit()}
                     </ColumnHeaderContainer>
                     <HeaderDivider />
                     <Droppable
