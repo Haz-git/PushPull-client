@@ -124,7 +124,7 @@ const MainBuildTemplateView = ({
     const [toolbarColumns, setToolbarColumns] = useState(['Blocks']);
 
     //We'll manage the current week right here. For now, it's limited to 1 week.
-    const [weekId, setWeekId] = useState('Undefined');
+    const [weekId, setWeekId] = useState(undefined);
 
     //Elements for drag drop context:
     const [editingSurfaceElements, setEditingSurfaceElements] = useState(

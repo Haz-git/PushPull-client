@@ -13,13 +13,13 @@ const projectTemplateReducer = (
     action: TemplateAction
 ) => {
     switch (action.type) {
-        case TemplateActionType.USER_FIND_TEMPLATE_IN_PROJECT_DASHBOARD:
+        case TemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD:
             return [...action.payload];
-        case TemplateActionType.USER_ADD_TEMPLATE_TO_PROJECT_DASHBOARD:
+        case TemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD:
             return [...action.payload];
-        case TemplateActionType.USER_UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD:
+        case TemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD:
             return [...action.payload];
-        case TemplateActionType.USER_DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD:
+        case TemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD:
             return [...action.payload];
         default:
             return state;

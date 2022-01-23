@@ -1,71 +1,76 @@
 import { TemplateActionType } from './action-types';
 
 interface findTemplateInProjectDashboard {
-    type: TemplateActionType.USER_FIND_TEMPLATE_IN_PROJECT_DASHBOARD;
+    type: TemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD;
     payload?: any;
 }
 
 interface addTemplateToProjectDashboard {
-    type: TemplateActionType.USER_ADD_TEMPLATE_TO_PROJECT_DASHBOARD;
+    type: TemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD;
     payload?: any;
 }
 
 interface updateTemplateInProjectDashboard {
-    type: TemplateActionType.USER_UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD;
+    type: TemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD;
     payload?: any;
 }
 
 interface deleteTemplateFromProjectDashboard {
-    type: TemplateActionType.USER_DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD;
+    type: TemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD;
     payload?: any;
 }
 interface updateTemplate {
-    type: TemplateActionType.USER_UPDATE_TEMPLATE;
+    type: TemplateActionType.UPDATE_TEMPLATE;
     payload?: any;
 }
 
 interface queryTemplate {
-    type: TemplateActionType.USER_QUERY_TEMPLATE;
+    type: TemplateActionType.QUERY_TEMPLATE;
     payload?: any;
 }
 
 interface clearTemplate {
-    type: TemplateActionType.USER_CLEAR_TEMPLATE;
+    type: TemplateActionType.CLEAR_TEMPLATE;
     payload?: any;
 }
 
 interface addToolbarBlock {
-    type: TemplateActionType.USER_ADD_TOOLBAR_BLOCK;
+    type: TemplateActionType.ADD_TOOLBAR_BLOCK;
+    payload?: any;
+}
+
+interface renameEditingSurfaceColumn {
+    type: TemplateActionType.RENAME_EDITING_SURFACE_COLUMN;
     payload?: any;
 }
 
 interface reorderEditingSurfaceColumn {
-    type: TemplateActionType.USER_REORDER_EDITING_SURFACE_COLUMN;
+    type: TemplateActionType.REORDER_EDITING_SURFACE_COLUMN;
     payload?: any;
 }
 
 interface addEditingSurfaceBlock {
-    type: TemplateActionType.USER_ADD_EDITING_SURFACE_BLOCK;
+    type: TemplateActionType.ADD_EDITING_SURFACE_BLOCK;
     payload?: any;
 }
 
 interface updateEditingSurfaceBlock {
-    type: TemplateActionType.USER_UPDATE_EDITING_SURFACE_BLOCK;
+    type: TemplateActionType.UPDATE_EDITING_SURFACE_BLOCK;
     payload?: any;
 }
 
 interface updateToolbarBlock {
-    type: TemplateActionType.USER_UPDATE_TOOLBAR_BLOCK;
+    type: TemplateActionType.UPDATE_TOOLBAR_BLOCK;
     payload?: any;
 }
 
 interface deleteEditingSurfaceBlock {
-    type: TemplateActionType.USER_DELETE_EDITING_SURFACE_BLOCK;
+    type: TemplateActionType.DELETE_EDITING_SURFACE_BLOCK;
     payload?: any;
 }
 
 interface deleteToolbarBlock {
-    type: TemplateActionType.USER_DELETE_TOOLBAR_BLOCK;
+    type: TemplateActionType.DELETE_TOOLBAR_BLOCK;
     payload?: any;
 }
 
@@ -78,6 +83,7 @@ export type TemplateAction =
     | queryTemplate
     | clearTemplate
     | addToolbarBlock
+    | renameEditingSurfaceColumn
     | reorderEditingSurfaceColumn
     | addEditingSurfaceBlock
     | updateEditingSurfaceBlock

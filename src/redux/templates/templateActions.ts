@@ -29,7 +29,7 @@ export const findTemplates = (
             }
 
             dispatch({
-                type: TemplateActionType.USER_FIND_TEMPLATE_IN_PROJECT_DASHBOARD,
+                type: TemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -53,7 +53,7 @@ export const addTemplate = (
             let response = await api.post(`/template/add`, { templateDetails });
 
             dispatch({
-                type: TemplateActionType.USER_ADD_TEMPLATE_TO_PROJECT_DASHBOARD,
+                type: TemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -91,7 +91,7 @@ export const updateTemplate = (
 
             if (isInTemplateBuilderMode) {
                 dispatch({
-                    type: TemplateActionType.USER_UPDATE_TEMPLATE,
+                    type: TemplateActionType.UPDATE_TEMPLATE,
                     payload: templateBuilderObject,
                 });
 
@@ -103,7 +103,7 @@ export const updateTemplate = (
             }
 
             dispatch({
-                type: TemplateActionType.USER_UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD,
+                type: TemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD,
                 payload: projectTemplateArray,
             });
 
@@ -131,7 +131,7 @@ export const deleteTemplate = (
             );
 
             dispatch({
-                type: TemplateActionType.USER_DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD,
+                type: TemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -154,7 +154,7 @@ export const queryTemplate = (templateId: string) => {
             let response = await api.get(`/template/query/${templateId}`);
 
             dispatch({
-                type: TemplateActionType.USER_QUERY_TEMPLATE,
+                type: TemplateActionType.QUERY_TEMPLATE,
                 payload: response.data.template,
             });
 
@@ -172,7 +172,7 @@ export const queryTemplate = (templateId: string) => {
 export const clearTemplate = () => {
     return async (dispatch: Dispatch<any>) => {
         dispatch({
-            type: TemplateActionType.USER_CLEAR_TEMPLATE,
+            type: TemplateActionType.CLEAR_TEMPLATE,
             payload: {},
         });
     };
@@ -193,7 +193,7 @@ export const addToolbarBlock = (
             dispatch(invokeLoaderState(loaderTypes.ADD_BLOCK_MODAL));
 
             dispatch({
-                type: TemplateActionType.USER_ADD_TOOLBAR_BLOCK,
+                type: TemplateActionType.ADD_TOOLBAR_BLOCK,
                 payload: response.data.template,
             });
 
@@ -219,7 +219,7 @@ export const deleteToolbarBlock = (
             );
 
             dispatch({
-                type: TemplateActionType.USER_DELETE_TOOLBAR_BLOCK,
+                type: TemplateActionType.DELETE_TOOLBAR_BLOCK,
                 payload: response.data.template,
             });
         } catch (err) {
@@ -240,7 +240,7 @@ export const addEditingSurfaceBlock = (
             );
 
             dispatch({
-                type: TemplateActionType.USER_ADD_EDITING_SURFACE_BLOCK,
+                type: TemplateActionType.ADD_EDITING_SURFACE_BLOCK,
                 payload: response.data.template,
             });
         } catch (err) {
@@ -262,7 +262,7 @@ export const deleteEditingSurfaceBlock = (
             );
 
             dispatch({
-                type: TemplateActionType.USER_DELETE_EDITING_SURFACE_BLOCK,
+                type: TemplateActionType.DELETE_EDITING_SURFACE_BLOCK,
                 payload: response.data.template,
             });
         } catch (err) {
@@ -273,22 +273,40 @@ export const deleteEditingSurfaceBlock = (
 
 export const reorderEditingSurfaceColumn = (
     templateId: string,
-    weekId: string,
+    weekId: string | undefined,
     newColumnOrder: any[]
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            let response = await api.post(
+            const response = await api.post(
                 `/template/surface/reorder/${templateId}`,
                 { reorderDetails: { weekId, newColumnOrder } }
             );
 
             dispatch({
-                type: TemplateActionType.USER_REORDER_EDITING_SURFACE_COLUMN,
+                type: TemplateActionType.REORDER_EDITING_SURFACE_COLUMN,
                 payload: response.data.template,
             });
         } catch (err) {
-            console.warn(err);
+            console.error(err);
+        }
+    };
+};
+
+export const renameEditingSurfaceColumn = (
+    templateId: string,
+    weekId: string | undefined,
+    oldColumnName: string,
+    newColumnName: string
+): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+            // dispatch({
+            //     type: TemplateActionType.RENAME_EDITING_SURFACE_COLUMN,
+            //     payload: response.data.template,
+            // });
+        } catch (err) {
+            console.error(err);
         }
     };
 };
