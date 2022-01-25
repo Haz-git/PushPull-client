@@ -107,7 +107,7 @@ const DateColumn = ({
         }
     };
 
-    const composeColumnHeader = () => {
+    const composeHeaderName = () => {
         if (!newColumnName.includes(`%SECRET%ID%`)) {
             return newColumnName;
         }
@@ -119,7 +119,7 @@ const DateColumn = ({
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={composeColumnHeader()} />
+                    <Text text={composeHeaderName()} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
