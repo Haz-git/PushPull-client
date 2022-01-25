@@ -279,7 +279,7 @@ export const reorderEditingSurfaceColumn = (
     return async (dispatch: Dispatch<any>) => {
         try {
             const response = await api.post(
-                `/template/surface/reorder/${templateId}`,
+                `/template/surface/reorder-column/${templateId}`,
                 { reorderDetails: { weekId, newColumnOrder } }
             );
 
@@ -301,10 +301,21 @@ export const renameEditingSurfaceColumn = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            // dispatch({
-            //     type: TemplateActionType.RENAME_EDITING_SURFACE_COLUMN,
-            //     payload: response.data.template,
-            // });
+            const response = await api.post(
+                `/template/surface/rename-column/${templateId}`,
+                {
+                    renameDetails: {
+                        weekId,
+                        oldColumnName,
+                        newColumnName,
+                    },
+                }
+            );
+
+            dispatch({
+                type: TemplateActionType.RENAME_EDITING_SURFACE_COLUMN,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.error(err);
         }

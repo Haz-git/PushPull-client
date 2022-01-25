@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 //Redux:
-import { useDispatch } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { renameEditingSurfaceColumn } from '../../../redux/templates/templateActions';
 
 //Components:
@@ -62,12 +62,22 @@ const DateColumn = ({
     elements,
     columnIndex,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+    const template = useSelector((state: RootStateOrAny) => state?.template);
+
     const [newColumnName, setNewColumnName] = useState(prefix);
     const [isEditModeOn, setIsEditModeOn] = useState(false);
 
     const inputRef = useClickOutside(() => {
         if (newColumnName !== '' && newColumnName !== prefix) {
-            console.log('Dispatch here.');
+            dispatch(
+                renameEditingSurfaceColumn(
+                    template.id,
+                    template.templateEditingSurfaceBlocks[0]['weekId'],
+                    prefix,
+                    newColumnName.concat(`%SECRET%ID%${uuid()}`)
+                )
+            );
         }
 
         setIsEditModeOn(false);
@@ -85,16 +95,31 @@ const DateColumn = ({
             newColumnName !== '' &&
             newColumnName !== prefix
         ) {
-            console.log('Dispatch here.');
+            dispatch(
+                renameEditingSurfaceColumn(
+                    template.id,
+                    template.templateEditingSurfaceBlocks[0]['weekId'],
+                    prefix,
+                    newColumnName.concat(`%SECRET%ID%${uuid()}`)
+                )
+            );
+            setIsEditModeOn(false);
         }
-        setIsEditModeOn(false);
+    };
+
+    const composeColumnHeader = () => {
+        if (!newColumnName.includes(`%SECRET%ID%`)) {
+            return newColumnName;
+        }
+
+        return newColumnName.substring(0, newColumnName.indexOf(`%SECRET%ID%`));
     };
 
     const renderInputFieldOnEdit = (): JSX.Element => {
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={newColumnName} />
+                    <Text text={composeColumnHeader()} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
