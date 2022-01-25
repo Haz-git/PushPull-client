@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 //Redux:
-import { useDispatch } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { renameEditingSurfaceColumn } from '../../../redux/templates/templateActions';
 
 //Components:
@@ -62,6 +62,10 @@ const DateColumn = ({
     elements,
     columnIndex,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+    const template = useSelector((state: RootStateOrAny) => state?.template);
+    // console.log(template);
+
     const [newColumnName, setNewColumnName] = useState(prefix);
     const [isEditModeOn, setIsEditModeOn] = useState(false);
 
@@ -85,9 +89,16 @@ const DateColumn = ({
             newColumnName !== '' &&
             newColumnName !== prefix
         ) {
-            console.log('Dispatch here.');
+            dispatch(
+                renameEditingSurfaceColumn(
+                    template.id,
+                    template.templateEditingSurfaceBlocks[0]['weekId'],
+                    prefix,
+                    newColumnName.concat(`%SECRET%ID%${uuid()}`)
+                )
+            );
+            setIsEditModeOn(false);
         }
-        setIsEditModeOn(false);
     };
 
     const renderInputFieldOnEdit = (): JSX.Element => {
