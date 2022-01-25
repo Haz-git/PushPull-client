@@ -8,6 +8,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 //Components:
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 import DateColumn from './DateColumn';
+import { SheetsFooter } from './SheetsFooter';
 
 //Styles:
 import styled from 'styled-components';
@@ -88,6 +89,7 @@ const EditingSurface = forwardRef(
                         ))}
                     </ListGridContainer>
                 </GridContainer>
+                <SheetsFooter />
             </MainContainer>
         );
     }
