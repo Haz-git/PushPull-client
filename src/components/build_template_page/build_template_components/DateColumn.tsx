@@ -65,7 +65,17 @@ const DateColumn = ({
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
 
-    const [newColumnName, setNewColumnName] = useState(prefix);
+    const composeHeaderName = (prefixString: string): string => {
+        if (!prefixString.includes(`%SECRET%ID%`)) {
+            return prefixString;
+        }
+
+        return prefixString.substring(0, prefixString.indexOf(`%SECRET%ID%`));
+    };
+
+    const [newColumnName, setNewColumnName] = useState(
+        composeHeaderName(prefix)
+    );
     const [isEditModeOn, setIsEditModeOn] = useState(false);
 
     const inputRef = useClickOutside(() => {
@@ -107,19 +117,11 @@ const DateColumn = ({
         }
     };
 
-    const composeHeaderName = () => {
-        if (!newColumnName.includes(`%SECRET%ID%`)) {
-            return newColumnName;
-        }
-
-        return newColumnName.substring(0, newColumnName.indexOf(`%SECRET%ID%`));
-    };
-
     const renderInputFieldOnEdit = (): JSX.Element => {
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={composeHeaderName()} />
+                    <Text text={composeHeaderName(newColumnName)} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
