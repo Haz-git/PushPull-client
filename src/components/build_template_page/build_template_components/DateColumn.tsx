@@ -64,14 +64,20 @@ const DateColumn = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
-    // console.log(template);
 
     const [newColumnName, setNewColumnName] = useState(prefix);
     const [isEditModeOn, setIsEditModeOn] = useState(false);
 
     const inputRef = useClickOutside(() => {
         if (newColumnName !== '' && newColumnName !== prefix) {
-            console.log('Dispatch here.');
+            dispatch(
+                renameEditingSurfaceColumn(
+                    template.id,
+                    template.templateEditingSurfaceBlocks[0]['weekId'],
+                    prefix,
+                    newColumnName.concat(`%SECRET%ID%${uuid()}`)
+                )
+            );
         }
 
         setIsEditModeOn(false);
@@ -101,11 +107,19 @@ const DateColumn = ({
         }
     };
 
+    const composeColumnHeader = () => {
+        if (!newColumnName.includes(`%SECRET%ID%`)) {
+            return newColumnName;
+        }
+
+        return newColumnName.substring(0, newColumnName.indexOf(`%SECRET%ID%`));
+    };
+
     const renderInputFieldOnEdit = (): JSX.Element => {
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={newColumnName} />
+                    <Text text={composeColumnHeader()} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
