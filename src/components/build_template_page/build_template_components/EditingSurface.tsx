@@ -14,8 +14,9 @@ import { SheetsFooter } from './SheetsFooter';
 import styled from 'styled-components';
 
 const MainContainer = styled.section<IMainContainerProps>`
+    position: relative;
     width: ${({ width }) => `${width - 274}px`};
-    height: ${({ height }) => `${height}px`};
+    /* height: ${({ height }) => `${height}px`}; */
     background: #ffffff;
 
     @media ${deviceMin.mobileS} {
@@ -49,7 +50,7 @@ const ListGridContainer = styled.div<IListGridContainer>`
     display: grid;
     grid-template-columns: repeat(7, minmax(auto, 20rem));
     width: 100%;
-    height: ${(props) => `${props.height + 32}px`};
+    /* height: ${(props) => `${props.height + 32}px`}; */
 `;
 
 //Interfaces:

@@ -13,6 +13,7 @@ import Text from '../../general_components/Text';
 import { v4 as uuid } from 'uuid';
 import { TextInput } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -64,6 +65,7 @@ const DateColumn = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
+    const { height } = useWindowDimensions();
 
     const composeHeaderName = (prefixString: string): string => {
         if (!prefixString.includes(`%SECRET%ID%`)) {
@@ -161,9 +163,11 @@ const DateColumn = ({
 
     const getListStyle = (isDraggingOver: any) => ({
         background: isDraggingOver ? '#ececec' : '#ffffff',
-        height: '100%',
+        height: `100vh`,
         borderRadius: '.3rem',
         width: '100%',
+        overflowY: 'scroll',
+        overflowX: 'visible',
     });
 
     return (
