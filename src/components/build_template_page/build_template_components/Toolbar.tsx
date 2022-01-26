@@ -81,6 +81,13 @@ const MainContainer = styled.section`
         width: 16rem;
         max-width: 16rem;
     }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 `;
 
 const LogoContainer = styled.div`

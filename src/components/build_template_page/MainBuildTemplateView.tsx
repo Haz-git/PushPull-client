@@ -38,8 +38,7 @@ const EditingSurfaceGridWrapper = styled.div`
     @media ${deviceMin.laptop} {
         height: 100%;
         display: grid;
-        grid-template-columns: 12rem auto;
-        padding: 0rem 0rem 2rem 0rem;
+        grid-template-columns: 15rem auto;
     }
 
     @media ${deviceMin.laptopL} {

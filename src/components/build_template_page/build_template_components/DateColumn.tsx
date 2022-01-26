@@ -13,6 +13,7 @@ import Text from '../../general_components/Text';
 import { v4 as uuid } from 'uuid';
 import { TextInput } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -45,11 +46,36 @@ const HeaderDivider = styled.div`
 `;
 
 const DroppableStyles = styled.div`
-    padding: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 1rem;
     background: #ffffff;
     border-right: 1px solid #ebe6fb;
     border-left: 1px solid #ebe6fb;
 `;
+
+const BlockContainer = styled.div<IBlockContainer>`
+    background: ${({ isDraggingOver }) =>
+        isDraggingOver ? '#ececec' : '#ffffff'};
+    height: 100%;
+    min-height: ${({ height }) => `${height - 57}px`};
+    border-radius: 0.3rem;
+    width: 100%;
+    padding-bottom: 2rem;
+    // overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+`;
+
+interface IBlockContainer {
+    isDraggingOver: any;
+    height: number;
+}
 
 interface IComponentProps {
     prefix: any;
@@ -64,8 +90,19 @@ const DateColumn = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
+    const { height } = useWindowDimensions();
 
-    const [newColumnName, setNewColumnName] = useState(prefix);
+    const composeHeaderName = (prefixString: string): string => {
+        if (!prefixString.includes(`%SECRET%ID%`)) {
+            return prefixString;
+        }
+
+        return prefixString.substring(0, prefixString.indexOf(`%SECRET%ID%`));
+    };
+
+    const [newColumnName, setNewColumnName] = useState(
+        composeHeaderName(prefix)
+    );
     const [isEditModeOn, setIsEditModeOn] = useState(false);
 
     const inputRef = useClickOutside(() => {
@@ -107,19 +144,11 @@ const DateColumn = ({
         }
     };
 
-    const composeColumnHeader = () => {
-        if (!newColumnName.includes(`%SECRET%ID%`)) {
-            return newColumnName;
-        }
-
-        return newColumnName.substring(0, newColumnName.indexOf(`%SECRET%ID%`));
-    };
-
     const renderInputFieldOnEdit = (): JSX.Element => {
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={composeColumnHeader()} />
+                    <Text text={composeHeaderName(newColumnName)} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
@@ -157,13 +186,6 @@ const DateColumn = ({
         );
     };
 
-    const getListStyle = (isDraggingOver: any) => ({
-        background: isDraggingOver ? '#ececec' : '#ffffff',
-        height: '100%',
-        borderRadius: '.3rem',
-        width: '100%',
-    });
-
     return (
         <Draggable draggableId={`${prefix}`} index={columnIndex}>
             {(provided) => (
@@ -180,10 +202,11 @@ const DateColumn = ({
                         type={`EXERCISE_BLOCK`}
                     >
                         {(provided: any, snapshot: any) => (
-                            <div
+                            <BlockContainer
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
-                                style={getListStyle(snapshot.isDraggingOver)}
+                                isDraggingOver={snapshot.isDraggingOver}
+                                height={height}
                             >
                                 {elements?.map((item: any, index: any) => (
                                     <BlockTypeExercise
@@ -197,7 +220,7 @@ const DateColumn = ({
                                     />
                                 ))}
                                 {provided.placeholder}
-                            </div>
+                            </BlockContainer>
                         )}
                     </Droppable>
                 </DroppableStyles>
