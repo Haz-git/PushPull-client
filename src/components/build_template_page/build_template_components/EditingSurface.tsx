@@ -13,7 +13,7 @@ import { SheetsFooter } from './SheetsFooter';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section<IMainContainerProps>`
+const MainContainer = styled.section`
     position: relative;
     background: #ffffff;
 
@@ -44,22 +44,13 @@ const MainContainer = styled.section<IMainContainerProps>`
 
 const GridContainer = styled.div``;
 
-const ListGridContainer = styled.div<IListGridContainer>`
+const ListGridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(7, minmax(12rem, 1fr));
     width: 100%;
 `;
 
 //Interfaces:
-
-interface IListGridContainer {
-    height: number;
-}
-
-interface IMainContainerProps {
-    height: number;
-    width: number;
-}
 
 interface IComponentProps {
     lists: any;
@@ -74,9 +65,9 @@ const EditingSurface = forwardRef(
         const { width, height } = useWindowDimensions();
 
         return (
-            <MainContainer height={height} width={width} ref={ref}>
+            <MainContainer ref={ref}>
                 <GridContainer>
-                    <ListGridContainer height={height}>
+                    <ListGridContainer>
                         {lists.map((listKey: any, index: any) => (
                             <DateColumn
                                 elements={elements[listKey]}
