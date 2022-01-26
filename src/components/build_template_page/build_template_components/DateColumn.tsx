@@ -46,11 +46,36 @@ const HeaderDivider = styled.div`
 `;
 
 const DroppableStyles = styled.div`
-    padding: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 1rem;
     background: #ffffff;
     border-right: 1px solid #ebe6fb;
     border-left: 1px solid #ebe6fb;
 `;
+
+const BlockContainer = styled.div<IBlockContainer>`
+    background: ${({ isDraggingOver }) =>
+        isDraggingOver ? '#ececec' : '#ffffff'};
+    height: 100%;
+    min-height: ${({ height }) => `${height - 57}px`};
+    border-radius: 0.3rem;
+    width: 100%;
+    padding-bottom: 2rem;
+    // overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+`;
+
+interface IBlockContainer {
+    isDraggingOver: any;
+    height: number;
+}
 
 interface IComponentProps {
     prefix: any;
@@ -161,15 +186,6 @@ const DateColumn = ({
         );
     };
 
-    const getListStyle = (isDraggingOver: any) => ({
-        background: isDraggingOver ? '#ececec' : '#ffffff',
-        height: `100vh`,
-        borderRadius: '.3rem',
-        width: '100%',
-        overflowY: 'scroll',
-        overflowX: 'visible',
-    });
-
     return (
         <Draggable draggableId={`${prefix}`} index={columnIndex}>
             {(provided) => (
@@ -186,10 +202,11 @@ const DateColumn = ({
                         type={`EXERCISE_BLOCK`}
                     >
                         {(provided: any, snapshot: any) => (
-                            <div
+                            <BlockContainer
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
-                                style={getListStyle(snapshot.isDraggingOver)}
+                                isDraggingOver={snapshot.isDraggingOver}
+                                height={height}
                             >
                                 {elements?.map((item: any, index: any) => (
                                     <BlockTypeExercise
@@ -203,7 +220,7 @@ const DateColumn = ({
                                     />
                                 ))}
                                 {provided.placeholder}
-                            </div>
+                            </BlockContainer>
                         )}
                     </Droppable>
                 </DroppableStyles>
