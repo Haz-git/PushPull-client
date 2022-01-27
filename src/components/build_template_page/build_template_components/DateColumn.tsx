@@ -50,8 +50,9 @@ const DroppableStyles = styled.div`
     margin: 0 auto;
     padding: 1rem 1rem;
     background: #ffffff;
-    border-right: 1px solid #ebe6fb;
-    border-left: 1px solid #ebe6fb;
+    outline: 1px solid #d6d6d6;
+    margin-top: 1px;
+    margin-left: 1px;
 `;
 
 const BlockContainer = styled.div<IBlockContainer>`
