@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Components:
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import LoadProgress from '../nprogress/LoadProgress';
 import Toolbar from './build_template_components/Toolbar';
 import EditingSurface from './build_template_components/EditingSurface';
@@ -36,13 +36,13 @@ const EditingSurfaceGridWrapper = styled.div`
     }
 
     @media ${deviceMin.laptop} {
-        height: 100%;
         display: grid;
-        grid-template-columns: 15rem auto;
+        height: 100%;
+        grid-template-columns: 14rem auto;
     }
 
     @media ${deviceMin.laptopL} {
-        grid-template-columns: 16rem auto;
+        grid-template-columns: 14rem auto;
     }
 `;
 

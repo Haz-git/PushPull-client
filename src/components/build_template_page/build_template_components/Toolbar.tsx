@@ -72,16 +72,6 @@ const MainContainer = styled.section`
         max-width: 14rem;
     }
 
-    @media ${deviceMin.laptop} {
-        width: 15rem;
-        max-width: 15rem;
-    }
-
-    @media ${deviceMin.laptopL} {
-        width: 16rem;
-        max-width: 16rem;
-    }
-
     &::-webkit-scrollbar {
         display: none;
     }

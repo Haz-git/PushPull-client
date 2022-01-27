@@ -13,9 +13,11 @@ import { SheetsFooter } from './SheetsFooter';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section`
+const MainContainer = styled.section<IMainContainerProps>`
+    width: ${({ width }) => `${width - 225}px`};
     position: relative;
     background: #ffffff;
+    margin-bottom: 2.5rem;
 
     @media ${deviceMin.mobileS} {
         margin-left: 11rem;
@@ -32,25 +34,21 @@ const MainContainer = styled.section`
     @media ${deviceMin.browserSm} {
         margin-left: 14rem;
     }
-
-    @media ${deviceMin.laptop} {
-        margin-left: 15rem;
-    }
-
-    @media ${deviceMin.laptopL} {
-        margin-left: 16rem;
-    }
 `;
 
 const GridContainer = styled.div``;
 
 const ListGridContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(7, minmax(12rem, 1fr));
+    grid-template-columns: repeat(7, minmax(10rem, 1fr));
     width: 100%;
 `;
 
 //Interfaces:
+
+interface IMainContainerProps {
+    width: number;
+}
 
 interface IComponentProps {
     lists: any;
@@ -62,10 +60,10 @@ const EditingSurface = forwardRef(
         const selectedBlock = useSelector(
             (state: RootStateOrAny) => state?.toolbarSelectedBlock
         );
-        const { width, height } = useWindowDimensions();
+        const { width } = useWindowDimensions();
 
         return (
-            <MainContainer ref={ref}>
+            <MainContainer ref={ref} width={width}>
                 <GridContainer>
                     <ListGridContainer>
                         {lists.map((listKey: any, index: any) => (
