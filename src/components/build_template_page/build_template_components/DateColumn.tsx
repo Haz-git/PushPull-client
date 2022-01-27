@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 //Redux:
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
@@ -50,8 +50,9 @@ const DroppableStyles = styled.div`
     margin: 0 auto;
     padding: 1rem 1rem;
     background: #ffffff;
-    border-right: 1px solid #ebe6fb;
-    border-left: 1px solid #ebe6fb;
+    outline: 1px solid #d6d6d6;
+    margin-top: 1px;
+    margin-left: 1px;
 `;
 
 const BlockContainer = styled.div<IBlockContainer>`
@@ -62,7 +63,6 @@ const BlockContainer = styled.div<IBlockContainer>`
     border-radius: 0.3rem;
     width: 100%;
     padding-bottom: 2rem;
-    // overflow-y: scroll;
 
     &::-webkit-scrollbar {
         display: none;
@@ -103,6 +103,13 @@ const DateColumn = ({
     const [newColumnName, setNewColumnName] = useState(
         composeHeaderName(prefix)
     );
+
+    //TODO: Not sure if using useMemo correctly here. Will go back to this..
+    const composedHeaderName = useMemo(
+        () => composeHeaderName(prefix),
+        [prefix]
+    );
+
     const [isEditModeOn, setIsEditModeOn] = useState(false);
 
     const inputRef = useClickOutside(() => {
@@ -148,7 +155,7 @@ const DateColumn = ({
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={composeHeaderName(newColumnName)} />
+                    <Text text={composedHeaderName} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
