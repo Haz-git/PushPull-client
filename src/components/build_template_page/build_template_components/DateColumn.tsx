@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 //Redux:
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
@@ -103,6 +103,13 @@ const DateColumn = ({
     const [newColumnName, setNewColumnName] = useState(
         composeHeaderName(prefix)
     );
+
+    //TODO: Not sure if using useMemo correctly here. Will go back to this..
+    const composedHeaderName = useMemo(
+        () => composeHeaderName(prefix),
+        [prefix]
+    );
+
     const [isEditModeOn, setIsEditModeOn] = useState(false);
 
     const inputRef = useClickOutside(() => {
@@ -148,7 +155,7 @@ const DateColumn = ({
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={composeHeaderName(newColumnName)} />
+                    <Text text={composedHeaderName} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
