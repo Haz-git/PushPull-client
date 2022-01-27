@@ -63,7 +63,6 @@ const BlockContainer = styled.div<IBlockContainer>`
     border-radius: 0.3rem;
     width: 100%;
     padding-bottom: 2rem;
-    // overflow-y: scroll;
 
     &::-webkit-scrollbar {
         display: none;
