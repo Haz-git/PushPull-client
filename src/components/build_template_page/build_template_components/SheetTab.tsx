@@ -19,6 +19,14 @@ const MainContainer = styled.button`
 
 //Interfaces:
 
-export const SheetTab = () => {
-    return <MainContainer>SHEET</MainContainer>;
+interface IComponentProps {
+    sheetId: string;
+    sheetName: string;
+}
+
+export const SheetTab = ({
+    sheetId,
+    sheetName,
+}: IComponentProps): JSX.Element => {
+    return <MainContainer>{sheetName}</MainContainer>;
 };
