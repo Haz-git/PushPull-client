@@ -51,6 +51,7 @@ const MainContainer = styled.section`
     text-align: left;
     overflow-y: scroll;
     z-index: 80;
+    border-right: 1px solid #ececec;
 
     @media ${deviceMin.mobileS} {
         width: 11rem;
