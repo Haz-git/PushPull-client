@@ -6,15 +6,16 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 //Components:
 import { SheetTab } from './SheetTab';
 import GeneralButton from '../../general_components/GeneralButton';
+import { Tooltip } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
 import { PlusLg } from '@styled-icons/bootstrap/PlusLg';
 
 const AddIcon = styled(PlusLg)`
-    color: #e07133;
-    height: 1.2rem;
-    width: 1.2rem;
+    color: #ffffff;
+    height: 1rem;
+    width: 1rem;
 `;
 
 const MainContainer = styled.div`
@@ -47,19 +48,28 @@ export const SheetsFooter = (): JSX.Element => {
         <MainContainer>
             <SheetContainer>
                 <AddSheetContainer>
-                    <GeneralButton
-                        height="2.5rem"
-                        borderRadius="0"
-                        hoverTransform="none"
-                        hoverShadow="none"
-                        buttonLabel=""
-                        buttonIconLeft={<AddIcon />}
-                        buttonBackground="#2c2c2c"
-                        leftIconMargin="0rem"
-                        rightIconMargin="0rem"
-                        margin="1px 1px 0px 0px"
-                        outline="1px solid #d6d6d6"
-                    />
+                    <Tooltip
+                        transition="fade"
+                        label="Add Sheet"
+                        color="dark"
+                        withArrow
+                    >
+                        <GeneralButton
+                            height="2.5rem"
+                            borderRadius="0"
+                            hoverTransform="none"
+                            hoverShadow="none"
+                            buttonLabel=""
+                            buttonIconLeft={<AddIcon />}
+                            buttonBackground="#2c2c2c"
+                            leftIconMargin="0rem"
+                            rightIconMargin="0rem"
+                            margin="1px 1px 0px 0px"
+                            outline="1px solid #d6d6d6"
+                            hoverColor="#464646"
+                            cursor="pointer"
+                        />
+                    </Tooltip>
                 </AddSheetContainer>
                 {sheets?.map((sheet: any) => (
                     <SheetTab
