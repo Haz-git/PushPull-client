@@ -28,6 +28,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     text-shadow: ${(props) => props.textShadow};
     transition: all 0.1s ease-in;
     height: ${(props) => props.height};
+    outline: ${(props) => props.outline};
 
     &:focus {
         outline: none;
@@ -78,6 +79,7 @@ interface IGeneralButtonProps {
     borderRight?: string;
     height?: string;
     borderRadius?: string;
+    outline?: string;
     type?: 'button' | 'submit' | 'reset';
 }
 
@@ -109,6 +111,7 @@ const GeneralButton = ({
     borderRight = 'none',
     height = 'auto',
     borderRadius = '0.2rem',
+    outline = 'none',
     type = 'submit',
 }: IGeneralButtonProps): JSX.Element => {
     const renderBtnLabel = () => {
@@ -141,6 +144,7 @@ const GeneralButton = ({
                 borderBottom={borderBottom}
                 borderLeft={borderLeft}
                 borderRight={borderRight}
+                outline={outline}
             >
                 <LeftIconContainer leftIconMargin={leftIconMargin}>
                     {buttonIconLeft && buttonIconLeft}
