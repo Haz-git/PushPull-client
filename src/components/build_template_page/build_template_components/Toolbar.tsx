@@ -51,6 +51,7 @@ const MainContainer = styled.section`
     text-align: left;
     overflow-y: scroll;
     z-index: 80;
+    border-right: 1px solid #ececec;
 
     @media ${deviceMin.mobileS} {
         width: 11rem;
@@ -184,6 +185,7 @@ const Toolbar = ({
                     width="100%"
                     buttonIconLeft={<ViewerInteractionsIcon />}
                     buttonBackground="transparent"
+                    border="1px solid #525252"
                     borderBottom="1px solid #525252"
                     borderTop="1px solid #525252"
                     disableShadow={true}
@@ -196,6 +198,7 @@ const Toolbar = ({
                     onClick={() => controlGlobalModal(true)}
                     width="100%"
                     buttonIconLeft={<SettingsIcon />}
+                    border="1px solid #525252"
                     buttonBackground="transparent"
                     borderBottom="1px solid #525252"
                     borderTop="1px solid #525252"
