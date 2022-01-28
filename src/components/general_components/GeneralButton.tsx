@@ -29,6 +29,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     transition: all 0.1s ease-in;
     height: ${(props) => props.height};
     outline: ${(props) => props.outline};
+    cursor: ${(props) => props.cursor};
 
     &:focus {
         outline: none;
@@ -80,6 +81,7 @@ interface IGeneralButtonProps {
     height?: string;
     borderRadius?: string;
     outline?: string;
+    cursor?: string;
     type?: 'button' | 'submit' | 'reset';
 }
 
@@ -112,6 +114,7 @@ const GeneralButton = ({
     height = 'auto',
     borderRadius = '0.2rem',
     outline = 'none',
+    cursor = 'default',
     type = 'submit',
 }: IGeneralButtonProps): JSX.Element => {
     const renderBtnLabel = () => {
@@ -145,6 +148,7 @@ const GeneralButton = ({
                 borderLeft={borderLeft}
                 borderRight={borderRight}
                 outline={outline}
+                cursor={cursor}
             >
                 <LeftIconContainer leftIconMargin={leftIconMargin}>
                     {buttonIconLeft && buttonIconLeft}
