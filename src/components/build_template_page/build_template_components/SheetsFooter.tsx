@@ -1,5 +1,8 @@
 import React from 'react';
 
+//Redux:
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+
 //Components:
 import { SheetTab } from './SheetTab';
 
@@ -25,14 +28,20 @@ const SheetContainer = styled.div`
 
 //Interfaces:
 
-export const SheetsFooter = () => {
+export const SheetsFooter = (): JSX.Element => {
+    const sheets = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
+    );
+
     return (
         <MainContainer>
             <SheetContainer>
-                <SheetTab />
-                <SheetTab />
-                <SheetTab />
-                <SheetTab />
+                {sheets?.map((sheet: any) => (
+                    <SheetTab
+                        sheetName={sheet.weekName}
+                        sheetId={sheet.weekId}
+                    />
+                ))}
             </SheetContainer>
         </MainContainer>
     );
