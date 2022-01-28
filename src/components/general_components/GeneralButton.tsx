@@ -6,11 +6,11 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: ${(props) => props.border};
     border-top: ${(props) => props.borderTop};
     border-bottom: ${(props) => props.borderBottom};
     border-left: ${(props) => props.borderLeft};
     border-right: ${(props) => props.borderRight};
+    border: ${(props) => props.border};
     margin: ${(props) => props.margin};
     background: ${(props) => props.buttonBackground};
     padding: ${(props) => props.padding};
