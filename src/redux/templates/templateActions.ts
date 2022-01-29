@@ -326,6 +326,14 @@ export const renameEditingSurfaceColumn = (
 export const addSheet = (templateId: string): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
+            const response = await api.post(
+                `/template/surface/add-sheet/${templateId}`
+            );
+
+            dispatch({
+                type: TemplateActionType.ADD_SHEET,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.error(err);
         }
