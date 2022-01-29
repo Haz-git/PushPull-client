@@ -2,6 +2,7 @@ import React from 'react';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
+import { addSheet } from '../../../redux/templates/templateActions';
 
 //Components:
 import { SheetTab } from './SheetTab';
@@ -40,9 +41,15 @@ const SheetContainer = styled.div`
 //Interfaces:
 
 export const SheetsFooter = (): JSX.Element => {
+    const dispatch = useDispatch();
+    const templateId = useSelector(
+        (state: RootStateOrAny) => state?.template?.id
+    );
     const sheets = useSelector(
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
+
+    console.log(templateId);
 
     return (
         <MainContainer>
@@ -68,6 +75,9 @@ export const SheetsFooter = (): JSX.Element => {
                             outline="1px solid #d6d6d6"
                             hoverColor="#464646"
                             cursor="pointer"
+                            onClick={() => {
+                                dispatch(addSheet(templateId));
+                            }}
                         />
                     </Tooltip>
                 </AddSheetContainer>
