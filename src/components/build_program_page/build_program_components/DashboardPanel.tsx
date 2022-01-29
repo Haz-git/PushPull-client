@@ -176,6 +176,7 @@ const DashboardPanel = ({
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
     );
+
     const query = useQuery();
     const projectUuid = query.get('uuid');
 
@@ -220,17 +221,21 @@ const DashboardPanel = ({
     const handleAddNewTemplate = () => {
         setIsTemplateBeingAdded(true);
         const templateUuid = uuid();
+        const sheetId = uuid();
         let templateDetails = {
             templateFileTitle: 'Untitled',
             id: templateUuid,
             projectId: projectUuid,
+            sheetId: sheetId,
         };
 
         dispatch(
             addTemplate((status: boolean) => {
                 setIsTemplateBeingAdded(status);
                 if (status !== true)
-                    historyObject.push(`/file/${templateUuid}`);
+                    historyObject.push(
+                        `/file/${templateUuid}?sheetId=${sheetId}`
+                    );
             }, templateDetails)
         );
     };
