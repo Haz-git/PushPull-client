@@ -135,6 +135,11 @@ const ProjectTemplates = ({
                 <MainContainer>
                     {templates.map((template: any) => (
                         <TemplateComponent
+                            templateSheetId={
+                                template.templateEditingSurfaceBlocks[0][
+                                    'sheetId'
+                                ]
+                            }
                             templateFileTitle={template.templateFileTitle}
                             templateSnapshot={template.templateSnapshot}
                             createdAt={template.createdAt}
