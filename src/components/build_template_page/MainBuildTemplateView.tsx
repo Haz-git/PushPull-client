@@ -123,7 +123,7 @@ const MainBuildTemplateView = ({
     const [toolbarColumns, setToolbarColumns] = useState(['Blocks']);
 
     //We'll manage the current week right here. For now, it's limited to 1 week.
-    const [weekId, setWeekId] = useState(undefined);
+    const [sheetId, setSheetId] = useState(undefined);
 
     //Elements for drag drop context:
     const [editingSurfaceElements, setEditingSurfaceElements] = useState(
@@ -133,10 +133,10 @@ const MainBuildTemplateView = ({
 
     useEffect(() => {
         if (editingSurfaceBlocks && toolbarBlocks) {
-            setEditingSurfaceColumns(editingSurfaceBlocks[0]['weekOrder']);
-            setEditingSurfaceElements(editingSurfaceBlocks[0]['weekContent']);
+            setEditingSurfaceColumns(editingSurfaceBlocks[0]['sheetOrder']);
+            setEditingSurfaceElements(editingSurfaceBlocks[0]['sheetContent']);
             setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
-            setWeekId(editingSurfaceBlocks[0]['weekId']);
+            setSheetId(editingSurfaceBlocks[0]['sheetId']);
         }
     }, [toolbarBlocks, editingSurfaceBlocks]);
 
@@ -213,7 +213,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceColumns(newColumnOrder);
 
             dispatch(
-                reorderEditingSurfaceColumn(fileUuid, weekId, newColumnOrder)
+                reorderEditingSurfaceColumn(fileUuid, sheetId, newColumnOrder)
             );
 
             return;
@@ -244,8 +244,8 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    weekId: weekId,
-                    weekContent: editingSurfaceList,
+                    sheetId: sheetId,
+                    sheetContent: editingSurfaceList,
                 })
             );
         } else {
@@ -266,8 +266,8 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    weekId: weekId,
-                    weekContent: editingSurfaceList,
+                    sheetId: sheetId,
+                    sheetContent: editingSurfaceList,
                 })
             );
         }

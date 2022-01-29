@@ -73,8 +73,8 @@ export const SheetsFooter = (): JSX.Element => {
                 </AddSheetContainer>
                 {sheets?.map((sheet: any) => (
                     <SheetTab
-                        sheetName={sheet.weekName}
-                        sheetId={sheet.weekId}
+                        sheetName={sheet.sheetName}
+                        sheetId={sheet.sheetId}
                     />
                 ))}
             </SheetContainer>
