@@ -107,6 +107,7 @@ interface MainContainerProps {
     isSelected: boolean;
 }
 interface IComponentProps {
+    templateSheetId: string;
     templateFileTitle: string;
     templateSnapshot: string | null;
     createdAt: string;
@@ -123,6 +124,7 @@ interface IComponentProps {
 }
 
 const TemplateComponent = ({
+    templateSheetId,
     templateFileTitle,
     templateSnapshot,
     createdAt,
@@ -187,7 +189,7 @@ const TemplateComponent = ({
         } else if (e.detail === 2) {
             //Highlight the entity:
             onSelectTemplate();
-            historyObject.push(`/file/${id}`);
+            historyObject.push(`/file/${id}?sheetId=${templateSheetId}`);
         }
     };
 

@@ -170,13 +170,14 @@ const DashboardPanel = ({
     toggleDeleteProjectModal,
     toggleDeleteTemplateModal,
 }: IDashboardPanel): JSX.Element => {
-    let { dashboardView } = useParams<{ dashboardView: string }>();
+    const { dashboardView } = useParams<{ dashboardView: string }>();
     const { width, height } = useWindowDimensions();
     const dispatch = useDispatch();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
     );
-    let query = useQuery();
+
+    const query = useQuery();
     const projectUuid = query.get('uuid');
 
     const [isTemplateBeingAdded, setIsTemplateBeingAdded] = useState(false);
@@ -220,17 +221,21 @@ const DashboardPanel = ({
     const handleAddNewTemplate = () => {
         setIsTemplateBeingAdded(true);
         const templateUuid = uuid();
+        const sheetId = uuid();
         let templateDetails = {
             templateFileTitle: 'Untitled',
             id: templateUuid,
             projectId: projectUuid,
+            sheetId: sheetId,
         };
 
         dispatch(
             addTemplate((status: boolean) => {
                 setIsTemplateBeingAdded(status);
                 if (status !== true)
-                    historyObject.push(`/file/${templateUuid}`);
+                    historyObject.push(
+                        `/file/${templateUuid}?sheetId=${sheetId}`
+                    );
             }, templateDetails)
         );
     };

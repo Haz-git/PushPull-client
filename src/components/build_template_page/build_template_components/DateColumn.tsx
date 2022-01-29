@@ -117,7 +117,7 @@ const DateColumn = ({
             dispatch(
                 renameEditingSurfaceColumn(
                     template.id,
-                    template.templateEditingSurfaceBlocks[0]['weekId'],
+                    template.templateEditingSurfaceBlocks[0]['sheetId'],
                     prefix,
                     newColumnName.concat(`%SECRET%ID%${uuid()}`)
                 )
@@ -142,7 +142,7 @@ const DateColumn = ({
             dispatch(
                 renameEditingSurfaceColumn(
                     template.id,
-                    template.templateEditingSurfaceBlocks[0]['weekId'],
+                    template.templateEditingSurfaceBlocks[0]['sheetId'],
                     prefix,
                     newColumnName.concat(`%SECRET%ID%${uuid()}`)
                 )

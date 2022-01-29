@@ -74,6 +74,21 @@ interface deleteToolbarBlock {
     payload?: any;
 }
 
+interface addSheet {
+    type: TemplateActionType.ADD_SHEET;
+    payload?: any;
+}
+
+interface updateSheet {
+    type: TemplateActionType.UPDATE_SHEET;
+    payload?: any;
+}
+
+interface deleteSheet {
+    type: TemplateActionType.DELETE_SHEET;
+    payload?: any;
+}
+
 export type TemplateAction =
     | findTemplateInProjectDashboard
     | addTemplateToProjectDashboard
@@ -89,4 +104,7 @@ export type TemplateAction =
     | updateEditingSurfaceBlock
     | updateToolbarBlock
     | deleteEditingSurfaceBlock
-    | deleteToolbarBlock;
+    | deleteToolbarBlock
+    | addSheet
+    | updateSheet
+    | deleteSheet;

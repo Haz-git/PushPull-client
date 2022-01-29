@@ -170,9 +170,9 @@ const ProjectPanel = ({
     toggleRecolorProjectModal,
     toggleDeleteProjectModal,
 }: IComponentProps): JSX.Element => {
-    let { dashboardView } = useParams<{ dashboardView: string }>();
-    let { width, height } = useWindowDimensions();
-    let query = useQuery();
+    const { dashboardView } = useParams<{ dashboardView: string }>();
+    const { width, height } = useWindowDimensions();
+    const query = useQuery();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
     );

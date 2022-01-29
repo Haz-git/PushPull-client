@@ -146,10 +146,10 @@ const BlockTypeExercise = ({
         (state: RootStateOrAny) => state?.template?.id
     );
 
-    //In the future, there should be a way to change view based on weekId. For now, it's limited to 1 week.
-    const weekId = useSelector(
+    //In the future, there should be a way to change view based on sheetId. For now, it's limited to 1 week.
+    const sheetId = useSelector(
         (state: RootStateOrAny) =>
-            state?.template?.templateEditingSurfaceBlocks[0].weekId
+            state?.template?.templateEditingSurfaceBlocks[0].sheetId
     );
 
     const { name, sets, reps } = blockDetails;
@@ -169,7 +169,7 @@ const BlockTypeExercise = ({
                 deleteEditingSurfaceBlock(
                     templateId,
                     blockId,
-                    weekId,
+                    sheetId,
                     columnPrefix
                 )
             );
