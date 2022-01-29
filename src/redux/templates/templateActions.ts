@@ -253,13 +253,13 @@ export const addEditingSurfaceBlock = (
 export const deleteEditingSurfaceBlock = (
     templateId: string,
     blockId: string,
-    weekId: string,
+    sheetId: string,
     columnPrefix: string | undefined
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
             let response = await api.delete(
-                `/template/surface/delete/${templateId}?blockId=${blockId}&weekId=${weekId}&columnPrefix=${columnPrefix}`
+                `/template/surface/delete/${templateId}?blockId=${blockId}&sheetId=${sheetId}&columnPrefix=${columnPrefix}`
             );
 
             dispatch({
@@ -274,14 +274,14 @@ export const deleteEditingSurfaceBlock = (
 
 export const reorderEditingSurfaceColumn = (
     templateId: string,
-    weekId: string | undefined,
+    sheetId: string | undefined,
     newColumnOrder: any[]
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
             const response = await api.post(
                 `/template/surface/reorder-column/${templateId}`,
-                { reorderDetails: { weekId, newColumnOrder } }
+                { reorderDetails: { sheetId, newColumnOrder } }
             );
 
             dispatch({
@@ -296,7 +296,7 @@ export const reorderEditingSurfaceColumn = (
 
 export const renameEditingSurfaceColumn = (
     templateId: string,
-    weekId: string | undefined,
+    sheetId: string | undefined,
     oldColumnName: string,
     newColumnName: string
 ): Function => {
@@ -306,7 +306,7 @@ export const renameEditingSurfaceColumn = (
                 `/template/surface/rename-column/${templateId}`,
                 {
                     renameDetails: {
-                        weekId,
+                        sheetId,
                         oldColumnName,
                         newColumnName,
                     },

@@ -75,6 +75,7 @@ export const SheetsFooter = (): JSX.Element => {
                     <SheetTab
                         sheetName={sheet.sheetName}
                         sheetId={sheet.sheetId}
+                        key={sheet.sheetId}
                     />
                 ))}
             </SheetContainer>
