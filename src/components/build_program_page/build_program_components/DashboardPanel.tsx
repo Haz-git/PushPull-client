@@ -170,13 +170,13 @@ const DashboardPanel = ({
     toggleDeleteProjectModal,
     toggleDeleteTemplateModal,
 }: IDashboardPanel): JSX.Element => {
-    let { dashboardView } = useParams<{ dashboardView: string }>();
+    const { dashboardView } = useParams<{ dashboardView: string }>();
     const { width, height } = useWindowDimensions();
     const dispatch = useDispatch();
     const builderProjects = useSelector(
         (state: RootStateOrAny) => state?.builderProjects
     );
-    let query = useQuery();
+    const query = useQuery();
     const projectUuid = query.get('uuid');
 
     const [isTemplateBeingAdded, setIsTemplateBeingAdded] = useState(false);
