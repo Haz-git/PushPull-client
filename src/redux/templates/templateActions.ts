@@ -1,6 +1,7 @@
 import api from '../../api';
 import { Dispatch } from 'redux';
 import { TemplateAction } from './templateInterfaces';
+import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
 import { TemplateActionType } from './action-types';
 import { loaderTypes } from '../uiLoader/loader-types';
 
@@ -170,7 +171,7 @@ export const queryTemplate = (templateId: string) => {
 };
 
 export const clearTemplate = () => {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<TemplateAction>) => {
         dispatch({
             type: TemplateActionType.CLEAR_TEMPLATE,
             payload: {},
@@ -316,6 +317,33 @@ export const renameEditingSurfaceColumn = (
                 type: TemplateActionType.RENAME_EDITING_SURFACE_COLUMN,
                 payload: response.data.template,
             });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+};
+
+export const addSheet = (templateId: string): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+        } catch (err) {
+            console.error(err);
+        }
+    };
+};
+
+export const updateSheet = (templateId: string, sheetId: string): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+        } catch (err) {
+            console.error(err);
+        }
+    };
+};
+
+export const deleteSheet = (templateId: string, sheetId: string): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
         } catch (err) {
             console.error(err);
         }
