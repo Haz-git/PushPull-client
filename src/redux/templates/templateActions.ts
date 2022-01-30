@@ -274,10 +274,13 @@ export const deleteEditingSurfaceBlock = (
 
 export const reorderEditingSurfaceColumn = (
     templateId: string,
-    sheetId: string | undefined,
+    sheetId: string | undefined | null,
     newColumnOrder: any[]
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
+        if (!sheetId) {
+            throw new Error('sheet Id was not defined');
+        }
         try {
             const response = await api.post(
                 `/template/surface/reorder-column/${templateId}`,

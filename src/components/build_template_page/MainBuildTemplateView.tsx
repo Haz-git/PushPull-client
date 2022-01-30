@@ -11,6 +11,8 @@ import GeneralModal from '../general_components/GeneralModal';
 import AddBlockForm from './build_template_components/AddBlockForm';
 import { GlobalSettingsForm } from './build_template_components/GlobalSettingsForm';
 import { v4 as uuid } from 'uuid';
+import useQuery from '../../utils/hooks/useQuery';
+import historyObject from '../../utils/historyObject';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -23,6 +25,8 @@ import {
 //Styles:
 import styled from 'styled-components';
 import ViewerInteractionsForm from './build_template_components/ViewerInteractionsForm';
+import { useNotifications } from '@mantine/notifications';
+import { CancelIcon } from '../build_program_page/build_program_components/AddProjectForm';
 
 const MainContainer = styled.section``;
 
@@ -48,18 +52,16 @@ const EditingSurfaceGridWrapper = styled.div`
 
 //Helper functions:
 
-//Fake data gen:
-const getItems = (count: any, prefix: any) =>
-    Array.from({ length: count }, (v, k) => k).map((k) => {
-        const randomId = uuid();
-        return {
-            id: `${randomId}`,
-            prefix,
-            content: `CONTENT = ${(Math.random() + 1)
-                .toString(36)
-                .substring(7)}`,
-        };
-    });
+const findSheetContent = (
+    arr: any[],
+    sheetId: string | undefined | null
+): any => {
+    if (!arr || !sheetId) {
+        return;
+    }
+
+    return arr.find((item) => item.sheetId === sheetId);
+};
 
 const generateLists = (list: any, blocks: any) =>
     //getItems(10, listKey) <- Pass this into empty array below to provide dummy data.
@@ -86,7 +88,10 @@ const MainBuildTemplateView = ({
         params: { fileUuid },
     },
 }: IComponentProps): JSX.Element => {
+    const query = useQuery();
+    const currSheetId = query.get('sheetId');
     const dispatch = useDispatch();
+    const notifications = useNotifications();
     useEffect(() => {
         dispatch(queryTemplate(fileUuid));
     }, []);
@@ -122,9 +127,6 @@ const MainBuildTemplateView = ({
 
     const [toolbarColumns, setToolbarColumns] = useState(['Blocks']);
 
-    //We'll manage the current week right here. For now, it's limited to 1 week.
-    const [sheetId, setSheetId] = useState(undefined);
-
     //Elements for drag drop context:
     const [editingSurfaceElements, setEditingSurfaceElements] = useState(
         {}
@@ -133,12 +135,31 @@ const MainBuildTemplateView = ({
 
     useEffect(() => {
         if (editingSurfaceBlocks && toolbarBlocks) {
-            setEditingSurfaceColumns(editingSurfaceBlocks[0]['sheetOrder']);
-            setEditingSurfaceElements(editingSurfaceBlocks[0]['sheetContent']);
+            const currentSheet = findSheetContent(
+                editingSurfaceBlocks,
+                currSheetId
+            );
+
+            if (!currentSheet) {
+                historyObject.push(
+                    `/file/${fileUuid}?sheetId=${editingSurfaceBlocks[0]['sheetId']}`
+                );
+
+                notifications.showNotification({
+                    title: 'Your sheet is missing or has been deleted.',
+                    message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+                    color: 'red',
+                    autoClose: 10000,
+                    icon: <CancelIcon />,
+                });
+                return;
+            }
+
+            setEditingSurfaceColumns(currentSheet.sheetOrder);
+            setEditingSurfaceElements(currentSheet.sheetContent);
             setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
-            setSheetId(editingSurfaceBlocks[0]['sheetId']);
         }
-    }, [toolbarBlocks, editingSurfaceBlocks]);
+    }, [toolbarBlocks, editingSurfaceBlocks, currSheetId]);
 
     // Modal control for Viewer interactions:
     const [openViewerInteractionsModal, setOpenViewerInteractionsModal] =
@@ -213,7 +234,11 @@ const MainBuildTemplateView = ({
             setEditingSurfaceColumns(newColumnOrder);
 
             dispatch(
-                reorderEditingSurfaceColumn(fileUuid, sheetId, newColumnOrder)
+                reorderEditingSurfaceColumn(
+                    fileUuid,
+                    currSheetId,
+                    newColumnOrder
+                )
             );
 
             return;
@@ -244,7 +269,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    sheetId: sheetId,
+                    sheetId: currSheetId,
                     sheetContent: editingSurfaceList,
                 })
             );
@@ -266,7 +291,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    sheetId: sheetId,
+                    sheetId: currSheetId,
                     sheetContent: editingSurfaceList,
                 })
             );
