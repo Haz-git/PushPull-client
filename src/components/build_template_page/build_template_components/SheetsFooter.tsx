@@ -49,8 +49,6 @@ export const SheetsFooter = (): JSX.Element => {
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
-    console.log(templateId);
-
     return (
         <MainContainer>
             <SheetContainer>
