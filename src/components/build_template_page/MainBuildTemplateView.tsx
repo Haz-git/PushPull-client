@@ -12,6 +12,7 @@ import AddBlockForm from './build_template_components/AddBlockForm';
 import { GlobalSettingsForm } from './build_template_components/GlobalSettingsForm';
 import { v4 as uuid } from 'uuid';
 import useQuery from '../../utils/hooks/useQuery';
+import historyObject from '../../utils/historyObject';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -24,6 +25,8 @@ import {
 //Styles:
 import styled from 'styled-components';
 import ViewerInteractionsForm from './build_template_components/ViewerInteractionsForm';
+import { useNotifications } from '@mantine/notifications';
+import { CancelIcon } from '../build_program_page/build_program_components/AddProjectForm';
 
 const MainContainer = styled.section``;
 
@@ -88,6 +91,7 @@ const MainBuildTemplateView = ({
     const query = useQuery();
     const currSheetId = query.get('sheetId');
     const dispatch = useDispatch();
+    const notifications = useNotifications();
     useEffect(() => {
         dispatch(queryTemplate(fileUuid));
     }, []);
@@ -135,6 +139,21 @@ const MainBuildTemplateView = ({
                 editingSurfaceBlocks,
                 currSheetId
             );
+
+            if (!currentSheet) {
+                historyObject.push(
+                    `/file/${fileUuid}?sheetId=${editingSurfaceBlocks[0]['sheetId']}`
+                );
+
+                notifications.showNotification({
+                    title: 'Your sheet is missing or has been deleted.',
+                    message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+                    color: 'red',
+                    autoClose: 10000,
+                    icon: <CancelIcon />,
+                });
+                return;
+            }
 
             setEditingSurfaceColumns(currentSheet.sheetOrder);
             setEditingSurfaceElements(currentSheet.sheetContent);
