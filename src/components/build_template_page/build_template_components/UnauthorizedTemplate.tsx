@@ -39,7 +39,7 @@ const UnauthorizedTemplate = () => {
                 <Text
                     text="Sorry, You Do Not Have Access to This Template!"
                     textColor="#ffffff"
-                    fontSize="1.25rem"
+                    fontSize="1.1rem"
                 />
                 <GeneralButton
                     buttonLabel="Return To Dashboard"
