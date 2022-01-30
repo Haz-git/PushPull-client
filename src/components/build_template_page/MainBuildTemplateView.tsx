@@ -13,6 +13,7 @@ import { GlobalSettingsForm } from './build_template_components/GlobalSettingsFo
 import { v4 as uuid } from 'uuid';
 import useQuery from '../../utils/hooks/useQuery';
 import historyObject from '../../utils/historyObject';
+import UnauthorizedTemplate from './build_template_components/UnauthorizedTemplate';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -310,7 +311,7 @@ const MainBuildTemplateView = ({
 
     const renderTemplateView = () => {
         if (isEmptyObj(template)) {
-            return <>Unauthorized</>;
+            return <UnauthorizedTemplate />;
         }
 
         return (
