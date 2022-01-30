@@ -83,6 +83,7 @@ export const SheetsFooter = (): JSX.Element => {
                     <SheetTab
                         sheetName={sheet.sheetName}
                         sheetId={sheet.sheetId}
+                        templateId={templateId}
                         key={sheet.sheetId}
                     />
                 ))}
