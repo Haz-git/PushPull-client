@@ -19,6 +19,7 @@ const MainText = styled.p<IComponentProps>`
         props.truncateWidth === '100%' ? 'clip' : 'ellipsis'};
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    text-shadow: ${(props) => props.textShadow};
 `;
 
 //Interfaces:
@@ -31,6 +32,7 @@ interface IComponentProps {
     subText?: boolean;
     mainText?: boolean;
     truncateWidth?: string | undefined;
+    textShadow?: string;
 }
 
 const Text = ({
@@ -41,6 +43,7 @@ const Text = ({
     subText,
     mainText,
     truncateWidth = '100%',
+    textShadow = 'none',
 }: IComponentProps): JSX.Element => {
     const renderTextColor = () => {
         if (textColor) return textColor;
@@ -54,6 +57,7 @@ const Text = ({
             textColor={renderTextColor()}
             fontSize={fontSize}
             truncateWidth={truncateWidth}
+            textShadow={textShadow}
         >
             {text}
         </MainText>

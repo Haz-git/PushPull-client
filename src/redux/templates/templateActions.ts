@@ -152,7 +152,7 @@ export const queryTemplate = (templateId: string) => {
         try {
             dispatch(invokeLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
 
-            let response = await api.get(`/template/query/${templateId}`);
+            const response = await api.get(`/template/query/${templateId}`);
 
             dispatch({
                 type: TemplateActionType.QUERY_TEMPLATE,
@@ -165,6 +165,7 @@ export const queryTemplate = (templateId: string) => {
                 );
             }
         } catch (err) {
+            dispatch({ type: 'QUERY_TEMPLATE_ERROR', error: err });
             dispatch(disableLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
         }
     };

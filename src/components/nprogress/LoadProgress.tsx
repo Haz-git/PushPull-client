@@ -30,6 +30,7 @@ const ProgressContainer = styled.div`
     row-gap: 2rem;
     align-items: center;
     justify-content: center;
+    margin-bottom: 15%;
 `;
 
 const ProgressLogoContainer = styled.div`

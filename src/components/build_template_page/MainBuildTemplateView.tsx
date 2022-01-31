@@ -13,6 +13,7 @@ import { GlobalSettingsForm } from './build_template_components/GlobalSettingsFo
 import { v4 as uuid } from 'uuid';
 import useQuery from '../../utils/hooks/useQuery';
 import historyObject from '../../utils/historyObject';
+import UnauthorizedTemplate from './build_template_components/UnauthorizedTemplate';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -89,7 +90,7 @@ const MainBuildTemplateView = ({
     },
 }: IComponentProps): JSX.Element => {
     const query = useQuery();
-    const currSheetId = query.get('sheetId');
+    const currentSheetId = query.get('sheetId');
     const dispatch = useDispatch();
     const notifications = useNotifications();
     useEffect(() => {
@@ -104,6 +105,8 @@ const MainBuildTemplateView = ({
     const isAddBlockModalLoading = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.addBlockModal?.isLoading
     );
+
+    const error = useSelector((state: RootStateOrAny) => state?.errors);
 
     const toolbarBlocks = useSelector(
         (state: RootStateOrAny) => state?.template?.templateToolbarBlocks
@@ -137,7 +140,7 @@ const MainBuildTemplateView = ({
         if (editingSurfaceBlocks && toolbarBlocks) {
             const currentSheet = findSheetContent(
                 editingSurfaceBlocks,
-                currSheetId
+                currentSheetId
             );
 
             if (!currentSheet) {
@@ -159,7 +162,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(currentSheet.sheetContent);
             setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
         }
-    }, [toolbarBlocks, editingSurfaceBlocks, currSheetId]);
+    }, [toolbarBlocks, editingSurfaceBlocks, currentSheetId]);
 
     // Modal control for Viewer interactions:
     const [openViewerInteractionsModal, setOpenViewerInteractionsModal] =
@@ -236,7 +239,7 @@ const MainBuildTemplateView = ({
             dispatch(
                 reorderEditingSurfaceColumn(
                     fileUuid,
-                    currSheetId,
+                    currentSheetId,
                     newColumnOrder
                 )
             );
@@ -269,7 +272,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    sheetId: currSheetId,
+                    sheetId: currentSheetId,
                     sheetContent: editingSurfaceList,
                 })
             );
@@ -291,88 +294,100 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    sheetId: currSheetId,
+                    sheetId: currentSheetId,
                     sheetContent: editingSurfaceList,
                 })
             );
         }
     };
 
-    return (
-        <>
-            {isMainViewLoading === true ? (
-                <LoadProgress
-                    darkMode={true}
-                    isAnimating={true}
-                    loadingText="Generating Template..."
-                    minimum={50}
-                />
-            ) : (
-                <>
-                    <GeneralModal
-                        size="lg"
-                        closeOnClickOutside={false}
-                        title="Viewer Interactions Settings"
-                        openBoolean={openViewerInteractionsModal}
-                        closeFunc={() => setOpenViewerInteractionsModal(false)}
-                    >
-                        <ViewerInteractionsForm />
-                    </GeneralModal>
-                    <GeneralModal
-                        closeOnClickOutside={false}
-                        title="Template Global Settings"
-                        openBoolean={openGlobalModal}
-                        closeFunc={() => setOpenGlobalModal(false)}
-                        isLoading={isGlobalSettingsModalLoading}
-                    >
-                        <GlobalSettingsForm
-                            toggleGlobalSettingsModal={controlGlobalModal}
-                        />
-                    </GeneralModal>
-                    <GeneralModal
-                        closeOnClickOutside={false}
-                        title="Add New Block"
-                        openBoolean={openBlockModal}
-                        closeFunc={() => setOpenBlockModal(false)}
-                        isLoading={isAddBlockModalLoading}
-                    >
-                        <AddBlockForm
-                            closeModal={() => setOpenBlockModal(false)}
-                        />
-                    </GeneralModal>
-                    <MainContainer>
-                        <DragDropContext onDragEnd={onDragEnd}>
-                            <EditingSurfaceGridWrapper>
-                                <Toolbar
-                                    controlViewerInteractionsModal={
-                                        controlViewerInteractionsModal
-                                    }
-                                    controlBlockModal={controlBlockModal}
-                                    controlGlobalModal={controlGlobalModal}
-                                    lists={toolbarColumns}
-                                    elements={toolbarElements}
-                                />
-                                <Droppable
-                                    droppableId="editing-surface-columns"
-                                    direction="horizontal"
-                                    type="editing-surface-column"
-                                >
-                                    {(provided) => (
-                                        <EditingSurface
-                                            {...provided.droppableProps}
-                                            ref={provided.innerRef} //According to https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md, innerRef was replaced with ref via the React16 forwardRef API.
-                                            lists={editingSurfaceColumns}
-                                            elements={editingSurfaceElements}
-                                        />
-                                    )}
-                                </Droppable>
-                            </EditingSurfaceGridWrapper>
-                        </DragDropContext>
-                    </MainContainer>
-                </>
-            )}
-        </>
-    );
+    const renderTemplateView = () => {
+        if (error) {
+            return <UnauthorizedTemplate />;
+        }
+
+        return (
+            <>
+                {isMainViewLoading === true ? (
+                    <LoadProgress
+                        darkMode={true}
+                        isAnimating={true}
+                        loadingText="Generating Template..."
+                        minimum={50}
+                    />
+                ) : (
+                    <>
+                        <GeneralModal
+                            size="lg"
+                            closeOnClickOutside={false}
+                            title="Viewer Interactions Settings"
+                            openBoolean={openViewerInteractionsModal}
+                            closeFunc={() =>
+                                setOpenViewerInteractionsModal(false)
+                            }
+                        >
+                            <ViewerInteractionsForm />
+                        </GeneralModal>
+                        <GeneralModal
+                            closeOnClickOutside={false}
+                            title="Template Global Settings"
+                            openBoolean={openGlobalModal}
+                            closeFunc={() => setOpenGlobalModal(false)}
+                            isLoading={isGlobalSettingsModalLoading}
+                        >
+                            <GlobalSettingsForm
+                                toggleGlobalSettingsModal={controlGlobalModal}
+                            />
+                        </GeneralModal>
+                        <GeneralModal
+                            closeOnClickOutside={false}
+                            title="Add New Block"
+                            openBoolean={openBlockModal}
+                            closeFunc={() => setOpenBlockModal(false)}
+                            isLoading={isAddBlockModalLoading}
+                        >
+                            <AddBlockForm
+                                closeModal={() => setOpenBlockModal(false)}
+                            />
+                        </GeneralModal>
+                        <MainContainer>
+                            <DragDropContext onDragEnd={onDragEnd}>
+                                <EditingSurfaceGridWrapper>
+                                    <Toolbar
+                                        controlViewerInteractionsModal={
+                                            controlViewerInteractionsModal
+                                        }
+                                        controlBlockModal={controlBlockModal}
+                                        controlGlobalModal={controlGlobalModal}
+                                        lists={toolbarColumns}
+                                        elements={toolbarElements}
+                                    />
+                                    <Droppable
+                                        droppableId="editing-surface-columns"
+                                        direction="horizontal"
+                                        type="editing-surface-column"
+                                    >
+                                        {(provided) => (
+                                            <EditingSurface
+                                                {...provided.droppableProps}
+                                                ref={provided.innerRef} //According to https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md, innerRef was replaced with ref via the React16 forwardRef API.
+                                                lists={editingSurfaceColumns}
+                                                elements={
+                                                    editingSurfaceElements
+                                                }
+                                            />
+                                        )}
+                                    </Droppable>
+                                </EditingSurfaceGridWrapper>
+                            </DragDropContext>
+                        </MainContainer>
+                    </>
+                )}
+            </>
+        );
+    };
+
+    return <>{renderTemplateView()}</>;
 };
 
 export default MainBuildTemplateView;
