@@ -53,14 +53,6 @@ const EditingSurfaceGridWrapper = styled.div`
 
 //Helper functions:
 
-const isEmptyObj = (object: Object): boolean => {
-    return (
-        object &&
-        Object.keys(object).length === 0 &&
-        Object.getPrototypeOf(object) === Object.prototype
-    );
-};
-
 const findSheetContent = (
     arr: any[],
     sheetId: string | undefined | null
@@ -114,7 +106,7 @@ const MainBuildTemplateView = ({
         (state: RootStateOrAny) => state?.uiLoader?.addBlockModal?.isLoading
     );
 
-    const template = useSelector((state: RootStateOrAny) => state?.template);
+    const error = useSelector((state: RootStateOrAny) => state?.errors);
 
     const toolbarBlocks = useSelector(
         (state: RootStateOrAny) => state?.template?.templateToolbarBlocks
@@ -310,7 +302,7 @@ const MainBuildTemplateView = ({
     };
 
     const renderTemplateView = () => {
-        if (isEmptyObj(template)) {
+        if (error) {
             return <UnauthorizedTemplate />;
         }
 
