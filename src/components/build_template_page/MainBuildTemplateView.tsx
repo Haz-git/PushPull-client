@@ -98,7 +98,7 @@ const MainBuildTemplateView = ({
     },
 }: IComponentProps): JSX.Element => {
     const query = useQuery();
-    const currSheetId = query.get('sheetId');
+    const currentSheetId = query.get('sheetId');
     const dispatch = useDispatch();
     const notifications = useNotifications();
     useEffect(() => {
@@ -148,7 +148,7 @@ const MainBuildTemplateView = ({
         if (editingSurfaceBlocks && toolbarBlocks) {
             const currentSheet = findSheetContent(
                 editingSurfaceBlocks,
-                currSheetId
+                currentSheetId
             );
 
             if (!currentSheet) {
@@ -170,7 +170,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(currentSheet.sheetContent);
             setToolbarElements(generateLists(toolbarColumns, toolbarBlocks));
         }
-    }, [toolbarBlocks, editingSurfaceBlocks, currSheetId]);
+    }, [toolbarBlocks, editingSurfaceBlocks, currentSheetId]);
 
     // Modal control for Viewer interactions:
     const [openViewerInteractionsModal, setOpenViewerInteractionsModal] =
@@ -247,7 +247,7 @@ const MainBuildTemplateView = ({
             dispatch(
                 reorderEditingSurfaceColumn(
                     fileUuid,
-                    currSheetId,
+                    currentSheetId,
                     newColumnOrder
                 )
             );
@@ -280,7 +280,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    sheetId: currSheetId,
+                    sheetId: currentSheetId,
                     sheetContent: editingSurfaceList,
                 })
             );
@@ -302,7 +302,7 @@ const MainBuildTemplateView = ({
             setEditingSurfaceElements(editingSurfaceList);
             dispatch(
                 addEditingSurfaceBlock(fileUuid, {
-                    sheetId: currSheetId,
+                    sheetId: currentSheetId,
                     sheetContent: editingSurfaceList,
                 })
             );
