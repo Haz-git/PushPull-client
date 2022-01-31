@@ -165,6 +165,7 @@ export const queryTemplate = (templateId: string) => {
                 );
             }
         } catch (err) {
+            dispatch({ type: 'QUERY_TEMPLATE_ERROR', error: err });
             dispatch(disableLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
         }
     };
