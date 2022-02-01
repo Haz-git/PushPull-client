@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
 import historyObject from '../../../utils/historyObject';
+import SheetMenu from './SheetMenu';
 
 //Styles:
 import styled from 'styled-components';
@@ -15,7 +17,7 @@ const DropdownIcon = styled(CaretDown)`
     color: #ffffff;
 `;
 
-const MainContainer = styled.button<ITabContainerProps>`
+const MainContainer = styled.div<ITabContainerProps>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,6 +74,8 @@ export const SheetTab = ({
     const query = useQuery();
     const currSheetId = query.get('sheetId') ? query.get('sheetId') : undefined;
 
+    const [isSheetMenuOpened, toggleSheetMenu] = useState(false);
+
     const shouldHighlightTab = (): boolean => {
         if (!currSheetId || !sheetId || currSheetId !== sheetId) {
             return false;
@@ -100,8 +104,15 @@ export const SheetTab = ({
                     }
                 />
             </SheetTitleContainer>
-            <DropdownIconButton isSelected={shouldHighlightTab()}>
-                <DropdownIcon />
+            <DropdownIconButton
+                isSelected={shouldHighlightTab()}
+                onClick={() => toggleSheetMenu(!isSheetMenuOpened)}
+            >
+                <SheetMenu
+                    isSheetMenuOpened={isSheetMenuOpened}
+                    toggleSheetMenu={toggleSheetMenu}
+                    controlElement={<DropdownIcon />}
+                />
             </DropdownIconButton>
         </MainContainer>
     );
