@@ -21,6 +21,7 @@ import {
     addEditingSurfaceBlock,
     queryTemplate,
     reorderEditingSurfaceColumn,
+    clearTemplate,
 } from '../../redux/templates/templateActions';
 
 //Styles:
@@ -95,6 +96,10 @@ const MainBuildTemplateView = ({
     const notifications = useNotifications();
     useEffect(() => {
         dispatch(queryTemplate(fileUuid));
+
+        return () => {
+            dispatch({ type: 'RESET_ERROR_MESSAGE' });
+        };
     }, []);
 
     const isMainViewLoading = useSelector(
