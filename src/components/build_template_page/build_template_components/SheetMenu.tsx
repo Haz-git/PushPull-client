@@ -18,11 +18,11 @@ import {
 import { useNotifications } from '@mantine/notifications';
 
 const DarkRenameIcon = styled(RenameIcon)`
-    color: rgba(0, 0, 34, 0.7);
+    color: rgba(0, 0, 34, 1);
 `;
 
 const DarkTrashIcon = styled(DeleteIcon)`
-    color: rgba(0, 0, 34, 0.7);
+    color: rgba(0, 0, 34, 1);
     margin: 0rem 0rem;
 `;
 
@@ -85,7 +85,7 @@ const SheetMenu = ({
                 icon={<DarkRenameIcon />}
                 onClick={() => alert('Under Construction..')}
             >
-                <Text text="Rename Sheet" subText={true} fontSize=".9rem" />
+                <Text text="Rename Sheet" mainText={true} fontSize=".9rem" />
             </Menu.Item>
             <Divider />
             <Menu.Item
@@ -93,7 +93,7 @@ const SheetMenu = ({
                 icon={<DarkTrashIcon />}
                 onClick={handleSheetDeletionRequest}
             >
-                <Text text="Delete Sheet" subText={true} fontSize=".90rem" />
+                <Text text="Delete Sheet" mainText={true} fontSize=".90rem" />
             </Menu.Item>
         </Menu>
     );
