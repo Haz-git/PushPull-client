@@ -21,6 +21,7 @@ import {
     addEditingSurfaceBlock,
     queryTemplate,
     reorderEditingSurfaceColumn,
+    clearTemplate,
 } from '../../redux/templates/templateActions';
 
 //Styles:
@@ -95,6 +96,10 @@ const MainBuildTemplateView = ({
     const notifications = useNotifications();
     useEffect(() => {
         dispatch(queryTemplate(fileUuid));
+
+        return () => {
+            dispatch({ type: 'RESET_ERROR_MESSAGE' });
+        };
     }, []);
 
     const isMainViewLoading = useSelector(
@@ -150,9 +155,9 @@ const MainBuildTemplateView = ({
 
                 notifications.showNotification({
                     title: 'Your sheet is missing or has been deleted.',
-                    message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+                    message: `If this is unexpected, please report this issue.`,
                     color: 'red',
-                    autoClose: 10000,
+                    autoClose: 5000,
                     icon: <CancelIcon />,
                 });
                 return;
