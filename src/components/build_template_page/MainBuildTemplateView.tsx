@@ -23,6 +23,8 @@ import {
     reorderEditingSurfaceColumn,
     clearTemplate,
 } from '../../redux/templates/templateActions';
+import { toggleModal } from '../../redux/modals/modalActions';
+import { ModalActionTypes } from '../../redux/modals/action-types';
 
 //Styles:
 import styled from 'styled-components';
@@ -119,6 +121,11 @@ const MainBuildTemplateView = ({
 
     const editingSurfaceBlocks = useSelector(
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
+    );
+
+    const isSheetDeletionModalOpened = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.DELETE_SHEET_CONFIRMATION?.isOpen
     );
 
     //Column States for DnD functionality:
@@ -322,6 +329,22 @@ const MainBuildTemplateView = ({
                     />
                 ) : (
                     <>
+                        <GeneralModal
+                            size="sm"
+                            closeOnClickOutside={true}
+                            title="Confirm Deletion"
+                            openBoolean={isSheetDeletionModalOpened}
+                            closeFunc={() =>
+                                dispatch(
+                                    toggleModal(
+                                        ModalActionTypes.DELETE_SHEET_CONFIRMATION,
+                                        'CLOSE'
+                                    )
+                                )
+                            }
+                        >
+                            <div>Testing Change name modal</div>
+                        </GeneralModal>
                         <GeneralModal
                             size="lg"
                             closeOnClickOutside={false}
