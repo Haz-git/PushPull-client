@@ -154,7 +154,7 @@ const MainBuildTemplateView = ({
                 );
 
                 notifications.showNotification({
-                    title: 'Your sheet is missing or has been deleted.',
+                    title: 'Your sheet has been deleted.',
                     message: `If this is unexpected, please report this issue.`,
                     color: 'red',
                     autoClose: 5000,
