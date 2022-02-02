@@ -356,6 +356,14 @@ export const updateSheet = (templateId: string, sheetId: string): Function => {
 export const deleteSheet = (templateId: string, sheetId: string): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
+            const response = await api.delete(
+                `/template/surface/delete-sheet/${templateId}?sheetId=${sheetId}`
+            );
+
+            dispatch({
+                type: TemplateActionType.DELETE_SHEET,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.error(err);
         }
