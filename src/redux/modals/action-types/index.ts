@@ -1,0 +1,3 @@
+export enum ModalActionTypes {
+    DELETE_SHEET_CONFIRMATION = 'DELETE_SHEET_CONFIRMATION',
+}

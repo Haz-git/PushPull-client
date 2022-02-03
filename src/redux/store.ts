@@ -18,6 +18,7 @@ import templateReducer from './templates/templateReducer';
 import uiLoaderReducer from './uiLoader/uiLoaderReducer';
 import selectedBlockReducer from './selectedBlock/selectedBlockReducer';
 import { errorReducer } from './errors/errorReducer';
+import { modalReducer } from './modals/modalReducer';
 
 //Persistence:
 const persistConfig = {
@@ -45,6 +46,7 @@ const appReducer = combineReducers({
     uiLoader: uiLoaderReducer,
     toolbarSelectedBlock: selectedBlockReducer,
     errors: errorReducer,
+    modals: modalReducer,
 });
 
 //Persisting formReducer:

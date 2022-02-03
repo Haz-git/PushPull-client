@@ -112,8 +112,6 @@ export const SheetTab = ({
                     isSheetMenuOpened={isSheetMenuOpened}
                     toggleSheetMenu={toggleSheetMenu}
                     controlElement={<DropdownIcon />}
-                    templateId={templateId}
-                    sheetId={sheetId}
                 />
             </DropdownIconButton>
         </MainContainer>

@@ -2,10 +2,11 @@ import * as React from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { deleteSheet } from '../../../redux/templates/templateActions';
+import { toggleModal } from '../../../redux/modals/modalActions';
+import { ModalActionTypes } from '../../../redux/modals/action-types';
 
 //Components:
-import { Menu, MenuItem, Divider } from '@mantine/core';
+import { Menu, Divider } from '@mantine/core';
 import Text from '../../general_components/Text';
 
 //Styles:
@@ -18,11 +19,11 @@ import {
 import { useNotifications } from '@mantine/notifications';
 
 const DarkRenameIcon = styled(RenameIcon)`
-    color: rgba(0, 0, 34, 0.7);
+    color: rgba(0, 0, 34, 1);
 `;
 
 const DarkTrashIcon = styled(DeleteIcon)`
-    color: rgba(0, 0, 34, 0.7);
+    color: rgba(0, 0, 34, 1);
     margin: 0rem 0rem;
 `;
 
@@ -32,16 +33,12 @@ interface IComponentProps {
     isSheetMenuOpened: boolean;
     toggleSheetMenu: (status: boolean) => void;
     controlElement: React.ReactElement;
-    templateId: string;
-    sheetId: string;
 }
 
 const SheetMenu = ({
     isSheetMenuOpened,
     toggleSheetMenu,
     controlElement,
-    templateId,
-    sheetId,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
@@ -51,11 +48,7 @@ const SheetMenu = ({
 
     const sheetCount = sheets.length;
 
-    const handleSheetDeletionRequest = () => {
-        if (!templateId || !sheetId) {
-            return;
-        }
-
+    const handleSheetDeletionRequest = (): Function | undefined => {
         if (sheetCount === 1) {
             notifications.showNotification({
                 title: 'You may not delete your only sheet.',
@@ -68,7 +61,11 @@ const SheetMenu = ({
             return;
         }
 
-        return dispatch(deleteSheet(templateId, sheetId));
+        return dispatch(
+            toggleModal(ModalActionTypes.DELETE_SHEET_CONFIRMATION, 'OPEN')
+        );
+
+        // return dispatch(deleteSheet(templateId, sheetId));
     };
 
     return (
@@ -85,7 +82,7 @@ const SheetMenu = ({
                 icon={<DarkRenameIcon />}
                 onClick={() => alert('Under Construction..')}
             >
-                <Text text="Rename Sheet" subText={true} fontSize=".9rem" />
+                <Text text="Rename Sheet" mainText={true} fontSize=".9rem" />
             </Menu.Item>
             <Divider />
             <Menu.Item
@@ -93,7 +90,7 @@ const SheetMenu = ({
                 icon={<DarkTrashIcon />}
                 onClick={handleSheetDeletionRequest}
             >
-                <Text text="Delete Sheet" subText={true} fontSize=".90rem" />
+                <Text text="Delete Sheet" mainText={true} fontSize=".90rem" />
             </Menu.Item>
         </Menu>
     );

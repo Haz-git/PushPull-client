@@ -14,6 +14,7 @@ import { v4 as uuid } from 'uuid';
 import useQuery from '../../utils/hooks/useQuery';
 import historyObject from '../../utils/historyObject';
 import UnauthorizedTemplate from './build_template_components/UnauthorizedTemplate';
+import { DeleteSheetForm } from './build_template_components/DeleteSheetForm';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -23,6 +24,8 @@ import {
     reorderEditingSurfaceColumn,
     clearTemplate,
 } from '../../redux/templates/templateActions';
+import { toggleModal } from '../../redux/modals/modalActions';
+import { ModalActionTypes } from '../../redux/modals/action-types';
 
 //Styles:
 import styled from 'styled-components';
@@ -121,6 +124,11 @@ const MainBuildTemplateView = ({
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
+    const isSheetDeletionModalOpened = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.DELETE_SHEET_CONFIRMATION?.isOpen
+    );
+
     //Column States for DnD functionality:
 
     const [editingSurfaceColumns, setEditingSurfaceColumns] = useState([
@@ -154,7 +162,7 @@ const MainBuildTemplateView = ({
                 );
 
                 notifications.showNotification({
-                    title: 'Your sheet is missing or has been deleted.',
+                    title: 'Your sheet has been deleted.',
                     message: `If this is unexpected, please report this issue.`,
                     color: 'red',
                     autoClose: 5000,
@@ -322,6 +330,25 @@ const MainBuildTemplateView = ({
                     />
                 ) : (
                     <>
+                        <GeneralModal
+                            size="md"
+                            closeOnClickOutside={true}
+                            title="Confirm Deletion"
+                            openBoolean={isSheetDeletionModalOpened}
+                            closeFunc={() =>
+                                dispatch(
+                                    toggleModal(
+                                        ModalActionTypes.DELETE_SHEET_CONFIRMATION,
+                                        'CLOSE'
+                                    )
+                                )
+                            }
+                        >
+                            <DeleteSheetForm
+                                sheetId={currentSheetId}
+                                templateId={fileUuid}
+                            />
+                        </GeneralModal>
                         <GeneralModal
                             size="lg"
                             closeOnClickOutside={false}
