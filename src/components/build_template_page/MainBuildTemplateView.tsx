@@ -14,6 +14,7 @@ import { v4 as uuid } from 'uuid';
 import useQuery from '../../utils/hooks/useQuery';
 import historyObject from '../../utils/historyObject';
 import UnauthorizedTemplate from './build_template_components/UnauthorizedTemplate';
+import { DeleteSheetForm } from './build_template_components/DeleteSheetForm';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -330,7 +331,7 @@ const MainBuildTemplateView = ({
                 ) : (
                     <>
                         <GeneralModal
-                            size="sm"
+                            size="md"
                             closeOnClickOutside={true}
                             title="Confirm Deletion"
                             openBoolean={isSheetDeletionModalOpened}
@@ -343,7 +344,10 @@ const MainBuildTemplateView = ({
                                 )
                             }
                         >
-                            <div>Testing Change name modal</div>
+                            <DeleteSheetForm
+                                sheetId={currentSheetId}
+                                templateId={fileUuid}
+                            />
                         </GeneralModal>
                         <GeneralModal
                             size="lg"
