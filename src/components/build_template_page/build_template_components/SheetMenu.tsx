@@ -3,6 +3,8 @@ import * as React from 'react';
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { deleteSheet } from '../../../redux/templates/templateActions';
+import { toggleModal } from '../../../redux/modals/modalActions';
+import { ModalActionTypes } from '../../../redux/modals/action-types';
 
 //Components:
 import { Menu, MenuItem, Divider } from '@mantine/core';
@@ -40,8 +42,6 @@ const SheetMenu = ({
     isSheetMenuOpened,
     toggleSheetMenu,
     controlElement,
-    templateId,
-    sheetId,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
@@ -52,10 +52,6 @@ const SheetMenu = ({
     const sheetCount = sheets.length;
 
     const handleSheetDeletionRequest = () => {
-        if (!templateId || !sheetId) {
-            return;
-        }
-
         if (sheetCount === 1) {
             notifications.showNotification({
                 title: 'You may not delete your only sheet.',
@@ -68,7 +64,11 @@ const SheetMenu = ({
             return;
         }
 
-        return dispatch(deleteSheet(templateId, sheetId));
+        return dispatch(
+            toggleModal(ModalActionTypes.DELETE_SHEET_CONFIRMATION, 'OPEN')
+        );
+
+        // return dispatch(deleteSheet(templateId, sheetId));
     };
 
     return (
