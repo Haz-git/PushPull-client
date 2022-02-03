@@ -34,8 +34,6 @@ interface IComponentProps {
     isSheetMenuOpened: boolean;
     toggleSheetMenu: (status: boolean) => void;
     controlElement: React.ReactElement;
-    templateId: string;
-    sheetId: string;
 }
 
 const SheetMenu = ({
