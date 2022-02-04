@@ -12,6 +12,7 @@ import {
 import { Draggable } from 'react-beautiful-dnd';
 import Text from '../../general_components/Text';
 import { Popover } from '@mantine/core';
+import useQuery from '../../../utils/hooks/useQuery';
 
 //Styles:
 import styled from 'styled-components';
@@ -141,15 +142,11 @@ const BlockTypeExercise = ({
     blockType,
     columnPrefix,
 }: IComponentProps): JSX.Element => {
+    const query = useQuery();
+    const currentSheetId = query.get('sheetId');
     const dispatch = useDispatch();
     const templateId = useSelector(
         (state: RootStateOrAny) => state?.template?.id
-    );
-
-    //In the future, there should be a way to change view based on sheetId. For now, it's limited to 1 week.
-    const sheetId = useSelector(
-        (state: RootStateOrAny) =>
-            state?.template?.templateEditingSurfaceBlocks[0].sheetId
     );
 
     const { name, sets, reps } = blockDetails;
@@ -169,7 +166,7 @@ const BlockTypeExercise = ({
                 deleteEditingSurfaceBlock(
                     templateId,
                     blockId,
-                    sheetId,
+                    currentSheetId,
                     columnPrefix
                 )
             );
