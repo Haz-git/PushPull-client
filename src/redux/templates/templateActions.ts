@@ -2,7 +2,7 @@ import api from '../../api';
 import { Dispatch } from 'redux';
 import { TemplateAction } from './templateInterfaces';
 import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
-import { TemplateActionType } from './action-types';
+import { TemplateActionType, ProjectTemplateActionType } from './action-types';
 import { loaderTypes } from '../uiLoader/loader-types';
 
 //Loader ui actions:
@@ -30,7 +30,7 @@ export const findTemplates = (
             }
 
             dispatch({
-                type: TemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD,
+                type: ProjectTemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -54,7 +54,7 @@ export const addTemplate = (
             let response = await api.post(`/template/add`, { templateDetails });
 
             dispatch({
-                type: TemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD,
+                type: ProjectTemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -104,7 +104,7 @@ export const updateTemplate = (
             }
 
             dispatch({
-                type: TemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD,
+                type: ProjectTemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD,
                 payload: projectTemplateArray,
             });
 
@@ -132,7 +132,7 @@ export const deleteTemplate = (
             );
 
             dispatch({
-                type: TemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD,
+                type: ProjectTemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD,
                 payload: response.data.templates,
             });
 
@@ -254,11 +254,15 @@ export const addEditingSurfaceBlock = (
 export const deleteEditingSurfaceBlock = (
     templateId: string,
     blockId: string,
-    sheetId: string,
+    sheetId: string | null,
     columnPrefix: string | undefined
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
+            if (!sheetId) {
+                throw new Error('No SheetId');
+            }
+
             let response = await api.delete(
                 `/template/surface/delete/${templateId}?blockId=${blockId}&sheetId=${sheetId}&columnPrefix=${columnPrefix}`
             );

@@ -1,4 +1,4 @@
-import { TemplateActionType } from './action-types';
+import { ProjectTemplateActionType } from './action-types';
 import { TemplateAction } from './templateInterfaces';
 
 const initialState: any = [];
@@ -12,18 +12,13 @@ const projectTemplateReducer = (
     state: Array<any> = initialState,
     action: TemplateAction
 ) => {
-    switch (action.type) {
-        case TemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD:
-            return [...action.payload];
-        case TemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD:
-            return [...action.payload];
-        case TemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD:
-            return [...action.payload];
-        case TemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD:
-            return [...action.payload];
-        default:
-            return state;
+    if (!Object.keys(ProjectTemplateActionType).includes(action.type)) {
+        return state;
     }
+
+    return {
+        ...action.payload,
+    };
 };
 
 export default projectTemplateReducer;

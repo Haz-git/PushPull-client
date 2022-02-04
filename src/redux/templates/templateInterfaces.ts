@@ -1,22 +1,22 @@
-import { TemplateActionType } from './action-types';
+import { TemplateActionType, ProjectTemplateActionType } from './action-types';
 
 interface findTemplateInProjectDashboard {
-    type: TemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD;
+    type: ProjectTemplateActionType.FIND_TEMPLATE_IN_PROJECT_DASHBOARD;
     payload?: any;
 }
 
 interface addTemplateToProjectDashboard {
-    type: TemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD;
+    type: ProjectTemplateActionType.ADD_TEMPLATE_TO_PROJECT_DASHBOARD;
     payload?: any;
 }
 
 interface updateTemplateInProjectDashboard {
-    type: TemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD;
+    type: ProjectTemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD;
     payload?: any;
 }
 
 interface deleteTemplateFromProjectDashboard {
-    type: TemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD;
+    type: ProjectTemplateActionType.DELETE_TEMPLATE_FROM_PROJECT_DASHBOARD;
     payload?: any;
 }
 interface updateTemplate {
