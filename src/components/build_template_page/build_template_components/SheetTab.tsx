@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+//Redux:
+import { useDispatch } from 'react-redux';
+import { updateSheet } from '../../../redux/templates/templateActions';
 
 //Components:
 import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
 import historyObject from '../../../utils/historyObject';
 import SheetMenu from './SheetMenu';
+import { TextInput } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
 
 //Styles:
 import styled from 'styled-components';
@@ -71,29 +77,76 @@ export const SheetTab = ({
     sheetName,
     templateId,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
     const query = useQuery();
-    const currSheetId = query.get('sheetId') ? query.get('sheetId') : undefined;
+    const currentSheetId = query.get('sheetId')
+        ? query.get('sheetId')
+        : undefined;
 
     const [isSheetMenuOpened, toggleSheetMenu] = useState(false);
+    const [isTextFieldActive, toggleTextField] = useState(false);
+    const [newSheetName, setNewSheetName] = useState(sheetName);
+
+    const handleEscapeKey = (e: KeyboardEvent): void => {
+        if (e.key === 'Escape') {
+            //Discard user edits.
+            setNewSheetName(sheetName);
+            toggleTextField(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleEscapeKey);
+
+        return () => {
+            document.removeEventListener('keydown', handleEscapeKey);
+        };
+    }, []);
 
     const shouldHighlightTab = (): boolean => {
-        if (!currSheetId || !sheetId || currSheetId !== sheetId) {
+        if (!currentSheetId || !sheetId || currentSheetId !== sheetId) {
             return false;
         }
 
         return true;
     };
 
-    return (
-        <MainContainer
-            isSelected={shouldHighlightTab()}
-            onClick={() =>
-                historyObject.push(`/file/${templateId}?sheetId=${sheetId}`)
-            }
-        >
-            <SheetTitleContainer>
+    const handleUpdateSheetName = (): undefined => {
+        if (newSheetName === '' || newSheetName === sheetName) {
+            return;
+        }
+
+        dispatch(
+            updateSheet(templateId, sheetId, {
+                sheetName: newSheetName,
+            })
+        );
+
+        toggleTextField(false);
+    };
+
+    const inputRef = useClickOutside(() => {
+        handleUpdateSheetName();
+    });
+
+    const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setNewSheetName(e.target.value);
+    };
+
+    const handleOnKeyPress = (
+        e: React.KeyboardEvent<HTMLInputElement>
+    ): void => {
+        //Esc key triggers textField to close. Esc key does not fire keyPress.
+        if (e.key === 'Enter') {
+            handleUpdateSheetName();
+        }
+    };
+
+    const showTextFieldOrName = (): JSX.Element => {
+        if (!isTextFieldActive) {
+            return (
                 <Text
-                    text={sheetName}
+                    text={newSheetName}
                     textColor="#ffffff"
                     fontWeight="500"
                     fontSize=".9rem"
@@ -103,7 +156,47 @@ export const SheetTab = ({
                             : 'none'
                     }
                 />
-            </SheetTitleContainer>
+            );
+        }
+
+        return (
+            <TextInput
+                ref={inputRef}
+                autoFocus
+                value={newSheetName}
+                required
+                onChange={handleUserInput}
+                size="xs"
+                styles={{
+                    root: {
+                        padding: '0 0',
+                        margin: '-.2rem 0rem 0rem 0rem',
+                    },
+                    input: {
+                        fontFamily: 'Lato',
+                        border: 'none',
+                        padding: '0rem 0rem 0rem .5rem',
+                        margin: '0 0',
+                        height: '1.4rem',
+                        fontSize: '1rem',
+                        fontWeight: 700,
+                        width: '100%',
+                        minHeight: '0',
+                    },
+                }}
+                onKeyPress={handleOnKeyPress}
+            />
+        );
+    };
+
+    return (
+        <MainContainer
+            isSelected={shouldHighlightTab()}
+            onClick={() =>
+                historyObject.push(`/file/${templateId}?sheetId=${sheetId}`)
+            }
+        >
+            <SheetTitleContainer>{showTextFieldOrName()}</SheetTitleContainer>
             <DropdownIconButton
                 isSelected={shouldHighlightTab()}
                 onClick={() => toggleSheetMenu(!isSheetMenuOpened)}
@@ -112,6 +205,7 @@ export const SheetTab = ({
                     isSheetMenuOpened={isSheetMenuOpened}
                     toggleSheetMenu={toggleSheetMenu}
                     controlElement={<DropdownIcon />}
+                    toggleTextField={toggleTextField}
                 />
             </DropdownIconButton>
         </MainContainer>

@@ -344,9 +344,22 @@ export const addSheet = (templateId: string): Function => {
     };
 };
 
-export const updateSheet = (templateId: string, sheetId: string): Function => {
+export const updateSheet = (
+    templateId: string,
+    sheetId: string,
+    updateObject: any
+): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
+            const response = await api.post(
+                `/template/surface/update-sheet/${templateId}?sheetId=${sheetId}`,
+                { ...updateObject }
+            );
+
+            dispatch({
+                type: TemplateActionType.UPDATE_SHEET,
+                payload: response.data.template,
+            });
         } catch (err) {
             console.error(err);
         }

@@ -33,12 +33,14 @@ interface IComponentProps {
     isSheetMenuOpened: boolean;
     toggleSheetMenu: (status: boolean) => void;
     controlElement: React.ReactElement;
+    toggleTextField: (status: boolean) => void;
 }
 
 const SheetMenu = ({
     isSheetMenuOpened,
     toggleSheetMenu,
     controlElement,
+    toggleTextField,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const notifications = useNotifications();
@@ -64,8 +66,6 @@ const SheetMenu = ({
         return dispatch(
             toggleModal(ModalActionTypes.DELETE_SHEET_CONFIRMATION, 'OPEN')
         );
-
-        // return dispatch(deleteSheet(templateId, sheetId));
     };
 
     return (
@@ -80,7 +80,7 @@ const SheetMenu = ({
         >
             <Menu.Item
                 icon={<DarkRenameIcon />}
-                onClick={() => alert('Under Construction..')}
+                onClick={() => toggleTextField(true)}
             >
                 <Text text="Rename Sheet" mainText={true} fontSize=".9rem" />
             </Menu.Item>
