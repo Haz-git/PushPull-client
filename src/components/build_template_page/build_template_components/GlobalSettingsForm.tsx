@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Text from '../../general_components/Text';
 import { TextInput, Textarea, Select } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
+import useQuery from '../../../utils/hooks/useQuery';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -47,6 +48,8 @@ interface IComponentProps {
 export const GlobalSettingsForm = ({
     toggleGlobalSettingsModal,
 }: IComponentProps): JSX.Element => {
+    const query = useQuery();
+    const currentSheetId = query.get('sheetId');
     const dispatch = useDispatch();
     //TODO: Rename userInputs to viewerInputs as it makes more sense.
     const {
