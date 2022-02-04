@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
@@ -20,10 +21,44 @@ const ButtonContainer = styled.div`
 `;
 
 export const AddColorForm = () => {
+    const [colorDetails, setColorDetails] = useState({
+        label: '',
+        description: '',
+        colorHex: '',
+    });
+
+    const handleUserInput = (
+        e: React.ChangeEvent<
+            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
+    ): void => {
+        setColorDetails({
+            ...colorDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const validateForm = (): boolean => {
+        if (!colorDetails.label || !colorDetails.colorHex) {
+            return false;
+        }
+
+        return true;
+    };
+
+    const handleSaveColor = (): void => {
+        if (!validateForm()) {
+            return;
+        }
+
+        console.log('dispatch request here');
+    };
+
     return (
         <MainContainer>
             <FormContainer>
                 <TextInput
+                    name="label"
                     styles={{
                         label: {
                             color: 'rgba(0, 0, 34, .7)',
@@ -42,16 +77,14 @@ export const AddColorForm = () => {
                     required
                     label="Color Label"
                     placeholder={'Label your color'}
-                    // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    //     if (hasError) setHasError(false);
-                    //     setProjectName(e.target.value);
-                    // }}
+                    onChange={handleUserInput}
                     // value={projectName}
                     // error={hasError}
                     // disabled={isCreatingNewProject}
                 />
                 <Divider />
                 <Textarea
+                    name="description"
                     styles={{
                         label: {
                             color: 'rgba(0, 0, 34, .7)',
@@ -70,14 +103,13 @@ export const AddColorForm = () => {
                     }}
                     label="Color Description"
                     placeholder="Describe what your color means.."
-                    // onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    //     setProjectDesc(e.target.value)
-                    // }
+                    onChange={handleUserInput}
                     // value={projectDesc}
                     // disabled={isCreatingNewProject}
                 />
                 <Divider />
                 <ColorInput
+                    name="colorHex"
                     required
                     styles={{
                         label: {
@@ -98,7 +130,9 @@ export const AddColorForm = () => {
                     label="Select Color"
                     disallowInput
                     dropdownZIndex={9999}
-                    // onChange={(e: string) => setProjectColor(e)}
+                    onChange={(e: string) =>
+                        setColorDetails({ ...colorDetails, colorHex: e })
+                    }
                     // value={projectColor}
                     // rightSection={
                     //     <RandomButton onClick={generateRandomHexColor}>
@@ -109,7 +143,11 @@ export const AddColorForm = () => {
                 />
             </FormContainer>
             <ButtonContainer>
-                <GeneralButton buttonLabel="Save Color" padding=".5rem .2rem" />
+                <GeneralButton
+                    buttonLabel="Save Color"
+                    padding=".5rem .2rem"
+                    onClick={handleSaveColor}
+                />
             </ButtonContainer>
         </MainContainer>
     );
