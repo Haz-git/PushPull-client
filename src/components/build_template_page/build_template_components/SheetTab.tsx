@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import { updateSheet } from '../../../redux/templates/templateActions';
+
 //Components:
 import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
@@ -73,23 +77,20 @@ export const SheetTab = ({
     sheetName,
     templateId,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
     const query = useQuery();
-    const currSheetId = query.get('sheetId') ? query.get('sheetId') : undefined;
+    const currentSheetId = query.get('sheetId')
+        ? query.get('sheetId')
+        : undefined;
 
     const [isSheetMenuOpened, toggleSheetMenu] = useState(false);
     const [isTextFieldActive, toggleTextField] = useState(false);
     const [newSheetName, setNewSheetName] = useState(sheetName);
 
-    const inputRef = useClickOutside(() => {
-        toggleTextField(false);
-    });
-
     const handleEscapeKey = (e: KeyboardEvent): void => {
         if (e.key === 'Escape') {
-            if (newSheetName !== sheetName) {
-                //Discard user edits.
-                setNewSheetName(sheetName);
-            }
+            //Discard user edits.
+            setNewSheetName(sheetName);
             toggleTextField(false);
         }
     };
@@ -103,12 +104,30 @@ export const SheetTab = ({
     }, []);
 
     const shouldHighlightTab = (): boolean => {
-        if (!currSheetId || !sheetId || currSheetId !== sheetId) {
+        if (!currentSheetId || !sheetId || currentSheetId !== sheetId) {
             return false;
         }
 
         return true;
     };
+
+    const handleUpdateSheetName = (): undefined => {
+        if (newSheetName === '' || newSheetName === sheetName) {
+            return;
+        }
+
+        dispatch(
+            updateSheet(templateId, sheetId, {
+                sheetName: newSheetName,
+            })
+        );
+
+        toggleTextField(false);
+    };
+
+    const inputRef = useClickOutside(() => {
+        handleUpdateSheetName();
+    });
 
     const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setNewSheetName(e.target.value);
@@ -118,14 +137,8 @@ export const SheetTab = ({
         e: React.KeyboardEvent<HTMLInputElement>
     ): void => {
         //Esc key triggers textField to close. Esc key does not fire keyPress.
-
-        if (
-            e.key === 'Enter' &&
-            newSheetName !== '' &&
-            newSheetName !== sheetName
-        ) {
-            console.log('dispatch rename request');
-            toggleTextField(false);
+        if (e.key === 'Enter') {
+            handleUpdateSheetName();
         }
     };
 
@@ -133,7 +146,7 @@ export const SheetTab = ({
         if (!isTextFieldActive) {
             return (
                 <Text
-                    text={sheetName}
+                    text={newSheetName}
                     textColor="#ffffff"
                     fontWeight="500"
                     fontSize=".9rem"
