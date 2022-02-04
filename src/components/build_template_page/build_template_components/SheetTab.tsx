@@ -85,18 +85,13 @@ export const SheetTab = ({
     });
 
     const handleEscapeKey = (e: KeyboardEvent): void => {
-        if (e.key !== 'Escape') {
-            return;
+        if (e.key === 'Escape') {
+            if (newSheetName !== sheetName) {
+                //Discard user edits.
+                setNewSheetName(sheetName);
+            }
+            toggleTextField(false);
         }
-
-        console.log(newSheetName, sheetName);
-
-        if (newSheetName !== sheetName) {
-            //Discard user edits, reset new sheet name
-            setNewSheetName(sheetName);
-        }
-
-        toggleTextField(false);
     };
 
     useEffect(() => {
