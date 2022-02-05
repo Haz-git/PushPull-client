@@ -48,10 +48,8 @@ const SheetMenu = ({
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
-    const sheetCount = sheets.length;
-
     const handleSheetDeletionRequest = (): Function | undefined => {
-        if (sheetCount === 1) {
+        if (sheets?.length === 1) {
             notifications.showNotification({
                 title: 'You may not delete your only sheet.',
                 message: '',
