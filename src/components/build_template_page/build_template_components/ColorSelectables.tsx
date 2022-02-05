@@ -47,11 +47,13 @@ interface IColorSwatch {
 }
 
 interface IComponentProps {
+    label: string;
     colorHex?: string;
     description?: string;
 }
 
 export const ColorSelectables = ({
+    label = 'Test Label',
     colorHex = '#000000',
     description = 'Test Description for color swatch',
 }: IComponentProps): JSX.Element => {
@@ -61,7 +63,7 @@ export const ColorSelectables = ({
                 <ColorSwatch color={colorHex} />
             </ColorSwatchContainer>
             <DescriptionContainer>
-                <Text text={description} subText={true} />
+                <Text text={label} subText={true} />
             </DescriptionContainer>
         </MainContainer>
     );
