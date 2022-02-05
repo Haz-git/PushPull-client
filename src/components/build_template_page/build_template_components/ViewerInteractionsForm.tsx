@@ -7,6 +7,7 @@ import { Tooltip } from '@mantine/core';
 import { Popover } from '@mantine/core';
 import { AddColorForm } from './AddColorForm';
 import { AddViewerInputForm } from './AddViewerInputForm';
+import { ColorSelectables } from './ColorSelectables';
 
 //Styles:
 import styled from 'styled-components';
@@ -58,8 +59,11 @@ const ActionContainer = styled.div`
     border: 1px solid #d6d6d6;
     background: #ececec;
     border-radius: 0.3rem;
-    height: 10rem;
+    min-height: 10rem;
     width: 100%;
+    padding: 0.5rem 0.5rem;
+    max-height: 12rem;
+    overflow-y: scroll;
 `;
 
 const ActionableButtonContainer = styled.div`
@@ -123,7 +127,14 @@ const ViewerInteractionsForm = () => {
                         <InfoIcon />
                     </Tooltip>
                 </OptionHeader>
-                <ActionContainer></ActionContainer>
+                <ActionContainer>
+                    <ColorSelectables />
+                    <ColorSelectables />
+                    <ColorSelectables />
+                    <ColorSelectables />
+                    <ColorSelectables />
+                    <ColorSelectables />
+                </ActionContainer>
                 <ActionableButtonContainer>
                     <Popover
                         noClickOutside={true}
