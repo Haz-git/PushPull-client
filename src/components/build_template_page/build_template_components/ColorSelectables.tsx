@@ -13,15 +13,14 @@ const MainContainer = styled.div`
     background: #ffffff;
     border-radius: 0.3rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
-    column-gap: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px;
 `;
 
 const ColorSwatchContainer = styled.div`
+    height: 100%;
     padding: 0.5rem 0.5rem;
-    border-right: 1px solid #d6d6d6;
 `;
 
 const ColorSwatch = styled.div`
@@ -31,7 +30,12 @@ const ColorSwatch = styled.div`
     background: #ea4cde;
 `;
 
-const DescriptionContainer = styled.div``;
+const DescriptionContainer = styled.div`
+    max-height: 5rem;
+    border-left: 1px solid #d6d6d6;
+    padding: 0.5rem 0.5rem;
+    overflow-y: scroll;
+`;
 
 export const ColorSelectables = () => {
     return (
@@ -40,7 +44,7 @@ export const ColorSelectables = () => {
                 <ColorSwatch />
             </ColorSwatchContainer>
             <DescriptionContainer>
-                <Text text="test" />
+                <Text text="Test long description Test long description Test long description Test long description Test long " />
             </DescriptionContainer>
         </MainContainer>
     );
