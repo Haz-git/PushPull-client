@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 
 //Redux:
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { ModalActionTypes } from '../../../redux/modals/action-types';
 
 //Components:
 import Text from '../../general_components/Text';
@@ -18,6 +19,7 @@ import styled from 'styled-components';
 import { Info } from '@styled-icons/fluentui-system-filled/Info';
 import { Add } from '@styled-icons/fluentui-system-filled/Add';
 import { Subtract } from '@styled-icons/fluentui-system-regular/Subtract';
+import { toggleModal } from '../../../redux/modals/modalActions';
 
 const InfoIcon = styled(Info)`
     margin-bottom: -0.02rem;
@@ -98,12 +100,19 @@ const RemoveButton = styled.button`
 `;
 
 const ViewerInteractionsForm = () => {
+    const dispatch = useDispatch();
     const colorSwatches = useSelector(
         (state: RootStateOrAny) => state?.template?.templateLegend
     );
-    const [isAddColorPopoverOpen, setStatusAddColorPopover] = useState(false);
-    const [isAddUserInputPopoverOpen, setStatusAddUserInputPopover] =
-        useState(false);
+
+    const isAddColorPopoverOpen = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.ADD_COLOR_SWATCH_POPOVER.isOpen
+    );
+    const isViewerInputPopoverOpen = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.ADD_VIEWER_INPUT_POPOVER.isOpen
+    );
 
     const renderColorSwatches = (): JSX.Element => {
         if (!colorSwatches || colorSwatches.length === 0) {
@@ -155,14 +164,28 @@ const ViewerInteractionsForm = () => {
                         noClickOutside={true}
                         noEscape={true}
                         title="Add New Color"
-                        onClose={() => setStatusAddColorPopover(false)}
+                        onClose={() =>
+                            dispatch(
+                                toggleModal(
+                                    ModalActionTypes.ADD_COLOR_SWATCH_POPOVER,
+                                    'CLOSE'
+                                )
+                            )
+                        }
                         placement="start"
                         position="bottom"
                         withCloseButton={true}
                         opened={isAddColorPopoverOpen}
                         target={
                             <AddButton
-                                onClick={() => setStatusAddColorPopover(true)}
+                                onClick={() =>
+                                    dispatch(
+                                        toggleModal(
+                                            ModalActionTypes.ADD_COLOR_SWATCH_POPOVER,
+                                            'OPEN'
+                                        )
+                                    )
+                                }
                             >
                                 <AddIcon />
                             </AddButton>
@@ -202,15 +225,27 @@ const ViewerInteractionsForm = () => {
                         noClickOutside={true}
                         noEscape={true}
                         title="Add Viewer Questions"
-                        onClose={() => setStatusAddUserInputPopover(false)}
+                        onClose={() =>
+                            dispatch(
+                                toggleModal(
+                                    ModalActionTypes.ADD_VIEWER_INPUT_POPOVER,
+                                    'CLOSE'
+                                )
+                            )
+                        }
                         placement="start"
                         position="bottom"
                         withCloseButton={true}
-                        opened={isAddUserInputPopoverOpen}
+                        opened={isViewerInputPopoverOpen}
                         target={
                             <AddButton
                                 onClick={() =>
-                                    setStatusAddUserInputPopover(true)
+                                    dispatch(
+                                        toggleModal(
+                                            ModalActionTypes.ADD_VIEWER_INPUT_POPOVER,
+                                            'OPEN'
+                                        )
+                                    )
                                 }
                             >
                                 <AddIcon />
