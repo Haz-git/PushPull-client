@@ -11,6 +11,7 @@ import { Popover } from '@mantine/core';
 import { AddColorForm } from './AddColorForm';
 import { AddViewerInputForm } from './AddViewerInputForm';
 import { ColorSelectables } from './ColorSelectables';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
@@ -111,8 +112,10 @@ const ViewerInteractionsForm = () => {
 
         return colorSwatches.map((color: any) => (
             <ColorSelectables
+                label={color.label}
                 colorHex={color.colorHex}
                 description={color.description}
+                key={uuid()}
             />
         ));
     };
