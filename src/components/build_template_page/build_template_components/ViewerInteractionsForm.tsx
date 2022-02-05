@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { ModalActionTypes } from '../../../redux/modals/action-types';
+import { toggleModal } from '../../../redux/modals/modalActions';
 
 //Components:
 import Text from '../../general_components/Text';
@@ -19,7 +19,6 @@ import styled from 'styled-components';
 import { Info } from '@styled-icons/fluentui-system-filled/Info';
 import { Add } from '@styled-icons/fluentui-system-filled/Add';
 import { Subtract } from '@styled-icons/fluentui-system-regular/Subtract';
-import { toggleModal } from '../../../redux/modals/modalActions';
 
 const InfoIcon = styled(Info)`
     margin-bottom: -0.02rem;
