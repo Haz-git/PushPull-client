@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { ModalActionTypes } from '../../../redux/modals/action-types';
+import { toggleModal } from '../../../redux/modals/modalActions';
 
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
@@ -67,7 +69,6 @@ export const AddColorForm = () => {
         }
 
         const { label, description, colorHex } = colorDetails;
-
         const newColorArray = [
             ...currentSavedColors,
             { label, description, colorHex },
@@ -75,12 +76,16 @@ export const AddColorForm = () => {
 
         dispatch(
             updateTemplate(
-                (status) => console.log(status),
+                (status) => {},
                 template.id,
                 { templateLegend: newColorArray },
                 true,
                 null
             )
+        );
+
+        dispatch(
+            toggleModal(ModalActionTypes.ADD_COLOR_SWATCH_POPOVER, 'CLOSE')
         );
     };
 
