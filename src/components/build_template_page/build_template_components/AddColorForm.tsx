@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 
 //Redux:
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
@@ -10,6 +10,7 @@ import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
+import { updateTemplate } from '../../../redux/templates/templateActions';
 
 const MainContainer = styled.div``;
 
@@ -24,20 +25,27 @@ const ButtonContainer = styled.div`
 `;
 
 export const AddColorForm = () => {
+    const dispatch = useDispatch();
     const currentSavedColors = useSelector(
         (state: RootStateOrAny) => state?.template?.templateLegend
     );
+    const template = useSelector((state: RootStateOrAny) => state?.template);
     const [colorDetails, setColorDetails] = useState({
         label: '',
         description: '',
         colorHex: '',
     });
+    const [formError, toggleFormError] = useState(false);
 
     const handleUserInput = (
         e: React.ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
         >
     ): void => {
+        if (formError) {
+            toggleFormError(false);
+        }
+
         setColorDetails({
             ...colorDetails,
             [e.target.name]: e.target.value,
@@ -54,13 +62,26 @@ export const AddColorForm = () => {
 
     const handleSaveColor = (): void => {
         if (!validateForm()) {
+            toggleFormError(true);
             return;
         }
 
-        console.log(
-            'This dispatch request will append the new color with the existing colors, and send a replacement object.'
+        const { label, description, colorHex } = colorDetails;
+
+        const newColorArray = [
+            ...currentSavedColors,
+            { label, description, colorHex },
+        ];
+
+        dispatch(
+            updateTemplate(
+                (status) => console.log(status),
+                template.id,
+                { templateLegend: newColorArray },
+                true,
+                null
+            )
         );
-        console.log('current colors: ', currentSavedColors);
     };
 
     return (
@@ -87,9 +108,7 @@ export const AddColorForm = () => {
                     label="Color Label"
                     placeholder={'Label your color'}
                     onChange={handleUserInput}
-                    // value={projectName}
-                    // error={hasError}
-                    // disabled={isCreatingNewProject}
+                    error={formError}
                 />
                 <Divider />
                 <Textarea
@@ -113,8 +132,6 @@ export const AddColorForm = () => {
                     label="Color Description"
                     placeholder="Describe what your color means.."
                     onChange={handleUserInput}
-                    // value={projectDesc}
-                    // disabled={isCreatingNewProject}
                 />
                 <Divider />
                 <ColorInput
@@ -142,13 +159,7 @@ export const AddColorForm = () => {
                     onChange={(e: string) =>
                         setColorDetails({ ...colorDetails, colorHex: e })
                     }
-                    // value={projectColor}
-                    // rightSection={
-                    //     <RandomButton onClick={generateRandomHexColor}>
-                    //         <RandomIcon />
-                    //     </RandomButton>
-                    // }
-                    // disabled={isCreatingNewProject}
+                    error={formError}
                 />
             </FormContainer>
             <ButtonContainer>
