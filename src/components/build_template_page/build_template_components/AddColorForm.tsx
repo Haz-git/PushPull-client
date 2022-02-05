@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useSelector, RootStateOrAny } from 'react-redux';
+
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
@@ -21,6 +24,9 @@ const ButtonContainer = styled.div`
 `;
 
 export const AddColorForm = () => {
+    const currentSavedColors = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateLegend
+    );
     const [colorDetails, setColorDetails] = useState({
         label: '',
         description: '',
@@ -51,7 +57,10 @@ export const AddColorForm = () => {
             return;
         }
 
-        console.log('dispatch request here');
+        console.log(
+            'This dispatch request will append the new color with the existing colors, and send a replacement object.'
+        );
+        console.log('current colors: ', currentSavedColors);
     };
 
     return (
