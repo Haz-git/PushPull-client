@@ -59,9 +59,11 @@ const ActionContainer = styled.div`
     border: 1px solid #d6d6d6;
     background: #ececec;
     border-radius: 0.3rem;
-    height: 10rem;
+    min-height: 10rem;
     width: 100%;
     padding: 0.5rem 0.5rem;
+    max-height: 12rem;
+    overflow-y: scroll;
 `;
 
 const ActionableButtonContainer = styled.div`
@@ -126,6 +128,11 @@ const ViewerInteractionsForm = () => {
                     </Tooltip>
                 </OptionHeader>
                 <ActionContainer>
+                    <ColorSelectables />
+                    <ColorSelectables />
+                    <ColorSelectables />
+                    <ColorSelectables />
+                    <ColorSelectables />
                     <ColorSelectables />
                 </ActionContainer>
                 <ActionableButtonContainer>

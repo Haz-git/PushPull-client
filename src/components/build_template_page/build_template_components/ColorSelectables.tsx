@@ -16,6 +16,7 @@ const MainContainer = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px;
+    margin-bottom: 0.5rem;
 `;
 
 const ColorSwatchContainer = styled.div`
