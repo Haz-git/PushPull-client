@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+//Redux:
+import { useSelector, RootStateOrAny } from 'react-redux';
+
 //Components:
 import Text from '../../general_components/Text';
 import { Tooltip } from '@mantine/core';
@@ -94,9 +97,25 @@ const RemoveButton = styled.button`
 `;
 
 const ViewerInteractionsForm = () => {
+    const colorSwatches = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateLegend
+    );
     const [isAddColorPopoverOpen, setStatusAddColorPopover] = useState(false);
     const [isAddUserInputPopoverOpen, setStatusAddUserInputPopover] =
         useState(false);
+
+    const renderColorSwatches = (): JSX.Element => {
+        if (!colorSwatches || colorSwatches.length === 0) {
+            return <>Temp Placeholder - no colors</>;
+        }
+
+        return colorSwatches.map((color: any) => (
+            <ColorSelectables
+                colorHex={color.colorHex}
+                description={color.description}
+            />
+        ));
+    };
 
     return (
         <MainContainer>
@@ -127,14 +146,7 @@ const ViewerInteractionsForm = () => {
                         <InfoIcon />
                     </Tooltip>
                 </OptionHeader>
-                <ActionContainer>
-                    <ColorSelectables />
-                    <ColorSelectables />
-                    <ColorSelectables />
-                    <ColorSelectables />
-                    <ColorSelectables />
-                    <ColorSelectables />
-                </ActionContainer>
+                <ActionContainer>{renderColorSwatches()}</ActionContainer>
                 <ActionableButtonContainer>
                     <Popover
                         noClickOutside={true}
