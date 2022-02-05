@@ -11,16 +11,10 @@ export const toggleModal = (
             return;
         }
 
-        let shouldModalOpen = true;
-
-        if (action !== 'OPEN') {
-            shouldModalOpen = false;
-        }
-
         return dispatch({
             type: modalType,
             payload: {
-                isOpen: shouldModalOpen,
+                isOpen: action === 'OPEN',
             },
         });
     };

@@ -62,7 +62,7 @@ export const addTemplate = (
                 statusCallback(false);
             }
         } catch (err) {
-            console.log(err);
+            console.warn(err);
             statusCallback(true);
         }
     };
@@ -112,6 +112,7 @@ export const updateTemplate = (
                 statusCallback(false);
             }
         } catch (err) {
+            console.warn(err);
             statusCallback(true);
         }
     };
@@ -204,7 +205,7 @@ export const addToolbarBlock = (
                 closeAddBlockModal();
             }
         } catch (err) {
-            console.log(err);
+            console.warn(err);
             dispatch(disableLoaderState(loaderTypes.ADD_BLOCK_MODAL));
         }
     };
@@ -246,7 +247,7 @@ export const addEditingSurfaceBlock = (
                 payload: response.data.template,
             });
         } catch (err) {
-            console.log(err);
+            console.warn(err);
         }
     };
 };

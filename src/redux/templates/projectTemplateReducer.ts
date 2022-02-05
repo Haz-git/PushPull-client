@@ -16,9 +16,7 @@ const projectTemplateReducer = (
         return state;
     }
 
-    return {
-        ...action.payload,
-    };
+    return [...action.payload];
 };
 
 export default projectTemplateReducer;

@@ -5,6 +5,12 @@ const initialState: any = {
     DELETE_SHEET_CONFIRMATION: {
         isOpen: false,
     },
+    ADD_COLOR_SWATCH_POPOVER: {
+        isOpen: false,
+    },
+    ADD_VIEWER_INPUT_POPOVER: {
+        isOpen: false,
+    },
 };
 
 export const modalReducer = (state: {} = initialState, action: ModalAction) => {
