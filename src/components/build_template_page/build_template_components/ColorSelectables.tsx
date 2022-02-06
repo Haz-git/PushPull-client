@@ -8,7 +8,7 @@ import Text from '../../general_components/Text';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<IMainContainerProps>`
     width: 100%;
     background: #ffffff;
     border-radius: 0.3rem;
@@ -17,6 +17,8 @@ const MainContainer = styled.div`
     justify-content: flex-start;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 2px 4px;
     margin-bottom: 0.5rem;
+    border: ${({ isSelected }) =>
+        isSelected ? '1px solid #e07133' : '1px solid transparent'};
 `;
 
 const ColorSwatchContainer = styled.div`
@@ -31,7 +33,7 @@ const ColorSwatch = styled.div<IColorSwatch>`
     background: ${({ color }) => color};
 `;
 
-const DescriptionContainer = styled.div`
+const LabelContainer = styled.div`
     height: 100%;
     max-height: 5rem;
     border-left: 1px solid #d6d6d6;
@@ -42,29 +44,42 @@ const DescriptionContainer = styled.div`
 
 //Interfaces:
 
+interface IMainContainerProps {
+    isSelected: boolean;
+}
+
 interface IColorSwatch {
     color: string;
 }
 
 interface IComponentProps {
+    id: string;
     label: string;
-    colorHex?: string;
+    colorHex: string;
     description?: string;
+    isSelected: boolean;
+    onSelectColor: (colorId: string) => void;
 }
 
 export const ColorSelectables = ({
+    id,
     label = 'Test Label',
     colorHex = '#000000',
     description = 'Test Description for color swatch',
+    isSelected = false,
+    onSelectColor,
 }: IComponentProps): JSX.Element => {
     return (
-        <MainContainer>
+        <MainContainer
+            isSelected={isSelected}
+            onClick={() => onSelectColor(id)}
+        >
             <ColorSwatchContainer>
                 <ColorSwatch color={colorHex} />
             </ColorSwatchContainer>
-            <DescriptionContainer>
+            <LabelContainer>
                 <Text text={label} subText={true} />
-            </DescriptionContainer>
+            </LabelContainer>
         </MainContainer>
     );
 };

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -10,9 +11,9 @@ import Text from '../../general_components/Text';
 import { Tooltip } from '@mantine/core';
 import { Popover } from '@mantine/core';
 import { AddColorForm } from './AddColorForm';
+import { DeleteColorForm } from './DeleteColorForm';
 import { AddViewerInputForm } from './AddViewerInputForm';
 import { ColorSelectables } from './ColorSelectables';
-import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
@@ -108,10 +109,36 @@ const ViewerInteractionsForm = () => {
         (state: RootStateOrAny) =>
             state?.modals?.ADD_COLOR_SWATCH_POPOVER.isOpen
     );
+
+    const isDeleteColorPopoverOpen = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.DELETE_COLOR_SWATCH_POPOVER.isOpen
+    );
+
     const isViewerInputPopoverOpen = useSelector(
         (state: RootStateOrAny) =>
             state?.modals?.ADD_VIEWER_INPUT_POPOVER.isOpen
     );
+    const isDeleteViewerInputPopoverOpen = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.DELETE_VIEWER_INPUT_POPOVER.isOpen
+    );
+
+    const [selectedColor, setSelectedColor] = useState('');
+
+    const onSelectColor = (colorId: string): void => {
+        if (!colorId) {
+            return;
+        }
+        setSelectedColor(colorId);
+    };
+
+    const isColorSelected = (
+        selectedColorId: string,
+        colorId: string
+    ): boolean => {
+        return selectedColorId === colorId;
+    };
 
     const renderColorSwatches = (): JSX.Element => {
         if (!colorSwatches || colorSwatches.length === 0) {
@@ -120,12 +147,19 @@ const ViewerInteractionsForm = () => {
 
         return colorSwatches.map((color: any) => (
             <ColorSelectables
+                id={color.id}
                 label={color.label}
                 colorHex={color.colorHex}
                 description={color.description}
-                key={uuid()}
+                key={color.id}
+                isSelected={isColorSelected(selectedColor, color.id)}
+                onSelectColor={onSelectColor}
             />
         ));
+    };
+
+    const shouldDeleteColorPopoverOpen = (): boolean => {
+        return selectedColor !== '' && isDeleteColorPopoverOpen;
     };
 
     return (
@@ -192,9 +226,43 @@ const ViewerInteractionsForm = () => {
                     >
                         <AddColorForm />
                     </Popover>
-                    <RemoveButton>
-                        <SubtractIcon />
-                    </RemoveButton>
+                    <Popover
+                        noClickOutside={false}
+                        noEscape={false}
+                        title="Remove Color"
+                        onClose={() =>
+                            dispatch(
+                                toggleModal(
+                                    ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER,
+                                    'CLOSE'
+                                )
+                            )
+                        }
+                        placement="start"
+                        position="bottom"
+                        withCloseButton={true}
+                        opened={shouldDeleteColorPopoverOpen()}
+                        target={
+                            <RemoveButton
+                                onClick={() => {
+                                    if (selectedColor !== '') {
+                                        dispatch(
+                                            toggleModal(
+                                                ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER,
+                                                'OPEN'
+                                            )
+                                        );
+                                    }
+                                }}
+                            >
+                                <SubtractIcon />
+                            </RemoveButton>
+                        }
+                    >
+                        <DeleteColorForm
+                            currentSelectedColorId={selectedColor}
+                        />
+                    </Popover>
                 </ActionableButtonContainer>
             </LegendContainer>
             <ViewerInputsContainer>

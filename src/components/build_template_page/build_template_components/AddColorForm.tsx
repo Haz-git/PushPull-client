@@ -5,14 +5,15 @@ import { useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { ModalActionTypes } from '../../../redux/modals/action-types';
 import { toggleModal } from '../../../redux/modals/modalActions';
+import { updateTemplate } from '../../../redux/templates/templateActions';
 
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
-import { updateTemplate } from '../../../redux/templates/templateActions';
 
 const MainContainer = styled.div``;
 
@@ -37,24 +38,24 @@ export const AddColorForm = () => {
         description: '',
         colorHex: '',
     });
-    const [formError, toggleFormError] = useState(false);
+    const [hasFormError, setHasFormError] = useState<boolean>(false);
 
     const handleUserInput = (
-        e: React.ChangeEvent<
+        event: React.ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
         >
     ): void => {
-        if (formError) {
-            toggleFormError(false);
+        if (hasFormError) {
+            setHasFormError(false);
         }
 
         setColorDetails({
             ...colorDetails,
-            [e.target.name]: e.target.value,
+            [event.target.name]: event.target.value,
         });
     };
 
-    const validateForm = (): boolean => {
+    const isFormValid = (): boolean => {
         if (!colorDetails.label || !colorDetails.colorHex) {
             return false;
         }
@@ -63,15 +64,15 @@ export const AddColorForm = () => {
     };
 
     const handleSaveColor = (): void => {
-        if (!validateForm()) {
-            toggleFormError(true);
+        if (!isFormValid()) {
+            setHasFormError(true);
             return;
         }
 
         const { label, description, colorHex } = colorDetails;
         const newColorArray = [
             ...currentSavedColors,
-            { label, description, colorHex },
+            { id: uuid(), label, description, colorHex },
         ];
 
         dispatch(
@@ -113,7 +114,7 @@ export const AddColorForm = () => {
                     label="Color Label"
                     placeholder={'Label your color'}
                     onChange={handleUserInput}
-                    error={formError}
+                    error={hasFormError}
                 />
                 <Divider />
                 <Textarea
@@ -161,10 +162,10 @@ export const AddColorForm = () => {
                     label="Select Color"
                     disallowInput
                     dropdownZIndex={9999}
-                    onChange={(e: string) =>
-                        setColorDetails({ ...colorDetails, colorHex: e })
+                    onChange={(hexcode: string) =>
+                        setColorDetails({ ...colorDetails, colorHex: hexcode })
                     }
-                    error={formError}
+                    error={hasFormError}
                 />
             </FormContainer>
             <ButtonContainer>
