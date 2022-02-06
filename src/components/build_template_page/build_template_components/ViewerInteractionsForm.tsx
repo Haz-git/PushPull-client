@@ -11,9 +11,9 @@ import Text from '../../general_components/Text';
 import { Tooltip } from '@mantine/core';
 import { Popover } from '@mantine/core';
 import { AddColorForm } from './AddColorForm';
+import { DeleteColorForm } from './DeleteColorForm';
 import { AddViewerInputForm } from './AddViewerInputForm';
 import { ColorSelectables } from './ColorSelectables';
-import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
@@ -227,8 +227,8 @@ const ViewerInteractionsForm = () => {
                         <AddColorForm />
                     </Popover>
                     <Popover
-                        noClickOutside={true}
-                        noEscape={true}
+                        noClickOutside={false}
+                        noEscape={false}
                         title="Remove Color"
                         onClose={() =>
                             dispatch(
@@ -259,7 +259,7 @@ const ViewerInteractionsForm = () => {
                             </RemoveButton>
                         }
                     >
-                        <div>example div</div>
+                        <DeleteColorForm />
                     </Popover>
                 </ActionableButtonContainer>
             </LegendContainer>
