@@ -109,9 +109,19 @@ const ViewerInteractionsForm = () => {
         (state: RootStateOrAny) =>
             state?.modals?.ADD_COLOR_SWATCH_POPOVER.isOpen
     );
+
+    const isDeleteColorPopoverOpen = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.DELETE_COLOR_SWATCH_POPOVER.isOpen
+    );
+
     const isViewerInputPopoverOpen = useSelector(
         (state: RootStateOrAny) =>
             state?.modals?.ADD_VIEWER_INPUT_POPOVER.isOpen
+    );
+    const isDeleteViewerInputPopoverOpen = useSelector(
+        (state: RootStateOrAny) =>
+            state?.modals?.DELETE_VIEWER_INPUT_POPOVER.isOpen
     );
 
     const [selectedColor, setSelectedColor] = useState('');
@@ -146,6 +156,10 @@ const ViewerInteractionsForm = () => {
                 onSelectColor={onSelectColor}
             />
         ));
+    };
+
+    const shouldDeleteColorPopoverOpen = (): boolean => {
+        return selectedColor !== '' && isDeleteColorPopoverOpen;
     };
 
     return (
@@ -212,9 +226,41 @@ const ViewerInteractionsForm = () => {
                     >
                         <AddColorForm />
                     </Popover>
-                    <RemoveButton>
-                        <SubtractIcon />
-                    </RemoveButton>
+                    <Popover
+                        noClickOutside={true}
+                        noEscape={true}
+                        title="Remove Color"
+                        onClose={() =>
+                            dispatch(
+                                toggleModal(
+                                    ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER,
+                                    'CLOSE'
+                                )
+                            )
+                        }
+                        placement="start"
+                        position="bottom"
+                        withCloseButton={true}
+                        opened={shouldDeleteColorPopoverOpen()}
+                        target={
+                            <RemoveButton
+                                onClick={() => {
+                                    if (selectedColor !== '') {
+                                        dispatch(
+                                            toggleModal(
+                                                ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER,
+                                                'OPEN'
+                                            )
+                                        );
+                                    }
+                                }}
+                            >
+                                <SubtractIcon />
+                            </RemoveButton>
+                        }
+                    >
+                        <div>example div</div>
+                    </Popover>
                 </ActionableButtonContainer>
             </LegendContainer>
             <ViewerInputsContainer>
