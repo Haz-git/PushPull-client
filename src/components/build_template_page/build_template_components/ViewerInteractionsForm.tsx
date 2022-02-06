@@ -116,6 +116,20 @@ const ViewerInteractionsForm = () => {
 
     const [selectedColor, setSelectedColor] = useState('');
 
+    const onSelectColor = (colorId: string): void => {
+        if (!colorId) {
+            return;
+        }
+        setSelectedColor(colorId);
+    };
+
+    const isColorSelected = (
+        selectedColorId: string,
+        colorId: string
+    ): boolean => {
+        return selectedColorId === colorId;
+    };
+
     const renderColorSwatches = (): JSX.Element => {
         if (!colorSwatches || colorSwatches.length === 0) {
             return <>Temp Placeholder - no colors</>;
@@ -128,6 +142,8 @@ const ViewerInteractionsForm = () => {
                 colorHex={color.colorHex}
                 description={color.description}
                 key={color.id}
+                isSelected={isColorSelected(selectedColor, color.id)}
+                onSelectColor={onSelectColor}
             />
         ));
     };
