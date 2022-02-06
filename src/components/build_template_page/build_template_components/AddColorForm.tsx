@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { ModalActionTypes } from '../../../redux/modals/action-types';
 import { toggleModal } from '../../../redux/modals/modalActions';
+import { updateTemplate } from '../../../redux/templates/templateActions';
 
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
@@ -13,7 +14,6 @@ import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
-import { updateTemplate } from '../../../redux/templates/templateActions';
 
 const MainContainer = styled.div``;
 
