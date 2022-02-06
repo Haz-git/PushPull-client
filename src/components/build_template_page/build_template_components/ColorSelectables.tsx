@@ -31,7 +31,7 @@ const ColorSwatch = styled.div<IColorSwatch>`
     background: ${({ color }) => color};
 `;
 
-const DescriptionContainer = styled.div`
+const LabelContainer = styled.div`
     height: 100%;
     max-height: 5rem;
     border-left: 1px solid #d6d6d6;
@@ -47,12 +47,14 @@ interface IColorSwatch {
 }
 
 interface IComponentProps {
+    id: string;
     label: string;
-    colorHex?: string;
+    colorHex: string;
     description?: string;
 }
 
 export const ColorSelectables = ({
+    id,
     label = 'Test Label',
     colorHex = '#000000',
     description = 'Test Description for color swatch',
@@ -62,9 +64,9 @@ export const ColorSelectables = ({
             <ColorSwatchContainer>
                 <ColorSwatch color={colorHex} />
             </ColorSwatchContainer>
-            <DescriptionContainer>
+            <LabelContainer>
                 <Text text={label} subText={true} />
-            </DescriptionContainer>
+            </LabelContainer>
         </MainContainer>
     );
 };

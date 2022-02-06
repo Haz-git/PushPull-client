@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -113,6 +114,8 @@ const ViewerInteractionsForm = () => {
             state?.modals?.ADD_VIEWER_INPUT_POPOVER.isOpen
     );
 
+    const [selectedColor, setSelectedColor] = useState('');
+
     const renderColorSwatches = (): JSX.Element => {
         if (!colorSwatches || colorSwatches.length === 0) {
             return <>Temp Placeholder - no colors</>;
@@ -120,10 +123,11 @@ const ViewerInteractionsForm = () => {
 
         return colorSwatches.map((color: any) => (
             <ColorSelectables
+                id={color.id}
                 label={color.label}
                 colorHex={color.colorHex}
                 description={color.description}
-                key={uuid()}
+                key={color.id}
             />
         ));
     };

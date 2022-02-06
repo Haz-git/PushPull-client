@@ -9,6 +9,7 @@ import { toggleModal } from '../../../redux/modals/modalActions';
 //Components:
 import { TextInput, Textarea, ColorInput } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
@@ -71,7 +72,7 @@ export const AddColorForm = () => {
         const { label, description, colorHex } = colorDetails;
         const newColorArray = [
             ...currentSavedColors,
-            { label, description, colorHex },
+            { id: uuid(), label, description, colorHex },
         ];
 
         dispatch(
