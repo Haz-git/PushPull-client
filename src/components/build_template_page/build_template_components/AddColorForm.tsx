@@ -38,24 +38,24 @@ export const AddColorForm = () => {
         description: '',
         colorHex: '',
     });
-    const [formError, toggleFormError] = useState(false);
+    const [hasFormError, setHasFormError] = useState<boolean>(false);
 
     const handleUserInput = (
-        e: React.ChangeEvent<
+        event: React.ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
         >
     ): void => {
-        if (formError) {
-            toggleFormError(false);
+        if (hasFormError) {
+            setHasFormError(false);
         }
 
         setColorDetails({
             ...colorDetails,
-            [e.target.name]: e.target.value,
+            [event.target.name]: event.target.value,
         });
     };
 
-    const validateForm = (): boolean => {
+    const isFormValid = (): boolean => {
         if (!colorDetails.label || !colorDetails.colorHex) {
             return false;
         }
@@ -64,8 +64,8 @@ export const AddColorForm = () => {
     };
 
     const handleSaveColor = (): void => {
-        if (!validateForm()) {
-            toggleFormError(true);
+        if (!isFormValid()) {
+            setHasFormError(true);
             return;
         }
 
@@ -114,7 +114,7 @@ export const AddColorForm = () => {
                     label="Color Label"
                     placeholder={'Label your color'}
                     onChange={handleUserInput}
-                    error={formError}
+                    error={hasFormError}
                 />
                 <Divider />
                 <Textarea
@@ -162,10 +162,10 @@ export const AddColorForm = () => {
                     label="Select Color"
                     disallowInput
                     dropdownZIndex={9999}
-                    onChange={(e: string) =>
-                        setColorDetails({ ...colorDetails, colorHex: e })
+                    onChange={(hexcode: string) =>
+                        setColorDetails({ ...colorDetails, colorHex: hexcode })
                     }
-                    error={formError}
+                    error={hasFormError}
                 />
             </FormContainer>
             <ButtonContainer>
