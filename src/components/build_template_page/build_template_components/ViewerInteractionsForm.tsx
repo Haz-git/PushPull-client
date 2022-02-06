@@ -259,7 +259,9 @@ const ViewerInteractionsForm = () => {
                             </RemoveButton>
                         }
                     >
-                        <DeleteColorForm />
+                        <DeleteColorForm
+                            currentSelectedColorId={selectedColor}
+                        />
                     </Popover>
                 </ActionableButtonContainer>
             </LegendContainer>
