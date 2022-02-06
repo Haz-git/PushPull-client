@@ -8,7 +8,13 @@ const initialState: any = {
     ADD_COLOR_SWATCH_POPOVER: {
         isOpen: false,
     },
+    DELETE_COLOR_SWATCH_POPOVER: {
+        isOpen: false,
+    },
     ADD_VIEWER_INPUT_POPOVER: {
+        isOpen: false,
+    },
+    DELETE_VIEWER_INPUT_POPOVER: {
         isOpen: false,
     },
 };
