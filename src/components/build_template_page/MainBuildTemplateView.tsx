@@ -105,16 +105,16 @@ const MainBuildTemplateView = ({
         };
     }, []);
 
-    const isMainViewLoading = useSelector(
+    const { isLoading: isMainViewLoading } = useSelector(
         (state: RootStateOrAny) =>
             state?.uiLoader?.MAIN_BUILD_TEMPLATE_VIEW?.isLoading
     );
 
-    const isAddBlockModalLoading = useSelector(
+    const { isLoading: isAddBlockModalLoading } = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.ADD_BLOCK_MODAL?.isLoading
     );
 
-    const isViewerInteractionsSettingsModalLoading = useSelector(
+    const { isLoading: isViewerInteractionsSettingsModalLoading } = useSelector(
         (state: RootStateOrAny) =>
             state?.uiLoader?.VIEWER_INTERACTIONS_SETTINGS_MODAL?.isLoading
     );
@@ -192,6 +192,7 @@ const MainBuildTemplateView = ({
     const controlViewerInteractionsModal = (state: boolean): void => {
         setOpenViewerInteractionsModal(state);
     };
+
     // Modal for viewing and editing Global Inputs:
     const [openGlobalModal, setOpenGlobalModal] = useState(false);
     const controlGlobalModal = (state: boolean): void => {
