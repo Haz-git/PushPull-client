@@ -15,7 +15,7 @@ import profileReducer from './profile/profileReducer';
 import builderReducer from './builder/builderReducer';
 import projectTemplateReducer from './templates/projectTemplateReducer';
 import templateReducer from './templates/templateReducer';
-import uiLoaderReducer from './uiLoader/uiLoaderReducer';
+import { uiLoaderReducer } from './uiLoader/uiLoaderReducer';
 import selectedBlockReducer from './selectedBlock/selectedBlockReducer';
 import { errorReducer } from './errors/errorReducer';
 import { modalReducer } from './modals/modalReducer';
