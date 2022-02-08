@@ -26,10 +26,12 @@ const TextDivider = styled.div`
 //Interfaces:
 interface IComponentProps {
     currentSelectedColorId: string;
+    resetColorId: () => void;
 }
 
 export const DeleteColorForm = ({
     currentSelectedColorId,
+    resetColorId,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const currentSavedColors = useSelector(
@@ -68,6 +70,8 @@ export const DeleteColorForm = ({
         dispatch(
             toggleModal(ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER, 'CLOSE')
         );
+
+        resetColorId();
     };
 
     return (

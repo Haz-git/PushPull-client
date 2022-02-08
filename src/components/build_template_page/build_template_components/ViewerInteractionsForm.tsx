@@ -261,6 +261,7 @@ const ViewerInteractionsForm = () => {
                     >
                         <DeleteColorForm
                             currentSelectedColorId={selectedColor}
+                            resetColorId={() => setSelectedColor('')}
                         />
                     </Popover>
                 </ActionableButtonContainer>
