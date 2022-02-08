@@ -74,12 +74,13 @@ export const updateTemplate = (
     templateDetails: any,
     isInTemplateBuilderMode: true | false,
     projectUuid?: string | null,
-    controlGlobalSettingsModal?: (state: boolean) => void
+    controlGlobalSettingsModal?: ((state: boolean) => void) | null,
+    uiLoaderType?: loaderTypes
 ) => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            if (isInTemplateBuilderMode) {
-                dispatch(invokeLoaderState(loaderTypes.GLOBAL_SETTINGS_MODAL));
+            if (uiLoaderType) {
+                dispatch(invokeLoaderState(uiLoaderType));
             }
 
             let response = await api.put(`/template/update/${templateId}`, {
@@ -96,8 +97,6 @@ export const updateTemplate = (
                     payload: templateBuilderObject,
                 });
 
-                dispatch(disableLoaderState(loaderTypes.GLOBAL_SETTINGS_MODAL));
-
                 if (controlGlobalSettingsModal) {
                     controlGlobalSettingsModal(false);
                 }
@@ -108,12 +107,19 @@ export const updateTemplate = (
                 payload: projectTemplateArray,
             });
 
+            if (uiLoaderType) {
+                dispatch(disableLoaderState(uiLoaderType));
+            }
+
             if (response.data.status === 'Success') {
                 statusCallback(false);
             }
         } catch (err) {
             console.warn(err);
             statusCallback(true);
+            if (uiLoaderType) {
+                dispatch(disableLoaderState(uiLoaderType));
+            }
         }
     };
 };
@@ -188,12 +194,12 @@ export const addToolbarBlock = (
 ) => {
     return async (dispatch: Dispatch<any>) => {
         try {
+            dispatch(invokeLoaderState(loaderTypes.ADD_BLOCK_MODAL));
+
             let response = await api.post(
                 `/template/toolbar/add/${templateId}`,
                 { blockDetails: blockDetails }
             );
-
-            dispatch(invokeLoaderState(loaderTypes.ADD_BLOCK_MODAL));
 
             dispatch({
                 type: TemplateActionType.ADD_TOOLBAR_BLOCK,
