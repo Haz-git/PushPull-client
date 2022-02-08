@@ -106,17 +106,16 @@ const MainBuildTemplateView = ({
     }, []);
 
     const { isLoading: isMainViewLoading } = useSelector(
-        (state: RootStateOrAny) =>
-            state?.uiLoader?.MAIN_BUILD_TEMPLATE_VIEW?.isLoading
+        (state: RootStateOrAny) => state?.uiLoader?.MAIN_BUILD_TEMPLATE_VIEW
     );
 
     const { isLoading: isAddBlockModalLoading } = useSelector(
-        (state: RootStateOrAny) => state?.uiLoader?.ADD_BLOCK_MODAL?.isLoading
+        (state: RootStateOrAny) => state?.uiLoader?.ADD_BLOCK_MODAL
     );
 
     const { isLoading: isViewerInteractionsSettingsModalLoading } = useSelector(
         (state: RootStateOrAny) =>
-            state?.uiLoader?.VIEWER_INTERACTIONS_SETTINGS_MODAL?.isLoading
+            state?.uiLoader?.VIEWER_INTERACTIONS_SETTINGS_MODAL
     );
     //Loader state for global settings modal on update
     const { isLoading: isGlobalSettingsModalLoading } = useSelector(
