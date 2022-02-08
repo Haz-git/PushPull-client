@@ -194,7 +194,7 @@ const ViewerInteractionsForm = () => {
                 <ActionContainer>{renderColorSwatches()}</ActionContainer>
                 <ActionableButtonContainer>
                     <Popover
-                        noClickOutside={true}
+                        noClickOutside={false}
                         noEscape={true}
                         title="Add New Color"
                         onClose={() =>
