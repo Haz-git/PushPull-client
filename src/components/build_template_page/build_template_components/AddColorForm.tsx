@@ -14,6 +14,7 @@ import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
+import { loaderTypes } from '../../../redux/uiLoader/loader-types';
 
 const MainContainer = styled.div``;
 
@@ -81,7 +82,9 @@ export const AddColorForm = () => {
                 template.id,
                 { templateLegend: newColorArray },
                 true,
-                null
+                null,
+                null,
+                loaderTypes.VIEWER_INTERACTIONS_SETTINGS_MODAL
             )
         );
 

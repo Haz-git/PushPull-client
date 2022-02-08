@@ -105,13 +105,22 @@ const MainBuildTemplateView = ({
         };
     }, []);
 
-    const isMainViewLoading = useSelector(
+    const { isLoading: isMainViewLoading } = useSelector(
         (state: RootStateOrAny) =>
-            state?.uiLoader?.mainBuildTemplateView?.isLoading
+            state?.uiLoader?.MAIN_BUILD_TEMPLATE_VIEW?.isLoading
     );
 
-    const isAddBlockModalLoading = useSelector(
-        (state: RootStateOrAny) => state?.uiLoader?.addBlockModal?.isLoading
+    const { isLoading: isAddBlockModalLoading } = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.ADD_BLOCK_MODAL?.isLoading
+    );
+
+    const { isLoading: isViewerInteractionsSettingsModalLoading } = useSelector(
+        (state: RootStateOrAny) =>
+            state?.uiLoader?.VIEWER_INTERACTIONS_SETTINGS_MODAL?.isLoading
+    );
+    //Loader state for global settings modal on update
+    const { isLoading: isGlobalSettingsModalLoading } = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.GLOBAL_SETTINGS_MODAL
     );
 
     const error = useSelector((state: RootStateOrAny) => state?.errors);
@@ -195,11 +204,6 @@ const MainBuildTemplateView = ({
     const controlBlockModal = (state: boolean): void => {
         setOpenBlockModal(state);
     };
-
-    //Loader state for global settings modal on update
-    const { isLoading: isGlobalSettingsModalLoading } = useSelector(
-        (state: RootStateOrAny) => state?.uiLoader?.globalSettingsModal
-    );
 
     //Helper Functions: For DragDropContext
 
@@ -350,6 +354,7 @@ const MainBuildTemplateView = ({
                             />
                         </GeneralModal>
                         <GeneralModal
+                            isLoading={isViewerInteractionsSettingsModalLoading}
                             size="lg"
                             closeOnClickOutside={false}
                             title="Viewer Interactions Settings"
@@ -361,22 +366,22 @@ const MainBuildTemplateView = ({
                             <ViewerInteractionsForm />
                         </GeneralModal>
                         <GeneralModal
+                            isLoading={isGlobalSettingsModalLoading}
                             closeOnClickOutside={false}
                             title="Template Global Settings"
                             openBoolean={openGlobalModal}
                             closeFunc={() => setOpenGlobalModal(false)}
-                            isLoading={isGlobalSettingsModalLoading}
                         >
                             <GlobalSettingsForm
                                 toggleGlobalSettingsModal={controlGlobalModal}
                             />
                         </GeneralModal>
                         <GeneralModal
+                            isLoading={isAddBlockModalLoading}
                             closeOnClickOutside={false}
                             title="Add New Block"
                             openBoolean={openBlockModal}
                             closeFunc={() => setOpenBlockModal(false)}
-                            isLoading={isAddBlockModalLoading}
                         >
                             <AddBlockForm
                                 closeModal={() => setOpenBlockModal(false)}

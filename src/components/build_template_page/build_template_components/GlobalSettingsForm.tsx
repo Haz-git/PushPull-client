@@ -13,6 +13,7 @@ import { updateTemplate } from '../../../redux/templates/templateActions';
 
 //Styles:
 import styled from 'styled-components';
+import { loaderTypes } from '../../../redux/uiLoader/loader-types';
 
 const MainContainer = styled.div`
     padding: 0rem 0.5rem;
@@ -136,7 +137,8 @@ export const GlobalSettingsForm = ({
                 findUserNewChanges(),
                 true,
                 projectId,
-                toggleGlobalSettingsModal
+                toggleGlobalSettingsModal,
+                loaderTypes.GLOBAL_SETTINGS_MODAL
             )
         );
     };

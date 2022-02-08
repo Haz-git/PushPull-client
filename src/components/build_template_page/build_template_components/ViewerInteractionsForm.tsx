@@ -140,9 +140,9 @@ const ViewerInteractionsForm = () => {
         return selectedColorId === colorId;
     };
 
-    const renderColorSwatches = (): JSX.Element => {
+    const renderColorSwatches = (): JSX.Element | null => {
         if (!colorSwatches || colorSwatches.length === 0) {
-            return <>Temp Placeholder - no colors</>;
+            return null;
         }
 
         return colorSwatches.map((color: any) => (

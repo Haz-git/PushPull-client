@@ -1,42 +1,32 @@
 import { uiLoaderActionType } from './action-types';
+import { loaderTypes } from './loader-types';
 import { uiLoaderAction } from './uiLoaderInterfaces';
 
 const initialState: any = {
-    statusTemplateBlocks: {
+    LOAD_ALL_TEMPLATE_BLOCKS: {
         isLoading: false,
     },
-    mainBuildTemplateView: {
+    MAIN_BUILD_TEMPLATE_VIEW: {
         isLoading: false,
     },
-    addBlockModal: {
+    ADD_BLOCK_MODAL: {
         isLoading: false,
     },
-    globalSettingsModal: {
+    GLOBAL_SETTINGS_MODAL: {
+        isLoading: false,
+    },
+    VIEWER_INTERACTIONS_SETTINGS_MODAL: {
         isLoading: false,
     },
 };
 
-const uiLoaderReducer = (state: {} = initialState, action: uiLoaderAction) => {
-    switch (action.type) {
-        case uiLoaderActionType.START_ADDBLOCKMODAL_LOADER:
-            return { ...state, addBlockModal: action.payload };
-        case uiLoaderActionType.START_MAINBUILDTEMPLATEVIEW_LOADER:
-            return { ...state, mainBuildTemplateView: action.payload };
-        case uiLoaderActionType.START_TEMPLATE_BLOCK_LOADER:
-            return { ...state, statusTemplateBlocks: action.payload };
-        case uiLoaderActionType.START_GLOBALSETTINGSMODAL_LOADER:
-            return { ...state, globalSettingsModal: action.payload };
-        case uiLoaderActionType.END_GLOBALSETTINGSMODAL_LOADER:
-            return { ...state, globalSettingsModal: action.payload };
-        case uiLoaderActionType.END_TEMPLATE_BLOCK_LOADER:
-            return { ...state, statusTemplateBlocks: action.payload };
-        case uiLoaderActionType.END_ADDBLOCKMODAL_LOADER:
-            return { ...state, addBlockModal: action.payload };
-        case uiLoaderActionType.END_MAINBUILDTEMPLATEVIEW_LOADER:
-            return { ...state, mainBuildTemplateView: action.payload };
-        default:
-            return state;
+export const uiLoaderReducer = (
+    state: {} = initialState,
+    action: uiLoaderAction
+) => {
+    if (!Object.keys(loaderTypes).includes(action.type)) {
+        return state;
     }
-};
 
-export default uiLoaderReducer;
+    return { ...state, [action.type]: action.payload };
+};

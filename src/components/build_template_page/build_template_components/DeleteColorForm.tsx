@@ -13,6 +13,7 @@ import Text from '../../general_components/Text';
 //Styles:
 import styled from 'styled-components';
 import { ButtonContainer } from '../../build_program_page/build_program_components/AddProjectForm';
+import { loaderTypes } from '../../../redux/uiLoader/loader-types';
 
 const MainContainer = styled.div`
     width: 14rem;
@@ -58,7 +59,9 @@ export const DeleteColorForm = ({
                 template.id,
                 { templateLegend: newColorArray },
                 true,
-                null
+                null,
+                null,
+                loaderTypes.VIEWER_INTERACTIONS_SETTINGS_MODAL
             )
         );
 
