@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
 import { uiLoaderAction } from './uiLoaderInterfaces';
-import { uiLoaderActionType } from './action-types';
+import { loaderTypes } from './loader-types';
 
 export const invokeLoaderState = (loaderType: any): Function => {
     return async (dispatch: Dispatch<uiLoaderAction>) => {
-        if (!Object.values(uiLoaderActionType).includes(loaderType)) {
+        if (!Object.values(loaderTypes).includes(loaderType)) {
             return;
         }
 
@@ -17,9 +17,9 @@ export const invokeLoaderState = (loaderType: any): Function => {
     };
 };
 
-export const disableLoaderState = (loaderType: any) => {
+export const disableLoaderState = (loaderType: any): Function => {
     return async (dispatch: Dispatch<uiLoaderAction>) => {
-        if (!Object.values(uiLoaderActionType).includes(loaderType)) {
+        if (!Object.values(loaderTypes).includes(loaderType)) {
             return;
         }
 

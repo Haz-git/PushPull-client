@@ -1,30 +1,32 @@
 import { uiLoaderActionType } from './action-types';
+import { loaderTypes } from './loader-types';
 import { uiLoaderAction } from './uiLoaderInterfaces';
 
 const initialState: any = {
-    statusTemplateBlocks: {
+    LOAD_ALL_TEMPLATE_BLOCKS: {
         isLoading: false,
     },
-    mainBuildTemplateView: {
+    MAIN_BUILD_TEMPLATE_VIEW: {
         isLoading: false,
     },
-    addBlockModal: {
+    ADD_BLOCK_MODAL: {
         isLoading: false,
     },
-    globalSettingsModal: {
+    GLOBAL_SETTINGS_MODAL: {
         isLoading: false,
     },
-    viewerInteractionsSettingsModal: {
+    VIEWER_INTERACTIONS_SETTINGS_MODAL: {
         isLoading: false,
     },
 };
 
-const uiLoaderReducer = (state: {} = initialState, action: uiLoaderAction) => {
-    if (!Object.keys(uiLoaderActionType).includes(action.type)) {
+export const uiLoaderReducer = (
+    state: {} = initialState,
+    action: uiLoaderAction
+) => {
+    if (!Object.keys(loaderTypes).includes(action.type)) {
         return state;
     }
 
     return { ...state, [action.type]: action.payload };
 };
-
-export default uiLoaderReducer;
