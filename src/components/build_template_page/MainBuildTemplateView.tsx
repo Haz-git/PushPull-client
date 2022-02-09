@@ -340,7 +340,7 @@ const MainBuildTemplateView = ({
                         <GeneralModal
                             size="md"
                             closeOnClickOutside={true}
-                            title="Edit Block"
+                            title="Block Details"
                             openBoolean={isEditBlockModalOpened}
                             closeFunc={() =>
                                 dispatch(
