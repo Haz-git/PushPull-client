@@ -178,6 +178,9 @@ const BlockTypeExercise = ({
     };
 
     const handleUserEditBlock = (): void => {
+        if (isHoverableButtonActive) {
+            setIsHoverableButtonActive(false);
+        }
         setIsPopoverOpen(false);
         dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'OPEN'));
     };
