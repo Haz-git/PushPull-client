@@ -2,6 +2,9 @@ import { ModalActionTypes } from './action-types';
 import { ModalAction } from './modalInterfaces';
 
 const initialState: any = {
+    EDIT_BLOCK: {
+        isOpen: false,
+    },
     DELETE_SHEET_CONFIRMATION: {
         isOpen: false,
     },

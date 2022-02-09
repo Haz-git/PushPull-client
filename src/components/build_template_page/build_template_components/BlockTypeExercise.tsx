@@ -7,6 +7,8 @@ import {
     deleteEditingSurfaceBlock,
     deleteToolbarBlock,
 } from '../../../redux/templates/templateActions';
+import { ModalActionTypes } from '../../../redux/modals/action-types';
+import { toggleModal } from '../../../redux/modals/modalActions';
 
 //Components:
 import { Draggable } from 'react-beautiful-dnd';
@@ -175,6 +177,14 @@ const BlockTypeExercise = ({
         return dispatch(deleteToolbarBlock(templateId, blockId));
     };
 
+    const handleUserEditBlock = (): void => {
+        if (isHoverableButtonActive) {
+            setIsHoverableButtonActive(false);
+        }
+        setIsPopoverOpen(false);
+        dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'OPEN'));
+    };
+
     return (
         <>
             <Draggable draggableId={item.id} index={index}>
@@ -220,7 +230,9 @@ const BlockTypeExercise = ({
                                     }}
                                 >
                                     <PopoverChildrenFlexWrapper>
-                                        <PopoverChildrenButton>
+                                        <PopoverChildrenButton
+                                            onClick={handleUserEditBlock}
+                                        >
                                             <Text text="Edit" />
                                         </PopoverChildrenButton>
                                         <Divider />
