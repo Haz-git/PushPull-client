@@ -15,6 +15,7 @@ import useQuery from '../../utils/hooks/useQuery';
 import historyObject from '../../utils/historyObject';
 import UnauthorizedTemplate from './build_template_components/UnauthorizedTemplate';
 import { DeleteSheetForm } from './build_template_components/DeleteSheetForm';
+import { EditBlockForm } from './build_template_components/EditBlockForm';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -132,9 +133,12 @@ const MainBuildTemplateView = ({
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
-    const isSheetDeletionModalOpened = useSelector(
-        (state: RootStateOrAny) =>
-            state?.modals?.DELETE_SHEET_CONFIRMATION?.isOpen
+    const { isOpen: isSheetDeletionModalOpened } = useSelector(
+        (state: RootStateOrAny) => state?.modals?.DELETE_SHEET_CONFIRMATION
+    );
+
+    const { isOpen: isEditBlockModalOpened } = useSelector(
+        (state: RootStateOrAny) => state?.modals?.EDIT_BLOCK
     );
 
     //Column States for DnD functionality:
@@ -333,6 +337,22 @@ const MainBuildTemplateView = ({
                     />
                 ) : (
                     <>
+                        <GeneralModal
+                            size="md"
+                            closeOnClickOutside={true}
+                            title="Edit Block"
+                            openBoolean={isEditBlockModalOpened}
+                            closeFunc={() =>
+                                dispatch(
+                                    toggleModal(
+                                        ModalActionTypes.EDIT_BLOCK,
+                                        'CLOSE'
+                                    )
+                                )
+                            }
+                        >
+                            <EditBlockForm />
+                        </GeneralModal>
                         <GeneralModal
                             size="md"
                             closeOnClickOutside={true}
