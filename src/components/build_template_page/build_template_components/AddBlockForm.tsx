@@ -12,25 +12,25 @@ import { addToolbarBlock } from '../../../redux/templates/templateActions';
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
     padding: 0rem 0.5rem;
     position: relative;
 `;
 
-const FormContainer = styled.div``;
+export const FormContainer = styled.div``;
 
-const Spacer = styled.div`
+export const Spacer = styled.div`
     height: 1rem;
 `;
 
-const FlexWrapper = styled.div`
+export const FlexWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     column-gap: 1rem;
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
     margin: 2rem 0rem 1rem 0rem;
 `;
 
@@ -42,9 +42,7 @@ interface IComponentProps {
 
 const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
-    const currTemplate = useSelector(
-        (state: RootStateOrAny) => state?.template
-    );
+    const template = useSelector((state: RootStateOrAny) => state?.template);
 
     //Modal input state
     const [userInput, setUserInput] = useState({
@@ -72,7 +70,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         if (hasBlockName()) {
             return dispatch(
                 addToolbarBlock(
-                    currTemplate.id,
+                    template.id,
                     { blockDetails: userInput },
                     closeModal
                 )
@@ -153,7 +151,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             label: {
                                 color: 'rgba(0, 0, 34, .7)',
                                 fontFamily: 'Lato, sans-serif',
-                                fontSize: '1.05rem',
+                                fontSize: '1rem',
                                 fontWeight: 700,
                                 marginBottom: '.25rem',
                             },
@@ -181,7 +179,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             label: {
                                 color: 'rgba(0, 0, 34, .7)',
                                 fontFamily: 'Lato, sans-serif',
-                                fontSize: '1.05rem',
+                                fontSize: '1rem',
                                 fontWeight: 700,
                                 marginBottom: '.25rem',
                             },
