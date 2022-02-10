@@ -1,9 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
-import { TextInput, Textarea, NumberInput } from '@mantine/core';
+import Text from '../../general_components/Text';
+import DividerLine from '../../general_components/DividerLine';
+import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -43,6 +45,17 @@ interface IComponentProps {
 const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
+
+    const composeWeightUnit = (): string | undefined => {
+        if (!template) {
+            return;
+        }
+        return template?.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
+    };
+
+    const composedWeightUnit = useMemo(composeWeightUnit, [
+        template.templateWeightUnit,
+    ]);
 
     //Modal input state
     const [userInput, setUserInput] = useState({
@@ -194,7 +207,86 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             handleUserInput('reps', String(val))
                         }
                     />
+                    <NumberInput
+                        // value={Number(userInput.reps)}
+                        label={`Weight (${composedWeightUnit})`}
+                        min={0}
+                        max={99}
+                        required
+                        styles={{
+                            root: {
+                                maxWidth: '40rem',
+                            },
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                            input: {
+                                color: 'rgba(0, 0, 34, 1)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1.05rem',
+                                fontWeight: 700,
+                            },
+                        }}
+                        // onChange={(val: number) =>
+                        //     handleUserInput('reps', String(val))
+                        // }
+                    />
                 </FlexWrapper>
+                <DividerLine
+                    border="1px solid #d6d6d6"
+                    margin="2rem 0rem 1rem 0rem"
+                />
+                <Text text="Linked Interactions" fontSize="1.5rem" />
+                <Spacer />
+                <Select
+                    clearable
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                        },
+                    }}
+                    label="Color Legend"
+                    placeholder="Link a color"
+                    data={[{ value: 'Super Set 1', label: 'Super Set 1' }]}
+                    required
+                />
+                <Spacer />
+                <Select
+                    clearable
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                        },
+                    }}
+                    label="Viewer Input"
+                    placeholder="Link a viewer input"
+                    data={[{ value: 'maxBench', label: 'Max Bench' }]}
+                    required
+                />
             </FormContainer>
             <ButtonContainer>
                 <GeneralButton
