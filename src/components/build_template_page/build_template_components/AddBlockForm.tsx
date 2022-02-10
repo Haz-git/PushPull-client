@@ -63,6 +63,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         desc: '',
         sets: '0',
         reps: '0',
+        weight: '0',
+        linkedColors: [],
+        linkedViewerInputs: [],
     });
 
     //Error state:
@@ -208,10 +211,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         }
                     />
                     <NumberInput
-                        // value={Number(userInput.reps)}
                         label={`Weight (${composedWeightUnit})`}
+                        value={Number(userInput.weight)}
                         min={0}
-                        max={99}
+                        max={9999}
                         required
                         styles={{
                             root: {
@@ -231,9 +234,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                                 fontWeight: 700,
                             },
                         }}
-                        // onChange={(val: number) =>
-                        //     handleUserInput('reps', String(val))
-                        // }
+                        onChange={(weight: number) =>
+                            handleUserInput('weight', String(weight))
+                        }
                     />
                 </FlexWrapper>
                 <DividerLine
