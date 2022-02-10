@@ -1,9 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
-import { TextInput, Textarea, NumberInput } from '@mantine/core';
+import Text from '../../general_components/Text';
+import DividerLine from '../../general_components/DividerLine';
+import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
+import { SelectColorItem } from './SelectColorItem';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -43,6 +46,50 @@ interface IComponentProps {
 const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
+    const colorLegendSelectables = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateLegend
+    );
+    const viewerInputSelectables = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateUserInputs
+    );
+
+    const composeColorLegendSelectData = (): string[] => {
+        //Colors are saved with the color values as 'colorHex' we must change this value to key 'value'.
+        if (!colorLegendSelectables) {
+            return [];
+        }
+
+        let selectDataArray: any[] = [];
+
+        for (let color of colorLegendSelectables) {
+            selectDataArray = [
+                ...selectDataArray,
+                {
+                    id: color.id,
+                    label: color.label,
+                    description: color.description,
+                    value: color.colorHex,
+                },
+            ];
+        }
+
+        return selectDataArray;
+    };
+
+    const composeWeightUnit = (): string | undefined => {
+        if (!template) {
+            return;
+        }
+        return template?.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
+    };
+
+    const composedWeightUnit = useMemo(composeWeightUnit, [
+        template.templateWeightUnit,
+    ]);
+
+    const composedColorSelectData = useMemo(composeColorLegendSelectData, [
+        template.templateLegend,
+    ]);
 
     //Modal input state
     const [userInput, setUserInput] = useState({
@@ -50,6 +97,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         desc: '',
         sets: '0',
         reps: '0',
+        weight: '0',
+        linkedColors: [],
+        linkedViewerInputs: [],
     });
 
     //Error state:
@@ -194,7 +244,95 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             handleUserInput('reps', String(val))
                         }
                     />
+                    <NumberInput
+                        label={`Weight (${composedWeightUnit})`}
+                        value={Number(userInput.weight)}
+                        min={0}
+                        max={9999}
+                        required
+                        styles={{
+                            root: {
+                                maxWidth: '40rem',
+                            },
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                            input: {
+                                color: 'rgba(0, 0, 34, 1)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1.05rem',
+                                fontWeight: 700,
+                            },
+                        }}
+                        onChange={(weight: number) =>
+                            handleUserInput('weight', String(weight))
+                        }
+                    />
                 </FlexWrapper>
+                <DividerLine
+                    border="1px solid #d6d6d6"
+                    margin="2rem 0rem 1rem 0rem"
+                />
+                <Text text="Linked Interactions" fontSize="1.5rem" />
+                <Spacer />
+                <Select
+                    searchable
+                    clearable
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                        },
+                    }}
+                    itemComponent={SelectColorItem}
+                    label="Color Legend"
+                    placeholder="Link a color"
+                    data={composedColorSelectData}
+                    filter={(value: string, item: any) =>
+                        item.label
+                            .toLowerCase()
+                            .includes(value.toLowerCase().trim())
+                    }
+                    nothingFound="No color found"
+                    required
+                    maxDropdownHeight={250}
+                />
+                <Spacer />
+                <Select
+                    clearable
+                    styles={{
+                        label: {
+                            color: 'rgba(0, 0, 34, .7)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            marginBottom: '.25rem',
+                        },
+                        input: {
+                            color: 'rgba(0, 0, 34, 1)',
+                            fontFamily: 'Lato, sans-serif',
+                            fontSize: '.9rem',
+                            fontWeight: 500,
+                        },
+                    }}
+                    label="Viewer Input"
+                    placeholder="Link a viewer input"
+                    data={[{ value: 'maxBench', label: 'Max Bench' }]}
+                    required
+                />
             </FormContainer>
             <ButtonContainer>
                 <GeneralButton
