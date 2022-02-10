@@ -6,6 +6,7 @@ import GeneralButton from '../../general_components/GeneralButton';
 import Text from '../../general_components/Text';
 import DividerLine from '../../general_components/DividerLine';
 import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
+import { SelectColorItem } from './SelectColorItem';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -45,6 +46,35 @@ interface IComponentProps {
 const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
+    const colorLegendSelectables = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateLegend
+    );
+    const viewerInputSelectables = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateUserInputs
+    );
+
+    const composeColorLegendSelectData = (): string[] => {
+        //Colors are saved with the color values as 'colorHex' we must change this value to key 'value'.
+        if (!colorLegendSelectables) {
+            return [];
+        }
+
+        let selectDataArray: any[] = [];
+
+        for (let color of colorLegendSelectables) {
+            selectDataArray = [
+                ...selectDataArray,
+                {
+                    id: color.id,
+                    label: color.label,
+                    description: color.description,
+                    value: color.colorHex,
+                },
+            ];
+        }
+
+        return selectDataArray;
+    };
 
     const composeWeightUnit = (): string | undefined => {
         if (!template) {
@@ -55,6 +85,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
     const composedWeightUnit = useMemo(composeWeightUnit, [
         template.templateWeightUnit,
+    ]);
+
+    const composedColorSelectData = useMemo(composeColorLegendSelectData, [
+        template.templateLegend,
     ]);
 
     //Modal input state
@@ -246,6 +280,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 <Text text="Linked Interactions" fontSize="1.5rem" />
                 <Spacer />
                 <Select
+                    searchable
                     clearable
                     styles={{
                         label: {
@@ -262,10 +297,18 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             fontWeight: 500,
                         },
                     }}
+                    itemComponent={SelectColorItem}
                     label="Color Legend"
                     placeholder="Link a color"
-                    data={[{ value: 'Super Set 1', label: 'Super Set 1' }]}
+                    data={composedColorSelectData}
+                    filter={(value: string, item: any) =>
+                        item.label
+                            .toLowerCase()
+                            .includes(value.toLowerCase().trim())
+                    }
+                    nothingFound="No color found"
                     required
+                    maxDropdownHeight={250}
                 />
                 <Spacer />
                 <Select
