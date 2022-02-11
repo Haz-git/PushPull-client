@@ -48,7 +48,7 @@ const HoverableButton = styled.button<IHoverableButtonProps>`
     }
 `;
 
-const MainContainer = styled.div<IMainContainerProps>`
+const MainContainer = styled.div`
     position: relative;
     margin: 0.5rem 0rem;
     border-radius: 0.2rem;
@@ -117,24 +117,30 @@ const Divider = styled.div`
 `;
 
 const BlockExerciseLengthContainer = styled.div`
-    padding: 0.5rem 0rem 0.5rem 0.5rem;
+    padding: 0.5rem 0.25rem 0.5rem 0.25rem;
     display: grid;
     align-items: center;
-    justify-content: flex-start;
-    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
 `;
 
-const ExerciseDetails = styled.div``;
+const ExerciseDetails = styled.div`
+    text-align: center;
+    padding: 0.25rem 0.25rem;
+    background: #ececec;
+    margin: 0 0.1rem;
+    border-radius: 0.3rem;
+`;
+
+const ExerciseDetailSpacer = styled.div`
+    height: 0.2rem;
+`;
 
 //Interfaces:
 
 export enum BlockTypes {
     TOOLBAR = 'TOOLBAR',
     EDITING_SURFACE = 'EDITING_SURFACE',
-}
-
-interface IMainContainerProps {
-    linkedColor: string;
 }
 
 interface ILinkedColorSwatchProps {
@@ -185,26 +191,43 @@ const BlockTypeExercise = ({
         linkedViewerInput,
     } = blockDetails;
 
-    const findCurrentColor = () => {
+    const currentLinkedColor = useMemo((): any => {
         if (!colorLegend) {
             return;
         }
 
-        return colorLegend.find((color: any) => color.id === linkedColor);
-    };
+        const targetColor = colorLegend.find(
+            (color: any) => color.id === linkedColor
+        );
 
-    const determineBlockWeight = (): string | undefined => {
+        return targetColor ? targetColor : undefined;
+    }, [colorLegend]);
+
+    const blockWeight = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
             return;
         }
 
         return templateWeightUnit === 'METRIC'
-            ? `${weightMetric} Kgs`
-            : `${weightImperial} Lbs`;
-    };
+            ? `${weightMetric}`
+            : `${weightImperial}`;
+    }, [templateWeightUnit]);
 
-    const currentLinkedColor = useMemo(findCurrentColor, [colorLegend]);
-    const blockWeight = useMemo(determineBlockWeight, [templateWeightUnit]);
+    const blockUnit = useMemo((): string | undefined => {
+        if (!templateWeightUnit) {
+            return;
+        }
+
+        return templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
+    }, [templateWeightUnit]);
+
+    const renderColorSwatch = (): JSX.Element | null => {
+        if (!currentLinkedColor) {
+            return null;
+        }
+
+        return <LinkedColorSwatch linkedColor={currentLinkedColor.colorHex} />;
+    };
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const [isHoverableButtonActive, setIsHoverableButtonActive] =
@@ -244,7 +267,6 @@ const BlockTypeExercise = ({
                 {(provided, snapshot) => {
                     return (
                         <MainContainer
-                            linkedColor={currentLinkedColor.colorHex}
                             ref={provided.innerRef}
                             data-snapshot={snapshot}
                             {...provided.draggableProps}
@@ -310,36 +332,53 @@ const BlockTypeExercise = ({
                                         fontSize=".95rem"
                                         fontWeight="800"
                                     />
-                                    <LinkedColorSwatch
-                                        linkedColor={
-                                            currentLinkedColor.colorHex
-                                        }
-                                    ></LinkedColorSwatch>
+                                    {renderColorSwatch()}
                                 </BlockHeader>
                                 <Divider />
                                 <BlockExerciseLengthContainer>
                                     <ExerciseDetails>
                                         <Text
-                                            text={`${sets} Sets`}
-                                            fontSize=".9rem"
-                                            fontWeight="600"
+                                            text={`Sets`}
+                                            fontSize=".75rem"
+                                            fontWeight="800"
                                             subText={true}
+                                        />
+                                        <ExerciseDetailSpacer />
+                                        <Text
+                                            text={`${sets}`}
+                                            fontSize="1rem"
+                                            fontWeight="800"
+                                            mainText={true}
                                         />
                                     </ExerciseDetails>
                                     <ExerciseDetails>
                                         <Text
-                                            text={`${reps} Reps`}
-                                            fontSize=".9rem"
-                                            fontWeight="600"
+                                            text={`Reps`}
+                                            fontSize=".75rem"
+                                            fontWeight="800"
                                             subText={true}
+                                        />
+                                        <ExerciseDetailSpacer />
+                                        <Text
+                                            text={`${reps}`}
+                                            fontSize="1rem"
+                                            fontWeight="800"
+                                            mainText={true}
                                         />
                                     </ExerciseDetails>
                                     <ExerciseDetails>
                                         <Text
-                                            text={determineBlockWeight()}
-                                            fontSize=".9rem"
-                                            fontWeight="600"
+                                            text={blockUnit}
+                                            fontSize=".75rem"
+                                            fontWeight="800"
                                             subText={true}
+                                        />
+                                        <ExerciseDetailSpacer />
+                                        <Text
+                                            text={blockWeight}
+                                            fontSize="1rem"
+                                            fontWeight="800"
+                                            mainText={true}
                                         />
                                     </ExerciseDetails>
                                 </BlockExerciseLengthContainer>
