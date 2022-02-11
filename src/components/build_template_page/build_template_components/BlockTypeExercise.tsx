@@ -121,12 +121,12 @@ const BlockExerciseLengthContainer = styled.div`
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 0.8fr 0.8fr 1.2fr;
 `;
 
 const ExerciseDetails = styled.div`
     text-align: center;
-    padding: 0.25rem 0.25rem;
+    padding: 0.2rem 0.2rem;
     background: #ececec;
     margin: 0 0.1rem;
     border-radius: 0.3rem;
