@@ -72,7 +72,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         if (!template) {
             return;
         }
-        return template?.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
+
+        return template.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
     };
 
     const composedWeightUnit = useMemo(composeWeightUnit, [
