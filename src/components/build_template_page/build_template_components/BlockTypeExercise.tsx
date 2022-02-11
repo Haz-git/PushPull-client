@@ -54,7 +54,7 @@ const MainContainer = styled.div<IMainContainerProps>`
     border-radius: 0.2rem;
     background: #ffffff;
     width: 100%;
-    border: ${({ linkedColor }) => `2px solid ${linkedColor}`};
+    border: 2px solid #e07133;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     transition: all 0.1s ease-in;
@@ -98,9 +98,18 @@ const PopoverChildrenButton = styled.button`
 `;
 
 const BlockHeader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 `;
 
+const LinkedColorSwatch = styled.div<ILinkedColorSwatchProps>`
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 0.2rem;
+    background: ${({ linkedColor }) => linkedColor};
+`;
 const Divider = styled.div`
     height: 1px;
     width: 100%;
@@ -125,6 +134,10 @@ export enum BlockTypes {
 }
 
 interface IMainContainerProps {
+    linkedColor: string;
+}
+
+interface ILinkedColorSwatchProps {
     linkedColor: string;
 }
 
@@ -216,83 +229,92 @@ const BlockTypeExercise = ({
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                         >
-                            <PopoverContainer>
-                                <Popover
-                                    noFocusTrap
-                                    gutter={10}
-                                    position="left"
-                                    placement="start"
-                                    opened={isPopoverOpen}
-                                    onClose={() => {
-                                        setIsPopoverOpen(false);
-                                        setIsHoverableButtonActive(false);
-                                    }}
-                                    target={
-                                        <HoverableButton
-                                            isActive={isHoverableButtonActive}
-                                            onClick={
-                                                handleUserClickHoverableButton
-                                            }
-                                        >
-                                            <MoreDots />
-                                        </HoverableButton>
-                                    }
-                                    styles={{
-                                        popover: {
-                                            position: 'static',
-                                            margin: '0 0',
-                                            padding: '0 0',
-                                        },
-                                        inner: {
-                                            padding: '0 0',
-                                            margin: '0 0',
-                                        },
-                                    }}
-                                >
-                                    <PopoverChildrenFlexWrapper>
-                                        <PopoverChildrenButton
-                                            onClick={handleUserEditBlock}
-                                        >
-                                            <Text text="Edit" />
-                                        </PopoverChildrenButton>
-                                        <Divider />
-                                        <PopoverChildrenButton
-                                            onClick={handleUserDeleteBlock}
-                                        >
-                                            <Text
-                                                text="Delete"
-                                                textColor="#AF1432"
-                                            />
-                                        </PopoverChildrenButton>
-                                    </PopoverChildrenFlexWrapper>
-                                </Popover>
-                            </PopoverContainer>
-                            <BlockHeader>
-                                <Text
-                                    text={name}
-                                    fontSize=".95rem"
-                                    fontWeight="800"
-                                />
-                            </BlockHeader>
-                            <Divider />
-                            <BlockExerciseLengthContainer>
-                                <ExerciseDetails>
+                            <>
+                                <PopoverContainer>
+                                    <Popover
+                                        noFocusTrap
+                                        gutter={10}
+                                        position="left"
+                                        placement="start"
+                                        opened={isPopoverOpen}
+                                        onClose={() => {
+                                            setIsPopoverOpen(false);
+                                            setIsHoverableButtonActive(false);
+                                        }}
+                                        target={
+                                            <HoverableButton
+                                                isActive={
+                                                    isHoverableButtonActive
+                                                }
+                                                onClick={
+                                                    handleUserClickHoverableButton
+                                                }
+                                            >
+                                                <MoreDots />
+                                            </HoverableButton>
+                                        }
+                                        styles={{
+                                            popover: {
+                                                position: 'static',
+                                                margin: '0 0',
+                                                padding: '0 0',
+                                            },
+                                            inner: {
+                                                padding: '0 0',
+                                                margin: '0 0',
+                                            },
+                                        }}
+                                    >
+                                        <PopoverChildrenFlexWrapper>
+                                            <PopoverChildrenButton
+                                                onClick={handleUserEditBlock}
+                                            >
+                                                <Text text="Edit" />
+                                            </PopoverChildrenButton>
+                                            <Divider />
+                                            <PopoverChildrenButton
+                                                onClick={handleUserDeleteBlock}
+                                            >
+                                                <Text
+                                                    text="Delete"
+                                                    textColor="#AF1432"
+                                                />
+                                            </PopoverChildrenButton>
+                                        </PopoverChildrenFlexWrapper>
+                                    </Popover>
+                                </PopoverContainer>
+                                <BlockHeader>
                                     <Text
-                                        text={`${sets} Sets`}
-                                        fontSize=".9rem"
-                                        fontWeight="600"
-                                        subText={true}
+                                        text={name}
+                                        fontSize=".95rem"
+                                        fontWeight="800"
                                     />
-                                </ExerciseDetails>
-                                <ExerciseDetails>
-                                    <Text
-                                        text={`${reps} Reps`}
-                                        fontSize=".9rem"
-                                        fontWeight="600"
-                                        subText={true}
-                                    />
-                                </ExerciseDetails>
-                            </BlockExerciseLengthContainer>
+                                    <LinkedColorSwatch
+                                        linkedColor={
+                                            currentLinkedColor.colorHex
+                                        }
+                                    ></LinkedColorSwatch>
+                                </BlockHeader>
+                                <Divider />
+                                <BlockExerciseLengthContainer>
+                                    <ExerciseDetails>
+                                        <Text
+                                            text={`${sets} Sets`}
+                                            fontSize=".9rem"
+                                            fontWeight="600"
+                                            subText={true}
+                                        />
+                                    </ExerciseDetails>
+                                    <ExerciseDetails>
+                                        <Text
+                                            text={`${reps} Reps`}
+                                            fontSize=".9rem"
+                                            fontWeight="600"
+                                            subText={true}
+                                        />
+                                    </ExerciseDetails>
+                                </BlockExerciseLengthContainer>
+                            </>
                         </MainContainer>
                     );
                 }}
