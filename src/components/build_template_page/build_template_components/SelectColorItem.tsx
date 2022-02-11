@@ -30,18 +30,18 @@ interface IComponentProps {
     value: string;
     label: string;
     description: string;
-    id: string;
+    color: string;
 }
 
 export const SelectColorItem = forwardRef(
     (
-        { value, label, description, id, ...others }: IComponentProps,
+        { value, label, description, color, ...others }: IComponentProps,
         ref: any
     ): JSX.Element => {
         return (
-            <MainContainer key={id} ref={ref} {...others}>
+            <MainContainer key={value} ref={ref} {...others}>
                 <div>
-                    <ColorSwatch color={value} />
+                    <ColorSwatch color={color} />
                 </div>
                 <div>
                     <Text text={label} />
