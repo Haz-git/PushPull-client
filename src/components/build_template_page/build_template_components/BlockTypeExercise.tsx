@@ -97,11 +97,14 @@ const PopoverChildrenButton = styled.button`
     }
 `;
 
+const BlockDetailsContainer = styled.div``;
+
 const BlockHeader = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    max-width: 100%;
 `;
 
 const LinkedColorSwatch = styled.div<ILinkedColorSwatchProps>`
@@ -272,60 +275,58 @@ const BlockTypeExercise = ({
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                         >
-                            <>
-                                <PopoverContainer>
-                                    <Popover
-                                        noFocusTrap
-                                        gutter={10}
-                                        position="left"
-                                        placement="start"
-                                        opened={isPopoverOpen}
-                                        onClose={() => {
-                                            setIsPopoverOpen(false);
-                                            setIsHoverableButtonActive(false);
-                                        }}
-                                        target={
-                                            <HoverableButton
-                                                isActive={
-                                                    isHoverableButtonActive
-                                                }
-                                                onClick={
-                                                    handleUserClickHoverableButton
-                                                }
-                                            >
-                                                <MoreDots />
-                                            </HoverableButton>
-                                        }
-                                        styles={{
-                                            popover: {
-                                                position: 'static',
-                                                margin: '0 0',
-                                                padding: '0 0',
-                                            },
-                                            inner: {
-                                                padding: '0 0',
-                                                margin: '0 0',
-                                            },
-                                        }}
-                                    >
-                                        <PopoverChildrenFlexWrapper>
-                                            <PopoverChildrenButton
-                                                onClick={handleUserEditBlock}
-                                            >
-                                                <Text text="Edit" />
-                                            </PopoverChildrenButton>
-                                            <Divider />
-                                            <PopoverChildrenButton
-                                                onClick={handleUserDeleteBlock}
-                                            >
-                                                <Text
-                                                    text="Delete"
-                                                    textColor="#AF1432"
-                                                />
-                                            </PopoverChildrenButton>
-                                        </PopoverChildrenFlexWrapper>
-                                    </Popover>
-                                </PopoverContainer>
+                            <PopoverContainer>
+                                <Popover
+                                    noFocusTrap
+                                    gutter={10}
+                                    position="left"
+                                    placement="start"
+                                    opened={isPopoverOpen}
+                                    onClose={() => {
+                                        setIsPopoverOpen(false);
+                                        setIsHoverableButtonActive(false);
+                                    }}
+                                    target={
+                                        <HoverableButton
+                                            isActive={isHoverableButtonActive}
+                                            onClick={
+                                                handleUserClickHoverableButton
+                                            }
+                                        >
+                                            <MoreDots />
+                                        </HoverableButton>
+                                    }
+                                    styles={{
+                                        popover: {
+                                            position: 'static',
+                                            margin: '0 0',
+                                            padding: '0 0',
+                                        },
+                                        inner: {
+                                            padding: '0 0',
+                                            margin: '0 0',
+                                        },
+                                    }}
+                                >
+                                    <PopoverChildrenFlexWrapper>
+                                        <PopoverChildrenButton
+                                            onClick={handleUserEditBlock}
+                                        >
+                                            <Text text="Edit" />
+                                        </PopoverChildrenButton>
+                                        <Divider />
+                                        <PopoverChildrenButton
+                                            onClick={handleUserDeleteBlock}
+                                        >
+                                            <Text
+                                                text="Delete"
+                                                textColor="#AF1432"
+                                            />
+                                        </PopoverChildrenButton>
+                                    </PopoverChildrenFlexWrapper>
+                                </Popover>
+                            </PopoverContainer>
+                            <BlockDetailsContainer>
                                 <BlockHeader>
                                     <Text
                                         text={name}
@@ -382,7 +383,7 @@ const BlockTypeExercise = ({
                                         />
                                     </ExerciseDetails>
                                 </BlockExerciseLengthContainer>
-                            </>
+                            </BlockDetailsContainer>
                         </MainContainer>
                     );
                 }}
