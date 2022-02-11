@@ -60,21 +60,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             return [];
         }
 
-        let selectDataArray: any[] = [];
-
-        for (let color of colorLegendSelectables) {
-            selectDataArray = [
-                ...selectDataArray,
-                {
-                    value: color.id,
-                    label: color.label,
-                    description: color.description,
-                    color: color.colorHex,
-                },
-            ];
-        }
-
-        return selectDataArray;
+        return colorLegendSelectables.map((color: any) => ({
+            value: color.id,
+            label: color.label,
+            description: color.description,
+            color: color.colorHex,
+        }));
     };
 
     const composeWeightUnit = (): string | undefined => {
