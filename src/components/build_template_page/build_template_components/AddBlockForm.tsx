@@ -54,7 +54,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     );
 
     const composeColorLegendSelectData = (): string[] => {
-        //Colors are saved with the color values as 'colorHex' we must change this value to key 'value'.
+        //To make this work with Mantine Select, value and label must be provided.
+        //We want the value to be the color id, in the case there are two of the same colors.
         if (!colorLegendSelectables) {
             return [];
         }
@@ -65,10 +66,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             selectDataArray = [
                 ...selectDataArray,
                 {
-                    id: color.id,
+                    value: color.id,
                     label: color.label,
                     description: color.description,
-                    value: color.colorHex,
+                    color: color.colorHex,
                 },
             ];
         }
@@ -98,8 +99,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         sets: '0',
         reps: '0',
         weight: '0',
-        linkedColors: [],
-        linkedViewerInputs: [],
+        linkedColor: '',
+        linkedViewerInput: '',
     });
 
     //Error state:
@@ -280,6 +281,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 <Text text="Linked Interactions" fontSize="1.5rem" />
                 <Spacer />
                 <Select
+                    value={userInput.linkedColor}
                     searchable
                     clearable
                     styles={{
@@ -309,6 +311,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     nothingFound="No color found"
                     required
                     maxDropdownHeight={250}
+                    onChange={(value: string) =>
+                        setUserInput({
+                            ...userInput,
+                            linkedColor: value,
+                        })
+                    }
                 />
                 <Spacer />
                 <Select
