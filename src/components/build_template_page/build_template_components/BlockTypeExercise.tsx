@@ -165,6 +165,9 @@ const BlockTypeExercise = ({
     const query = useQuery();
     const currentSheetId = query.get('sheetId');
     const dispatch = useDispatch();
+    const { templateWeightUnit } = useSelector(
+        (state: RootStateOrAny) => state?.template
+    );
     const templateId = useSelector(
         (state: RootStateOrAny) => state?.template?.id
     );
@@ -172,8 +175,15 @@ const BlockTypeExercise = ({
         (state: RootStateOrAny) => state.template?.templateLegend
     );
 
-    const { name, sets, reps, weight, linkedColor, linkedViewerInput } =
-        blockDetails;
+    const {
+        name,
+        sets,
+        reps,
+        weightImperial,
+        weightMetric,
+        linkedColor,
+        linkedViewerInput,
+    } = blockDetails;
 
     const findCurrentColor = () => {
         if (!colorLegend) {
@@ -183,7 +193,18 @@ const BlockTypeExercise = ({
         return colorLegend.find((color: any) => color.id === linkedColor);
     };
 
+    const determineBlockWeight = (): string | undefined => {
+        if (!templateWeightUnit) {
+            return;
+        }
+
+        return templateWeightUnit === 'METRIC'
+            ? `${weightMetric} Kgs`
+            : `${weightImperial} Lbs`;
+    };
+
     const currentLinkedColor = useMemo(findCurrentColor, [colorLegend]);
+    const blockWeight = useMemo(determineBlockWeight, [templateWeightUnit]);
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const [isHoverableButtonActive, setIsHoverableButtonActive] =
@@ -308,6 +329,14 @@ const BlockTypeExercise = ({
                                     <ExerciseDetails>
                                         <Text
                                             text={`${reps} Reps`}
+                                            fontSize=".9rem"
+                                            fontWeight="600"
+                                            subText={true}
+                                        />
+                                    </ExerciseDetails>
+                                    <ExerciseDetails>
+                                        <Text
+                                            text={determineBlockWeight()}
                                             fontSize=".9rem"
                                             fontWeight="600"
                                             subText={true}
