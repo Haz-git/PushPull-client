@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -48,13 +48,13 @@ const HoverableButton = styled.button<IHoverableButtonProps>`
     }
 `;
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<IMainContainerProps>`
     position: relative;
     margin: 0.5rem 0rem;
     border-radius: 0.2rem;
     background: #ffffff;
     width: 100%;
-    border: 2px solid #e07133;
+    border: ${({ linkedColor }) => `2px solid ${linkedColor}`};
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     transition: all 0.1s ease-in;
@@ -123,6 +123,11 @@ export enum BlockTypes {
     TOOLBAR = 'TOOLBAR',
     EDITING_SURFACE = 'EDITING_SURFACE',
 }
+
+interface IMainContainerProps {
+    linkedColor: string;
+}
+
 interface IHoverableButtonProps {
     isActive: boolean;
 }
@@ -150,8 +155,22 @@ const BlockTypeExercise = ({
     const templateId = useSelector(
         (state: RootStateOrAny) => state?.template?.id
     );
+    const colorLegend = useSelector(
+        (state: RootStateOrAny) => state.template?.templateLegend
+    );
 
-    const { name, sets, reps } = blockDetails;
+    const { name, sets, reps, weight, linkedColor, linkedViewerInput } =
+        blockDetails;
+
+    const findCurrentColor = () => {
+        if (!colorLegend) {
+            return;
+        }
+
+        return colorLegend.find((color: any) => color.id === linkedColor);
+    };
+
+    const currentLinkedColor = useMemo(findCurrentColor, [colorLegend]);
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const [isHoverableButtonActive, setIsHoverableButtonActive] =
@@ -191,6 +210,7 @@ const BlockTypeExercise = ({
                 {(provided, snapshot) => {
                     return (
                         <MainContainer
+                            linkedColor={currentLinkedColor.colorHex}
                             ref={provided.innerRef}
                             data-snapshot={snapshot}
                             {...provided.draggableProps}
