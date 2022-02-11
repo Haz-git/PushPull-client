@@ -53,7 +53,15 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         (state: RootStateOrAny) => state?.template?.templateUserInputs
     );
 
-    const composeColorLegendSelectData = (): string[] => {
+    const composedWeightUnit = useMemo((): string | undefined => {
+        if (!template) {
+            return;
+        }
+
+        return template.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
+    }, [template.templateWeightUnit]);
+
+    const composedColorSelectData = useMemo((): string[] => {
         //To make this work with Mantine Select, value and label must be provided.
         //We want the value to be the color id, in the case there are two of the same colors.
         if (!colorLegendSelectables) {
@@ -66,23 +74,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             description: color.description,
             color: color.colorHex,
         }));
-    };
-
-    const composeWeightUnit = (): string | undefined => {
-        if (!template) {
-            return;
-        }
-
-        return template.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
-    };
-
-    const composedWeightUnit = useMemo(composeWeightUnit, [
-        template.templateWeightUnit,
-    ]);
-
-    const composedColorSelectData = useMemo(composeColorLegendSelectData, [
-        template.templateLegend,
-    ]);
+    }, [template.templateLegend]);
 
     //Modal input state
     const [userInput, setUserInput] = useState({
@@ -111,10 +103,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     };
 
     const composeInputWeight = (weight: number): void => {
-        if (composeWeightUnit() === 'Kgs') {
+        if (composedWeightUnit === 'Kgs') {
             return setUserInput({
                 ...userInput,
-                weightImperial: String(weight * 2.205),
+                weightImperial: (weight * 2.205).toFixed(1),
                 weightMetric: String(weight),
             });
         }
@@ -122,12 +114,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         return setUserInput({
             ...userInput,
             weightImperial: String(weight),
-            weightMetric: String(weight / 2.205),
+            weightMetric: (weight / 2.205).toFixed(1),
         });
     };
 
     const determineUnitValue = () => {
-        return composeWeightUnit() === 'Kgs'
+        return composedWeightUnit === 'Kgs'
             ? Number(userInput.weightMetric)
             : Number(userInput.weightImperial);
     };
@@ -174,7 +166,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }}
                     value={userInput.name}
                     error={hasError}
-                    // disabled={isCreatingNewProject}
                 />
                 <Spacer />
                 <Textarea
@@ -200,7 +191,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         handleUserInput('desc', e.target.value);
                     }}
                     value={userInput.desc}
-                    // disabled={isCreatingNewProject}
                 />
                 <Spacer />
                 <FlexWrapper>
