@@ -44,7 +44,7 @@ const ViewerInteractionsIcon = styled(UserVoice)`
 
 const MainContainer = styled.section`
     display: grid;
-    grid-template-rows: 4.5rem auto 10%;
+    grid-template-rows: 4.5rem auto 1fr;
     background: #2c2c2c;
     position: fixed;
     height: 100%;
@@ -111,6 +111,8 @@ const AccordionContainer = styled.div`
     align-self: start;
 `;
 
+const DroppableContainer = styled.div``;
+
 const ToolsContainer = styled.div`
     align-self: end;
     width: 100%;
@@ -159,7 +161,7 @@ const Toolbar = ({
                             isDropDisabled={true}
                         >
                             {(provided: any) => (
-                                <div
+                                <DroppableContainer
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
@@ -170,7 +172,7 @@ const Toolbar = ({
                                             key={listKey}
                                         />
                                     ))}
-                                </div>
+                                </DroppableContainer>
                             )}
                         </Droppable>
                     </Accordion.Item>
