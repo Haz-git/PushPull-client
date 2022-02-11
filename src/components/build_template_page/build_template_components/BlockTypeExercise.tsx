@@ -117,14 +117,24 @@ const Divider = styled.div`
 `;
 
 const BlockExerciseLengthContainer = styled.div`
-    padding: 0.5rem 0rem 0.5rem 0.5rem;
+    padding: 0.5rem 0.25rem 0.5rem 0.25rem;
     display: grid;
     align-items: center;
-    justify-content: flex-start;
-    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
 `;
 
-const ExerciseDetails = styled.div``;
+const ExerciseDetails = styled.div`
+    text-align: center;
+    padding: 0.25rem 0.25rem;
+    background: #ececec;
+    margin: 0 0.1rem;
+    border-radius: 0.3rem;
+`;
+
+const ExerciseDetailSpacer = styled.div`
+    height: 0.2rem;
+`;
 
 //Interfaces:
 
@@ -199,8 +209,16 @@ const BlockTypeExercise = ({
         }
 
         return templateWeightUnit === 'METRIC'
-            ? `${weightMetric} Kgs`
-            : `${weightImperial} Lbs`;
+            ? `${weightMetric}`
+            : `${weightImperial}`;
+    }, [templateWeightUnit]);
+
+    const blockUnit = useMemo((): string | undefined => {
+        if (!templateWeightUnit) {
+            return;
+        }
+
+        return templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
     }, [templateWeightUnit]);
 
     const renderColorSwatch = (): JSX.Element | null => {
@@ -320,26 +338,47 @@ const BlockTypeExercise = ({
                                 <BlockExerciseLengthContainer>
                                     <ExerciseDetails>
                                         <Text
-                                            text={`${sets} Sets`}
-                                            fontSize=".9rem"
-                                            fontWeight="600"
+                                            text={`Sets`}
+                                            fontSize=".75rem"
+                                            fontWeight="800"
                                             subText={true}
+                                        />
+                                        <ExerciseDetailSpacer />
+                                        <Text
+                                            text={`${sets}`}
+                                            fontSize="1rem"
+                                            fontWeight="800"
+                                            mainText={true}
                                         />
                                     </ExerciseDetails>
                                     <ExerciseDetails>
                                         <Text
-                                            text={`${reps} Reps`}
-                                            fontSize=".9rem"
-                                            fontWeight="600"
+                                            text={`Reps`}
+                                            fontSize=".75rem"
+                                            fontWeight="800"
                                             subText={true}
+                                        />
+                                        <ExerciseDetailSpacer />
+                                        <Text
+                                            text={`${reps}`}
+                                            fontSize="1rem"
+                                            fontWeight="800"
+                                            mainText={true}
                                         />
                                     </ExerciseDetails>
                                     <ExerciseDetails>
+                                        <Text
+                                            text={blockUnit}
+                                            fontSize=".75rem"
+                                            fontWeight="800"
+                                            subText={true}
+                                        />
+                                        <ExerciseDetailSpacer />
                                         <Text
                                             text={blockWeight}
-                                            fontSize=".9rem"
-                                            fontWeight="600"
-                                            subText={true}
+                                            fontSize="1rem"
+                                            fontWeight="800"
+                                            mainText={true}
                                         />
                                     </ExerciseDetails>
                                 </BlockExerciseLengthContainer>
