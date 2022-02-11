@@ -98,7 +98,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         desc: '',
         sets: '0',
         reps: '0',
-        weight: '0',
+        weightImperial: '0',
+        weightMetric: '0',
         linkedColor: '',
         linkedViewerInput: '',
     });
@@ -115,6 +116,28 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             ...userInput,
             [name]: val,
         });
+    };
+
+    const composeInputWeight = (weight: number): void => {
+        if (composeWeightUnit() === 'Kgs') {
+            return setUserInput({
+                ...userInput,
+                weightImperial: String(weight * 2.205),
+                weightMetric: String(weight),
+            });
+        }
+
+        return setUserInput({
+            ...userInput,
+            weightImperial: String(weight),
+            weightMetric: String(weight / 2.205),
+        });
+    };
+
+    const determineUnitValue = () => {
+        return composeWeightUnit() === 'Kgs'
+            ? Number(userInput.weightMetric)
+            : Number(userInput.weightImperial);
     };
 
     const dispatchBlock = () => {
@@ -247,7 +270,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     />
                     <NumberInput
                         label={`Weight (${composedWeightUnit})`}
-                        value={Number(userInput.weight)}
+                        value={determineUnitValue()}
                         min={0}
                         max={9999}
                         required
@@ -270,7 +293,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             },
                         }}
                         onChange={(weight: number) =>
-                            handleUserInput('weight', String(weight))
+                            composeInputWeight(weight)
                         }
                     />
                 </FlexWrapper>
