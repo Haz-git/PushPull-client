@@ -48,7 +48,7 @@ const HoverableButton = styled.button<IHoverableButtonProps>`
     }
 `;
 
-const MainContainer = styled.div<IMainContainerProps>`
+const MainContainer = styled.div`
     position: relative;
     margin: 0.5rem 0rem;
     border-radius: 0.2rem;
@@ -133,10 +133,6 @@ export enum BlockTypes {
     EDITING_SURFACE = 'EDITING_SURFACE',
 }
 
-interface IMainContainerProps {
-    linkedColor: string;
-}
-
 interface ILinkedColorSwatchProps {
     linkedColor: string;
 }
@@ -185,15 +181,19 @@ const BlockTypeExercise = ({
         linkedViewerInput,
     } = blockDetails;
 
-    const findCurrentColor = () => {
+    const currentLinkedColor = useMemo((): any => {
         if (!colorLegend) {
             return;
         }
 
-        return colorLegend.find((color: any) => color.id === linkedColor);
-    };
+        const targetColor = colorLegend.find(
+            (color: any) => color.id === linkedColor
+        );
 
-    const determineBlockWeight = (): string | undefined => {
+        return targetColor ? targetColor : undefined;
+    }, [colorLegend]);
+
+    const blockWeight = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
             return;
         }
@@ -201,10 +201,15 @@ const BlockTypeExercise = ({
         return templateWeightUnit === 'METRIC'
             ? `${weightMetric} Kgs`
             : `${weightImperial} Lbs`;
-    };
+    }, [templateWeightUnit]);
 
-    const currentLinkedColor = useMemo(findCurrentColor, [colorLegend]);
-    const blockWeight = useMemo(determineBlockWeight, [templateWeightUnit]);
+    const renderColorSwatch = (): JSX.Element | null => {
+        if (!currentLinkedColor) {
+            return null;
+        }
+
+        return <LinkedColorSwatch linkedColor={currentLinkedColor.colorHex} />;
+    };
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const [isHoverableButtonActive, setIsHoverableButtonActive] =
@@ -244,7 +249,6 @@ const BlockTypeExercise = ({
                 {(provided, snapshot) => {
                     return (
                         <MainContainer
-                            linkedColor={currentLinkedColor.colorHex}
                             ref={provided.innerRef}
                             data-snapshot={snapshot}
                             {...provided.draggableProps}
@@ -310,11 +314,7 @@ const BlockTypeExercise = ({
                                         fontSize=".95rem"
                                         fontWeight="800"
                                     />
-                                    <LinkedColorSwatch
-                                        linkedColor={
-                                            currentLinkedColor.colorHex
-                                        }
-                                    ></LinkedColorSwatch>
+                                    {renderColorSwatch()}
                                 </BlockHeader>
                                 <Divider />
                                 <BlockExerciseLengthContainer>
@@ -336,7 +336,7 @@ const BlockTypeExercise = ({
                                     </ExerciseDetails>
                                     <ExerciseDetails>
                                         <Text
-                                            text={determineBlockWeight()}
+                                            text={blockWeight}
                                             fontSize=".9rem"
                                             fontWeight="600"
                                             subText={true}
