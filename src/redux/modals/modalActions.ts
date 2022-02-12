@@ -16,7 +16,7 @@ export const toggleModal = (
             type: modalType,
             payload: {
                 isOpen: action === 'OPEN',
-                modalProps: modalProps,
+                modalProps: modalProps || {},
             },
         });
     };
