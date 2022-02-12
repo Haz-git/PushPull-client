@@ -37,6 +37,10 @@ export const ButtonContainer = styled.div`
     margin: 2rem 0rem 1rem 0rem;
 `;
 
+const ErrorSpacer = styled.div`
+    height: 0.25rem;
+`;
+
 //Interfaces:
 
 interface IComponentProps {
@@ -90,12 +94,35 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
     //Error state:
     const [hasError, setHasError] = useState(false);
+    const [isNameLengthLimitExceeded, setIsNameLengthLimitExceeded] =
+        useState(false);
 
-    const hasBlockName = () => {
+    const hasBlockName = (): boolean => {
         return userInput.name !== '';
     };
 
-    const handleUserInput = (name: string, val: string | number) => {
+    const isNameLengthValid = (): boolean => {
+        return userInput.name.length <= 50;
+    };
+
+    const renderNameLengthExceededError = (): undefined | JSX.Element => {
+        if (!isNameLengthLimitExceeded) {
+            return;
+        }
+
+        return (
+            <>
+                <ErrorSpacer />
+                <Text
+                    text="Block name must be 50 characters or less."
+                    textColor="#AF1432"
+                    fontSize=".85rem"
+                />
+            </>
+        );
+    };
+
+    const handleUserInput = (name: string, val: string | number): void => {
         setUserInput({
             ...userInput,
             [name]: val,
@@ -118,14 +145,14 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         });
     };
 
-    const determineUnitValue = () => {
+    const determineUnitValue = (): number => {
         return composedWeightUnit === 'Kgs'
             ? Number(userInput.weightMetric)
             : Number(userInput.weightImperial);
     };
 
     const dispatchBlock = () => {
-        if (hasBlockName()) {
+        if (hasBlockName() && isNameLengthValid()) {
             return dispatch(
                 addToolbarBlock(
                     template.id,
@@ -133,6 +160,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     closeModal
                 )
             );
+        }
+
+        if (!isNameLengthValid()) {
+            setIsNameLengthLimitExceeded(true);
         }
 
         return setHasError(true);
@@ -167,6 +198,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     value={userInput.name}
                     error={hasError}
                 />
+                {renderNameLengthExceededError()}
                 <Spacer />
                 <Textarea
                     styles={{
