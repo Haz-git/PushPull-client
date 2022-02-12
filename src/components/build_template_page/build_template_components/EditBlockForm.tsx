@@ -48,7 +48,7 @@ export const EditBlockForm = () => {
         weightMetric,
         weightImperial,
         linkedViewerInput,
-    } = blockDetails;
+    } = blockDetails || {};
 
     //Modal input state
     const [userInput, setUserInput] = useState({
