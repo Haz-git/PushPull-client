@@ -37,7 +37,7 @@ export const ButtonContainer = styled.div`
     margin: 2rem 0rem 1rem 0rem;
 `;
 
-const ErrorSpacer = styled.div`
+export const ErrorSpacer = styled.div`
     height: 0.25rem;
 `;
 
