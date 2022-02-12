@@ -261,7 +261,12 @@ const BlockTypeExercise = ({
             setIsHoverableButtonActive(false);
         }
         setIsPopoverOpen(false);
-        dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'OPEN'));
+        dispatch(
+            toggleModal(ModalActionTypes.EDIT_BLOCK, 'OPEN', {
+                blockId,
+                blockDetails,
+            })
+        );
     };
 
     return (

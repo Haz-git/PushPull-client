@@ -4,21 +4,27 @@ import { ModalAction } from './modalInterfaces';
 const initialState: any = {
     EDIT_BLOCK: {
         isOpen: false,
+        modalProps: {},
     },
     DELETE_SHEET_CONFIRMATION: {
         isOpen: false,
+        modalProps: {},
     },
     ADD_COLOR_SWATCH_POPOVER: {
         isOpen: false,
+        modalProps: {},
     },
     DELETE_COLOR_SWATCH_POPOVER: {
         isOpen: false,
+        modalProps: {},
     },
     ADD_VIEWER_INPUT_POPOVER: {
         isOpen: false,
+        modalProps: {},
     },
     DELETE_VIEWER_INPUT_POPOVER: {
         isOpen: false,
+        modalProps: {},
     },
 };
 

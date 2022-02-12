@@ -41,6 +41,7 @@ const GridContainer = styled.div``;
 const ListGridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(7, minmax(10rem, 1fr));
+    word-wrap: break-word;
     width: 100%;
 `;
 
