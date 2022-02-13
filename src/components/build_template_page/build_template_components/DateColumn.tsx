@@ -158,7 +158,7 @@ const DateColumn = ({
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={composedHeaderName} />
+                    <Text text={newColumnName} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
