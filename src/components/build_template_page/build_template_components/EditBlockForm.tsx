@@ -3,8 +3,6 @@ import { useMemo, useState } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { toggleModal } from '../../../redux/modals/modalActions';
-import { ModalActionTypes } from '../../../redux/modals/action-types';
 import { updateEditingSurfaceBlock } from '../../../redux/templates/templateActions';
 
 //Components:
@@ -16,7 +14,6 @@ import { SelectColorItem } from './SelectColorItem';
 import { NameLengthExceededError } from './NameLengthExceededError';
 
 //Styles:
-import styled from 'styled-components';
 import {
     MainContainer,
     FormContainer,
