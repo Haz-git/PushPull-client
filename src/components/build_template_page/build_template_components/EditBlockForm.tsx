@@ -80,9 +80,9 @@ export const EditBlockForm = () => {
         return userInput.name.length <= 50;
     };
 
-    const renderNameLengthExceededError = (): undefined | JSX.Element => {
+    const renderNameLengthExceededError = (): null | JSX.Element => {
         if (!isNameLengthLimitExceeded) {
-            return;
+            return null;
         }
 
         return <NameLengthExceededError />;
@@ -124,6 +124,14 @@ export const EditBlockForm = () => {
             : Number(userInput.weightImperial);
     };
 
+    const submitBlockUpdateRequest = (): void => {
+        if (!hasBlockName() || isNameLengthLimitExceeded) {
+            return setHasError(true);
+        }
+
+        return console.log('Request Dispatched');
+    };
+
     return (
         <MainContainer>
             <FormContainer>
@@ -147,12 +155,24 @@ export const EditBlockForm = () => {
                     label="Block Name"
                     placeholder={'Name your exercise'}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        if (hasError) setHasError(false);
+                        if (hasError) {
+                            setHasError(false);
+                        }
+
+                        if (isNameLengthLimitExceeded) {
+                            setIsNameLengthLimitExceeded(false);
+                        }
+
+                        if (e.target.value.length > 50) {
+                            setIsNameLengthLimitExceeded(true);
+                        }
+
                         handleUserInput('name', e.target.value);
                     }}
                     value={userInput.name}
                     error={hasError}
                 />
+                {renderNameLengthExceededError()}
                 <Spacer />
                 <Textarea
                     styles={{
@@ -335,7 +355,10 @@ export const EditBlockForm = () => {
                 />
             </FormContainer>
             <ButtonContainer>
-                <GeneralButton buttonLabel="Update Block" />
+                <GeneralButton
+                    buttonLabel="Update Block"
+                    onClick={submitBlockUpdateRequest}
+                />
             </ButtonContainer>
         </MainContainer>
     );
