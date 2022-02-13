@@ -12,6 +12,7 @@ import DividerLine from '../../general_components/DividerLine';
 import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
 import Text from '../../general_components/Text';
 import { SelectColorItem } from './SelectColorItem';
+import { NameLengthExceededError } from './NameLengthExceededError';
 
 //Styles:
 import styled from 'styled-components';
@@ -95,16 +96,7 @@ export const EditBlockForm = () => {
             return;
         }
 
-        return (
-            <>
-                <ErrorSpacer />
-                <Text
-                    text="Block name must be 50 characters or less."
-                    textColor="#AF1432"
-                    fontSize=".85rem"
-                />
-            </>
-        );
+        return <NameLengthExceededError />;
     };
 
     const handleUserInput = (name: string, val: string | number): void => {
