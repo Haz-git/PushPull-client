@@ -14,6 +14,7 @@ import { addToolbarBlock } from '../../../redux/templates/templateActions';
 
 //Styles:
 import styled from 'styled-components';
+import { NameLengthExceededError } from './NameLengthExceededError';
 
 export const MainContainer = styled.div`
     padding: 0rem 0.5rem;
@@ -110,16 +111,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             return;
         }
 
-        return (
-            <>
-                <ErrorSpacer />
-                <Text
-                    text="Block name must be 50 characters or less."
-                    textColor="#AF1432"
-                    fontSize=".85rem"
-                />
-            </>
-        );
+        return <NameLengthExceededError />;
     };
 
     const handleUserInput = (name: string, val: string | number): void => {
