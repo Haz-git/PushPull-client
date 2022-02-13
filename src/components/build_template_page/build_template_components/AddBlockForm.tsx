@@ -106,9 +106,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         return userInput.name.length <= 50;
     };
 
-    const renderNameLengthExceededError = (): undefined | JSX.Element => {
+    const renderNameLengthExceededError = (): null | JSX.Element => {
         if (!isNameLengthLimitExceeded) {
-            return;
+            return null;
         }
 
         return <NameLengthExceededError />;
@@ -144,21 +144,17 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     };
 
     const dispatchBlock = () => {
-        if (hasBlockName() && isNameLengthValid()) {
-            return dispatch(
-                addToolbarBlock(
-                    template.id,
-                    { blockDetails: userInput },
-                    closeModal
-                )
-            );
+        if (!hasBlockName() || isNameLengthLimitExceeded) {
+            return setHasError(true);
         }
 
-        if (!isNameLengthValid()) {
-            setIsNameLengthLimitExceeded(true);
-        }
-
-        return setHasError(true);
+        return dispatch(
+            addToolbarBlock(
+                template.id,
+                { blockDetails: userInput },
+                closeModal
+            )
+        );
     };
 
     return (
@@ -184,7 +180,18 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     label="Block Name"
                     placeholder={'Name your exercise'}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        if (hasError) setHasError(false);
+                        if (hasError) {
+                            setHasError(false);
+                        }
+
+                        if (isNameLengthLimitExceeded) {
+                            setIsNameLengthLimitExceeded(false);
+                        }
+
+                        if (e.target.value.length > 50) {
+                            setIsNameLengthLimitExceeded(true);
+                        }
+
                         handleUserInput('name', e.target.value);
                     }}
                     value={userInput.name}

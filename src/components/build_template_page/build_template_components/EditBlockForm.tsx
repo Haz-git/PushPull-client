@@ -3,8 +3,7 @@ import { useMemo, useState } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { toggleModal } from '../../../redux/modals/modalActions';
-import { ModalActionTypes } from '../../../redux/modals/action-types';
+import { updateEditingSurfaceBlock } from '../../../redux/templates/templateActions';
 
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
@@ -15,7 +14,6 @@ import { SelectColorItem } from './SelectColorItem';
 import { NameLengthExceededError } from './NameLengthExceededError';
 
 //Styles:
-import styled from 'styled-components';
 import {
     MainContainer,
     FormContainer,
@@ -39,28 +37,17 @@ export const EditBlockForm = () => {
         (state: RootStateOrAny) => state?.modals?.EDIT_BLOCK
     );
     const currentSheetId = query.get('sheetId');
-    const { blockId, blockDetails } = modalProps;
-    const {
-        desc,
-        name,
-        reps,
-        sets,
-        linkedColor,
-        weightMetric,
-        weightImperial,
-        linkedViewerInput,
-    } = blockDetails || {};
 
     //Modal input state
     const [userInput, setUserInput] = useState({
-        name: name,
-        desc: desc,
-        sets: sets,
-        reps: reps,
-        weightImperial: weightImperial,
-        weightMetric: weightMetric,
-        linkedColor: linkedColor,
-        linkedViewerInput: linkedViewerInput,
+        name: modalProps?.blockDetails?.name,
+        desc: modalProps?.blockDetails?.desc,
+        sets: modalProps?.blockDetails?.sets,
+        reps: modalProps?.blockDetails?.reps,
+        weightImperial: modalProps?.blockDetails?.weightImperial,
+        weightMetric: modalProps?.blockDetails?.weightMetric,
+        linkedColor: modalProps?.blockDetails?.linkedColor,
+        linkedViewerInput: modalProps?.blockDetails?.linkedViewerInput,
     });
 
     const composedColorSelectData = useMemo((): string[] => {
@@ -91,9 +78,9 @@ export const EditBlockForm = () => {
         return userInput.name.length <= 50;
     };
 
-    const renderNameLengthExceededError = (): undefined | JSX.Element => {
+    const renderNameLengthExceededError = (): null | JSX.Element => {
         if (!isNameLengthLimitExceeded) {
-            return;
+            return null;
         }
 
         return <NameLengthExceededError />;
@@ -135,6 +122,22 @@ export const EditBlockForm = () => {
             : Number(userInput.weightImperial);
     };
 
+    const submitBlockUpdateRequest = (): void => {
+        if (!hasBlockName() || isNameLengthLimitExceeded) {
+            return setHasError(true);
+        }
+
+        dispatch(
+            updateEditingSurfaceBlock(
+                template.id,
+                currentSheetId,
+                modalProps.blockId,
+                modalProps.columnPrefix,
+                userInput
+            )
+        );
+    };
+
     return (
         <MainContainer>
             <FormContainer>
@@ -157,14 +160,25 @@ export const EditBlockForm = () => {
                     required
                     label="Block Name"
                     placeholder={'Name your exercise'}
-                    // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    //     if (hasError) setHasError(false);
-                    //     handleUserInput('name', e.target.value);
-                    // }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        if (hasError) {
+                            setHasError(false);
+                        }
+
+                        if (isNameLengthLimitExceeded) {
+                            setIsNameLengthLimitExceeded(false);
+                        }
+
+                        if (e.target.value.length > 50) {
+                            setIsNameLengthLimitExceeded(true);
+                        }
+
+                        handleUserInput('name', e.target.value);
+                    }}
                     value={userInput.name}
-                    // error={hasError}
-                    // disabled={isCreatingNewProject}
+                    error={hasError}
                 />
+                {renderNameLengthExceededError()}
                 <Spacer />
                 <Textarea
                     styles={{
@@ -185,9 +199,9 @@ export const EditBlockForm = () => {
                     }}
                     label="Block Description"
                     placeholder="Block name and description can be updated at any time"
-                    // onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                    //     handleUserInput('desc', e.target.value);
-                    // }}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                        handleUserInput('desc', e.target.value);
+                    }}
                     value={userInput.desc}
                     // disabled={isCreatingNewProject}
                 />
@@ -217,9 +231,9 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        // onChange={(val: number) =>
-                        //     handleUserInput('sets', String(val))
-                        // }
+                        onChange={(val: number) =>
+                            handleUserInput('sets', String(val))
+                        }
                     />
                     <NumberInput
                         value={Number(userInput.reps)}
@@ -245,15 +259,15 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        // onChange={(val: number) =>
-                        //     handleUserInput('reps', String(val))
-                        // }
+                        onChange={(val: number) =>
+                            handleUserInput('reps', String(val))
+                        }
                     />
                     <NumberInput
                         label={`Weight (${composedWeightUnit})`}
                         value={determineUnitValue()}
                         min={0}
-                        max={99}
+                        max={9999}
                         required
                         styles={{
                             root: {
@@ -273,9 +287,9 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        // onChange={(val: number) =>
-                        //     handleUserInput('reps', String(val))
-                        // }
+                        onChange={(weight: number) =>
+                            composeInputWeight(weight)
+                        }
                     />
                 </FlexWrapper>
                 <DividerLine
@@ -347,7 +361,10 @@ export const EditBlockForm = () => {
                 />
             </FormContainer>
             <ButtonContainer>
-                <GeneralButton buttonLabel="Update Block" />
+                <GeneralButton
+                    buttonLabel="Update Block"
+                    onClick={submitBlockUpdateRequest}
+                />
             </ButtonContainer>
         </MainContainer>
     );

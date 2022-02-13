@@ -12,6 +12,9 @@ const initialState: any = {
     ADD_BLOCK_MODAL: {
         isLoading: false,
     },
+    EDIT_BLOCK_MODAL: {
+        isLoading: false,
+    },
     GLOBAL_SETTINGS_MODAL: {
         isLoading: false,
     },

@@ -18,6 +18,7 @@ import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 //Styles:
 import styled from 'styled-components';
 import { Edit } from '@styled-icons/fluentui-system-filled/Edit';
+import useQuery from '../../../utils/hooks/useQuery';
 
 const EditIcon = styled(Edit)`
     height: 1.2rem;
@@ -88,9 +89,11 @@ const DateColumn = ({
     elements,
     columnIndex,
 }: IComponentProps): JSX.Element => {
+    const query = useQuery();
     const dispatch = useDispatch();
     const template = useSelector((state: RootStateOrAny) => state?.template);
     const { height } = useWindowDimensions();
+    const currentSheetId = query.get('sheetId');
 
     const composeHeaderName = (prefixString: string): string => {
         if (!prefixString.includes(`%SECRET%ID%`)) {
@@ -117,7 +120,7 @@ const DateColumn = ({
             dispatch(
                 renameEditingSurfaceColumn(
                     template.id,
-                    template.templateEditingSurfaceBlocks[0]['sheetId'],
+                    currentSheetId,
                     prefix,
                     newColumnName.concat(`%SECRET%ID%${uuid()}`)
                 )
@@ -155,7 +158,7 @@ const DateColumn = ({
         if (!isEditModeOn) {
             return (
                 <>
-                    <Text text={composedHeaderName} />
+                    <Text text={newColumnName} />
                     <ColumnHeaderButton onClick={() => setIsEditModeOn(true)}>
                         <EditIcon />
                     </ColumnHeaderButton>
@@ -223,7 +226,7 @@ const DateColumn = ({
                                         index={index}
                                         blockDetails={item.blockDetails}
                                         blockType={BlockTypes.EDITING_SURFACE}
-                                        columnPrefix={`${prefix}`}
+                                        columnPrefix={prefix}
                                     />
                                 ))}
                                 {provided.placeholder}

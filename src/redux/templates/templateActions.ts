@@ -10,6 +10,8 @@ import {
     invokeLoaderState,
     disableLoaderState,
 } from '../uiLoader/uiLoaderActions';
+import { toggleModal } from '../modals/modalActions';
+import { ModalActionTypes } from '../modals/action-types';
 
 //Project Templates or View- specific template actions.
 
@@ -243,7 +245,7 @@ export const addEditingSurfaceBlock = (
 ) => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            let response = await api.post(
+            const response = await api.post(
                 `/template/surface/add/${templateId}`,
                 { blockDetails: blockDetails }
             );
@@ -254,6 +256,41 @@ export const addEditingSurfaceBlock = (
             });
         } catch (err) {
             console.warn(err);
+        }
+    };
+};
+
+export const updateEditingSurfaceBlock = (
+    templateId: string,
+    sheetId: string | null,
+    blockId: string,
+    columnPrefix: string | null,
+    blockDetails: any
+): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+            if (!templateId || !sheetId || !blockId || !blockDetails) {
+                throw new Error('Missing one or more required arguments');
+            }
+
+            dispatch(invokeLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+
+            const response = await api.post(
+                `/template/surface/update/${templateId}?sheetId=${sheetId}&blockId=${blockId}&columnPrefix=${columnPrefix}`,
+                { blockDetails }
+            );
+
+            if (response) {
+                dispatch({
+                    type: TemplateActionType.UPDATE_EDITING_SURFACE_BLOCK,
+                    payload: response.data.template,
+                });
+
+                dispatch(disableLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+                dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'CLOSE'));
+            }
+        } catch (err) {
+            console.error(err);
         }
     };
 };
@@ -270,7 +307,7 @@ export const deleteEditingSurfaceBlock = (
                 throw new Error('No SheetId');
             }
 
-            let response = await api.delete(
+            const response = await api.delete(
                 `/template/surface/delete/${templateId}?blockId=${blockId}&sheetId=${sheetId}&columnPrefix=${columnPrefix}`
             );
 
@@ -311,12 +348,15 @@ export const reorderEditingSurfaceColumn = (
 
 export const renameEditingSurfaceColumn = (
     templateId: string,
-    sheetId: string | undefined,
+    sheetId: string | null,
     oldColumnName: string,
     newColumnName: string
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
+            if (!sheetId) {
+                throw new Error('SheetId not provided.');
+            }
             const response = await api.post(
                 `/template/surface/rename-column/${templateId}`,
                 {
