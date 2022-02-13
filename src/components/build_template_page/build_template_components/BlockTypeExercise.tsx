@@ -204,7 +204,7 @@ const BlockTypeExercise = ({
         );
 
         return targetColor ? targetColor : undefined;
-    }, [colorLegend]);
+    }, [linkedColor]);
 
     const blockWeight = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
@@ -214,7 +214,7 @@ const BlockTypeExercise = ({
         return templateWeightUnit === 'METRIC'
             ? `${weightMetric}`
             : `${weightImperial}`;
-    }, [templateWeightUnit]);
+    }, [weightMetric, weightImperial]);
 
     const blockUnit = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
