@@ -264,6 +264,7 @@ const BlockTypeExercise = ({
         dispatch(
             toggleModal(ModalActionTypes.EDIT_BLOCK, 'OPEN', {
                 blockId,
+                columnPrefix,
                 blockDetails,
             })
         );
