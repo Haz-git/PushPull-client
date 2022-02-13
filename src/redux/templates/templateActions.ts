@@ -10,6 +10,8 @@ import {
     invokeLoaderState,
     disableLoaderState,
 } from '../uiLoader/uiLoaderActions';
+import { toggleModal } from '../modals/modalActions';
+import { ModalActionTypes } from '../modals/action-types';
 
 //Project Templates or View- specific template actions.
 
@@ -271,15 +273,22 @@ export const updateEditingSurfaceBlock = (
                 throw new Error('Missing one or more required arguments');
             }
 
+            dispatch(invokeLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+
             const response = await api.post(
                 `/template/surface/update/${templateId}?sheetId=${sheetId}&blockId=${blockId}&columnPrefix=${columnPrefix}`,
                 { blockDetails }
             );
 
-            dispatch({
-                type: TemplateActionType.UPDATE_EDITING_SURFACE_BLOCK,
-                payload: response.data.template,
-            });
+            if (response) {
+                dispatch({
+                    type: TemplateActionType.UPDATE_EDITING_SURFACE_BLOCK,
+                    payload: response.data.template,
+                });
+
+                dispatch(disableLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+                dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'CLOSE'));
+            }
         } catch (err) {
             console.error(err);
         }
