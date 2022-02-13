@@ -2,9 +2,11 @@ import { Dispatch } from 'redux';
 import { ModalAction } from './modalInterfaces';
 import { ModalActionTypes } from './action-types';
 
+type ModalOperation = 'OPEN' | 'CLOSE';
+
 export const toggleModal = (
     modalType: any,
-    action: 'OPEN' | 'CLOSE',
+    action: ModalOperation,
     modalProps?: any
 ): Function => {
     return async (dispatch: Dispatch<ModalAction>) => {
