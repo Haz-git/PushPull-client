@@ -106,6 +106,10 @@ const MainBuildTemplateView = ({
         };
     }, []);
 
+    const { isLoading: isEditBlockModalLoading } = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.EDIT_BLOCK_MODAL
+    );
+
     const { isLoading: isMainViewLoading } = useSelector(
         (state: RootStateOrAny) => state?.uiLoader?.MAIN_BUILD_TEMPLATE_VIEW
     );
@@ -342,6 +346,7 @@ const MainBuildTemplateView = ({
                             closeOnClickOutside={false}
                             title="Block Details"
                             openBoolean={isEditBlockModalOpened}
+                            isLoading={isEditBlockModalLoading}
                             closeFunc={() =>
                                 dispatch(
                                     toggleModal(
