@@ -348,12 +348,15 @@ export const reorderEditingSurfaceColumn = (
 
 export const renameEditingSurfaceColumn = (
     templateId: string,
-    sheetId: string | undefined,
+    sheetId: string | null,
     oldColumnName: string,
     newColumnName: string
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
+            if (!sheetId) {
+                throw new Error('SheetId not provided.');
+            }
             const response = await api.post(
                 `/template/surface/rename-column/${templateId}`,
                 {
