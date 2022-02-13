@@ -42,14 +42,14 @@ export const EditBlockForm = () => {
 
     //Modal input state
     const [userInput, setUserInput] = useState({
-        name: modalProps.blockDetails.name,
-        desc: modalProps.blockDetails.desc,
-        sets: modalProps.blockDetails.sets,
-        reps: modalProps.blockDetails.reps,
-        weightImperial: modalProps.blockDetails.weightImperial,
-        weightMetric: modalProps.blockDetails.weightMetric,
-        linkedColor: modalProps.blockDetails.linkedColor,
-        linkedViewerInput: modalProps.blockDetails.linkedViewerInput,
+        name: modalProps?.blockDetails?.name,
+        desc: modalProps?.blockDetails?.desc,
+        sets: modalProps?.blockDetails?.sets,
+        reps: modalProps?.blockDetails?.reps,
+        weightImperial: modalProps?.blockDetails?.weightImperial,
+        weightMetric: modalProps?.blockDetails?.weightMetric,
+        linkedColor: modalProps?.blockDetails?.linkedColor,
+        linkedViewerInput: modalProps?.blockDetails?.linkedViewerInput,
     });
 
     const composedColorSelectData = useMemo((): string[] => {
@@ -241,7 +241,7 @@ export const EditBlockForm = () => {
                         label={`Weight (${composedWeightUnit})`}
                         value={determineUnitValue()}
                         min={0}
-                        max={99}
+                        max={9999}
                         required
                         styles={{
                             root: {
@@ -261,8 +261,8 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        onChange={(val: number) =>
-                            handleUserInput('reps', String(val))
+                        onChange={(weight: number) =>
+                            composeInputWeight(weight)
                         }
                     />
                 </FlexWrapper>
