@@ -243,7 +243,7 @@ export const addEditingSurfaceBlock = (
 ) => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            let response = await api.post(
+            const response = await api.post(
                 `/template/surface/add/${templateId}`,
                 { blockDetails: blockDetails }
             );
@@ -255,6 +255,17 @@ export const addEditingSurfaceBlock = (
         } catch (err) {
             console.warn(err);
         }
+    };
+};
+
+export const updateEditingSurfaceBlock = (
+    templateId: string,
+    sheetId: string,
+    blockId: string
+): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+        } catch (err) {}
     };
 };
 
@@ -270,7 +281,7 @@ export const deleteEditingSurfaceBlock = (
                 throw new Error('No SheetId');
             }
 
-            let response = await api.delete(
+            const response = await api.delete(
                 `/template/surface/delete/${templateId}?blockId=${blockId}&sheetId=${sheetId}&columnPrefix=${columnPrefix}`
             );
 
