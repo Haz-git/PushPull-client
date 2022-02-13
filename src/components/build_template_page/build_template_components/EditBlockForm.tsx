@@ -39,28 +39,17 @@ export const EditBlockForm = () => {
         (state: RootStateOrAny) => state?.modals?.EDIT_BLOCK
     );
     const currentSheetId = query.get('sheetId');
-    const { blockId, blockDetails } = modalProps;
-    const {
-        desc,
-        name,
-        reps,
-        sets,
-        linkedColor,
-        weightMetric,
-        weightImperial,
-        linkedViewerInput,
-    } = blockDetails || {};
 
     //Modal input state
     const [userInput, setUserInput] = useState({
-        name: name,
-        desc: desc,
-        sets: sets,
-        reps: reps,
-        weightImperial: weightImperial,
-        weightMetric: weightMetric,
-        linkedColor: linkedColor,
-        linkedViewerInput: linkedViewerInput,
+        name: modalProps.blockDetails.name,
+        desc: modalProps.blockDetails.desc,
+        sets: modalProps.blockDetails.sets,
+        reps: modalProps.blockDetails.reps,
+        weightImperial: modalProps.blockDetails.weightImperial,
+        weightMetric: modalProps.blockDetails.weightMetric,
+        linkedColor: modalProps.blockDetails.linkedColor,
+        linkedViewerInput: modalProps.blockDetails.linkedViewerInput,
     });
 
     const composedColorSelectData = useMemo((): string[] => {
@@ -157,13 +146,12 @@ export const EditBlockForm = () => {
                     required
                     label="Block Name"
                     placeholder={'Name your exercise'}
-                    // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    //     if (hasError) setHasError(false);
-                    //     handleUserInput('name', e.target.value);
-                    // }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        if (hasError) setHasError(false);
+                        handleUserInput('name', e.target.value);
+                    }}
                     value={userInput.name}
-                    // error={hasError}
-                    // disabled={isCreatingNewProject}
+                    error={hasError}
                 />
                 <Spacer />
                 <Textarea
@@ -185,9 +173,9 @@ export const EditBlockForm = () => {
                     }}
                     label="Block Description"
                     placeholder="Block name and description can be updated at any time"
-                    // onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                    //     handleUserInput('desc', e.target.value);
-                    // }}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                        handleUserInput('desc', e.target.value);
+                    }}
                     value={userInput.desc}
                     // disabled={isCreatingNewProject}
                 />
@@ -217,9 +205,9 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        // onChange={(val: number) =>
-                        //     handleUserInput('sets', String(val))
-                        // }
+                        onChange={(val: number) =>
+                            handleUserInput('sets', String(val))
+                        }
                     />
                     <NumberInput
                         value={Number(userInput.reps)}
@@ -245,9 +233,9 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        // onChange={(val: number) =>
-                        //     handleUserInput('reps', String(val))
-                        // }
+                        onChange={(val: number) =>
+                            handleUserInput('reps', String(val))
+                        }
                     />
                     <NumberInput
                         label={`Weight (${composedWeightUnit})`}
@@ -273,9 +261,9 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        // onChange={(val: number) =>
-                        //     handleUserInput('reps', String(val))
-                        // }
+                        onChange={(val: number) =>
+                            handleUserInput('reps', String(val))
+                        }
                     />
                 </FlexWrapper>
                 <DividerLine
