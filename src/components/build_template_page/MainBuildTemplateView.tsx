@@ -339,7 +339,7 @@ const MainBuildTemplateView = ({
                     <>
                         <GeneralModal
                             size="md"
-                            closeOnClickOutside={true}
+                            closeOnClickOutside={false}
                             title="Block Details"
                             openBoolean={isEditBlockModalOpened}
                             closeFunc={() =>
