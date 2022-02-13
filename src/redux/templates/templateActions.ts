@@ -260,12 +260,29 @@ export const addEditingSurfaceBlock = (
 
 export const updateEditingSurfaceBlock = (
     templateId: string,
-    sheetId: string,
-    blockId: string
+    sheetId: string | null,
+    blockId: string,
+    columnPrefix: string | null,
+    blockDetails: any
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-        } catch (err) {}
+            if (!templateId || !sheetId || !blockId || !blockDetails) {
+                throw new Error('Missing one or more required arguments');
+            }
+
+            const response = await api.post(
+                `/template/surface/update/${templateId}?sheetId=${sheetId}&blockId=${blockId}&columnPrefix=${columnPrefix}`,
+                { blockDetails }
+            );
+
+            dispatch({
+                type: TemplateActionType.UPDATE_EDITING_SURFACE_BLOCK,
+                payload: response.data.template,
+            });
+        } catch (err) {
+            console.error(err);
+        }
     };
 };
 
