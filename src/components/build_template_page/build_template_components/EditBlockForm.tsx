@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { toggleModal } from '../../../redux/modals/modalActions';
 import { ModalActionTypes } from '../../../redux/modals/action-types';
+import { updateEditingSurfaceBlock } from '../../../redux/templates/templateActions';
 
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
@@ -129,7 +130,15 @@ export const EditBlockForm = () => {
             return setHasError(true);
         }
 
-        return console.log('Request Dispatched');
+        dispatch(
+            updateEditingSurfaceBlock(
+                template.id,
+                currentSheetId,
+                modalProps.blockId,
+                modalProps.columnPrefix,
+                userInput
+            )
+        );
     };
 
     return (
