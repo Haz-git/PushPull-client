@@ -136,7 +136,7 @@ export const deleteTemplate = (
         const id = toggleNotif();
 
         try {
-            let response = await api.delete(
+            const response = await api.delete(
                 `/template/delete/${templateId}?projectId=${projectUuid}`
             );
 
@@ -198,7 +198,7 @@ export const addToolbarBlock = (
         try {
             dispatch(invokeLoaderState(loaderTypes.ADD_BLOCK_MODAL));
 
-            let response = await api.post(
+            const response = await api.post(
                 `/template/toolbar/add/${templateId}`,
                 { blockDetails: blockDetails }
             );
@@ -219,13 +219,42 @@ export const addToolbarBlock = (
     };
 };
 
+export const updateToolbarBlock = (
+    templateId: string,
+    blockId: string,
+    blockDetails: any
+): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch(invokeLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+
+            const response = await api.post(
+                `/template/toolbar/update/${templateId}?blockId=${blockId}`,
+                { blockDetails }
+            );
+
+            if (response) {
+                dispatch({
+                    type: TemplateActionType.UPDATE_TOOLBAR_BLOCK,
+                    payload: response.data.template,
+                });
+
+                dispatch(disableLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+                dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'CLOSE'));
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+};
+
 export const deleteToolbarBlock = (
     templateId: string,
     blockId: string
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            let response = await api.delete(
+            const response = await api.delete(
                 `/template/toolbar/delete/${templateId}?blockId=${blockId}`
             );
 
@@ -269,7 +298,10 @@ export const updateEditingSurfaceBlock = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            if (!templateId || !sheetId || !blockId || !blockDetails) {
+            const isMissingRequiredArguments =
+                !templateId || !sheetId || !blockId || !blockDetails;
+
+            if (isMissingRequiredArguments) {
                 throw new Error('Missing one or more required arguments');
             }
 
@@ -357,6 +389,7 @@ export const renameEditingSurfaceColumn = (
             if (!sheetId) {
                 throw new Error('SheetId not provided.');
             }
+
             const response = await api.post(
                 `/template/surface/rename-column/${templateId}`,
                 {
