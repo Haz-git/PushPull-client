@@ -3,7 +3,10 @@ import { useMemo, useState } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { updateEditingSurfaceBlock } from '../../../redux/templates/templateActions';
+import {
+    updateEditingSurfaceBlock,
+    updateToolbarBlock,
+} from '../../../redux/templates/templateActions';
 
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
@@ -122,17 +125,23 @@ export const EditBlockForm = () => {
             : Number(userInput.weightImperial);
     };
 
-    const submitBlockUpdateRequest = (): void => {
+    const submitBlockUpdateRequest = (): Function | void => {
         if (!hasBlockName() || isNameLengthLimitExceeded) {
             return setHasError(true);
         }
 
-        dispatch(
+        if (modalProps?.blockType === 'TOOLBAR') {
+            return dispatch(
+                updateToolbarBlock(template.id, modalProps?.blockId, userInput)
+            );
+        }
+
+        return dispatch(
             updateEditingSurfaceBlock(
                 template.id,
                 currentSheetId,
-                modalProps.blockId,
-                modalProps.columnPrefix,
+                modalProps?.blockId,
+                modalProps?.columnPrefix,
                 userInput
             )
         );
