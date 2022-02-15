@@ -263,6 +263,7 @@ const BlockTypeExercise = ({
         setIsPopoverOpen(false);
         dispatch(
             toggleModal(ModalActionTypes.EDIT_BLOCK, 'OPEN', {
+                blockType,
                 blockId,
                 columnPrefix,
                 blockDetails,
