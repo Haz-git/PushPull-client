@@ -181,7 +181,7 @@ export const SheetTab = ({
                         height: '1.4rem',
                         fontSize: '1rem',
                         fontWeight: 700,
-                        width: '100%',
+                        width: '10rem',
                         minHeight: '0',
                     },
                 }}
