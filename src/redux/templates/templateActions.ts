@@ -219,6 +219,17 @@ export const addToolbarBlock = (
     };
 };
 
+export const updateToolbarBlock = (
+    templateId: string,
+    blockId: string,
+    blockDetails: any
+): Function => {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+        } catch (err) {}
+    };
+};
+
 export const deleteToolbarBlock = (
     templateId: string,
     blockId: string
