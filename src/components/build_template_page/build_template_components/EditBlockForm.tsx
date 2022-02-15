@@ -81,14 +81,6 @@ export const EditBlockForm = () => {
         return userInput.name.length <= 50;
     };
 
-    const renderNameLengthExceededError = (): null | JSX.Element => {
-        if (!isNameLengthLimitExceeded) {
-            return null;
-        }
-
-        return <NameLengthExceededError />;
-    };
-
     const handleUserInput = (name: string, val: string | number): void => {
         setUserInput({
             ...userInput,
@@ -187,7 +179,10 @@ export const EditBlockForm = () => {
                     value={userInput.name}
                     error={hasError}
                 />
-                {renderNameLengthExceededError()}
+                <NameLengthExceededError
+                    errorText="Block name must be 50 characters or less."
+                    shouldShowError={isNameLengthLimitExceeded}
+                />
                 <Spacer />
                 <Textarea
                     styles={{

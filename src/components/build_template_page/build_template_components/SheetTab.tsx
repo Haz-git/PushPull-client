@@ -101,7 +101,7 @@ export const SheetTab = ({
         return () => {
             document.removeEventListener('keydown', handleEscapeKey);
         };
-    }, []);
+    }, [sheetName]);
 
     const shouldHighlightTab = (): boolean => {
         if (!currentSheetId || !sheetId || currentSheetId !== sheetId) {
@@ -111,9 +111,10 @@ export const SheetTab = ({
         return true;
     };
 
-    const handleUpdateSheetName = (): undefined => {
+    const handleUpdateSheetName = (): void => {
         if (newSheetName === '' || newSheetName === sheetName) {
-            return;
+            setNewSheetName(sheetName);
+            return toggleTextField(false);
         }
 
         dispatch(
@@ -122,7 +123,7 @@ export const SheetTab = ({
             })
         );
 
-        toggleTextField(false);
+        return toggleTextField(false);
     };
 
     const inputRef = useClickOutside(() => {
@@ -180,7 +181,7 @@ export const SheetTab = ({
                         height: '1.4rem',
                         fontSize: '1rem',
                         fontWeight: 700,
-                        width: '100%',
+                        width: '10rem',
                         minHeight: '0',
                     },
                 }}
