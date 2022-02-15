@@ -269,7 +269,10 @@ export const updateEditingSurfaceBlock = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            if (!templateId || !sheetId || !blockId || !blockDetails) {
+            const isMissingRequiredArguments =
+                !templateId || !sheetId || !blockId || !blockDetails;
+
+            if (isMissingRequiredArguments) {
                 throw new Error('Missing one or more required arguments');
             }
 
@@ -357,6 +360,7 @@ export const renameEditingSurfaceColumn = (
             if (!sheetId) {
                 throw new Error('SheetId not provided.');
             }
+
             const response = await api.post(
                 `/template/surface/rename-column/${templateId}`,
                 {

@@ -165,9 +165,9 @@ export const EditBlockForm = () => {
                             setHasError(false);
                         }
 
-                        if (isNameLengthLimitExceeded) {
-                            setIsNameLengthLimitExceeded(false);
-                        }
+                        setIsNameLengthLimitExceeded(
+                            e.target.value.length > 50
+                        );
 
                         if (e.target.value.length > 50) {
                             setIsNameLengthLimitExceeded(true);
