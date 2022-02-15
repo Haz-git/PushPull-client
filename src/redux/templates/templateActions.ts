@@ -136,7 +136,7 @@ export const deleteTemplate = (
         const id = toggleNotif();
 
         try {
-            let response = await api.delete(
+            const response = await api.delete(
                 `/template/delete/${templateId}?projectId=${projectUuid}`
             );
 
@@ -198,7 +198,7 @@ export const addToolbarBlock = (
         try {
             dispatch(invokeLoaderState(loaderTypes.ADD_BLOCK_MODAL));
 
-            let response = await api.post(
+            const response = await api.post(
                 `/template/toolbar/add/${templateId}`,
                 { blockDetails: blockDetails }
             );
@@ -226,7 +226,25 @@ export const updateToolbarBlock = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-        } catch (err) {}
+            dispatch(invokeLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+
+            const response = await api.post(
+                `/template/toolbar/update/${templateId}?blockId=${blockId}`,
+                { blockDetails }
+            );
+
+            if (response) {
+                dispatch({
+                    type: TemplateActionType.UPDATE_TOOLBAR_BLOCK,
+                    payload: response.data.template,
+                });
+
+                dispatch(disableLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
+                dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'CLOSE'));
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 };
 
@@ -236,7 +254,7 @@ export const deleteToolbarBlock = (
 ): Function => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            let response = await api.delete(
+            const response = await api.delete(
                 `/template/toolbar/delete/${templateId}?blockId=${blockId}`
             );
 
