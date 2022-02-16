@@ -5,8 +5,15 @@ import { useState, useMemo } from 'react';
 import GeneralButton from '../../general_components/GeneralButton';
 import Text from '../../general_components/Text';
 import DividerLine from '../../general_components/DividerLine';
-import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
+import {
+    TextInput,
+    Textarea,
+    NumberInput,
+    Select,
+    Checkbox,
+} from '@mantine/core';
 import { SelectColorItem } from './SelectColorItem';
+import { SetConfigurationMenu } from './SetConfigurationMenu';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -32,6 +39,10 @@ export const FlexWrapper = styled.div`
     align-items: center;
     justify-content: center;
     column-gap: 1rem;
+`;
+
+export const SetConfigurationContainer = styled.div`
+    margin: 0.5rem 0rem;
 `;
 
 export const ButtonContainer = styled.div`
@@ -80,6 +91,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             color: color.colorHex,
         }));
     }, [template.templateLegend]);
+
+    //Set Configuration Menu State:
+    const [isSetConfigurationMenuOpen, toggleSetConfigurationMenu] =
+        useState(false);
 
     //Modal input state
     const [userInput, setUserInput] = useState({
@@ -301,6 +316,27 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         }
                     />
                 </FlexWrapper>
+                <SetConfigurationContainer>
+                    <Checkbox
+                        checked={isSetConfigurationMenuOpen}
+                        label="Configure Sets Separately"
+                        onChange={() =>
+                            toggleSetConfigurationMenu(
+                                !isSetConfigurationMenuOpen
+                            )
+                        }
+                        styles={{
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                        }}
+                    />
+                    <SetConfigurationMenu isOpen={isSetConfigurationMenuOpen} />
+                </SetConfigurationContainer>
                 <DividerLine
                     border="1px solid #d6d6d6"
                     margin="2rem 0rem 1rem 0rem"
