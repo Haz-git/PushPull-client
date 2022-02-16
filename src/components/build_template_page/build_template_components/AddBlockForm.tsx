@@ -318,6 +318,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 </FlexWrapper>
                 <SetConfigurationContainer>
                     <Checkbox
+                        color="orange"
                         checked={isSetConfigurationMenuOpen}
                         label="Configure Sets Separately"
                         onChange={() =>
