@@ -42,7 +42,7 @@ export const FlexWrapper = styled.div`
 `;
 
 export const SetConfigurationContainer = styled.div`
-    margin: 0.5rem 0rem;
+    margin-top: 1rem;
 `;
 
 export const ButtonContainer = styled.div`
@@ -339,7 +339,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 </SetConfigurationContainer>
                 <DividerLine
                     border="1px solid #d6d6d6"
-                    margin="2rem 0rem 1rem 0rem"
+                    margin="1rem 0rem 1rem 0rem"
                 />
                 <Text text="Linked Interactions" fontSize="1.5rem" />
                 <Spacer />
