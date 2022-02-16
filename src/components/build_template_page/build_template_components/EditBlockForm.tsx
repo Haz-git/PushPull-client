@@ -77,10 +77,6 @@ export const EditBlockForm = () => {
         return userInput.name !== '';
     };
 
-    const isNameLengthValid = (): boolean => {
-        return userInput.name.length <= 50;
-    };
-
     const handleUserInput = (name: string, val: string | number): void => {
         setUserInput({
             ...userInput,
