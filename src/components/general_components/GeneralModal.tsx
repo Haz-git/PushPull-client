@@ -55,7 +55,7 @@ const GeneralModal = ({
                 opened={openBoolean}
                 onClose={closeFunc}
                 size={size}
-                overflow="outside"
+                overflow="inside"
             >
                 <LoadingOverlay
                     visible={isLoading}
