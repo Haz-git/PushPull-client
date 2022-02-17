@@ -235,7 +235,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         value={Number(userInput.sets)}
                         label="Total Sets"
                         min={0}
-                        max={99}
+                        max={isSetConfigurationMenuOpen ? 15 : 99}
                         required
                         styles={{
                             root: {
