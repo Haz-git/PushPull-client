@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 //Components:
+import { SetConfigurationField } from './SetConfigurationField';
 
 //Styles:
 
