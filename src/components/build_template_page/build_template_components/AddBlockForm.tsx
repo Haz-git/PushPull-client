@@ -378,7 +378,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             .includes(value.toLowerCase().trim())
                     }
                     nothingFound="No color found"
-                    required
                     maxDropdownHeight={250}
                     onChange={(value: string) =>
                         setUserInput({
@@ -408,7 +407,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     label="Viewer Input"
                     placeholder="Link a viewer input"
                     data={[{ value: 'maxBench', label: 'Max Bench' }]}
-                    required
                 />
             </FormContainer>
             <ButtonContainer>
