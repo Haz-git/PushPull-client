@@ -338,6 +338,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             },
                         }}
                     />
+                    <Spacer />
                     <SetConfigurationMenu
                         isOpen={isSetConfigurationMenuOpen}
                         totalSets={userInput.sets}
