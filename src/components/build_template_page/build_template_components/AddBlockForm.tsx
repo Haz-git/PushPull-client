@@ -264,7 +264,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         label="Reps Per Set"
                         min={0}
                         max={99}
-                        required
+                        required={!isSetConfigurationMenuOpen}
                         styles={{
                             root: {
                                 maxWidth: '40rem',
@@ -286,13 +286,14 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         onChange={(val: number) =>
                             handleUserInput('reps', String(val))
                         }
+                        disabled={isSetConfigurationMenuOpen}
                     />
                     <NumberInput
                         label={`Weight (${composedWeightUnit})`}
+                        required={!isSetConfigurationMenuOpen}
                         value={determineUnitValue()}
                         min={0}
                         max={9999}
-                        required
                         styles={{
                             root: {
                                 maxWidth: '40rem',
@@ -314,6 +315,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         onChange={(weight: number) =>
                             composeInputWeight(weight)
                         }
+                        disabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>
@@ -336,7 +338,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             },
                         }}
                     />
-                    <SetConfigurationMenu isOpen={isSetConfigurationMenuOpen} />
+                    <SetConfigurationMenu
+                        isOpen={isSetConfigurationMenuOpen}
+                        totalSets={userInput.sets}
+                    />
                 </SetConfigurationContainer>
                 <DividerLine
                     border="1px solid #d6d6d6"
