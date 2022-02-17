@@ -5,8 +5,15 @@ import { useState, useMemo } from 'react';
 import GeneralButton from '../../general_components/GeneralButton';
 import Text from '../../general_components/Text';
 import DividerLine from '../../general_components/DividerLine';
-import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
+import {
+    TextInput,
+    Textarea,
+    NumberInput,
+    Select,
+    Checkbox,
+} from '@mantine/core';
 import { SelectColorItem } from './SelectColorItem';
+import { SetConfigurationMenu } from './SetConfigurationMenu';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -32,6 +39,10 @@ export const FlexWrapper = styled.div`
     align-items: center;
     justify-content: center;
     column-gap: 1rem;
+`;
+
+export const SetConfigurationContainer = styled.div`
+    margin-top: 1rem;
 `;
 
 export const ButtonContainer = styled.div`
@@ -81,6 +92,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         }));
     }, [template.templateLegend]);
 
+    //Set Configuration Menu State:
+    const [isSetConfigurationMenuOpen, toggleSetConfigurationMenu] =
+        useState(false);
+
     //Modal input state
     const [userInput, setUserInput] = useState({
         name: '',
@@ -100,10 +115,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
     const hasBlockName = (): boolean => {
         return userInput.name !== '';
-    };
-
-    const isNameLengthValid = (): boolean => {
-        return userInput.name.length <= 50;
     };
 
     const handleUserInput = (name: string, val: string | number): void => {
@@ -224,7 +235,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         value={Number(userInput.sets)}
                         label="Total Sets"
                         min={0}
-                        max={99}
+                        max={isSetConfigurationMenuOpen ? 15 : 99}
                         required
                         styles={{
                             root: {
@@ -253,7 +264,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         label="Reps Per Set"
                         min={0}
                         max={99}
-                        required
+                        required={!isSetConfigurationMenuOpen}
                         styles={{
                             root: {
                                 maxWidth: '40rem',
@@ -275,13 +286,14 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         onChange={(val: number) =>
                             handleUserInput('reps', String(val))
                         }
+                        disabled={isSetConfigurationMenuOpen}
                     />
                     <NumberInput
                         label={`Weight (${composedWeightUnit})`}
+                        required={!isSetConfigurationMenuOpen}
                         value={determineUnitValue()}
                         min={0}
                         max={9999}
-                        required
                         styles={{
                             root: {
                                 maxWidth: '40rem',
@@ -303,11 +315,38 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         onChange={(weight: number) =>
                             composeInputWeight(weight)
                         }
+                        disabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>
+                <SetConfigurationContainer>
+                    <Checkbox
+                        color="orange"
+                        checked={isSetConfigurationMenuOpen}
+                        label="Configure Sets Separately"
+                        onChange={() =>
+                            toggleSetConfigurationMenu(
+                                !isSetConfigurationMenuOpen
+                            )
+                        }
+                        styles={{
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                        }}
+                    />
+                    <Spacer />
+                    <SetConfigurationMenu
+                        isOpen={isSetConfigurationMenuOpen}
+                        totalSets={userInput.sets}
+                    />
+                </SetConfigurationContainer>
                 <DividerLine
                     border="1px solid #d6d6d6"
-                    margin="2rem 0rem 1rem 0rem"
+                    margin="1rem 0rem 1rem 0rem"
                 />
                 <Text text="Linked Interactions" fontSize="1.5rem" />
                 <Spacer />
@@ -340,7 +379,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             .includes(value.toLowerCase().trim())
                     }
                     nothingFound="No color found"
-                    required
                     maxDropdownHeight={250}
                     onChange={(value: string) =>
                         setUserInput({
@@ -370,7 +408,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     label="Viewer Input"
                     placeholder="Link a viewer input"
                     data={[{ value: 'maxBench', label: 'Max Bench' }]}
-                    required
                 />
             </FormContainer>
             <ButtonContainer>
