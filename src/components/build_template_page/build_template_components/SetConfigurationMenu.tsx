@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 
 //Components:
 import { SetConfigurationField } from './SetConfigurationField';
@@ -12,11 +13,20 @@ import { useDebouncedValue } from '@mantine/hooks';
 interface IComponentProps {
     isOpen: boolean;
     totalSets: string;
+    configurationFieldValues: any;
+    updateConfiguredSets: (
+        operation: 'RESET' | 'UPDATE',
+        setId: string,
+        reps: string,
+        weightImperial: string,
+        weightMetric: string
+    ) => void;
 }
 
 export const SetConfigurationMenu = ({
     isOpen,
     totalSets,
+    updateConfiguredSets,
 }: IComponentProps): JSX.Element => {
     //Using debounced value here to delay rendering configuration fields to user. Not sure if correct usage here, but I would consider mapping new items to the dom as expensive?
     const [debouncedNumberOfSets] = useDebouncedValue(totalSets, 200, {
@@ -36,7 +46,11 @@ export const SetConfigurationMenu = ({
         return Array.from(
             Array(Number(debouncedNumberOfSets)),
             (element, index) => (
-                <SetConfigurationField fieldId={index} key={uuid()} />
+                <SetConfigurationField
+                    fieldId={index}
+                    key={uuid()}
+                    updateConfiguredSets={updateConfiguredSets}
+                />
             )
         );
     };

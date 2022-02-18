@@ -1,8 +1,13 @@
 import * as React from 'react';
+import { useState, useMemo } from 'react';
+
+//Redux:
+import { useSelector, RootStateOrAny } from 'react-redux';
 
 //Components:
 import { NumberInput } from '@mantine/core';
 import Text from '../../general_components/Text';
+import { useClickOutside } from '@mantine/hooks';
 
 //Styles:
 import styled from 'styled-components';
@@ -34,11 +39,73 @@ const InputFieldsContainer = styled.div``;
 //Interfaces:
 interface IComponentProps {
     fieldId: number;
+    updateConfiguredSets: (
+        operation: 'RESET' | 'UPDATE',
+        setId: string,
+        reps: string,
+        weightImperial: string,
+        weightMetric: string
+    ) => void;
 }
 
 export const SetConfigurationField = ({
     fieldId,
+    updateConfiguredSets,
 }: IComponentProps): JSX.Element => {
+    const template = useSelector((state: RootStateOrAny) => state?.template);
+    const clickOutsideRef = useClickOutside(() =>
+        updateConfiguredSets(
+            'UPDATE',
+            String(fieldId + 1),
+            userInput.reps,
+            userInput.weightImperial,
+            userInput.weightMetric
+        )
+    );
+
+    const composedWeightUnit = useMemo((): string | undefined => {
+        if (!template) {
+            return;
+        }
+
+        return template.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
+    }, [template.templateWeightUnit]);
+
+    const [userInput, setUserInput] = useState({
+        reps: '0',
+        weightImperial: '0',
+        weightMetric: '0',
+    });
+
+    const handleUserInput = (name: string, val: string | number): void => {
+        setUserInput({
+            ...userInput,
+            [name]: val,
+        });
+    };
+
+    const composeInputWeight = (weight: number): void => {
+        if (composedWeightUnit === 'Kgs') {
+            return setUserInput({
+                ...userInput,
+                weightImperial: (weight * 2.205).toFixed(1),
+                weightMetric: String(weight),
+            });
+        }
+
+        return setUserInput({
+            ...userInput,
+            weightImperial: String(weight),
+            weightMetric: (weight / 2.205).toFixed(1),
+        });
+    };
+
+    const determineUnitValue = (): number => {
+        return composedWeightUnit === 'Kgs'
+            ? Number(userInput.weightMetric)
+            : Number(userInput.weightImperial);
+    };
+
     return (
         <MainContainer>
             <SetContainer>
@@ -56,11 +123,10 @@ export const SetConfigurationField = ({
                 />
             </SetContainer>
             <NumberInput
-                // value={Number(userInput.reps)}
+                value={Number(userInput.reps)}
                 label={`Reps`}
                 min={0}
                 max={99}
-                // required={!isSetConfigurationMenuOpen}
                 styles={{
                     root: {
                         maxWidth: '40rem',
@@ -79,15 +145,13 @@ export const SetConfigurationField = ({
                         fontWeight: 700,
                     },
                 }}
-                // onChange={(val: number) => handleUserInput('reps', String(val))}
-                // disabled={isSetConfigurationMenuOpen}
+                onChange={(val: number) => handleUserInput('reps', String(val))}
             />
             <NumberInput
-                // value={Number(userInput.reps)}
-                label={`Weight`}
+                label={`Weight (${composedWeightUnit})`}
+                value={determineUnitValue()}
                 min={0}
-                max={99}
-                // required={!isSetConfigurationMenuOpen}
+                max={9999}
                 styles={{
                     root: {
                         maxWidth: '40rem',
@@ -95,19 +159,18 @@ export const SetConfigurationField = ({
                     label: {
                         color: 'rgba(0, 0, 34, .7)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '.85rem',
+                        fontSize: '1rem',
                         fontWeight: 700,
                         marginBottom: '.25rem',
                     },
                     input: {
                         color: 'rgba(0, 0, 34, 1)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '.95rem',
+                        fontSize: '1.05rem',
                         fontWeight: 700,
                     },
                 }}
-                // onChange={(val: number) => handleUserInput('reps', String(val))}
-                // disabled={isSetConfigurationMenuOpen}
+                onChange={(weight: number) => composeInputWeight(weight)}
             />
         </MainContainer>
     );
