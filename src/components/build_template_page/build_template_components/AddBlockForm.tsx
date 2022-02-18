@@ -101,6 +101,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         name: '',
         desc: '',
         sets: '0',
+        configuredSets: [],
         reps: '0',
         weightImperial: '0',
         weightMetric: '0',
