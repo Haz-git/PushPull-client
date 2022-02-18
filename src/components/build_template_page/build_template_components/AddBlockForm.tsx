@@ -101,13 +101,47 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         name: '',
         desc: '',
         sets: '0',
-        configuredSets: [],
+        configuredSets: [] as any,
         reps: '0',
         weightImperial: '0',
         weightMetric: '0',
         linkedColor: '',
         linkedViewerInput: '',
     });
+
+    const updateConfiguredSets = (
+        operation: 'RESET' | 'UPDATE',
+        setId: string,
+        reps: string,
+        weightImperial: string,
+        weightMetric: string
+    ): void => {
+        switch (operation) {
+            case 'RESET':
+                setUserInput({
+                    ...userInput,
+                    configuredSets: [],
+                });
+                break;
+            case 'UPDATE':
+                setUserInput({
+                    ...userInput,
+                    configuredSets: {
+                        ...userInput.configuredSets,
+                        [setId]: {
+                            reps: reps,
+                            weightImperial: weightImperial,
+                            weightMetric: weightMetric,
+                        },
+                    },
+                });
+                break;
+            default:
+                throw new Error('No operation was supplied..');
+        }
+    };
+
+    console.log(userInput.configuredSets);
 
     //Error state:
     const [hasError, setHasError] = useState(false);
@@ -324,11 +358,11 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         color="orange"
                         checked={isSetConfigurationMenuOpen}
                         label="Configure Sets Separately"
-                        onChange={() =>
+                        onChange={() => {
                             toggleSetConfigurationMenu(
                                 !isSetConfigurationMenuOpen
-                            )
-                        }
+                            );
+                        }}
                         styles={{
                             label: {
                                 color: 'rgba(0, 0, 34, .7)',
@@ -343,6 +377,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     <SetConfigurationMenu
                         isOpen={isSetConfigurationMenuOpen}
                         totalSets={userInput.sets}
+                        configurationFieldValues={userInput.configuredSets}
+                        updateConfiguredSets={updateConfiguredSets}
                     />
                 </SetConfigurationContainer>
                 <DividerLine
