@@ -14,7 +14,7 @@ import DividerLine from '../../general_components/DividerLine';
 import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
 import Text from '../../general_components/Text';
 import { SelectColorItem } from './SelectColorItem';
-import { NameLengthExceededError } from './NameLengthExceededError';
+import { AddBlockError } from './AddBlockError';
 
 //Styles:
 import {
@@ -175,7 +175,7 @@ export const EditBlockForm = () => {
                     value={userInput.name}
                     error={hasError}
                 />
-                <NameLengthExceededError
+                <AddBlockError
                     errorText="Block name must be 50 characters or less."
                     shouldShowError={isNameLengthLimitExceeded}
                 />
