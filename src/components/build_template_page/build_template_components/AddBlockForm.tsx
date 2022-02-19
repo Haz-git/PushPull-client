@@ -101,7 +101,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         name: '',
         desc: '',
         sets: '0',
-        configuredSets: [] as any,
+        configuredSets: {} as any,
         reps: '0',
         weightImperial: '0',
         weightMetric: '0',
@@ -112,9 +112,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
     const updateConfiguredSets = (
         operation: 'RESET' | 'UPDATE',
         setId: string,
-        reps: string,
-        weightImperial: string,
-        weightMetric: string
+        inputName: string,
+        inputValue: string
     ): void => {
         switch (operation) {
             case 'RESET':
@@ -129,27 +128,60 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     configuredSets: {
                         ...userInput.configuredSets,
                         [setId]: {
-                            reps: reps,
-                            weightImperial: weightImperial,
-                            weightMetric: weightMetric,
+                            ...userInput.configuredSets[setId],
+                            [inputName]: inputValue,
                         },
                     },
                 });
+
                 break;
             default:
                 throw new Error('No operation was supplied..');
         }
     };
 
-    const generateCustomSetObjects = (setNumber: number) => {
+    const generateCustomSetObjects = (setNumber: number): any => {
         //This should generate an object with setNumber amount of nested objects with default values for:
         // reps, weightMetric, weightImperial
+
+        const setsObject = {} as any;
+
+        for (let i = 1; i < setNumber + 1; ++i) {
+            setsObject[i] = {
+                fieldId: String(i),
+                reps: '0',
+                weightImperial: '0',
+                weightMetric: '0',
+            };
+        }
+        return setsObject;
     };
 
-    const handleCustomSetRequest = () => {
-        //This should check if sets !== 0, and toggle on or off the menu state.
-        //if toggle menu is on, and sets !== 0 but < 15, we generate the set items.
-        //If we toggle menu off, we reset the configured sets.
+    const handleCustomSetRequest = (): void => {
+        if (Number(userInput.sets) <= 0) {
+            return;
+        }
+
+        if (isSetConfigurationMenuOpen) {
+            //reset configured sets on toggle off
+            setUserInput({
+                ...userInput,
+                configuredSets: {},
+            });
+
+            return toggleSetConfigurationMenu(false);
+        }
+
+        //We've checked sets !== 0, if we're toggling on we generate the set items:
+        const defaultSetObjects = generateCustomSetObjects(
+            Number(userInput.sets)
+        );
+        setUserInput({
+            ...userInput,
+            configuredSets: defaultSetObjects,
+        });
+
+        return toggleSetConfigurationMenu(true);
     };
     //Error state:
     const [hasError, setHasError] = useState(false);
@@ -366,11 +398,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         color="orange"
                         checked={isSetConfigurationMenuOpen}
                         label="Configure Sets Separately"
-                        onChange={() => {
-                            toggleSetConfigurationMenu(
-                                !isSetConfigurationMenuOpen
-                            );
-                        }}
+                        onChange={handleCustomSetRequest}
                         styles={{
                             label: {
                                 color: 'rgba(0, 0, 34, .7)',
