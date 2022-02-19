@@ -148,14 +148,14 @@ export const SetConfigurationField = ({
                     label: {
                         color: 'rgba(0, 0, 34, .7)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '1rem',
+                        fontSize: '.85',
                         fontWeight: 700,
                         marginBottom: '.25rem',
                     },
                     input: {
                         color: 'rgba(0, 0, 34, 1)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '1.05rem',
+                        fontSize: '.95rem',
                         fontWeight: 700,
                     },
                 }}
