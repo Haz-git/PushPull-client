@@ -45,9 +45,8 @@ interface IComponentProps {
     updateConfiguredSets: (
         operation: 'RESET' | 'UPDATE',
         setId: string,
-        reps: string,
-        weightImperial: string,
-        weightMetric: string
+        inputName: string,
+        inputValue: string
     ) => void;
 }
 
@@ -68,39 +67,32 @@ export const SetConfigurationField = ({
         return template.templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
     }, [template.templateWeightUnit]);
 
-    const [userInput, setUserInput] = useState({
-        reps: '0',
-        weightImperial: '0',
-        weightMetric: '0',
-    });
-
-    const handleUserInput = (name: string, val: string | number): void => {
-        setUserInput({
-            ...userInput,
-            [name]: val,
-        });
-    };
-
-    const composeInputWeight = (weight: number): void => {
-        if (composedWeightUnit === 'Kgs') {
-            return setUserInput({
-                ...userInput,
-                weightImperial: (weight * 2.205).toFixed(1),
-                weightMetric: String(weight),
-            });
-        }
-
-        return setUserInput({
-            ...userInput,
-            weightImperial: String(weight),
-            weightMetric: (weight / 2.205).toFixed(1),
-        });
+    const handleUserInput = (name: string, value: string | number): void => {
+        updateConfiguredSets('UPDATE', String(fieldId), name, String(value));
     };
 
     const determineUnitValue = (): number => {
         return composedWeightUnit === 'Kgs'
             ? Number(weightMetric)
             : Number(weightImperial);
+    };
+
+    const handleWeightInput = (weight: number): void => {
+        if (composedWeightUnit === 'Kgs') {
+            return updateConfiguredSets(
+                'UPDATE',
+                String(fieldId),
+                'weightMetric',
+                String(weight)
+            );
+        }
+
+        return updateConfiguredSets(
+            'UPDATE',
+            String(fieldId),
+            'weightImperial',
+            String(weight)
+        );
     };
 
     return (
@@ -113,14 +105,14 @@ export const SetConfigurationField = ({
                     subText={true}
                 />
                 <Text
-                    text={`${fieldId + 1}`}
+                    text={`${fieldId}`}
                     fontSize="1.5rem"
                     fontWeight="800"
                     mainText={true}
                 />
             </SetContainer>
             <NumberInput
-                value={Number(userInput.reps)}
+                value={Number(reps)}
                 label={`Reps`}
                 min={0}
                 max={99}
@@ -167,7 +159,7 @@ export const SetConfigurationField = ({
                         fontWeight: 700,
                     },
                 }}
-                onChange={(weight: number) => composeInputWeight(weight)}
+                onChange={(weight: number) => handleWeightInput(weight)}
             />
         </MainContainer>
     );

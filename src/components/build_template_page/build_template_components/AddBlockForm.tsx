@@ -21,7 +21,7 @@ import { addToolbarBlock } from '../../../redux/templates/templateActions';
 
 //Styles:
 import styled from 'styled-components';
-import { NameLengthExceededError } from './NameLengthExceededError';
+import { AddBlockError } from './AddBlockError';
 
 export const MainContainer = styled.div`
     padding: 0rem 0.5rem;
@@ -101,7 +101,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         name: '',
         desc: '',
         sets: '0',
-        configuredSets: [] as any,
+        configuredSets: {} as any,
         reps: '0',
         weightImperial: '0',
         weightMetric: '0',
@@ -109,12 +109,18 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         linkedViewerInput: '',
     });
 
+    //Error state:
+    const [hasError, setHasError] = useState(false);
+    const [isNameLengthLimitExceeded, setIsNameLengthLimitExceeded] =
+        useState(false);
+    const [isCustomSetLimitExceeded, setIsCustomSetLimitExceeded] =
+        useState(false);
+
     const updateConfiguredSets = (
         operation: 'RESET' | 'UPDATE',
         setId: string,
-        reps: string,
-        weightImperial: string,
-        weightMetric: string
+        inputName: string,
+        inputValue: string
     ): void => {
         switch (operation) {
             case 'RESET':
@@ -129,32 +135,73 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     configuredSets: {
                         ...userInput.configuredSets,
                         [setId]: {
-                            reps: reps,
-                            weightImperial: weightImperial,
-                            weightMetric: weightMetric,
+                            ...userInput.configuredSets[setId],
+                            [inputName]: inputValue,
                         },
                     },
                 });
+
                 break;
             default:
                 throw new Error('No operation was supplied..');
         }
     };
 
-    const generateCustomSetObjects = (setNumber: number) => {
+    const generateCustomSetObjects = (setNumber: number): any => {
         //This should generate an object with setNumber amount of nested objects with default values for:
         // reps, weightMetric, weightImperial
+
+        const setsObject = {} as any;
+
+        for (let i = 1; i < setNumber + 1; ++i) {
+            setsObject[i] = {
+                fieldId: String(i),
+                reps: '0',
+                weightImperial: '0',
+                weightMetric: '0',
+            };
+        }
+        return setsObject;
     };
 
-    const handleCustomSetRequest = () => {
-        //This should check if sets !== 0, and toggle on or off the menu state.
-        //if toggle menu is on, and sets !== 0 but < 15, we generate the set items.
-        //If we toggle menu off, we reset the configured sets.
+    const resetRepsAndWeight = (): void => {
+        //Reset reps and weight on customized sets:
+        setUserInput({
+            ...userInput,
+            reps: '0',
+            weightImperial: '0',
+            weightMetric: '0',
+        });
     };
-    //Error state:
-    const [hasError, setHasError] = useState(false);
-    const [isNameLengthLimitExceeded, setIsNameLengthLimitExceeded] =
-        useState(false);
+
+    const handleCustomSetRequest = (): void => {
+        if (Number(userInput.sets) <= 0 || Number(userInput.sets) > 15) {
+            return setIsCustomSetLimitExceeded(true);
+        }
+
+        if (isSetConfigurationMenuOpen) {
+            //reset configured sets on toggle off
+            setUserInput({
+                ...userInput,
+                configuredSets: {},
+            });
+
+            return toggleSetConfigurationMenu(false);
+        }
+
+        resetRepsAndWeight();
+
+        //We've checked sets !== 0, if we're toggling on we generate the set items:
+        const defaultSetObjects = generateCustomSetObjects(
+            Number(userInput.sets)
+        );
+        setUserInput({
+            ...userInput,
+            configuredSets: defaultSetObjects,
+        });
+
+        return toggleSetConfigurationMenu(true);
+    };
 
     const hasBlockName = (): boolean => {
         return userInput.name !== '';
@@ -243,7 +290,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     value={userInput.name}
                     error={hasError}
                 />
-                <NameLengthExceededError
+                <AddBlockError
                     errorText="Block name must be 50 characters or less."
                     shouldShowError={isNameLengthLimitExceeded}
                 />
@@ -298,9 +345,20 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                                 fontWeight: 700,
                             },
                         }}
-                        onChange={(val: number) =>
-                            handleUserInput('sets', String(val))
-                        }
+                        onChange={(val: number) => {
+                            if (isCustomSetLimitExceeded) {
+                                //Reset error warning.
+                                setIsCustomSetLimitExceeded(false);
+                            }
+
+                            if (isSetConfigurationMenuOpen) {
+                                //If this menu is already open, and the user changes the set, we close menu and reset (checking will generate another set object).
+                                updateConfiguredSets('RESET', '', '', '');
+                                toggleSetConfigurationMenu(false);
+                            }
+
+                            handleUserInput('sets', String(val));
+                        }}
                     />
                     <NumberInput
                         value={Number(userInput.reps)}
@@ -366,11 +424,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         color="orange"
                         checked={isSetConfigurationMenuOpen}
                         label="Configure Sets Separately"
-                        onChange={() => {
-                            toggleSetConfigurationMenu(
-                                !isSetConfigurationMenuOpen
-                            );
-                        }}
+                        onChange={handleCustomSetRequest}
                         styles={{
                             label: {
                                 color: 'rgba(0, 0, 34, .7)',
@@ -382,6 +436,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         }}
                     />
                     <Spacer />
+                    <AddBlockError
+                        shouldShowError={isCustomSetLimitExceeded}
+                        errorText="You must customize atleast 1 set, or up to 15 total sets."
+                    />
                     <SetConfigurationMenu
                         isOpen={isSetConfigurationMenuOpen}
                         totalSets={userInput.sets}

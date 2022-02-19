@@ -12,7 +12,7 @@ interface IComponentProps {
     shouldShowError: boolean;
 }
 
-export const NameLengthExceededError = ({
+export const AddBlockError = ({
     errorText,
     shouldShowError,
 }: IComponentProps): JSX.Element => {

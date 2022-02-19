@@ -17,9 +17,8 @@ interface IComponentProps {
     updateConfiguredSets: (
         operation: 'RESET' | 'UPDATE',
         setId: string,
-        reps: string,
-        weightImperial: string,
-        weightMetric: string
+        inputName: string,
+        inputValue: string
     ) => void;
 }
 
@@ -29,7 +28,7 @@ export const SetConfigurationMenu = ({
     updateConfiguredSets,
     configurationFieldValues,
 }: IComponentProps): JSX.Element => {
-    //Using debounced value here to delay rendering configuration fields to user. Not sure if correct usage here, but I would consider mapping new items to the dom as expensive?
+    //Using debounced value here to delay rendering configuration fields to user. Not sure if correct usage here, but I would consider dynamically mapping new items (on user input) to the dom as expensive?
     const [debouncedNumberOfSets] = useDebouncedValue(totalSets, 200, {
         leading: true,
     });
@@ -44,11 +43,11 @@ export const SetConfigurationMenu = ({
             return null;
         }
 
-        return configurationFieldValues.map((element: any, index: any) => (
+        return Object.values(configurationFieldValues).map((element: any) => (
             <SetConfigurationField
                 updateConfiguredSets={updateConfiguredSets}
-                fieldId={index + 1}
-                key={uuid()}
+                fieldId={element.fieldId}
+                key={element.fieldId}
                 reps={element.reps || '0'}
                 weightImperial={element.weightImperial || '0'}
                 weightMetric={element.weightMetric || '0'}
