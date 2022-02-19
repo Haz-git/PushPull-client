@@ -214,7 +214,7 @@ const BlockTypeExercise = ({
         return templateWeightUnit === 'METRIC'
             ? `${weightMetric}`
             : `${weightImperial}`;
-    }, [weightMetric, weightImperial]);
+    }, [templateWeightUnit, weightMetric, weightImperial]);
 
     const blockUnit = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
