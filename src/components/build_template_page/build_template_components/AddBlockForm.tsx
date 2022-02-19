@@ -141,8 +141,16 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         }
     };
 
-    console.log(userInput.configuredSets);
+    const generateCustomSetObjects = (setNumber: number) => {
+        //This should generate an object with setNumber amount of nested objects with default values for:
+        // reps, weightMetric, weightImperial
+    };
 
+    const handleCustomSetRequest = () => {
+        //This should check if sets !== 0, and toggle on or off the menu state.
+        //if toggle menu is on, and sets !== 0 but < 15, we generate the set items.
+        //If we toggle menu off, we reset the configured sets.
+    };
     //Error state:
     const [hasError, setHasError] = useState(false);
     const [isNameLengthLimitExceeded, setIsNameLengthLimitExceeded] =

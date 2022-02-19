@@ -27,6 +27,7 @@ export const SetConfigurationMenu = ({
     isOpen,
     totalSets,
     updateConfiguredSets,
+    configurationFieldValues,
 }: IComponentProps): JSX.Element => {
     //Using debounced value here to delay rendering configuration fields to user. Not sure if correct usage here, but I would consider mapping new items to the dom as expensive?
     const [debouncedNumberOfSets] = useDebouncedValue(totalSets, 200, {
@@ -43,16 +44,16 @@ export const SetConfigurationMenu = ({
             return null;
         }
 
-        return Array.from(
-            Array(Number(debouncedNumberOfSets)),
-            (element, index) => (
-                <SetConfigurationField
-                    fieldId={index}
-                    key={uuid()}
-                    updateConfiguredSets={updateConfiguredSets}
-                />
-            )
-        );
+        return configurationFieldValues.map((element: any, index: any) => (
+            <SetConfigurationField
+                updateConfiguredSets={updateConfiguredSets}
+                fieldId={index + 1}
+                key={uuid()}
+                reps={element.reps || '0'}
+                weightImperial={element.weightImperial || '0'}
+                weightMetric={element.weightMetric || '0'}
+            />
+        ));
     };
 
     return <>{isOpen ? <>{renderConfigurationFields()}</> : null}</>;

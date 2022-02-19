@@ -39,6 +39,9 @@ const InputFieldsContainer = styled.div``;
 //Interfaces:
 interface IComponentProps {
     fieldId: number;
+    reps: string;
+    weightImperial: string;
+    weightMetric: string;
     updateConfiguredSets: (
         operation: 'RESET' | 'UPDATE',
         setId: string,
@@ -50,18 +53,12 @@ interface IComponentProps {
 
 export const SetConfigurationField = ({
     fieldId,
+    reps,
+    weightImperial,
+    weightMetric,
     updateConfiguredSets,
 }: IComponentProps): JSX.Element => {
     const template = useSelector((state: RootStateOrAny) => state?.template);
-    const clickOutsideRef = useClickOutside(() =>
-        updateConfiguredSets(
-            'UPDATE',
-            String(fieldId + 1),
-            userInput.reps,
-            userInput.weightImperial,
-            userInput.weightMetric
-        )
-    );
 
     const composedWeightUnit = useMemo((): string | undefined => {
         if (!template) {
@@ -102,8 +99,8 @@ export const SetConfigurationField = ({
 
     const determineUnitValue = (): number => {
         return composedWeightUnit === 'Kgs'
-            ? Number(userInput.weightMetric)
-            : Number(userInput.weightImperial);
+            ? Number(weightMetric)
+            : Number(weightImperial);
     };
 
     return (
