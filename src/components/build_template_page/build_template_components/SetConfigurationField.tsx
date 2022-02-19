@@ -53,15 +53,6 @@ export const SetConfigurationField = ({
     updateConfiguredSets,
 }: IComponentProps): JSX.Element => {
     const template = useSelector((state: RootStateOrAny) => state?.template);
-    const clickOutsideRef = useClickOutside(() =>
-        updateConfiguredSets(
-            'UPDATE',
-            String(fieldId + 1),
-            userInput.reps,
-            userInput.weightImperial,
-            userInput.weightMetric
-        )
-    );
 
     const composedWeightUnit = useMemo((): string | undefined => {
         if (!template) {
