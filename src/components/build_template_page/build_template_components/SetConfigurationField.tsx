@@ -39,6 +39,9 @@ const InputFieldsContainer = styled.div``;
 //Interfaces:
 interface IComponentProps {
     fieldId: number;
+    reps: string;
+    weightImperial: string;
+    weightMetric: string;
     updateConfiguredSets: (
         operation: 'RESET' | 'UPDATE',
         setId: string,
@@ -50,6 +53,9 @@ interface IComponentProps {
 
 export const SetConfigurationField = ({
     fieldId,
+    reps,
+    weightImperial,
+    weightMetric,
     updateConfiguredSets,
 }: IComponentProps): JSX.Element => {
     const template = useSelector((state: RootStateOrAny) => state?.template);
@@ -93,8 +99,8 @@ export const SetConfigurationField = ({
 
     const determineUnitValue = (): number => {
         return composedWeightUnit === 'Kgs'
-            ? Number(userInput.weightMetric)
-            : Number(userInput.weightImperial);
+            ? Number(weightMetric)
+            : Number(weightImperial);
     };
 
     return (
