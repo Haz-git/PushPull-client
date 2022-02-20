@@ -55,6 +55,11 @@ export const ErrorSpacer = styled.div`
 
 //Interfaces:
 
+export enum ConfiguredSetOperation {
+    Reset = 'Reset',
+    Update = 'Update',
+}
+
 interface IComponentProps {
     closeModal: () => void;
 }
@@ -117,19 +122,19 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         useState(false);
 
     const updateConfiguredSets = (
-        operation: 'RESET' | 'UPDATE',
+        operation: ConfiguredSetOperation,
         setId: string,
         inputName: string,
         inputValue: string
     ): void => {
         switch (operation) {
-            case 'RESET':
+            case ConfiguredSetOperation.Reset:
                 setUserInput({
                     ...userInput,
                     configuredSets: [],
                 });
                 break;
-            case 'UPDATE':
+            case ConfiguredSetOperation.Update:
                 setUserInput({
                     ...userInput,
                     configuredSets: {
@@ -241,13 +246,15 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             return setHasError(true);
         }
 
-        return dispatch(
-            addToolbarBlock(
-                template.id,
-                { blockDetails: userInput },
-                closeModal
-            )
-        );
+        // return dispatch(
+        //     addToolbarBlock(
+        //         template.id,
+        //         { blockDetails: userInput },
+        //         closeModal
+        //     )
+        // );
+
+        console.log(userInput);
     };
 
     return (
@@ -353,7 +360,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
                             if (isSetConfigurationMenuOpen) {
                                 //If this menu is already open, and the user changes the set, we close menu and reset (checking will generate another set object).
-                                updateConfiguredSets('RESET', '', '', '');
+                                updateConfiguredSets(
+                                    ConfiguredSetOperation.Reset,
+                                    '',
+                                    '',
+                                    ''
+                                );
                                 toggleSetConfigurationMenu(false);
                             }
 

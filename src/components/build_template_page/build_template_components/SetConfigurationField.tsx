@@ -8,6 +8,7 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import { NumberInput } from '@mantine/core';
 import Text from '../../general_components/Text';
 import { useClickOutside } from '@mantine/hooks';
+import { ConfiguredSetOperation } from './AddBlockForm';
 
 //Styles:
 import styled from 'styled-components';
@@ -37,13 +38,14 @@ const SetContainer = styled.div`
 const InputFieldsContainer = styled.div``;
 
 //Interfaces:
+
 interface IComponentProps {
     fieldId: number;
     reps: string;
     weightImperial: string;
     weightMetric: string;
     updateConfiguredSets: (
-        operation: 'RESET' | 'UPDATE',
+        operation: ConfiguredSetOperation,
         setId: string,
         inputName: string,
         inputValue: string
@@ -68,7 +70,12 @@ export const SetConfigurationField = ({
     }, [template.templateWeightUnit]);
 
     const handleUserInput = (name: string, value: string | number): void => {
-        updateConfiguredSets('UPDATE', String(fieldId), name, String(value));
+        updateConfiguredSets(
+            ConfiguredSetOperation.Update,
+            String(fieldId),
+            name,
+            String(value)
+        );
     };
 
     const determineUnitValue = (): number => {
@@ -80,7 +87,7 @@ export const SetConfigurationField = ({
     const handleWeightInput = (weight: number): void => {
         if (composedWeightUnit === 'Kgs') {
             return updateConfiguredSets(
-                'UPDATE',
+                ConfiguredSetOperation.Update,
                 String(fieldId),
                 'weightMetric',
                 String(weight)
@@ -88,7 +95,7 @@ export const SetConfigurationField = ({
         }
 
         return updateConfiguredSets(
-            'UPDATE',
+            ConfiguredSetOperation.Update,
             String(fieldId),
             'weightImperial',
             String(weight)
