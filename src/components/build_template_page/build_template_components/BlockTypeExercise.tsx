@@ -184,27 +184,17 @@ const BlockTypeExercise = ({
         (state: RootStateOrAny) => state.template?.templateLegend
     );
 
-    const {
-        name,
-        sets,
-        reps,
-        weightImperial,
-        weightMetric,
-        linkedColor,
-        linkedViewerInput,
-    } = blockDetails;
-
     const currentLinkedColor = useMemo((): any => {
         if (!colorLegend) {
             return;
         }
 
         const targetColor = colorLegend.find(
-            (color: any) => color.id === linkedColor
+            (color: any) => color.id === blockDetails.linkedColor
         );
 
         return targetColor ? targetColor : undefined;
-    }, [linkedColor]);
+    }, [blockDetails.linkedColor]);
 
     const blockWeight = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
@@ -212,9 +202,13 @@ const BlockTypeExercise = ({
         }
 
         return templateWeightUnit === 'METRIC'
-            ? `${weightMetric}`
-            : `${weightImperial}`;
-    }, [templateWeightUnit, weightMetric, weightImperial]);
+            ? `${blockDetails.weightMetric}`
+            : `${blockDetails.weightImperial}`;
+    }, [
+        templateWeightUnit,
+        blockDetails.weightMetric,
+        blockDetails.weightImperial,
+    ]);
 
     const blockUnit = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
@@ -336,7 +330,7 @@ const BlockTypeExercise = ({
                             <BlockDetailsContainer>
                                 <BlockHeader>
                                     <Text
-                                        text={name}
+                                        text={blockDetails.name}
                                         fontSize=".95rem"
                                         fontWeight="800"
                                     />
@@ -353,7 +347,7 @@ const BlockTypeExercise = ({
                                         />
                                         <ExerciseDetailSpacer />
                                         <Text
-                                            text={`${sets}`}
+                                            text={`${blockDetails.sets}`}
                                             fontSize="1rem"
                                             fontWeight="800"
                                             mainText={true}
@@ -368,7 +362,7 @@ const BlockTypeExercise = ({
                                         />
                                         <ExerciseDetailSpacer />
                                         <Text
-                                            text={`${reps}`}
+                                            text={`${blockDetails.reps}`}
                                             fontSize="1rem"
                                             fontWeight="800"
                                             mainText={true}

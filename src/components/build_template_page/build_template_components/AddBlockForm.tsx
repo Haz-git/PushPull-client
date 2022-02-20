@@ -193,8 +193,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             default:
                 throw new Error('No operation was supplied..');
         }
-
-        console.log(userInput.configuredSets);
     };
 
     const generateCustomSetObjects = (setNumber: number): any => {
@@ -300,8 +298,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 closeModal
             )
         );
-
-        console.log(userInput);
     };
 
     return (
