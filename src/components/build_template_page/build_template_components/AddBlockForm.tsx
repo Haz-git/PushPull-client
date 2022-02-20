@@ -131,10 +131,48 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             case ConfiguredSetOperation.Reset:
                 setUserInput({
                     ...userInput,
-                    configuredSets: [],
+                    configuredSets: {},
                 });
                 break;
             case ConfiguredSetOperation.Update:
+                //This looks sloppy-- but I want to update both weightImperial and weightMetric at the same time. In the SetConfigurationField, I've try two dispatch operations but one seems to be ignored. Will work on this more later.
+
+                if (inputName === 'weightImperial') {
+                    setUserInput({
+                        ...userInput,
+                        configuredSets: {
+                            ...userInput.configuredSets,
+                            [setId]: {
+                                ...userInput.configuredSets[setId],
+                                [inputName]: inputValue,
+                                ['weightMetric']: `${(
+                                    Number(inputValue) / 2.205
+                                ).toFixed(1)}`,
+                            },
+                        },
+                    });
+
+                    break;
+                }
+
+                if (inputName === 'weightMetric') {
+                    setUserInput({
+                        ...userInput,
+                        configuredSets: {
+                            ...userInput.configuredSets,
+                            [setId]: {
+                                ...userInput.configuredSets[setId],
+                                [inputName]: inputValue,
+                                ['weightImperial']: `${(
+                                    Number(inputValue) * 2.205
+                                ).toFixed(1)}`,
+                            },
+                        },
+                    });
+
+                    break;
+                }
+
                 setUserInput({
                     ...userInput,
                     configuredSets: {
@@ -150,6 +188,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             default:
                 throw new Error('No operation was supplied..');
         }
+
+        console.log(userInput.configuredSets);
     };
 
     const generateCustomSetObjects = (setNumber: number): any => {
