@@ -333,6 +333,7 @@ const BlockTypeExercise = ({
                                     shouldShowCollapseLayout={
                                         blockDetails.hasConfiguredSets
                                     }
+                                    composedWeightUnit={blockUnit}
                                     configuredSets={blockDetails.configuredSets}
                                 />
                             </BlockDetailsContainer>
