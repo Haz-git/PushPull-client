@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 //Components:
 import Text from '../../general_components/Text';
@@ -25,6 +25,8 @@ const MainContainer = styled.div`
 const Spacer = styled.div`
     height: 0.25rem;
 `;
+
+const SetWrapper = styled.div``;
 
 const SetContainer = styled.div`
     display: grid;
@@ -60,11 +62,19 @@ export const BlockTypeExerciseDataCollapse = ({
 }: IComponentProps): JSX.Element => {
     const [isCollapseOpen, toggleCollapse] = useState(false);
 
-    const renderTotalSets = () => {
+    useEffect(() => {
+        //Setting UUID for keys initially here. Docs mention wise to do it only once instead of
+        //Something I've been doing for a while: key={uuid()}.. oops!
+        Object.values(configuredSets).map((set: any) => {
+            set['uuid'] = uuid();
+        });
+    }, [configuredSets]);
+
+    const renderTotalSets = (): React.ReactNode => {
         return Object.values(configuredSets).map((set: any) => (
-            <>
+            <SetWrapper key={set.uuid}>
                 <Spacer />
-                <SetContainer key={uuid()}>
+                <SetContainer>
                     <ExerciseDetails>
                         <Text
                             text={`Set`}
@@ -115,7 +125,7 @@ export const BlockTypeExerciseDataCollapse = ({
                         />
                     </ExerciseDetails>
                 </SetContainer>
-            </>
+            </SetWrapper>
         ));
     };
 
