@@ -107,6 +107,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         desc: '',
         sets: '0',
         configuredSets: {} as any,
+        hasConfiguredSets: false,
         reps: '0',
         weightImperial: '0',
         weightMetric: '0',
@@ -131,6 +132,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             case ConfiguredSetOperation.Reset:
                 setUserInput({
                     ...userInput,
+                    hasConfiguredSets: false,
                     configuredSets: {},
                 });
                 break;
@@ -140,6 +142,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 if (inputName === 'weightImperial') {
                     setUserInput({
                         ...userInput,
+                        hasConfiguredSets: true,
                         configuredSets: {
                             ...userInput.configuredSets,
                             [setId]: {
@@ -158,6 +161,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 if (inputName === 'weightMetric') {
                     setUserInput({
                         ...userInput,
+                        hasConfiguredSets: true,
                         configuredSets: {
                             ...userInput.configuredSets,
                             [setId]: {
@@ -175,6 +179,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
                 setUserInput({
                     ...userInput,
+                    hasConfiguredSets: true,
                     configuredSets: {
                         ...userInput.configuredSets,
                         [setId]: {
@@ -228,6 +233,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             //reset configured sets on toggle off
             setUserInput({
                 ...userInput,
+                hasConfiguredSets: false,
                 configuredSets: {},
             });
 
@@ -242,6 +248,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         );
         setUserInput({
             ...userInput,
+            hasConfiguredSets: true,
             configuredSets: defaultSetObjects,
         });
 
@@ -286,13 +293,13 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             return setHasError(true);
         }
 
-        // return dispatch(
-        //     addToolbarBlock(
-        //         template.id,
-        //         { blockDetails: userInput },
-        //         closeModal
-        //     )
-        // );
+        return dispatch(
+            addToolbarBlock(
+                template.id,
+                { blockDetails: userInput },
+                closeModal
+            )
+        );
 
         console.log(userInput);
     };
