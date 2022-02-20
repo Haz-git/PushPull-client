@@ -15,10 +15,12 @@ import { Draggable } from 'react-beautiful-dnd';
 import Text from '../../general_components/Text';
 import { Popover } from '@mantine/core';
 import useQuery from '../../../utils/hooks/useQuery';
+import { BlockTypeExerciseDataGrid } from './BlockTypeExerciseDataGrid';
 
 //Styles:
 import styled from 'styled-components';
 import { MoreHorizontal } from '@styled-icons/fluentui-system-regular/MoreHorizontal';
+import { BlockTypeExerciseDataCollapse } from './BlockTypeExerciseDataCollapse';
 
 const MoreDots = styled(MoreHorizontal)`
     color: #ffffff;
@@ -117,26 +119,6 @@ const Divider = styled.div`
     height: 1px;
     width: 100%;
     background: #d6d6d6;
-`;
-
-const BlockExerciseLengthContainer = styled.div`
-    padding: 0.5rem 0.25rem 0.5rem 0.25rem;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 0.8fr 0.8fr 1.2fr;
-`;
-
-const ExerciseDetails = styled.div`
-    text-align: center;
-    padding: 0.2rem 0.2rem;
-    background: #ececec;
-    margin: 0 0.1rem;
-    border-radius: 0.3rem;
-`;
-
-const ExerciseDetailSpacer = styled.div`
-    height: 0.2rem;
 `;
 
 //Interfaces:
@@ -337,53 +319,22 @@ const BlockTypeExercise = ({
                                     {renderColorSwatch()}
                                 </BlockHeader>
                                 <Divider />
-                                <BlockExerciseLengthContainer>
-                                    <ExerciseDetails>
-                                        <Text
-                                            text={`Sets`}
-                                            fontSize=".75rem"
-                                            fontWeight="800"
-                                            subText={true}
-                                        />
-                                        <ExerciseDetailSpacer />
-                                        <Text
-                                            text={`${blockDetails.sets}`}
-                                            fontSize="1rem"
-                                            fontWeight="800"
-                                            mainText={true}
-                                        />
-                                    </ExerciseDetails>
-                                    <ExerciseDetails>
-                                        <Text
-                                            text={`Reps`}
-                                            fontSize=".75rem"
-                                            fontWeight="800"
-                                            subText={true}
-                                        />
-                                        <ExerciseDetailSpacer />
-                                        <Text
-                                            text={`${blockDetails.reps}`}
-                                            fontSize="1rem"
-                                            fontWeight="800"
-                                            mainText={true}
-                                        />
-                                    </ExerciseDetails>
-                                    <ExerciseDetails>
-                                        <Text
-                                            text={blockUnit}
-                                            fontSize=".75rem"
-                                            fontWeight="800"
-                                            subText={true}
-                                        />
-                                        <ExerciseDetailSpacer />
-                                        <Text
-                                            text={blockWeight}
-                                            fontSize="1rem"
-                                            fontWeight="800"
-                                            mainText={true}
-                                        />
-                                    </ExerciseDetails>
-                                </BlockExerciseLengthContainer>
+                                <BlockTypeExerciseDataGrid
+                                    shouldShowGridLayout={
+                                        //If we have configured sets, we can't display the original layout. A collapse will be shown.
+                                        !blockDetails.hasConfiguredSets
+                                    }
+                                    sets={blockDetails.sets}
+                                    reps={blockDetails.reps}
+                                    weightUnit={blockUnit}
+                                    weight={blockWeight}
+                                />
+                                <BlockTypeExerciseDataCollapse
+                                    shouldShowCollapseLayout={
+                                        blockDetails.hasConfiguredSets
+                                    }
+                                    configuredSets={blockDetails.configuredSets}
+                                />
                             </BlockDetailsContainer>
                         </MainContainer>
                     );
