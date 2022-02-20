@@ -15,7 +15,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     background: ${(props) => props.buttonBackground};
     padding: ${(props) => props.padding};
     border-radius: ${(props) => props.borderRadius};
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', sans-serif !important;
     font-size: ${(props) => props.fontSize};
     font-weight: ${(props) => props.fontWeight};
     color: ${(props) => props.buttonTextColor};

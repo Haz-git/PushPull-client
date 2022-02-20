@@ -9,13 +9,14 @@ import { useDebouncedValue } from '@mantine/hooks';
 //Styles:
 
 //Interfaces:
+import { ConfiguredSetOperation } from './AddBlockForm';
 
 interface IComponentProps {
     isOpen: boolean;
     totalSets: string;
     configurationFieldValues: any;
     updateConfiguredSets: (
-        operation: 'RESET' | 'UPDATE',
+        operation: ConfiguredSetOperation,
         setId: string,
         inputName: string,
         inputValue: string

@@ -15,10 +15,12 @@ import { Draggable } from 'react-beautiful-dnd';
 import Text from '../../general_components/Text';
 import { Popover } from '@mantine/core';
 import useQuery from '../../../utils/hooks/useQuery';
+import { BlockTypeExerciseDataGrid } from './BlockTypeExerciseDataGrid';
 
 //Styles:
 import styled from 'styled-components';
 import { MoreHorizontal } from '@styled-icons/fluentui-system-regular/MoreHorizontal';
+import { BlockTypeExerciseDataCollapse } from './BlockTypeExerciseDataCollapse';
 
 const MoreDots = styled(MoreHorizontal)`
     color: #ffffff;
@@ -119,26 +121,6 @@ const Divider = styled.div`
     background: #d6d6d6;
 `;
 
-const BlockExerciseLengthContainer = styled.div`
-    padding: 0.5rem 0.25rem 0.5rem 0.25rem;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 0.8fr 0.8fr 1.2fr;
-`;
-
-const ExerciseDetails = styled.div`
-    text-align: center;
-    padding: 0.2rem 0.2rem;
-    background: #ececec;
-    margin: 0 0.1rem;
-    border-radius: 0.3rem;
-`;
-
-const ExerciseDetailSpacer = styled.div`
-    height: 0.2rem;
-`;
-
 //Interfaces:
 
 export enum BlockTypes {
@@ -184,27 +166,17 @@ const BlockTypeExercise = ({
         (state: RootStateOrAny) => state.template?.templateLegend
     );
 
-    const {
-        name,
-        sets,
-        reps,
-        weightImperial,
-        weightMetric,
-        linkedColor,
-        linkedViewerInput,
-    } = blockDetails;
-
     const currentLinkedColor = useMemo((): any => {
         if (!colorLegend) {
             return;
         }
 
         const targetColor = colorLegend.find(
-            (color: any) => color.id === linkedColor
+            (color: any) => color.id === blockDetails.linkedColor
         );
 
         return targetColor ? targetColor : undefined;
-    }, [linkedColor]);
+    }, [blockDetails.linkedColor]);
 
     const blockWeight = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
@@ -212,9 +184,13 @@ const BlockTypeExercise = ({
         }
 
         return templateWeightUnit === 'METRIC'
-            ? `${weightMetric}`
-            : `${weightImperial}`;
-    }, [templateWeightUnit, weightMetric, weightImperial]);
+            ? `${blockDetails.weightMetric}`
+            : `${blockDetails.weightImperial}`;
+    }, [
+        templateWeightUnit,
+        blockDetails.weightMetric,
+        blockDetails.weightImperial,
+    ]);
 
     const blockUnit = useMemo((): string | undefined => {
         if (!templateWeightUnit) {
@@ -336,60 +312,30 @@ const BlockTypeExercise = ({
                             <BlockDetailsContainer>
                                 <BlockHeader>
                                     <Text
-                                        text={name}
+                                        text={blockDetails.name}
                                         fontSize=".95rem"
                                         fontWeight="800"
                                     />
                                     {renderColorSwatch()}
                                 </BlockHeader>
                                 <Divider />
-                                <BlockExerciseLengthContainer>
-                                    <ExerciseDetails>
-                                        <Text
-                                            text={`Sets`}
-                                            fontSize=".75rem"
-                                            fontWeight="800"
-                                            subText={true}
-                                        />
-                                        <ExerciseDetailSpacer />
-                                        <Text
-                                            text={`${sets}`}
-                                            fontSize="1rem"
-                                            fontWeight="800"
-                                            mainText={true}
-                                        />
-                                    </ExerciseDetails>
-                                    <ExerciseDetails>
-                                        <Text
-                                            text={`Reps`}
-                                            fontSize=".75rem"
-                                            fontWeight="800"
-                                            subText={true}
-                                        />
-                                        <ExerciseDetailSpacer />
-                                        <Text
-                                            text={`${reps}`}
-                                            fontSize="1rem"
-                                            fontWeight="800"
-                                            mainText={true}
-                                        />
-                                    </ExerciseDetails>
-                                    <ExerciseDetails>
-                                        <Text
-                                            text={blockUnit}
-                                            fontSize=".75rem"
-                                            fontWeight="800"
-                                            subText={true}
-                                        />
-                                        <ExerciseDetailSpacer />
-                                        <Text
-                                            text={blockWeight}
-                                            fontSize="1rem"
-                                            fontWeight="800"
-                                            mainText={true}
-                                        />
-                                    </ExerciseDetails>
-                                </BlockExerciseLengthContainer>
+                                <BlockTypeExerciseDataGrid
+                                    shouldShowGridLayout={
+                                        //If we have configured sets, we can't display the original layout. A collapse will be shown.
+                                        !blockDetails.hasConfiguredSets
+                                    }
+                                    sets={blockDetails.sets}
+                                    reps={blockDetails.reps}
+                                    weightUnit={blockUnit}
+                                    weight={blockWeight}
+                                />
+                                <BlockTypeExerciseDataCollapse
+                                    shouldShowCollapseLayout={
+                                        blockDetails.hasConfiguredSets
+                                    }
+                                    composedWeightUnit={blockUnit}
+                                    configuredSets={blockDetails.configuredSets}
+                                />
                             </BlockDetailsContainer>
                         </MainContainer>
                     );

@@ -55,6 +55,11 @@ export const ErrorSpacer = styled.div`
 
 //Interfaces:
 
+export enum ConfiguredSetOperation {
+    Reset = 'Reset',
+    Update = 'Update',
+}
+
 interface IComponentProps {
     closeModal: () => void;
 }
@@ -102,6 +107,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         desc: '',
         sets: '0',
         configuredSets: {} as any,
+        hasConfiguredSets: false,
         reps: '0',
         weightImperial: '0',
         weightMetric: '0',
@@ -117,21 +123,63 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         useState(false);
 
     const updateConfiguredSets = (
-        operation: 'RESET' | 'UPDATE',
+        operation: ConfiguredSetOperation,
         setId: string,
         inputName: string,
         inputValue: string
     ): void => {
         switch (operation) {
-            case 'RESET':
+            case ConfiguredSetOperation.Reset:
                 setUserInput({
                     ...userInput,
-                    configuredSets: [],
+                    hasConfiguredSets: false,
+                    configuredSets: {},
                 });
                 break;
-            case 'UPDATE':
+            case ConfiguredSetOperation.Update:
+                //This looks sloppy-- but I want to update both weightImperial and weightMetric at the same time. In the SetConfigurationField, I've try two dispatch operations but one seems to be ignored. Will work on this more later.
+
+                if (inputName === 'weightImperial') {
+                    setUserInput({
+                        ...userInput,
+                        hasConfiguredSets: true,
+                        configuredSets: {
+                            ...userInput.configuredSets,
+                            [setId]: {
+                                ...userInput.configuredSets[setId],
+                                [inputName]: inputValue,
+                                ['weightMetric']: `${(
+                                    Number(inputValue) / 2.205
+                                ).toFixed(1)}`,
+                            },
+                        },
+                    });
+
+                    break;
+                }
+
+                if (inputName === 'weightMetric') {
+                    setUserInput({
+                        ...userInput,
+                        hasConfiguredSets: true,
+                        configuredSets: {
+                            ...userInput.configuredSets,
+                            [setId]: {
+                                ...userInput.configuredSets[setId],
+                                [inputName]: inputValue,
+                                ['weightImperial']: `${(
+                                    Number(inputValue) * 2.205
+                                ).toFixed(1)}`,
+                            },
+                        },
+                    });
+
+                    break;
+                }
+
                 setUserInput({
                     ...userInput,
+                    hasConfiguredSets: true,
                     configuredSets: {
                         ...userInput.configuredSets,
                         [setId]: {
@@ -183,6 +231,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             //reset configured sets on toggle off
             setUserInput({
                 ...userInput,
+                hasConfiguredSets: false,
                 configuredSets: {},
             });
 
@@ -197,6 +246,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         );
         setUserInput({
             ...userInput,
+            hasConfiguredSets: true,
             configuredSets: defaultSetObjects,
         });
 
@@ -353,7 +403,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
                             if (isSetConfigurationMenuOpen) {
                                 //If this menu is already open, and the user changes the set, we close menu and reset (checking will generate another set object).
-                                updateConfiguredSets('RESET', '', '', '');
+                                updateConfiguredSets(
+                                    ConfiguredSetOperation.Reset,
+                                    '',
+                                    '',
+                                    ''
+                                );
                                 toggleSetConfigurationMenu(false);
                             }
 
