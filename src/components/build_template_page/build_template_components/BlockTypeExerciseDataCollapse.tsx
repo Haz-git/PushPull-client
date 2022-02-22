@@ -70,8 +70,6 @@ export const BlockTypeExerciseDataCollapse = ({
         });
     }, [configuredSets]);
 
-    console.log(configuredSets);
-
     const renderTotalSets = (): React.ReactNode => {
         //For some reason, this still returns a "unique key prop" error even though outermost element has a unique key...
         return Object.values(configuredSets).map((set: any) => (

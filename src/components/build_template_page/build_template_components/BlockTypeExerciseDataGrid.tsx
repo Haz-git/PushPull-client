@@ -5,7 +5,7 @@ import Text from '../../general_components/Text';
 //Styles:
 import styled from 'styled-components';
 
-const BlockExerciseLengthContainer = styled.div`
+export const BlockExerciseLengthContainer = styled.div`
     padding: 0.5rem 0.25rem 0.5rem 0.25rem;
     display: grid;
     align-items: center;
