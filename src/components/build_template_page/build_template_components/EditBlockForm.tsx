@@ -11,21 +11,36 @@ import {
 //Components:
 import GeneralButton from '../../general_components/GeneralButton';
 import DividerLine from '../../general_components/DividerLine';
-import { TextInput, Textarea, NumberInput, Select } from '@mantine/core';
+import {
+    TextInput,
+    Textarea,
+    NumberInput,
+    Select,
+    Checkbox,
+} from '@mantine/core';
 import Text from '../../general_components/Text';
 import { SelectColorItem } from './SelectColorItem';
 import { AddBlockError } from './AddBlockError';
+import { ConfiguredSetOperation } from './AddBlockForm';
+import { SetConfigurationMenu } from './SetConfigurationMenu';
+import useQuery from '../../../utils/hooks/useQuery';
 
 //Styles:
+import styled from 'styled-components';
 import {
     MainContainer,
     FormContainer,
     Spacer,
     FlexWrapper,
-    ButtonContainer,
     ErrorSpacer,
+    SetConfigurationContainer,
 } from './AddBlockForm';
-import useQuery from '../../../utils/hooks/useQuery';
+
+const ButtonContainer = styled.div`
+    margin: 2rem 0rem 1rem 0rem;
+    display: flex;
+    column-gap: 0.5rem;
+`;
 
 //Interfaces:
 
@@ -41,6 +56,28 @@ export const EditBlockForm = () => {
     );
     const currentSheetId = query.get('sheetId');
 
+    //Grabbing current default states for reset:
+
+    const initialComponentState = {
+        name: modalProps?.blockDetails?.name,
+        desc: modalProps?.blockDetails?.desc,
+        sets: modalProps?.blockDetails?.sets,
+        reps: modalProps?.blockDetails?.reps,
+        weightImperial: modalProps?.blockDetails?.weightImperial,
+        weightMetric: modalProps?.blockDetails?.weightMetric,
+        linkedColor: modalProps?.blockDetails?.linkedColor,
+        linkedViewerInput: modalProps?.blockDetails?.linkedViewerInput,
+        hasConfiguredSets: modalProps?.blockDetails?.hasConfiguredSets,
+        configuredSets: modalProps?.blockDetails?.configuredSets,
+    };
+
+    //Error states:
+    const [hasError, setHasError] = useState(false);
+    const [isNameLengthLimitExceeded, setIsNameLengthLimitExceeded] =
+        useState(false);
+    const [isCustomSetLimitExceeded, setIsCustomSetLimitExceeded] =
+        useState(false);
+
     //Modal input state
     const [userInput, setUserInput] = useState({
         name: modalProps?.blockDetails?.name,
@@ -51,7 +88,14 @@ export const EditBlockForm = () => {
         weightMetric: modalProps?.blockDetails?.weightMetric,
         linkedColor: modalProps?.blockDetails?.linkedColor,
         linkedViewerInput: modalProps?.blockDetails?.linkedViewerInput,
+        hasConfiguredSets: modalProps?.blockDetails?.hasConfiguredSets,
+        configuredSets: modalProps?.blockDetails?.configuredSets,
     });
+
+    //Set Configuration Menu State:
+    const [isSetConfigurationMenuOpen, toggleSetConfigurationMenu] = useState(
+        userInput.hasConfiguredSets || false
+    );
 
     const composedColorSelectData = useMemo((): string[] => {
         //To make this work with Mantine Select, value and label must be provided.
@@ -68,10 +112,78 @@ export const EditBlockForm = () => {
         }));
     }, [template.templateLegend]);
 
-    //Error state:
-    const [hasError, setHasError] = useState(false);
-    const [isNameLengthLimitExceeded, setIsNameLengthLimitExceeded] =
-        useState(false);
+    const updateConfiguredSets = (
+        operation: ConfiguredSetOperation,
+        setId: string,
+        inputName: string,
+        inputValue: string
+    ): void => {
+        switch (operation) {
+            case ConfiguredSetOperation.Reset:
+                setUserInput({
+                    ...userInput,
+                    hasConfiguredSets: false,
+                    configuredSets: {},
+                });
+                break;
+            case ConfiguredSetOperation.Update:
+                //This looks sloppy-- but I want to update both weightImperial and weightMetric at the same time. In the SetConfigurationField, I've try to dispatch two operations but one seems to be ignored. Will work on this more later.
+
+                if (inputName === 'weightImperial') {
+                    setUserInput({
+                        ...userInput,
+                        hasConfiguredSets: true,
+                        configuredSets: {
+                            ...userInput.configuredSets,
+                            [setId]: {
+                                ...userInput.configuredSets[setId],
+                                [inputName]: inputValue,
+                                ['weightMetric']: `${(
+                                    Number(inputValue) / 2.205
+                                ).toFixed(1)}`,
+                            },
+                        },
+                    });
+
+                    break;
+                }
+
+                if (inputName === 'weightMetric') {
+                    setUserInput({
+                        ...userInput,
+                        hasConfiguredSets: true,
+                        configuredSets: {
+                            ...userInput.configuredSets,
+                            [setId]: {
+                                ...userInput.configuredSets[setId],
+                                [inputName]: inputValue,
+                                ['weightImperial']: `${(
+                                    Number(inputValue) * 2.205
+                                ).toFixed(1)}`,
+                            },
+                        },
+                    });
+
+                    break;
+                }
+
+                setUserInput({
+                    ...userInput,
+                    hasConfiguredSets: true,
+                    configuredSets: {
+                        ...userInput.configuredSets,
+                        [setId]: {
+                            ...userInput.configuredSets[setId],
+                            [inputName]: inputValue,
+                        },
+                    },
+                });
+
+                break;
+            default:
+                throw new Error('No operation was supplied..');
+        }
+    };
 
     const hasBlockName = (): boolean => {
         return userInput.name !== '';
@@ -133,6 +245,64 @@ export const EditBlockForm = () => {
                 userInput
             )
         );
+    };
+
+    const generateCustomSetObjects = (setNumber: number): any => {
+        //This should generate an object with setNumber amount of nested objects with default values for:
+        // reps, weightMetric, weightImperial
+
+        const setsObject = {} as any;
+
+        for (let i = 1; i < setNumber + 1; ++i) {
+            setsObject[i] = {
+                fieldId: String(i),
+                reps: '0',
+                weightImperial: '0',
+                weightMetric: '0',
+            };
+        }
+        return setsObject;
+    };
+
+    const resetRepsAndWeight = (): void => {
+        //Reset reps and weight on customized sets:
+        setUserInput({
+            ...userInput,
+            reps: '0',
+            weightImperial: '0',
+            weightMetric: '0',
+        });
+    };
+
+    const handleCustomSetRequest = (): void => {
+        if (Number(userInput.sets) <= 0 || Number(userInput.sets) > 15) {
+            return setIsCustomSetLimitExceeded(true);
+        }
+
+        if (isSetConfigurationMenuOpen) {
+            //reset configured sets on toggle off
+            setUserInput({
+                ...userInput,
+                hasConfiguredSets: false,
+                configuredSets: {},
+            });
+
+            return toggleSetConfigurationMenu(false);
+        }
+
+        resetRepsAndWeight();
+
+        //We've checked sets !== 0, if we're toggling on we generate the set items:
+        const defaultSetObjects = generateCustomSetObjects(
+            Number(userInput.sets)
+        );
+        setUserInput({
+            ...userInput,
+            hasConfiguredSets: true,
+            configuredSets: defaultSetObjects,
+        });
+
+        return toggleSetConfigurationMenu(true);
     };
 
     return (
@@ -231,16 +401,32 @@ export const EditBlockForm = () => {
                                 fontWeight: 700,
                             },
                         }}
-                        onChange={(val: number) =>
-                            handleUserInput('sets', String(val))
-                        }
+                        onChange={(val: number) => {
+                            if (isCustomSetLimitExceeded) {
+                                //Reset error warning.
+                                setIsCustomSetLimitExceeded(false);
+                            }
+
+                            if (isSetConfigurationMenuOpen) {
+                                //If this menu is already open, and the user changes the set, we close menu and reset (checking will generate another set object).
+                                updateConfiguredSets(
+                                    ConfiguredSetOperation.Reset,
+                                    '',
+                                    '',
+                                    ''
+                                );
+                                toggleSetConfigurationMenu(false);
+                            }
+
+                            handleUserInput('sets', String(val));
+                        }}
                     />
                     <NumberInput
                         value={Number(userInput.reps)}
                         label="Reps Per Set"
+                        required={!isSetConfigurationMenuOpen}
                         min={0}
                         max={99}
-                        required
                         styles={{
                             root: {
                                 maxWidth: '40rem',
@@ -262,13 +448,14 @@ export const EditBlockForm = () => {
                         onChange={(val: number) =>
                             handleUserInput('reps', String(val))
                         }
+                        disabled={isSetConfigurationMenuOpen}
                     />
                     <NumberInput
                         label={`Weight (${composedWeightUnit})`}
+                        required={!isSetConfigurationMenuOpen}
                         value={determineUnitValue()}
                         min={0}
                         max={9999}
-                        required
                         styles={{
                             root: {
                                 maxWidth: '40rem',
@@ -290,8 +477,37 @@ export const EditBlockForm = () => {
                         onChange={(weight: number) =>
                             composeInputWeight(weight)
                         }
+                        disabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>
+                <SetConfigurationContainer>
+                    <Checkbox
+                        color="orange"
+                        checked={isSetConfigurationMenuOpen}
+                        label="Configure Sets Separately"
+                        onChange={handleCustomSetRequest}
+                        styles={{
+                            label: {
+                                color: 'rgba(0, 0, 34, .7)',
+                                fontFamily: 'Lato, sans-serif',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginBottom: '.25rem',
+                            },
+                        }}
+                    />
+                    <Spacer />
+                    <AddBlockError
+                        shouldShowError={isCustomSetLimitExceeded}
+                        errorText="You must customize atleast 1 set, or up to 15 total sets."
+                    />
+                    <SetConfigurationMenu
+                        isOpen={isSetConfigurationMenuOpen}
+                        totalSets={userInput.sets}
+                        configurationFieldValues={userInput.configuredSets}
+                        updateConfiguredSets={updateConfiguredSets}
+                    />
+                </SetConfigurationContainer>
                 <DividerLine
                     border="1px solid #d6d6d6"
                     margin="2rem 0rem 1rem 0rem"
@@ -364,6 +580,21 @@ export const EditBlockForm = () => {
                 <GeneralButton
                     buttonLabel="Update Block"
                     onClick={submitBlockUpdateRequest}
+                />
+                <GeneralButton
+                    buttonBackground="#c6c6c6"
+                    width="10rem"
+                    buttonTextColor="rgba(0, 0, 34, 1)"
+                    textShadow="none"
+                    disableShadow={true}
+                    hoverShadow="none"
+                    buttonLabel="Reset"
+                    onClick={() => {
+                        toggleSetConfigurationMenu(
+                            initialComponentState.hasConfiguredSets
+                        );
+                        setUserInput(initialComponentState);
+                    }}
                 />
             </ButtonContainer>
         </MainContainer>

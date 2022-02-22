@@ -137,7 +137,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 });
                 break;
             case ConfiguredSetOperation.Update:
-                //This looks sloppy-- but I want to update both weightImperial and weightMetric at the same time. In the SetConfigurationField, I've try two dispatch operations but one seems to be ignored. Will work on this more later.
+                //This looks sloppy-- but I want to update both weightImperial and weightMetric at the same time. In the SetConfigurationField, I've try to dispatch two operations but one seems to be ignored. Will work on this more later.
 
                 if (inputName === 'weightImperial') {
                     setUserInput({
