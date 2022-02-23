@@ -3,6 +3,7 @@ import React from 'react';
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { addSheet } from '../../../redux/templates/templateActions';
+import { SheetsFooterNavButtons } from './SheetsFooterNavButtons';
 
 //Components:
 import { SheetTab } from './SheetTab';
@@ -35,6 +36,11 @@ const SheetContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     width: 100%;
+    height: 100%;
+`;
+
+const SheetNavigationButtonsContainer = styled.div`
+    justify-self: end;
     height: 100%;
 `;
 
@@ -87,6 +93,9 @@ export const SheetsFooter = (): JSX.Element => {
                         key={sheet.sheetId}
                     />
                 ))}
+                <SheetNavigationButtonsContainer>
+                    <SheetsFooterNavButtons />
+                </SheetNavigationButtonsContainer>
             </SheetContainer>
         </MainContainer>
     );
