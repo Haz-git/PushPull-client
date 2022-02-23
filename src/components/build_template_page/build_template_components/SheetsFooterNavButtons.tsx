@@ -5,6 +5,20 @@ import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
+import { CaretLeft } from 'styled-icons/fluentui-system-filled';
+import { CaretRight } from 'styled-icons/fluentui-system-filled';
+
+const LeftIcon = styled(CaretLeft)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #e07133;
+`;
+
+const RightIcon = styled(CaretRight)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #e07133;
+`;
 
 const MainContainer = styled.div`
     display: flex;
@@ -17,8 +31,23 @@ const MainContainer = styled.div`
     margin-left: 1px;
 `;
 
+const MoveButton = styled.button`
+    outline: none;
+    background: inherit;
+    border: none;
+`;
+
 //Interfaces:
 
 export const SheetsFooterNavButtons = () => {
-    return <MainContainer>test</MainContainer>;
+    return (
+        <MainContainer>
+            <MoveButton>
+                <LeftIcon />
+            </MoveButton>
+            <MoveButton>
+                <RightIcon />
+            </MoveButton>
+        </MainContainer>
+    );
 };
