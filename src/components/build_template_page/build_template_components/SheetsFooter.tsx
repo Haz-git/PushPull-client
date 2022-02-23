@@ -3,11 +3,13 @@ import React from 'react';
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { addSheet } from '../../../redux/templates/templateActions';
+import { SheetsFooterNavButtons } from './SheetsFooterNavButtons';
 
 //Components:
 import { SheetTab } from './SheetTab';
 import GeneralButton from '../../general_components/GeneralButton';
 import { Tooltip } from '@mantine/core';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -23,25 +25,34 @@ const MainContainer = styled.div`
     position: fixed;
     bottom: 0;
     background: #d6d6d6;
-    width: 100%;
     height: 2.5rem;
     width: 100%;
 `;
 
 const AddSheetContainer = styled.div``;
 
-const SheetContainer = styled.div`
+const SheetContainer = styled.div<ISheetContainerProps>`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 100%;
+    width: ${({ width }) => `${width - 240}px`};
+    height: 100%;
+`;
+
+const SheetNavigationButtonsContainer = styled.div`
+    margin-left: auto;
     height: 100%;
 `;
 
 //Interfaces:
 
+interface ISheetContainerProps {
+    width: number;
+}
+
 export const SheetsFooter = (): JSX.Element => {
     const dispatch = useDispatch();
+    const { width } = useWindowDimensions();
     const templateId = useSelector(
         (state: RootStateOrAny) => state?.template?.id
     );
@@ -51,7 +62,7 @@ export const SheetsFooter = (): JSX.Element => {
 
     return (
         <MainContainer>
-            <SheetContainer>
+            <SheetContainer width={width}>
                 <AddSheetContainer>
                     <Tooltip
                         transition="fade"
@@ -87,6 +98,9 @@ export const SheetsFooter = (): JSX.Element => {
                         key={sheet.sheetId}
                     />
                 ))}
+                <SheetNavigationButtonsContainer>
+                    <SheetsFooterNavButtons />
+                </SheetNavigationButtonsContainer>
             </SheetContainer>
         </MainContainer>
     );
