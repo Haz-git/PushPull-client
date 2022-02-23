@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef, useState } from 'react';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -44,6 +45,8 @@ const SheetNavigationButtonsContainer = styled.div`
     height: 100%;
 `;
 
+const SheetTabContainer = styled.div``;
+
 //Interfaces:
 
 interface ISheetContainerProps {
@@ -59,6 +62,25 @@ export const SheetsFooter = (): JSX.Element => {
     const sheets = useSelector(
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
+
+    //Scroll states:
+    const [scrollX, setScrollX] = useState(0);
+    const [scrollEnd, setScrollEnd] = useState(false);
+
+    //Ref to control sheetsContainer:
+    const scroll = useRef<any>(null);
+
+    //Slide function:
+    const slide = (shift: number): void => {
+        scroll.current.scrollLeft += shift;
+        setScrollX(scrollX + shift);
+
+        if (Math.floor(scroll.current.scrollWidth - scroll.current.scrollLeft) <= scroll.current.offsetWidth) {
+            return setScrollEnd(true);
+        }
+
+        return setScrollEnd(false);
+    };
 
     return (
         <MainContainer>
@@ -90,14 +112,16 @@ export const SheetsFooter = (): JSX.Element => {
                         />
                     </Tooltip>
                 </AddSheetContainer>
-                {sheets?.map((sheet: any) => (
-                    <SheetTab
-                        sheetName={sheet.sheetName}
-                        sheetId={sheet.sheetId}
-                        templateId={templateId}
-                        key={sheet.sheetId}
-                    />
-                ))}
+                <SheetTabContainer ref={scroll}>
+                    {sheets?.map((sheet: any) => (
+                        <SheetTab
+                            sheetName={sheet.sheetName}
+                            sheetId={sheet.sheetId}
+                            templateId={templateId}
+                            key={sheet.sheetId}
+                        />
+                    ))}
+                </SheetTabContainer>
                 <SheetNavigationButtonsContainer>
                     <SheetsFooterNavButtons />
                 </SheetNavigationButtonsContainer>
