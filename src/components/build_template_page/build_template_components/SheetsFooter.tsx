@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef, useState } from 'react';
 
 //Redux:
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
@@ -44,6 +45,21 @@ const SheetNavigationButtonsContainer = styled.div`
     height: 100%;
 `;
 
+const SheetTabContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+        background: transparent; /* make scrollbar transparent */
+        -webkit-appearance: none;
+        width: 0;
+        height: 0;
+    }
+`;
+
 //Interfaces:
 
 interface ISheetContainerProps {
@@ -59,6 +75,39 @@ export const SheetsFooter = (): JSX.Element => {
     const sheets = useSelector(
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
+
+    //Scroll states:
+    const [scrollX, setScrollX] = useState(0);
+    const [scrollEnd, setScrollEnd] = useState(false);
+
+    //Ref to control sheetsContainer:
+    const scroll = useRef<any>(null);
+
+    const shouldScrollEnd = (): boolean => {
+        if (
+            Math.floor(
+                scroll.current.scrollWidth - scroll.current.scrollLeft
+            ) <= scroll.current.offsetWidth
+        ) {
+            return true;
+        }
+
+        return false;
+    };
+
+    //Slide function:
+    const slide = (shift: number): void => {
+        scroll.current.scrollLeft += shift;
+        setScrollX(scrollX + shift);
+        return setScrollEnd(shouldScrollEnd());
+    };
+
+    //Identify scroll position:
+
+    const scrollCheck = (): void => {
+        setScrollX(scroll.current.scrollLeft);
+        return setScrollEnd(shouldScrollEnd());
+    };
 
     return (
         <MainContainer>
@@ -90,16 +139,18 @@ export const SheetsFooter = (): JSX.Element => {
                         />
                     </Tooltip>
                 </AddSheetContainer>
-                {sheets?.map((sheet: any) => (
-                    <SheetTab
-                        sheetName={sheet.sheetName}
-                        sheetId={sheet.sheetId}
-                        templateId={templateId}
-                        key={sheet.sheetId}
-                    />
-                ))}
+                <SheetTabContainer ref={scroll} onScroll={scrollCheck}>
+                    {sheets?.map((sheet: any) => (
+                        <SheetTab
+                            sheetName={sheet.sheetName}
+                            sheetId={sheet.sheetId}
+                            templateId={templateId}
+                            key={sheet.sheetId}
+                        />
+                    ))}
+                </SheetTabContainer>
                 <SheetNavigationButtonsContainer>
-                    <SheetsFooterNavButtons />
+                    <SheetsFooterNavButtons handleScrollSlide={slide} />
                 </SheetNavigationButtonsContainer>
             </SheetContainer>
         </MainContainer>

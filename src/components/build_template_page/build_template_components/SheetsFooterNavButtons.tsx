@@ -39,13 +39,19 @@ const MoveButton = styled.button`
 
 //Interfaces:
 
-export const SheetsFooterNavButtons = () => {
+interface IComponentProps {
+    handleScrollSlide: (shift: number) => void;
+}
+
+export const SheetsFooterNavButtons = ({
+    handleScrollSlide,
+}: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
-            <MoveButton>
+            <MoveButton onClick={() => handleScrollSlide(-700)}>
                 <LeftIcon />
             </MoveButton>
-            <MoveButton>
+            <MoveButton onClick={() => handleScrollSlide(700)}>
                 <RightIcon />
             </MoveButton>
         </MainContainer>

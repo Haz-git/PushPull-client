@@ -31,6 +31,7 @@ const MainContainer = styled.div<ITabContainerProps>`
     text-decoration: none;
     background: ${({ isSelected }) => (isSelected ? '#e07133' : '#2c2c2c')};
     width: fit-content;
+    min-width: 10rem;
     height: 100%;
     padding: 0rem 1rem;
     outline: 1px solid #d6d6d6;
