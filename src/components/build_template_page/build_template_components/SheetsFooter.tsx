@@ -108,6 +108,15 @@ export const SheetsFooter = (): JSX.Element => {
         setScrollEnd(shouldScrollEnd());
     };
 
+    //Scroll UI state functions:
+    const allowScrollLeft = (): boolean => {
+        return scrollX > 0;
+    };
+
+    const allowScrollRight = (): boolean => {
+        return !scrollEnd;
+    };
+
     return (
         <MainContainer>
             <SheetContainer width={width}>
@@ -152,6 +161,8 @@ export const SheetsFooter = (): JSX.Element => {
                     <SheetsFooterNavButtons
                         handleScrollSlide={slide}
                         horizontalScrollWidth={sheetsFooterWidth}
+                        allowScrollLeft={allowScrollLeft()}
+                        allowScrollRight={allowScrollRight()}
                     />
                 </SheetNavigationButtonsContainer>
             </SheetContainer>
