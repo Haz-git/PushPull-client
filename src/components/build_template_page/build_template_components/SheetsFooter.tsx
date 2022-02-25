@@ -84,15 +84,11 @@ export const SheetsFooter = (): JSX.Element => {
     const scroll = useRef<any>(null);
 
     const shouldScrollEnd = (): boolean => {
-        if (
+        return (
             Math.floor(
                 scroll.current.scrollWidth - scroll.current.scrollLeft
             ) <= scroll.current.offsetWidth
-        ) {
-            return true;
-        }
-
-        return false;
+        );
     };
 
     //Slide function:
