@@ -76,6 +76,9 @@ export const SheetsFooter = (): JSX.Element => {
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
+    //240 px allocated for menu bar
+    const sheetsFooterWidth = width - 240;
+
     //Scroll states:
     const [scrollX, setScrollX] = useState(0);
     const [scrollEnd, setScrollEnd] = useState(false);
@@ -95,14 +98,14 @@ export const SheetsFooter = (): JSX.Element => {
     const slide = (shift: number): void => {
         scroll.current.scrollLeft += shift;
         setScrollX(scrollX + shift);
-        return setScrollEnd(shouldScrollEnd());
+        setScrollEnd(shouldScrollEnd());
     };
 
     //Identify scroll position:
 
     const scrollCheck = (): void => {
         setScrollX(scroll.current.scrollLeft);
-        return setScrollEnd(shouldScrollEnd());
+        setScrollEnd(shouldScrollEnd());
     };
 
     return (
@@ -146,7 +149,10 @@ export const SheetsFooter = (): JSX.Element => {
                     ))}
                 </SheetTabContainer>
                 <SheetNavigationButtonsContainer>
-                    <SheetsFooterNavButtons handleScrollSlide={slide} />
+                    <SheetsFooterNavButtons
+                        handleScrollSlide={slide}
+                        horizontalScrollWidth={sheetsFooterWidth}
+                    />
                 </SheetNavigationButtonsContainer>
             </SheetContainer>
         </MainContainer>
