@@ -145,7 +145,7 @@ const DateColumn = ({
             dispatch(
                 renameEditingSurfaceColumn(
                     template.id,
-                    template.templateEditingSurfaceBlocks[0]['sheetId'],
+                    currentSheetId,
                     prefix,
                     newColumnName.concat(`%SECRET%ID%${uuid()}`)
                 )

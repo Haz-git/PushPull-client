@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 //Redux:
 import { useDispatch } from 'react-redux';
 import { updateSheet } from '../../../redux/templates/templateActions';
 
 //Components:
-import Text from '../../general_components/Text';
 import useQuery from '../../../utils/hooks/useQuery';
 import historyObject from '../../../utils/historyObject';
 import SheetMenu from './SheetMenu';
@@ -24,14 +23,12 @@ const DropdownIcon = styled(CaretDown)`
 `;
 
 const MainContainer = styled.div<ITabContainerProps>`
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     border: none;
     text-decoration: none;
     background: ${({ isSelected }) => (isSelected ? '#e07133' : '#2c2c2c')};
-    width: fit-content;
-    min-width: 10rem;
     height: 100%;
     padding: 0rem 1rem;
     outline: 1px solid #d6d6d6;
@@ -46,7 +43,18 @@ const MainContainer = styled.div<ITabContainerProps>`
     }
 `;
 
-const SheetTitleContainer = styled.div``;
+const SheetTitle = styled.p`
+    font-family: 'Lato',
+    font-weight: 500;
+    color: #ffffff;
+    font-size: .9rem;
+    white-space: nowrap;
+
+`;
+
+const SheetTitleContainer = styled.div`
+    width: 100%;
+`;
 
 const DropdownIconButton = styled.button<ITabContainerProps>`
     border: none;
@@ -146,19 +154,7 @@ export const SheetTab = ({
 
     const showTextFieldOrName = (): JSX.Element => {
         if (!isTextFieldActive) {
-            return (
-                <Text
-                    text={newSheetName}
-                    textColor="#ffffff"
-                    fontWeight="500"
-                    fontSize=".9rem"
-                    textShadow={
-                        shouldHighlightTab()
-                            ? '1px 1px 1px rgba(0,0,0,.25)'
-                            : 'none'
-                    }
-                />
-            );
+            return <SheetTitle>{newSheetName}</SheetTitle>;
         }
 
         return (
@@ -182,7 +178,7 @@ export const SheetTab = ({
                         height: '1.4rem',
                         fontSize: '1rem',
                         fontWeight: 700,
-                        width: '10rem',
+                        minWidth: '10rem',
                         minHeight: '0',
                     },
                 }}
