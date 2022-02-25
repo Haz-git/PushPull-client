@@ -76,6 +76,9 @@ export const SheetsFooter = (): JSX.Element => {
         (state: RootStateOrAny) => state?.template?.templateEditingSurfaceBlocks
     );
 
+    //240 px allocated for menu bar
+    const sheetsFooterWidth = width - 240;
+
     //Scroll states:
     const [scrollX, setScrollX] = useState(0);
     const [scrollEnd, setScrollEnd] = useState(false);
@@ -84,29 +87,34 @@ export const SheetsFooter = (): JSX.Element => {
     const scroll = useRef<any>(null);
 
     const shouldScrollEnd = (): boolean => {
-        if (
+        return (
             Math.floor(
                 scroll.current.scrollWidth - scroll.current.scrollLeft
             ) <= scroll.current.offsetWidth
-        ) {
-            return true;
-        }
-
-        return false;
+        );
     };
 
     //Slide function:
     const slide = (shift: number): void => {
         scroll.current.scrollLeft += shift;
         setScrollX(scrollX + shift);
-        return setScrollEnd(shouldScrollEnd());
+        setScrollEnd(shouldScrollEnd());
     };
 
     //Identify scroll position:
 
     const scrollCheck = (): void => {
         setScrollX(scroll.current.scrollLeft);
-        return setScrollEnd(shouldScrollEnd());
+        setScrollEnd(shouldScrollEnd());
+    };
+
+    //Scroll UI state functions:
+    const allowScrollLeft = (): boolean => {
+        return scrollX > 0;
+    };
+
+    const allowScrollRight = (): boolean => {
+        return !scrollEnd;
     };
 
     return (
@@ -150,7 +158,12 @@ export const SheetsFooter = (): JSX.Element => {
                     ))}
                 </SheetTabContainer>
                 <SheetNavigationButtonsContainer>
-                    <SheetsFooterNavButtons handleScrollSlide={slide} />
+                    <SheetsFooterNavButtons
+                        handleScrollSlide={slide}
+                        horizontalScrollWidth={sheetsFooterWidth}
+                        allowScrollLeft={allowScrollLeft()}
+                        allowScrollRight={allowScrollRight()}
+                    />
                 </SheetNavigationButtonsContainer>
             </SheetContainer>
         </MainContainer>
