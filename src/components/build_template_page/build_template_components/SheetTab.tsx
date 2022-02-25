@@ -54,7 +54,6 @@ const SheetTitle = styled.p`
 
 const SheetTitleContainer = styled.div`
     width: 100%;
-    flex: 1;
 `;
 
 const DropdownIconButton = styled.button<ITabContainerProps>`
@@ -179,7 +178,7 @@ export const SheetTab = ({
                         height: '1.4rem',
                         fontSize: '1rem',
                         fontWeight: 700,
-                        width: 'fit-content',
+                        minWidth: '10rem',
                         minHeight: '0',
                     },
                 }}
