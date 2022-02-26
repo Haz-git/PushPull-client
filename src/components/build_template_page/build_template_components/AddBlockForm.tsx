@@ -14,6 +14,7 @@ import {
 } from '@mantine/core';
 import { SelectColorItem } from './SelectColorItem';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
+import { v4 as uuid } from 'uuid';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -197,7 +198,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
     const generateCustomSetObjects = (setNumber: number): any => {
         //This should generate an object with setNumber amount of nested objects with default values for:
-        // reps, weightMetric, weightImperial
+        // reps, weightMetric, weightImperial.
+
+        //fieldKey is generated via uuid() to prevent unique key error during render in BlockTypeExerciseDataCollapse.
 
         const setsObject = {} as any;
 
@@ -207,6 +210,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 reps: '0',
                 weightImperial: '0',
                 weightMetric: '0',
+                fieldKey: uuid(),
             };
         }
         return setsObject;
