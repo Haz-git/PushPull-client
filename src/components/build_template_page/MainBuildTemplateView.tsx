@@ -244,7 +244,6 @@ const MainBuildTemplateView = ({
 
         //Check if user moved column instead of item:
         if (type === 'editing-surface-column') {
-            //Create copy
             const newColumnOrder = Array.from(editingSurfaceColumns);
             newColumnOrder.splice(result.source.index, 1);
             newColumnOrder.splice(
@@ -271,7 +270,7 @@ const MainBuildTemplateView = ({
         let manipulatedElement, newSourceList;
 
         if (result.source.droppableId !== 'Blocks') {
-            //Control elements passed between date columns on editing surface.
+            //handles blocks passed between columns within editing surface.
             [manipulatedElement, newSourceList] = removeFromList(
                 editingSurfaceSourceList,
                 result.source.index
@@ -296,7 +295,7 @@ const MainBuildTemplateView = ({
                 })
             );
         } else {
-            //Element is passed from toolbar (BlockColumn) to DateColumn
+            //Element is passed from toolbar to editing surface
             manipulatedElement = duplicateBlockFromToolbarWithNewId(
                 toolbarSourceList[result.source.index]
             );
