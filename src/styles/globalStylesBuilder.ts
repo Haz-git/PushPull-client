@@ -142,12 +142,6 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
     }
 
-    .react-grid-item.react-grid-placeholder {
-        background: #525252 !important;
-    }
-
-
-
 `;
 
 export default GlobalStyle;

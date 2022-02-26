@@ -62,18 +62,9 @@ export const BlockTypeExerciseDataCollapse = ({
 }: IComponentProps): JSX.Element => {
     const [isCollapseOpen, toggleCollapse] = useState(false);
 
-    useEffect(() => {
-        //Setting UUID for keys initially here. Docs mention wise to do it only once instead of
-        //Something I've been doing for a while: key={uuid()}.. oops!
-        Object.values(configuredSets).map((set: any) => {
-            set['uuid'] = uuid();
-        });
-    }, [configuredSets]);
-
     const renderTotalSets = (): React.ReactNode => {
-        //For some reason, this still returns a "unique key prop" error even though outermost element has a unique key...
         return Object.values(configuredSets).map((set: any) => (
-            <SetWrapper key={set.uuid}>
+            <SetWrapper key={set.fieldKey}>
                 <Spacer />
                 <SetContainer>
                     <ExerciseDetails>
