@@ -14,7 +14,6 @@ import { SheetsFooter } from './SheetsFooter';
 import styled from 'styled-components';
 
 const MainContainer = styled.section<IMainContainerProps>`
-    width: ${({ width }) => `${width - 225}px`};
     position: relative;
     background: #ffffff;
     margin-bottom: 2.5rem;
