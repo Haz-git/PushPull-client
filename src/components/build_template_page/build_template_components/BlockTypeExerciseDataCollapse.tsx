@@ -11,8 +11,8 @@ import styled from 'styled-components';
 import { CaretDown } from '@styled-icons/fluentui-system-filled/CaretDown';
 
 const CaretDownIcon = styled(CaretDown)`
-    height: 1.75rem;
-    width: 1.75rem;
+    height: 1.35rem;
+    width: 1.35rem;
     color: #e07133;
 `;
 
