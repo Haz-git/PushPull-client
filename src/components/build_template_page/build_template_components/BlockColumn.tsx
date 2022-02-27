@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Fragment } from 'react';
 
 //Components:
 import { Droppable } from 'react-beautiful-dnd';
@@ -52,23 +53,23 @@ const BlockColumn = ({ prefix, elements }: IComponentProps): JSX.Element => {
                             const shouldRenderClone =
                                 item.id === snapshot.draggingFromThisWith;
                             return (
-                                <>
+                                <Fragment key={item.id}>
                                     {shouldRenderClone ? (
                                         <BlockTypeExerciseClone
                                             blockDetails={item.blockDetails}
-                                            key={uuid()}
+                                            className="toolbar-block-dnd-copy"
                                         />
                                     ) : (
                                         <BlockTypeExercise
-                                            key={item.id}
                                             blockId={item.id}
                                             item={item}
                                             index={index}
                                             blockDetails={item.blockDetails}
                                             blockType={BlockTypes.TOOLBAR}
+                                            className="toolbar-block-dnd-copy"
                                         />
                                     )}
-                                </>
+                                </Fragment>
                             );
                         })}
                     </div>

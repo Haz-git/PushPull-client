@@ -32,6 +32,7 @@ interface IComponentProps {
     style?: any;
     draggableProps?: any;
     dragHandleProps?: any;
+    className?: string;
 }
 
 export const BlockTypeExerciseClone = forwardRef(
@@ -41,6 +42,7 @@ export const BlockTypeExerciseClone = forwardRef(
             style,
             draggableProps,
             dragHandleProps,
+            className,
         }: IComponentProps,
         ref: any
     ): JSX.Element => {
@@ -103,6 +105,7 @@ export const BlockTypeExerciseClone = forwardRef(
                 style={style}
                 {...draggableProps}
                 {...dragHandleProps}
+                className={className}
             >
                 <PopoverContainer>
                     <Popover
