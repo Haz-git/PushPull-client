@@ -142,6 +142,14 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
     }
 
+    .toolbar-block-dnd-copy {
+        transform: none !important;
+    }
+
+    .toolbar-block-dnd-copy ~ [data-rbd-placeholder-context-id] {
+        display: none !important;
+    }
+
 `;
 
 export default GlobalStyle;

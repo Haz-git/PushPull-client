@@ -22,13 +22,13 @@ import styled from 'styled-components';
 import { MoreHorizontal } from '@styled-icons/fluentui-system-regular/MoreHorizontal';
 import { BlockTypeExerciseDataCollapse } from './BlockTypeExerciseDataCollapse';
 
-const MoreDots = styled(MoreHorizontal)`
+export const MoreDots = styled(MoreHorizontal)`
     color: #ffffff;
     height: 1rem;
     width: 1rem;
 `;
 
-const HoverableButton = styled.button<IHoverableButtonProps>`
+export const HoverableButton = styled.button<IHoverableButtonProps>`
     opacity: ${({ isActive }) => (isActive ? '100' : '0')};
     display: block;
     height: 1.5rem;
@@ -50,7 +50,7 @@ const HoverableButton = styled.button<IHoverableButtonProps>`
     }
 `;
 
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
     position: relative;
     margin: 0.5rem 0rem;
     border-radius: 0.2rem;
@@ -71,13 +71,13 @@ const MainContainer = styled.div`
     }
 `;
 
-const PopoverContainer = styled.div`
+export const PopoverContainer = styled.div`
     position: absolute;
     top: -1rem;
     right: -0.25rem;
 `;
 
-const PopoverChildrenFlexWrapper = styled.div`
+export const PopoverChildrenFlexWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -85,7 +85,7 @@ const PopoverChildrenFlexWrapper = styled.div`
     width: 6rem;
 `;
 
-const PopoverChildrenButton = styled.button`
+export const PopoverChildrenButton = styled.button`
     background: #ffffff;
     text-decoration: none;
     border: none;
@@ -99,9 +99,9 @@ const PopoverChildrenButton = styled.button`
     }
 `;
 
-const BlockDetailsContainer = styled.div``;
+export const BlockDetailsContainer = styled.div``;
 
-const BlockHeader = styled.div`
+export const BlockHeader = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -109,13 +109,13 @@ const BlockHeader = styled.div`
     max-width: 100%;
 `;
 
-const LinkedColorSwatch = styled.div<ILinkedColorSwatchProps>`
+export const LinkedColorSwatch = styled.div<ILinkedColorSwatchProps>`
     height: 1.25rem;
     width: 1.25rem;
     border-radius: 0.2rem;
     background: ${({ linkedColor }) => linkedColor};
 `;
-const Divider = styled.div`
+export const Divider = styled.div`
     height: 1px;
     width: 100%;
     background: #d6d6d6;
@@ -143,6 +143,7 @@ interface IComponentProps {
     blockId: string;
     blockType: BlockTypes.TOOLBAR | BlockTypes.EDITING_SURFACE;
     columnPrefix?: string;
+    className?: string;
 }
 
 const BlockTypeExercise = ({
@@ -152,6 +153,7 @@ const BlockTypeExercise = ({
     blockDetails,
     blockType,
     columnPrefix,
+    className,
 }: IComponentProps): JSX.Element => {
     const query = useQuery();
     const currentSheetId = query.get('sheetId');
@@ -257,6 +259,7 @@ const BlockTypeExercise = ({
                             data-snapshot={snapshot}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
+                            className={className}
                         >
                             <PopoverContainer>
                                 <Popover
