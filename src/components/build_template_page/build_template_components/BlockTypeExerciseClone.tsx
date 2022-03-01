@@ -25,7 +25,12 @@ import {
     Divider,
 } from './BlockTypeExercise';
 
-//Interfaces:
+//Interfaces / Enums:
+
+enum WeightUnit {
+    Metric = 'METRIC',
+    Imperial = 'IMPERIAL',
+}
 
 interface IComponentProps {
     blockDetails: any;
@@ -82,7 +87,7 @@ export const BlockTypeExerciseClone = forwardRef(
                 return;
             }
 
-            return templateWeightUnit === 'METRIC'
+            return templateWeightUnit === WeightUnit.Metric
                 ? `${blockDetails.weightMetric}`
                 : `${blockDetails.weightImperial}`;
         }, [
@@ -96,7 +101,7 @@ export const BlockTypeExerciseClone = forwardRef(
                 return;
             }
 
-            return templateWeightUnit === 'METRIC' ? 'Kgs' : 'Lbs';
+            return templateWeightUnit === WeightUnit.Metric ? 'Kgs' : 'Lbs';
         }, [templateWeightUnit]);
 
         return (
