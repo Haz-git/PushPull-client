@@ -174,7 +174,7 @@ export const AddColorForm = () => {
             <ButtonContainer>
                 <GeneralButton
                     buttonLabel="Save Color"
-                    padding=".5rem .2rem"
+                    padding=".4rem .2rem"
                     onClick={handleSaveColor}
                 />
             </ButtonContainer>

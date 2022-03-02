@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { defaultFieldStyle } from '../../../styles/fieldStyles';
 import { TextInput, Select } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -102,7 +103,12 @@ export const AddViewerInputForm = () => {
                     )}
                 />
 
-                <input type="submit" />
+                <GeneralButton
+                    buttonLabel="Save Question"
+                    type="submit"
+                    padding=".4rem .2rem"
+                    margin="1rem 0rem 0rem 0rem"
+                />
             </form>
         </MainContainer>
     );
