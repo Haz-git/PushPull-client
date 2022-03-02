@@ -53,7 +53,7 @@ export const AddViewerInputForm = () => {
                     name="InputQuestion"
                     control={control}
                     rules={{
-                        //Set requirements here. If rules are broke errors object is updated.
+                        //Set requirements here. If rules are broken errors object is updated.
                         required: {
                             value: true,
                             message: 'You must enter a question',
@@ -76,10 +76,17 @@ export const AddViewerInputForm = () => {
                 <Controller
                     name="ResponseType"
                     control={control}
-                    rules={{ required: true }}
+                    rules={{
+                        required: {
+                            value: true,
+                            message:
+                                'You must enter a response type entered by the viewer.',
+                        },
+                    }}
                     render={({ field }) => (
                         <Select
                             label="Response Type"
+                            required
                             placeholder="Number"
                             styles={defaultFieldStyle}
                             data={[
@@ -87,7 +94,10 @@ export const AddViewerInputForm = () => {
                                 { value: 'Text', label: 'Text' },
                             ]}
                             onChange={field.onChange}
-                            // error={error}
+                            error={hasFieldError(
+                                errors,
+                                FieldName.ResponseType
+                            )}
                         />
                     )}
                 />
