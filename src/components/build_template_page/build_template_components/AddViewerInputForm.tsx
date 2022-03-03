@@ -1,13 +1,21 @@
 import * as React from 'react';
 
+//Redux:
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { ModalActionTypes } from '../../../redux/modals/action-types';
+import { toggleModal } from '../../../redux/modals/modalActions';
+import { updateTemplate } from '../../../redux/templates/templateActions';
+
 //Components:
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { defaultFieldStyle } from '../../../styles/fieldStyles';
 import { TextInput, Select } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
+import { loaderTypes } from '../../../redux/uiLoader/loader-types';
 
 //Interfaces / enums:
 enum FieldName {
@@ -28,6 +36,12 @@ interface IFormInput {
 const MainContainer = styled.div``;
 
 export const AddViewerInputForm = () => {
+    const dispatch = useDispatch();
+    const template = useSelector((state: RootStateOrAny) => state?.template);
+    const currentSavedQuestions = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateUserInputs
+    );
+
     const {
         handleSubmit,
         control,
@@ -39,7 +53,28 @@ export const AddViewerInputForm = () => {
         },
     });
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+    const onSubmit: SubmitHandler<IFormInput> = (data): void => {
+        let updatedQuestionArray = [
+            ...currentSavedQuestions,
+            { id: uuid(), ...data },
+        ];
+
+        dispatch(
+            updateTemplate(
+                (status) => {},
+                template.id,
+                { templateUserInputs: updatedQuestionArray },
+                true,
+                null,
+                null,
+                loaderTypes.VIEWER_INTERACTIONS_SETTINGS_MODAL
+            )
+        );
+
+        dispatch(
+            toggleModal(ModalActionTypes.ADD_VIEWER_INPUT_POPOVER, 'CLOSE')
+        );
+    };
 
     const hasFieldError = (errorObject: any, fieldName: FieldName): Boolean => {
         return fieldName in errorObject;
