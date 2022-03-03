@@ -3,6 +3,7 @@ import * as React from 'react';
 //Redux:
 
 //Components:
+import Text from '../../general_components/Text';
 
 //Styles:
 import styled from 'styled-components';
@@ -18,6 +19,22 @@ const MainContainer = styled.div<IMainContainerProps>`
     margin-bottom: 0.5rem;
     border: ${({ isSelected }) =>
         isSelected ? '1px solid #e07133' : '1px solid transparent'};
+`;
+
+const ResponseTypeContainer = styled.div`
+    padding: 0.5rem 0.5rem;
+    width: 5.5rem;
+    margin-right: 0.5rem;
+    background: #d6d6d6;
+    border-radius: 0.3rem;
+`;
+
+const LabelContainer = styled.div`
+    height: 100%;
+    max-height: 5rem;
+    padding: 1rem 1rem;
+    overflow-y: scroll;
+    width: 100%;
 `;
 
 //Interfaces:
@@ -46,8 +63,12 @@ export const QuestionSelectables = ({
             isSelected={isSelected}
             onClick={() => onSelectQuestion(id)}
         >
-            <div>{inputQuestion}</div>
-            <div>{responseType}</div>
+            <LabelContainer>
+                <Text text={inputQuestion} subText={true} />
+            </LabelContainer>
+            <ResponseTypeContainer>
+                <Text text={responseType} subText={true} />
+            </ResponseTypeContainer>
         </MainContainer>
     );
 };
