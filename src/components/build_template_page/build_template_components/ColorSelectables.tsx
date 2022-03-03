@@ -63,9 +63,9 @@ interface IComponentProps {
 
 export const ColorSelectables = ({
     id,
-    label = 'Test Label',
-    colorHex = '#000000',
-    description = 'Test Description for color swatch',
+    label,
+    colorHex,
+    description,
     isSelected = false,
     onSelectColor,
 }: IComponentProps): JSX.Element => {
