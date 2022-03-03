@@ -20,6 +20,7 @@ import styled from 'styled-components';
 import { Info } from '@styled-icons/fluentui-system-filled/Info';
 import { Add } from '@styled-icons/fluentui-system-filled/Add';
 import { Subtract } from '@styled-icons/fluentui-system-regular/Subtract';
+import { QuestionSelectables } from './QuestionSelectables';
 
 const InfoIcon = styled(Info)`
     margin-bottom: -0.02rem;
@@ -105,6 +106,10 @@ const ViewerInteractionsForm = () => {
         (state: RootStateOrAny) => state?.template?.templateLegend
     );
 
+    const viewerQuestions = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateUserInputs
+    );
+
     const isAddColorPopoverOpen = useSelector(
         (state: RootStateOrAny) =>
             state?.modals?.ADD_COLOR_SWATCH_POPOVER.isOpen
@@ -125,12 +130,22 @@ const ViewerInteractionsForm = () => {
     );
 
     const [selectedColor, setSelectedColor] = useState('');
+    const [selectedQuestion, setSelectedQuestion] = useState('');
 
     const onSelectColor = (colorId: string): void => {
         if (!colorId) {
             return;
         }
+
         setSelectedColor(colorId);
+    };
+
+    const onSelectQuestion = (questionId: string): void => {
+        if (!questionId) {
+            return;
+        }
+
+        setSelectedQuestion(questionId);
     };
 
     const isColorSelected = (
@@ -138,6 +153,13 @@ const ViewerInteractionsForm = () => {
         colorId: string
     ): boolean => {
         return selectedColorId === colorId;
+    };
+
+    const isQuestionSelected = (
+        selectedQuestionId: string,
+        questionId: string
+    ): boolean => {
+        return selectedQuestionId === questionId;
     };
 
     const renderColorSwatches = (): JSX.Element | null => {
@@ -154,6 +176,23 @@ const ViewerInteractionsForm = () => {
                 key={color.id}
                 isSelected={isColorSelected(selectedColor, color.id)}
                 onSelectColor={onSelectColor}
+            />
+        ));
+    };
+
+    const renderViewerQuestions = (): JSX.Element | null => {
+        if (!viewerQuestions || viewerQuestions.length === 0) {
+            return null;
+        }
+
+        return viewerQuestions.map((question: any) => (
+            <QuestionSelectables
+                id={question.id}
+                key={question.id}
+                inputQuestion={question.InputQuestion}
+                responseType={question.ResponseType}
+                isSelected={isQuestionSelected(selectedQuestion, question.id)}
+                onSelectQuestion={onSelectQuestion}
             />
         ));
     };
@@ -287,7 +326,7 @@ const ViewerInteractionsForm = () => {
                         <InfoIcon />
                     </Tooltip>
                 </OptionHeader>
-                <ActionContainer></ActionContainer>
+                <ActionContainer>{renderViewerQuestions()}</ActionContainer>
                 <ActionableButtonContainer>
                     <Popover
                         noClickOutside={true}
