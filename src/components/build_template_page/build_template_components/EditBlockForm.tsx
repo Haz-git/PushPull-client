@@ -51,6 +51,9 @@ export const EditBlockForm = () => {
     const colorLegendSelectables = useSelector(
         (state: RootStateOrAny) => state?.template?.templateLegend
     );
+    const viewerInputSelectables = useSelector(
+        (state: RootStateOrAny) => state?.template?.templateUserInputs
+    );
     const { modalProps } = useSelector(
         (state: RootStateOrAny) => state?.modals?.EDIT_BLOCK
     );
@@ -111,6 +114,17 @@ export const EditBlockForm = () => {
             color: color.colorHex,
         }));
     }, [template.templateLegend]);
+
+    const composedViewerInputSelectData = useMemo((): string[] => {
+        if (!viewerInputSelectables) {
+            return [];
+        }
+
+        return viewerInputSelectables.map((question: any) => ({
+            value: question.id,
+            label: question.InputQuestion,
+        }));
+    }, [template.templateUserInputs]);
 
     const updateConfiguredSets = (
         operation: ConfiguredSetOperation,
@@ -554,6 +568,8 @@ export const EditBlockForm = () => {
                 />
                 <Spacer />
                 <Select
+                    value={userInput.linkedViewerInput}
+                    searchable
                     clearable
                     styles={{
                         label: {
@@ -572,8 +588,21 @@ export const EditBlockForm = () => {
                     }}
                     label="Viewer Input"
                     placeholder="Link a viewer input"
-                    data={[{ value: 'maxBench', label: 'Max Bench' }]}
+                    data={composedViewerInputSelectData}
                     required
+                    filter={(value: string, item: any) =>
+                        item.label
+                            .toLowerCase()
+                            .includes(value.toLowerCase().trim())
+                    }
+                    nothingFound="No Viewer Input Found"
+                    maxDropdownHeight={250}
+                    onChange={(value: string) =>
+                        setUserInput({
+                            ...userInput,
+                            linkedViewerInput: value,
+                        })
+                    }
                 />
             </FormContainer>
             <ButtonContainer>

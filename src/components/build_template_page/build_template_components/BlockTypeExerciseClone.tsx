@@ -22,6 +22,8 @@ import {
     BlockDetailsContainer,
     BlockHeader,
     LinkedColorSwatch,
+    LinkedIcon,
+    SymbolContainer,
     Divider,
 } from './BlockTypeExercise';
 
@@ -80,6 +82,14 @@ export const BlockTypeExerciseClone = forwardRef(
             return (
                 <LinkedColorSwatch linkedColor={currentLinkedColor.colorHex} />
             );
+        };
+
+        const renderLinkedIcon = (): JSX.Element | null => {
+            if (blockDetails.linkedViewerInput === '') {
+                return null;
+            }
+
+            return <LinkedIcon />;
         };
 
         const blockWeight = useMemo((): string | undefined => {
@@ -154,7 +164,10 @@ export const BlockTypeExerciseClone = forwardRef(
                             fontSize=".95rem"
                             fontWeight="800"
                         />
-                        {renderColorSwatch()}
+                        <SymbolContainer>
+                            {renderColorSwatch()}
+                            {renderLinkedIcon()}
+                        </SymbolContainer>
                     </BlockHeader>
                     <Divider />
                     <BlockTypeExerciseDataGrid
