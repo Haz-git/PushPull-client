@@ -37,9 +37,42 @@ export const DeleteViewerInputForm = ({
     const currentSavedQuestions = useSelector(
         (state: RootStateOrAny) => state?.template?.templateUserInputs
     );
+    const template = useSelector((state: RootStateOrAny) => state?.template);
+
+    const composeInputsPostDeletion = (): any[] => {
+        let savedQuestions = [...currentSavedQuestions];
+        const targetIndex = savedQuestions.findIndex(
+            (question) => question.id === currentSelectedQuestionId
+        );
+
+        savedQuestions.splice(targetIndex, 1);
+        return savedQuestions;
+    };
 
     const handleViewerInputDeletion = (): void => {
-        console.log('test');
+        if (!currentSelectedQuestionId) {
+            return;
+        }
+
+        const newInputsArray = composeInputsPostDeletion();
+
+        dispatch(
+            updateTemplate(
+                (status) => {},
+                template.id,
+                { templateUserInputs: newInputsArray },
+                true,
+                null,
+                null,
+                loaderTypes.VIEWER_INTERACTIONS_SETTINGS_MODAL
+            )
+        );
+
+        dispatch(
+            toggleModal(ModalActionTypes.DELETE_VIEWER_INPUT_POPOVER, 'CLOSE')
+        );
+
+        resetQuestionId();
     };
 
     return (
