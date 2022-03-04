@@ -98,6 +98,19 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         }));
     }, [template.templateLegend]);
 
+    const composedViewerInputSelectData = useMemo((): string[] => {
+        if (!viewerInputSelectables) {
+            return [];
+        }
+
+        console.log(viewerInputSelectables);
+
+        return viewerInputSelectables.map((question: any) => ({
+            value: question.id,
+            label: question.InputQuestion,
+        }));
+    }, [template.templateUserInputs]);
+
     //Set Configuration Menu State:
     const [isSetConfigurationMenuOpen, toggleSetConfigurationMenu] =
         useState(false);
@@ -551,6 +564,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                 />
                 <Spacer />
                 <Select
+                    value={userInput.linkedViewerInput}
+                    searchable
                     clearable
                     styles={{
                         label: {
@@ -569,7 +584,20 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }}
                     label="Viewer Input"
                     placeholder="Link a viewer input"
-                    data={[{ value: 'maxBench', label: 'Max Bench' }]}
+                    data={composedViewerInputSelectData}
+                    filter={(value: string, item: any) =>
+                        item.label
+                            .toLowerCase()
+                            .includes(value.toLowerCase().trim())
+                    }
+                    nothingFound="No Viewer Input Found"
+                    maxDropdownHeight={250}
+                    onChange={(value: string) =>
+                        setUserInput({
+                            ...userInput,
+                            linkedViewerInput: value,
+                        })
+                    }
                 />
             </FormContainer>
             <ButtonContainer>
