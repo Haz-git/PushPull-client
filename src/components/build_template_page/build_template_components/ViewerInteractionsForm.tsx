@@ -21,6 +21,7 @@ import { Info } from '@styled-icons/fluentui-system-filled/Info';
 import { Add } from '@styled-icons/fluentui-system-filled/Add';
 import { Subtract } from '@styled-icons/fluentui-system-regular/Subtract';
 import { QuestionSelectables } from './QuestionSelectables';
+import { DeleteViewerInputForm } from './DeleteViewerInputForm';
 
 const InfoIcon = styled(Info)`
     margin-bottom: -0.02rem;
@@ -197,6 +198,10 @@ const ViewerInteractionsForm = () => {
         ));
     };
 
+    const shouldDeleteViewerInputPopoverOpen = (): boolean => {
+        return selectedQuestion !== '' && isDeleteViewerInputPopoverOpen;
+    };
+
     const shouldDeleteColorPopoverOpen = (): boolean => {
         return selectedColor !== '' && isDeleteColorPopoverOpen;
     };
@@ -361,9 +366,44 @@ const ViewerInteractionsForm = () => {
                     >
                         <AddViewerInputForm />
                     </Popover>
-                    <RemoveButton>
-                        <SubtractIcon />
-                    </RemoveButton>
+                    <Popover
+                        noClickOutside={false}
+                        noEscape={false}
+                        title="Remove Input Question"
+                        onClose={() =>
+                            dispatch(
+                                toggleModal(
+                                    ModalActionTypes.DELETE_VIEWER_INPUT_POPOVER,
+                                    'CLOSE'
+                                )
+                            )
+                        }
+                        placement="start"
+                        position="bottom"
+                        withCloseButton={true}
+                        opened={shouldDeleteViewerInputPopoverOpen()}
+                        target={
+                            <RemoveButton
+                                onClick={() => {
+                                    if (selectedQuestion !== '') {
+                                        dispatch(
+                                            toggleModal(
+                                                ModalActionTypes.DELETE_VIEWER_INPUT_POPOVER,
+                                                'OPEN'
+                                            )
+                                        );
+                                    }
+                                }}
+                            >
+                                <SubtractIcon />
+                            </RemoveButton>
+                        }
+                    >
+                        <DeleteViewerInputForm
+                            currentSelectedQuestionId={selectedQuestion}
+                            resetQuestionId={() => setSelectedQuestion('')}
+                        />
+                    </Popover>
                 </ActionableButtonContainer>
             </ViewerInputsContainer>
         </MainContainer>
