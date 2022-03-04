@@ -21,11 +21,18 @@ import { BlockTypeExerciseDataGrid } from './BlockTypeExerciseDataGrid';
 import styled from 'styled-components';
 import { MoreHorizontal } from '@styled-icons/fluentui-system-regular/MoreHorizontal';
 import { BlockTypeExerciseDataCollapse } from './BlockTypeExerciseDataCollapse';
+import { Link } from '@styled-icons/material-twotone/Link';
 
 export const MoreDots = styled(MoreHorizontal)`
     color: #ffffff;
     height: 1rem;
     width: 1rem;
+`;
+
+export const LinkedIcon = styled(Link)`
+    color: #2c2c2c;
+    height: 1.3rem;
+    width: 1.3rem;
 `;
 
 export const HoverableButton = styled.button<IHoverableButtonProps>`
@@ -105,8 +112,15 @@ export const BlockHeader = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem 0.25rem 0.5rem 0.5rem;
     max-width: 100%;
+`;
+
+export const SymbolContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.15rem;
+    margin-left: 0.35rem;
 `;
 
 export const LinkedColorSwatch = styled.div<ILinkedColorSwatchProps>`
@@ -208,6 +222,14 @@ const BlockTypeExercise = ({
         }
 
         return <LinkedColorSwatch linkedColor={currentLinkedColor.colorHex} />;
+    };
+
+    const renderLinkedIcon = (): JSX.Element | null => {
+        if (blockDetails.linkedViewerInput === '') {
+            return null;
+        }
+
+        return <LinkedIcon />;
     };
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -319,7 +341,10 @@ const BlockTypeExercise = ({
                                         fontSize=".95rem"
                                         fontWeight="800"
                                     />
-                                    {renderColorSwatch()}
+                                    <SymbolContainer>
+                                        {renderColorSwatch()}
+                                        {renderLinkedIcon()}
+                                    </SymbolContainer>
                                 </BlockHeader>
                                 <Divider />
                                 <BlockTypeExerciseDataGrid
