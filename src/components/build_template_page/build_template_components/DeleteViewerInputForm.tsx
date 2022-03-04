@@ -37,5 +37,41 @@ export const DeleteViewerInputForm = ({
     const currentSavedQuestions = useSelector(
         (state: RootStateOrAny) => state?.template?.templateUserInputs
     );
-    return <div>DeleteViewerInputForm</div>;
+
+    const handleViewerInputDeletion = (): void => {
+        console.log('test');
+    };
+
+    return (
+        <MainContainer>
+            <div>
+                <Text
+                    text="Deleting this input will unlink all blocks connected to this input"
+                    subText={true}
+                    fontSize=".9rem"
+                    fontWeight="800"
+                />
+                <TextDivider />
+                <Text
+                    text="This action is irreversible."
+                    subText={true}
+                    fontSize=".9rem"
+                    fontWeight="800"
+                    textColor="#AF1432"
+                />
+                <TextDivider />
+            </div>
+            <ButtonContainer>
+                <GeneralButton
+                    buttonLabel="Delete"
+                    width="6rem"
+                    buttonBackground="#AF1432"
+                    fontSize="1rem"
+                    height="2rem"
+                    leftIconMargin="0rem .3rem -.2rem 0rem"
+                    onClick={handleViewerInputDeletion}
+                />
+            </ButtonContainer>
+        </MainContainer>
+    );
 };
