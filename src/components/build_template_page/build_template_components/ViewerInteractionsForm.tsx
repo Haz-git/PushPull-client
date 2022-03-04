@@ -385,7 +385,7 @@ const ViewerInteractionsForm = () => {
                         target={
                             <RemoveButton
                                 onClick={() => {
-                                    if (selectedColor !== '') {
+                                    if (selectedQuestion !== '') {
                                         dispatch(
                                             toggleModal(
                                                 ModalActionTypes.DELETE_VIEWER_INPUT_POPOVER,
