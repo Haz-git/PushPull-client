@@ -103,8 +103,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             return [];
         }
 
-        console.log(viewerInputSelectables);
-
         return viewerInputSelectables.map((question: any) => ({
             value: question.id,
             label: question.InputQuestion,
