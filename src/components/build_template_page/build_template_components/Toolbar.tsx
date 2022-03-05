@@ -143,6 +143,11 @@ const Toolbar = ({
     elements,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const templateId = useSelector(
+        (state: RootStateOrAny) => state?.template?.id
+    );
+
+    console.log(templateId);
 
     useEffect(() => {
         return () => {
@@ -219,9 +224,7 @@ const Toolbar = ({
                     height="3.5rem"
                     buttonLabel="View Preview"
                     onClick={() =>
-                        alert(
-                            'A copy of your current template will be saved and rendered for preview. Agree?'
-                        )
+                        historyObject.push(`/template/view/${templateId}`)
                     }
                     width="100%"
                     buttonIconLeft={<PreviewIcon />}
