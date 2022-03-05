@@ -23,6 +23,13 @@ import styled from 'styled-components';
 import { IosArrowLeft } from '@styled-icons/fluentui-system-filled/IosArrowLeft';
 import { ContentSettings } from 'styled-icons/fluentui-system-filled';
 import { UserVoice } from '@styled-icons/boxicons-solid/UserVoice';
+import { Preview } from '@styled-icons/material-rounded/Preview';
+
+const PreviewIcon = styled(Preview)`
+    color: #ffffff;
+    height: 1.75rem;
+    width: 1.75rem;
+`;
 
 const SettingsIcon = styled(ContentSettings)`
     color: #ffffff;
@@ -188,7 +195,7 @@ const Toolbar = ({
                     buttonIconLeft={<ViewerInteractionsIcon />}
                     buttonBackground="transparent"
                     border="1px solid #525252"
-                    borderBottom="1px solid #525252"
+                    borderBottom="none"
                     borderTop="1px solid #525252"
                     disableShadow={true}
                     hoverTransform="none"
@@ -200,6 +207,24 @@ const Toolbar = ({
                     onClick={() => controlGlobalModal(true)}
                     width="100%"
                     buttonIconLeft={<SettingsIcon />}
+                    border="1px solid #525252"
+                    buttonBackground="transparent"
+                    borderBottom="1px solid #525252"
+                    borderTop="1px solid #525252"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
+                />
+                <GeneralButton
+                    height="3.5rem"
+                    buttonLabel="View Preview"
+                    onClick={() =>
+                        alert(
+                            'A copy of your current template will be saved and rendered for preview. Agree?'
+                        )
+                    }
+                    width="100%"
+                    buttonIconLeft={<PreviewIcon />}
                     border="1px solid #525252"
                     buttonBackground="transparent"
                     borderBottom="1px solid #525252"
