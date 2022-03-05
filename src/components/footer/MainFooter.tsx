@@ -165,20 +165,28 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
     const [isOpen, setIsOpen] = useState(false);
 
     const identifyBrowserOrTablet = () => {
-        if (isDesktop || isTablet) return true;
-        else return false;
+        if (isDesktop || isTablet) {
+            return true;
+        }
+
+        return false;
     };
 
     const returnStateCollapseButtonIcon = () => {
-        if (isOpen === true) return <CaretDownIcon />;
+        if (isOpen === true) {
+            return <CaretDownIcon />;
+        }
+
         return <CaretUpIcon />;
     };
 
     const renderFooter = () => {
-        if (
+        const isNotInRestrictedLocations =
             !location.pathname.includes('builder') &&
-            !location.pathname.includes('file')
-        ) {
+            !location.pathname.includes('file') &&
+            !location.pathname.includes('template/view');
+
+        if (isNotInRestrictedLocations) {
             return (
                 <>
                     <CustomView condition={identifyBrowserOrTablet()}>
@@ -264,9 +272,9 @@ const MainFooter = ({ bugReportHandler }: IComponentProps): JSX.Element => {
                     </MobileOnlyView>
                 </>
             );
-        } else {
-            return null;
         }
+
+        return null;
     };
 
     return <>{renderFooter()}</>;
