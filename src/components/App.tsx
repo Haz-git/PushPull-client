@@ -32,6 +32,7 @@ import FeedbackForm from './general_components/FeedbackForm';
 import PasswordResetForm from './auth_forms/PasswordResetForm';
 import ProfilePageView from './profile_page/ProfilePageView';
 import NotFound from './not_found_page/NotFound';
+// import { MainViewTemplateView } from './view_template_page/MainViewTemplateView';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
@@ -89,6 +90,26 @@ const MainBuildTemplateView = loadable(
         fallback: (
             <LoadProgress
                 loadingText="Generating Template..."
+                darkMode={true}
+                isAnimating={true}
+                minimum={0}
+                incrementDuration={500}
+            />
+        ),
+    }
+);
+
+const MainViewTemplateView = loadable(
+    () =>
+        import(
+            /* webpackPrefetch: true */ './view_template_page/MainViewTemplateView'
+        ),
+    {
+        //resolveComponent is necessary for named exports. Loadable components defaults to unnamed exports
+        resolveComponent: (components: any) => components.MainViewTemplateView,
+        fallback: (
+            <LoadProgress
+                loadingText="Rendering Template..."
                 darkMode={true}
                 isAnimating={true}
                 minimum={0}
@@ -209,6 +230,11 @@ const App = () => {
                                         }
                                     />
                                 )}
+                            />
+                            <Route
+                                exact
+                                path="/template/view/:templateId"
+                                component={MainViewTemplateView}
                             />
                             <PrivateRoute
                                 exact
