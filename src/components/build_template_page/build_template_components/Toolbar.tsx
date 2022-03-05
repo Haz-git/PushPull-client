@@ -147,8 +147,6 @@ const Toolbar = ({
         (state: RootStateOrAny) => state?.template?.id
     );
 
-    console.log(templateId);
-
     useEffect(() => {
         return () => {
             dispatch(deselectBlock());
