@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { NotificationsProvider } from '@mantine/notifications';
 import GlobalStyle from '../../styles/globalStyles';
 import GlobalStylesBuilder from '../../styles/globalStylesBuilder';
+import { GlobalStylesViewTemplate } from '../../styles/globalStylesViewTemplate';
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
 
 interface IComponentProps {
@@ -13,7 +14,7 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
     const Location = useLocation();
     const { width } = useWindowDimensions();
 
-    const checkIfBuilderOrFile = () => {
+    const checkIfBuilderOrFile = (): boolean => {
         if (
             Location.pathname.includes('builder') ||
             Location.pathname.includes('file')
@@ -22,18 +23,41 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
         return false;
     };
 
-    const repositionNotif = () => {
+    const checkIfTemplateView = (): boolean => {
+        if (Location.pathname.includes('template/view')) {
+            return true;
+        }
+
+        return false;
+    };
+
+    const repositionNotif = (): any => {
         if (width <= 1024) return 'bottom-left';
         return 'bottom-center';
     };
 
-    const renderNotificationProviderOnURL = () => {
-        if (!checkIfBuilderOrFile()) {
+    const renderNotificationProviderOnURL = (): JSX.Element => {
+        if (checkIfBuilderOrFile()) {
             return (
                 <>
-                    <GlobalStyle />
+                    <GlobalStylesBuilder />
                     <NotificationsProvider
-                        position="bottom-left"
+                        position={repositionNotif()}
+                        limit={5}
+                        zIndex={89}
+                    >
+                        {children}
+                    </NotificationsProvider>
+                </>
+            );
+        }
+
+        if (checkIfTemplateView()) {
+            return (
+                <>
+                    <GlobalStylesViewTemplate />
+                    <NotificationsProvider
+                        position={repositionNotif()}
                         limit={5}
                         zIndex={89}
                     >
@@ -45,9 +69,9 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
 
         return (
             <>
-                <GlobalStylesBuilder />
+                <GlobalStyle />
                 <NotificationsProvider
-                    position={repositionNotif()}
+                    position="bottom-left"
                     limit={5}
                     zIndex={89}
                 >

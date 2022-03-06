@@ -250,7 +250,11 @@ const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     };
 
     const controlRenderNavbar = () => {
-        if (Location.pathname.includes('file')) return null;
+        if (
+            Location.pathname.includes('file') ||
+            Location.pathname.includes('template/view')
+        )
+            return null;
         return (
             <StyledNavbar isBuilder={checkIfBuilder()}>
                 <LeftWrapper>
