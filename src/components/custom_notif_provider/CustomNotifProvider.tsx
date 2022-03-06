@@ -14,35 +14,28 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
     const Location = useLocation();
     const { width } = useWindowDimensions();
 
-    const checkIfBuilderOrFile = (): boolean => {
-        if (
+    const isBuilderOrFileView = (): boolean => {
+        return (
             Location.pathname.includes('builder') ||
             Location.pathname.includes('file')
-        )
-            return true;
-        return false;
+        );
     };
 
-    const checkIfTemplateView = (): boolean => {
-        if (Location.pathname.includes('template/view')) {
-            return true;
-        }
-
-        return false;
+    const isTemplateView = (): boolean => {
+        return Location.pathname.includes('template/view');
     };
 
-    const repositionNotif = (): any => {
-        if (width <= 1024) return 'bottom-left';
-        return 'bottom-center';
+    const repositionNotification = (): any => {
+        return width <= 1024 ? 'bottom-left' : 'bottom-center';
     };
 
     const renderNotificationProviderOnURL = (): JSX.Element => {
-        if (checkIfBuilderOrFile()) {
+        if (isBuilderOrFileView()) {
             return (
                 <>
                     <GlobalStylesBuilder />
                     <NotificationsProvider
-                        position={repositionNotif()}
+                        position={repositionNotification()}
                         limit={5}
                         zIndex={89}
                     >
@@ -52,12 +45,12 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
             );
         }
 
-        if (checkIfTemplateView()) {
+        if (isTemplateView()) {
             return (
                 <>
                     <GlobalStylesViewTemplate />
                     <NotificationsProvider
-                        position={repositionNotif()}
+                        position={repositionNotification()}
                         limit={5}
                         zIndex={89}
                     >
