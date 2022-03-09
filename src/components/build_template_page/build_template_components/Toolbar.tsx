@@ -161,15 +161,18 @@ const Toolbar = ({
             return;
         }
 
+        const viewTemplateId = uuid();
+
         const composedViewTemplate = {
-            id: uuid(),
+            id: viewTemplateId,
             savedTemplate: template,
             templateFileId: template?.id,
         };
 
         dispatch(addViewTemplate(composedViewTemplate));
 
-        historyObject.push(`/template/view/${template.id}`);
+        //Each view template will have individual, unique uuids. We will reference the saved template, however.
+        historyObject.push(`/template/view/${viewTemplateId}`);
     };
 
     return (
