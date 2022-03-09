@@ -8,6 +8,7 @@ import {
     selectBlock,
     deselectBlock,
 } from '../../../redux/selectedBlock/selectedBlockActions';
+import { addViewTemplate } from '../../../redux/viewTemplates/viewTemplateActions';
 
 //Components:
 import historyObject from '../../../utils/historyObject';
@@ -143,15 +144,33 @@ const Toolbar = ({
     elements,
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
-    const templateId = useSelector(
-        (state: RootStateOrAny) => state?.template?.id
-    );
+    const template = useSelector((state: RootStateOrAny) => state?.template);
 
     useEffect(() => {
         return () => {
             dispatch(deselectBlock());
         };
     }, []);
+
+    const handleSaveViewTemplate = (): void => {
+        //Handles request to add a new view template (for preview and others to view).
+        //In order to know what uuid to query, we'll create that here.
+        // TODO: We should create a flag in template to determine if there is an existing viewTemplate.
+
+        if (!template) {
+            return;
+        }
+
+        const composedViewTemplate = {
+            id: uuid(),
+            savedTemplate: template,
+            templateFileId: template?.id,
+        };
+
+        dispatch(addViewTemplate(composedViewTemplate));
+
+        historyObject.push(`/template/view/${template.id}`);
+    };
 
     return (
         <MainContainer>
@@ -220,10 +239,8 @@ const Toolbar = ({
                 />
                 <GeneralButton
                     height="3.5rem"
-                    buttonLabel="View Preview"
-                    onClick={() =>
-                        historyObject.push(`/template/view/${templateId}`)
-                    }
+                    buttonLabel="Save and Preview"
+                    onClick={handleSaveViewTemplate}
                     width="100%"
                     buttonIconLeft={<PreviewIcon />}
                     border="1px solid #525252"
