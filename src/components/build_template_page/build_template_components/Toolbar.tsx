@@ -220,7 +220,7 @@ const Toolbar = ({
                 />
                 <GeneralButton
                     height="3.5rem"
-                    buttonLabel="View Preview"
+                    buttonLabel="Save and Preview"
                     onClick={() =>
                         historyObject.push(`/template/view/${templateId}`)
                     }
