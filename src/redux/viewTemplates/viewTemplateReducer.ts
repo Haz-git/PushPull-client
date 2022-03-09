@@ -3,7 +3,7 @@ import { ViewTemplateActions } from './viewTemplateInterfaces';
 
 const initialState: any = {};
 
-export const templateReducer = (
+export const viewTemplateReducer = (
     state: {} = initialState,
     action: ViewTemplateActions
 ) => {
