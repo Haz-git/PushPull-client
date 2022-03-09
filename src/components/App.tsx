@@ -233,7 +233,7 @@ const App = () => {
                             />
                             <Route
                                 exact
-                                path="/template/view/:templateId"
+                                path="/template/view/:viewTemplateId"
                                 component={MainViewTemplateView}
                             />
                             <PrivateRoute
