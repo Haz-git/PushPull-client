@@ -155,6 +155,7 @@ const Toolbar = ({
     const handleSaveViewTemplate = (): void => {
         //Handles request to add a new view template (for preview and others to view).
         //In order to know what uuid to query, we'll create that here.
+        // TODO: We should create a flag in template to determine if there is an existing viewTemplate.
 
         if (!template) {
             return;
