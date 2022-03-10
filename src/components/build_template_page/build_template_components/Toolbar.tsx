@@ -25,6 +25,13 @@ import { IosArrowLeft } from '@styled-icons/fluentui-system-filled/IosArrowLeft'
 import { ContentSettings } from 'styled-icons/fluentui-system-filled';
 import { UserVoice } from '@styled-icons/boxicons-solid/UserVoice';
 import { Preview } from '@styled-icons/material-rounded/Preview';
+import { DocumentSave } from '@styled-icons/fluentui-system-filled/DocumentSave';
+
+const SaveDocument = styled(DocumentSave)`
+    color: #ffffff;
+    height: 1.6rem;
+    width: 1.6rem;
+`;
 
 const PreviewIcon = styled(Preview)`
     color: #ffffff;
@@ -169,10 +176,15 @@ const Toolbar = ({
             templateFileId: template?.id,
         };
 
+        //TODO: Notify user when changes have been published.
+
         dispatch(addViewTemplate(composedViewTemplate));
 
         //Each view template will have individual, unique uuids. We will reference the saved template, however.
-        historyObject.push(`/template/view/${viewTemplateId}`);
+    };
+
+    const pushUserToPreview = (): void => {
+        historyObject.push(`/template/view/${template.id}`);
     };
 
     return (
@@ -242,8 +254,22 @@ const Toolbar = ({
                 />
                 <GeneralButton
                     height="3.5rem"
-                    buttonLabel="Save and Preview"
+                    buttonLabel="Publish Changes"
                     onClick={handleSaveViewTemplate}
+                    width="100%"
+                    buttonIconLeft={<SaveDocument />}
+                    border="1px solid #525252"
+                    buttonBackground="transparent"
+                    borderBottom="1px solid #525252"
+                    borderTop="1px solid #525252"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
+                />
+                <GeneralButton
+                    height="3.5rem"
+                    buttonLabel="View Preview"
+                    onClick={pushUserToPreview}
                     width="100%"
                     buttonIconLeft={<PreviewIcon />}
                     border="1px solid #525252"
