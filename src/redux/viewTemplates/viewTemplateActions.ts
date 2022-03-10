@@ -11,9 +11,12 @@ type ComposedViewTemplate = {
     templateFileId: string;
 };
 
-export const findViewTemplate = () => {
+export const findViewTemplate = (templateId: string): Function => {
     return async (dispatch: Dispatch<ViewTemplateActions>) => {
         try {
+            const response = await api.get(`/viewTemplate/${templateId}`);
+
+            console.log(response);
         } catch (err) {
             //TODO: Link error action creator for error handling.
             console.error(err);
@@ -33,6 +36,7 @@ export const addViewTemplate = (
             console.log(response);
         } catch (err) {
             //TODO: Link error action creator for error handling.
+            //TODO: Link notif action creator to notify user template is published.
             console.error(err);
         }
     };

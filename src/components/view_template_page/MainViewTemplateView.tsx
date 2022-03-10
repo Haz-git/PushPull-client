@@ -1,6 +1,9 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 
 //Redux:
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { findViewTemplate } from '../../redux/viewTemplates/viewTemplateActions';
 
 //Components:
 import { FixedToolbar } from './view_template_components/FixedToolbar';
@@ -33,7 +36,25 @@ const ToolbarContainer = styled.div`
 
 //Interfaces:
 
-export const MainViewTemplateView = () => {
+interface IComponentProps {
+    match: {
+        params: {
+            viewTemplateId: string;
+        };
+    };
+}
+
+export const MainViewTemplateView = ({
+    match: {
+        params: { viewTemplateId },
+    },
+}: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(findViewTemplate(viewTemplateId));
+    }, []);
+
     return (
         <MainContainer>
             <Wrapper>
