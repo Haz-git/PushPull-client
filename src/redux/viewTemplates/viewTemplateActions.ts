@@ -11,10 +11,10 @@ type ComposedViewTemplate = {
     templateFileId: string;
 };
 
-export const findViewTemplate = (viewTemplateId: string): Function => {
+export const findViewTemplate = (templateId: string): Function => {
     return async (dispatch: Dispatch<ViewTemplateActions>) => {
         try {
-            const response = await api.get(`/viewTemplate/${viewTemplateId}`);
+            const response = await api.get(`/viewTemplate/${templateId}`);
 
             console.log(response);
         } catch (err) {
