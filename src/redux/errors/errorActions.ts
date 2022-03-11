@@ -5,7 +5,7 @@ import { ErrorAction, ErrorProps } from './errorInterfaces';
 export const toggleErrorNotification = (
     errorType: ErrorType,
     errorProps: ErrorProps
-): Function => {
+): any => {
     return async (dispatch: Dispatch<ErrorAction>) => {
         if (!Object.values(ErrorType).includes(errorType)) {
             return;
