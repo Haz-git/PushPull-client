@@ -122,7 +122,7 @@ const MainBuildTemplateView = ({
         (state: RootStateOrAny) => state?.uiLoader?.GLOBAL_SETTINGS_MODAL
     );
 
-    const error = useSelector((state: RootStateOrAny) => state?.errors);
+    const error = useSelector((state: RootStateOrAny) => state?.errors?.QUERY_TEMPLATE?.hasError);
 
     const toolbarBlocks = useSelector(
         (state: RootStateOrAny) => state?.template?.templateToolbarBlocks
