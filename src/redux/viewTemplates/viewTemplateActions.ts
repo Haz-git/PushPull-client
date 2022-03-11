@@ -5,6 +5,11 @@ import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
 import { ViewTemplateActionType } from './action-types';
 import { loaderTypes } from '../uiLoader/loader-types';
 
+//Error Handling
+import { ErrorType } from '../errors/action-types';
+import { ErrorAction } from '../errors/errorInterfaces';
+import { toggleErrorNotification } from '../errors/errorActions';
+
 type ComposedViewTemplate = {
     id: string;
     savedTemplate: any; //Todo..
@@ -12,13 +17,22 @@ type ComposedViewTemplate = {
 };
 
 export const findViewTemplate = (templateId: string): Function => {
-    return async (dispatch: Dispatch<ViewTemplateActions>) => {
+    return async (dispatch: Dispatch<ViewTemplateActions | ErrorAction>) => {
         try {
             const response = await api.get(`/viewTemplate/${templateId}`);
 
             console.log(response);
         } catch (err) {
             //TODO: Link error action creator for error handling.
+
+            dispatch(
+                toggleErrorNotification(ErrorType.QUERY_VIEW_TEMPLATE, {
+                    errorMessage: 'Unable to query view template',
+                    redirectionLink: 'Test back link',
+                    openDuration: 10000,
+                })
+            );
+
             console.error(err);
         }
     };
