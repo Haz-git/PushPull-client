@@ -1,17 +1,21 @@
-//This error reducer should handle any action with an error field.
+import { ErrorAction, ErrorProps } from './errorInterfaces';
+import { ErrorType } from './action-types';
 
-const initialState: null = null;
+const initialState: any = {
+    QUERY_VIEW_TEMPLATE: {
+        hasError: false,
+        errorProps: {},
+    },
+    SAVE_VIEW_TEMPLATE: {
+        hasError: false,
+        errorProps: {},
+    },
+};
 
-export const errorReducer = (state: null = initialState, action: any) => {
-    const { type, error } = action;
-
-    if (type === 'RESET_ERROR_MESSAGE') {
-        return null;
+export const errorReducer = (state: {} = initialState, action: ErrorAction) => {
+    if (!Object.keys(ErrorType).includes(action.type)) {
+        return state;
     }
 
-    if (error) {
-        return error;
-    }
-
-    return state;
+    return { ...state, [action.type]: action.payload };
 };
