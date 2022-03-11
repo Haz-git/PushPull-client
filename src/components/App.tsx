@@ -38,6 +38,7 @@ import NotFound from './not_found_page/NotFound';
 import GeneralDrawer from './general_components/GeneralDrawer';
 import UserAuthForm from './auth_forms/UserAuthForm';
 import AuthPage from './auth_forms/AuthPage';
+import { ErrorNotificationProvider } from './error_handler/ErrorNotificationProvider';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
@@ -141,124 +142,128 @@ const App = () => {
             <ThemeProvider theme={lightTheme}>
                 <Router history={history}>
                     <CustomNotifProvider>
-                        <SignupDrawerContainer>
-                            <GeneralDrawer
-                                openBoolean={stateAuthDrawer}
-                                closeFunc={() => setStateAuthDrawer(false)}
-                                title=""
-                                padding={0}
-                                size={isMobileOnly ? '100%' : '35rem'}
-                                position={isMobileOnly ? 'bottom' : 'right'}
-                            >
-                                <UserAuthForm
-                                    formBackgroundColor="transparent"
-                                    formShadow="none"
-                                    authStateRenderView={stateAuthFormView}
-                                    closeAuthDrawerContainer={
-                                        closeAuthDrawerContainer
-                                    }
-                                />
-                            </GeneralDrawer>
-                        </SignupDrawerContainer>
-                        <BugReportModalContainer>
-                            <GeneralModal
-                                openBoolean={stateBugReportModal}
-                                closeFunc={closeBugReportModal}
-                                title="Send Feedback"
-                            >
-                                <FeedbackForm />
-                            </GeneralModal>
-                        </BugReportModalContainer>
-                        <Navbar
-                            toggleAuthDrawerWithView={toggleAuthDrawerWithView}
-                        />
-                        <Switch>
-                            <Route
-                                exact
-                                path="/"
-                                component={MainLandingPageView}
-                            />
-                            <Route
-                                exact
-                                path="/search"
-                                component={MainSearchPage}
-                            />
-                            <Route
-                                exact
-                                path="/authenticate"
-                                component={AuthPage}
-                            />
-                            <Route
-                                exact
-                                path="/program/:id"
-                                render={(props) => (
-                                    <AuthContext.Provider
-                                        value={{ toggleAuthDrawerWithView }}
-                                    >
-                                        <MainWorkoutProgramPage
-                                            {...props}
-                                            toggleAuthDrawerWithView={
-                                                toggleAuthDrawerWithView
-                                            }
-                                        />
-                                    </AuthContext.Provider>
-                                )}
-                            />
-                            <Route
-                                exact
-                                path="/user/:id"
-                                component={ProfilePageView}
-                            />
-                            <PrivateRoute
-                                exact
-                                path="/add-review/:id"
-                                authPath="/authenticate"
-                                isAuthenticated={isUserLoggedIn}
-                                component={MainAddReviewPageView}
-                                toggleAuthDrawerWithView={
-                                    toggleAuthDrawerWithView
-                                }
-                            />
-                            <Route
-                                exact
-                                path="/password/reset"
-                                render={(props) => (
-                                    <PasswordResetForm
-                                        {...props}
+                        <ErrorNotificationProvider>
+                            <SignupDrawerContainer>
+                                <GeneralDrawer
+                                    openBoolean={stateAuthDrawer}
+                                    closeFunc={() => setStateAuthDrawer(false)}
+                                    title=""
+                                    padding={0}
+                                    size={isMobileOnly ? '100%' : '35rem'}
+                                    position={isMobileOnly ? 'bottom' : 'right'}
+                                >
+                                    <UserAuthForm
+                                        formBackgroundColor="transparent"
+                                        formShadow="none"
+                                        authStateRenderView={stateAuthFormView}
                                         closeAuthDrawerContainer={
                                             closeAuthDrawerContainer
                                         }
                                     />
-                                )}
-                            />
-                            <Route
-                                exact
-                                path="/template/view/:viewTemplateId"
-                                component={MainViewTemplateView}
-                            />
-                            <PrivateRoute
-                                exact
-                                path="/builder/dashboard/:dashboardView"
-                                authPath="/authenticate"
-                                isAuthenticated={isUserLoggedIn}
-                                component={MainBuildProgramView}
+                                </GeneralDrawer>
+                            </SignupDrawerContainer>
+                            <BugReportModalContainer>
+                                <GeneralModal
+                                    openBoolean={stateBugReportModal}
+                                    closeFunc={closeBugReportModal}
+                                    title="Send Feedback"
+                                >
+                                    <FeedbackForm />
+                                </GeneralModal>
+                            </BugReportModalContainer>
+                            <Navbar
                                 toggleAuthDrawerWithView={
                                     toggleAuthDrawerWithView
                                 }
                             />
-                            <PrivateRoute
-                                exact
-                                path="/file/:fileUuid"
-                                authPath="/authenticate"
-                                isAuthenticated={isUserLoggedIn}
-                                component={MainBuildTemplateView}
-                                toggleAuthDrawerWithView={
-                                    toggleAuthDrawerWithView
-                                }
-                            />
-                            <Route component={NotFound} />
-                        </Switch>
-                        <MainFooter bugReportHandler={openBugReportModal} />
+                            <Switch>
+                                <Route
+                                    exact
+                                    path="/"
+                                    component={MainLandingPageView}
+                                />
+                                <Route
+                                    exact
+                                    path="/search"
+                                    component={MainSearchPage}
+                                />
+                                <Route
+                                    exact
+                                    path="/authenticate"
+                                    component={AuthPage}
+                                />
+                                <Route
+                                    exact
+                                    path="/program/:id"
+                                    render={(props) => (
+                                        <AuthContext.Provider
+                                            value={{ toggleAuthDrawerWithView }}
+                                        >
+                                            <MainWorkoutProgramPage
+                                                {...props}
+                                                toggleAuthDrawerWithView={
+                                                    toggleAuthDrawerWithView
+                                                }
+                                            />
+                                        </AuthContext.Provider>
+                                    )}
+                                />
+                                <Route
+                                    exact
+                                    path="/user/:id"
+                                    component={ProfilePageView}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path="/add-review/:id"
+                                    authPath="/authenticate"
+                                    isAuthenticated={isUserLoggedIn}
+                                    component={MainAddReviewPageView}
+                                    toggleAuthDrawerWithView={
+                                        toggleAuthDrawerWithView
+                                    }
+                                />
+                                <Route
+                                    exact
+                                    path="/password/reset"
+                                    render={(props) => (
+                                        <PasswordResetForm
+                                            {...props}
+                                            closeAuthDrawerContainer={
+                                                closeAuthDrawerContainer
+                                            }
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    exact
+                                    path="/template/view/:viewTemplateId"
+                                    component={MainViewTemplateView}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path="/builder/dashboard/:dashboardView"
+                                    authPath="/authenticate"
+                                    isAuthenticated={isUserLoggedIn}
+                                    component={MainBuildProgramView}
+                                    toggleAuthDrawerWithView={
+                                        toggleAuthDrawerWithView
+                                    }
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path="/file/:fileUuid"
+                                    authPath="/authenticate"
+                                    isAuthenticated={isUserLoggedIn}
+                                    component={MainBuildTemplateView}
+                                    toggleAuthDrawerWithView={
+                                        toggleAuthDrawerWithView
+                                    }
+                                />
+                                <Route component={NotFound} />
+                            </Switch>
+                            <MainFooter bugReportHandler={openBugReportModal} />
+                        </ErrorNotificationProvider>
                     </CustomNotifProvider>
                 </Router>
             </ThemeProvider>
