@@ -49,6 +49,8 @@ export const ErrorNotificationProvider = ({
             autoClose: activeErrorObject.errorProps.openDuration,
             icon: <CancelIcon />,
         });
+
+        //TODO: If requested link to redirect, it should happen somewhere in this component...
     };
 
     useEffect(() => {
