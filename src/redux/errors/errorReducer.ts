@@ -2,6 +2,10 @@ import { ErrorAction, ErrorProps } from './errorInterfaces';
 import { ErrorType } from './action-types';
 
 const initialState: any = {
+    QUERY_TEMPLATE: {
+        hasError: false,
+        errorProps: {},
+    },
     QUERY_VIEW_TEMPLATE: {
         hasError: false,
         errorProps: {},

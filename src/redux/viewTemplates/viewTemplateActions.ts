@@ -27,7 +27,7 @@ export const findViewTemplate = (templateId: string): Function => {
 
             dispatch(
                 toggleErrorNotification(ErrorType.QUERY_VIEW_TEMPLATE, {
-                    errorMessage: 'Unable to query view template',
+                    errorMessage: 'Unable to find View Template..',
                     redirectionLink: 'Test back link',
                     openDuration: 10000,
                 })
