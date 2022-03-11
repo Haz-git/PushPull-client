@@ -13,6 +13,10 @@ import {
 import { toggleModal } from '../modals/modalActions';
 import { ModalActionTypes } from '../modals/action-types';
 
+//Error Types:
+import { ErrorType } from '../errors/action-types';
+import { toggleErrorNotification } from '../errors/errorActions';
+
 //Project Templates or View- specific template actions.
 
 export const findTemplates = (
@@ -174,7 +178,14 @@ export const queryTemplate = (templateId: string) => {
                 );
             }
         } catch (err) {
-            dispatch({ type: 'QUERY_TEMPLATE_ERROR', error: err });
+            //TODO: Differentiate errors based on query Error VS Unauthorized Error.
+
+            dispatch(toggleErrorNotification(ErrorType.QUERY_TEMPLATE, {
+                errorMessage: 'Unable to query template',
+                redirectionLink: 'None',
+                openDuration: 0,   
+            }));
+            
             dispatch(disableLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
         }
     };
