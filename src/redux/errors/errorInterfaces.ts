@@ -1,10 +1,10 @@
 import { ErrorType } from './action-types';
 
-// When error notification displays, we want the redirection function to push the user back to the previous page... probably something like history.push('xxxx')
+// When error notification displays, we want the redirection link to push the user back to the previous page... probably something like history.push('xxxx')
 
 export type ErrorProps = {
     errorMessage: string;
-    redirectionFunction: Function;
+    redirectionLink: string;
     openDuration: number;
 };
 
