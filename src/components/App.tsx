@@ -32,13 +32,13 @@ import FeedbackForm from './general_components/FeedbackForm';
 import PasswordResetForm from './auth_forms/PasswordResetForm';
 import ProfilePageView from './profile_page/ProfilePageView';
 import NotFound from './not_found_page/NotFound';
+import { ErrorNotificationProvider } from './error_handler/ErrorNotificationProvider';
 // import { MainViewTemplateView } from './view_template_page/MainViewTemplateView';
 
 //Signup Drawer
 import GeneralDrawer from './general_components/GeneralDrawer';
 import UserAuthForm from './auth_forms/UserAuthForm';
 import AuthPage from './auth_forms/AuthPage';
-import { ErrorNotificationProvider } from './error_handler/ErrorNotificationProvider';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
