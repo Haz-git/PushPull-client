@@ -2,15 +2,15 @@ import { ErrorAction, ErrorProps } from './errorInterfaces';
 import { ErrorType } from './action-types';
 
 const initialState: any = {
-    QUERY_TEMPLATE: {
+    QUERY_TEMPLATE_ERROR: {
         hasError: false,
         errorProps: {},
     },
-    QUERY_VIEW_TEMPLATE: {
+    QUERY_VIEW_TEMPLATE_ERROR: {
         hasError: false,
         errorProps: {},
     },
-    SAVE_VIEW_TEMPLATE: {
+    SAVE_VIEW_TEMPLATE_ERROR: {
         hasError: false,
         errorProps: {},
     },

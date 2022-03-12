@@ -102,16 +102,25 @@ export const GlobalStylesViewTemplate = createGlobalStyle`
         }
     }
 
+    .mantine-Notification-title {
+        color: #ffffff;
+        font-weight: 900;
+    }
+
+    .mantine-Notification-description {
+        color: #ffffff;
+        font-weight: 200;
+    }
 
     .mantine-Notification-root {
-
+        background-color: #393939;
 
         @media(min-width: 320px) {
-            bottom: 2.75rem;
+            bottom: 1rem;
         }
 
         @media(min-width: 768px) {
-            bottom: 3.5rem;
+            bottom: .5rem;
         }
     }
 

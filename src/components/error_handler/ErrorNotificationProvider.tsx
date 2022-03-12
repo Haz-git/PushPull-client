@@ -5,7 +5,9 @@ import { useEffect } from 'react';
 import { useNotifications } from '@mantine/notifications';
 
 //Redux:
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { ErrorType } from '../../redux/errors/action-types';
+import { resetErrorNotification } from '../../redux/errors/errorActions';
 
 //Styles:
 import { CancelIcon } from '../build_program_page/build_program_components/AddProjectForm';
@@ -24,20 +26,24 @@ interface IComponentProps {
 export const ErrorNotificationProvider = ({
     children,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
     const errors = useSelector((state: RootStateOrAny) => state?.errors);
     const notifications = useNotifications();
 
     const findActiveError = (): any => {
         //Check if hasError: true for any errors in store.
-        //TODO: ActiveErrorType throws error.
+        //TODO: Find type
+        //I think its OK to query for first error here. Only one error should be present in application at once.
+
         return Object.values(errors).find(
             (error: any) => error.hasError === true
         );
     };
 
-    const displayErrorNotification = () => {
+    const redirectUser = (): void => {};
+
+    const displayErrorNotification = (): string | undefined => {
         const activeErrorObject = findActiveError();
-        console.log(activeErrorObject);
         if (!activeErrorObject) {
             return;
         }
