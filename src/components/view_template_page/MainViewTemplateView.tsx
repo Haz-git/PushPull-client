@@ -52,7 +52,8 @@ export const MainViewTemplateView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const hasViewTemplateError = useSelector(
-        (state: RootStateOrAny) => state?.errors?.QUERY_VIEW_TEMPLATE?.hasError
+        (state: RootStateOrAny) =>
+            state?.errors?.QUERY_VIEW_TEMPLATE_ERROR?.hasError
     );
 
     useEffect(() => {
