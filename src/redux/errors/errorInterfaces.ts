@@ -12,7 +12,7 @@ interface DisplayError {
     type: ErrorType;
     payload: {
         hasError: boolean;
-        errorProps: ErrorProps;
+        errorProps?: ErrorProps;
     };
 }
 
