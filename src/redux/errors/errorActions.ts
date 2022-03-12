@@ -32,6 +32,7 @@ export const resetErrorNotification = (errorType: ErrorType): any => {
             type: errorType,
             payload: {
                 hasError: false,
+                errorProps: {},
             },
         });
     };
