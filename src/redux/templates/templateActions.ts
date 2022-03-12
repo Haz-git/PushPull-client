@@ -180,12 +180,14 @@ export const queryTemplate = (templateId: string) => {
         } catch (err) {
             //TODO: Differentiate errors based on query Error VS Unauthorized Error.
 
-            dispatch(toggleErrorNotification(ErrorType.QUERY_TEMPLATE, {
-                errorMessage: 'Unable to query template',
-                redirectionLink: 'None',
-                openDuration: 0,   
-            }));
-            
+            dispatch(
+                toggleErrorNotification(ErrorType.QUERY_TEMPLATE_ERROR, {
+                    errorMessage: 'Unable to query template',
+                    redirectionLink: 'None',
+                    openDuration: 0,
+                })
+            );
+
             dispatch(disableLoaderState(loaderTypes.MAIN_BUILD_TEMPLATE_VIEW));
         }
     };
