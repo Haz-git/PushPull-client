@@ -6,6 +6,11 @@ import { ReactComponent as DarkLogoSVG } from '../../../assets/dark_logo.svg';
 import GeneralButton from '../../general_components/GeneralButton';
 import historyObject from '../../../utils/historyObject';
 
+//Redux:
+import { useDispatch } from 'react-redux';
+import { resetErrorNotification } from '../../../redux/errors/errorActions';
+import { ErrorType } from '../../../redux/errors/action-types';
+
 //Styles:
 import styled from 'styled-components';
 
@@ -44,6 +49,8 @@ export const UnauthorizedViewTemplate = ({
     buttonLabel,
     redirectLink,
 }: IComponentProps): JSX.Element => {
+    const dispatch = useDispatch();
+
     return (
         <>
             {shouldDisplay && (
@@ -57,7 +64,14 @@ export const UnauthorizedViewTemplate = ({
                         />
                         <GeneralButton
                             buttonLabel={buttonLabel}
-                            onClick={() => historyObject.push(redirectLink)}
+                            onClick={() => {
+                                dispatch(
+                                    resetErrorNotification(
+                                        ErrorType.QUERY_VIEW_TEMPLATE_ERROR
+                                    )
+                                );
+                                historyObject.push(redirectLink);
+                            }}
                         />
                     </LogoContainer>
                 </MainContainer>
