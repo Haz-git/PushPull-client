@@ -35,9 +35,10 @@ export const ErrorNotificationProvider = ({
         );
     };
 
-    const displayErrorNotification = () => {
+    const redirectUser = (): void => {};
+
+    const displayErrorNotification = (): string | undefined => {
         const activeErrorObject = findActiveError();
-        console.log(activeErrorObject);
         if (!activeErrorObject) {
             return;
         }
