@@ -50,8 +50,8 @@ export const ErrorNotificationProvider = ({
 
         return notifications.showNotification({
             color: 'red',
-            title: activeErrorObject.errorProps.errorMessage,
-            message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
+            title: activeErrorObject.errorProps.message,
+            message: activeErrorObject.errorProps.description || '',
             autoClose: activeErrorObject.errorProps.openDuration,
             icon: <CancelIcon />,
         });
