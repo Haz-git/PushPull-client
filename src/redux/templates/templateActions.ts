@@ -81,7 +81,7 @@ export const updateTemplate = (
     isInTemplateBuilderMode: true | false,
     projectUuid?: string | null,
     controlGlobalSettingsModal?: ((state: boolean) => void) | null,
-    uiLoaderType?: loaderTypes
+    uiLoaderType?: loaderTypes | null
 ) => {
     return async (dispatch: Dispatch<any>) => {
         try {
@@ -182,8 +182,7 @@ export const queryTemplate = (templateId: string) => {
 
             dispatch(
                 toggleErrorNotification(ErrorType.QUERY_TEMPLATE_ERROR, {
-                    errorMessage: 'Unable to query template',
-                    redirectionLink: 'None',
+                    message: 'Unable to query template',
                     openDuration: 0,
                 })
             );

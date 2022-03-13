@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { deviceMin } from '../../devices/breakpoints';
 
 //Redux:
@@ -159,11 +159,12 @@ Userfront.init('5nxxrqn7');
 
 const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
-
     const template = useSelector((state: RootStateOrAny) => state.template);
     const Location = useLocation();
     const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+
+    // FIXME: Doesn't auto-logout when userfront's refresh token expires
 
     const renderAuthOptionsIfUserNotLoggedIn = () => {
         if (isUserLoggedIn) {

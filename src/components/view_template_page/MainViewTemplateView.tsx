@@ -12,9 +12,11 @@ import { UnauthorizedViewTemplate } from './view_template_components/Unauthorize
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.section`
+const MainContainer = styled.section<IMainContainerProps>`
     // overflow: hidden;
     height: 100%;
+    background: ${(props) =>
+        props.hasUnauthorizedError === true ? '#2c2c2c' : '#ffffff'};
 `;
 
 const Wrapper = styled.div`
@@ -36,6 +38,10 @@ const ToolbarContainer = styled.div`
 `;
 
 //Interfaces:
+
+interface IMainContainerProps {
+    hasUnauthorizedError: boolean;
+}
 
 interface IComponentProps {
     match: {
@@ -61,15 +67,15 @@ export const MainViewTemplateView = ({
     }, []);
 
     return (
-        <>
+        <MainContainer hasUnauthorizedError={hasViewTemplateError}>
             <UnauthorizedViewTemplate
                 shouldDisplay={hasViewTemplateError}
-                messageLabel="Test"
-                buttonLabel="Return to Home"
+                messageLabel="Sorry, We Can't Access This Template!"
+                buttonLabel="Return To Home"
                 redirectLink="/" //TODO: For users querying a view template, return home. For build template users previewing, return to builder.
             />
             {!hasViewTemplateError && (
-                <MainContainer>
+                <>
                     <Wrapper>
                         <ToolbarContainer>
                             <FixedToolbar />
@@ -307,8 +313,8 @@ export const MainViewTemplateView = ({
                             aliquam sem et tortor.
                         </DocumentContainer>
                     </Wrapper>
-                </MainContainer>
+                </>
             )}
-        </>
+        </MainContainer>
     );
 };
