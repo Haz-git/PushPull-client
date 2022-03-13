@@ -182,8 +182,7 @@ export const queryTemplate = (templateId: string) => {
 
             dispatch(
                 toggleErrorNotification(ErrorType.QUERY_TEMPLATE_ERROR, {
-                    errorMessage: 'Unable to query template',
-                    redirectionLink: 'None',
+                    message: 'Unable to query template',
                     openDuration: 0,
                 })
             );
