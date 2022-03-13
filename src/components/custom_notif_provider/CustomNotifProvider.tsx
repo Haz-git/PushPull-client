@@ -36,7 +36,7 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
                     <GlobalStylesBuilder />
                     <NotificationsProvider
                         position={repositionNotification()}
-                        limit={5}
+                        limit={1}
                         zIndex={89}
                     >
                         {children}
@@ -51,7 +51,7 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
                     <GlobalStylesViewTemplate />
                     <NotificationsProvider
                         position={repositionNotification()}
-                        limit={5}
+                        limit={2}
                         zIndex={89}
                     >
                         {children}
@@ -65,7 +65,7 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
                 <GlobalStyle />
                 <NotificationsProvider
                     position="bottom-left"
-                    limit={5}
+                    limit={2}
                     zIndex={89}
                 >
                     {children}
