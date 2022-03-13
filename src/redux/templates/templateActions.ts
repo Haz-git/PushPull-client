@@ -81,7 +81,7 @@ export const updateTemplate = (
     isInTemplateBuilderMode: true | false,
     projectUuid?: string | null,
     controlGlobalSettingsModal?: ((state: boolean) => void) | null,
-    uiLoaderType?: loaderTypes
+    uiLoaderType?: loaderTypes | null
 ) => {
     return async (dispatch: Dispatch<any>) => {
         try {
