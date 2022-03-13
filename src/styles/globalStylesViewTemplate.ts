@@ -19,17 +19,17 @@ export const GlobalStylesViewTemplate = createGlobalStyle`
 
     }
 
-    @media screen and (min-width: 320px) {
-        body {
-            padding-bottom: 3.5rem;
-        }
-    }
+    // @media screen and (min-width: 320px) {
+    //     body {
+    //         padding-bottom: 3.5rem;
+    //     }
+    // }
 
-    @media screen and (min-width: 800px) {
-        body {
-            padding-bottom: 3.5rem;
-        }
-    }
+    // @media screen and (min-width: 800px) {
+    //     body {
+    //         padding-bottom: 3.5rem;
+    //     }
+    // }
 
     a {
         text-decoration: none;
