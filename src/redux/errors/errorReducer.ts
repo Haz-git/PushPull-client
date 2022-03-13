@@ -14,6 +14,10 @@ const initialState: any = {
         hasError: false,
         errorProps: {},
     },
+    VIEW_PREVIEW_ERROR: {
+        hasError: false,
+        errorProps: {},
+    },
 };
 
 export const errorReducer = (state: {} = initialState, action: ErrorAction) => {
