@@ -1,10 +1,18 @@
+import React, { useState, useEffect } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import Userfront from '@userfront/react';
 
-Userfront.init('demo1234');
-
 const useLoginStatus = (): boolean => {
-    return Userfront.tokens.accessToken ? true : false;
+    const User = useSelector((state: RootStateOrAny) => state.user.user);
+
+    if (
+        User &&
+        Object.keys(User).length !== 0 &&
+        Object.getPrototypeOf(User) === Object.prototype
+    )
+        return true;
+
+    return false;
 };
 
 export default useLoginStatus;
