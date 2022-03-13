@@ -9,6 +9,8 @@ import {
     deselectBlock,
 } from '../../../redux/selectedBlock/selectedBlockActions';
 import { addViewTemplate } from '../../../redux/viewTemplates/viewTemplateActions';
+import { ErrorType } from '../../../redux/errors/action-types';
+import { toggleErrorNotification } from '../../../redux/errors/errorActions';
 
 //Components:
 import historyObject from '../../../utils/historyObject';
@@ -162,7 +164,6 @@ const Toolbar = ({
     const handleSaveViewTemplate = (): void => {
         //Handles request to add a new view template (for preview and others to view).
         //In order to know what uuid to query, we'll create that here.
-        // TODO: We should create a flag in template to determine if there is an existing viewTemplate.
 
         if (!template) {
             return;
@@ -184,6 +185,18 @@ const Toolbar = ({
     };
 
     const pushUserToPreview = (): void => {
+        if (template?.hasSavedViewTemplate === false) {
+            dispatch(
+                toggleErrorNotification(ErrorType.VIEW_PREVIEW_ERROR, {
+                    message:
+                        'Please save your current builder file before previewing!',
+                    openDuration: 3000,
+                })
+            );
+
+            return;
+        }
+
         historyObject.push(`/template/view/${template.id}`);
     };
 
