@@ -64,8 +64,8 @@ export const MainViewTemplateView = ({
         <>
             <UnauthorizedViewTemplate
                 shouldDisplay={hasViewTemplateError}
-                messageLabel="Test"
-                buttonLabel="Return to Home"
+                messageLabel="Sorry, You Do Not Have Access to This Template!"
+                buttonLabel="Return To Home"
                 redirectLink="/" //TODO: For users querying a view template, return home. For build template users previewing, return to builder.
             />
             {!hasViewTemplateError && (
