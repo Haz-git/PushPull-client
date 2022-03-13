@@ -181,9 +181,7 @@ const Toolbar = ({
         //TODO: Notify user when changes have been published.
 
         dispatch(addViewTemplate(composedViewTemplate));
-        console.log(template);
 
-        //Why does this return a internal service error? 500. Can't find template?
         dispatch(
             updateTemplate(
                 (status) => {},
