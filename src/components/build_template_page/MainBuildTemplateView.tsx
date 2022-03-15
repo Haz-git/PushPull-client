@@ -123,7 +123,7 @@ const MainBuildTemplateView = ({
     );
 
     const error = useSelector(
-        (state: RootStateOrAny) => state?.errors?.QUERY_TEMPLATE_ERROR?.hasError
+        (state: RootStateOrAny) => state?.errors?.queryTemplateError?.hasError
     );
 
     const toolbarBlocks = useSelector(
