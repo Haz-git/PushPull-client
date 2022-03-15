@@ -59,7 +59,7 @@ export const MainViewTemplateView = ({
     const dispatch = useDispatch();
     const hasViewTemplateError = useSelector(
         (state: RootStateOrAny) =>
-            state?.errors?.QUERY_VIEW_TEMPLATE_ERROR?.hasError
+            state?.errors?.queryViewTemplateError?.hasError
     );
 
     useEffect(() => {
