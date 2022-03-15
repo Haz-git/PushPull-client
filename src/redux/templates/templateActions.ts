@@ -181,7 +181,7 @@ export const queryTemplate = (templateId: string) => {
             //TODO: Differentiate errors based on query Error VS Unauthorized Error.
 
             dispatch(
-                toggleErrorNotification(ErrorType.QUERY_TEMPLATE_ERROR, {
+                toggleErrorNotification(ErrorType.queryTemplateError, {
                     message: 'Unable to query template',
                     openDuration: 0,
                 })
