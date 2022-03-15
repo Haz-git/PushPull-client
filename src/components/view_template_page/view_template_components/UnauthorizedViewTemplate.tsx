@@ -67,7 +67,7 @@ export const UnauthorizedViewTemplate = ({
                             onClick={() => {
                                 dispatch(
                                     resetErrorNotification(
-                                        ErrorType.QUERY_VIEW_TEMPLATE_ERROR
+                                        ErrorType.queryViewTemplateError
                                     )
                                 );
                                 historyObject.push(redirectLink);
