@@ -1,8 +1,8 @@
 //Appended ERROR here to avoid conflict with other reducer types, e.g QUERY_TEMPLATE
 
 export enum ErrorType {
-    QUERY_TEMPLATE_ERROR = 'QUERY_TEMPLATE_ERROR',
-    QUERY_VIEW_TEMPLATE_ERROR = 'QUERY_VIEW_TEMPLATE_ERROR',
-    SAVE_VIEW_TEMPLATE_ERROR = 'SAVE_VIEW_TEMPLATE_ERROR',
-    VIEW_PREVIEW_ERROR = 'VIEW_PREVIEW_ERROR',
+    queryTemplateError = 'QUERY_TEMPLATE_ERROR',
+    queryViewTemplateError = 'QUERY_VIEW_TEMPLATE_ERROR',
+    saveViewTemplateError = 'SAVE_VIEW_TEMPLATE_ERROR',
+    viewPreviewError = 'VIEW_PREVIEW_ERROR',
 }
