@@ -52,7 +52,7 @@ export const NotificationAndStyleAdjuster = ({
     };
 
     const imposeStyle = (): JSX.Element => {
-        //CLEAMME: This can be possibly extracted to a styleProvider component of some sort.
+        //CLEAMME: This can be possibly extracted to a StyleProvider component of some sort.
 
         if (isBuilderOrFileView()) {
             return <GlobalStylesBuilder />;
