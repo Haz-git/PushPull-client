@@ -165,17 +165,10 @@ const MainBuildTemplateView = ({
 
     useEffect(() => {
         if (editingSurfaceBlocks && toolbarBlocks) {
-            //On creation of new template, currentSheet is undefined for two renders.
-
-            console.log('currSheetId', currentSheetId);
-            console.log('editingSurfaceBlocks', editingSurfaceBlocks);
-
             const currentSheet = findSheetContent(
                 editingSurfaceBlocks,
                 currentSheetId
             );
-
-            console.log(currentSheet);
 
             if (!currentSheet) {
                 historyObject.push(
