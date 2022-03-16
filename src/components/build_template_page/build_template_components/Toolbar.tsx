@@ -204,8 +204,7 @@ const Toolbar = ({
         if (template?.hasSavedViewTemplate === false) {
             dispatch(
                 toggleErrorNotification(ErrorType.viewPreviewError, {
-                    message:
-                        'Please save your current builder file before previewing!',
+                    message: 'Please publish your changes before previewing!',
                     openDuration: 3000,
                 })
             );
