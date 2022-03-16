@@ -192,7 +192,7 @@ const MainBuildProgramView = ({
                 color: 'red',
                 title: 'Your Builder Details Failed To Be Loaded',
                 message: `An error might have occurred, or you aren't connected to the internet right now. Please report this issue, or try again later.`,
-                autoClose: 10000,
+                autoClose: 40000,
                 icon: <CancelIcon />,
             });
         }
@@ -202,7 +202,7 @@ const MainBuildProgramView = ({
             title: 'Welcome To Builder Mode.',
             message:
                 'Your projects and templates have been loaded successfully.',
-            autoClose: 3000,
+            autoClose: 2000,
             icon: <CheckIcon />,
         });
     };
