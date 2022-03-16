@@ -93,11 +93,12 @@ const MainBuildTemplateView = ({
     const currentSheetId = query.get('sheetId');
     const dispatch = useDispatch();
     const notifications = useNotifications();
+
     useEffect(() => {
         dispatch(queryTemplate(fileUuid));
 
         return () => {
-            dispatch({ type: 'RESET_ERROR_MESSAGE' });
+            dispatch(clearTemplate());
         };
     }, []);
 
@@ -164,10 +165,17 @@ const MainBuildTemplateView = ({
 
     useEffect(() => {
         if (editingSurfaceBlocks && toolbarBlocks) {
+            //On creation of new template, currentSheet is undefined for two renders.
+
+            console.log('currSheetId', currentSheetId);
+            console.log('editingSurfaceBlocks', editingSurfaceBlocks);
+
             const currentSheet = findSheetContent(
                 editingSurfaceBlocks,
                 currentSheetId
             );
+
+            console.log(currentSheet);
 
             if (!currentSheet) {
                 historyObject.push(
