@@ -40,9 +40,9 @@ export const GenericNotificationProvider = ({
         return notifications.showNotification({
             color: activeNotification.notificationProps.color || 'orange',
             title: activeNotification.notificationProps.title,
-            message: activeNotification.notificationProps.message,
-            loading: activeNotification.notificationProps.isLoading,
-            icon: activeNotification.notificationProps.icon, //Default = line, can use checkmark here.
+            message: activeNotification.notificationProps.message || '',
+            loading: activeNotification.notificationProps.isLoading || false,
+            icon: activeNotification.notificationProps.icon || null, //Default = line, can use checkmark here.
         });
     };
 
