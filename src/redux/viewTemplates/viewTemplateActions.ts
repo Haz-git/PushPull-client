@@ -10,6 +10,11 @@ import { ErrorType } from '../errors/action-types';
 import { ErrorAction } from '../errors/errorInterfaces';
 import { toggleErrorNotification } from '../errors/errorActions';
 
+//Generic Notification Handling
+import { GenericNotificationType } from '../genericNotifications/action-types';
+import { GenericNotificationAction } from '../genericNotifications/genericNotificationInterfaces';
+import { toggleGenericNotification } from '../genericNotifications/genericNotificationActions';
+
 type ComposedViewTemplate = {
     id: string;
     savedTemplate: any; //Todo..
@@ -42,6 +47,17 @@ export const addViewTemplate = (
 ): Function => {
     return async (dispatch: Dispatch<ViewTemplateActions>) => {
         try {
+            dispatch(
+                toggleGenericNotification(
+                    GenericNotificationType.loadingSaveViewTemplate,
+                    {
+                        title: 'Publishing Template Changes...',
+                        openDuration: 1000,
+                        isLoading: true,
+                    }
+                )
+            );
+
             const response = await api.post(`/viewTemplate/add`, {
                 composedViewTemplate,
             });

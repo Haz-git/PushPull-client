@@ -3,11 +3,11 @@ import { GenericNotificationType } from './action-types';
 
 export type NotificationProps = {
     title: string;
-    message: string;
+    message?: string;
     openDuration: number;
-    color: string;
-    isLoading: boolean;
-    icon: ReactNode;
+    color?: string;
+    isLoading?: boolean;
+    icon?: ReactNode;
 };
 
 interface DisplayGenericNotification {
