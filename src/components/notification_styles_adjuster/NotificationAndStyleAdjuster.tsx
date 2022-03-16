@@ -10,7 +10,19 @@ interface IComponentProps {
     children: React.ReactNode;
 }
 
-const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
+/**
+ * This component repositions the general location of Mantine's notification hook based on page.
+ * In addition to repositioning, custom styles for each page are also wrapped.
+ *
+ * Purpose -- Mantine's NotificationsProvider does not allow specific notification changes.
+ * CLEANME: Component can be abstracted further. Naming is debatable.
+ *
+ * GenericNotificationProvider will also wrap here to catch any non-error notifications.
+ */
+
+export const NotificationAndStyleAdjuster = ({
+    children,
+}: IComponentProps): JSX.Element => {
     const Location = useLocation();
     const { width } = useWindowDimensions();
 
@@ -75,5 +87,3 @@ const CustomNotifProvider = ({ children }: IComponentProps): JSX.Element => {
     };
     return <>{renderNotificationProviderOnURL()}</>;
 };
-
-export default CustomNotifProvider;

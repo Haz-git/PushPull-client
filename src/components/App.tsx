@@ -19,7 +19,7 @@ import { lightTheme } from '../styles/themes';
 //Components:
 import LoadingIndicatorWithDelay from './nprogress/LoadingIndicatorWithDelay';
 import LoadProgress from '../components/nprogress/LoadProgress';
-import CustomNotifProvider from '../components/custom_notif_provider/CustomNotifProvider';
+import { NotificationAndStyleAdjuster } from './notification_styles_adjuster/NotificationAndStyleAdjuster';
 import PrivateRoute from './protect_route/PrivateRoute';
 import history from '../utils/historyObject';
 import Navbar from './nav_bar/Navbar';
@@ -141,7 +141,7 @@ const App = () => {
         <>
             <ThemeProvider theme={lightTheme}>
                 <Router history={history}>
-                    <CustomNotifProvider>
+                    <NotificationAndStyleAdjuster>
                         <ErrorNotificationProvider>
                             <SignupDrawerContainer>
                                 <GeneralDrawer
@@ -264,7 +264,7 @@ const App = () => {
                             </Switch>
                             <MainFooter bugReportHandler={openBugReportModal} />
                         </ErrorNotificationProvider>
-                    </CustomNotifProvider>
+                    </NotificationAndStyleAdjuster>
                 </Router>
             </ThemeProvider>
         </>

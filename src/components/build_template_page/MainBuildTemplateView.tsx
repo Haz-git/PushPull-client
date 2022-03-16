@@ -93,11 +93,12 @@ const MainBuildTemplateView = ({
     const currentSheetId = query.get('sheetId');
     const dispatch = useDispatch();
     const notifications = useNotifications();
+
     useEffect(() => {
         dispatch(queryTemplate(fileUuid));
 
         return () => {
-            dispatch({ type: 'RESET_ERROR_MESSAGE' });
+            dispatch(clearTemplate());
         };
     }, []);
 

@@ -63,9 +63,5 @@ export const ErrorNotificationProvider = ({
         displayErrorNotification();
     }, [errors]);
 
-    return (
-        <>
-            <>{children}</>
-        </>
-    );
+    return <>{children}</>;
 };
