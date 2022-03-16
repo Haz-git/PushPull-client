@@ -1,11 +1,17 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+
+//Components:
+import { GenericNotificationProvider } from '../generic_notification_provider/GenericNotificationProvider';
 import { NotificationsProvider } from '@mantine/notifications';
+
+//Hooks:
+import { useLocation } from 'react-router-dom';
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
+
+//Styles:
 import GlobalStyle from '../../styles/globalStyles';
 import GlobalStylesBuilder from '../../styles/globalStylesBuilder';
 import { GlobalStylesViewTemplate } from '../../styles/globalStylesViewTemplate';
-import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
-
 interface IComponentProps {
     children: React.ReactNode;
 }
@@ -38,52 +44,39 @@ export const NotificationAndStyleAdjuster = ({
     };
 
     const repositionNotification = (): any => {
+        if (!isBuilderOrFileView() && !isTemplateView()) {
+            return 'bottom-left';
+        }
+
         return width <= 1024 ? 'bottom-left' : 'bottom-center';
     };
 
-    const renderNotificationProviderOnURL = (): JSX.Element => {
+    const imposeStyle = (): JSX.Element => {
+        //CLEAMME: This can be possibly extracted to a styleProvider component of some sort.
+
         if (isBuilderOrFileView()) {
-            return (
-                <>
-                    <GlobalStylesBuilder />
-                    <NotificationsProvider
-                        position={repositionNotification()}
-                        limit={1}
-                        zIndex={89}
-                    >
-                        {children}
-                    </NotificationsProvider>
-                </>
-            );
+            return <GlobalStylesBuilder />;
         }
 
         if (isTemplateView()) {
-            return (
-                <>
-                    <GlobalStylesViewTemplate />
-                    <NotificationsProvider
-                        position={repositionNotification()}
-                        limit={2}
-                        zIndex={89}
-                    >
-                        {children}
-                    </NotificationsProvider>
-                </>
-            );
+            return <GlobalStylesViewTemplate />;
         }
 
-        return (
-            <>
-                <GlobalStyle />
-                <NotificationsProvider
-                    position="bottom-left"
-                    limit={2}
-                    zIndex={89}
-                >
-                    {children}
-                </NotificationsProvider>
-            </>
-        );
+        return <GlobalStyle />;
     };
-    return <>{renderNotificationProviderOnURL()}</>;
+
+    return (
+        <>
+            {imposeStyle()}
+            <NotificationsProvider
+                position={repositionNotification()}
+                limit={1}
+                zIndex={89}
+            >
+                <GenericNotificationProvider>
+                    {children}
+                </GenericNotificationProvider>
+            </NotificationsProvider>
+        </>
+    );
 };
