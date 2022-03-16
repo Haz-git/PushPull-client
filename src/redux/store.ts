@@ -20,6 +20,7 @@ import selectedBlockReducer from './selectedBlock/selectedBlockReducer';
 import { errorReducer } from './errors/errorReducer';
 import { modalReducer } from './modals/modalReducer';
 import { viewTemplateReducer } from './viewTemplates/viewTemplateReducer';
+import { genericNotificationReducer } from './genericNotifications/genericNotificationReducer';
 
 //Persistence:
 const persistConfig = {
@@ -49,6 +50,7 @@ const appReducer = combineReducers({
     errors: errorReducer,
     modals: modalReducer,
     viewTemplate: viewTemplateReducer,
+    genericNotifications: genericNotificationReducer,
 });
 
 //Persisting formReducer:

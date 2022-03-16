@@ -15,7 +15,7 @@ const initialState: any = {
     },
 };
 
-export const errorReducer = (
+export const genericNotificationReducer = (
     state: {} = initialState,
     action: GenericNotificationAction
 ) => {
