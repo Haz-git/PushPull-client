@@ -1,7 +1,7 @@
 /**
  * Some types to brainstorm:
- * - loadingXXX => Loading
- * - successXXX => Loading complete or action finished.
+ * - loadingXXX => Loading => transitions to complete or finished.
+ * - successXXX => TBD. Perhaps will change this later, leaving successSaveViewTemplate for now.
  *
  */
 

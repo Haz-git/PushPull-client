@@ -7,10 +7,12 @@ import { GenericNotificationType } from './action-types';
 const initialState: any = {
     loadingSaveViewTemplate: {
         shouldDisplay: false,
+        isUpdated: false,
         notificationProps: {},
     },
     successSaveViewTemplate: {
         shouldDisplay: false,
+        isUpdated: false,
         notificationProps: {},
     },
 };
