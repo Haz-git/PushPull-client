@@ -30,14 +30,15 @@ export const findViewTemplate = (templateId: string): Function => {
         try {
             const response = await api.get(`/viewTemplate/${templateId}`);
 
-            console.log(response);
+            dispatch({
+                type: ViewTemplateActionType.queryViewTemplate,
+                payload: response.data.viewTemplate,
+            });
         } catch (err) {
-            //TODO: Link error action creator for error handling.
-
             dispatch(
                 toggleErrorNotification(ErrorType.queryViewTemplateError, {
                     message: 'Unable to find View Template..',
-                    openDuration: 10000,
+                    openDuration: 3000,
                 })
             );
 
@@ -76,26 +77,71 @@ export const addViewTemplate = (
                         GenericNotificationType.loadingSaveViewTemplate,
                         {
                             id: notificationId,
-                            title: 'Your template has been published!',
-                            openDuration: 10000,
+                            title: 'Your Template Has Been Published!',
+                            openDuration: 3000,
                             isLoading: false,
                         }
                     )
                 );
             }
         } catch (err) {
-            //TODO: Link error action creator for error handling.
-            //TODO: Link notif action creator to notify user template is published.
+            dispatch(
+                toggleErrorNotification(ErrorType.saveViewTemplateError, {
+                    message: 'Unable To Publish View Template.',
+                    openDuration: 3000,
+                })
+            );
             console.error(err);
         }
     };
 };
 
-export const updateViewTemplate = () => {
+export const updateViewTemplate = (
+    viewTemplateId: string,
+    updatedTemplate: any
+) => {
     return async (dispatch: Dispatch<ViewTemplateActions>) => {
+        //Todo Types...
         try {
+            const notificationId = uuid();
+            dispatch(
+                toggleGenericNotification(
+                    GenericNotificationType.loadingSaveViewTemplate,
+                    {
+                        id: notificationId,
+                        title: 'Publishing Template Changes...',
+                        openDuration: false,
+                        isLoading: true,
+                    }
+                )
+            );
+
+            const response = await api.put(
+                `/viewTemplate/update/${viewTemplateId}`,
+                { updatedTemplate }
+            );
+
+            if (response) {
+                //Todo: better check here.
+                dispatch(
+                    updateGenericNotification(
+                        GenericNotificationType.loadingSaveViewTemplate,
+                        {
+                            id: notificationId,
+                            title: 'Your Template Has Been Published!',
+                            openDuration: 3000,
+                            isLoading: false,
+                        }
+                    )
+                );
+            }
         } catch (err) {
-            //TODO: Link error action creator for error handling.
+            dispatch(
+                toggleErrorNotification(ErrorType.saveViewTemplateError, {
+                    message: 'Unable To Publish View Template.',
+                    openDuration: 3000,
+                })
+            );
             console.error(err);
         }
     };
