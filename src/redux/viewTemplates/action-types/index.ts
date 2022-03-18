@@ -1,6 +1,6 @@
 export enum ViewTemplateActionType {
-    QUERY_VIEW_TEMPLATE = 'QUERY_VIEW_TEMPLATE',
-    ADD_VIEW_TEMPLATE = 'ADD_VIEW_TEMPLATE',
-    UPDATE_VIEW_TEMPLATE = 'UPDATE_VIEW_TEMPLATE',
-    DELETE_VIEW_TEMPLATE = 'DELETE_VIEW_TEMPLATE',
+    queryViewTemplate = 'queryViewTemplate',
+    addViewTemplate = 'addViewTemplate',
+    updateViewTemplate = 'updateViewTemplate',
+    deleteViewTemplate = 'deleteViewTemplate',
 }

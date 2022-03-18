@@ -30,14 +30,15 @@ export const findViewTemplate = (templateId: string): Function => {
         try {
             const response = await api.get(`/viewTemplate/${templateId}`);
 
-            console.log(response);
+            dispatch({
+                type: ViewTemplateActionType.queryViewTemplate,
+                payload: response.data.viewTemplate,
+            });
         } catch (err) {
-            //TODO: Link error action creator for error handling.
-
             dispatch(
                 toggleErrorNotification(ErrorType.queryViewTemplateError, {
                     message: 'Unable to find View Template..',
-                    openDuration: 10000,
+                    openDuration: 3000,
                 })
             );
 
@@ -77,7 +78,7 @@ export const addViewTemplate = (
                         {
                             id: notificationId,
                             title: 'Your template has been published!',
-                            openDuration: 10000,
+                            openDuration: 3000,
                             isLoading: false,
                         }
                     )
@@ -87,7 +88,7 @@ export const addViewTemplate = (
             dispatch(
                 toggleErrorNotification(ErrorType.saveViewTemplateError, {
                     message: 'Unable to publish view template.',
-                    openDuration: 10000,
+                    openDuration: 3000,
                 })
             );
             console.error(err);
