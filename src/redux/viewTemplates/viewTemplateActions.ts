@@ -77,7 +77,7 @@ export const addViewTemplate = (
                         GenericNotificationType.loadingSaveViewTemplate,
                         {
                             id: notificationId,
-                            title: 'Your template has been published!',
+                            title: 'Your Template Has Been Published!',
                             openDuration: 3000,
                             isLoading: false,
                         }
@@ -87,7 +87,7 @@ export const addViewTemplate = (
         } catch (err) {
             dispatch(
                 toggleErrorNotification(ErrorType.saveViewTemplateError, {
-                    message: 'Unable to publish view template.',
+                    message: 'Unable To Publish View Template.',
                     openDuration: 3000,
                 })
             );
@@ -96,11 +96,52 @@ export const addViewTemplate = (
     };
 };
 
-export const updateViewTemplate = () => {
+export const updateViewTemplate = (
+    viewTemplateId: string,
+    updatedViewTemplate: any
+) => {
     return async (dispatch: Dispatch<ViewTemplateActions>) => {
+        //Todo Types...
         try {
+            const notificationId = uuid();
+            dispatch(
+                toggleGenericNotification(
+                    GenericNotificationType.loadingSaveViewTemplate,
+                    {
+                        id: notificationId,
+                        title: 'Publishing Template Changes...',
+                        openDuration: false,
+                        isLoading: true,
+                    }
+                )
+            );
+
+            const response = await api.put(
+                `/viewTemplate/update/${viewTemplateId}`,
+                { updatedViewTemplate }
+            );
+
+            if (response) {
+                //Todo: better check here.
+                dispatch(
+                    updateGenericNotification(
+                        GenericNotificationType.loadingSaveViewTemplate,
+                        {
+                            id: notificationId,
+                            title: 'Your Template Has Been Published!',
+                            openDuration: 3000,
+                            isLoading: false,
+                        }
+                    )
+                );
+            }
         } catch (err) {
-            //TODO: Link error action creator for error handling.
+            dispatch(
+                toggleErrorNotification(ErrorType.saveViewTemplateError, {
+                    message: 'Unable To Publish View Template.',
+                    openDuration: 3000,
+                })
+            );
             console.error(err);
         }
     };
