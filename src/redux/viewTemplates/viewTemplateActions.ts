@@ -84,8 +84,12 @@ export const addViewTemplate = (
                 );
             }
         } catch (err) {
-            //TODO: Link error action creator for error handling.
-            //TODO: Link notif action creator to notify user template is published.
+            dispatch(
+                toggleErrorNotification(ErrorType.saveViewTemplateError, {
+                    message: 'Unable to publish view template.',
+                    openDuration: 10000,
+                })
+            );
             console.error(err);
         }
     };
