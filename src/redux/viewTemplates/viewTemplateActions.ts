@@ -4,6 +4,7 @@ import { ViewTemplateActions } from './viewTemplateInterfaces';
 import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
 import { ViewTemplateActionType } from './action-types';
 import { loaderTypes } from '../uiLoader/loader-types';
+import { v4 as uuid } from 'uuid';
 
 //Error Handling
 import { ErrorType } from '../errors/action-types';
@@ -13,7 +14,10 @@ import { toggleErrorNotification } from '../errors/errorActions';
 //Generic Notification Handling
 import { GenericNotificationType } from '../genericNotifications/action-types';
 import { GenericNotificationAction } from '../genericNotifications/genericNotificationInterfaces';
-import { toggleGenericNotification } from '../genericNotifications/genericNotificationActions';
+import {
+    toggleGenericNotification,
+    updateGenericNotification,
+} from '../genericNotifications/genericNotificationActions';
 
 type ComposedViewTemplate = {
     id: string;
@@ -47,12 +51,15 @@ export const addViewTemplate = (
 ): Function => {
     return async (dispatch: Dispatch<ViewTemplateActions>) => {
         try {
+            const notificationId = uuid();
+
             dispatch(
                 toggleGenericNotification(
                     GenericNotificationType.loadingSaveViewTemplate,
                     {
+                        id: notificationId,
                         title: 'Publishing Template Changes...',
-                        openDuration: 1000,
+                        openDuration: false,
                         isLoading: true,
                     }
                 )
@@ -62,7 +69,20 @@ export const addViewTemplate = (
                 composedViewTemplate,
             });
 
-            console.log(response);
+            if (response) {
+                //Todo: better check here.
+                dispatch(
+                    updateGenericNotification(
+                        GenericNotificationType.loadingSaveViewTemplate,
+                        {
+                            id: notificationId,
+                            title: 'Your template has been published!',
+                            openDuration: 10000,
+                            isLoading: false,
+                        }
+                    )
+                );
+            }
         } catch (err) {
             //TODO: Link error action creator for error handling.
             //TODO: Link notif action creator to notify user template is published.
