@@ -98,7 +98,7 @@ export const addViewTemplate = (
 
 export const updateViewTemplate = (
     viewTemplateId: string,
-    updatedViewTemplate: any
+    updatedTemplate: any
 ) => {
     return async (dispatch: Dispatch<ViewTemplateActions>) => {
         //Todo Types...
@@ -118,7 +118,7 @@ export const updateViewTemplate = (
 
             const response = await api.put(
                 `/viewTemplate/update/${viewTemplateId}`,
-                { updatedViewTemplate }
+                { updatedTemplate }
             );
 
             if (response) {
