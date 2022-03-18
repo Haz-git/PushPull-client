@@ -8,7 +8,10 @@ import {
     selectBlock,
     deselectBlock,
 } from '../../../redux/selectedBlock/selectedBlockActions';
-import { addViewTemplate } from '../../../redux/viewTemplates/viewTemplateActions';
+import {
+    addViewTemplate,
+    updateViewTemplate,
+} from '../../../redux/viewTemplates/viewTemplateActions';
 import { ErrorType } from '../../../redux/errors/action-types';
 import { toggleErrorNotification } from '../../../redux/errors/errorActions';
 import { updateTemplate } from '../../../redux/templates/templateActions';
@@ -162,12 +165,20 @@ const Toolbar = ({
         };
     }, []);
 
+    const updateExistingViewTemplate = (viewTemplateId: string): void => {
+        dispatch(updateViewTemplate(viewTemplateId, template));
+    };
+
     const handleSaveViewTemplate = (): void => {
         //Handles request to add a new view template (for preview and others to view).
         //In order to know what uuid to query, we'll create that here.
 
         if (!template) {
             return;
+        }
+
+        if (template.hasSavedViewTemplate) {
+            return updateExistingViewTemplate(template.savedViewTemplateId);
         }
 
         const viewTemplateId = uuid();
