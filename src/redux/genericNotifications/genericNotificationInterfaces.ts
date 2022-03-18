@@ -2,9 +2,10 @@ import { ReactNode } from 'react';
 import { GenericNotificationType } from './action-types';
 
 export type NotificationProps = {
+    id?: string;
     title: string;
     message?: string;
-    openDuration: number;
+    openDuration: number | false;
     color?: string;
     isLoading?: boolean;
     icon?: ReactNode;
