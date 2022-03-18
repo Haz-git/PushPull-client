@@ -14,6 +14,7 @@ interface DisplayGenericNotification {
     type: GenericNotificationType;
     payload: {
         shouldDisplay: boolean;
+        isUpdated: boolean;
         notificationProps?: NotificationProps | {};
     };
 }
