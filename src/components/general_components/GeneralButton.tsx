@@ -26,7 +26,7 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     overflow: hidden;
     width: ${(props) => props.width};
     text-shadow: ${(props) => props.textShadow};
-    transition: all 0.1s ease-in;
+    transition: all 0.05s linear;
     height: ${(props) => props.height};
     outline: ${(props) => props.outline};
     cursor: ${(props) => props.cursor};
