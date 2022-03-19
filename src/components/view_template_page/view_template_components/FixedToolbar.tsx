@@ -3,6 +3,9 @@ import * as React from 'react';
 //Redux:
 
 //Components:
+import { Tooltip } from '@mantine/core';
+import GeneralButton from '../../general_components/GeneralButton';
+import historyObject from '../../../utils/historyObject';
 
 //Styles:
 import styled from 'styled-components';
@@ -15,31 +18,31 @@ import { KeyboardBackspace } from '@styled-icons/material-rounded/KeyboardBacksp
 const DownloadIcon = styled(FileDownload)`
     height: 1.5rem;
     width: 1.5rem;
-    color: #2c2c2c;
+    color: #ffffff;
 `;
 
 const ViewingIcon = styled(RemoveRedEye)`
     height: 1.5rem;
     width: 1.5rem;
-    color: #2c2c2c;
+    color: #ffffff;
 `;
 
 const CopyIcon = styled(FileCopy)`
     height: 1.5rem;
     width: 1.5rem;
-    color: #2c2c2c;
+    color: #ffffff;
 `;
 
 const PublishIcon = styled(CloudUpload)`
     height: 1.5rem;
     width: 1.5rem;
-    color: #2c2c2c;
+    color: #ffffff;
 `;
 
-const BuilderIcon = styled(KeyboardBackspace)`
+const BackIcon = styled(KeyboardBackspace)`
     height: 1.5rem;
     width: 1.5rem;
-    color: #2c2c2c;
+    color: #ffffff;
 `;
 
 const MainContainer = styled.div`
@@ -49,37 +52,99 @@ const MainContainer = styled.div`
     justify-content: center;
     row-gap: 1rem;
     height: 100%;
+    background: #2c2c2c;
 `;
 
 const ButtonContainer = styled.div``;
 
 const ButtonWrapper = styled.div`
-    background: #d6d6d6;
-    padding: 0.75rem 0.75rem;
-    border: 1px solid #ececec;
-    border-radius: 0.5rem;
+    padding: 0rem 0.75rem;
 `;
 
 //Interfaces:
 
-export const FixedToolbar = () => {
+interface IComponentProps {
+    templateId: string;
+    onReturnSheetId: string;
+}
+
+export const FixedToolbar = ({
+    templateId,
+    onReturnSheetId,
+}: IComponentProps): JSX.Element => {
     return (
         <MainContainer>
-            <ButtonWrapper>
-                <DownloadIcon />
-            </ButtonWrapper>
-            <ButtonWrapper>
-                <ViewingIcon />
-            </ButtonWrapper>
-            <ButtonWrapper>
-                <CopyIcon />
-            </ButtonWrapper>
-            <ButtonWrapper>
-                <PublishIcon />
-            </ButtonWrapper>
-            <ButtonWrapper>
-                <BuilderIcon />
-            </ButtonWrapper>
+            <Tooltip label="Download File" position="right" placement="center">
+                <ButtonWrapper>
+                    <GeneralButton
+                        buttonLabel=""
+                        buttonIconLeft={<DownloadIcon />}
+                        leftIconMargin="0"
+                        rightIconMargin="0"
+                    />
+                </ButtonWrapper>
+            </Tooltip>
+            <Tooltip
+                label="Configure Viewing Access"
+                position="right"
+                placement="center"
+            >
+                <ButtonWrapper>
+                    <GeneralButton
+                        buttonLabel=""
+                        buttonIconLeft={<ViewingIcon />}
+                        leftIconMargin="0"
+                        rightIconMargin="0"
+                    />
+                </ButtonWrapper>
+            </Tooltip>
+            <Tooltip
+                label="Configure Duplication Access"
+                position="right"
+                placement="center"
+            >
+                <ButtonWrapper>
+                    <GeneralButton
+                        buttonLabel=""
+                        buttonIconLeft={<CopyIcon />}
+                        leftIconMargin="0"
+                        rightIconMargin="0"
+                    />
+                </ButtonWrapper>
+            </Tooltip>
+            <Tooltip
+                label="Upload To PushPull Database"
+                position="right"
+                placement="center"
+            >
+                <ButtonWrapper>
+                    <GeneralButton
+                        buttonLabel=""
+                        buttonIconLeft={<PublishIcon />}
+                        leftIconMargin="0"
+                        rightIconMargin="0"
+                    />
+                </ButtonWrapper>
+            </Tooltip>
+            <Tooltip
+                label="Return To Templates"
+                position="right"
+                placement="center"
+            >
+                <ButtonWrapper>
+                    <GeneralButton
+                        buttonLabel=""
+                        buttonIconLeft={<BackIcon />}
+                        leftIconMargin="0"
+                        rightIconMargin="0"
+                        onClick={() =>
+                            historyObject.push(
+                                `/file/${templateId}?sheetId=${onReturnSheetId}`
+                            )
+                        }
+                    />
+                </ButtonWrapper>
+            </Tooltip>
         </MainContainer>
     );
 };
