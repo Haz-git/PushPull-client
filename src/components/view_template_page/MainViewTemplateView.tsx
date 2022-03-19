@@ -59,6 +59,11 @@ export const MainViewTemplateView = ({
         (state: RootStateOrAny) =>
             state?.errors?.queryViewTemplateError?.hasError
     );
+    const onReturnSheetId = useSelector(
+        (state: RootStateOrAny) =>
+            state?.viewTemplate?.savedTemplate?.templateEditingSurfaceBlocks[0]
+                ?.sheetId
+    );
 
     useEffect(() => {
         dispatch(findViewTemplate(templateId));
@@ -76,7 +81,10 @@ export const MainViewTemplateView = ({
                 <>
                     <Wrapper>
                         <ToolbarContainer>
-                            <FixedToolbar templateId={templateId} />
+                            <FixedToolbar
+                                templateId={templateId}
+                                onReturnSheetId={onReturnSheetId}
+                            />
                         </ToolbarContainer>
                         <DocumentContainer>
                             Non enim praesent elementum facilisis. Facilisis
