@@ -31,9 +31,7 @@ const DocumentContainer = styled.div`
 
 const ToolbarContainer = styled.div`
     position: fixed;
-    background: #ececec;
     border-right: 1px solid black;
-    padding: 1rem;
     height: 100%;
 `;
 
@@ -46,14 +44,14 @@ interface IMainContainerProps {
 interface IComponentProps {
     match: {
         params: {
-            viewTemplateId: string;
+            templateId: string;
         };
     };
 }
 
 export const MainViewTemplateView = ({
     match: {
-        params: { viewTemplateId },
+        params: { templateId },
     },
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
@@ -61,9 +59,14 @@ export const MainViewTemplateView = ({
         (state: RootStateOrAny) =>
             state?.errors?.queryViewTemplateError?.hasError
     );
+    const onReturnSheetId = useSelector(
+        (state: RootStateOrAny) =>
+            state?.viewTemplate?.savedTemplate?.templateEditingSurfaceBlocks[0]
+                ?.sheetId
+    );
 
     useEffect(() => {
-        dispatch(findViewTemplate(viewTemplateId));
+        dispatch(findViewTemplate(templateId));
     }, []);
 
     return (
@@ -78,7 +81,10 @@ export const MainViewTemplateView = ({
                 <>
                     <Wrapper>
                         <ToolbarContainer>
-                            <FixedToolbar />
+                            <FixedToolbar
+                                templateId={templateId}
+                                onReturnSheetId={onReturnSheetId}
+                            />
                         </ToolbarContainer>
                         <DocumentContainer>
                             Non enim praesent elementum facilisis. Facilisis
