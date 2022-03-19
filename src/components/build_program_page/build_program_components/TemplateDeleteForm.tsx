@@ -102,6 +102,14 @@ const TemplateDeleteForm = ({
                 />
                 <TextDivider />
                 <Text
+                    text="Your published template will also be removed."
+                    subText={true}
+                    fontSize="1rem"
+                    fontWeight="800"
+                    textColor="#AF1432"
+                />
+                <TextDivider />
+                <Text
                     text="Please consider carefully."
                     subText={true}
                     fontSize="1rem"
