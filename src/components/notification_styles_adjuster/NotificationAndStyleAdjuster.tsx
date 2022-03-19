@@ -70,7 +70,7 @@ export const NotificationAndStyleAdjuster = ({
             {imposeStyle()}
             <NotificationsProvider
                 position={repositionNotification()}
-                limit={1}
+                limit={3}
                 zIndex={89}
             >
                 <GenericNotificationProvider>
