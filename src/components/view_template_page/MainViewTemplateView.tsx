@@ -8,6 +8,8 @@ import { findViewTemplate } from '../../redux/viewTemplates/viewTemplateActions'
 //Components:
 import { FixedToolbar } from './view_template_components/FixedToolbar';
 import { UnauthorizedViewTemplate } from './view_template_components/UnauthorizedViewTemplate';
+import { PDFViewer } from '@react-pdf/renderer';
+import { TemplateDocument } from './view_template_components/TemplateDocument';
 
 //Styles:
 import styled from 'styled-components';
@@ -90,7 +92,9 @@ export const MainViewTemplateView = ({
                             />
                         </ToolbarContainer>
                         <DocumentContainer>
-                            {viewTemplate?.savedTemplate?.templateFileTitle}
+                            <PDFViewer>
+                                <TemplateDocument />
+                            </PDFViewer>
                         </DocumentContainer>
                     </Wrapper>
                 </>
