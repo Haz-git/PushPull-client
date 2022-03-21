@@ -7,7 +7,9 @@ import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'row',
-        backgroundColor: '#E4E4E4',
+        backgroundColor: '#ffffff',
+        width: '100%',
+        orientation: 'portrait',
     },
     section: {
         margin: 10,
@@ -24,7 +26,7 @@ const styles = StyleSheet.create({
 export const TemplateDocument = () => {
     return (
         <Document>
-            <Page size="A4" style={styles.page}>
+            <Page object-fit="fill" size="A4" style={styles.page}>
                 <View style={styles.section}>
                     <Text style={styles.text}>Section #1</Text>
                 </View>

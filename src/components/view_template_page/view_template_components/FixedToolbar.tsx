@@ -53,6 +53,7 @@ const MainContainer = styled.div`
     row-gap: 1rem;
     height: 100%;
     background: #2c2c2c;
+    width: 75px;
 `;
 
 const ButtonContainer = styled.div``;
