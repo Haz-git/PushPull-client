@@ -113,7 +113,7 @@ export const FixedToolbar = ({
                 </ButtonWrapper>
             </Tooltip>
             <Tooltip
-                label="Upload To PushPull Database"
+                label="Upload To PushPull Search Database"
                 position="right"
                 placement="center"
             >
