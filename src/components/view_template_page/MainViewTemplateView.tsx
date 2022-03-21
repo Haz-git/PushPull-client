@@ -90,7 +90,7 @@ export const MainViewTemplateView = ({
                             />
                         </ToolbarContainer>
                         <DocumentContainer>
-                            {viewTemplate.savedTemplate.templateFileTitle}
+                            {viewTemplate?.savedTemplate?.templateFileTitle}
                         </DocumentContainer>
                     </Wrapper>
                 </>
