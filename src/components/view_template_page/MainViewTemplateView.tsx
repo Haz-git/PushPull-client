@@ -8,6 +8,9 @@ import { findViewTemplate } from '../../redux/viewTemplates/viewTemplateActions'
 //Components:
 import { FixedToolbar } from './view_template_components/FixedToolbar';
 import { UnauthorizedViewTemplate } from './view_template_components/UnauthorizedViewTemplate';
+import { PDFViewer } from '@react-pdf/renderer';
+import { TemplateDocument } from './view_template_components/TemplateDocument';
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
 
 //Styles:
 import styled from 'styled-components';
@@ -25,8 +28,10 @@ const Wrapper = styled.div`
 `;
 
 const DocumentContainer = styled.div`
-    margin-left: 5rem;
-    padding: 10rem 10rem 10rem 5rem;
+    margin-left: 75px;
+    // padding: 10rem 10rem 10rem 5rem;
+    // height: 100%;
+    // width: 100%;
 `;
 
 const ToolbarContainer = styled.div`
@@ -55,6 +60,7 @@ export const MainViewTemplateView = ({
     },
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
+    const { height, width } = useWindowDimensions();
     const viewTemplate = useSelector(
         (state: RootStateOrAny) => state?.viewTemplate
     );
@@ -90,7 +96,13 @@ export const MainViewTemplateView = ({
                             />
                         </ToolbarContainer>
                         <DocumentContainer>
-                            {viewTemplate.savedTemplate.templateFileTitle}
+                            <PDFViewer
+                                width={width - 75} //75 is toolbar's size. This is a temp solution.
+                                height={height}
+                                showToolbar={true}
+                            >
+                                <TemplateDocument />
+                            </PDFViewer>
                         </DocumentContainer>
                     </Wrapper>
                 </>

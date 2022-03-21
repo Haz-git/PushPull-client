@@ -53,6 +53,7 @@ const MainContainer = styled.div`
     row-gap: 1rem;
     height: 100%;
     background: #2c2c2c;
+    width: 75px;
 `;
 
 const ButtonContainer = styled.div``;
@@ -113,7 +114,7 @@ export const FixedToolbar = ({
                 </ButtonWrapper>
             </Tooltip>
             <Tooltip
-                label="Upload To PushPull Database"
+                label="Upload To PushPull Search Database"
                 position="right"
                 placement="center"
             >
