@@ -95,15 +95,7 @@ export const MainViewTemplateView = ({
                                 onReturnSheetId={onReturnSheetId}
                             />
                         </ToolbarContainer>
-                        <DocumentContainer>
-                            <PDFViewer
-                                width={width - 75} //75 is toolbar's size. This is a temp solution.
-                                height={height}
-                                showToolbar={true}
-                            >
-                                <TemplateDocument />
-                            </PDFViewer>
-                        </DocumentContainer>
+                        <DocumentContainer></DocumentContainer>
                     </Wrapper>
                 </>
             )}
