@@ -29,10 +29,12 @@ const Wrapper = styled.div`
 `;
 
 const DocumentContainer = styled.div`
-    margin-left: 75px;
+    margin-left: 5rem;
     padding: 10rem 10rem 10rem 5rem;
     height: 100%;
     width: 100%;
+    margin-right: 17rem;
+    overflow: scroll;
 `;
 
 const ToolbarContainer = styled.div`
@@ -46,6 +48,7 @@ const InformationPanelContainer = styled.section`
     right: 0;
     border-left: 1px solid black;
     height: 100%;
+    width: 17rem;
 `;
 
 //Interfaces:
