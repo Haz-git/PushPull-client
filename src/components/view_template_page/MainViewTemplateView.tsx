@@ -17,7 +17,6 @@ import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
 import styled from 'styled-components';
 
 const MainContainer = styled.section<IMainContainerProps>`
-    // overflow: hidden;
     height: 100%;
     background: ${(props) =>
         props.hasUnauthorizedError === true ? '#2c2c2c' : '#ffffff'};
@@ -25,16 +24,14 @@ const MainContainer = styled.section<IMainContainerProps>`
 
 const Wrapper = styled.div`
     display: flex;
-    height: 100vh;
 `;
 
 const DocumentContainer = styled.div`
     margin-left: 5rem;
-    padding: 10rem 10rem 10rem 5rem;
+    padding: 5rem 5rem;
     height: 100%;
     width: 100%;
     margin-right: 17rem;
-    overflow: scroll;
 `;
 
 const ToolbarContainer = styled.div`
@@ -112,6 +109,162 @@ export const MainViewTemplateView = ({
                             dolore magna aliqua. Elementum facilisis leo vel
                             fringilla. Nisl pretium fusce id velit ut tortor
                             pretium viverra suspendisse. Adipiscing elit ut
+                            aliquam purus sit amet luctus venenatis lectus. Et
+                            ultrices neque ornare aenean. Urna nec tincidunt
+                            praesent semper feugiat nibh. Dignissim diam quis
+                            enim lobortis scelerisque fermentum dui faucibus.
+                            Etiam tempor orci eu lobortis elementum nibh. Sit
+                            amet porttitor eget dolor morbi non. Id venenatis a
+                            condimentum vitae. Ultrices dui sapien eget mi
+                            proin. Leo a diam sollicitudin tempor id eu nisl
+                            nunc. Non curabitur gravida arcu ac. Sagittis eu
+                            volutpat odio facilisis mauris sit amet massa vitae.
+                            Dolor sit amet consectetur adipiscing elit ut
+                            aliquam purus sit. Dictum varius duis at consectetur
+                            lorem donec. Commodo nulla facilisi nullam vehicula
+                            ipsum a. Commodo odio aenean sed adipiscing diam
+                            donec adipiscing. Praesent semper feugiat nibh sed
+                            pulvinar proin gravida hendrerit lectus. Enim nulla
+                            aliquet porttitor lacus luctus accumsan tortor
+                            posuere. Vel turpis nunc eget lorem dolor sed.
+                            Consectetur a erat nam at lectus. Ornare lectus sit
+                            amet est placerat. Dis parturient montes nascetur
+                            ridiculus mus mauris. Neque sodales ut etiam sit
+                            amet nisl. Duis ultricies lacus sed turpis tincidunt
+                            id aliquet. Mauris in aliquam sem fringilla ut morbi
+                            tincidunt augue. Sit amet consectetur adipiscing
+                            elit duis tristique. Ipsum a arcu cursus vitae
+                            congue mauris rhoncus aenean. Maecenas pharetra
+                            aliquam purus sit amet luctus venenatis lectus. Et
+                            ultrices neque ornare aenean. Urna nec tincidunt
+                            praesent semper feugiat nibh. Dignissim diam quis
+                            enim lobortis scelerisque fermentum dui faucibus.
+                            Etiam tempor orci eu lobortis elementum nibh. Sit
+                            amet porttitor eget dolor morbi non. Id venenatis a
+                            condimentum vitae. Ultrices dui sapien eget mi
+                            proin. Leo a diam sollicitudin tempor id eu nisl
+                            nunc. Non curabitur gravida arcu ac. Sagittis eu
+                            volutpat odio facilisis mauris sit amet massa vitae.
+                            Dolor sit amet consectetur adipiscing elit ut
+                            aliquam purus sit. Dictum varius duis at consectetur
+                            lorem donec. Commodo nulla facilisi nullam vehicula
+                            ipsum a. Commodo odio aenean sed adipiscing diam
+                            donec adipiscing. Praesent semper feugiat nibh sed
+                            pulvinar proin gravida hendrerit lectus. Enim nulla
+                            aliquet porttitor lacus luctus accumsan tortor
+                            posuere. Vel turpis nunc eget lorem dolor sed.
+                            Consectetur a erat nam at lectus. Ornare lectus sit
+                            amet est placerat. Dis parturient montes nascetur
+                            ridiculus mus mauris. Neque sodales ut etiam sit
+                            amet nisl. Duis ultricies lacus sed turpis tincidunt
+                            id aliquet. Mauris in aliquam sem fringilla ut morbi
+                            tincidunt augue. Sit amet consectetur adipiscing
+                            elit duis tristique. Ipsum a arcu cursus vitae
+                            congue mauris rhoncus aenean. Maecenas pharetra
+                            aliquam purus sit amet luctus venenatis lectus. Et
+                            ultrices neque ornare aenean. Urna nec tincidunt
+                            praesent semper feugiat nibh. Dignissim diam quis
+                            enim lobortis scelerisque fermentum dui faucibus.
+                            Etiam tempor orci eu lobortis elementum nibh. Sit
+                            amet porttitor eget dolor morbi non. Id venenatis a
+                            condimentum vitae. Ultrices dui sapien eget mi
+                            proin. Leo a diam sollicitudin tempor id eu nisl
+                            nunc. Non curabitur gravida arcu ac. Sagittis eu
+                            volutpat odio facilisis mauris sit amet massa vitae.
+                            Dolor sit amet consectetur adipiscing elit ut
+                            aliquam purus sit. Dictum varius duis at consectetur
+                            lorem donec. Commodo nulla facilisi nullam vehicula
+                            ipsum a. Commodo odio aenean sed adipiscing diam
+                            donec adipiscing. Praesent semper feugiat nibh sed
+                            pulvinar proin gravida hendrerit lectus. Enim nulla
+                            aliquet porttitor lacus luctus accumsan tortor
+                            posuere. Vel turpis nunc eget lorem dolor sed.
+                            Consectetur a erat nam at lectus. Ornare lectus sit
+                            amet est placerat. Dis parturient montes nascetur
+                            ridiculus mus mauris. Neque sodales ut etiam sit
+                            amet nisl. Duis ultricies lacus sed turpis tincidunt
+                            id aliquet. Mauris in aliquam sem fringilla ut morbi
+                            tincidunt augue. Sit amet consectetur adipiscing
+                            elit duis tristique. Ipsum a arcu cursus vitae
+                            congue mauris rhoncus aenean. Maecenas pharetra
+                            aliquam purus sit amet luctus venenatis lectus. Et
+                            ultrices neque ornare aenean. Urna nec tincidunt
+                            praesent semper feugiat nibh. Dignissim diam quis
+                            enim lobortis scelerisque fermentum dui faucibus.
+                            Etiam tempor orci eu lobortis elementum nibh. Sit
+                            amet porttitor eget dolor morbi non. Id venenatis a
+                            condimentum vitae. Ultrices dui sapien eget mi
+                            proin. Leo a diam sollicitudin tempor id eu nisl
+                            nunc. Non curabitur gravida arcu ac. Sagittis eu
+                            volutpat odio facilisis mauris sit amet massa vitae.
+                            Dolor sit amet consectetur adipiscing elit ut
+                            aliquam purus sit. Dictum varius duis at consectetur
+                            lorem donec. Commodo nulla facilisi nullam vehicula
+                            ipsum a. Commodo odio aenean sed adipiscing diam
+                            donec adipiscing. Praesent semper feugiat nibh sed
+                            pulvinar proin gravida hendrerit lectus. Enim nulla
+                            aliquet porttitor lacus luctus accumsan tortor
+                            posuere. Vel turpis nunc eget lorem dolor sed.
+                            Consectetur a erat nam at lectus. Ornare lectus sit
+                            amet est placerat. Dis parturient montes nascetur
+                            ridiculus mus mauris. Neque sodales ut etiam sit
+                            amet nisl. Duis ultricies lacus sed turpis tincidunt
+                            id aliquet. Mauris in aliquam sem fringilla ut morbi
+                            tincidunt augue. Sit amet consectetur adipiscing
+                            elit duis tristique. Ipsum a arcu cursus vitae
+                            congue mauris rhoncus aenean. Maecenas pharetra
+                            aliquam purus sit amet luctus venenatis lectus. Et
+                            ultrices neque ornare aenean. Urna nec tincidunt
+                            praesent semper feugiat nibh. Dignissim diam quis
+                            enim lobortis scelerisque fermentum dui faucibus.
+                            Etiam tempor orci eu lobortis elementum nibh. Sit
+                            amet porttitor eget dolor morbi non. Id venenatis a
+                            condimentum vitae. Ultrices dui sapien eget mi
+                            proin. Leo a diam sollicitudin tempor id eu nisl
+                            nunc. Non curabitur gravida arcu ac. Sagittis eu
+                            volutpat odio facilisis mauris sit amet massa vitae.
+                            Dolor sit amet consectetur adipiscing elit ut
+                            aliquam purus sit. Dictum varius duis at consectetur
+                            lorem donec. Commodo nulla facilisi nullam vehicula
+                            ipsum a. Commodo odio aenean sed adipiscing diam
+                            donec adipiscing. Praesent semper feugiat nibh sed
+                            pulvinar proin gravida hendrerit lectus. Enim nulla
+                            aliquet porttitor lacus luctus accumsan tortor
+                            posuere. Vel turpis nunc eget lorem dolor sed.
+                            Consectetur a erat nam at lectus. Ornare lectus sit
+                            amet est placerat. Dis parturient montes nascetur
+                            ridiculus mus mauris. Neque sodales ut etiam sit
+                            amet nisl. Duis ultricies lacus sed turpis tincidunt
+                            id aliquet. Mauris in aliquam sem fringilla ut morbi
+                            tincidunt augue. Sit amet consectetur adipiscing
+                            elit duis tristique. Ipsum a arcu cursus vitae
+                            congue mauris rhoncus aenean. Maecenas pharetra
+                            aliquam purus sit amet luctus venenatis lectus. Et
+                            ultrices neque ornare aenean. Urna nec tincidunt
+                            praesent semper feugiat nibh. Dignissim diam quis
+                            enim lobortis scelerisque fermentum dui faucibus.
+                            Etiam tempor orci eu lobortis elementum nibh. Sit
+                            amet porttitor eget dolor morbi non. Id venenatis a
+                            condimentum vitae. Ultrices dui sapien eget mi
+                            proin. Leo a diam sollicitudin tempor id eu nisl
+                            nunc. Non curabitur gravida arcu ac. Sagittis eu
+                            volutpat odio facilisis mauris sit amet massa vitae.
+                            Dolor sit amet consectetur adipiscing elit ut
+                            aliquam purus sit. Dictum varius duis at consectetur
+                            lorem donec. Commodo nulla facilisi nullam vehicula
+                            ipsum a. Commodo odio aenean sed adipiscing diam
+                            donec adipiscing. Praesent semper feugiat nibh sed
+                            pulvinar proin gravida hendrerit lectus. Enim nulla
+                            aliquet porttitor lacus luctus accumsan tortor
+                            posuere. Vel turpis nunc eget lorem dolor sed.
+                            Consectetur a erat nam at lectus. Ornare lectus sit
+                            amet est placerat. Dis parturient montes nascetur
+                            ridiculus mus mauris. Neque sodales ut etiam sit
+                            amet nisl. Duis ultricies lacus sed turpis tincidunt
+                            id aliquet. Mauris in aliquam sem fringilla ut morbi
+                            tincidunt augue. Sit amet consectetur adipiscing
+                            elit duis tristique. Ipsum a arcu cursus vitae
+                            congue mauris rhoncus aenean. Maecenas pharetra
                             aliquam purus sit amet luctus venenatis lectus. Et
                             ultrices neque ornare aenean. Urna nec tincidunt
                             praesent semper feugiat nibh. Dignissim diam quis
