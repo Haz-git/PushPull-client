@@ -32,6 +32,12 @@ const DocumentContainer = styled.div`
     height: 100%;
     width: 100%;
     margin-right: 17rem;
+    -moz-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45),
+        inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45),
+        inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
+    box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45),
+        inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
 `;
 
 const ToolbarContainer = styled.div`
