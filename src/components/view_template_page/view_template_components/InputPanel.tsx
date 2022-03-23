@@ -20,7 +20,7 @@ export const InputPanel = () => {
                     textShadow="#000000 0px 0px 2px"
                 />
             </HeaderContainer>
-            <BodyContainer>test</BodyContainer>
+            <BodyContainer>Under construction...</BodyContainer>
         </MainContainer>
     );
 };

@@ -14,7 +14,7 @@ export const MainContainer = styled.div`
 export const HeaderContainer = styled.div`
     background: #7678ed;
     padding: 0.5rem 1rem;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #2c2c2c;
     border-top-left-radius: 0.2rem;
     border-top-right-radius: 0.2rem;
 `;
@@ -38,7 +38,7 @@ export const LegendPanel = () => {
                     textShadow="#000000 0px 0px 2px"
                 />
             </HeaderContainer>
-            <BodyContainer>test</BodyContainer>
+            <BodyContainer>Under construction...</BodyContainer>
         </MainContainer>
     );
 };

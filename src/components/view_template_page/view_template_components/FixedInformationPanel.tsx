@@ -12,6 +12,7 @@ const MainContainer = styled.div`
     background: #2c2c2c;
     height: 100%;
     padding: 1rem 1rem;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px;
 `;
 
 //Interfaces:
