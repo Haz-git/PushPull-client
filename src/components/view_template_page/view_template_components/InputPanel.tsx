@@ -6,14 +6,21 @@ import Text from '../../general_components/Text';
 //Styles:
 import styled from 'styled-components';
 
-import { MainContainer } from './LegendPanel';
+import { MainContainer, HeaderContainer, BodyContainer } from './LegendPanel';
 
 //Interfaces:
 
 export const InputPanel = () => {
     return (
         <MainContainer>
-            <Text text="Inputs" />
+            <HeaderContainer>
+                <Text
+                    text="Viewer Inputs"
+                    textColor="#ffffff"
+                    textShadow="#000000 0px 0px 2px"
+                />
+            </HeaderContainer>
+            <BodyContainer>test</BodyContainer>
         </MainContainer>
     );
 };
