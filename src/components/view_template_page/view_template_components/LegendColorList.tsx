@@ -28,7 +28,7 @@ export const LegendColorList = ({
     const composeColorItems = (): JSX.Element[] => {
         return legendColors?.map((item) => (
             <LegendColorItem
-                key={item.id}
+                id={item.id}
                 label={item.label}
                 colorHex={item.colorHex}
                 description={item.description}

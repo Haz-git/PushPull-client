@@ -5,6 +5,10 @@ import { useState } from 'react';
 
 //Components
 import Text from '../../general_components/Text';
+import {
+    IColorSwatch,
+    ColorSwatch,
+} from '../../build_template_page/build_template_components/ColorSelectables';
 
 //Styles
 import styled from 'styled-components';
@@ -28,32 +32,62 @@ const ColorItemContainer = styled.div`
     }
 `;
 
+const HeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const DescriptionContainer = styled.div`
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+`;
+
 //Interfaces
 
 interface IComponentProps {
-    key: string;
+    id: string;
     label: string;
     colorHex: string;
     description: string;
 }
 
 export const LegendColorItem = ({
-    key,
+    id,
     label,
     colorHex,
     description,
 }: IComponentProps): JSX.Element => {
     const [isCollapseOpen, setIsCollapseOpen] = useState(false);
 
+    const isDescriptionEmpty = (): boolean => {
+        return description === '';
+    };
+
     return (
         <ColorItemContainer
-            key={key}
+            key={id}
             onClick={() => setIsCollapseOpen(!isCollapseOpen)}
         >
-            <Text text={label} fontSize="1.05rem" />
-            <Collapse in={isCollapseOpen}>
-                <div>{description}</div>
-            </Collapse>
+            <HeaderContainer>
+                <Text text={label} fontSize="1.05rem" />
+                <ColorSwatch color={colorHex} />
+            </HeaderContainer>
+            <>
+                {!isDescriptionEmpty() && (
+                    <Collapse in={isCollapseOpen}>
+                        <DescriptionContainer>
+                            <Text
+                                text={description}
+                                subText={true}
+                                fontSize=".95rem"
+                                fontWeight="800"
+                            />
+                        </DescriptionContainer>
+                    </Collapse>
+                )}
+            </>
         </ColorItemContainer>
     );
 };
