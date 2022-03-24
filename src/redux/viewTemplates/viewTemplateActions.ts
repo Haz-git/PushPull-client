@@ -156,3 +156,12 @@ export const deleteViewTemplate = () => {
         }
     };
 };
+
+export const resetViewTemplate = () => {
+    return async (dispatch: Dispatch<ViewTemplateActions>) => {
+        dispatch({
+            type: ViewTemplateActionType.resetViewTemplate,
+            payload: {},
+        });
+    };
+};

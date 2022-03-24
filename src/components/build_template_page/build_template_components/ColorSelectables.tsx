@@ -26,7 +26,7 @@ const ColorSwatchContainer = styled.div`
     padding: 0.5rem 0.5rem;
 `;
 
-const ColorSwatch = styled.div<IColorSwatch>`
+export const ColorSwatch = styled.div<IColorSwatch>`
     height: 1.5rem;
     width: 1.5rem;
     border-radius: 0.3rem;
@@ -48,7 +48,7 @@ interface IMainContainerProps {
     isSelected: boolean;
 }
 
-interface IColorSwatch {
+export interface IColorSwatch {
     color: string;
 }
 

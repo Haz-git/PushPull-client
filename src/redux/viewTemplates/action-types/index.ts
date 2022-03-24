@@ -3,4 +3,5 @@ export enum ViewTemplateActionType {
     addViewTemplate = 'addViewTemplate',
     updateViewTemplate = 'updateViewTemplate',
     deleteViewTemplate = 'deleteViewTemplate',
+    resetViewTemplate = 'resetViewTemplate',
 }

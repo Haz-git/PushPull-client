@@ -3,7 +3,10 @@ import { useEffect } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { findViewTemplate } from '../../redux/viewTemplates/viewTemplateActions';
+import {
+    findViewTemplate,
+    resetViewTemplate,
+} from '../../redux/viewTemplates/viewTemplateActions';
 
 //Components:
 import { FixedToolbar } from './view_template_components/FixedToolbar';
@@ -90,6 +93,10 @@ export const MainViewTemplateView = ({
 
     useEffect(() => {
         dispatch(findViewTemplate(templateId));
+
+        return () => {
+            dispatch(resetViewTemplate());
+        };
     }, []);
 
     return (

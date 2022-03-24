@@ -20,8 +20,14 @@ interface deleteViewTemplate {
     payload?: any;
 }
 
+interface resetViewTemplate {
+    type: ViewTemplateActionType.resetViewTemplate;
+    payload: {};
+}
+
 export type ViewTemplateActions =
     | queryViewTemplate
     | addViewTemplate
     | updateViewTemplate
-    | deleteViewTemplate;
+    | deleteViewTemplate
+    | resetViewTemplate;
