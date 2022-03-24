@@ -3,6 +3,7 @@ import * as React from 'react';
 //Redux:
 
 //Components:
+import { LegendColorItem } from './LegendColorItem';
 
 //Styles:
 
@@ -24,5 +25,16 @@ export const LegendColorList = ({
     shouldDisplayColors,
     legendColors,
 }: IComponentProps): JSX.Element => {
-    return <>{shouldDisplayColors && <div>LegendColorItem</div>}</>;
+    const composeColorItems = (): JSX.Element[] => {
+        return legendColors?.map((item) => (
+            <LegendColorItem
+                key={item.id}
+                label={item.label}
+                colorHex={item.colorHex}
+                description={item.description}
+            />
+        ));
+    };
+
+    return <>{shouldDisplayColors && <div>{composeColorItems()}</div>}</>;
 };
