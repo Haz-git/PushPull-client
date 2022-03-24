@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+//Redux:
+import { useSelector, RootStateOrAny } from 'react-redux';
+
 //Components:
 import Text from '../../general_components/Text';
 
@@ -18,6 +21,7 @@ export const InputPanel = () => {
                     text="Viewer Inputs"
                     textColor="#ffffff"
                     textShadow="#000000 0px 0px 2px"
+                    fontSize="1.15rem"
                 />
             </HeaderContainer>
             <BodyContainer>Under construction...</BodyContainer>

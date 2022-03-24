@@ -39,7 +39,7 @@ export const LegendPanel = () => {
     );
 
     const hasLegendColors = (): boolean => {
-        return legendColors.length !== 0;
+        return legendColors?.length !== 0;
     };
 
     return (
@@ -49,6 +49,7 @@ export const LegendPanel = () => {
                     text="Color Legend"
                     textColor="#ffffff"
                     textShadow="#000000 0px 0px 2px"
+                    fontSize="1.15rem"
                 />
             </HeaderContainer>
             <BodyContainer>
