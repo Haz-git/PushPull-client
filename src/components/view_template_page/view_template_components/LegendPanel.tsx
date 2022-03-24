@@ -1,7 +1,11 @@
 import * as React from 'react';
 
+//Redux:
+import { useSelector, RootStateOrAny } from 'react-redux';
+
 //Components:
 import Text from '../../general_components/Text';
+import { LegendColorList } from './LegendColorList';
 
 //Styles:
 import styled from 'styled-components';
@@ -29,6 +33,15 @@ export const BodyContainer = styled.div`
 //Interfaces:
 
 export const LegendPanel = () => {
+    const legendColors = useSelector(
+        (state: RootStateOrAny) =>
+            state?.viewTemplate?.savedTemplate?.templateLegend
+    );
+
+    const hasLegendColors = (): boolean => {
+        return legendColors.length !== 0;
+    };
+
     return (
         <MainContainer>
             <HeaderContainer>
@@ -38,7 +51,12 @@ export const LegendPanel = () => {
                     textShadow="#000000 0px 0px 2px"
                 />
             </HeaderContainer>
-            <BodyContainer>Under construction...</BodyContainer>
+            <BodyContainer>
+                <LegendColorList
+                    shouldDisplayColors={hasLegendColors()}
+                    legendColors={legendColors}
+                />
+            </BodyContainer>
         </MainContainer>
     );
 };
