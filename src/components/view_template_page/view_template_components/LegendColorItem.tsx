@@ -32,6 +32,11 @@ const ColorItemContainer = styled.div`
     }
 `;
 
+const StyledColorSwatch = styled(ColorSwatch)`
+    height: 1.3rem;
+    width: 1.3rem;
+`;
+
 const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
@@ -72,7 +77,7 @@ export const LegendColorItem = ({
         >
             <HeaderContainer>
                 <Text text={label} fontSize="1.05rem" />
-                <ColorSwatch color={colorHex} />
+                <StyledColorSwatch color={colorHex} />
             </HeaderContainer>
             <>
                 {!isDescriptionEmpty() && (
