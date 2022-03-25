@@ -9,6 +9,8 @@ import DividerLine from '../../general_components/DividerLine';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     background: #2c2c2c;
     height: 100%;
     padding: 1rem 1rem;
@@ -21,7 +23,7 @@ export const FixedInformationPanel = () => {
     return (
         <MainContainer>
             <InputPanel />
-            <DividerLine border="none" margin="1rem" />
+            <DividerLine border="none" margin=".5rem" />
             <LegendPanel />
         </MainContainer>
     );

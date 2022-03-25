@@ -11,10 +11,13 @@ import { InputList } from './InputList';
 import styled from 'styled-components';
 
 import { MainContainer, HeaderContainer, BodyContainer } from './LegendPanel';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 //Interfaces:
 
 export const InputPanel = () => {
+    const { width, height } = useWindowDimensions();
+
     const inputArray = useSelector(
         (state: RootStateOrAny) =>
             state?.viewTemplate?.savedTemplate?.templateUserInputs
@@ -33,7 +36,7 @@ export const InputPanel = () => {
                     fontSize="1.15rem"
                 />
             </HeaderContainer>
-            <BodyContainer>
+            <BodyContainer height={height}>
                 <InputList
                     shouldDisplayInputs={hasInputArray()}
                     inputArray={inputArray}
