@@ -25,7 +25,7 @@ export const HeaderContainer = styled.div`
 
 export const BodyContainer = styled.div`
     background: #ffffff;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     border-bottom-left-radius: 0.2rem;
     border-bottom-right-radius: 0.2rem;
 `;

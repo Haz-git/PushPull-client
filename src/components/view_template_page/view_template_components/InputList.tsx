@@ -11,8 +11,8 @@ import { InputItem } from './InputItem';
 
 type InputItem = {
     id: string;
-    responseType: string;
-    inputQuestion: string;
+    ResponseType: string;
+    InputQuestion: string;
 };
 
 interface IComponentProps {
@@ -28,8 +28,8 @@ export const InputList = ({
         return inputArray?.map((item) => (
             <InputItem
                 id={item.id}
-                responseType={item.responseType}
-                inputQuestion={item.inputQuestion}
+                responseType={item.ResponseType}
+                inputQuestion={item.InputQuestion}
             />
         ));
     };
