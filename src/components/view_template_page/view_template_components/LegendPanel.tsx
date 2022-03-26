@@ -33,8 +33,11 @@ export const BodyContainer = styled.div<IBodyContainer>`
     max-height: ${({ height }) => `${height / 2 - 70}px`};
     overflow-y: scroll;
 
+    /* Scrollbar styling not recommended, TODO: Find workaround for ugly scrollbar */
+
     -ms-overflow-style: 3px; /* Internet Explorer 10+ */
     scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #e07133;
 
     /* Safari and Chrome */
     &::-webkit-scrollbar-track {
