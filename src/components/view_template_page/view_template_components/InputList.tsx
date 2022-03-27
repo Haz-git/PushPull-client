@@ -4,8 +4,10 @@ import * as React from 'react';
 
 //Components:
 import { InputItem } from './InputItem';
+import Text from '../../general_components/Text';
 
 //Styles:
+import { AbsentItemContainer } from './LegendColorList';
 
 //Interfaces:
 
@@ -34,5 +36,15 @@ export const InputList = ({
         ));
     };
 
-    return <>{shouldDisplayInputs && <>{composeInputItems()}</>}</>;
+    return (
+        <>
+            {shouldDisplayInputs ? (
+                <>{composeInputItems()}</>
+            ) : (
+                <AbsentItemContainer>
+                    <Text text="No Inputs Available" subText={true} />
+                </AbsentItemContainer>
+            )}
+        </>
+    );
 };

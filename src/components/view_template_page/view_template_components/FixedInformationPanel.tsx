@@ -11,6 +11,8 @@ import styled from 'styled-components';
 const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 0.5rem;
     background: #2c2c2c;
     height: 100%;
     padding: 1rem 1rem;
@@ -23,7 +25,6 @@ export const FixedInformationPanel = () => {
     return (
         <MainContainer>
             <InputPanel />
-            <DividerLine border="none" margin=".5rem" />
             <LegendPanel />
         </MainContainer>
     );

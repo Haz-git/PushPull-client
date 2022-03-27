@@ -79,11 +79,18 @@ export const updateTemplate = (
     templateId: string,
     templateDetails: any,
     isInTemplateBuilderMode: true | false,
+    isInProjectDashboard: true | false,
     projectUuid?: string | null,
     controlGlobalSettingsModal?: ((state: boolean) => void) | null,
     uiLoaderType?: loaderTypes | null
 ) => {
     return async (dispatch: Dispatch<any>) => {
+        /***
+         * CLEANME: This function manages update request for templates in both the project dashboard and within the template builder mode. Ideally, each operation should be abstracted to their own action creator. Half-a-year-ago Harry was crazy...
+         *
+         * Managed to debug annoying bug with the two isInTemplateBuilderMode and isInProjectDashboard flags, but this is pretty hacky and will need cleanup.
+         */
+
         try {
             if (uiLoaderType) {
                 dispatch(invokeLoaderState(uiLoaderType));
@@ -91,16 +98,17 @@ export const updateTemplate = (
 
             let response = await api.put(`/template/update/${templateId}`, {
                 templateDetails,
-                projectUuid,
+                isInTemplateBuilderMode,
+                isInProjectDashboard,
             });
 
-            const templateBuilderObject = response.data.templates[0];
-            const projectTemplateArray = response.data.templates;
+            console.log(response.data);
 
-            if (isInTemplateBuilderMode) {
+            if (isInTemplateBuilderMode && !isInProjectDashboard) {
+                //On global template modifications we want to update both the template in the template builder and the array in the project dashboard.
                 dispatch({
                     type: TemplateActionType.UPDATE_TEMPLATE,
-                    payload: templateBuilderObject,
+                    payload: response.data.template,
                 });
 
                 if (controlGlobalSettingsModal) {
@@ -108,10 +116,12 @@ export const updateTemplate = (
                 }
             }
 
-            dispatch({
-                type: ProjectTemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD,
-                payload: projectTemplateArray,
-            });
+            if (!isInProjectDashboard && isInTemplateBuilderMode) {
+                dispatch({
+                    type: ProjectTemplateActionType.UPDATE_TEMPLATE_IN_PROJECT_DASHBOARD,
+                    payload: response.data.templates,
+                });
+            }
 
             if (uiLoaderType) {
                 dispatch(disableLoaderState(uiLoaderType));

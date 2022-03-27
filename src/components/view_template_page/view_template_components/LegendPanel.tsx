@@ -30,12 +30,16 @@ export const BodyContainer = styled.div<IBodyContainer>`
     padding: 0.5rem 0.75rem;
     border-bottom-left-radius: 0.2rem;
     border-bottom-right-radius: 0.2rem;
-    max-height: ${({ height }) => `${height - 500}px`};
+    max-height: ${({ height }) => `${height / 2 - 70}px`};
     overflow-y: scroll;
+
+    /* Scrollbar styling not recommended, TODO: Find workaround for ugly scrollbar */
 
     -ms-overflow-style: 3px; /* Internet Explorer 10+ */
     scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #e07133;
 
+    /* Safari and Chrome */
     &::-webkit-scrollbar-track {
         background: transparent;
     }

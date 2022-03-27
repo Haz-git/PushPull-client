@@ -65,6 +65,7 @@ export const AddViewerInputForm = () => {
                 template.id,
                 { templateUserInputs: updatedQuestionArray },
                 true,
+                false,
                 null,
                 null,
                 loaderTypes.VIEWER_INTERACTIONS_SETTINGS_MODAL
