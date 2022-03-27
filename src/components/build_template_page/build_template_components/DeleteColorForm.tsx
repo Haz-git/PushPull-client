@@ -61,6 +61,7 @@ export const DeleteColorForm = ({
                 template.id,
                 { templateLegend: newColorArray },
                 true,
+                false,
                 null,
                 null,
                 loaderTypes.VIEWER_INTERACTIONS_SETTINGS_MODAL

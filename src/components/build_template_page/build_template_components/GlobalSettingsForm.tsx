@@ -136,6 +136,7 @@ export const GlobalSettingsForm = ({
                 id,
                 findUserNewChanges(),
                 true,
+                false,
                 projectId,
                 toggleGlobalSettingsModal,
                 loaderTypes.GLOBAL_SETTINGS_MODAL

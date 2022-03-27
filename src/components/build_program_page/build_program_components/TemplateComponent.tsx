@@ -151,7 +151,10 @@ const TemplateComponent = ({
                     templateFileTitle: newTemplateFileTitle,
                 },
                 false,
-                projectUuid
+                true,
+                projectUuid,
+                null,
+                null
             )
         );
         setStateTitleInput(false);
@@ -212,7 +215,10 @@ const TemplateComponent = ({
                         templateFileTitle: newTemplateFileTitle,
                     },
                     false,
-                    projectUuid
+                    true,
+                    projectUuid,
+                    null,
+                    null
                 )
             );
             setStateTitleInput(false);

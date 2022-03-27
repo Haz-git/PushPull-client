@@ -62,6 +62,7 @@ export const DeleteViewerInputForm = ({
                 template.id,
                 { templateUserInputs: newInputsArray },
                 true,
+                false,
                 null,
                 null,
                 loaderTypes.VIEWER_INTERACTIONS_SETTINGS_MODAL
