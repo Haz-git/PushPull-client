@@ -102,8 +102,6 @@ export const updateTemplate = (
                 isInProjectDashboard,
             });
 
-            console.log(response.data);
-
             if (isInTemplateBuilderMode && !isInProjectDashboard) {
                 //On global template modifications we want to update both the template in the template builder and the array in the project dashboard.
                 dispatch({
