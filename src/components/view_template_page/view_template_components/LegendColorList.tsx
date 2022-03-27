@@ -4,8 +4,17 @@ import * as React from 'react';
 
 //Components:
 import { LegendColorItem } from './LegendColorItem';
+import Text from '../../general_components/Text';
 
 //Styles:
+import styled from 'styled-components';
+
+export const AbsentItemContainer = styled.div`
+    padding: 1rem 1rem;
+    border-radius: 0.3rem;
+    background-color: #ececec;
+    text-align: center;
+`;
 
 //Interfaces:
 
@@ -36,5 +45,15 @@ export const LegendColorList = ({
         ));
     };
 
-    return <>{shouldDisplayColors && <div>{composeColorItems()}</div>}</>;
+    return (
+        <>
+            {shouldDisplayColors ? (
+                <div>{composeColorItems()}</div>
+            ) : (
+                <AbsentItemContainer>
+                    <Text text="No Colors Available" subText={true} />
+                </AbsentItemContainer>
+            )}
+        </>
+    );
 };
