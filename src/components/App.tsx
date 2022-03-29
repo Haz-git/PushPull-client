@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 import { isMobileOnly } from 'react-device-detect';
 import pMinDelay from 'p-min-delay';
@@ -124,8 +124,18 @@ const App = () => {
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
-    const isUserLoggedIn = useLoginStatus();
+    useEffect(() => {
+        /***
+         * Create a action creator to check if user is logged in on each app render.
+         * Action creator should dispatch to server, server should check JWT with userfront,
+         * Server should send back user details if authenticated. Fail if not.
+         */
+        setIsUserLoggedIn(false);
+    }, []);
+
+    // const isUserLoggedIn = useLoginStatus();
 
     const toggleAuthDrawerWithView = (state: boolean, view: string) => {
         setStateAuthFormView(view);
@@ -175,6 +185,7 @@ const App = () => {
                                 toggleAuthDrawerWithView={
                                     toggleAuthDrawerWithView
                                 }
+                                isUserLoggedIn={isUserLoggedIn}
                             />
                             <Switch>
                                 <Route
