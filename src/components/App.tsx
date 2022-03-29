@@ -39,6 +39,7 @@ import { ErrorNotificationProvider } from './error_handler/ErrorNotificationProv
 import GeneralDrawer from './general_components/GeneralDrawer';
 import UserAuthForm from './auth_forms/UserAuthForm';
 import AuthPage from './auth_forms/AuthPage';
+import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
@@ -121,19 +122,35 @@ const MainViewTemplateView = loadable(
 );
 
 const App = () => {
+    const user = useSelector((state: RootStateOrAny) => state?.user?.user);
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+    const checkIfUserIsLoggedIn = () => {
+        if (
+            user &&
+            Object.keys(user).length !== 0 &&
+            Object.getPrototypeOf(user) === Object.prototype
+        )
+            return true;
+
+        return false;
+    };
 
     useEffect(() => {
         /***
          * Create a action creator to check if user is logged in on each app render.
          * Action creator should dispatch to server, server should check JWT with userfront,
          * Server should send back user details if authenticated. Fail if not.
+         *
+         * This solution is worse than previous. Doesn't update if we refresh. We may have to NOT persist the user.
          */
-        setIsUserLoggedIn(false);
-    }, []);
+
+        const loginStatus = checkIfUserIsLoggedIn;
+        setIsUserLoggedIn(loginStatus);
+    }, [user]);
 
     // const isUserLoggedIn = useLoginStatus();
 
