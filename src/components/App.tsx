@@ -5,6 +5,10 @@ import { isMobileOnly } from 'react-device-detect';
 import pMinDelay from 'p-min-delay';
 import loadable from '@loadable/component';
 
+//Redux:
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { checkIfUserLoggedIn } from '../redux/auth/authActions';
+
 //Context:
 import { createContext } from 'react';
 
@@ -39,7 +43,6 @@ import { ErrorNotificationProvider } from './error_handler/ErrorNotificationProv
 import GeneralDrawer from './general_components/GeneralDrawer';
 import UserAuthForm from './auth_forms/UserAuthForm';
 import AuthPage from './auth_forms/AuthPage';
-import { RootStateOrAny, useSelector } from 'react-redux';
 
 //Styles:
 const BugReportModalContainer = styled.div``;
@@ -122,6 +125,7 @@ const MainViewTemplateView = loadable(
 );
 
 const App = () => {
+    const dispatch = useDispatch();
     const user = useSelector((state: RootStateOrAny) => state?.user?.user);
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
@@ -148,8 +152,7 @@ const App = () => {
          * This solution is worse than previous. Doesn't update if we refresh. We may have to NOT persist the user.
          */
 
-        const loginStatus = checkIfUserIsLoggedIn;
-        setIsUserLoggedIn(loginStatus);
+        dispatch(checkIfUserLoggedIn());
     }, [user]);
 
     // const isUserLoggedIn = useLoginStatus();
