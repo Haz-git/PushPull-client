@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Switch, Router, Route } from 'react-router-dom';
 import { isMobileOnly } from 'react-device-detect';
 import pMinDelay from 'p-min-delay';
 import loadable from '@loadable/component';
+
+//Redux:
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { checkIfUserLoggedIn, userSignout } from '../redux/auth/authActions';
 
 //Context:
 import { createContext } from 'react';
@@ -121,11 +125,35 @@ const MainViewTemplateView = loadable(
 );
 
 const App = () => {
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootStateOrAny) => state?.user?.user);
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
-    const isUserLoggedIn = useLoginStatus();
+    const checkIfUserIsLoggedIn = () => {
+        //Todo clean this up... abstract somewhere else..
+        if (
+            user &&
+            Object.keys(user).length !== 0 &&
+            Object.getPrototypeOf(user) === Object.prototype
+        )
+            return true;
+
+        return false;
+    };
+
+    useEffect(() => {
+        /***
+         * Todo: Clean this up. Flicker on user logout.
+         */
+
+        dispatch(checkIfUserLoggedIn());
+        setIsUserLoggedIn(checkIfUserIsLoggedIn());
+    }, [user]);
+
+    // const isUserLoggedIn = useLoginStatus();
 
     const toggleAuthDrawerWithView = (state: boolean, view: string) => {
         setStateAuthFormView(view);
@@ -175,6 +203,7 @@ const App = () => {
                                 toggleAuthDrawerWithView={
                                     toggleAuthDrawerWithView
                                 }
+                                isUserLoggedIn={isUserLoggedIn}
                             />
                             <Switch>
                                 <Route

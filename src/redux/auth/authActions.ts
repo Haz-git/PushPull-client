@@ -23,6 +23,23 @@ export const userSignout = () => {
     };
 };
 
+export const checkIfUserLoggedIn = () => {
+    return async (dispatch: Dispatch<AuthAction>) => {
+        try {
+            const response = await api.get('/user/details');
+
+            dispatch({
+                type: AuthActionType.USER_LOG_IN,
+                payload: response.data.user,
+            });
+        } catch (error) {
+            dispatch({
+                type: AuthActionType.USER_SIGN_OUT,
+            });
+        }
+    };
+};
+
 export const voteReview = (reviewObject: any) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         let response = await api.post(`/user/review/update`, { reviewObject });

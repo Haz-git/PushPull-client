@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
-import Userfront from '@userfront/react';
 
 const useLoginStatus = (): boolean => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);

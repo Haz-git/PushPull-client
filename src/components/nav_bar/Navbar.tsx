@@ -147,6 +147,7 @@ const MobileButtonsContainer = styled.div`
 
 interface IComponentProps {
     toggleAuthDrawerWithView: (state: boolean, view: string) => void;
+    isUserLoggedIn: boolean;
 }
 
 interface NavbarProps {
@@ -157,11 +158,14 @@ interface NavbarProps {
 
 Userfront.init('5nxxrqn7');
 
-const Navbar = ({ toggleAuthDrawerWithView }: IComponentProps): JSX.Element => {
+const Navbar = ({
+    toggleAuthDrawerWithView,
+    isUserLoggedIn,
+}: IComponentProps): JSX.Element => {
     const User = useSelector((state: RootStateOrAny) => state.user.user);
     const template = useSelector((state: RootStateOrAny) => state.template);
     const Location = useLocation();
-    const isUserLoggedIn = useLoginStatus();
+    // const isUserLoggedIn = useLoginStatus();
     const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
     // FIXME: Doesn't auto-logout when userfront's refresh token expires
