@@ -5,15 +5,19 @@ const initialState: any = {};
 
 const authReducer = (state: Object = initialState, action: AuthAction) => {
     switch (action.type) {
-        case AuthActionType.USER_LOG_IN:
+        case AuthActionType.userLogIn:
             return { ...state, user: action.payload };
-        case AuthActionType.USER_UPDATE_VOTES:
+        case AuthActionType.userUpdateVotes:
             return {
                 ...state,
                 user: action.payload,
             };
-        case AuthActionType.USER_SIGN_OUT:
+        case AuthActionType.userSignOut:
             return { user: initialState };
+        case AuthActionType.userSessionActive:
+            return { ...state, user: action.payload };
+        case AuthActionType.userSessionInactive:
+            return { ...state, user: initialState };
         default:
             return state;
     }
