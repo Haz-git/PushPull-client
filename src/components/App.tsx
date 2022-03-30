@@ -7,7 +7,7 @@ import loadable from '@loadable/component';
 
 //Redux:
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
-import { checkIfUserLoggedIn } from '../redux/auth/authActions';
+import { checkIfUserLoggedIn, userSignout } from '../redux/auth/authActions';
 
 //Context:
 import { createContext } from 'react';
@@ -133,6 +133,7 @@ const App = () => {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
     const checkIfUserIsLoggedIn = () => {
+        //Todo clean this up... abstract somewhere else..
         if (
             user &&
             Object.keys(user).length !== 0 &&
@@ -145,14 +146,11 @@ const App = () => {
 
     useEffect(() => {
         /***
-         * Create a action creator to check if user is logged in on each app render.
-         * Action creator should dispatch to server, server should check JWT with userfront,
-         * Server should send back user details if authenticated. Fail if not.
-         *
-         * This solution is worse than previous. Doesn't update if we refresh. We may have to NOT persist the user.
+         * Todo: Clean this up. Flicker on user logout.
          */
 
         dispatch(checkIfUserLoggedIn());
+        setIsUserLoggedIn(checkIfUserIsLoggedIn());
     }, [user]);
 
     // const isUserLoggedIn = useLoginStatus();

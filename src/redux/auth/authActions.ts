@@ -28,13 +28,14 @@ export const checkIfUserLoggedIn = () => {
         try {
             const response = await api.get('/user/details');
 
-            console.log(response);
-            // dispatch({
-            //     type: AuthActionType.USER_LOG_IN,
-            //     payload: response.data,
-            // });
+            dispatch({
+                type: AuthActionType.USER_LOG_IN,
+                payload: response.data.user,
+            });
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: AuthActionType.USER_SIGN_OUT,
+            });
         }
     };
 };
