@@ -9,7 +9,7 @@ Userfront.init('5nxxrqn7');
 export const userLogin = (userDetails: any) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         dispatch({
-            type: AuthActionType.USER_LOG_IN,
+            type: AuthActionType.userLogIn,
             payload: userDetails,
         });
     };
@@ -18,7 +18,7 @@ export const userLogin = (userDetails: any) => {
 export const userSignout = () => {
     return async (dispatch: Dispatch<AuthAction>) => {
         dispatch({
-            type: AuthActionType.USER_SIGN_OUT,
+            type: AuthActionType.userSignOut,
         });
     };
 };
@@ -29,12 +29,13 @@ export const checkIfUserLoggedIn = () => {
             const response = await api.get('/user/details');
 
             dispatch({
-                type: AuthActionType.USER_LOG_IN,
+                type: AuthActionType.userSessionActive,
                 payload: response.data.user,
             });
         } catch (error) {
             dispatch({
-                type: AuthActionType.USER_SIGN_OUT,
+                type: AuthActionType.userSessionInactive,
+                payload: {},
             });
         }
     };
@@ -45,7 +46,7 @@ export const voteReview = (reviewObject: any) => {
         let response = await api.post(`/user/review/update`, { reviewObject });
 
         dispatch({
-            type: AuthActionType.USER_UPDATE_VOTES,
+            type: AuthActionType.userUpdateVotes,
             payload: response.data.userDetails,
         });
     };
