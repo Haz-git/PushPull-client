@@ -10,7 +10,10 @@ export const userLogin = (userDetails: any) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         dispatch({
             type: AuthActionType.userLogIn,
-            payload: userDetails,
+            payload: {
+                isLoggedIn: true,
+                userDetails,
+            },
         });
     };
 };
@@ -19,6 +22,9 @@ export const userSignout = () => {
     return async (dispatch: Dispatch<AuthAction>) => {
         dispatch({
             type: AuthActionType.userSignOut,
+            payload: {
+                isLoggedIn: false,
+            },
         });
     };
 };
@@ -30,12 +36,17 @@ export const checkIfUserLoggedIn = () => {
 
             dispatch({
                 type: AuthActionType.userSessionActive,
-                payload: response.data.user,
+                payload: {
+                    isLoggedIn: true,
+                    userDetails: response.data.user,
+                },
             });
         } catch (error) {
             dispatch({
                 type: AuthActionType.userSessionInactive,
-                payload: {},
+                payload: {
+                    isLoggedIn: false,
+                },
             });
         }
     };
