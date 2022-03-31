@@ -22,7 +22,9 @@ interface retrieveUserIfSessionActive {
 
 interface preventUserDetailsIfSessionInactive {
     type: AuthActionType.userSessionInactive;
-    payload: {};
+    payload: {
+        isLoggedIn: boolean;
+    };
 }
 
 export type AuthAction =
