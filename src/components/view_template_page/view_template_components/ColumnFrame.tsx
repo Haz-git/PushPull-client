@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     section: {
         margin: 10,
         padding: 10,
-        flexGrow: 1,
     },
     text: {
         fontSize: 10,
@@ -25,5 +24,5 @@ const styles = StyleSheet.create({
  */
 
 export const ColumnFrame = (): JSX.Element => {
-    return <div>ColumnFrame</div>;
+    return <Text style={styles.text}>ColumnFrame</Text>;
 };

@@ -4,25 +4,57 @@ import * as React from 'react';
 
 //Component:
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { ColumnFrame } from './ColumnFrame';
 
 //Styles:
 const styles = StyleSheet.create({
-    section: {
+    column: {
+        border: '1px solid black',
+    },
+    columnWrapper: {
+        flexDirection: 'column',
+        border: '1px solid black',
+        marginTop: 20,
+    },
+    sheet: {
+        flexDirection: 'column',
         margin: 10,
         padding: 10,
-        flexGrow: 1,
+        border: '1px solid black',
     },
     text: {
         fontSize: 10,
     },
 });
 
-//Interfaces
+//Interfaces:
 
-export const SheetFrame = () => {
+/**
+ * @description This frame represents individual 'sheets' within each template.
+ *
+ */
+
+export const SheetFrame = (): JSX.Element => {
     return (
-        <View style={styles.section}>
+        <View style={styles.sheet}>
             <Text style={styles.text}>Week 1</Text>
+            <View style={styles.columnWrapper}>
+                <View style={styles.column}>
+                    <ColumnFrame />
+                </View>
+                <View style={styles.column}>
+                    <ColumnFrame />
+                </View>
+                <View style={styles.column}>
+                    <ColumnFrame />
+                </View>
+                <View style={styles.column}>
+                    <ColumnFrame />
+                </View>
+                <View style={styles.column}>
+                    <ColumnFrame />
+                </View>
+            </View>
         </View>
     );
 };
