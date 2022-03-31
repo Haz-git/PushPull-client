@@ -143,7 +143,6 @@ const App = () => {
     };
 
     const closeAuthDrawerContainer = () => setStateAuthDrawer(false);
-
     const openBugReportModal = () => setStateBugReportModal(true);
     const closeBugReportModal = () => setStateBugReportModal(false);
 
