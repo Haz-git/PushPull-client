@@ -126,34 +126,16 @@ const MainViewTemplateView = loadable(
 
 const App = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state: RootStateOrAny) => state?.user?.user);
+    const isLoggedIn = useSelector(
+        (state: RootStateOrAny) => state?.user?.isLoggedIn
+    );
     const [stateBugReportModal, setStateBugReportModal] = useState(false);
     const [stateAuthDrawer, setStateAuthDrawer] = useState(false);
     const [stateAuthFormView, setStateAuthFormView] = useState('SIGNUP');
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
-    const checkIfUserIsLoggedIn = () => {
-        //Todo clean this up... abstract somewhere else..
-        if (
-            user &&
-            Object.keys(user).length !== 0 &&
-            Object.getPrototypeOf(user) === Object.prototype
-        )
-            return true;
-
-        return false;
-    };
 
     useEffect(() => {
-        /***
-         * Todo: Clean this up. Flicker on user logout.
-         */
-
         dispatch(checkIfUserLoggedIn());
-        setIsUserLoggedIn(checkIfUserIsLoggedIn());
-    }, [user]);
-
-    // const isUserLoggedIn = useLoginStatus();
+    }, [isLoggedIn]);
 
     const toggleAuthDrawerWithView = (state: boolean, view: string) => {
         setStateAuthFormView(view);
@@ -161,7 +143,6 @@ const App = () => {
     };
 
     const closeAuthDrawerContainer = () => setStateAuthDrawer(false);
-
     const openBugReportModal = () => setStateBugReportModal(true);
     const closeBugReportModal = () => setStateBugReportModal(false);
 
@@ -203,7 +184,7 @@ const App = () => {
                                 toggleAuthDrawerWithView={
                                     toggleAuthDrawerWithView
                                 }
-                                isUserLoggedIn={isUserLoggedIn}
+                                isUserLoggedIn={isLoggedIn}
                             />
                             <Switch>
                                 <Route
@@ -246,7 +227,7 @@ const App = () => {
                                     exact
                                     path="/add-review/:id"
                                     authPath="/authenticate"
-                                    isAuthenticated={isUserLoggedIn}
+                                    isAuthenticated={isLoggedIn}
                                     component={MainAddReviewPageView}
                                     toggleAuthDrawerWithView={
                                         toggleAuthDrawerWithView
@@ -273,7 +254,7 @@ const App = () => {
                                     exact
                                     path="/builder/dashboard/:dashboardView"
                                     authPath="/authenticate"
-                                    isAuthenticated={isUserLoggedIn}
+                                    isAuthenticated={isLoggedIn}
                                     component={MainBuildProgramView}
                                     toggleAuthDrawerWithView={
                                         toggleAuthDrawerWithView
@@ -283,7 +264,7 @@ const App = () => {
                                     exact
                                     path="/file/:fileUuid"
                                     authPath="/authenticate"
-                                    isAuthenticated={isUserLoggedIn}
+                                    isAuthenticated={isLoggedIn}
                                     component={MainBuildTemplateView}
                                     toggleAuthDrawerWithView={
                                         toggleAuthDrawerWithView

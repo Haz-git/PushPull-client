@@ -1,19 +1,38 @@
 import { AuthActionType } from './action-types';
 import { AuthAction } from './authInterfaces';
 
-const initialState: any = {};
+const initialState: any = {
+    isLoggedIn: false,
+    user: {},
+};
 
 const authReducer = (state: Object = initialState, action: AuthAction) => {
     switch (action.type) {
-        case AuthActionType.USER_LOG_IN:
-            return { ...state, user: action.payload };
-        case AuthActionType.USER_UPDATE_VOTES:
+        case AuthActionType.userLogIn:
+            return {
+                isLoggedIn: action.payload.isLoggedIn,
+                user: action.payload.userDetails,
+            };
+        case AuthActionType.userUpdateVotes:
             return {
                 ...state,
                 user: action.payload,
             };
-        case AuthActionType.USER_SIGN_OUT:
-            return { user: initialState };
+        case AuthActionType.userSignOut:
+            return {
+                isLoggedIn: action.payload.isLoggedIn,
+                user: {},
+            };
+        case AuthActionType.userSessionActive:
+            return {
+                isLoggedIn: action.payload.isLoggedIn,
+                user: action.payload.userDetails,
+            };
+        case AuthActionType.userSessionInactive:
+            return {
+                isLoggedIn: action.payload.isLoggedIn,
+                user: {},
+            };
         default:
             return state;
     }

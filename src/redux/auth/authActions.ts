@@ -9,8 +9,11 @@ Userfront.init('5nxxrqn7');
 export const userLogin = (userDetails: any) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         dispatch({
-            type: AuthActionType.USER_LOG_IN,
-            payload: userDetails,
+            type: AuthActionType.userLogIn,
+            payload: {
+                isLoggedIn: true,
+                userDetails,
+            },
         });
     };
 };
@@ -18,7 +21,10 @@ export const userLogin = (userDetails: any) => {
 export const userSignout = () => {
     return async (dispatch: Dispatch<AuthAction>) => {
         dispatch({
-            type: AuthActionType.USER_SIGN_OUT,
+            type: AuthActionType.userSignOut,
+            payload: {
+                isLoggedIn: false,
+            },
         });
     };
 };
@@ -29,12 +35,18 @@ export const checkIfUserLoggedIn = () => {
             const response = await api.get('/user/details');
 
             dispatch({
-                type: AuthActionType.USER_LOG_IN,
-                payload: response.data.user,
+                type: AuthActionType.userSessionActive,
+                payload: {
+                    isLoggedIn: true,
+                    userDetails: response.data.user,
+                },
             });
         } catch (error) {
             dispatch({
-                type: AuthActionType.USER_SIGN_OUT,
+                type: AuthActionType.userSessionInactive,
+                payload: {
+                    isLoggedIn: false,
+                },
             });
         }
     };
@@ -45,7 +57,7 @@ export const voteReview = (reviewObject: any) => {
         let response = await api.post(`/user/review/update`, { reviewObject });
 
         dispatch({
-            type: AuthActionType.USER_UPDATE_VOTES,
+            type: AuthActionType.userUpdateVotes,
             payload: response.data.userDetails,
         });
     };
