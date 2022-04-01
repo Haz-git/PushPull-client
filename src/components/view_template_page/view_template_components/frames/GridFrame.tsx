@@ -4,12 +4,13 @@ import * as React from 'react';
 
 //Components:
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import { GridFrame } from './GridFrame';
+import { GridHeaderFrame } from './GridHeaderFrame';
+import { RowFrame } from './RowFrame';
 
 //Styles:
 const styles = StyleSheet.create({
-    section: {
-        margin: 10,
+    grid: {
+        flexDirection: 'column',
         padding: 10,
     },
     text: {
@@ -20,16 +21,16 @@ const styles = StyleSheet.create({
 //Interfaces:
 
 /**
- * @description This frame represents individal 'columns' within each template. Defaulted to 'Day 1', 'Day 2', etc.
+ * @description This frame represents the grid enclosure.
  *
  */
 
-export const ColumnFrame = (): JSX.Element => {
+export const GridFrame = () => {
     return (
-        <View>
-            <Text style={styles.text}>Day 'X'</Text>
+        <View style={styles.grid}>
+            <GridHeaderFrame />
             <View>
-                <GridFrame />
+                <RowFrame />
             </View>
         </View>
     );
