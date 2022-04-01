@@ -2,7 +2,7 @@ import * as React from 'react';
 
 //Components:
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import { SheetFrame } from './SheetFrame';
+import { SheetFrame } from './frames/SheetFrame';
 
 //Styles:
 const styles = StyleSheet.create({
