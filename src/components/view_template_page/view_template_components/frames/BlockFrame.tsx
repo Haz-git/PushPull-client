@@ -4,7 +4,7 @@ import * as React from 'react';
 
 //Components:
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import { BlockFrame } from './BlockFrame';
+import { GridFrame } from './GridFrame';
 
 //Styles:
 const styles = StyleSheet.create({
@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
         border: '1px solid black',
         textAlign: 'center',
     },
-    flexRow: {
-        flexDirection: 'row',
+    column: {
+        flexDirection: 'column',
     },
     text: {
         fontSize: 10,
@@ -38,31 +38,31 @@ const styles = StyleSheet.create({
 
 //Interfaces:
 
+interface IComponentProps {
+    itemCount?: number;
+}
+
 /**
- * @description This frame represents each exercise row.
+ * @description This frame represents each block in an exercise row. Such as Set, Reps, Weight, or Rest.
  *
  */
 
-export const RowFrame = () => {
+export const BlockFrame = ({ itemCount }: IComponentProps): JSX.Element => {
+    //Currently the items are created manually. We'll need to dynamically render out the set, rep, and weight count. They should be the same number however.
+
     return (
-        <View style={styles.flexRow}>
-            <View style={styles.orderItem}>
+        <View style={styles.column}>
+            <View>
                 <Text>1</Text>
             </View>
-            <View style={styles.exerciseItem}>
-                <Text>Bench Press</Text>
+            <View>
+                <Text>2</Text>
             </View>
-            <View style={styles.headerItem}>
-                <BlockFrame />
+            <View>
+                <Text>3</Text>
             </View>
-            <View style={styles.headerItem}>
-                <Text>24</Text>
-            </View>
-            <View style={styles.headerItem}>
-                <Text>110</Text>
-            </View>
-            <View style={styles.headerItem}>
-                <Text>Na</Text>
+            <View>
+                <Text>4</Text>
             </View>
         </View>
     );
