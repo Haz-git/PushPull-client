@@ -53,16 +53,16 @@ export const BlockFrame = ({ itemCount }: IComponentProps): JSX.Element => {
     return (
         <View style={styles.column}>
             <View>
-                <Text>1</Text>
+                <Text style={styles.text}>1</Text>
             </View>
             <View>
-                <Text>2</Text>
+                <Text style={styles.text}>2</Text>
             </View>
             <View>
-                <Text>3</Text>
+                <Text style={styles.text}>3</Text>
             </View>
             <View>
-                <Text>4</Text>
+                <Text style={styles.text}>4</Text>
             </View>
         </View>
     );

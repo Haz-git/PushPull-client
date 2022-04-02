@@ -51,7 +51,7 @@ export const RowFrame = () => {
                 <Text>1</Text>
             </View>
             <View style={styles.exerciseItem}>
-                <Text>Bench Press</Text>
+                <Text style={styles.text}>Bench Press</Text>
             </View>
             <View style={styles.exerciseDescriptionItem}>
                 <BlockFrame />
@@ -60,10 +60,10 @@ export const RowFrame = () => {
                 <BlockFrame />
             </View>
             <View style={styles.exerciseDescriptionItem}>
-                <Text>110</Text>
+                <Text style={styles.text}>110</Text>
             </View>
             <View style={styles.exerciseDescriptionItem}>
-                <Text>Na</Text>
+                <Text style={styles.text}>Na</Text>
             </View>
         </View>
     );

@@ -84,6 +84,9 @@ export const MainViewTemplateView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const { height, width } = useWindowDimensions();
+    const viewTemplate = useSelector(
+        (state: RootStateOrAny) => state?.viewTemplate?.savedTemplate
+    );
     const hasViewTemplateError = useSelector(
         (state: RootStateOrAny) =>
             state?.errors?.queryViewTemplateError?.hasError
@@ -126,7 +129,7 @@ export const MainViewTemplateView = ({
                                 width={width - 325} //325 is combined width of information panel and fixedToolbar
                                 style={pdfViewerStyles}
                             >
-                                <TemplateDocument />
+                                <TemplateDocument viewTemplate={viewTemplate} />
                             </PDFViewer>
                         </DocumentContainer>
                         <InformationPanelContainer>

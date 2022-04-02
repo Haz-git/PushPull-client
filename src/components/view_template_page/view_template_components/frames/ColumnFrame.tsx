@@ -10,8 +10,8 @@ import { GridFrame } from './GridFrame';
 const styles = StyleSheet.create({
     columnContainer: {
         border: '1px solid black',
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 5,
+        marginBottom: 5,
     },
     section: {
         margin: 10,
