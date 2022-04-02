@@ -23,19 +23,30 @@ const styles = StyleSheet.create({
 });
 
 //Interfaces:
+interface IComponentProps {
+    viewTemplate: any;
+    sheetContent: any;
+}
 
 /**
  * @description This frame represents individal 'columns' within each template. Defaulted to 'Day 1', 'Day 2', etc.
  * Wrap is false here to prevent cut-off during PDF page separation.
  */
 
-export const ColumnFrame = (): JSX.Element => {
-    return (
-        <View wrap={false} style={styles.columnContainer}>
-            <Text style={styles.text}>Day 'X'</Text>
-            <View>
-                <GridFrame />
+export const ColumnFrame = ({
+    viewTemplate,
+    sheetContent,
+}: IComponentProps): JSX.Element => {
+    const composeColumnFrames = (): JSX.Element[] => {
+        return Object.keys(sheetContent).map((item, i) => (
+            <View wrap={false} style={styles.columnContainer}>
+                <Text style={styles.text}>{item}</Text>
+                <View>
+                    <GridFrame />
+                </View>
             </View>
-        </View>
-    );
+        ));
+    };
+
+    return <View>{composeColumnFrames()}</View>;
 };
