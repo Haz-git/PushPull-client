@@ -14,8 +14,9 @@ const styles = StyleSheet.create({
         marginRight: 10,
         border: '1px solid black',
         textAlign: 'center',
+        alignContent: 'center',
     },
-    headerItem: {
+    exerciseDescriptionItem: {
         width: '100%',
         maxWidth: 75,
         marginRight: 10,
@@ -52,16 +53,16 @@ export const RowFrame = () => {
             <View style={styles.exerciseItem}>
                 <Text>Bench Press</Text>
             </View>
-            <View style={styles.headerItem}>
+            <View style={styles.exerciseDescriptionItem}>
                 <BlockFrame />
             </View>
-            <View style={styles.headerItem}>
-                <Text>24</Text>
+            <View style={styles.exerciseDescriptionItem}>
+                <BlockFrame />
             </View>
-            <View style={styles.headerItem}>
+            <View style={styles.exerciseDescriptionItem}>
                 <Text>110</Text>
             </View>
-            <View style={styles.headerItem}>
+            <View style={styles.exerciseDescriptionItem}>
                 <Text>Na</Text>
             </View>
         </View>

@@ -32,6 +32,9 @@ export const GridFrame = () => {
             <View>
                 <RowFrame />
             </View>
+            <View>
+                <RowFrame />
+            </View>
         </View>
     );
 };

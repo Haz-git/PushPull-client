@@ -8,6 +8,11 @@ import { GridFrame } from './GridFrame';
 
 //Styles:
 const styles = StyleSheet.create({
+    columnContainer: {
+        border: '1px solid black',
+        marginTop: 10,
+        marginBottom: 10,
+    },
     section: {
         margin: 10,
         padding: 10,
@@ -21,12 +26,12 @@ const styles = StyleSheet.create({
 
 /**
  * @description This frame represents individal 'columns' within each template. Defaulted to 'Day 1', 'Day 2', etc.
- *
+ * Wrap is false here to prevent cut-off during PDF page separation.
  */
 
 export const ColumnFrame = (): JSX.Element => {
     return (
-        <View>
+        <View wrap={false} style={styles.columnContainer}>
             <Text style={styles.text}>Day 'X'</Text>
             <View>
                 <GridFrame />

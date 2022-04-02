@@ -8,9 +8,6 @@ import { ColumnFrame } from './ColumnFrame';
 
 //Styles:
 const styles = StyleSheet.create({
-    column: {
-        border: '1px solid black',
-    },
     columnWrapper: {
         flexDirection: 'column',
         border: '1px solid black',
@@ -39,21 +36,11 @@ export const SheetFrame = (): JSX.Element => {
         <View style={styles.sheet}>
             <Text style={styles.text}>Week 1</Text>
             <View style={styles.columnWrapper}>
-                <View style={styles.column}>
-                    <ColumnFrame />
-                </View>
-                <View style={styles.column}>
-                    <ColumnFrame />
-                </View>
-                <View style={styles.column}>
-                    <ColumnFrame />
-                </View>
-                <View style={styles.column}>
-                    <ColumnFrame />
-                </View>
-                <View style={styles.column}>
-                    <ColumnFrame />
-                </View>
+                <ColumnFrame />
+                <ColumnFrame />
+                <ColumnFrame />
+                <ColumnFrame />
+                <ColumnFrame />
             </View>
         </View>
     );
