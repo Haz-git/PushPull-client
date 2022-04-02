@@ -26,22 +26,29 @@ const styles = StyleSheet.create({
 
 //Interfaces:
 
+interface IComponentProps {
+    viewTemplate: any;
+}
+
 /**
  * @description This frame represents individual 'sheets' within each template.
  *
  */
 
-export const SheetFrame = (): JSX.Element => {
-    return (
-        <View style={styles.sheet}>
-            <Text style={styles.text}>Week 1</Text>
-            <View style={styles.columnWrapper}>
-                <ColumnFrame />
-                <ColumnFrame />
-                <ColumnFrame />
-                <ColumnFrame />
-                <ColumnFrame />
+export const SheetFrame = ({ viewTemplate }: IComponentProps): JSX.Element => {
+    const composeSheetFrames = (): JSX.Element[] => {
+        return viewTemplate?.templateEditingSurfaceBlocks.map((sheet: any) => (
+            <View style={styles.sheet} key={sheet.sheetId}>
+                <Text style={styles.text}>{sheet.sheetName}</Text>
+                <View style={styles.columnWrapper}>
+                    <ColumnFrame
+                        viewTemplate={viewTemplate}
+                        sheetContent={sheet.sheetContent}
+                    />
+                </View>
             </View>
-        </View>
-    );
+        ));
+    };
+
+    return <View>{composeSheetFrames()}</View>;
 };
