@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 //Interfaces:
 interface IComponentProps {
-    viewTemplate: any;
+    viewTemplate: any; //Todo: viewTemplate object...
 }
 
 export const TemplateDocument = ({
@@ -32,7 +32,7 @@ export const TemplateDocument = ({
                     weightUnit={viewTemplate?.templateWeightUnit}
                     updatedAt={viewTemplate?.updatedAt}
                 />
-                <SheetFrame />
+                <SheetFrame viewTemplate={viewTemplate} />
             </Page>
         </Document>
     );
