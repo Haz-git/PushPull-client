@@ -26,7 +26,12 @@ export const TemplateDocument = ({
     return (
         <Document>
             <Page object-fit="fill" size="A4" style={styles.page}>
-                <PageHeaderFrame />
+                <PageHeaderFrame
+                    title={viewTemplate?.templateFileTitle}
+                    description={viewTemplate?.templateFileDesc}
+                    weightUnit={viewTemplate?.templateWeightUnit}
+                    updatedAt={viewTemplate?.updatedAt}
+                />
                 <SheetFrame />
             </Page>
         </Document>

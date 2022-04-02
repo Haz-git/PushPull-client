@@ -19,7 +19,10 @@ const styles = StyleSheet.create({
 //Interfaces:
 
 interface IComponentProps {
-    itemCount?: number;
+    title: string;
+    description: string;
+    weightUnit: string;
+    updatedAt: string;
 }
 
 /**
@@ -27,10 +30,18 @@ interface IComponentProps {
  *
  */
 
-export const PageHeaderFrame = () => {
+export const PageHeaderFrame = ({
+    title,
+    description,
+    weightUnit,
+    updatedAt,
+}: IComponentProps): JSX.Element => {
     return (
         <View style={styles.container}>
-            <Text>Test</Text>
+            <Text>{title}</Text>
+            <Text>{description}</Text>
+            <Text>{weightUnit}</Text>
+            <Text>{updatedAt}</Text>
         </View>
     );
 };
