@@ -5,6 +5,7 @@ import * as React from 'react';
 //Components:
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import { GridFrame } from './GridFrame';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 const styles = StyleSheet.create({
@@ -40,18 +41,19 @@ export const ColumnFrame = ({
     sheetOrder,
 }: IComponentProps): JSX.Element => {
     const composeColumnFrames = (): JSX.Element[] => {
-        return Object.keys(sheetContent).map((item, i) => (
+        return sheetOrder.map((columnHeader: string, index: number) => (
             <View
                 wrap={false}
                 style={styles.columnContainer}
                 key={sheetContent.sheetId}
             >
-                <Text style={styles.text}>{item}</Text>
+                <Text style={styles.text}>{columnHeader}</Text>
                 <View>
                     <GridFrame
                         viewTemplate={viewTemplate}
                         sheetContent={sheetContent}
                         sheetOrder={sheetOrder}
+                        columnHeader={columnHeader}
                     />
                 </View>
             </View>

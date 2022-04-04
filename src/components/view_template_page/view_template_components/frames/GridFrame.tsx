@@ -5,7 +5,8 @@ import * as React from 'react';
 //Components:
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import { GridHeaderFrame } from './GridHeaderFrame';
-import { RowFrameContainer } from './RowFrameContainer';
+import { v4 as uuid } from 'uuid';
+import { RowFrame } from './RowFrame';
 //Styles:
 const styles = StyleSheet.create({
     grid: {
@@ -22,6 +23,7 @@ interface IComponentProps {
     viewTemplate: any;
     sheetContent: any;
     sheetOrder: any;
+    columnHeader: string;
 }
 
 /**
@@ -36,14 +38,13 @@ export const GridFrame = ({
     viewTemplate,
     sheetContent,
     sheetOrder,
+    columnHeader,
 }: IComponentProps): JSX.Element => {
     const composeRowFrameContainers = (): JSX.Element[] => {
-        return sheetOrder.map((sheetName: string) => (
+        //TODO: Not sure why all exercises are being rendered per day. Also, order of the days are NOT maintained during map.
+        return sheetContent[columnHeader].map((block: any, index: number) => (
             <View>
-                <RowFrameContainer
-                    blocks={sheetContent[sheetName]}
-                    key={sheetContent[sheetName].id}
-                />
+                <RowFrame blockDetails={block.blockDetails} index={index + 1} />
             </View>
         ));
     };
