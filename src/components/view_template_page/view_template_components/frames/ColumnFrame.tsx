@@ -42,7 +42,7 @@ export const ColumnFrame = ({
             <View wrap={false} style={styles.columnContainer}>
                 <Text style={styles.text}>{item}</Text>
                 <View>
-                    <GridFrame />
+                    <GridFrame viewTemplate={viewTemplate} />
                 </View>
             </View>
         ));

@@ -19,13 +19,16 @@ const styles = StyleSheet.create({
 });
 
 //Interfaces:
+interface IComponentProps {
+    viewTemplate: any;
+}
 
 /**
  * @description This frame represents the grid enclosure.
  *
  */
 
-export const GridFrame = () => {
+export const GridFrame = ({ viewTemplate }: IComponentProps): JSX.Element => {
     return (
         <View style={styles.grid}>
             <GridHeaderFrame />
