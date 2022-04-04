@@ -48,7 +48,7 @@ export const RowFrame = () => {
     return (
         <View style={styles.flexRow}>
             <View style={styles.orderItem}>
-                <Text>1</Text>
+                <Text style={styles.text}>1</Text>
             </View>
             <View style={styles.exerciseItem}>
                 <Text style={styles.text}>Bench Press</Text>
