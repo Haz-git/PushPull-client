@@ -44,6 +44,7 @@ export const SheetFrame = ({ viewTemplate }: IComponentProps): JSX.Element => {
                     <ColumnFrame
                         viewTemplate={viewTemplate}
                         sheetContent={sheet.sheetContent}
+                        sheetOrder={sheet.sheetOrder}
                     />
                 </View>
             </View>

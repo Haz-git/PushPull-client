@@ -21,14 +21,23 @@ const styles = StyleSheet.create({
 //Interfaces:
 interface IComponentProps {
     viewTemplate: any;
+    sheetContent: any;
+    sheetOrder: any;
 }
 
 /**
  * @description This frame represents the grid enclosure.
  *
+ * sheetOrder describes the order by which each row should be rendered.
+ * Naive approach suggests mapping through sheetOrder, querying sheetContent
+ *
  */
 
-export const GridFrame = ({ viewTemplate }: IComponentProps): JSX.Element => {
+export const GridFrame = ({
+    viewTemplate,
+    sheetContent,
+    sheetOrder,
+}: IComponentProps): JSX.Element => {
     return (
         <View style={styles.grid}>
             <GridHeaderFrame />

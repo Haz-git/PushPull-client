@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
 interface IComponentProps {
     viewTemplate: any;
     sheetContent: any;
+    sheetOrder: any;
 }
 
 /**
@@ -36,13 +37,18 @@ interface IComponentProps {
 export const ColumnFrame = ({
     viewTemplate,
     sheetContent,
+    sheetOrder,
 }: IComponentProps): JSX.Element => {
     const composeColumnFrames = (): JSX.Element[] => {
         return Object.keys(sheetContent).map((item, i) => (
             <View wrap={false} style={styles.columnContainer}>
                 <Text style={styles.text}>{item}</Text>
                 <View>
-                    <GridFrame viewTemplate={viewTemplate} />
+                    <GridFrame
+                        viewTemplate={viewTemplate}
+                        sheetContent={sheetContent}
+                        sheetOrder={sheetOrder}
+                    />
                 </View>
             </View>
         ));
