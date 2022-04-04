@@ -5,8 +5,7 @@ import * as React from 'react';
 //Components:
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import { GridHeaderFrame } from './GridHeaderFrame';
-import { RowFrame } from './RowFrame';
-
+import { RowFrameContainer } from './RowFrameContainer';
 //Styles:
 const styles = StyleSheet.create({
     grid: {
@@ -29,7 +28,7 @@ interface IComponentProps {
  * @description This frame represents the grid enclosure.
  *
  * sheetOrder describes the order by which each row should be rendered.
- * Naive approach suggests mapping through sheetOrder, querying sheetContent
+ * Naive approach suggests mapping through sheetOrder, querying sheetContent for each string in sheetOrder, and returning the blocks as a RowFrame.
  *
  */
 
@@ -38,15 +37,16 @@ export const GridFrame = ({
     sheetContent,
     sheetOrder,
 }: IComponentProps): JSX.Element => {
-    return (
-        <View style={styles.grid}>
-            <GridHeaderFrame />
+    const composeRowFrameContainers = (): JSX.Element[] => {
+        return sheetOrder.map((sheetName: string) => (
             <View>
-                <RowFrame />
+                <RowFrameContainer
+                    blocks={sheetContent[sheetName]}
+                    key={sheetContent[sheetName].id}
+                />
             </View>
-            <View>
-                <RowFrame />
-            </View>
-        </View>
-    );
+        ));
+    };
+
+    return <View style={styles.grid}>{composeRowFrameContainers()}</View>;
 };

@@ -41,7 +41,11 @@ export const ColumnFrame = ({
 }: IComponentProps): JSX.Element => {
     const composeColumnFrames = (): JSX.Element[] => {
         return Object.keys(sheetContent).map((item, i) => (
-            <View wrap={false} style={styles.columnContainer}>
+            <View
+                wrap={false}
+                style={styles.columnContainer}
+                key={sheetContent.sheetId}
+            >
                 <Text style={styles.text}>{item}</Text>
                 <View>
                     <GridFrame

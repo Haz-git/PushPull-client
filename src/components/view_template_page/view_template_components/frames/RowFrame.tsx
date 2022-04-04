@@ -38,22 +38,29 @@ const styles = StyleSheet.create({
 });
 
 //Interfaces:
+interface IComponentProps {
+    blockDetails: any;
+    index: number;
+}
 
 /**
  * @description This frame represents each exercise row.
  *
  */
 
-export const RowFrame = () => {
+export const RowFrame = ({
+    blockDetails,
+    index,
+}: IComponentProps): JSX.Element => {
     return (
         <View style={styles.flexRow}>
             <View style={styles.orderItem}>
-                <Text style={styles.text}>1</Text>
+                <Text style={styles.text}>{index}</Text>
             </View>
             <View style={styles.exerciseItem}>
-                <Text style={styles.text}>Bench Press</Text>
+                <Text style={styles.text}>{blockDetails.name}</Text>
             </View>
-            <View style={styles.exerciseDescriptionItem}>
+            {/* <View style={styles.exerciseDescriptionItem}>
                 <BlockFrame />
             </View>
             <View style={styles.exerciseDescriptionItem}>
@@ -64,7 +71,7 @@ export const RowFrame = () => {
             </View>
             <View style={styles.exerciseDescriptionItem}>
                 <Text style={styles.text}>Na</Text>
-            </View>
+            </View> */}
         </View>
     );
 };
