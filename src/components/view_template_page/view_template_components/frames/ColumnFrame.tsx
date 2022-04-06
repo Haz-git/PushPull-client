@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 
 //Redux:
 
@@ -34,6 +35,11 @@ interface IComponentProps {
  * @description This frame represents individal 'columns' within each template. Defaulted to 'Day 1', 'Day 2', etc.
  * Wrap is false here to prevent cut-off during PDF page separation.
  */
+const constructHeaderName = (columnHeader: string): string => {
+    return columnHeader.includes(`%SECRET%ID%`)
+        ? columnHeader.substring(0, columnHeader.indexOf(`%SECRET%ID%`))
+        : columnHeader;
+};
 
 export const ColumnFrame = ({
     viewTemplate,
@@ -47,7 +53,9 @@ export const ColumnFrame = ({
                 style={styles.columnContainer}
                 key={sheetContent.sheetId}
             >
-                <Text style={styles.text}>{columnHeader}</Text>
+                <Text style={styles.text}>
+                    {constructHeaderName(columnHeader)}
+                </Text>
                 <View>
                     <GridFrame
                         viewTemplate={viewTemplate}
