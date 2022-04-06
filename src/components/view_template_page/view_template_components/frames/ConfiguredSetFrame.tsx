@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     },
     exerciseDescriptionItem: {
         width: '100%',
-        maxWidth: 75,
         marginRight: 10,
         border: '1px solid black',
         textAlign: 'center',
@@ -48,7 +47,7 @@ export const ConfiguredSetFrame = ({
 }: IComponentProps): JSX.Element => {
     const generateConfiguredSetFrames = (): JSX.Element[] => {
         return Object.keys(configuredSets).map((item, i) => (
-            <>
+            <View style={styles.container}>
                 <View style={styles.exerciseDescriptionItem}>
                     <Text>{item}</Text>
                 </View>
@@ -58,7 +57,7 @@ export const ConfiguredSetFrame = ({
                 <View style={styles.exerciseDescriptionItem}>
                     <Text>{configuredSets[item].weightImperial}</Text>
                 </View>
-            </>
+            </View>
         ));
     };
 

@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     exerciseDescriptionItem: {
+        flexDirection: 'row',
         width: '100%',
-        maxWidth: 75,
+        maxWidth: 300,
         marginRight: 10,
         border: '1px solid black',
         textAlign: 'center',
@@ -90,16 +91,18 @@ export const ColumnFrame = ({
                             <Text style={styles.text}>Exercise</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Sets</Text>
-                        </View>
-                        <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Reps</Text>
-                        </View>
-                        <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Weight</Text>
-                        </View>
-                        <View style={styles.orderItem}>
-                            <Text style={styles.text}>Rest</Text>
+                            <View>
+                                <Text style={styles.text}>Sets</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Reps</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Weight</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Rest</Text>
+                            </View>
                         </View>
                     </View>
                     <GridFrame

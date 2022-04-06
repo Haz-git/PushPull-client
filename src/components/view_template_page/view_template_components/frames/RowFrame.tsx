@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     },
     exerciseDescriptionItem: {
         width: '100%',
-        maxWidth: 75,
+        maxWidth: 300,
         marginRight: 10,
         border: '1px solid black',
         textAlign: 'center',
@@ -61,14 +61,16 @@ export const RowFrame = ({
             <View style={styles.exerciseItem}>
                 <Text style={styles.text}>{blockDetails.name}</Text>
             </View>
-            <ConfiguredSetFrame
-                sets={blockDetails.sets}
-                reps={blockDetails.reps}
-                hasConfiguredSets={blockDetails.hasConfiguredSets}
-                configuredSets={blockDetails.configuredSets}
-                weightImperial={blockDetails.weightImperial}
-                weightMetric={blockDetails.weightMetric}
-            />
+            <View style={styles.exerciseDescriptionItem}>
+                <ConfiguredSetFrame
+                    sets={blockDetails.sets}
+                    reps={blockDetails.reps}
+                    hasConfiguredSets={blockDetails.hasConfiguredSets}
+                    configuredSets={blockDetails.configuredSets}
+                    weightImperial={blockDetails.weightImperial}
+                    weightMetric={blockDetails.weightMetric}
+                />
+            </View>
         </View>
     );
 };
