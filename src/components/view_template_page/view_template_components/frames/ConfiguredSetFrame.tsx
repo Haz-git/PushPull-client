@@ -39,14 +39,23 @@ const styles = StyleSheet.create({
 //Interfaces:
 
 interface IComponentProps {
-    itemCount?: number;
+    configuredSets: any;
+    hasConfiguredSets: boolean;
+    sets: string;
+    reps: string;
 }
 
 /**
  * @description This frame represents each block in an exercise row. Such as Set, Reps, Weight, or Rest.
  *
+ * If hasConfiguredSets is false, then we render each style component with identical sets, reps and desired weight.
+ * If hasConfiguredSets is true, then we render the configured sets, which should not be null.
  */
 
-export const ConfiguredSetFrame = () => {
+export const ConfiguredSetFrame = ({
+    hasConfiguredSets,
+    sets,
+    reps,
+}: IComponentProps): JSX.Element => {
     return <div>ConfiguredSetFrame</div>;
 };
