@@ -10,10 +10,35 @@ import { v4 as uuid } from 'uuid';
 
 //Styles:
 const styles = StyleSheet.create({
+    exerciseItem: {
+        width: '100%',
+        maxWidth: 165,
+        marginRight: 10,
+        border: '1px solid black',
+        textAlign: 'center',
+        alignContent: 'center',
+    },
+    exerciseDescriptionItem: {
+        width: '100%',
+        maxWidth: 75,
+        marginRight: 10,
+        border: '1px solid black',
+        textAlign: 'center',
+    },
+    orderItem: {
+        width: 20,
+        marginRight: 10,
+        border: '1px solid black',
+        textAlign: 'center',
+    },
     columnContainer: {
         border: '1px solid black',
         marginTop: 5,
         marginBottom: 5,
+    },
+    gridHeaderContainer: {
+        flexDirection: 'row',
+        marginLeft: 10,
     },
     section: {
         margin: 10,
@@ -57,6 +82,23 @@ export const ColumnFrame = ({
                     {constructHeaderName(columnHeader)}
                 </Text>
                 <View>
+                    <View style={styles.gridHeaderContainer}>
+                        <View style={styles.orderItem}>
+                            <Text style={styles.text}>#</Text>
+                        </View>
+                        <View style={styles.exerciseItem}>
+                            <Text style={styles.text}>Exercise</Text>
+                        </View>
+                        <View style={styles.exerciseDescriptionItem}>
+                            <Text style={styles.text}>Sets</Text>
+                        </View>
+                        <View style={styles.exerciseDescriptionItem}>
+                            <Text style={styles.text}>Reps</Text>
+                        </View>
+                        <View style={styles.orderItem}>
+                            <Text style={styles.text}>Rest</Text>
+                        </View>
+                    </View>
                     <GridFrame
                         viewTemplate={viewTemplate}
                         sheetContent={sheetContent}
