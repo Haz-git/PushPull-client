@@ -8,31 +8,15 @@ import { GridFrame } from './GridFrame';
 
 //Styles:
 const styles = StyleSheet.create({
-    exerciseItem: {
-        width: '100%',
-        maxWidth: 165,
-        marginRight: 10,
-        border: '1px solid black',
-        textAlign: 'center',
+    container: {
+        flexDirection: 'row',
     },
-    headerItem: {
+    exerciseDescriptionItem: {
         width: '100%',
         maxWidth: 75,
         marginRight: 10,
         border: '1px solid black',
         textAlign: 'center',
-    },
-    orderItem: {
-        width: 20,
-        marginRight: 10,
-        border: '1px solid black',
-        textAlign: 'center',
-    },
-    column: {
-        flexDirection: 'column',
-    },
-    text: {
-        fontSize: 10,
     },
 });
 
@@ -43,6 +27,8 @@ interface IComponentProps {
     hasConfiguredSets: boolean;
     sets: string;
     reps: string;
+    weightImperial: string;
+    weightMetric: string;
 }
 
 /**
@@ -53,9 +39,48 @@ interface IComponentProps {
  */
 
 export const ConfiguredSetFrame = ({
+    configuredSets,
     hasConfiguredSets,
     sets,
     reps,
+    weightImperial,
+    weightMetric,
 }: IComponentProps): JSX.Element => {
-    return <div>ConfiguredSetFrame</div>;
+    const generateConfiguredSetFrames = (): JSX.Element[] => {
+        return Object.keys(configuredSets).map((item, i) => (
+            <>
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text>{item}</Text>
+                </View>
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text>{configuredSets[item].reps}</Text>
+                </View>
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text>{configuredSets[item].weightImperial}</Text>
+                </View>
+            </>
+        ));
+    };
+
+    const generateSetFrames = (): JSX.Element[] | JSX.Element => {
+        if (hasConfiguredSets) {
+            return generateConfiguredSetFrames();
+        }
+
+        return Array(Number(sets)).fill(
+            <>
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text>{sets}</Text>
+                </View>
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text>{reps}</Text>
+                </View>
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text>{weightImperial}</Text>
+                </View>
+            </>
+        );
+    };
+
+    return <>{generateSetFrames()}</>;
 };

@@ -95,6 +95,9 @@ export const ColumnFrame = ({
                         <View style={styles.exerciseDescriptionItem}>
                             <Text style={styles.text}>Reps</Text>
                         </View>
+                        <View style={styles.exerciseDescriptionItem}>
+                            <Text style={styles.text}>Weight</Text>
+                        </View>
                         <View style={styles.orderItem}>
                             <Text style={styles.text}>Rest</Text>
                         </View>

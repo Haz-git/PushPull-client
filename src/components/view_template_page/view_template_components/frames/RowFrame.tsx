@@ -5,6 +5,7 @@ import * as React from 'react';
 //Components:
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import { BlockFrame } from './BlockFrame';
+import { ConfiguredSetFrame } from './ConfiguredSetFrame';
 
 //Styles:
 const styles = StyleSheet.create({
@@ -60,18 +61,14 @@ export const RowFrame = ({
             <View style={styles.exerciseItem}>
                 <Text style={styles.text}>{blockDetails.name}</Text>
             </View>
-            {/* <View style={styles.exerciseDescriptionItem}>
-                <BlockFrame />
-            </View>
-            <View style={styles.exerciseDescriptionItem}>
-                <BlockFrame />
-            </View>
-            <View style={styles.exerciseDescriptionItem}>
-                <Text style={styles.text}>110</Text>
-            </View>
-            <View style={styles.exerciseDescriptionItem}>
-                <Text style={styles.text}>Na</Text>
-            </View> */}
+            <ConfiguredSetFrame
+                sets={blockDetails.sets}
+                reps={blockDetails.reps}
+                hasConfiguredSets={blockDetails.hasConfiguredSets}
+                configuredSets={blockDetails.configuredSets}
+                weightImperial={blockDetails.weightImperial}
+                weightMetric={blockDetails.weightMetric}
+            />
         </View>
     );
 };
