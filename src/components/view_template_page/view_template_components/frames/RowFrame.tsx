@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 300,
         marginRight: 10,
-        border: '1px solid black',
         textAlign: 'center',
     },
     orderItem: {

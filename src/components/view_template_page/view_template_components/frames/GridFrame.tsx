@@ -9,27 +9,6 @@ import { v4 as uuid } from 'uuid';
 import { RowFrame } from './RowFrame';
 //Styles:
 const styles = StyleSheet.create({
-    exerciseItem: {
-        width: '100%',
-        maxWidth: 165,
-        marginRight: 10,
-        border: '1px solid black',
-        textAlign: 'center',
-        alignContent: 'center',
-    },
-    exerciseDescriptionItem: {
-        width: '100%',
-        maxWidth: 75,
-        marginRight: 10,
-        border: '1px solid black',
-        textAlign: 'center',
-    },
-    orderItem: {
-        width: 20,
-        marginRight: 10,
-        border: '1px solid black',
-        textAlign: 'center',
-    },
     grid: {
         flexDirection: 'column',
         padding: 10,
@@ -64,9 +43,9 @@ export const GridFrame = ({
     const composeRowFrameContainers = (): JSX.Element[] => {
         //TODO: Not sure why all exercises are being rendered per day. Also, order of the days are NOT maintained during map.
         return sheetContent[columnHeader].map((block: any, index: number) => (
-            <View>
+            <>
                 <RowFrame blockDetails={block.blockDetails} index={index + 1} />
-            </View>
+            </>
         ));
     };
 
