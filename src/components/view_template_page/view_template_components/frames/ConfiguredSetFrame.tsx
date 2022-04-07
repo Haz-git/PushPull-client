@@ -9,13 +9,19 @@ import { GridFrame } from './GridFrame';
 //Styles:
 const styles = StyleSheet.create({
     container: {
+        maxWidth: 300,
+        width: '100%',
         flexDirection: 'row',
     },
     exerciseDescriptionItem: {
+        maxWidth: 78,
         width: '100%',
-        marginRight: 10,
         border: '1px solid black',
         textAlign: 'center',
+        marginRight: 10,
+    },
+    text: {
+        fontSize: 10,
     },
 });
 
@@ -49,13 +55,18 @@ export const ConfiguredSetFrame = ({
         return Object.keys(configuredSets).map((item, i) => (
             <View style={styles.container}>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text>{item}</Text>
+                    <Text style={styles.text}>{item}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text>{configuredSets[item].reps}</Text>
+                    <Text style={styles.text}>{configuredSets[item].reps}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text>{configuredSets[item].weightImperial}</Text>
+                    <Text style={styles.text}>
+                        {configuredSets[item].weightImperial}
+                    </Text>
+                </View>
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text style={styles.text}>NA</Text>
                 </View>
             </View>
         ));
@@ -66,19 +77,22 @@ export const ConfiguredSetFrame = ({
             return generateConfiguredSetFrames();
         }
 
-        return Array(Number(sets)).fill(
-            <>
+        return [...Array(Number(sets))].map((item, i) => (
+            <View style={styles.container}>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text>{sets}</Text>
+                    <Text style={styles.text}>{i + 1}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text>{reps}</Text>
+                    <Text style={styles.text}>{reps}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text>{weightImperial}</Text>
+                    <Text style={styles.text}>{weightImperial}</Text>
                 </View>
-            </>
-        );
+                <View style={styles.exerciseDescriptionItem}>
+                    <Text style={styles.text}>NA</Text>
+                </View>
+            </View>
+        ));
     };
 
     return <>{generateSetFrames()}</>;
