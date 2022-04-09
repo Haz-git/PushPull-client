@@ -77,29 +77,10 @@ export const ConfiguredSetFrame = ({
             return generateConfiguredSetFrames();
         }
 
-        if (Number(sets) > 15) {
-            return (
-                <View style={styles.container}>
-                    <View style={styles.exerciseDescriptionItem}>
-                        <Text style={styles.text}>{`...${sets}`}</Text>
-                    </View>
-                    <View style={styles.exerciseDescriptionItem}>
-                        <Text style={styles.text}>{reps}</Text>
-                    </View>
-                    <View style={styles.exerciseDescriptionItem}>
-                        <Text style={styles.text}>{weightImperial}</Text>
-                    </View>
-                    <View style={styles.exerciseDescriptionItem}>
-                        <Text style={styles.text}>NA</Text>
-                    </View>
-                </View>
-            );
-        }
-
-        return [...Array(Number(sets))].map((item, i) => (
+        return (
             <View style={styles.container}>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text style={styles.text}>{i + 1}</Text>
+                    <Text style={styles.text}>{`1 - ${sets}`}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
                     <Text style={styles.text}>{reps}</Text>
@@ -111,7 +92,7 @@ export const ConfiguredSetFrame = ({
                     <Text style={styles.text}>NA</Text>
                 </View>
             </View>
-        ));
+        );
     };
 
     return <>{generateSetFrames()}</>;
