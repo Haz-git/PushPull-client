@@ -93,7 +93,7 @@ export const ColumnFrame = ({
                             <Text style={styles.text}>Exercise</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Sets</Text>
+                            <Text style={styles.text}>Set</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
                             <Text style={styles.text}>Reps</Text>
