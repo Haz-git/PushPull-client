@@ -137,14 +137,14 @@ const App = () => {
         dispatch(checkIfUserLoggedIn());
     }, [isLoggedIn]);
 
-    const toggleAuthDrawerWithView = (state: boolean, view: string) => {
+    const toggleAuthDrawerWithView = (state: boolean, view: string): void => {
         setStateAuthFormView(view);
         setStateAuthDrawer(state);
     };
 
-    const closeAuthDrawerContainer = () => setStateAuthDrawer(false);
-    const openBugReportModal = () => setStateBugReportModal(true);
-    const closeBugReportModal = () => setStateBugReportModal(false);
+    const closeAuthDrawerContainer = (): void => setStateAuthDrawer(false);
+    const openBugReportModal = (): void => setStateBugReportModal(true);
+    const closeBugReportModal = (): void => setStateBugReportModal(false);
 
     return (
         <>
