@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     },
     flexRow: {
         flexDirection: 'row',
+        marginTop: 5,
+        marginBottom: 5,
     },
     text: {
         fontSize: 10,
