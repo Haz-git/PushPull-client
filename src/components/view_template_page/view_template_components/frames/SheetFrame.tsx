@@ -38,7 +38,7 @@ interface IComponentProps {
 export const SheetFrame = ({ viewTemplate }: IComponentProps): JSX.Element => {
     const composeSheetFrames = (): JSX.Element[] => {
         return viewTemplate?.templateEditingSurfaceBlocks.map((sheet: any) => (
-            <View style={styles.sheet} key={sheet.sheetId}>
+            <View style={styles.sheet} key={sheet.sheetId} wrap={false}>
                 <Text style={styles.text}>{sheet.sheetName}</Text>
                 <View style={styles.columnWrapper}>
                     <ColumnFrame
