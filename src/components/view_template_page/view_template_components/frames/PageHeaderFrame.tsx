@@ -4,18 +4,25 @@ import * as React from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 
 //Components:
-import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 import { GridFrame } from './GridFrame';
+import { NunitoFamily } from '../../../fonts/masterFonts';
 
 //Styles:
+Font.register({
+    family: 'Nunito',
+    format: 'truetype',
+    src: NunitoFamily.bold800,
+});
+
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
         margin: 10,
         padding: 10,
     },
     text: {
         fontSize: 10,
+        fontFamily: 'Nunito',
     },
 });
 
