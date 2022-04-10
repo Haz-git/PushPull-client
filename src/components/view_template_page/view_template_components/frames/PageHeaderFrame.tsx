@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
     },
+    text: {
+        fontSize: 10,
+    },
 });
 
 //Interfaces:
@@ -38,10 +41,10 @@ export const PageHeaderFrame = ({
 }: IComponentProps): JSX.Element => {
     return (
         <View style={styles.container}>
-            <Text>{title}</Text>
-            <Text>{description}</Text>
-            <Text>{weightUnit}</Text>
-            <Text>{updatedAt}</Text>
+            <Text style={styles.text}>{title}</Text>
+            <Text style={styles.text}>{description}</Text>
+            <Text style={styles.text}>{weightUnit}</Text>
+            <Text style={styles.text}>{updatedAt}</Text>
         </View>
     );
 };
