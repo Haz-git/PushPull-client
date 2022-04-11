@@ -41,7 +41,6 @@ interface IComponentProps {
  */
 
 export const ColorLegendFrame = ({ legend }: IComponentProps): JSX.Element => {
-    console.log(legend);
     const composeColorItems = (): JSX.Element[] | null => {
         if (legend?.length === 0) {
             return null;

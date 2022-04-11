@@ -56,7 +56,6 @@ export const PageHeaderFrame = ({
     updatedAt,
     viewTemplate,
 }: IComponentProps): JSX.Element => {
-    console.log(viewTemplate);
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{title}</Text>
