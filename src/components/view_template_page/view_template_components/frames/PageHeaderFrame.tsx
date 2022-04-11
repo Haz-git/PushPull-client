@@ -33,10 +33,13 @@ interface IComponentProps {
     description: string;
     weightUnit: string;
     updatedAt: string;
+    viewTemplate: any;
 }
 
 /**
  * @description This frame represents the template introduction header
+ *
+ * Embedded into this frame should be the viewer inputs and any color legends.
  *
  */
 
@@ -45,6 +48,7 @@ export const PageHeaderFrame = ({
     description,
     weightUnit,
     updatedAt,
+    viewTemplate,
 }: IComponentProps): JSX.Element => {
     return (
         <View style={styles.container}>
