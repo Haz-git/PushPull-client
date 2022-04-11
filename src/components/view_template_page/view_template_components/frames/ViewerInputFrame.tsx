@@ -40,9 +40,21 @@ interface IComponentProps {
 export const ViewerInputFrame = ({
     viewerInputs,
 }: IComponentProps): JSX.Element => {
+    const composeInputItems = (): JSX.Element[] | null => {
+        if (viewerInputs?.length === 0) {
+            return null;
+        }
+
+        return viewerInputs?.map((inputItem: any) => (
+            <View>
+                <Text style={styles.text}>{inputItem.InputQuestion}</Text>
+            </View>
+        ));
+    };
     return (
         <View style={styles.container}>
             <Text style={styles.text}>ViewerInputFrame</Text>
+            <View>{composeInputItems()}</View>
         </View>
     );
 };
