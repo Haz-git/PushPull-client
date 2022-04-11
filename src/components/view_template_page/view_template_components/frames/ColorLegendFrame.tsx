@@ -16,6 +16,9 @@ Font.register({
 });
 
 const styles = StyleSheet.create({
+    colorItemContainer: {
+        flexDirection: 'row',
+    },
     container: {
         border: '1px solid black',
         flex: 1,
@@ -26,15 +29,44 @@ const styles = StyleSheet.create({
     },
 });
 
+//Interface
+
+interface IComponentProps {
+    legend: any;
+}
+
 /**
  * @description This frame is embedded into the PageHeaderFrame. Indicates what each color represents in each block.
  *
  */
 
-export const ColorLegendFrame = () => {
+export const ColorLegendFrame = ({ legend }: IComponentProps): JSX.Element => {
+    console.log(legend);
+    const composeColorItems = (): JSX.Element[] | null => {
+        if (legend?.length === 0) {
+            return null;
+        }
+
+        return legend?.map((colorItem: any) => (
+            <View style={styles.colorItemContainer}>
+                <View
+                    style={{
+                        backgroundColor: `${colorItem.colorHex}`,
+                        height: 12,
+                        width: 12,
+                        borderRadius: 2,
+                        marginRight: 5,
+                    }}
+                />
+                <Text style={styles.text}>{colorItem.label}</Text>
+            </View>
+        ));
+    };
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>ColorLegendFrame</Text>
+            <Text style={styles.text}>Color Legend</Text>
+            <View>{composeColorItems()}</View>
         </View>
     );
 };

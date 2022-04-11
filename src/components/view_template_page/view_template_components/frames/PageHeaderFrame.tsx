@@ -56,6 +56,7 @@ export const PageHeaderFrame = ({
     updatedAt,
     viewTemplate,
 }: IComponentProps): JSX.Element => {
+    console.log(viewTemplate);
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{title}</Text>
@@ -63,8 +64,10 @@ export const PageHeaderFrame = ({
             <Text style={styles.text}>{weightUnit}</Text>
             <Text style={styles.text}>{updatedAt}</Text>
             <View style={styles.inputContainer}>
-                <ViewerInputFrame />
-                <ColorLegendFrame />
+                <ViewerInputFrame
+                    viewerInputs={viewTemplate?.templateUserInputs}
+                />
+                <ColorLegendFrame legend={viewTemplate?.templateLegend} />
             </View>
         </View>
     );

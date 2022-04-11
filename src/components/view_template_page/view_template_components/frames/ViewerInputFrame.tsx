@@ -26,12 +26,20 @@ const styles = StyleSheet.create({
     },
 });
 
+//Interfaces:
+
+interface IComponentProps {
+    viewerInputs: any;
+}
+
 /**
  * @description This frame is embedded into the PageHeaderFrame. Indicates what the user has inputted per view.
  *
  */
 
-export const ViewerInputFrame = () => {
+export const ViewerInputFrame = ({
+    viewerInputs,
+}: IComponentProps): JSX.Element => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>ViewerInputFrame</Text>
