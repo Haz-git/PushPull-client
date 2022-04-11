@@ -31,6 +31,7 @@ export const TemplateDocument = ({
                     description={viewTemplate?.templateFileDesc}
                     weightUnit={viewTemplate?.templateWeightUnit}
                     updatedAt={viewTemplate?.updatedAt}
+                    viewTemplate={viewTemplate}
                 />
                 <SheetFrame viewTemplate={viewTemplate} />
             </Page>
