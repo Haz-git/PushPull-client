@@ -17,8 +17,8 @@ Font.register({
 
 const styles = StyleSheet.create({
     container: {
-        margin: 10,
-        padding: 10,
+        border: '1px solid black',
+        flex: 1,
     },
     text: {
         fontSize: 10,
@@ -32,5 +32,9 @@ const styles = StyleSheet.create({
  */
 
 export const ColorLegendFrame = () => {
-    return <div>ColorLegendFrame</div>;
+    return (
+        <View style={styles.container}>
+            <Text style={styles.text}>ColorLegendFrame</Text>
+        </View>
+    );
 };

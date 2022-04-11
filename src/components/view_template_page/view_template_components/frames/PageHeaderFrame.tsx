@@ -5,7 +5,8 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 
 //Components:
 import { Text, View, StyleSheet, Font } from '@react-pdf/renderer';
-import { GridFrame } from './GridFrame';
+import { ViewerInputFrame } from './ViewerInputFrame';
+import { ColorLegendFrame } from './ColorLegendFrame';
 import { NunitoFamily } from '../../../fonts/masterFonts';
 
 //Styles:
@@ -16,6 +17,11 @@ Font.register({
 });
 
 const styles = StyleSheet.create({
+    inputContainer: {
+        border: '1px solid black',
+        flexDirection: 'row',
+        marginTop: 10,
+    },
     container: {
         margin: 10,
         padding: 10,
@@ -56,6 +62,10 @@ export const PageHeaderFrame = ({
             <Text style={styles.text}>{description}</Text>
             <Text style={styles.text}>{weightUnit}</Text>
             <Text style={styles.text}>{updatedAt}</Text>
+            <View style={styles.inputContainer}>
+                <ViewerInputFrame />
+                <ColorLegendFrame />
+            </View>
         </View>
     );
 };
