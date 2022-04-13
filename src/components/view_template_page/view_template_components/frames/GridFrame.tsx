@@ -41,7 +41,6 @@ export const GridFrame = ({
     columnHeader,
 }: IComponentProps): JSX.Element => {
     const composeRowFrameContainers = (): JSX.Element[] => {
-        //TODO: Not sure why all exercises are being rendered per day. Also, order of the days are NOT maintained during map.
         return sheetContent[columnHeader].map((block: any, index: number) => (
             <>
                 <RowFrame blockDetails={block.blockDetails} index={index + 1} />

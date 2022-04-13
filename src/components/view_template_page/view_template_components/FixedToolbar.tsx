@@ -1,11 +1,14 @@
 import * as React from 'react';
 
 //Redux:
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
 //Components:
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { Tooltip } from '@mantine/core';
 import GeneralButton from '../../general_components/GeneralButton';
 import historyObject from '../../../utils/historyObject';
+import { TemplateDocument } from './TemplateDocument';
 
 //Styles:
 import styled from 'styled-components';
@@ -72,16 +75,26 @@ export const FixedToolbar = ({
     templateId,
     onReturnSheetId,
 }: IComponentProps): JSX.Element => {
+    const viewTemplate = useSelector(
+        (state: RootStateOrAny) => state?.viewTemplate?.savedTemplate
+    );
     return (
         <MainContainer>
             <Tooltip label="Download File" position="right" placement="center">
                 <ButtonWrapper>
-                    <GeneralButton
-                        buttonLabel=""
-                        buttonIconLeft={<DownloadIcon />}
-                        leftIconMargin="0"
-                        rightIconMargin="0"
-                    />
+                    <PDFDownloadLink
+                        document={
+                            <TemplateDocument viewTemplate={viewTemplate} />
+                        }
+                        fileName={`${viewTemplate?.templateFileTitle}.pdf`}
+                    >
+                        <GeneralButton
+                            buttonLabel=""
+                            buttonIconLeft={<DownloadIcon />}
+                            leftIconMargin="0"
+                            rightIconMargin="0"
+                        />
+                    </PDFDownloadLink>
                 </ButtonWrapper>
             </Tooltip>
             <Tooltip

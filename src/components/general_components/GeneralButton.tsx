@@ -6,11 +6,11 @@ const StyledGeneralButton = styled.button<IGeneralButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
+    border: ${(props) => props.border};
     border-top: ${(props) => props.borderTop};
     border-bottom: ${(props) => props.borderBottom};
     border-left: ${(props) => props.borderLeft};
     border-right: ${(props) => props.borderRight};
-    border: ${(props) => props.border};
     margin: ${(props) => props.margin};
     background: ${(props) => props.buttonBackground};
     padding: ${(props) => props.padding};
@@ -121,6 +121,20 @@ const GeneralButton = ({
         if (buttonLabel !== '') return buttonLabel;
         return null;
     };
+
+    const relayBorderControl = (uniqueBorder: string): string => {
+        if (border !== 'none') {
+            return border;
+        }
+
+        // const hasUniqueBorder = borderTop !== 'none' || borderLeft !== 'none' || borderRight !== 'none' || borderBottom !== 'none';
+
+        if (border === 'none' && uniqueBorder !== 'none') {
+            return uniqueBorder;
+        }
+
+        return 'none';
+    };
     return (
         <>
             <StyledGeneralButton
@@ -139,14 +153,14 @@ const GeneralButton = ({
                 padding={padding}
                 margin={margin}
                 textShadow={textShadow}
-                border={border}
+                border={relayBorderControl(border)}
                 height={height}
                 borderRadius={borderRadius}
                 type={type}
-                borderTop={borderTop}
-                borderBottom={borderBottom}
-                borderLeft={borderLeft}
-                borderRight={borderRight}
+                borderTop={relayBorderControl(borderTop)}
+                borderBottom={relayBorderControl(borderBottom)}
+                borderLeft={relayBorderControl(borderLeft)}
+                borderRight={relayBorderControl(borderRight)}
                 outline={outline}
                 cursor={cursor}
             >
