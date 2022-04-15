@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -75,6 +76,11 @@ export const ButtonWrapper = styled.div`
 `;
 
 //Interfaces:
+enum ToolbarView {
+    owner = 'owner',
+    guest = 'guest',
+    anonymous = 'anonymous',
+}
 
 interface IComponentProps {
     templateId: string;
@@ -88,6 +94,31 @@ export const FixedToolbar = ({
     const viewTemplate = useSelector(
         (state: RootStateOrAny) => state?.viewTemplate?.savedTemplate
     );
+
+    const user = useSelector((state: RootStateOrAny) => state?.user);
+
+    const [toolbarView, setToolbarView] = useState(ToolbarView.anonymous);
+
+    const electUserToolbarView = (): void => {
+        const matchCurrentUsername =
+            user?.user?.username === viewTemplate?.templateCreatedBy?.username;
+        const matchCurrentUserId =
+            user?.user?.userId ===
+            Number(viewTemplate?.templateCreatedBy?.userfrontUserId);
+
+        if (user?.isLoggedIn && matchCurrentUsername && matchCurrentUserId) {
+            setToolbarView(ToolbarView.owner);
+        }
+
+        if (user?.isLoggedIn && !matchCurrentUsername && !matchCurrentUserId) {
+            setToolbarView(ToolbarView.guest);
+        }
+    };
+
+    useEffect(() => {
+        electUserToolbarView();
+    }, [user, viewTemplate]);
+
     return (
         <MainContainer>
             <Tooltip label="Download File" position="right" placement="center">
@@ -110,10 +141,14 @@ export const FixedToolbar = ({
             <FixedToolbarOwnerView
                 templateId={templateId}
                 onReturnSheetId={onReturnSheetId}
-                shouldDisplay={true}
+                shouldDisplay={toolbarView === ToolbarView.owner}
             />
-            <FixedToolbarAnonymousView shouldDisplay={false} />
-            <FixedToolbarGuestView shouldDisplay={false} />
+            <FixedToolbarAnonymousView
+                shouldDisplay={toolbarView === ToolbarView.anonymous}
+            />
+            <FixedToolbarGuestView
+                shouldDisplay={toolbarView === ToolbarView.guest}
+            />
         </MainContainer>
     );
 };
