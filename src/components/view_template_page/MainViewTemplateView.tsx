@@ -15,6 +15,7 @@ import { PDFViewer } from '@react-pdf/renderer';
 import { TemplateDocument } from './view_template_components/TemplateDocument';
 import { FixedInformationPanel } from './view_template_components/FixedInformationPanel';
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
+import LoadProgress from '../nprogress/LoadProgress';
 
 //Styles:
 import styled from 'styled-components';
@@ -84,6 +85,11 @@ export const MainViewTemplateView = ({
 }: IComponentProps): JSX.Element => {
     const dispatch = useDispatch();
     const { height, width } = useWindowDimensions();
+
+    const { isLoading: isViewTemplateLoading } = useSelector(
+        (state: RootStateOrAny) => state?.uiLoader?.MAIN_VIEW_TEMPLATE_VIEW
+    );
+
     const viewTemplate = useSelector(
         (state: RootStateOrAny) => state?.viewTemplate?.savedTemplate
     );
@@ -106,38 +112,52 @@ export const MainViewTemplateView = ({
     }, []);
 
     return (
-        <MainContainer hasUnauthorizedError={hasViewTemplateError}>
-            <UnauthorizedViewTemplate
-                shouldDisplay={hasViewTemplateError}
-                messageLabel="Sorry, We Can't Access This Template!"
-                buttonLabel="Return To Home"
-                redirectLink="/" //TODO: For users querying a view template, return home. For build template users previewing, return to builder.
-            />
-            {!hasViewTemplateError && (
-                <>
-                    <Wrapper>
-                        <ToolbarContainer>
-                            <FixedToolbar
-                                templateId={templateId}
-                                onReturnSheetId={onReturnSheetId}
-                            />
-                        </ToolbarContainer>
-                        <DocumentContainer>
-                            <PDFViewer
-                                height={height}
-                                showToolbar={false}
-                                width={width - 325} //325 is combined width of information panel and fixedToolbar
-                                style={pdfViewerStyles}
-                            >
-                                <TemplateDocument viewTemplate={viewTemplate} />
-                            </PDFViewer>
-                        </DocumentContainer>
-                        <InformationPanelContainer>
-                            <FixedInformationPanel />
-                        </InformationPanelContainer>
-                    </Wrapper>
-                </>
+        <>
+            {isViewTemplateLoading ? (
+                <LoadProgress
+                    loadingText="Unpacking Template..."
+                    darkMode={true}
+                    isAnimating={true}
+                    minimum={0}
+                    incrementDuration={500}
+                />
+            ) : (
+                <MainContainer hasUnauthorizedError={hasViewTemplateError}>
+                    <UnauthorizedViewTemplate
+                        shouldDisplay={hasViewTemplateError}
+                        messageLabel="Sorry, We Can't Access This Template!"
+                        buttonLabel="Return To Home"
+                        redirectLink="/" //TODO: For users querying a view template, return home. For build template users previewing, return to builder.
+                    />
+                    {!hasViewTemplateError && (
+                        <>
+                            <Wrapper>
+                                <ToolbarContainer>
+                                    <FixedToolbar
+                                        templateId={templateId}
+                                        onReturnSheetId={onReturnSheetId}
+                                    />
+                                </ToolbarContainer>
+                                <DocumentContainer>
+                                    <PDFViewer
+                                        height={height}
+                                        showToolbar={false}
+                                        width={width - 325} //325 is combined width of information panel and fixedToolbar
+                                        style={pdfViewerStyles}
+                                    >
+                                        <TemplateDocument
+                                            viewTemplate={viewTemplate}
+                                        />
+                                    </PDFViewer>
+                                </DocumentContainer>
+                                <InformationPanelContainer>
+                                    <FixedInformationPanel />
+                                </InformationPanelContainer>
+                            </Wrapper>
+                        </>
+                    )}
+                </MainContainer>
             )}
-        </MainContainer>
+        </>
     );
 };

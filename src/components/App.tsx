@@ -114,7 +114,7 @@ const MainViewTemplateView = loadable(
         resolveComponent: (components: any) => components.MainViewTemplateView,
         fallback: (
             <LoadProgress
-                loadingText="Rendering Template..."
+                loadingText="Building Template..."
                 darkMode={true}
                 isAnimating={true}
                 minimum={0}
