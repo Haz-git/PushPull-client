@@ -100,6 +100,8 @@ export const FixedToolbar = ({
     const [toolbarView, setToolbarView] = useState(ToolbarView.anonymous);
 
     const electUserToolbarView = (): void => {
+        //TODO : There's a small lag when transitioning to owner.
+
         const matchCurrentUsername =
             user?.user?.username === viewTemplate?.templateCreatedBy?.username;
         const matchCurrentUserId =
