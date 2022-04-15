@@ -20,6 +20,7 @@ import { RemoveRedEye } from '@styled-icons/material-rounded/RemoveRedEye';
 import { FileCopy } from '@styled-icons/material-rounded/FileCopy';
 import { CloudUpload } from '@styled-icons/material-rounded/CloudUpload';
 import { KeyboardBackspace } from '@styled-icons/material-rounded/KeyboardBackspace';
+import { Survey } from '@styled-icons/remix-fill/Survey';
 
 export const DownloadIcon = styled(FileDownload)`
     height: 1.5rem;
@@ -46,6 +47,12 @@ export const PublishIcon = styled(CloudUpload)`
 `;
 
 export const BackIcon = styled(KeyboardBackspace)`
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #ffffff;
+`;
+
+export const RateIcon = styled(Survey)`
     height: 1.5rem;
     width: 1.5rem;
     color: #ffffff;
@@ -105,6 +112,8 @@ export const FixedToolbar = ({
                 onReturnSheetId={onReturnSheetId}
                 shouldDisplay={true}
             />
+            <FixedToolbarAnonymousView shouldDisplay={false} />
+            <FixedToolbarGuestView shouldDisplay={false} />
         </MainContainer>
     );
 };

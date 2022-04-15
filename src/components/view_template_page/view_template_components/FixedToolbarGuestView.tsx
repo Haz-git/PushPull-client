@@ -8,7 +8,8 @@ import GeneralButton from '../../general_components/GeneralButton';
 import historyObject from '../../../utils/historyObject';
 
 //Styles
-import { ButtonWrapper, CopyIcon, BackIcon } from './FixedToolbar';
+import styled from 'styled-components';
+import { ButtonWrapper, CopyIcon, BackIcon, RateIcon } from './FixedToolbar';
 
 //Interfaces
 
@@ -23,5 +24,55 @@ interface IComponentProps {
 export const FixedToolbarGuestView = ({
     shouldDisplay,
 }: IComponentProps): JSX.Element => {
-    return <div>FixedToolbarGuestView</div>;
+    return (
+        <>
+            {shouldDisplay && (
+                <>
+                    <Tooltip
+                        label="Copy Program"
+                        position="right"
+                        placement="center"
+                    >
+                        <ButtonWrapper>
+                            <GeneralButton
+                                buttonLabel=""
+                                buttonIconLeft={<CopyIcon />}
+                                leftIconMargin="0"
+                                rightIconMargin="0"
+                            />
+                        </ButtonWrapper>
+                    </Tooltip>
+                    <Tooltip
+                        label="Rate Program"
+                        position="right"
+                        placement="center"
+                    >
+                        <ButtonWrapper>
+                            <GeneralButton
+                                buttonLabel=""
+                                buttonIconLeft={<RateIcon />}
+                                leftIconMargin="0"
+                                rightIconMargin="0"
+                            />
+                        </ButtonWrapper>
+                    </Tooltip>
+                    <Tooltip
+                        label="Return To Homepage"
+                        position="right"
+                        placement="center"
+                    >
+                        <ButtonWrapper>
+                            <GeneralButton
+                                buttonLabel=""
+                                buttonIconLeft={<BackIcon />}
+                                leftIconMargin="0"
+                                rightIconMargin="0"
+                                onClick={() => historyObject.push(`/`)}
+                            />
+                        </ButtonWrapper>
+                    </Tooltip>
+                </>
+            )}
+        </>
+    );
 };
