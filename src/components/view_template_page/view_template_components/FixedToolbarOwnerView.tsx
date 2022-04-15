@@ -8,7 +8,6 @@ import GeneralButton from '../../general_components/GeneralButton';
 import historyObject from '../../../utils/historyObject';
 
 //Styles
-import styled from 'styled-components';
 import {
     ButtonWrapper,
     ViewingIcon,
