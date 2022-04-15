@@ -1,10 +1,17 @@
 import api from '../../api';
 import { Dispatch } from 'redux';
 import { ViewTemplateActions } from './viewTemplateInterfaces';
-import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
 import { ViewTemplateActionType } from './action-types';
-import { loaderTypes } from '../uiLoader/loader-types';
 import { v4 as uuid } from 'uuid';
+
+//UI loader state:
+
+import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
+import {
+    invokeLoaderState,
+    disableLoaderState,
+} from '../uiLoader/uiLoaderActions';
+import { loaderTypes } from '../uiLoader/loader-types';
 
 //Error Handling
 import { ErrorType } from '../errors/action-types';
@@ -26,14 +33,21 @@ type ComposedViewTemplate = {
 };
 
 export const findViewTemplate = (templateId: string): Function => {
-    return async (dispatch: Dispatch<ViewTemplateActions | ErrorAction>) => {
+    return async (dispatch: Dispatch<any>) => {
         try {
+            dispatch(invokeLoaderState(loaderTypes.MAIN_VIEW_TEMPLATE_VIEW));
             const response = await api.get(`/viewTemplate/${templateId}`);
 
             dispatch({
                 type: ViewTemplateActionType.queryViewTemplate,
                 payload: response.data.viewTemplate,
             });
+
+            if (response) {
+                dispatch(
+                    disableLoaderState(loaderTypes.MAIN_VIEW_TEMPLATE_VIEW)
+                );
+            }
         } catch (err) {
             dispatch(
                 toggleErrorNotification(ErrorType.queryViewTemplateError, {
