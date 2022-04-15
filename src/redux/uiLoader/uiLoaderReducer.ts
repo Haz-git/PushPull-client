@@ -3,6 +3,9 @@ import { loaderTypes } from './loader-types';
 import { uiLoaderAction } from './uiLoaderInterfaces';
 
 const initialState: any = {
+    MAIN_VIEW_TEMPLATE_VIEW: {
+        isLoading: false,
+    },
     LOAD_ALL_TEMPLATE_BLOCKS: {
         isLoading: false,
     },

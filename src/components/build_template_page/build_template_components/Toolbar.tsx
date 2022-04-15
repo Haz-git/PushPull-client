@@ -32,6 +32,13 @@ import { ContentSettings } from 'styled-icons/fluentui-system-filled';
 import { UserVoice } from '@styled-icons/boxicons-solid/UserVoice';
 import { Preview } from '@styled-icons/material-rounded/Preview';
 import { DocumentSave } from '@styled-icons/fluentui-system-filled/DocumentSave';
+import { PiggyBank } from '@styled-icons/fa-solid/PiggyBank';
+
+const PiggyIcon = styled(PiggyBank)`
+    color: #ffffff;
+    height: 1.6rem;
+    width: 1.6rem;
+`;
 
 const SaveDocument = styled(DocumentSave)`
     color: #ffffff;
@@ -259,10 +266,22 @@ const Toolbar = ({
                             )}
                         </Droppable>
                     </Accordion.Item>
-                    <Accordion.Item label="Saved blocks"></Accordion.Item>
                 </Accordion>
             </AccordionContainer>
             <ToolsContainer>
+                <GeneralButton
+                    height="3.5rem"
+                    buttonLabel="Block Bank"
+                    onClick={() => alert('This feature is under construction')}
+                    width="100%"
+                    buttonIconLeft={<PiggyIcon />}
+                    buttonBackground="transparent"
+                    borderTop="1px solid #525252"
+                    borderBottom="1px solid #525252"
+                    disableShadow={true}
+                    hoverTransform="none"
+                    hoverShadow="none"
+                />
                 <GeneralButton
                     height="3.5rem"
                     buttonLabel="Viewer Interactions"
@@ -270,7 +289,6 @@ const Toolbar = ({
                     width="100%"
                     buttonIconLeft={<ViewerInteractionsIcon />}
                     buttonBackground="transparent"
-                    borderTop="1px solid #525252"
                     borderBottom="1px solid #525252"
                     disableShadow={true}
                     hoverTransform="none"
