@@ -6,12 +6,12 @@ import { v4 as uuid } from 'uuid';
 
 //UI loader state:
 
-import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
 import {
     invokeLoaderState,
     disableLoaderState,
 } from '../uiLoader/uiLoaderActions';
 import { loaderTypes } from '../uiLoader/loader-types';
+import { uiLoaderAction } from '../uiLoader/uiLoaderInterfaces';
 
 //Error Handling
 import { ErrorType } from '../errors/action-types';
@@ -33,8 +33,9 @@ type ComposedViewTemplate = {
 };
 
 export const findViewTemplate = (templateId: string): Function => {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<ViewTemplateActions | any>) => {
         try {
+            //TODO: Spent 1H trying to figure out how to make types work with invokeLoaderState and disableLoaderState. Dispatch is not liking how we're passing a function? I'm not sure if I understand..
             dispatch(invokeLoaderState(loaderTypes.MAIN_VIEW_TEMPLATE_VIEW));
             const response = await api.get(`/viewTemplate/${templateId}`);
 
