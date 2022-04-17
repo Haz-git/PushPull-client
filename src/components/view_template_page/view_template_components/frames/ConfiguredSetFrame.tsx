@@ -9,16 +9,13 @@ import { GridFrame } from './GridFrame';
 //Styles:
 const styles = StyleSheet.create({
     container: {
-        maxWidth: 300,
         width: '100%',
         flexDirection: 'row',
     },
     exerciseDescriptionItem: {
-        maxWidth: 78,
         width: '100%',
-        border: '1px solid black',
         textAlign: 'center',
-        marginRight: 10,
+        marginBottom: 5,
     },
     text: {
         fontSize: 10,

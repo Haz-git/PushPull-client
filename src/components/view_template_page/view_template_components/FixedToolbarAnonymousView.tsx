@@ -26,23 +26,21 @@ export const FixedToolbarAnonymousView = ({
     return (
         <>
             {shouldDisplay && (
-                <>
-                    <Tooltip
-                        label="Return To Homepage"
-                        position="right"
-                        placement="center"
-                    >
-                        <ButtonWrapper>
-                            <GeneralButton
-                                buttonLabel=""
-                                buttonIconLeft={<BackIcon />}
-                                leftIconMargin="0"
-                                rightIconMargin="0"
-                                onClick={() => historyObject.push(`/`)}
-                            />
-                        </ButtonWrapper>
-                    </Tooltip>
-                </>
+                <Tooltip
+                    label="Return To Homepage"
+                    position="right"
+                    placement="center"
+                >
+                    <ButtonWrapper>
+                        <GeneralButton
+                            buttonLabel=""
+                            buttonIconLeft={<BackIcon />}
+                            leftIconMargin="0"
+                            rightIconMargin="0"
+                            onClick={() => historyObject.push(`/`)}
+                        />
+                    </ButtonWrapper>
+                </Tooltip>
             )}
         </>
     );

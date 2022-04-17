@@ -11,7 +11,6 @@ import { RowFrame } from './RowFrame';
 const styles = StyleSheet.create({
     grid: {
         flexDirection: 'column',
-        padding: 10,
     },
     text: {
         fontSize: 10,

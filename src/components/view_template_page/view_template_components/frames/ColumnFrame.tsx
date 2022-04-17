@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 165,
         marginRight: 10,
-        border: '1px solid black',
         textAlign: 'center',
         alignContent: 'center',
     },
@@ -25,30 +24,37 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 75,
         marginRight: 10,
-        border: '1px solid black',
         textAlign: 'center',
     },
     orderItem: {
         width: 20,
         marginRight: 10,
-        border: '1px solid black',
         textAlign: 'center',
     },
     columnContainer: {
-        border: '1px solid black',
         marginTop: 5,
         marginBottom: 5,
     },
     gridHeaderContainer: {
+        marginTop: 10,
         flexDirection: 'row',
-        marginLeft: 10,
+        backgroundColor: '#606060',
+        borderRadius: 3,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
     },
     section: {
         margin: 10,
         padding: 10,
     },
-    text: {
+    gridHeaderText: {
         fontSize: 10,
+        color: '#ffffff',
+    },
+    columnHeaderName: {
+        fontSize: 12,
     },
 });
 
@@ -81,28 +87,28 @@ export const ColumnFrame = ({
                 style={styles.columnContainer}
                 key={sheetContent.sheetId}
             >
-                <Text style={styles.text}>
+                <Text style={styles.columnHeaderName}>
                     {constructHeaderName(columnHeader)}
                 </Text>
                 <View>
                     <View style={styles.gridHeaderContainer}>
                         <View style={styles.orderItem}>
-                            <Text style={styles.text}>#</Text>
+                            <Text style={styles.gridHeaderText}>#</Text>
                         </View>
                         <View style={styles.exerciseItem}>
-                            <Text style={styles.text}>Exercise</Text>
+                            <Text style={styles.gridHeaderText}>Exercise</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Set</Text>
+                            <Text style={styles.gridHeaderText}>Set</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Reps</Text>
+                            <Text style={styles.gridHeaderText}>Reps</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Weight</Text>
+                            <Text style={styles.gridHeaderText}>Weight</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.text}>Rest</Text>
+                            <Text style={styles.gridHeaderText}>Rest</Text>
                         </View>
                     </View>
                     <GridFrame

@@ -1,13 +1,10 @@
 import { loaderTypes } from './loader-types';
 
-interface invokeLoader {
+interface engageLoader {
     type: loaderTypes;
-    payload?: any;
+    payload: {
+        isLoading: true | false;
+    };
 }
 
-interface disableLoader {
-    type: loaderTypes;
-    payload?: any;
-}
-
-export type uiLoaderAction = invokeLoader | disableLoader;
+export type uiLoaderAction = engageLoader;

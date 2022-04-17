@@ -52,6 +52,8 @@ const SheetTabContainer = styled.div`
     height: 100%;
     overflow-x: scroll;
     scroll-behavior: smooth;
+    scrollbar-color: transparent;
+    scrollbar-width: none;
     &::-webkit-scrollbar {
         background: transparent; /* make scrollbar transparent */
         -webkit-appearance: none;

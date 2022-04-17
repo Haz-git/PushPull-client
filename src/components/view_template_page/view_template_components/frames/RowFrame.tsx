@@ -9,33 +9,39 @@ import { ConfiguredSetFrame } from './ConfiguredSetFrame';
 
 //Styles:
 const styles = StyleSheet.create({
+    blockMainContainer: {
+        flexDirection: 'row',
+        marginTop: 5,
+        marginBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
     exerciseItem: {
         width: '100%',
         maxWidth: 165,
         marginRight: 10,
-        border: '1px solid black',
         textAlign: 'center',
         alignContent: 'center',
     },
     exerciseDescriptionItem: {
         width: '100%',
-        maxWidth: 300,
-        marginRight: 10,
+        maxWidth: 330,
+        // marginRight: 10,
         textAlign: 'center',
     },
     orderItem: {
         width: 20,
         marginRight: 10,
-        border: '1px solid black',
         textAlign: 'center',
-    },
-    flexRow: {
-        flexDirection: 'row',
-        marginTop: 5,
-        marginBottom: 5,
     },
     text: {
         fontSize: 10,
+    },
+    divider: {
+        // borderBottom: '2px solid #e5e5e5',
+        height: 2,
+        borderRadius: 10,
+        backgroundColor: '#e5e5e5',
     },
 });
 
@@ -55,23 +61,26 @@ export const RowFrame = ({
     index,
 }: IComponentProps): JSX.Element => {
     return (
-        <View style={styles.flexRow}>
-            <View style={styles.orderItem}>
-                <Text style={styles.text}>{index}</Text>
+        <>
+            <View style={styles.blockMainContainer}>
+                <View style={styles.orderItem}>
+                    <Text style={styles.text}>{index}</Text>
+                </View>
+                <View style={styles.exerciseItem}>
+                    <Text style={styles.text}>{blockDetails.name}</Text>
+                </View>
+                <View style={styles.exerciseDescriptionItem}>
+                    <ConfiguredSetFrame
+                        sets={blockDetails.sets}
+                        reps={blockDetails.reps}
+                        hasConfiguredSets={blockDetails.hasConfiguredSets}
+                        configuredSets={blockDetails.configuredSets}
+                        weightImperial={blockDetails.weightImperial}
+                        weightMetric={blockDetails.weightMetric}
+                    />
+                </View>
             </View>
-            <View style={styles.exerciseItem}>
-                <Text style={styles.text}>{blockDetails.name}</Text>
-            </View>
-            <View style={styles.exerciseDescriptionItem}>
-                <ConfiguredSetFrame
-                    sets={blockDetails.sets}
-                    reps={blockDetails.reps}
-                    hasConfiguredSets={blockDetails.hasConfiguredSets}
-                    configuredSets={blockDetails.configuredSets}
-                    weightImperial={blockDetails.weightImperial}
-                    weightMetric={blockDetails.weightMetric}
-                />
-            </View>
-        </View>
+            <View style={styles.divider} />
+        </>
     );
 };
