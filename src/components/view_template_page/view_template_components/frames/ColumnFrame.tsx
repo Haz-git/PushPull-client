@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         color: '#ffffff',
     },
     columnHeaderName: {
-        fontSize: 10,
+        fontSize: 12,
     },
 });
 
