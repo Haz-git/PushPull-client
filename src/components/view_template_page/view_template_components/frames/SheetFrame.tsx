@@ -10,14 +10,12 @@ import { ColumnFrame } from './ColumnFrame';
 const styles = StyleSheet.create({
     columnWrapper: {
         flexDirection: 'column',
-        // border: '1px solid black',
         marginTop: 20,
     },
     sheet: {
         flexDirection: 'column',
         margin: 10,
         padding: 10,
-        // border: '1px solid black',
     },
     sheetName: {
         fontSize: 13,
