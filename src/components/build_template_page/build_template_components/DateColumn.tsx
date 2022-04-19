@@ -107,7 +107,6 @@ const DateColumn = ({
         composeHeaderName(prefix)
     );
 
-    //TODO: Not sure if using useMemo correctly here. Will go back to this..
     const composedHeaderName = useMemo(
         () => composeHeaderName(prefix),
         [prefix]

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 
 //Redux:
 
@@ -16,12 +17,14 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
     },
-    exerciseItem: {
+    exerciseNameContainer: {
         width: '100%',
         maxWidth: 165,
         marginRight: 10,
         textAlign: 'center',
         alignContent: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
     },
     exerciseDescriptionItem: {
         width: '100%',
@@ -47,6 +50,7 @@ const styles = StyleSheet.create({
 interface IComponentProps {
     blockDetails: any;
     index: number;
+    viewTemplate: any;
 }
 
 /**
@@ -57,14 +61,44 @@ interface IComponentProps {
 export const RowFrame = ({
     blockDetails,
     index,
+    viewTemplate,
 }: IComponentProps): JSX.Element => {
+    // console.log(blockDetails);
+
+    const exerciseColorObject = useMemo(
+        () =>
+            viewTemplate.templateLegend.find((colorObject: any) => {
+                return colorObject.id === blockDetails.linkedColor;
+            }),
+        [viewTemplate, blockDetails]
+    );
+
+    const composeColorSplotch = (): JSX.Element | null => {
+        if (!exerciseColorObject) {
+            return null;
+        }
+
+        return (
+            <View
+                style={{
+                    backgroundColor: `${exerciseColorObject.colorHex}`,
+                    height: 12,
+                    width: 12,
+                    borderRadius: 2,
+                    marginRight: 5,
+                }}
+            />
+        );
+    };
+
     return (
         <>
             <View style={styles.blockMainContainer}>
                 <View style={styles.orderItem}>
                     <Text style={styles.text}>{index}</Text>
                 </View>
-                <View style={styles.exerciseItem}>
+                <View style={styles.exerciseNameContainer}>
+                    <View>{composeColorSplotch()}</View>
                     <Text style={styles.text}>{blockDetails.name}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>

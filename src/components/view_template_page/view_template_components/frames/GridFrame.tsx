@@ -42,7 +42,11 @@ export const GridFrame = ({
     const composeRowFrameContainers = (): JSX.Element[] => {
         return sheetContent[columnHeader].map((block: any, index: number) => (
             <>
-                <RowFrame blockDetails={block.blockDetails} index={index + 1} />
+                <RowFrame
+                    blockDetails={block.blockDetails}
+                    index={index + 1}
+                    viewTemplate={viewTemplate}
+                />
             </>
         ));
     };
