@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     imageContainer: {
         height: 25,
         width: 75,
-        textAlign: 'right',
+        marginLeft: 500,
+        marginTop: 10,
     },
     templateDescriptionContainer: {
         flexDirection: 'row',
@@ -76,7 +77,7 @@ export const PageHeaderFrame = ({
 }: IComponentProps): JSX.Element => {
     return (
         <View>
-            <View style={styles.imageContainer}>
+            <View style={styles.imageContainer} fixed={true}>
                 <Image src={logoPNG} />
             </View>
             <View style={styles.templateDetailsContainer}>
