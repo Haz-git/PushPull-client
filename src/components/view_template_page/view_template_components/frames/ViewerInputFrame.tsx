@@ -17,8 +17,10 @@ Font.register({
 
 const styles = StyleSheet.create({
     container: {
-        border: '1px solid black',
         flex: 1,
+        padding: 10,
+        backgroundColor: '#efefef',
+        marginRight: 2,
     },
     text: {
         fontSize: 10,

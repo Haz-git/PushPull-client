@@ -20,20 +20,29 @@ Font.register({
 const styles = StyleSheet.create({
     imageContainer: {
         height: 25,
-        width: 100,
+        width: 75,
+        textAlign: 'right',
     },
     templateDescriptionContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        padding: 10,
+        backgroundColor: '#efefef',
+        marginRight: 2,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
     },
     inputContainer: {
         border: '1px solid black',
         flexDirection: 'row',
         marginTop: 10,
     },
-    mainContainer: {
-        margin: 10,
-        padding: 10,
+    templateDetailsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginLeft: 20,
+        marginRight: 20,
+        // backgroundColor: '#e5e5e5',
     },
     text: {
         fontSize: 10,
@@ -66,19 +75,19 @@ export const PageHeaderFrame = ({
     viewTemplate,
 }: IComponentProps): JSX.Element => {
     return (
-        <View style={styles.mainContainer}>
-            <View style={styles.templateDescriptionContainer}>
-                <View>
-                    <Text style={styles.text}>{title}</Text>
-                    <Text style={styles.text}>{description}</Text>
-                    <Text style={styles.text}>{weightUnit}</Text>
-                    <Text style={styles.text}>{updatedAt}</Text>
-                </View>
-                <View style={styles.imageContainer}>
-                    <Image src={logoPNG} />
-                </View>
+        <View>
+            <View style={styles.imageContainer}>
+                <Image src={logoPNG} />
             </View>
-            <View style={styles.inputContainer}>
+            <View style={styles.templateDetailsContainer}>
+                <View style={styles.templateDescriptionContainer}>
+                    <View>
+                        <Text style={styles.text}>{title}</Text>
+                        <Text style={styles.text}>{description}</Text>
+                        <Text style={styles.text}>{weightUnit}</Text>
+                        <Text style={styles.text}>{updatedAt}</Text>
+                    </View>
+                </View>
                 <ViewerInputFrame
                     viewerInputs={viewTemplate?.templateUserInputs}
                 />
