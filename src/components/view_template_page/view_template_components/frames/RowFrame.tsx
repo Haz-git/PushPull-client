@@ -11,8 +11,8 @@ import { ConfiguredSetFrame } from './ConfiguredSetFrame';
 const styles = StyleSheet.create({
     blockMainContainer: {
         flexDirection: 'row',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
         paddingLeft: 10,
         paddingRight: 10,
     },
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     exerciseDescriptionItem: {
         width: '100%',
         maxWidth: 330,
-        // marginRight: 10,
         textAlign: 'center',
     },
     orderItem: {
@@ -38,7 +37,6 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     divider: {
-        // borderBottom: '2px solid #e5e5e5',
         height: 2,
         borderRadius: 10,
         backgroundColor: '#e5e5e5',
