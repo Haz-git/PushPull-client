@@ -339,7 +339,7 @@ const MainBuildTemplateView = ({
                 ) : (
                     <>
                         <GeneralModal
-                            size="md"
+                            size="lg"
                             closeOnClickOutside={false}
                             title="Block Details"
                             openBoolean={isEditBlockModalOpened}
@@ -403,6 +403,7 @@ const MainBuildTemplateView = ({
                             title="Add New Block"
                             openBoolean={openBlockModal}
                             closeFunc={() => setOpenBlockModal(false)}
+                            size="lg"
                         >
                             <AddBlockForm
                                 closeModal={() => setOpenBlockModal(false)}
