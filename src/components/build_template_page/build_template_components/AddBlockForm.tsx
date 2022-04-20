@@ -38,7 +38,8 @@ export const Spacer = styled.div`
 `;
 
 export const FlexWrapper = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     align-items: center;
     justify-content: center;
     column-gap: 1rem;
@@ -492,7 +493,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         disabled={isSetConfigurationMenuOpen}
                     />
                     <TimeInput
-                        label="Rest"
+                        label="Rest Per Set"
                         styles={defaultTimeFieldStyle}
                         onChange={(value: Date) => console.log(value)}
                     />
