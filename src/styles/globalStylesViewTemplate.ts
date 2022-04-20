@@ -130,4 +130,10 @@ export const GlobalStylesViewTemplate = createGlobalStyle`
         }
     }
 
+    .mantine-TimeRangeInput-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
 `;

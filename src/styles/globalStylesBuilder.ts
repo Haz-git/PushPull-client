@@ -55,6 +55,12 @@ const GlobalStyle = createGlobalStyle`
 
     }
 
+    .mantine-Input-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
     .mantine-RichTextEditor-root {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
@@ -151,6 +157,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .mantine-TimeInput-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
+    .mantine-TimeRangeInput-input {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
         }
