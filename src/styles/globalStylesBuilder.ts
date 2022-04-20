@@ -156,15 +156,21 @@ const GlobalStyle = createGlobalStyle`
         display: none !important;
     }
 
+    .mantine-TimeInput-defaultVariant {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1) !important;
+        }
+    }
+
     .mantine-TimeInput-input {
         :focus {
-            border: 1px solid rgba(224, 113, 51, 1);
+            border: 1px solid rgba(224, 113, 51, 1) !important;
         }
     }
 
     .mantine-TimeRangeInput-input {
         :focus {
-            border: 1px solid rgba(224, 113, 51, 1);
+            border: 1px solid rgba(224, 113, 51, 1) !important;
         }
     }
 

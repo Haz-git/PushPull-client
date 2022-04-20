@@ -496,6 +496,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         label="Rest Per Set"
                         styles={defaultTimeFieldStyle}
                         onChange={(value: Date) => console.log(value)}
+                        // tabIndex={0}
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>
