@@ -20,6 +20,7 @@ const MainText = styled.p<IComponentProps>`
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     text-shadow: ${(props) => props.textShadow};
+    word-break: break-all;
 `;
 
 //Interfaces:
