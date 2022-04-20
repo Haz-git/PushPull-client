@@ -12,9 +12,11 @@ import {
     Select,
     Checkbox,
 } from '@mantine/core';
+import { TimeInput } from '@mantine/dates';
 import { SelectColorItem } from './SelectColorItem';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import { v4 as uuid } from 'uuid';
+import { AddBlockError } from './AddBlockError';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -22,7 +24,7 @@ import { addToolbarBlock } from '../../../redux/templates/templateActions';
 
 //Styles:
 import styled from 'styled-components';
-import { AddBlockError } from './AddBlockError';
+import { defaultTimeFieldStyle } from '../../../styles/fieldStyles';
 
 export const MainContainer = styled.div`
     padding: 0rem 0.5rem;
@@ -121,6 +123,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         configuredSets: {} as any,
         hasConfiguredSets: false,
         reps: '0',
+        restTime: '0:00',
         weightImperial: '0',
         weightMetric: '0',
         linkedColor: '',
@@ -487,6 +490,11 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             composeInputWeight(weight)
                         }
                         disabled={isSetConfigurationMenuOpen}
+                    />
+                    <TimeInput
+                        label="Rest"
+                        styles={defaultTimeFieldStyle}
+                        onChange={(value: Date) => console.log(value)}
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>
