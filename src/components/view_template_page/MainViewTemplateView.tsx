@@ -113,7 +113,7 @@ export const MainViewTemplateView = ({
 
     return (
         <>
-            {isViewTemplateLoading ? (
+            {isViewTemplateLoading && !hasViewTemplateError ? (
                 <LoadProgress
                     loadingText="Unpacking Template..."
                     darkMode={true}
@@ -125,7 +125,7 @@ export const MainViewTemplateView = ({
                 <MainContainer hasUnauthorizedError={hasViewTemplateError}>
                     <UnauthorizedViewTemplate
                         shouldDisplay={hasViewTemplateError}
-                        messageLabel="Sorry, We Can't Access This Template!"
+                        messageLabel="Sorry, this template is gone-- or you don't have permissions."
                         buttonLabel="Return To Home"
                         redirectLink="/" //TODO: For users querying a view template, return home. For build template users previewing, return to builder.
                     />
