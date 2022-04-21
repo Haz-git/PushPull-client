@@ -21,7 +21,7 @@ const LabelContainer = styled.div`
     cursor: default;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<IInputProps>`
     border: 1px solid #d1d4d6;
     width: 100%;
     padding: 0rem 0rem 0rem 0.8rem;
@@ -32,6 +32,9 @@ const StyledInput = styled.input`
     font-size: 1.05rem;
     font-weight: 700;
     outline: none; //Needs this to remove default black bold border.
+    opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
+    pointer: ${({ isDisabled }) => (isDisabled ? 'text' : 'not-allowed')};
+    background: ${({ isDisabled }) => (isDisabled ? '#eff1f2' : 'transparent')};
 
     &:focus {
         border: 1px solid #e07133;
@@ -40,10 +43,15 @@ const StyledInput = styled.input`
 
 //Interfaces:
 
+interface IInputProps {
+    isDisabled?: boolean;
+}
+
 interface IComponentProps {
     label?: string;
     value?: string;
     onChange?: (event: any, value: string) => void;
+    isDisabled?: boolean;
 }
 
 /**
@@ -55,7 +63,9 @@ export const UITimeField = ({
     label,
     value,
     onChange,
+    isDisabled,
 }: IComponentProps): JSX.Element => {
+    console.log(isDisabled);
     return (
         <MainContainer>
             <LabelContainer>
@@ -64,7 +74,12 @@ export const UITimeField = ({
             <TimeField
                 onChange={onChange}
                 value={value}
-                input={<StyledInput />}
+                input={
+                    <StyledInput
+                        isDisabled={isDisabled}
+                        disabled={isDisabled}
+                    />
+                }
             />
         </MainContainer>
     );
