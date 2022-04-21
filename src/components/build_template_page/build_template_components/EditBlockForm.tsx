@@ -500,6 +500,7 @@ export const EditBlockForm = () => {
                         label="Rest per Set"
                         value={userInput.restTime}
                         onChange={(event, value) => console.log(value)}
+                        isDisabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>
