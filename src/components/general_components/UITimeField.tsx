@@ -34,7 +34,7 @@ const StyledInput = styled.input<IInputProps>`
     outline: none; //Needs this to remove default black bold border.
     opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
     pointer: ${({ isDisabled }) => (isDisabled ? 'text' : 'not-allowed')};
-    background: ${({ isDisabled }) => (isDisabled ? '#eff1f2' : 'transparent')};
+    background: ${({ isDisabled }) => (isDisabled ? '#eff1f2' : '#ffffff')};
 
     &:focus {
         border: 1px solid #e07133;

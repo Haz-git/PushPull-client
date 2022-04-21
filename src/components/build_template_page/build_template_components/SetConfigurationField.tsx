@@ -9,13 +9,14 @@ import { NumberInput } from '@mantine/core';
 import Text from '../../general_components/Text';
 import { useClickOutside } from '@mantine/hooks';
 import { ConfiguredSetOperation } from './AddBlockForm';
+import { UITimeField } from '../../general_components/UITimeField';
 
 //Styles:
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr;
     column-gap: 1rem;
     align-items: flex-end;
     justify-content: flex-start;
@@ -130,14 +131,14 @@ export const SetConfigurationField = ({
                     label: {
                         color: 'rgba(0, 0, 34, .7)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '.85rem',
+                        fontSize: '1rem',
                         fontWeight: 700,
                         marginBottom: '.25rem',
                     },
                     input: {
                         color: 'rgba(0, 0, 34, 1)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '.95rem',
+                        fontSize: '1.05rem',
                         fontWeight: 700,
                     },
                 }}
@@ -155,18 +156,23 @@ export const SetConfigurationField = ({
                     label: {
                         color: 'rgba(0, 0, 34, .7)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '.85',
+                        fontSize: '1rem',
                         fontWeight: 700,
                         marginBottom: '.25rem',
                     },
                     input: {
                         color: 'rgba(0, 0, 34, 1)',
                         fontFamily: 'Lato, sans-serif',
-                        fontSize: '.95rem',
+                        fontSize: '1.05rem',
                         fontWeight: 700,
                     },
                 }}
                 onChange={(weight: number) => handleWeightInput(weight)}
+            />
+            <UITimeField
+                label="Rest"
+                value="00:00"
+                onChange={(event, value) => console.log(value)}
             />
         </MainContainer>
     );
