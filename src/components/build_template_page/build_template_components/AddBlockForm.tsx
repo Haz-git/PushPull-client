@@ -12,9 +12,11 @@ import {
     Select,
     Checkbox,
 } from '@mantine/core';
+import { UITimeField } from '../../general_components/UITimeField';
 import { SelectColorItem } from './SelectColorItem';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import { v4 as uuid } from 'uuid';
+import { AddBlockError } from './AddBlockError';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -22,7 +24,7 @@ import { addToolbarBlock } from '../../../redux/templates/templateActions';
 
 //Styles:
 import styled from 'styled-components';
-import { AddBlockError } from './AddBlockError';
+import { defaultTimeFieldStyle } from '../../../styles/fieldStyles';
 
 export const MainContainer = styled.div`
     padding: 0rem 0.5rem;
@@ -36,7 +38,8 @@ export const Spacer = styled.div`
 `;
 
 export const FlexWrapper = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     align-items: center;
     justify-content: center;
     column-gap: 1rem;
@@ -52,6 +55,10 @@ export const ButtonContainer = styled.div`
 
 export const ErrorSpacer = styled.div`
     height: 0.25rem;
+`;
+
+export const StyledTimeInput = styled.input`
+    border: 1px solid red;
 `;
 
 //Interfaces:
@@ -121,6 +128,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         configuredSets: {} as any,
         hasConfiguredSets: false,
         reps: '0',
+        restTime: '0:00',
         weightImperial: '0',
         weightMetric: '0',
         linkedColor: '',
@@ -432,7 +440,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     />
                     <NumberInput
                         value={Number(userInput.reps)}
-                        label="Reps Per Set"
+                        label="Reps per Set"
                         min={0}
                         max={99}
                         required={!isSetConfigurationMenuOpen}
@@ -487,6 +495,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             composeInputWeight(weight)
                         }
                         disabled={isSetConfigurationMenuOpen}
+                    />
+                    <UITimeField
+                        label="Rest per Set"
+                        value={userInput.restTime}
+                        onChange={(event, value) => console.log(value)}
+                        isDisabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>

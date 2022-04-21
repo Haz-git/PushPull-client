@@ -20,8 +20,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     container: {
-        border: '1px solid black',
         flex: 1,
+        padding: 10,
+        backgroundColor: '#efefef',
+        borderTopRightRadius: 5,
+        borderBottomRightRadius: 5,
     },
     text: {
         fontSize: 10,

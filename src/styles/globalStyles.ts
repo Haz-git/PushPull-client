@@ -103,6 +103,12 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    .mantine-TimeInput-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
 
     .mantine-Notification-root {
 

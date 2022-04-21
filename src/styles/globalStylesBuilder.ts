@@ -55,6 +55,12 @@ const GlobalStyle = createGlobalStyle`
 
     }
 
+    .mantine-Input-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1);
+        }
+    }
+
     .mantine-RichTextEditor-root {
         :focus {
             border: 1px solid rgba(224, 113, 51, 1);
@@ -148,6 +154,24 @@ const GlobalStyle = createGlobalStyle`
 
     .toolbar-block-dnd-copy ~ [data-rbd-placeholder-context-id] {
         display: none !important;
+    }
+
+    .mantine-TimeInput-defaultVariant {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1) !important;
+        }
+    }
+
+    .mantine-TimeInput-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1) !important;
+        }
+    }
+
+    .mantine-TimeRangeInput-input {
+        :focus {
+            border: 1px solid rgba(224, 113, 51, 1) !important;
+        }
     }
 
 `;

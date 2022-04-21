@@ -24,6 +24,7 @@ import { AddBlockError } from './AddBlockError';
 import { ConfiguredSetOperation } from './AddBlockForm';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import useQuery from '../../../utils/hooks/useQuery';
+import { UITimeField } from '../../general_components/UITimeField';
 
 //Styles:
 import styled from 'styled-components';
@@ -66,6 +67,7 @@ export const EditBlockForm = () => {
         desc: modalProps?.blockDetails?.desc,
         sets: modalProps?.blockDetails?.sets,
         reps: modalProps?.blockDetails?.reps,
+        restTime: modalProps?.blockDetails?.restTime,
         weightImperial: modalProps?.blockDetails?.weightImperial,
         weightMetric: modalProps?.blockDetails?.weightMetric,
         linkedColor: modalProps?.blockDetails?.linkedColor,
@@ -87,6 +89,7 @@ export const EditBlockForm = () => {
         desc: modalProps?.blockDetails?.desc,
         sets: modalProps?.blockDetails?.sets,
         reps: modalProps?.blockDetails?.reps,
+        restTime: modalProps?.blockDetails?.restTime,
         weightImperial: modalProps?.blockDetails?.weightImperial,
         weightMetric: modalProps?.blockDetails?.weightMetric,
         linkedColor: modalProps?.blockDetails?.linkedColor,
@@ -492,6 +495,12 @@ export const EditBlockForm = () => {
                             composeInputWeight(weight)
                         }
                         disabled={isSetConfigurationMenuOpen}
+                    />
+                    <UITimeField
+                        label="Rest per Set"
+                        value={userInput.restTime}
+                        onChange={(event, value) => console.log(value)}
+                        isDisabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>

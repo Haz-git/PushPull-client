@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 
 //Redux:
 
@@ -11,22 +12,23 @@ import { ConfiguredSetFrame } from './ConfiguredSetFrame';
 const styles = StyleSheet.create({
     blockMainContainer: {
         flexDirection: 'row',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
         paddingLeft: 10,
         paddingRight: 10,
     },
-    exerciseItem: {
+    exerciseNameContainer: {
         width: '100%',
         maxWidth: 165,
         marginRight: 10,
         textAlign: 'center',
         alignContent: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
     },
     exerciseDescriptionItem: {
         width: '100%',
         maxWidth: 330,
-        // marginRight: 10,
         textAlign: 'center',
     },
     orderItem: {
@@ -38,7 +40,6 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     divider: {
-        // borderBottom: '2px solid #e5e5e5',
         height: 2,
         borderRadius: 10,
         backgroundColor: '#e5e5e5',
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
 interface IComponentProps {
     blockDetails: any;
     index: number;
+    viewTemplate: any;
 }
 
 /**
@@ -59,14 +61,44 @@ interface IComponentProps {
 export const RowFrame = ({
     blockDetails,
     index,
+    viewTemplate,
 }: IComponentProps): JSX.Element => {
+    // console.log(blockDetails);
+
+    const exerciseColorObject = useMemo(
+        () =>
+            viewTemplate.templateLegend.find((colorObject: any) => {
+                return colorObject.id === blockDetails.linkedColor;
+            }),
+        [viewTemplate, blockDetails]
+    );
+
+    const composeColorSplotch = (): JSX.Element | null => {
+        if (!exerciseColorObject) {
+            return null;
+        }
+
+        return (
+            <View
+                style={{
+                    backgroundColor: `${exerciseColorObject.colorHex}`,
+                    height: 12,
+                    width: 12,
+                    borderRadius: 2,
+                    marginRight: 5,
+                }}
+            />
+        );
+    };
+
     return (
         <>
             <View style={styles.blockMainContainer}>
                 <View style={styles.orderItem}>
                     <Text style={styles.text}>{index}</Text>
                 </View>
-                <View style={styles.exerciseItem}>
+                <View style={styles.exerciseNameContainer}>
+                    <View>{composeColorSplotch()}</View>
                     <Text style={styles.text}>{blockDetails.name}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
