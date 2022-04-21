@@ -12,7 +12,7 @@ import {
     Select,
     Checkbox,
 } from '@mantine/core';
-import { TimeInput } from '@mantine/dates';
+import { UITimeField } from '../../general_components/UITimeField';
 import { SelectColorItem } from './SelectColorItem';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import { v4 as uuid } from 'uuid';
@@ -55,6 +55,10 @@ export const ButtonContainer = styled.div`
 
 export const ErrorSpacer = styled.div`
     height: 0.25rem;
+`;
+
+export const StyledTimeInput = styled.input`
+    border: 1px solid red;
 `;
 
 //Interfaces:
@@ -436,7 +440,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     />
                     <NumberInput
                         value={Number(userInput.reps)}
-                        label="Reps Per Set"
+                        label="Reps per Set"
                         min={0}
                         max={99}
                         required={!isSetConfigurationMenuOpen}
@@ -492,11 +496,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         }
                         disabled={isSetConfigurationMenuOpen}
                     />
-                    <TimeInput
-                        label="Rest Per Set"
-                        styles={defaultTimeFieldStyle}
-                        onChange={(value: Date) => console.log(value)}
-                        // tabIndex={0}
+                    <UITimeField
+                        label="Rest per Set"
+                        value={userInput.restTime}
+                        onChange={(event, value) => console.log(value)}
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>
