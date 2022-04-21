@@ -24,9 +24,14 @@ const LabelContainer = styled.div`
 const StyledInput = styled.input`
     border: 1px solid #d1d4d6;
     width: 100%;
-    padding: 0.5rem;
+    padding: 0rem 0rem 0rem 0.8rem;
     border-radius: 0.3rem;
     height: 36px;
+    color: rgba(0, 0, 34, 1);
+    font-family: Lato, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    outline: none; //Needs this to remove default black bold border.
 
     &:focus {
         border: 1px solid #e07133;
