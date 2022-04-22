@@ -172,7 +172,7 @@ export const SetConfigurationField = ({
             <UITimeField
                 label="Rest"
                 value="00:00"
-                onChange={(event, value) => console.log(value)}
+                onChange={(event, value) => handleUserInput('restTime', value)}
             />
         </MainContainer>
     );
