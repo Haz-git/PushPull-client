@@ -80,8 +80,6 @@ export const ColumnFrame = ({
     sheetContent,
     sheetOrder,
 }: IComponentProps): JSX.Element => {
-    console.log(viewTemplate.templateWe);
-
     const composeColumnFrames = (): JSX.Element[] => {
         return sheetOrder.map((columnHeader: string, index: number) => (
             <View
