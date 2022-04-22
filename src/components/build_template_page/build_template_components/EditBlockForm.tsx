@@ -499,7 +499,9 @@ export const EditBlockForm = () => {
                     <UITimeField
                         label="Rest per Set"
                         value={userInput.restTime}
-                        onChange={(event, value) => console.log(value)}
+                        onChange={(event, value) =>
+                            handleUserInput('restTime', value)
+                        }
                         isDisabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>
