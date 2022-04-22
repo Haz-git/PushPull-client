@@ -31,6 +31,7 @@ interface IComponentProps {
     reps: string;
     weightImperial: string;
     weightMetric: string;
+    restTime: string;
 }
 
 /**
@@ -47,6 +48,7 @@ export const ConfiguredSetFrame = ({
     reps,
     weightImperial,
     weightMetric,
+    restTime,
 }: IComponentProps): JSX.Element => {
     const generateConfiguredSetFrames = (): JSX.Element[] => {
         return Object.keys(configuredSets).map((item, i) => (
@@ -63,7 +65,9 @@ export const ConfiguredSetFrame = ({
                     </Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text style={styles.text}>NA</Text>
+                    <Text style={styles.text}>
+                        {configuredSets[item].restTime}
+                    </Text>
                 </View>
             </View>
         ));
@@ -86,7 +90,7 @@ export const ConfiguredSetFrame = ({
                     <Text style={styles.text}>{weightImperial}</Text>
                 </View>
                 <View style={styles.exerciseDescriptionItem}>
-                    <Text style={styles.text}>NA</Text>
+                    <Text style={styles.text}>{restTime}</Text>
                 </View>
             </View>
         );

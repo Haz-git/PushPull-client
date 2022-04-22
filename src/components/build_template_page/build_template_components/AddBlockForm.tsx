@@ -499,7 +499,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     <UITimeField
                         label="Rest per Set"
                         value={userInput.restTime}
-                        onChange={(event, value) => console.log(value)}
+                        onChange={(event, value) =>
+                            handleUserInput('restTime', value)
+                        }
                         isDisabled={isSetConfigurationMenuOpen}
                     />
                 </FlexWrapper>

@@ -356,6 +356,7 @@ const BlockTypeExercise = ({
                                     reps={blockDetails.reps}
                                     weightUnit={blockUnit}
                                     weight={blockWeight}
+                                    restTime={blockDetails.restTime}
                                 />
                                 <BlockTypeExerciseDataCollapse
                                     shouldShowCollapseLayout={

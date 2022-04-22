@@ -9,6 +9,7 @@ import { v4 as uuid } from 'uuid';
 //Styles:
 import styled from 'styled-components';
 import { CaretDown } from '@styled-icons/fluentui-system-filled/CaretDown';
+import { RestBlock } from './BlockTypeExerciseDataGrid';
 
 const CaretDownIcon = styled(CaretDown)`
     height: 1.35rem;
@@ -117,6 +118,14 @@ export const BlockTypeExerciseDataCollapse = ({
                         />
                     </ExerciseDetails>
                 </SetContainer>
+                <RestBlock>
+                    <Text
+                        text={`Rest: ${set.restTime} m`}
+                        fontSize=".75rem"
+                        fontWeight="800"
+                        mainText={true}
+                    />
+                </RestBlock>
             </SetWrapper>
         ));
     };

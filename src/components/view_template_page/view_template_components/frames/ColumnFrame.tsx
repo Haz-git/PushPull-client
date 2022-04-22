@@ -105,10 +105,14 @@ export const ColumnFrame = ({
                             <Text style={styles.gridHeaderText}>Reps</Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.gridHeaderText}>Weight</Text>
+                            <Text style={styles.gridHeaderText}>
+                                {viewTemplate.templateWeightUnit === 'IMPERIAL'
+                                    ? 'Weight (Lbs)'
+                                    : 'Weight (Kgs)'}
+                            </Text>
                         </View>
                         <View style={styles.exerciseDescriptionItem}>
-                            <Text style={styles.gridHeaderText}>Rest</Text>
+                            <Text style={styles.gridHeaderText}>Rest (m)</Text>
                         </View>
                     </View>
                     <GridFrame

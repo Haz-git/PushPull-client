@@ -65,7 +65,6 @@ export const UITimeField = ({
     onChange,
     isDisabled,
 }: IComponentProps): JSX.Element => {
-    console.log(isDisabled);
     return (
         <MainContainer>
             <LabelContainer>
