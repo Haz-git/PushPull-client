@@ -105,6 +105,7 @@ export const RowFrame = ({
                     <ConfiguredSetFrame
                         sets={blockDetails.sets}
                         reps={blockDetails.reps}
+                        restTime={blockDetails.restTime}
                         hasConfiguredSets={blockDetails.hasConfiguredSets}
                         configuredSets={blockDetails.configuredSets}
                         weightImperial={blockDetails.weightImperial}
