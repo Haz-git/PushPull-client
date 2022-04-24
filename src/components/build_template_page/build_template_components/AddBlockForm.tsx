@@ -631,12 +631,19 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }
                     nothingFound="No Viewer Input Found"
                     maxDropdownHeight={250}
-                    onChange={(value: string) =>
-                        setUserInput({
-                            ...userInput,
-                            linkedViewerInput: value,
-                        })
-                    }
+                    onChange={(value: string) => {
+                        if (
+                            window.confirm(
+                                'Modifying this input will reset all current weight values. Instead, they will be replaced with fields where you may place a certain percentage of this input. Proceed?'
+                            )
+                        ) {
+                            setUserInput({
+                                ...userInput,
+                                linkedViewerInput: value,
+                            });
+                            return;
+                        }
+                    }}
                 />
             </FormContainer>
             <ButtonContainer>
