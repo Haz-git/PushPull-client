@@ -24,7 +24,6 @@ enum FieldName {
 }
 
 enum ViewerResponseTypeEnum {
-    Text = 'Text',
     Number = 'Number',
 }
 
@@ -110,35 +109,6 @@ export const AddViewerInputForm = () => {
                         />
                     )}
                 />
-                <Controller
-                    name="ResponseType"
-                    control={control}
-                    rules={{
-                        required: {
-                            value: true,
-                            message:
-                                'You must enter a response type entered by the viewer.',
-                        },
-                    }}
-                    render={({ field }) => (
-                        <Select
-                            label="Response Type"
-                            required
-                            placeholder="Number"
-                            styles={defaultFieldStyle}
-                            data={[
-                                { value: 'Number', label: 'Number' },
-                                { value: 'Text', label: 'Text' },
-                            ]}
-                            onChange={field.onChange}
-                            error={hasFieldError(
-                                errors,
-                                FieldName.ResponseType
-                            )}
-                        />
-                    )}
-                />
-
                 <GeneralButton
                     buttonLabel="Save Question"
                     type="submit"
