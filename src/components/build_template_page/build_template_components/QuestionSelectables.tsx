@@ -23,7 +23,7 @@ const MainContainer = styled.div<IMainContainerProps>`
 
 const ResponseTypeContainer = styled.div`
     padding: 0.5rem 0.5rem;
-    width: 5.5rem;
+    width: 10rem;
     margin: 0rem 0.5rem;
     background: #d6d6d6;
     border-radius: 0.3rem;
@@ -66,14 +66,6 @@ export const QuestionSelectables = ({
             <LabelContainer>
                 <Text text={inputQuestion} subText={true} />
             </LabelContainer>
-            <ResponseTypeContainer>
-                <Text
-                    text={responseType}
-                    subText={true}
-                    fontSize=".9rem"
-                    fontWeight="800"
-                />
-            </ResponseTypeContainer>
         </MainContainer>
     );
 };
