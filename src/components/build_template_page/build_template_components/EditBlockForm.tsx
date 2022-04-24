@@ -35,6 +35,7 @@ import {
     FlexWrapper,
     ErrorSpacer,
     SetConfigurationContainer,
+    CheckBoxOptionsContainer,
 } from './AddBlockForm';
 
 const ButtonContainer = styled.div`
@@ -506,21 +507,39 @@ export const EditBlockForm = () => {
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>
-                    <Checkbox
-                        color="orange"
-                        checked={isSetConfigurationMenuOpen}
-                        label="Configure Sets Separately"
-                        onChange={handleCustomSetRequest}
-                        styles={{
-                            label: {
-                                color: 'rgba(0, 0, 34, .7)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '1rem',
-                                fontWeight: 700,
-                                marginBottom: '.25rem',
-                            },
-                        }}
-                    />
+                    <CheckBoxOptionsContainer>
+                        <Checkbox
+                            color="orange"
+                            checked={isSetConfigurationMenuOpen}
+                            label="Configure Sets Separately"
+                            onChange={handleCustomSetRequest}
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.2rem',
+                                },
+                            }}
+                        />
+                        <Checkbox
+                            color="orange"
+                            checked={false}
+                            label="Use RPE for Weight"
+                            onChange={handleCustomSetRequest}
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.2rem',
+                                },
+                            }}
+                            disabled
+                        />
+                    </CheckBoxOptionsContainer>
                     <Spacer />
                     <AddBlockError
                         shouldShowError={isCustomSetLimitExceeded}
