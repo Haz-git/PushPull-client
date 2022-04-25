@@ -7,7 +7,6 @@ import { NumberInput } from '@mantine/core';
 
 //Styles:
 import styled from 'styled-components';
-import { defaultFieldStyle } from '../../../styles/fieldStyles';
 
 const InputMainContainer = styled.div``;
 

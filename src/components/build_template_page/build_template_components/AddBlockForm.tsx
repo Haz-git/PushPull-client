@@ -49,6 +49,13 @@ export const SetConfigurationContainer = styled.div`
     margin-top: 1rem;
 `;
 
+export const CheckBoxOptionsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 2rem;
+`;
+
 export const ButtonContainer = styled.div`
     margin: 2rem 0rem 1rem 0rem;
 `;
@@ -506,21 +513,39 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     />
                 </FlexWrapper>
                 <SetConfigurationContainer>
-                    <Checkbox
-                        color="orange"
-                        checked={isSetConfigurationMenuOpen}
-                        label="Configure Sets Separately"
-                        onChange={handleCustomSetRequest}
-                        styles={{
-                            label: {
-                                color: 'rgba(0, 0, 34, .7)',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '1rem',
-                                fontWeight: 700,
-                                marginBottom: '.25rem',
-                            },
-                        }}
-                    />
+                    <CheckBoxOptionsContainer>
+                        <Checkbox
+                            color="orange"
+                            checked={isSetConfigurationMenuOpen}
+                            label="Configure Sets Separately"
+                            onChange={handleCustomSetRequest}
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.2rem',
+                                },
+                            }}
+                        />
+                        <Checkbox
+                            color="orange"
+                            checked={false}
+                            label="Use RPE for Weight"
+                            onChange={handleCustomSetRequest}
+                            styles={{
+                                label: {
+                                    color: 'rgba(0, 0, 34, .7)',
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    marginBottom: '.2rem',
+                                },
+                            }}
+                            disabled
+                        />
+                    </CheckBoxOptionsContainer>
                     <Spacer />
                     <AddBlockError
                         shouldShowError={isCustomSetLimitExceeded}
@@ -606,12 +631,19 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }
                     nothingFound="No Viewer Input Found"
                     maxDropdownHeight={250}
-                    onChange={(value: string) =>
-                        setUserInput({
-                            ...userInput,
-                            linkedViewerInput: value,
-                        })
-                    }
+                    onChange={(value: string) => {
+                        if (
+                            window.confirm(
+                                'Modifying this input will reset all current weight values. Instead, they will be replaced with fields where you may place a certain percentage of this input. Proceed?'
+                            )
+                        ) {
+                            setUserInput({
+                                ...userInput,
+                                linkedViewerInput: value,
+                            });
+                            return;
+                        }
+                    }}
                 />
             </FormContainer>
             <ButtonContainer>
