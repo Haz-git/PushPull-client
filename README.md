@@ -37,6 +37,10 @@ During my fitness journey, I jumped from one workout program to another when the
 The **Landing Page** was designed in collaboration with a UI/UX designer. Authentication system complete with protected routes was developed by integrating the auth provider *UserFront*. The user can sign up or log in at any unprotected page.
 
 ![](https://media.giphy.com/media/Ee4JJT2M9Ad3s8BtBV/giphy.gif)
+
+The **Search Database** allows users to use an incredible range of filters to sift through many workout programs. Sorting is implemented as well. Currently, the workout programs are being pulled from custom dummy data--I hope this will be filled with user-created programs in the near future.
+
+![](https://media.giphy.com/media/6Szg20JjYA6qCaBMKF/giphy.gif)
     
 ### Contributing
 ---
