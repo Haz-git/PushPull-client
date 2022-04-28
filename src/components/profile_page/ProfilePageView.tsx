@@ -144,6 +144,7 @@ const ProfilePageView = ({
                         openBoolean={stateAvatarModal}
                         closeFunc={() => setStateAvatarModal(false)}
                         title="Update Avatar"
+                        size="lg"
                     >
                         <UpdateProfileAvatarForm
                             toggleModal={handleAvatarModal}
