@@ -6,9 +6,9 @@ A *fitness programming* web-app created for rapid prototyping of workout-related
 
 ### About The Project
 ---
-*PushPull* is my newest passion project designed for the rapid creation of fitness programs for distribution. Whether fitness trainer, professional bodybuilder, or just a general fitness enthusiast like me-- I wanted PushPull to serve as a centralized community where people can create, search, rate, and discuss a variety of workout programs.
+*PushPull* is my newest passion project designed for the rapid creation of fitness programs for distribution. Whether fitness trainer, professional bodybuilder, student athlete, or just a general fitness enthusiast like me-- I wanted PushPull to serve as a centralized community where people can create, search, rate, and discuss a variety of workout programs.
 
-During my fitness journey, I jumped from one workout program to another when the time felt right. I perused Reddit for hours to find the best workout programs for my current level. Then, after long contemplation, I visited multiple sketchy blog websites to find and download that fitness program. My dislike toward this process led to the creation of *PushPull*
+During my fitness journey, I jumped from one workout program to another when the time felt right. I perused Reddit for hours to find the best workout programs for my current level. Then, after long contemplation, I visited multiple sketchy blog websites to find and download that fitness program. My dislike toward this process led to the creation of *PushPull*.
 
 #### Built With
 - TypeScript
