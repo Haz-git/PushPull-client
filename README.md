@@ -26,8 +26,8 @@ During my fitness journey, I jumped from one workout program to another when the
 ---
 
 1. Head over to [PushPull's Website](https://www.gopushpull.com/).
-2. Navigate to 'Sign up'--create a free account.
-3. Navigate to 'Log In' and enter the app using your credentials.
+2. Click 'Sign up' in the upper right--create an account.
+3. Log in.
 4. Start exploring!
 
 ### Feature Highlights
@@ -38,7 +38,7 @@ The **Landing Page** was designed in collaboration with a UI/UX designer. Authen
 
 ![](https://media.giphy.com/media/Ee4JJT2M9Ad3s8BtBV/giphy.gif)
 
-The **Search Database** allows users to use an incredible range of filters to sift through many workout programs. Sorting is implemented as well. Currently, the workout programs are being pulled from custom dummy data--I hope this will be filled with user-created programs in the near future.
+The **Search Database** allows users to use an incredible range of filters to sift through many workout programs.
 
 ![](https://media.giphy.com/media/6Szg20JjYA6qCaBMKF/giphy.gif)
 
@@ -74,7 +74,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ### License
 ---
-Distributed under the GPL-3.0 License. See ```LICENSE``` for more information.
+Distributed under the GPL-3.0 License. See [LICENSE](https://github.com/Haz-git/PushPull-client/blob/master/LICENSE) for more information.
 
 ### Contact
 ---
