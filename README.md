@@ -41,6 +41,26 @@ The **Landing Page** was designed in collaboration with a UI/UX designer. Authen
 The **Search Database** allows users to use an incredible range of filters to sift through many workout programs. Sorting is implemented as well. Currently, the workout programs are being pulled from custom dummy data--I hope this will be filled with user-created programs in the near future.
 
 ![](https://media.giphy.com/media/6Szg20JjYA6qCaBMKF/giphy.gif)
+
+Authenticated users are able to submit a review of a workout program by filling out a **Review Form**. This review form is a custom wizard form implemented from scratch. The review contributes to the program's overall ratings and other users can choose to like or dislike the review.
+
+![](https://media.giphy.com/media/lQr2hmTsrAdftL6O9r/giphy.gif)
+
+Authenticated users have access to their **Profile Page** which includes avatar and user detail customization.
+
+![](https://media.giphy.com/media/fIe8TvQnnIhGfpHpPg/giphy.gif)
+
+Authenticated users also have access to **Builder Mode** which enables crafting of custom workout routines. Here, the user can create *projects* and then nest individual *templates* within each project.
+
+![](https://media.giphy.com/media/GRzFToVGn7KjHBDhUH/giphy.gif)
+
+In the **Builder Mode**, the owner can add exercises as blocks where they can drag and drop to corresponding columns defaultly labeled as 'day 1', 'day 2', etc. The block-building architecture allows the construction of complex workout routines. Workout routines can also be separated by 'sheets' allowing for more organizational capabilities.
+
+Once the owner publishes, they (and other guests!) can view and download the routine as a PDF!
+
+![](https://media.giphy.com/media/CFhiWDr7ygtMwwrG5s/giphy.gif)
+
+**PushPull** offers more capabilities than the features described here. Head over to **Usage** to try Pushpull yourself!
     
 ### Contributing
 ---
