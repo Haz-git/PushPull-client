@@ -261,7 +261,7 @@ const Navbar = ({
         )
             return null;
         return (
-            <StyledNavbar isBuilder={checkIfBuilder()}>
+            <StyledNavbar isBuilder={checkIfBuilder()} data-testid="navbar">
                 <LeftWrapper>
                     {renderBuilderBackButton()}
                     <LogoContainer>
