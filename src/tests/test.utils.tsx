@@ -18,9 +18,9 @@ interface IComponentProps {
 }
 
 /**
- *
- *
- *
+ * Will be wrapping all of our tests.
+ * Need to wrap tests in Provider + Persist + Router. Might need to add more later.
+ * This is so rendered components can have access to store.
  */
 
 export const TestWrapper = ({ children }: IComponentProps): JSX.Element => {
