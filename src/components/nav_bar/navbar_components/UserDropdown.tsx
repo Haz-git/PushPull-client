@@ -176,7 +176,10 @@ const UserDropdown = ({
     };
 
     return (
-        <MainContainer isBuilder={checkIfBuilderOrFile()}>
+        <MainContainer
+            isBuilder={checkIfBuilderOrFile()}
+            data-testid="userDropdown"
+        >
             <Menu
                 styles={returnBuilderStyles()}
                 placement="start"
