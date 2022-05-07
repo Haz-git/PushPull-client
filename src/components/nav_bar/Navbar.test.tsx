@@ -1,6 +1,6 @@
 import React from 'react';
 import { TestWrapper } from '../../tests/test.utils';
-import { render } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Navbar from './Navbar';
 
@@ -12,8 +12,10 @@ import Navbar from './Navbar';
  * - Clicking auth options should open authentication drawer.
  */
 
+afterEach(() => cleanup);
+
 describe('Navbar', () => {
-    test('Should render at all times', () => {
+    test('should render at all times', () => {
         const { queryByTestId } = render(
             <TestWrapper>
                 <Navbar
@@ -26,7 +28,7 @@ describe('Navbar', () => {
     });
 });
 
-describe('when isUserLogged is false', () => {
+describe('when isUserLoggedin is false', () => {
     test('should render both login and signup buttons', () => {
         const { getByText } = render(
             <TestWrapper>
@@ -47,4 +49,17 @@ describe('when isUserLogged is false', () => {
     });
 });
 
-//To be cont.
+describe('when isUserLoggedIn is true', () => {
+    test('should render userDropdown', () => {
+        const { queryByTestId } = render(
+            <TestWrapper>
+                <Navbar
+                    isUserLoggedIn={true}
+                    toggleAuthDrawerWithView={(state, view) => {}}
+                />
+            </TestWrapper>
+        );
+
+        expect(queryByTestId(/userDropdown/i)).toBeTruthy();
+    });
+});
