@@ -42,13 +42,13 @@ describe('when isUserLoggedin is false', () => {
             screen.getByRole('button', {
                 name: /Log in/i,
             })
-        );
+        ).toBeInTheDocument();
 
         expect(
             screen.getByRole('button', {
                 name: /Sign up/i,
             })
-        );
+        ).toBeInTheDocument();
     });
 });
 
@@ -63,6 +63,6 @@ describe('when isUserLoggedIn is true', () => {
             </TestWrapper>
         );
 
-        expect(queryByTestId(/userDropdown/i)).toBeTruthy();
+        expect(queryByTestId(/userDropdown/i)).toBeInTheDocument();
     });
 });
