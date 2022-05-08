@@ -10,5 +10,8 @@ describe('Search workout templates', () => {
 
     it('user can search for a workout template', () => {
         cy.visit('/');
+        cy.findByRole('button', {
+            name: /Search Workouts/i,
+        }).click({ force: true });
     });
 });
