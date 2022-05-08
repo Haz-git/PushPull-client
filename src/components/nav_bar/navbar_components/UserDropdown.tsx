@@ -162,7 +162,7 @@ const UserDropdown = ({
         return 'lg';
     };
 
-    const checkIfBuilderOrFile = () => {
+    const isBuilderOrFile = () => {
         if (
             Location.pathname.includes('builder') ||
             Location.pathname.includes('file')
@@ -172,19 +172,16 @@ const UserDropdown = ({
     };
 
     const returnBuilderStyles = () => {
-        if (checkIfBuilderOrFile()) return builderStyles;
+        if (isBuilderOrFile()) return builderStyles;
     };
 
     return (
-        <MainContainer
-            isBuilder={checkIfBuilderOrFile()}
-            data-testid="userDropdown"
-        >
+        <MainContainer isBuilder={isBuilderOrFile()} data-testid="userDropdown">
             <Menu
                 styles={returnBuilderStyles()}
                 placement="start"
                 control={
-                    <DropdownContainer isBuilder={checkIfBuilderOrFile()}>
+                    <DropdownContainer isBuilder={isBuilderOrFile()}>
                         <AvatarContainer>
                             <Avatar
                                 src={image}
@@ -194,25 +191,25 @@ const UserDropdown = ({
                             />
                         </AvatarContainer>
                         <HeaderContainer>
-                            <UserDetailText isBuilder={checkIfBuilderOrFile()}>
+                            <UserDetailText isBuilder={isBuilderOrFile()}>
                                 {username}
                             </UserDetailText>
                         </HeaderContainer>
-                        <CaretDownIcon isBuilder={checkIfBuilderOrFile()} />
+                        <CaretDownIcon isBuilder={isBuilderOrFile()} />
                     </DropdownContainer>
                 }
                 zIndex={999}
                 size={checkIfMobile()}
             >
                 <MenuItem
-                    icon={<ProfileIcon isBuilder={checkIfBuilderOrFile()} />}
+                    icon={<ProfileIcon isBuilder={isBuilderOrFile()} />}
                     onClick={() => historyObject.push(`/user/${username}`)}
                 >
                     User Profile
                 </MenuItem>
                 <Divider />
                 <MenuItem
-                    icon={<ToolsIcon isBuilder={checkIfBuilderOrFile()} />}
+                    icon={<ToolsIcon isBuilder={isBuilderOrFile()} />}
                     onClick={() =>
                         historyObject.push(`/builder/dashboard/recents`)
                     }
@@ -221,7 +218,7 @@ const UserDropdown = ({
                 </MenuItem>
                 <Divider />
                 <MenuItem
-                    icon={<ExitIcon isBuilder={checkIfBuilderOrFile()} />}
+                    icon={<ExitIcon isBuilder={isBuilderOrFile()} />}
                     onClick={() => {
                         Userfront.logout({ redirect: false });
                         dispatch(userSignout());

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TestWrapper } from '../../tests/test.utils';
-import { render, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Navbar from './Navbar';
 
@@ -12,25 +12,24 @@ import Navbar from './Navbar';
  * - Clicking auth options should open authentication drawer.
  */
 
-afterEach(() => cleanup);
-
 describe('Navbar', () => {
     test('should render at all times', () => {
-        const { queryByTestId } = render(
-            <TestWrapper>
-                <Navbar
-                    isUserLoggedIn={false}
-                    toggleAuthDrawerWithView={(state, view) => {}}
-                />
-            </TestWrapper>
-        );
-        expect(queryByTestId(/navbar/i)).toBeTruthy();
+        expect(() =>
+            render(
+                <TestWrapper>
+                    <Navbar
+                        isUserLoggedIn={false}
+                        toggleAuthDrawerWithView={(state, view) => {}}
+                    />
+                </TestWrapper>
+            )
+        ).not.toThrow();
     });
 });
 
 describe('when isUserLoggedin is false', () => {
     test('should render both login and signup buttons', () => {
-        const { getByText } = render(
+        render(
             <TestWrapper>
                 <Navbar
                     isUserLoggedIn={false}
@@ -39,13 +38,17 @@ describe('when isUserLoggedin is false', () => {
             </TestWrapper>
         );
 
-        expect(() =>
-            getByText(/Log in/i, { selector: 'button' })
-        ).not.toThrow();
+        expect(
+            screen.getByRole('button', {
+                name: /Log in/i,
+            })
+        );
 
-        expect(() =>
-            getByText(/Sign up/i, { selector: 'button' })
-        ).not.toThrow();
+        expect(
+            screen.getByRole('button', {
+                name: /Sign up/i,
+            })
+        );
     });
 });
 
