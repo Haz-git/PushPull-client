@@ -83,6 +83,7 @@ const Searchbar = ({
                     placeholder={placeholderText}
                     isActive={isActive}
                     ref={focusRef}
+                    data-cy="search-workout-input"
                 />
             </MainContainer>
         </OutsideClickHandler>

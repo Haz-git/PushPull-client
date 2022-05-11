@@ -167,7 +167,11 @@ const SearchbarDropdown = ({
     const mapFilteredWorkoutPrograms = () => {
         if (totalWorkoutPrograms && totalWorkoutPrograms.length !== 0) {
             return totalWorkoutPrograms.map((program) => (
-                <EntityWrapper key={uuid()} isActive={renderDropdown}>
+                <EntityWrapper
+                    key={uuid()}
+                    isActive={renderDropdown}
+                    daya-cy="template-entity-wrapper"
+                >
                     <EntityItem to={`/program/${program.id}`} key={program.id}>
                         <FileIcon />
                         <EntityNameText>
@@ -226,7 +230,10 @@ const SearchbarDropdown = ({
                     currValue={searchbarInput}
                     focusRef={inputRef}
                 />
-                <DropdownContainer isActive={renderDropdown}>
+                <DropdownContainer
+                    isActive={renderDropdown}
+                    data-cy="search-workout-template-dropdown"
+                >
                     <DropdownHeaderContainer isActive={renderDropdown}>
                         <DropdownHeader isActive={renderDropdown}>
                             Recent
