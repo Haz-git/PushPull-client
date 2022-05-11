@@ -8,10 +8,22 @@ describe('Search workout templates', () => {
      * 6. Go back to workout programs
      */
 
-    it('user can search for a workout template', () => {
+    it('can navigate to search page', () => {
         cy.visit('/');
         cy.findByRole('button', {
             name: /Search Workouts/i,
         }).click({ force: true });
+    });
+
+    it('can search for a workout template', () => {
+        cy.get('input[data-cy="search-workout-input"]')
+            .click({ force: true })
+            .type('Starting Stre{enter}');
+    });
+
+    it('can navigate to searched template', () => {
+        cy.get('div[data-cy="search-workout-template-dropdown"]')
+            .contains('Starting Strength')
+            .click();
     });
 });
