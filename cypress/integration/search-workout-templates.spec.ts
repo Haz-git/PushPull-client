@@ -16,14 +16,12 @@ describe('Search workout templates', () => {
     });
 
     it('can search for a workout template', () => {
-        cy.get('input[data-cy="search-workout-input"]')
-            .click({ force: true })
-            .type('Starting Stre{enter}');
+        cy.get('input').click({ force: true }).type('Starting Strength{enter}');
     });
 
     it('can navigate to searched template', () => {
         cy.get('div[data-cy="search-workout-template-dropdown"]')
             .contains('Starting Strength')
-            .click();
+            .click({ force: true });
     });
 });
