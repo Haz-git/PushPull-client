@@ -260,7 +260,7 @@ export const updateToolbarBlock = (
                 });
 
                 dispatch(disableLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
-                dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'CLOSE'));
+                dispatch(toggleModal(ModalActionTypes.editBlock, 'CLOSE'));
             }
         } catch (err) {
             console.error(err);
@@ -339,7 +339,7 @@ export const updateEditingSurfaceBlock = (
                 });
 
                 dispatch(disableLoaderState(loaderTypes.EDIT_BLOCK_MODAL));
-                dispatch(toggleModal(ModalActionTypes.EDIT_BLOCK, 'CLOSE'));
+                dispatch(toggleModal(ModalActionTypes.editBlock, 'CLOSE'));
             }
         } catch (err) {
             console.error(err);

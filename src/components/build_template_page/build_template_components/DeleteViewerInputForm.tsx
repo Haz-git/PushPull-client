@@ -70,7 +70,7 @@ export const DeleteViewerInputForm = ({
         );
 
         dispatch(
-            toggleModal(ModalActionTypes.DELETE_VIEWER_INPUT_POPOVER, 'CLOSE')
+            toggleModal(ModalActionTypes.deleteViewerInputPopover, 'CLOSE')
         );
 
         resetQuestionId();

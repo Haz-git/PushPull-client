@@ -71,9 +71,7 @@ export const AddViewerInputForm = () => {
             )
         );
 
-        dispatch(
-            toggleModal(ModalActionTypes.ADD_VIEWER_INPUT_POPOVER, 'CLOSE')
-        );
+        dispatch(toggleModal(ModalActionTypes.addViewerInputPopover, 'CLOSE'));
     };
 
     const hasFieldError = (errorObject: any, fieldName: FieldName): Boolean => {

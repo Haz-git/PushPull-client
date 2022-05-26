@@ -1,8 +1,8 @@
 export enum ModalActionTypes {
-    EDIT_BLOCK = 'EDIT_BLOCK',
-    DELETE_SHEET_CONFIRMATION = 'DELETE_SHEET_CONFIRMATION',
-    ADD_COLOR_SWATCH_POPOVER = 'ADD_COLOR_SWATCH_POPOVER',
-    DELETE_COLOR_SWATCH_POPOVER = 'DELETE_COLOR_SWATCH_POPOVER',
-    ADD_VIEWER_INPUT_POPOVER = 'ADD_VIEWER_INPUT_POPOVER',
-    DELETE_VIEWER_INPUT_POPOVER = 'DELETE_VIEWER_INPUT_POPOVER',
+    editBlock = 'editBlock',
+    deleteSheetConfirmation = 'deleteSheetConfirmation',
+    addColorSwatchPopover = 'addColorSwatchPopover',
+    deleteColorSwatchPopover = 'deleteColorSwatchPopover',
+    addViewerInputPopover = 'addViewerInputPopover',
+    deleteViewerInputPopover = 'deleteViewerInputPopover',
 }
