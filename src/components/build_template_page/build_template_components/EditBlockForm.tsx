@@ -57,7 +57,7 @@ export const EditBlockForm = () => {
         (state: RootStateOrAny) => state?.template?.templateUserInputs
     );
     const { modalProps } = useSelector(
-        (state: RootStateOrAny) => state?.modals?.EDIT_BLOCK
+        (state: RootStateOrAny) => state?.modals?.editBlock
     );
     const currentSheetId = query.get('sheetId');
 
