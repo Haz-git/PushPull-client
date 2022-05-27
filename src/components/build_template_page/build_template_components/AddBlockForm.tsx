@@ -17,6 +17,7 @@ import { SelectColorItem } from './SelectColorItem';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import { v4 as uuid } from 'uuid';
 import { AddBlockError } from './AddBlockError';
+import { AddBlockFormInputLinkLabel } from './AddBlockFormInputLinkLabel';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -122,6 +123,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             label: question.InputQuestion,
         }));
     }, [template.templateUserInputs]);
+
+    //AddBlockFormInputLinkLabel state:
+    const [isBlockFormInputLinkLabelOpen, setIsBlockFormInputLinkLabelOpen] =
+        useState(false);
 
     //Set Configuration Menu State:
     const [isSetConfigurationMenuOpen, toggleSetConfigurationMenu] =
@@ -602,6 +607,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }
                 />
                 <Spacer />
+                <AddBlockFormInputLinkLabel
+                    shouldDisplay={isBlockFormInputLinkLabelOpen}
+                />
                 <Select
                     value={userInput.linkedViewerInput}
                     searchable
@@ -631,6 +639,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }
                     nothingFound="No Viewer Input Found"
                     maxDropdownHeight={250}
+                    onDropdownOpen={() =>
+                        setIsBlockFormInputLinkLabelOpen(true)
+                    }
+                    onDropdownClose={() =>
+                        setIsBlockFormInputLinkLabelOpen(false)
+                    }
                     onChange={(value: string) => {
                         if (
                             window.confirm(
