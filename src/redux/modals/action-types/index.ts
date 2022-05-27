@@ -5,5 +5,4 @@ export enum ModalActionTypes {
     deleteColorSwatchPopover = 'deleteColorSwatchPopover',
     addViewerInputPopover = 'addViewerInputPopover',
     deleteViewerInputPopover = 'deleteViewerInputPopover',
-    allowResetAddBlockFormValues = 'allowResetAddBlockFormValues',
 }

@@ -26,10 +26,6 @@ const initialState: any = {
         isOpen: false,
         modalProps: {},
     },
-    allowResetAddBlockFormValues: {
-        isOpen: false,
-        modalProps: {},
-    },
 };
 
 export const modalReducer = (state: {} = initialState, action: ModalAction) => {
