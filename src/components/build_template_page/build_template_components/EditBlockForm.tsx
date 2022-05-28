@@ -25,6 +25,7 @@ import { ConfiguredSetOperation } from './AddBlockForm';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import useQuery from '../../../utils/hooks/useQuery';
 import { UITimeField } from '../../general_components/UITimeField';
+import { AddBlockFormInputLinkLabel } from './AddBlockFormInputLinkLabel';
 
 //Styles:
 import styled from 'styled-components';
@@ -76,6 +77,10 @@ export const EditBlockForm = () => {
         hasConfiguredSets: modalProps?.blockDetails?.hasConfiguredSets,
         configuredSets: modalProps?.blockDetails?.configuredSets,
     };
+
+    //AddBlockFormInputLinkLabel state:
+    const [isBlockFormInputLinkLabelOpen, setIsBlockFormInputLinkLabelOpen] =
+        useState(false);
 
     //Error states:
     const [hasError, setHasError] = useState(false);
@@ -597,6 +602,9 @@ export const EditBlockForm = () => {
                     }
                 />
                 <Spacer />
+                <AddBlockFormInputLinkLabel
+                    shouldDisplay={isBlockFormInputLinkLabelOpen}
+                />
                 <Select
                     value={userInput.linkedViewerInput}
                     searchable
@@ -627,6 +635,12 @@ export const EditBlockForm = () => {
                     }
                     nothingFound="No Viewer Input Found"
                     maxDropdownHeight={250}
+                    onDropdownOpen={() =>
+                        setIsBlockFormInputLinkLabelOpen(true)
+                    }
+                    onDropdownClose={() =>
+                        setIsBlockFormInputLinkLabelOpen(false)
+                    }
                     onChange={(value: string) =>
                         setUserInput({
                             ...userInput,
