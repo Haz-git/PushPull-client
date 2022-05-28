@@ -477,6 +477,8 @@ export const EditBlockForm = () => {
                         label={`Weight (${composedWeightUnit})`}
                         required={!isSetConfigurationMenuOpen}
                         value={determineUnitValue()}
+                        precision={2}
+                        step={0.01}
                         min={0}
                         max={9999}
                         styles={{
@@ -641,7 +643,7 @@ export const EditBlockForm = () => {
                     onDropdownClose={() =>
                         setIsBlockFormInputLinkLabelOpen(false)
                     }
-                    onChange={(value: string) =>
+                    onChange={(value: string): void =>
                         setUserInput({
                             ...userInput,
                             linkedViewerInput: value,
