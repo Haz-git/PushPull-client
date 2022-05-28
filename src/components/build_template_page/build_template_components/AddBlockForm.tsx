@@ -303,7 +303,7 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
 
     const convertWeightValues = (): void => {
         // When user input is selected, we need to convert from numerical weight input to a percentage scale.
-        // .01 -> 1% , 1 -> 100%
+        // .1 -> .1%, 100 -> 100%
         // 1. If there are no configured sets, just reset weightImperial or weightMetric
         // 2. If there are configured sets, outsource to different function.
         if (userInput.hasConfiguredSets) {
