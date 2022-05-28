@@ -147,6 +147,8 @@ export const SetConfigurationField = ({
             <NumberInput
                 label={`Weight (${composedWeightUnit})`}
                 value={determineUnitValue()}
+                precision={1}
+                step={0.01}
                 min={0}
                 max={9999}
                 styles={{

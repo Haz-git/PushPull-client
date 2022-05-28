@@ -299,6 +299,28 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
         });
     };
 
+    const convertConfiguredSetWeights = (): void => {};
+
+    const convertWeightValues = (): void => {
+        // When user input is selected, we need to convert from numerical weight input to a percentage scale.
+        // .01 -> 1% , 1 -> 100%
+        // 1. If there are no configured sets, just reset weightImperial or weightMetric
+        // 2. If there are configured sets, outsource to different function.
+        if (userInput.hasConfiguredSets) {
+            return convertConfiguredSetWeights();
+        }
+
+        console.log('test');
+
+        setUserInput({
+            ...userInput,
+            weightImperial: '.01',
+            weightMetric: '.01',
+        });
+
+        return;
+    };
+
     const composeInputWeight = (weight: number): void => {
         if (composedWeightUnit === 'Kgs') {
             return setUserInput({
@@ -483,6 +505,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         label={`Weight (${composedWeightUnit})`}
                         required={!isSetConfigurationMenuOpen}
                         value={determineUnitValue()}
+                        precision={1}
+                        step={0.01}
                         min={0}
                         max={9999}
                         styles={{
@@ -645,18 +669,13 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     onDropdownClose={() =>
                         setIsBlockFormInputLinkLabelOpen(false)
                     }
-                    onChange={(value: string) => {
-                        if (
-                            window.confirm(
-                                'Modifying this input will reset all current weight values. Instead, they will be replaced with fields where you may place a certain percentage of this input. Proceed?'
-                            )
-                        ) {
-                            setUserInput({
-                                ...userInput,
-                                linkedViewerInput: value,
-                            });
-                            return;
-                        }
+                    onChange={(value: string): void => {
+                        setUserInput({
+                            ...userInput,
+                            linkedViewerInput: value,
+                        });
+                        convertWeightValues();
+                        return;
                     }}
                 />
             </FormContainer>
