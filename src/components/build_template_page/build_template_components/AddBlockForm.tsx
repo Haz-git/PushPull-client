@@ -310,13 +310,12 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             return convertConfiguredSetWeights();
         }
 
-        console.log('test');
-
-        setUserInput({
-            ...userInput,
-            weightImperial: '.01',
-            weightMetric: '.01',
-        });
+        // Reseting state here conflicts with updating value of linkedUserInput..
+        // setUserInput({
+        //     ...userInput,
+        //     weightImperial: '.01',
+        //     weightMetric: '.01',
+        // });
 
         return;
     };
@@ -675,7 +674,6 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                             linkedViewerInput: value,
                         });
                         convertWeightValues();
-                        return;
                     }}
                 />
             </FormContainer>
