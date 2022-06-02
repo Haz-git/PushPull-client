@@ -25,6 +25,7 @@ import { ConfiguredSetOperation } from './AddBlockForm';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import useQuery from '../../../utils/hooks/useQuery';
 import { UITimeField } from '../../general_components/UITimeField';
+import { AddBlockFormInputLinkLabel } from './AddBlockFormInputLinkLabel';
 
 //Styles:
 import styled from 'styled-components';
@@ -57,7 +58,7 @@ export const EditBlockForm = () => {
         (state: RootStateOrAny) => state?.template?.templateUserInputs
     );
     const { modalProps } = useSelector(
-        (state: RootStateOrAny) => state?.modals?.EDIT_BLOCK
+        (state: RootStateOrAny) => state?.modals?.editBlock
     );
     const currentSheetId = query.get('sheetId');
 
@@ -76,6 +77,10 @@ export const EditBlockForm = () => {
         hasConfiguredSets: modalProps?.blockDetails?.hasConfiguredSets,
         configuredSets: modalProps?.blockDetails?.configuredSets,
     };
+
+    //AddBlockFormInputLinkLabel state:
+    const [isBlockFormInputLinkLabelOpen, setIsBlockFormInputLinkLabelOpen] =
+        useState(false);
 
     //Error states:
     const [hasError, setHasError] = useState(false);
@@ -472,6 +477,8 @@ export const EditBlockForm = () => {
                         label={`Weight (${composedWeightUnit})`}
                         required={!isSetConfigurationMenuOpen}
                         value={determineUnitValue()}
+                        precision={2}
+                        step={0.01}
                         min={0}
                         max={9999}
                         styles={{
@@ -597,6 +604,9 @@ export const EditBlockForm = () => {
                     }
                 />
                 <Spacer />
+                <AddBlockFormInputLinkLabel
+                    shouldDisplay={isBlockFormInputLinkLabelOpen}
+                />
                 <Select
                     value={userInput.linkedViewerInput}
                     searchable
@@ -627,7 +637,13 @@ export const EditBlockForm = () => {
                     }
                     nothingFound="No Viewer Input Found"
                     maxDropdownHeight={250}
-                    onChange={(value: string) =>
+                    onDropdownOpen={() =>
+                        setIsBlockFormInputLinkLabelOpen(true)
+                    }
+                    onDropdownClose={() =>
+                        setIsBlockFormInputLinkLabelOpen(false)
+                    }
+                    onChange={(value: string): void =>
                         setUserInput({
                             ...userInput,
                             linkedViewerInput: value,

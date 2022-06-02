@@ -17,6 +17,7 @@ import { SelectColorItem } from './SelectColorItem';
 import { SetConfigurationMenu } from './SetConfigurationMenu';
 import { v4 as uuid } from 'uuid';
 import { AddBlockError } from './AddBlockError';
+import { AddBlockFormInputLinkLabel } from './AddBlockFormInputLinkLabel';
 
 //Redux:
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
@@ -122,6 +123,10 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             label: question.InputQuestion,
         }));
     }, [template.templateUserInputs]);
+
+    //AddBlockFormInputLinkLabel state:
+    const [isBlockFormInputLinkLabelOpen, setIsBlockFormInputLinkLabelOpen] =
+        useState(false);
 
     //Set Configuration Menu State:
     const [isSetConfigurationMenuOpen, toggleSetConfigurationMenu] =
@@ -292,6 +297,27 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
             ...userInput,
             [name]: val,
         });
+    };
+
+    const convertConfiguredSetWeights = (): void => {};
+
+    const convertWeightValues = (): void => {
+        // When user input is selected, we need to convert from numerical weight input to a percentage scale.
+        // .1 -> .1%, 100 -> 100%
+        // 1. If there are no configured sets, just reset weightImperial or weightMetric
+        // 2. If there are configured sets, outsource to different function.
+        if (userInput.hasConfiguredSets) {
+            return convertConfiguredSetWeights();
+        }
+
+        // Reseting state here conflicts with updating value of linkedUserInput..
+        // setUserInput({
+        //     ...userInput,
+        //     weightImperial: '.01',
+        //     weightMetric: '.01',
+        // });
+
+        return;
     };
 
     const composeInputWeight = (weight: number): void => {
@@ -478,6 +504,8 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                         label={`Weight (${composedWeightUnit})`}
                         required={!isSetConfigurationMenuOpen}
                         value={determineUnitValue()}
+                        precision={1}
+                        step={0.01}
                         min={0}
                         max={9999}
                         styles={{
@@ -602,6 +630,9 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }
                 />
                 <Spacer />
+                <AddBlockFormInputLinkLabel
+                    shouldDisplay={isBlockFormInputLinkLabelOpen}
+                />
                 <Select
                     value={userInput.linkedViewerInput}
                     searchable
@@ -631,18 +662,18 @@ const AddBlockForm = ({ closeModal }: IComponentProps): JSX.Element => {
                     }
                     nothingFound="No Viewer Input Found"
                     maxDropdownHeight={250}
-                    onChange={(value: string) => {
-                        if (
-                            window.confirm(
-                                'Modifying this input will reset all current weight values. Instead, they will be replaced with fields where you may place a certain percentage of this input. Proceed?'
-                            )
-                        ) {
-                            setUserInput({
-                                ...userInput,
-                                linkedViewerInput: value,
-                            });
-                            return;
-                        }
+                    onDropdownOpen={() =>
+                        setIsBlockFormInputLinkLabelOpen(true)
+                    }
+                    onDropdownClose={() =>
+                        setIsBlockFormInputLinkLabelOpen(false)
+                    }
+                    onChange={(value: string): void => {
+                        setUserInput({
+                            ...userInput,
+                            linkedViewerInput: value,
+                        });
+                        convertWeightValues();
                     }}
                 />
             </FormContainer>

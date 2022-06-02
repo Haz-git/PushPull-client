@@ -62,7 +62,7 @@ const SheetMenu = ({
         }
 
         return dispatch(
-            toggleModal(ModalActionTypes.DELETE_SHEET_CONFIRMATION, 'OPEN')
+            toggleModal(ModalActionTypes.deleteSheetConfirmation, 'OPEN')
         );
     };
 

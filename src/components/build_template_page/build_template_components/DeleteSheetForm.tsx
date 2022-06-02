@@ -41,7 +41,7 @@ export const DeleteSheetForm = ({
 
         dispatch(deleteSheet(templateId, sheetId));
         dispatch(
-            toggleModal(ModalActionTypes.DELETE_SHEET_CONFIRMATION, 'CLOSE')
+            toggleModal(ModalActionTypes.deleteSheetConfirmation, 'CLOSE')
         );
     };
 
@@ -88,7 +88,7 @@ export const DeleteSheetForm = ({
                     onClick={() =>
                         dispatch(
                             toggleModal(
-                                ModalActionTypes.DELETE_SHEET_CONFIRMATION,
+                                ModalActionTypes.deleteSheetConfirmation,
                                 'CLOSE'
                             )
                         )

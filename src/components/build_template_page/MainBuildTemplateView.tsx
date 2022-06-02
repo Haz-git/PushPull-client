@@ -136,11 +136,11 @@ const MainBuildTemplateView = ({
     );
 
     const { isOpen: isSheetDeletionModalOpened } = useSelector(
-        (state: RootStateOrAny) => state?.modals?.DELETE_SHEET_CONFIRMATION
+        (state: RootStateOrAny) => state?.modals?.deleteSheetConfirmation
     );
 
     const { isOpen: isEditBlockModalOpened } = useSelector(
-        (state: RootStateOrAny) => state?.modals?.EDIT_BLOCK
+        (state: RootStateOrAny) => state?.modals?.editBlock
     );
 
     //Column States for DnD functionality:
@@ -347,7 +347,7 @@ const MainBuildTemplateView = ({
                             closeFunc={() =>
                                 dispatch(
                                     toggleModal(
-                                        ModalActionTypes.EDIT_BLOCK,
+                                        ModalActionTypes.editBlock,
                                         'CLOSE'
                                     )
                                 )
@@ -363,7 +363,7 @@ const MainBuildTemplateView = ({
                             closeFunc={() =>
                                 dispatch(
                                     toggleModal(
-                                        ModalActionTypes.DELETE_SHEET_CONFIRMATION,
+                                        ModalActionTypes.deleteSheetConfirmation,
                                         'CLOSE'
                                     )
                                 )

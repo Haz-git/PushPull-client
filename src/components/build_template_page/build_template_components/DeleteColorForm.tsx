@@ -69,7 +69,7 @@ export const DeleteColorForm = ({
         );
 
         dispatch(
-            toggleModal(ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER, 'CLOSE')
+            toggleModal(ModalActionTypes.deleteColorSwatchPopover, 'CLOSE')
         );
 
         resetColorId();

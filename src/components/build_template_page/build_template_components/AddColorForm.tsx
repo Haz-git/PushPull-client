@@ -89,9 +89,7 @@ export const AddColorForm = () => {
             )
         );
 
-        dispatch(
-            toggleModal(ModalActionTypes.ADD_COLOR_SWATCH_POPOVER, 'CLOSE')
-        );
+        dispatch(toggleModal(ModalActionTypes.addColorSwatchPopover, 'CLOSE'));
     };
 
     return (

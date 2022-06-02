@@ -112,22 +112,20 @@ const ViewerInteractionsForm = () => {
     );
 
     const isAddColorPopoverOpen = useSelector(
-        (state: RootStateOrAny) =>
-            state?.modals?.ADD_COLOR_SWATCH_POPOVER.isOpen
+        (state: RootStateOrAny) => state?.modals?.addColorSwatchPopover.isOpen
     );
 
     const isDeleteColorPopoverOpen = useSelector(
         (state: RootStateOrAny) =>
-            state?.modals?.DELETE_COLOR_SWATCH_POPOVER.isOpen
+            state?.modals?.deleteColorSwatchPopover.isOpen
     );
 
     const isViewerInputPopoverOpen = useSelector(
-        (state: RootStateOrAny) =>
-            state?.modals?.ADD_VIEWER_INPUT_POPOVER.isOpen
+        (state: RootStateOrAny) => state?.modals?.addViewerInputPopover.isOpen
     );
     const isDeleteViewerInputPopoverOpen = useSelector(
         (state: RootStateOrAny) =>
-            state?.modals?.DELETE_VIEWER_INPUT_POPOVER.isOpen
+            state?.modals?.deleteViewerInputPopover.isOpen
     );
 
     const [selectedColor, setSelectedColor] = useState('');
@@ -244,7 +242,7 @@ const ViewerInteractionsForm = () => {
                         onClose={() =>
                             dispatch(
                                 toggleModal(
-                                    ModalActionTypes.ADD_COLOR_SWATCH_POPOVER,
+                                    ModalActionTypes.addColorSwatchPopover,
                                     'CLOSE'
                                 )
                             )
@@ -258,7 +256,7 @@ const ViewerInteractionsForm = () => {
                                 onClick={() =>
                                     dispatch(
                                         toggleModal(
-                                            ModalActionTypes.ADD_COLOR_SWATCH_POPOVER,
+                                            ModalActionTypes.addColorSwatchPopover,
                                             'OPEN'
                                         )
                                     )
@@ -277,7 +275,7 @@ const ViewerInteractionsForm = () => {
                         onClose={() =>
                             dispatch(
                                 toggleModal(
-                                    ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER,
+                                    ModalActionTypes.deleteColorSwatchPopover,
                                     'CLOSE'
                                 )
                             )
@@ -292,7 +290,7 @@ const ViewerInteractionsForm = () => {
                                     if (selectedColor !== '') {
                                         dispatch(
                                             toggleModal(
-                                                ModalActionTypes.DELETE_COLOR_SWATCH_POPOVER,
+                                                ModalActionTypes.deleteColorSwatchPopover,
                                                 'OPEN'
                                             )
                                         );
@@ -340,7 +338,7 @@ const ViewerInteractionsForm = () => {
                         onClose={() =>
                             dispatch(
                                 toggleModal(
-                                    ModalActionTypes.ADD_VIEWER_INPUT_POPOVER,
+                                    ModalActionTypes.addViewerInputPopover,
                                     'CLOSE'
                                 )
                             )
@@ -354,7 +352,7 @@ const ViewerInteractionsForm = () => {
                                 onClick={() =>
                                     dispatch(
                                         toggleModal(
-                                            ModalActionTypes.ADD_VIEWER_INPUT_POPOVER,
+                                            ModalActionTypes.addViewerInputPopover,
                                             'OPEN'
                                         )
                                     )
@@ -373,7 +371,7 @@ const ViewerInteractionsForm = () => {
                         onClose={() =>
                             dispatch(
                                 toggleModal(
-                                    ModalActionTypes.DELETE_VIEWER_INPUT_POPOVER,
+                                    ModalActionTypes.deleteViewerInputPopover,
                                     'CLOSE'
                                 )
                             )
@@ -388,7 +386,7 @@ const ViewerInteractionsForm = () => {
                                     if (selectedQuestion !== '') {
                                         dispatch(
                                             toggleModal(
-                                                ModalActionTypes.DELETE_VIEWER_INPUT_POPOVER,
+                                                ModalActionTypes.deleteViewerInputPopover,
                                                 'OPEN'
                                             )
                                         );

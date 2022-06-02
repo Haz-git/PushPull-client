@@ -2,27 +2,27 @@ import { ModalActionTypes } from './action-types';
 import { ModalAction } from './modalInterfaces';
 
 const initialState: any = {
-    EDIT_BLOCK: {
+    editBlock: {
         isOpen: false,
         modalProps: {},
     },
-    DELETE_SHEET_CONFIRMATION: {
+    deleteSheetConfirmation: {
         isOpen: false,
         modalProps: {},
     },
-    ADD_COLOR_SWATCH_POPOVER: {
+    addColorSwatchPopover: {
         isOpen: false,
         modalProps: {},
     },
-    DELETE_COLOR_SWATCH_POPOVER: {
+    deleteColorSwatchPopover: {
         isOpen: false,
         modalProps: {},
     },
-    ADD_VIEWER_INPUT_POPOVER: {
+    addViewerInputPopover: {
         isOpen: false,
         modalProps: {},
     },
-    DELETE_VIEWER_INPUT_POPOVER: {
+    deleteViewerInputPopover: {
         isOpen: false,
         modalProps: {},
     },
