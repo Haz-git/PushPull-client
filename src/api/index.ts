@@ -6,7 +6,7 @@ let targetURL;
 if (process.env.NODE_ENV !== 'production') {
     targetURL = 'http://localhost:8080/api';
 } else if (process.env.NODE_ENV === 'production') {
-    targetURL = 'https://rankmyworkout.herokuapp.com/api';
+    targetURL = 'https://pushpull-server.onrender.com/api';
 }
 
 const axiosInstance = axios.create({
